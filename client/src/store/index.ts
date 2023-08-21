@@ -22,8 +22,8 @@ import { urlSyncEffect } from 'recoil-sync';
 export const mapSettingsAtom = atom({
   key: 'map-settings',
   default: {
-    basemap: 'basemap-light',
-    labels: 'labels-dark',
+    basemap: 'basemap-satellite',
+    labels: 'labels-light',
     boundaries: false,
     roads: false,
   },

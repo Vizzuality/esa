@@ -44,13 +44,13 @@ const DEFAULT_PROPS: CustomMapProps = {
   id: 'default',
   initialViewState: {
     longitude: 0,
-    latitude: 20,
-    zoom: 2,
+    latitude: 0,
+    zoom: 0,
     pitch: 0,
     bearing: 0,
-    bounds: [-159.86, 6.31, -65.75, 60.67],
+    // bounds: [-159.86, 6.31, -65.75, 60.67],
   },
-  minZoom: 2,
+  minZoom: 0,
   maxZoom: 20,
 };
 
@@ -143,6 +143,7 @@ export default function MapContainer() {
             bounds: bbox as LngLatBoundsLike,
           }),
         }}
+        projection="globe"
         bounds={tmpBounds}
         minZoom={minZoom}
         maxZoom={maxZoom}

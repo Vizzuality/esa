@@ -22,7 +22,7 @@ const MapSettingsManager = () => {
     (groups: string[], groupId: string, visible = true) => {
       if (!mapRef) return;
       const map = mapRef.getMap();
-      const { layers, metadata } = mapRef.getStyle();
+      const { layers, metadata = {} } = mapRef.getStyle();
 
       const lys = layers as AnyLayerWithMetadata[];
 
