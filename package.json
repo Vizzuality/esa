@@ -1,0 +1,19 @@
+{
+  "name": "esa",
+  "packageManager": "yarn@3.6.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "cms",
+    "types"
+  ],
+  "scripts": {
+    "client": "yarn workspace @esa/client",
+    "cms": "yarn workspace @esa/cms",
+    "types": "yarn workspace @esa/types",
+    "heroku-postbuild": "./heroku.build"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
