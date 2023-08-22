@@ -2,8 +2,6 @@
 
 import { PropsWithChildren, useCallback } from 'react';
 
-import { MapProvider } from 'react-map-gl';
-
 import { RecoilRoot } from 'recoil';
 
 import { RecoilURLSyncNext } from '@/lib/recoil';
@@ -29,7 +27,7 @@ export default function Providers({ children }: PropsWithChildren) {
       >
         <RecoilDevTools />
 
-        <MapProvider>{children}</MapProvider>
+        {children}
       </RecoilURLSyncNext>
     </RecoilRoot>
   );

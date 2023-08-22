@@ -1,11 +1,11 @@
 import '@/styles/globals.css';
 import '@/styles/mapbox.css';
 
-import { Inter } from 'next/font/google';
-
 import Providers from '@/app/layout-providers';
 
-const inter = Inter({ subsets: ['latin'] });
+import Map from '@/containers/home/map';
+
+import Fonts from '@/components/ui/fonts';
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,7 +16,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <Providers>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <Fonts />
+        <body className="font-notes h-screen w-screen">
+          <Map />
+          {children}
+        </body>
       </html>
     </Providers>
   );
