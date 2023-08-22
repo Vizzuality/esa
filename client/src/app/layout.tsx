@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <Fonts />
         <body className="font-notes h-screen w-screen">
-          <main className="absolute left-0 top-0 flex h-screen w-[30vw] flex-col">
+          <main className="flex flex-col">
             <div>
               <Map />
               {children}

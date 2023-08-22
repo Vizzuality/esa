@@ -28,14 +28,14 @@ export default function Providers({ children }: PropsWithChildren) {
       <RecoilRoot>
         <MapProvider>
           <TooltipProvider>
-            {/* <RecoilURLSyncNext
+            <RecoilURLSyncNext
               location={{ part: 'queryParams' }}
               serialize={serialize}
               deserialize={deserialize}
-            > */}
-            {/* <RecoilDevTools /> */}
-            {children}
-            {/* </RecoilURLSyncNext> */}
+            >
+              <RecoilDevTools />
+              {children}
+            </RecoilURLSyncNext>
           </TooltipProvider>
         </MapProvider>
       </RecoilRoot>
