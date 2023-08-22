@@ -20,16 +20,12 @@ export default async function Home() {
   }, [setBbox]);
 
   return (
-    <>
-      <main className="w absolute left-0 top-0 flex h-screen flex-col">
-        <div>
-          <Sidebar>
-            <Link href="/links">Links</Link>
-            <Link href="/story1/1">Story 1</Link>
-            <Datasets />
-          </Sidebar>
-        </div>
-      </main>
-    </>
+    <div>
+      <Sidebar>
+        <Link href="/links">Links</Link>
+        <Link href="/story1/1">Story 1</Link>
+        <Datasets />
+      </Sidebar>
+    </div>
   );
 }

@@ -134,7 +134,7 @@ export default function MapContainer() {
   );
 
   return (
-    <div className="h-screen w-screen">
+    <div className="absolute left-0 top-0 h-screen w-screen">
       <Map
         id={id}
         initialViewState={{
