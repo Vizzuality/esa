@@ -23,7 +23,7 @@ export const mapSettingsAtom = atom({
   key: 'map-settings',
   default: {
     basemap: 'basemap-satellite',
-    labels: 'labels-light',
+    labels: 'labels-none',
     boundaries: false,
     roads: false,
   },
