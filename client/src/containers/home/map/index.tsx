@@ -45,13 +45,22 @@ const DEFAULT_PROPS: CustomMapProps = {
   initialViewState: {
     longitude: 0,
     latitude: 0,
-    zoom: 0,
+    zoom: 2.01,
     pitch: 0,
     bearing: 0,
     // bounds: [-159.86, 6.31, -65.75, 60.67],
   },
-  minZoom: 0,
+  minZoom: 2,
   maxZoom: 20,
+};
+
+const FOG = {
+  range: [0.5, 8],
+  'horizon-blend': 0.125,
+  color: '#2a6981',
+  'high-color': '#0a2839',
+  'space-color': '#0a2839',
+  'star-intensity': 0.25,
 };
 
 export default function MapContainer() {
@@ -148,6 +157,7 @@ export default function MapContainer() {
         minZoom={minZoom}
         maxZoom={maxZoom}
         mapStyle={MAPBOX_STYLES.default}
+        fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         onClick={handleMapClick}
         onMapViewStateChange={handleMapViewStateChange}

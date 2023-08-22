@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { layersAtom, layersSettingsAtom } from '@/store';
 
 import LayerManagerItem from '@/containers/home/map/layer-manager/item';
+import Markers from '@/containers/home/map/markers';
 
 import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 
@@ -17,6 +18,7 @@ const LayerManager = () => {
   return (
     <DeckMapboxOverlayProvider>
       <>
+        <Markers />
         {/*
           Generate all transparent backgrounds to be able to sort by layers without an error
           - https://github.com/visgl/react-map-gl/issues/939#issuecomment-625290200
