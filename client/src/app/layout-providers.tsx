@@ -13,6 +13,8 @@ import RecoilDevTools from '@/lib/recoil/devtools';
 
 import { TooltipProvider } from '@/components/ui/tooltip';
 
+import { notesESA, sans } from '@/styles/fonts';
+
 export default function Providers({ children }: PropsWithChildren) {
   const [queryClient] = useState(() => new QueryClient());
   const serialize: Serialize = useCallback((x) => {
@@ -24,21 +26,30 @@ export default function Providers({ children }: PropsWithChildren) {
     return JSON.parse(x);
   }, []);
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <MapProvider>
-          <TooltipProvider>
-            <RecoilURLSyncNext
-              location={{ part: 'queryParams' }}
-              serialize={serialize}
-              deserialize={deserialize}
-            >
-              <RecoilDevTools />
-              {children}
-            </RecoilURLSyncNext>
-          </TooltipProvider>
-        </MapProvider>
-      </RecoilRoot>
-    </QueryClientProvider>
+    <>
+      <style jsx global>{`
+        :root {
+          --font-inter: ${sans.style.fontFamily};
+          --font-esa-notes: ${notesESA.style.fontFamily};
+        }
+      `}</style>
+
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <MapProvider>
+            <TooltipProvider>
+              <RecoilURLSyncNext
+                location={{ part: 'queryParams' }}
+                serialize={serialize}
+                deserialize={deserialize}
+              >
+                <RecoilDevTools />
+                {children}
+              </RecoilURLSyncNext>
+            </TooltipProvider>
+          </MapProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
+    </>
   );
 }
