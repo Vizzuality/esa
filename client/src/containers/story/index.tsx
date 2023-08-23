@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { useSetRecoilState } from 'recoil';
 
@@ -13,23 +15,25 @@ import { Button } from '@/components/ui/button';
 
 const TOTAL_STEPS = 3;
 
-const Story = ({ storyId, step }: { storyId: string; step: string }) => {
+const Story = () => {
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
   const { push } = useRouter();
+  const searchParams = useSearchParams();
+  const step = searchParams.get('step');
+  const pathname = usePathname();
+  const storyId = pathname.split('/').pop();
 
   useEffect(() => {
     setTmpBbox([20, 0, 25, 1]);
   }, [setTmpBbox]);
 
-  const currentStep = Number.isInteger(parseInt(step)) ? parseInt(step) : 0;
+  const currentStep = step && Number.isInteger(parseInt(step)) ? parseInt(step) : 1;
 
   const handleStep = (direction: 'next' | 'prev') => {
-    if (Number.isInteger(currentStep)) {
-      if (direction === 'prev' && currentStep > 1) {
-        push(`/story1/${currentStep - 1}`);
-      } else if (direction === 'next' && currentStep < TOTAL_STEPS) {
-        push(`/story1/${currentStep + 1}`);
-      }
+    if (direction === 'prev' && currentStep > 1) {
+      push(`${pathname}?step=${currentStep - 1}`);
+    } else if (direction === 'next' && currentStep < TOTAL_STEPS) {
+      push(`${pathname}?step=${currentStep + 1}`);
     }
   };
 

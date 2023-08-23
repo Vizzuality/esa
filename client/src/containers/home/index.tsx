@@ -11,7 +11,7 @@ import { tmpBboxAtom } from '@/store';
 import Datasets from '@/containers/home/datasets';
 import Sidebar from '@/containers/home/sidebar';
 
-export default async function Home() {
+export default function Home() {
   const bbox: [number, number, number, number] = [-50.45, -66.05, 107.79, 85.05];
   const setBbox = useSetRecoilState(tmpBboxAtom);
 
@@ -23,7 +23,7 @@ export default async function Home() {
     <div>
       <Sidebar>
         <Link href="/links">Links</Link>
-        <Link href="/story1/1">Story 1</Link>
+        <Link href="/stories/story1">Story 1</Link>
         <Datasets />
       </Sidebar>
     </div>
