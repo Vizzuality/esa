@@ -6371,6 +6371,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/supercluster@npm:7.1.0":
+  version: 7.1.0
+  resolution: "@types/supercluster@npm:7.1.0"
+  dependencies:
+    "@types/geojson": "*"
+  checksum: 029aba15871ac16855c8813bde35ca773f20996448647567b62f103f58a5979d852fb79066d895cb642913d28cb72ebbed6149bcca8c7f4b8b162062998fd640
+  languageName: node
+  linkType: hard
+
 "@types/through@npm:*":
   version: 0.0.30
   resolution: "@types/through@npm:0.0.30"
@@ -9471,7 +9480,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dequal@npm:^2.0.0, dequal@npm:^2.0.3":
+"dequal@npm:2.0.3, dequal@npm:^2.0.0, dequal@npm:^2.0.2, dequal@npm:^2.0.3":
   version: 2.0.3
   resolution: "dequal@npm:2.0.3"
   checksum: 8679b850e1a3d0ebbc46ee780d5df7b478c23f335887464023a631d1b9af051ad4a6595a44220f9ff8ff95a8ddccf019b5ad778a976fd7bbf77383d36f412f90
@@ -10032,6 +10041,11 @@ __metadata:
 "esa@workspace:.":
   version: 0.0.0-use.local
   resolution: "esa@workspace:."
+  dependencies:
+    "@types/supercluster": 7.1.0
+    dequal: 2.0.3
+    supercluster: 8.0.1
+    use-deep-compare-effect: 1.8.1
   languageName: unknown
   linkType: soft
 
@@ -19755,7 +19769,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"supercluster@npm:^8.0.0":
+"supercluster@npm:8.0.1, supercluster@npm:^8.0.0":
   version: 8.0.1
   resolution: "supercluster@npm:8.0.1"
   dependencies:
@@ -20705,6 +20719,18 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 7913df383a5a6fcb399212eedefaac2e0c6f843555202d4e3010bac3848afe38ecaa3d0d6500ad1d936fbeffd637e6c517e68edb024af5e6beca7f27f3ce7b21
+  languageName: node
+  linkType: hard
+
+"use-deep-compare-effect@npm:1.8.1":
+  version: 1.8.1
+  resolution: "use-deep-compare-effect@npm:1.8.1"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    dequal: ^2.0.2
+  peerDependencies:
+    react: ">=16.13"
+  checksum: 2b9b6291df3f772f44d259b352e5d998963ccee0db2efeb76bb05525d928064aeeb69bb0dee5a5e428fea7cf3db67c097a770ebd30caa080662b565f6ef02b2e
   languageName: node
   linkType: hard
 

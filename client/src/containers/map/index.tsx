@@ -22,6 +22,7 @@ import { Bbox } from '@/types/map';
 
 import { MAPBOX_STYLES } from '@/constants/mapbox';
 
+import StoryMarkers from '@/containers/map/markers';
 import Popup from '@/containers/map/popup';
 import MapSettings from '@/containers/map/settings';
 import MapSettingsManager from '@/containers/map/settings/manager';
@@ -170,6 +171,8 @@ export default function MapContainer() {
                 <MapSettings />
               </SettingsControl>
             </Controls>
+
+            <StoryMarkers />
 
             <LayerManager />
 

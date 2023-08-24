@@ -552,7 +552,7 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
   left: 0;
   will-change: transform;
   opacity: 1;
-  transition: opacity 0.2s;
+  /* transition: opacity 0.2s; */
 }
 .mapboxgl-marker-occluded {
   opacity: 0.2;

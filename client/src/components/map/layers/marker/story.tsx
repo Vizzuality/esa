@@ -4,7 +4,7 @@ import { Marker as RMarker, MarkerProps as RMarkerProps } from 'react-map-gl';
 
 import { cn } from '@/lib/classnames';
 
-const Marker = (props: RMarkerProps) => {
+const StoryMarker = (props: RMarkerProps) => {
   const [hover, setHover] = useState(false);
 
   return (
@@ -24,4 +24,4 @@ const Marker = (props: RMarkerProps) => {
   );
 };
 
-export default Marker;
+export default StoryMarker;
