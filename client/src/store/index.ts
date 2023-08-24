@@ -40,6 +40,11 @@ export const mapSettingsAtom = atom({
 });
 
 // Map viewport
+export const zoomAtom = atom<number>({
+  key: 'zoom',
+  default: 2,
+});
+
 export const bboxAtom = atom<readonly [number, number, number, number] | null | undefined>({
   key: 'bbox',
   default: null,

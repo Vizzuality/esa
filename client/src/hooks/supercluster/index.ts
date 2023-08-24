@@ -27,7 +27,7 @@ const useSupercluster = <
   const [clusters, setClusters] = useState<
     Array<Supercluster.ClusterFeature<C> | Supercluster.PointFeature<P>>
   >([]);
-  const zoomInt = zoom;
+  const zoomInt = Math.round(zoom);
 
   useDeepCompareEffectNoCheck(() => {
     if (

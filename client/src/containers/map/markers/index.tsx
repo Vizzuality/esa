@@ -1,15 +1,15 @@
-import { useMap } from 'react-map-gl';
+import { useRecoilValue } from 'recoil';
 
-import { Bbox } from '@/types/map';
+import { zoomAtom } from '@/store';
 
 import useSupercluster from '@/hooks/supercluster';
 
 import GEOSJON from '@/constants/markers.json';
 
-import MarkerItem from './item';
+import StoryMarkerItem from './item';
 
 const StoryMarkers = () => {
-  const { default: map } = useMap();
+  const zoom = useRecoilValue(zoomAtom);
 
   const FeatureCollection = GEOSJON as unknown as GeoJSON.FeatureCollection<
     GeoJSON.Point,
@@ -18,10 +18,10 @@ const StoryMarkers = () => {
     }
   >;
 
-  const { clusters } = useSupercluster({
+  const { clusters, supercluster } = useSupercluster({
     points: FeatureCollection.features,
-    zoom: map ? map.getZoom() : 2,
-    bounds: map ? (map.getBounds().toArray().flat() as Bbox) : [-180, -80, 180, 80],
+    zoom: zoom,
+    bounds: [-180, -90, 180, 90],
     options: {
       radius: 40,
     },
@@ -29,10 +29,12 @@ const StoryMarkers = () => {
 
   return (
     <>
-      {clusters.map((f, i) => {
+      {clusters.map((f) => {
         const { id } = f;
 
-        return <MarkerItem key={id} {...f} />;
+        if (!supercluster) return null;
+
+        return <StoryMarkerItem key={id} {...f} supercluster={supercluster} />;
       })}
     </>
   );

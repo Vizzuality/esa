@@ -8,16 +8,24 @@ import StoryMarker from '@/components/map/layers/marker/story';
 import StoryClusterMarker from '@/components/map/layers/marker/story-cluster';
 
 export type StoryMarkerItemProps =
-  | Supercluster.PointFeature<Supercluster.AnyProps>
-  | Supercluster.ClusterFeature<Supercluster.AnyProps>;
+  | (Supercluster.PointFeature<Supercluster.AnyProps> & {
+      supercluster: Supercluster<Supercluster.AnyProps>;
+    })
+  | (Supercluster.ClusterFeature<Supercluster.AnyProps> & {
+      supercluster: Supercluster<Supercluster.AnyProps>;
+    });
 
-const StoryMarkerItem = ({ id, geometry, properties }: StoryMarkerItemProps) => {
+const StoryMarkerItem = ({ id, geometry, properties, supercluster }: StoryMarkerItemProps) => {
   const { push } = useRouter();
-  const { cluster, category } = properties;
+  const { cluster, cluster_id, category } = properties;
 
   const handleClick = useCallback(() => {
     push(`/stories/${id}`);
   }, [push, id]);
+
+  const handleClusterClick = useCallback(() => {
+    console.info(supercluster.getLeaves(cluster_id));
+  }, [cluster_id, supercluster]);
 
   return (
     <>
@@ -26,6 +34,7 @@ const StoryMarkerItem = ({ id, geometry, properties }: StoryMarkerItemProps) => 
           key={id}
           longitude={geometry.coordinates[0]}
           latitude={geometry.coordinates[1]}
+          onClick={handleClusterClick}
         />
       )}
 

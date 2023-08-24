@@ -14,6 +14,7 @@ import {
   layersInteractiveIdsAtom,
   popupAtom,
   tmpBboxAtom,
+  zoomAtom,
 } from '@/store';
 
 import { useGetLayers } from '@/types/generated/layer';
@@ -74,8 +75,11 @@ export default function MapContainer() {
   const layersInteractive = useRecoilValue(layersInteractiveAtom);
   const layersInteractiveIds = useRecoilValue(layersInteractiveIdsAtom);
 
+  const setZoom = useSetRecoilState(zoomAtom);
+
   const setBbox = useSetRecoilState(bboxAtom);
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
+
   const setPopup = useSetRecoilState(popupAtom);
 
   const { data: layersInteractiveData } = useGetLayers(
@@ -122,8 +126,10 @@ export default function MapContainer() {
 
       setBbox(b);
       setTmpBbox(null);
+
+      setZoom(map.getZoom());
     }
-  }, [map, setBbox, setTmpBbox]);
+  }, [map, setBbox, setTmpBbox, setZoom]);
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
@@ -153,7 +159,9 @@ export default function MapContainer() {
             bounds: bbox as LngLatBoundsLike,
           }),
         }}
-        projection="globe"
+        projection={{
+          name: 'globe',
+        }}
         bounds={tmpBounds}
         minZoom={minZoom}
         maxZoom={maxZoom}
