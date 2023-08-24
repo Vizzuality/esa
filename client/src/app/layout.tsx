@@ -3,7 +3,7 @@ import '@/styles/mapbox.css';
 
 import Providers from '@/app/layout-providers';
 
-import Map from '@/containers/home/map';
+import Map from '@/containers/map';
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <body className="font-notes h-screen w-screen">
           <main>
             <Map />
+
             {children}
           </main>
         </body>

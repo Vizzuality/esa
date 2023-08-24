@@ -12,10 +12,10 @@ import Datasets from '@/containers/home/datasets';
 import Sidebar from '@/containers/home/sidebar';
 
 export default function Home() {
-  const bbox: [number, number, number, number] = [-50.45, -66.05, 107.79, 85.05];
   const setBbox = useSetRecoilState(tmpBboxAtom);
 
   useEffect(() => {
+    const bbox: [number, number, number, number] = [-50.45, -66.05, 107.79, 85.05];
     setBbox(bbox);
   }, [setBbox]);
 

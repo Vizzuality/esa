@@ -11,7 +11,7 @@ const Marker = (props: RMarkerProps) => {
     <RMarker {...props}>
       <div
         className={cn({
-          'flex h-3 w-3 rotate-45 items-center justify-center border border-[#FFE094] transition-all':
+          'flex h-3 w-3 rotate-45 cursor-pointer items-center justify-center border border-[#FFE094] transition-all':
             true,
           'scale-[2] bg-[#FFE094]': hover,
         })}
