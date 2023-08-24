@@ -6,8 +6,8 @@ import { useRecoilValue } from 'recoil';
 
 import { layersAtom, layersSettingsAtom } from '@/store';
 
-import LayerManagerItem from '@/containers/home/map/layer-manager/item';
-import Markers from '@/containers/home/map/markers';
+import LayerManagerItem from '@/containers/map/layer-manager/item';
+import Markers from '@/containers/map/markers';
 
 import { DeckMapboxOverlayProvider } from '@/components/map/provider';
 

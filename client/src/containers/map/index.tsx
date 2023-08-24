@@ -22,9 +22,9 @@ import { Bbox } from '@/types/map';
 
 import { MAPBOX_STYLES } from '@/constants/mapbox';
 
-import Popup from '@/containers/home/map/popup';
-import MapSettings from '@/containers/home/map/settings';
-import MapSettingsManager from '@/containers/home/map/settings/manager';
+import Popup from '@/containers/map/popup';
+import MapSettings from '@/containers/map/settings';
+import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
 import Controls from '@/components/map/controls';
@@ -32,11 +32,11 @@ import SettingsControl from '@/components/map/controls/settings';
 import ZoomControl from '@/components/map/controls/zoom';
 import { CustomMapProps } from '@/components/map/types';
 
-const LayerManager = dynamic(() => import('@/containers/home/map/layer-manager'), {
+const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
 });
 
-const Legend = dynamic(() => import('@/containers/home/map/legend'), {
+const Legend = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
 });
 

@@ -6,7 +6,7 @@ from shapely.geometry import Point
 # Load land geometries from Natural Earth dataset (1:10m scale)
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
-# Define latitude range to avoid poles (approximately ±70 degrees)
+# Define latitude range to avoid poles (approximately ±80 degrees)
 min_latitude = -50
 max_latitude = 70
 
@@ -29,14 +29,27 @@ tags = ['agriculture', 'rural', 'city', 'development', 'nature', 'scenic']
 features = []
 for idx in range(100):
     coordinates = generate_random_coordinates_within_land_and_range()
+    longitude, latitude = coordinates
+
     properties = {
         "category": random.choice(categories),
         "ifi": random.choice(ifis),
         "status": random.choice(statuses),
         "tags": random.sample(tags, random.randint(1, 3))
     }
+
     point = geojson.Point(coordinates)
-    feature = geojson.Feature(geometry=point, properties=properties, id=idx + 1)
+
+    # Calculate bounding box with offsets
+    bbox_offset = 0.1  # Adjust this offset as needed
+    bbox = [
+        longitude - bbox_offset,
+        latitude - bbox_offset,
+        longitude + bbox_offset,
+        latitude + bbox_offset
+    ]
+
+    feature = geojson.Feature(geometry=point, properties=properties, id=idx + 1, bbox=bbox)
     features.append(feature)
 
 # Create FeatureCollection
