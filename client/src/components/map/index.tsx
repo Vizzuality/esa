@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 
-import ReactMapGL, { ViewState, ViewStateChangeEvent, MapboxEvent, useMap } from 'react-map-gl';
+import ReactMapGL, { ViewState, ViewStateChangeEvent, MapEvent, useMap } from 'react-map-gl';
 
 // * If you plan to use Mapbox (and not a fork):
 // * 1) remove maplibre-gl,
@@ -93,7 +93,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
   );
 
   const handleMapLoad = useCallback(
-    (e: MapboxEvent<undefined>) => {
+    (e: MapEvent<undefined>) => {
       setLoaded(true);
 
       if (onLoad) {

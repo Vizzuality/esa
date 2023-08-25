@@ -1,11 +1,27 @@
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
 import { Marker as RMarker, MarkerProps as RMarkerProps } from 'react-map-gl';
 
 import { cn } from '@/lib/classnames';
 
-const Marker = (props: RMarkerProps) => {
+interface MarkerProps extends RMarkerProps {
+  onMouseEnter?: MouseEventHandler<HTMLDivElement>;
+  onMouseLeave?: MouseEventHandler<HTMLDivElement>;
+}
+
+const Marker = (props: MarkerProps) => {
+  const { onMouseEnter, onMouseLeave } = props;
   const [hover, setHover] = useState(false);
+
+  const handleMouseEnter: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (onMouseEnter) onMouseEnter(e);
+    setHover(true);
+  };
+
+  const handleMouseLeave: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (onMouseLeave) onMouseLeave(e);
+    setHover(false);
+  };
 
   return (
     <RMarker {...props}>
@@ -15,8 +31,8 @@ const Marker = (props: RMarkerProps) => {
             true,
           'scale-[2] bg-[#FFE094]': hover,
         })}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div className="h-1.5 w-1.5 bg-[#FFE094]"></div>
       </div>
