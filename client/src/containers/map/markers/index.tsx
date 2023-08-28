@@ -1,5 +1,7 @@
 import { Layer, Source } from 'react-map-gl';
 
+import { useMapImage } from '@/hooks/map';
+
 import GEOSJON from '@/constants/markers.json';
 
 const StoryMarkers = () => {
@@ -9,6 +11,11 @@ const StoryMarkers = () => {
       category: string;
     }
   >;
+
+  useMapImage({
+    name: 'story-marker',
+    url: '/images/map/story-marker.png',
+  });
 
   return (
     <Source id="story-markers" type="geojson" data={FeatureCollection} cluster clusterRadius={16}>
@@ -32,6 +39,8 @@ const StoryMarkers = () => {
         layout={{
           'text-field': ['get', 'point_count_abbreviated'],
           'text-size': 12,
+          'text-ignore-placement': true,
+          'text-allow-overlap': true,
         }}
         paint={{
           'text-color': '#fff',
@@ -40,13 +49,17 @@ const StoryMarkers = () => {
 
       <Layer
         id="story-markers-unclustered"
-        type="circle"
+        type="symbol"
         filter={['!', ['has', 'point_count']]}
         paint={{
-          'circle-radius': 6,
-          'circle-color': '#fff',
-          'circle-stroke-color': '#000',
-          'circle-stroke-width': 1,
+          'icon-color': '#FFE094',
+        }}
+        layout={{
+          'icon-image': 'story-marker',
+          'icon-ignore-placement': true,
+          'icon-allow-overlap': true,
+          // 'icon-pitch-alignment': 'map',
+          // 'icon-rotation-alignment': 'map',
         }}
       />
     </Source>

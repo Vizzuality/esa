@@ -2,11 +2,12 @@
 
 import { useCallback, useMemo, useState } from 'react';
 
-import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
+import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
+import { LngLatBoundsLike } from 'mapbox-gl';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import {
@@ -149,7 +150,7 @@ export default function MapContainer() {
     [layersInteractive, layersInteractiveData, setPopup]
   );
 
-  const handleMapEnter = useCallback((e: MapLayerMouseEvent) => {
+  const handleMapMove = useCallback((e: MapLayerMouseEvent) => {
     if (e.features?.length) {
       const f = e.features[0];
 
@@ -159,11 +160,15 @@ export default function MapContainer() {
           geometry: f.geometry as GeoJSON.Point,
         });
       }
-    }
-  }, []);
 
-  const handleMapLeave = useCallback(() => {
-    console.log('Leave');
+      if (f.source !== 'story-markers') {
+        setMarker(null);
+      }
+    }
+
+    if (e.features?.length === 0) {
+      setMarker(null);
+    }
   }, []);
 
   return (
@@ -186,43 +191,36 @@ export default function MapContainer() {
         fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         onClick={handleMapClick}
-        onMouseEnter={handleMapEnter}
-        onMouseLeave={handleMapLeave}
-        // onMouseMove={handleMapMove}
+        onMouseMove={handleMapMove}
         onMapViewStateChange={handleMapViewStateChange}
       >
-        {() => (
-          <>
-            <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
-              <ZoomControl />
-              <SettingsControl>
-                <MapSettings />
-              </SettingsControl>
-            </Controls>
+        <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
+          <ZoomControl />
+          <SettingsControl>
+            <MapSettings />
+          </SettingsControl>
+        </Controls>
 
-            <LayerManager />
+        <LayerManager />
 
-            <Popup />
+        <Popup />
 
-            <MapSettingsManager />
+        <MapSettingsManager />
 
-            <Legend />
+        <Legend />
 
-            <StoryMarkers />
+        <StoryMarkers />
 
-            {marker && (
-              <Marker
-                key={marker.id}
-                longitude={marker.geometry.coordinates[0]}
-                latitude={marker.geometry.coordinates[1]}
-                onMouseLeave={() => setMarker(null)}
-                onClick={() => {
-                  setMarker(null);
-                  push(`/stories/${marker.id}`);
-                }}
-              />
-            )}
-          </>
+        {marker && (
+          <Marker
+            key={marker.id}
+            longitude={marker.geometry.coordinates[0]}
+            latitude={marker.geometry.coordinates[1]}
+            onClick={() => {
+              setMarker(null);
+              push(`/stories/${marker.id}`);
+            }}
+          />
         )}
       </Map>
     </div>

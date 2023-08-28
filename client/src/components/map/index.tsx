@@ -152,7 +152,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
         {...mapboxProps}
         {...localViewState}
       >
-        {!!mapRef && loaded && !!children && children(mapRef.getMap())}
+        {!!mapRef && loaded && children}
       </ReactMapGL>
     </div>
   );
