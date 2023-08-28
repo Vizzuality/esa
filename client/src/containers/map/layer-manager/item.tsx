@@ -35,14 +35,16 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
       const { interaction_config } = data.data.attributes as LayerTyped;
 
       if (interaction_config?.enabled) {
-        const ids = styles.map((l) => l.id);
+        const ids = styles.map((l) => l.id).filter((i) => !!i) as string[];
 
         if (layersInteractive.includes(id)) {
           return;
         }
 
         setLayersInteractive((prev) => [...prev, id]);
-        setLayersInteractiveIds((prev) => [...prev, ...ids]);
+        setLayersInteractiveIds((prev) => {
+          return [...prev, ...ids];
+        });
       }
     },
     [data?.data?.attributes, id, layersInteractive, setLayersInteractive, setLayersInteractiveIds]

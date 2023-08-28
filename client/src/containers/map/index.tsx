@@ -1,11 +1,13 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
-import { LngLatBoundsLike, MapLayerMouseEvent, useMap } from 'react-map-gl';
+import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 
+import { LngLatBoundsLike } from 'mapbox-gl';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import {
@@ -22,14 +24,16 @@ import { Bbox } from '@/types/map';
 
 import { MAPBOX_STYLES } from '@/constants/mapbox';
 
+import StoryMarkers from '@/containers/map/markers';
 import Popup from '@/containers/map/popup';
-import MapSettings from '@/containers/map/settings';
+// import MapSettings from '@/containers/map/settings';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
-import Controls from '@/components/map/controls';
-import SettingsControl from '@/components/map/controls/settings';
-import ZoomControl from '@/components/map/controls/zoom';
+// import Controls from '@/components/map/controls';
+// import SettingsControl from '@/components/map/controls/settings';
+// import ZoomControl from '@/components/map/controls/zoom';
+import Marker from '@/components/map/layers/marker';
 import { CustomMapProps } from '@/components/map/types';
 
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
@@ -67,6 +71,10 @@ export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
 
   const { [id]: map } = useMap();
+
+  const { push } = useRouter();
+
+  const [marker, setMarker] = useState<GeoJSON.Feature<GeoJSON.Point> | null>(null);
 
   const bbox = useRecoilValue(bboxAtom);
   const tmpBbox = useRecoilValue(tmpBboxAtom);
@@ -142,6 +150,27 @@ export default function MapContainer() {
     [layersInteractive, layersInteractiveData, setPopup]
   );
 
+  const handleMapMove = useCallback((e: MapLayerMouseEvent) => {
+    if (e.features?.length) {
+      const f = e.features[0];
+
+      if (f.source === 'story-markers') {
+        setMarker({
+          ...f,
+          geometry: f.geometry as GeoJSON.Point,
+        });
+      }
+
+      if (f.source !== 'story-markers') {
+        setMarker(null);
+      }
+    }
+
+    if (e.features?.length === 0) {
+      setMarker(null);
+    }
+  }, []);
+
   return (
     <div className="absolute left-0 top-0 h-screen w-screen">
       <Map
@@ -152,7 +181,9 @@ export default function MapContainer() {
             bounds: bbox as LngLatBoundsLike,
           }),
         }}
-        projection="globe"
+        projection={{
+          name: 'globe',
+        }}
         bounds={tmpBounds}
         minZoom={minZoom}
         maxZoom={maxZoom}
@@ -160,25 +191,36 @@ export default function MapContainer() {
         fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         onClick={handleMapClick}
+        onMouseMove={handleMapMove}
         onMapViewStateChange={handleMapViewStateChange}
       >
-        {() => (
-          <>
-            {/* <Controls className="absolute right-5 top-16 z-40 sm:right-8 sm:top-10">
-              <ZoomControl />
-              <SettingsControl>
-                <MapSettings />
-              </SettingsControl>
-            </Controls> */}
+        {/* <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
+          <ZoomControl />
+          <SettingsControl>
+            <MapSettings />
+          </SettingsControl>
+        </Controls> */}
 
-            <LayerManager />
+        <LayerManager />
 
-            <Popup />
+        <Popup />
 
-            <MapSettingsManager />
+        <MapSettingsManager />
 
-            <Legend />
-          </>
+        <Legend />
+
+        <StoryMarkers />
+
+        {marker && (
+          <Marker
+            key={marker.id}
+            longitude={marker.geometry.coordinates[0]}
+            latitude={marker.geometry.coordinates[1]}
+            onClick={() => {
+              setMarker(null);
+              push(`/stories/${marker.id}`);
+            }}
+          />
         )}
       </Map>
     </div>

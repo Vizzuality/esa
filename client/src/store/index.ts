@@ -15,6 +15,7 @@ import {
   tuple,
   writableDict,
 } from '@recoiljs/refine';
+import { MapboxGeoJSONFeature } from 'mapbox-gl';
 import { atom, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 import { urlSyncEffect } from 'recoil-sync';
 
@@ -89,13 +90,18 @@ export const layersInteractiveAtom = atom<number[]>({
 
 export const layersInteractiveIdsAtom = atom<string[]>({
   key: 'layers-interactive-ids',
-  default: [],
+  default: ['story-markers-cluster', 'story-markers-cluster-count', 'story-markers-unclustered'],
 });
 
 export const popupAtom = atom<MapLayerMouseEvent | null>({
   key: 'point',
   default: null,
   dangerouslyAllowMutability: true,
+});
+
+export const markerAtom = atom<MapboxGeoJSONFeature | null>({
+  key: 'marker',
+  default: null,
 });
 
 export const DEFAULT_SETTINGS = {

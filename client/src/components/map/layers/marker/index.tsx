@@ -1,24 +1,25 @@
-import { useState } from 'react';
-
 import { Marker as RMarker, MarkerProps as RMarkerProps } from 'react-map-gl';
 
 import { cn } from '@/lib/classnames';
 
 const Marker = (props: RMarkerProps) => {
-  const [hover, setHover] = useState(false);
-
   return (
     <RMarker {...props}>
       <div
         className={cn({
-          'flex h-3 w-3 rotate-45 cursor-pointer items-center justify-center border border-[#FFE094] transition-all':
+          'animate-in zoom-in relative flex h-6 w-6 cursor-pointer items-center justify-center duration-150':
             true,
-          'scale-[2] bg-[#FFE094]': hover,
         })}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
       >
-        <div className="h-1.5 w-1.5 bg-[#FFE094]"></div>
+        <div
+          className={cn({
+            'absolute left-1/2 top-1/2 flex h-3 w-3 -translate-x-1/2 -translate-y-1/2 rotate-45 items-center justify-center border border-[#FFE094] transition-all':
+              true,
+            'scale-[2] bg-[#FFE094]': true,
+          })}
+        >
+          <div className="h-1.5 w-1.5 bg-[#FFE094]"></div>
+        </div>
       </div>
     </RMarker>
   );
