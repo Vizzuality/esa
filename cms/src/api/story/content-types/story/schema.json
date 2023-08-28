@@ -34,10 +34,10 @@
       "max": 90,
       "min": -90,
       "required": true,
-      "type": "integer"
+      "type": "float"
     },
     "longitude": {
-      "type": "integer",
+      "type": "float",
       "required": true,
       "max": 180,
       "min": -180
@@ -47,6 +47,10 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "stories"
+    },
+    "bbox": {
+      "type": "json",
+      "required": true
     }
   }
 }
