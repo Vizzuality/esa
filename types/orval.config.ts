@@ -52,6 +52,26 @@ module.exports = {
                 staleTime: 10000,
               },
             }
+          },
+          "get/categories/{id}": {
+            query: {
+              useQuery: true,
+              useInfinite: false,
+              signal: true,
+              options: {
+                staleTime: 10000,
+              },
+            }
+          },
+          "get/stories/{id}": {
+            query: {
+              useQuery: true,
+              useInfinite: false,
+              signal: true,
+              options: {
+                staleTime: 10000,
+              },
+            }
           }
         }
       },
@@ -59,7 +79,7 @@ module.exports = {
     input: {
       target: '../cms/dist/src/extensions/documentation/documentation/1.0.0/full_documentation.json',
       filters: {
-        tags: ['Dataset', 'Dataset-group', 'Layer'],
+        tags: ['Dataset', 'Dataset-group', 'Layer', 'Story', 'Category'],
       },
     }
   }
