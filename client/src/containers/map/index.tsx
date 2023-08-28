@@ -26,13 +26,13 @@ import { MAPBOX_STYLES } from '@/constants/mapbox';
 
 import StoryMarkers from '@/containers/map/markers';
 import Popup from '@/containers/map/popup';
-import MapSettings from '@/containers/map/settings';
+// import MapSettings from '@/containers/map/settings';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
-import Controls from '@/components/map/controls';
-import SettingsControl from '@/components/map/controls/settings';
-import ZoomControl from '@/components/map/controls/zoom';
+// import Controls from '@/components/map/controls';
+// import SettingsControl from '@/components/map/controls/settings';
+// import ZoomControl from '@/components/map/controls/zoom';
 import Marker from '@/components/map/layers/marker';
 import { CustomMapProps } from '@/components/map/types';
 
@@ -194,13 +194,13 @@ export default function MapContainer() {
         onMouseMove={handleMapMove}
         onMapViewStateChange={handleMapViewStateChange}
       >
-        <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
+        {/* <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
           <ZoomControl />
           <SettingsControl>
             <MapSettings />
           </SettingsControl>
-        </Controls>
-              
+        </Controls> */}
+
         <LayerManager />
 
         <Popup />
