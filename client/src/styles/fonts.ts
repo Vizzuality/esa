@@ -1,11 +1,20 @@
-import { Inter as SansFont } from 'next/font/google';
+import { Inter, Open_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
 
-export const sans = SansFont({
+export const sans = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   fallback: ['system-ui', 'Helvetica Neue', 'Helvetica', 'Arial'],
   weight: ['400'],
+  display: 'block',
+});
+
+export const openSans = Open_Sans({
+  subsets: ['latin'],
+  variable: '--font-open-sans',
+  fallback: ['system-ui', 'Helvetica Neue', 'Helvetica', 'Arial'],
+  weight: ['300'],
+  style: ['italic'],
   display: 'block',
 });
 
