@@ -2,11 +2,11 @@ import { PropsWithChildren } from 'react';
 
 import { InfoIcon } from 'lucide-react';
 
-type ItemsLayoutProps = PropsWithChildren & {
+type CardProps = PropsWithChildren & {
   title?: string;
 };
 
-const ItemsLayout = ({ children, title }: ItemsLayoutProps) => {
+const Card = ({ children, title }: CardProps) => {
   return (
     <div className="rounded border border-[#335E6F] bg-[#00324775] p-4 backdrop-blur-sm">
       {title && (
@@ -19,4 +19,4 @@ const ItemsLayout = ({ children, title }: ItemsLayoutProps) => {
   );
 };
 
-export default ItemsLayout;
+export default Card;

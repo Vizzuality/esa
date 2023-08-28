@@ -79,6 +79,9 @@ module.exports = {
         'header-line':
           'linear-gradient(90deg, rgba(0, 174, 157, 0.00) 0%, rgba(0, 174, 157, 0.70) 51.56%, rgba(0, 174, 157, 0.00) 98.43%)',
       },
+      screens: {
+        '3xl': '1650px',
+      },
     },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],

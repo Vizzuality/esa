@@ -4,7 +4,7 @@ import Category from './item';
 
 const Categories = () => {
   return (
-    <div className="my-4 flex max-w-3xl gap-8">
+    <div className="3xl:mb-4 mb-14 mt-4 flex max-w-3xl gap-8">
       <div className="w-12">
         <p className="text-center text-sm leading-4">Select category</p>
       </div>

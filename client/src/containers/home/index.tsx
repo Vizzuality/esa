@@ -8,10 +8,12 @@ import { tmpBboxAtom } from '@/store';
 
 import Sidebar from '@/containers/home/sidebar';
 
+import Card from '@/components/ui/card';
+import GradientLine from '@/components/ui/gradient-line';
+
 import Categories from './categories';
 import Dashboard from './dashboard';
 import Header from './header';
-import ItemsLayout from './item-layout';
 import TopStories from './top-stories';
 
 export default function Home() {
@@ -33,11 +35,11 @@ export default function Home() {
         </Sidebar>
         <Sidebar>
           <div className="2xl:w-70 w-64">
-            <ItemsLayout title="Impact indicator">IMPACT INDICATOR</ItemsLayout>
-            <div className="bg-header-line my-4 h-[1px]"></div>
-            <ItemsLayout title="Top stories (6)">
+            <Card title="Impact indicator">IMPACT INDICATOR</Card>
+            <GradientLine />
+            <Card title="Top stories (6)">
               <TopStories />
-            </ItemsLayout>
+            </Card>
           </div>
         </Sidebar>
       </div>

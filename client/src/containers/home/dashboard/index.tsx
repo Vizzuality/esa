@@ -1,4 +1,5 @@
-import ItemsLayout from '../item-layout';
+import Card from '@/components/ui/card';
+import GradientLine from '@/components/ui/gradient-line';
 
 import DashboardNumbers from './numbers';
 import DashboardRegions from './regions';
@@ -6,13 +7,13 @@ import DashboardRegions from './regions';
 const Dashboard = () => {
   return (
     <div className="w-60">
-      <ItemsLayout>
+      <Card>
         <DashboardNumbers />
-      </ItemsLayout>
-      <div className="bg-header-line my-4 h-[1px]"></div>
-      <ItemsLayout title="Regions">
+      </Card>
+      <GradientLine />
+      <Card title="Regions">
         <DashboardRegions />
-      </ItemsLayout>
+      </Card>
     </div>
   );
 };

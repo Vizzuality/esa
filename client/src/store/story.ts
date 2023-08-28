@@ -2,17 +2,12 @@ import { string } from '@recoiljs/refine';
 import { atom } from 'recoil';
 import { urlSyncEffect } from 'recoil-sync';
 
-export const categoryAtom = atom({
+export const categoryAtom = atom<string>({
   key: 'category',
-  default: 'all',
+  default: undefined,
   effects: [
     urlSyncEffect({
       refine: string(),
     }),
   ],
-});
-
-export const selectedStoryAtom = atom<string | null>({
-  key: 'selected-story',
-  default: null,
 });

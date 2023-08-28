@@ -1,4 +1,4 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
 
@@ -14,8 +14,12 @@ type CategoryProps = {
 
 const Category = ({ name, id, Icon }: CategoryProps) => {
   const [category, setCategory] = useRecoilState(categoryAtom);
+  const resetCategory = useResetRecoilState(categoryAtom);
 
   const handleClick = (id: string) => {
+    if (category === id) {
+      return resetCategory();
+    }
     setCategory(id);
   };
 
