@@ -71,8 +71,16 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        inter: ['var(--font-inter)'],
+        'open-sans': ['var(--font-open-sans)'],
         notes: ['var(--font-esa-notes)'],
+      },
+      backgroundImage: {
+        'header-line':
+          'linear-gradient(90deg, rgba(0, 174, 157, 0.00) 0%, rgba(0, 174, 157, 0.70) 51.56%, rgba(0, 174, 157, 0.00) 98.43%)',
+      },
+      screens: {
+        '3xl': '1650px',
       },
     },
   },
