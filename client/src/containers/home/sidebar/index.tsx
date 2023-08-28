@@ -18,13 +18,12 @@ export default function Sidebar({ children }: PropsWithChildren) {
   return (
     <div
       className={cn({
-        'absolute left-0 top-0 flex h-full w-full max-w-[400px] flex-col bg-white shadow-lg transition-transform duration-500':
-          true,
+        'h-full max-w-[400px] flex-col  transition-transform duration-500': true,
         'translate-x-0': open,
         '-translate-x-full': !open,
       })}
     >
-      <div className="absolute left-full top-6 z-10">
+      {/* <div className="absolute left-full top-6 z-10">
         <Button
           variant="default"
           size="icon"
@@ -39,7 +38,7 @@ export default function Sidebar({ children }: PropsWithChildren) {
             })}
           />
         </Button>
-      </div>
+      </div> */}
 
       <div className="flex grow flex-col overflow-y-auto">{children}</div>
     </div>
