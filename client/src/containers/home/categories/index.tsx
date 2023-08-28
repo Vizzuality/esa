@@ -1,8 +1,13 @@
+import { useGetCategories } from '@/types/generated/category';
+
 import categories from '@/constants/categories';
 
 import Category from './item';
 
 const Categories = () => {
+  const { data } = useGetCategories();
+  console.info(data);
+
   return (
     <div className="3xl:mb-4 mb-14 mt-4 flex max-w-3xl gap-8">
       <div className="w-12">
