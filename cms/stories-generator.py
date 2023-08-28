@@ -1,14 +1,18 @@
-import geojson
+import json
 import random
 import geopandas as gpd
 from shapely.geometry import Point
-
+from slugify import slugify
+from faker import Faker
 # Load land geometries from Natural Earth dataset (1:10m scale)
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
 # Define latitude range to avoid poles (approximately ±80 degrees)
-min_latitude = -50
-max_latitude = 70
+min_latitude = -60
+max_latitude = 80
+
+# Initialize Faker generator
+fake = Faker()
 
 # Function to generate random coordinates within land boundaries and latitude range
 def generate_random_coordinates_within_land_and_range():
@@ -20,10 +24,7 @@ def generate_random_coordinates_within_land_and_range():
             return longitude, latitude
 
 # Sample data for categories, IFIs, statuses, and tags
-categories = ['farm', 'urban', 'mountain']
-ifis = ['World bank', 'ADB', 'IFAD']
-statuses = ['completed', 'in progress']
-tags = ['agriculture', 'rural', 'city', 'development', 'nature', 'scenic']
+statuses = ['Completed', 'In progress']
 
 # Generate 100 random features within land boundaries and excluding polar regions
 features = []
@@ -31,14 +32,10 @@ for idx in range(100):
     coordinates = generate_random_coordinates_within_land_and_range()
     longitude, latitude = coordinates
 
-    properties = {
-        "category": random.choice(categories),
-        "ifi": random.choice(ifis),
-        "status": random.choice(statuses),
-        "tags": random.sample(tags, random.randint(1, 3))
-    }
-
-    point = geojson.Point(coordinates)
+    title = fake.catch_phrase()  # Generate a random title
+    slug = slugify(title)
+    status = random.choice(statuses)
+    category_id = random.randint(1, 11)  # Generate random category ID from 1 to 11
 
     # Calculate bounding box with offsets
     bbox_offset = 0.1  # Adjust this offset as needed
@@ -49,13 +46,19 @@ for idx in range(100):
         latitude + bbox_offset
     ]
 
-    feature = geojson.Feature(geometry=point, properties=properties, id=idx + 1, bbox=bbox)
+    feature = {
+        "title": title,
+        "slug": slug,
+        "status": status,
+        "latitude": latitude,
+        "longitude": longitude,
+        "bbox": bbox,
+        "category": category_id
+    }
+
     features.append(feature)
 
-# Create FeatureCollection
-feature_collection = geojson.FeatureCollection(features)
-
-# Write to the specified GeoJSON file
-output_path = "client/src/constants/markers.json"
+# Write to the specified JSON array file
+output_path = "client/src/constants/stories.json"
 with open(output_path, "w") as f:
-    geojson.dump(feature_collection, f)
+    json.dump(features, f, indent=2)

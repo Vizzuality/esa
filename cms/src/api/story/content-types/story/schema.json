@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stories",
+  "info": {
+    "singularName": "story",
+    "pluralName": "stories",
+    "displayName": "Story",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "required": false,
+      "targetField": "title"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Completed",
+        "In progress"
+      ],
+      "default": "In progress",
+      "required": true
+    },
+    "latitude": {
+      "max": 90,
+      "min": -90,
+      "required": true,
+      "type": "float"
+    },
+    "longitude": {
+      "type": "float",
+      "required": true,
+      "max": 180,
+      "min": -180
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "stories"
+    },
+    "bbox": {
+      "type": "json",
+      "required": true
+    }
+  }
+}
