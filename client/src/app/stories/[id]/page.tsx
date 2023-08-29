@@ -1,4 +1,6 @@
-import { getStories } from '@/types/generated/story';
+import type { Metadata } from 'next';
+
+import { getStories, getStoriesId } from '@/types/generated/story';
 
 import Story from '@/containers/story';
 
@@ -25,6 +27,25 @@ export async function generateStaticParams() {
   } catch (e) {
     console.error(e);
     return [];
+  }
+}
+
+export async function generateMetadata({ params }: StoryPageProps): Promise<Metadata> {
+  try {
+    // read route params
+    const { id } = params;
+
+    // fetch data
+    const { data: storyData } = await getStoriesId(+id);
+
+    return {
+      title: storyData?.attributes?.title,
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      title: 'Story',
+    };
   }
 }
 
