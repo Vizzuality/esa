@@ -3,56 +3,41 @@
 import { useEffect } from 'react';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
-import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 import { useSetRecoilState } from 'recoil';
 
 import { tmpBboxAtom } from '@/store';
 
-import { Button } from '@/components/ui/button';
+import { useGetStoriesId } from '@/types/generated/story';
 
-const TOTAL_STEPS = 3;
+import { Button } from '@/components/ui/button';
+import Card from '@/components/ui/card';
 
 const Story = () => {
+  const { id } = useParams();
+  const { data: storyData } = useGetStoriesId(+id);
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
-  const { push } = useRouter();
-  const searchParams = useSearchParams();
-  const step = searchParams.get('step');
-  const pathname = usePathname();
-  const storyId = pathname.split('/').pop();
 
   useEffect(() => {
-    setTmpBbox([20, 0, 25, 1]);
-  }, [setTmpBbox]);
-
-  const currentStep = step && Number.isInteger(parseInt(step)) ? parseInt(step) : 1;
-
-  const handleStep = (direction: 'next' | 'prev') => {
-    if (direction === 'prev' && currentStep > 1) {
-      push(`${pathname}?step=${currentStep - 1}`);
-    } else if (direction === 'next' && currentStep < TOTAL_STEPS) {
-      push(`${pathname}?step=${currentStep + 1}`);
+    if (storyData?.data?.attributes?.bbox) {
+      setTmpBbox(storyData?.data?.attributes?.bbox as [number, number, number, number]);
     }
-  };
+  }, [storyData?.data?.attributes?.bbox, setTmpBbox]);
 
   return (
-    <div className="absolute left-0 top-0 z-50 bg-white">
-      <h1>
-        {storyId} step {step}
-      </h1>
+    <div className="text-primary justify-between p-12">
+      <div className="2xl:w-70 w-64">
+        <Card>
+          <div className="flex flex-col space-y-2">
+            <h1>{storyData?.data?.attributes?.title}</h1>
 
-      <div>
-        <Button disabled={currentStep <= 1} onClick={() => handleStep('prev')}>
-          Prev
-        </Button>
-        <Button disabled={currentStep >= TOTAL_STEPS} onClick={() => handleStep('next')}>
-          Next
-        </Button>
+            <Link href="/">
+              <Button variant="secondary">Back to Home page</Button>
+            </Link>
+          </div>
+        </Card>
       </div>
-
-      <Link href="/">Back to Home page</Link>
     </div>
   );
 };
