@@ -1,34 +1,35 @@
+import { dehydrate } from '@tanstack/query-core';
 import type { Metadata } from 'next';
 
-import { getStories, getStoriesId } from '@/types/generated/story';
+import getQueryClient from '@/lib/react-query';
+import Hydrate from '@/lib/react-query/hydrate';
+
+import { getGetStoriesIdQueryOptions, getStoriesId } from '@/types/generated/story';
 
 import Story from '@/containers/story';
 
 type StoryPageProps = { params: { id: string } };
 
-export async function generateStaticParams() {
-  try {
-    const { data: storiesData } = await getStories({
-      'pagination[limit]': 1000,
-    });
+// export async function generateStaticParams() {
+//   try {
+//     const { data: storiesData } = await getStories({
+//       'pagination[limit]': 200,
+//     });
 
-    if (!storiesData) {
-      throw new Error('Failed to parse storiesData');
-    }
+//     if (!storiesData) {
+//       throw new Error('Failed to parse storiesData');
+//     }
 
-    return storiesData.map(
-      (s) =>
-        ({
-          params: {
-            id: `${s.id}`,
-          },
-        } satisfies StoryPageProps)
-    );
-  } catch (e) {
-    console.error(e);
-    return [];
-  }
-}
+//     console.log('storiesData', storiesData);
+
+//     return storiesData.map((s) => ({
+//       id: `${s.id}`,
+//     }));
+//   } catch (e) {
+//     console.error(e);
+//     return [];
+//   }
+// }
 
 export async function generateMetadata({ params }: StoryPageProps): Promise<Metadata> {
   try {
@@ -49,8 +50,24 @@ export async function generateMetadata({ params }: StoryPageProps): Promise<Meta
   }
 }
 
-export default async function StoryPage({ params }: StoryPageProps) {
-  console.log(params);
+async function prefetchQueries(params: StoryPageProps['params']) {
+  // Prefetch datasets
+  const queryClient = getQueryClient();
+  const { queryKey, queryFn } = getGetStoriesIdQueryOptions(+params.id);
 
-  return <Story />;
+  await queryClient.prefetchQuery({
+    queryKey,
+    queryFn,
+  });
+  return dehydrate(queryClient);
+}
+
+export default async function StoryPage({ params }: StoryPageProps) {
+  const dehydratedState = await prefetchQueries(params);
+
+  return (
+    <Hydrate state={dehydratedState}>
+      <Story />
+    </Hydrate>
+  );
 }
