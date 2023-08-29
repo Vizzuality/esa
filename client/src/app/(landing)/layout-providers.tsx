@@ -25,6 +25,7 @@ export default function Providers({ children }: PropsWithChildren) {
   const deserialize: Deserialize = useCallback((x: string) => {
     return JSON.parse(x);
   }, []);
+
   return (
     <>
       <style jsx global>{`
