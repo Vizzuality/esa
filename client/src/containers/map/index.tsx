@@ -172,7 +172,7 @@ export default function MapContainer() {
   }, []);
 
   return (
-    <div className="absolute left-0 top-0 h-screen w-screen">
+    <div className="absolute left-0 top-0 h-screen w-screen bg-[#0a2839]">
       <Map
         id={id}
         initialViewState={{
@@ -216,7 +216,8 @@ export default function MapContainer() {
             key={marker.id}
             longitude={marker.geometry.coordinates[0]}
             latitude={marker.geometry.coordinates[1]}
-            onClick={() => {
+            onClick={(e) => {
+              e.originalEvent.stopPropagation();
               setMarker(null);
               push(`/stories/${marker.id}`);
             }}
