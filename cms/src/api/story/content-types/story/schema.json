@@ -51,6 +51,10 @@
     "bbox": {
       "type": "json",
       "required": true
+    },
+    "location": {
+      "type": "customField",
+      "customField": "plugin::map-field.map-field"
     }
   }
 }
