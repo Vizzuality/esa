@@ -1,5 +1,10 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'Links',
+  description: 'Links',
+};
+
 export default async function LinksPage() {
   return (
     <div className="z-50 flex flex-col space-y-5 bg-white">
