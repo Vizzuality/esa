@@ -10,18 +10,18 @@ import transport from '@/svgs/categories/transport.svg';
 import urban from '@/svgs/categories/urban.svg';
 import water from '@/svgs/categories/water.svg';
 
-const categories = [
-  { name: 'Agriculture', id: 'agriculture', icon: agriculture },
-  { name: 'Climate Resilience', id: 'climate', icon: climate },
-  { name: 'Disaster Resilience', id: 'disaster', icon: disaster },
-  { name: 'Clean Energy', id: 'energy', icon: energy },
-  { name: 'Forest management', id: 'forest', icon: forest },
-  { name: 'Fragility, Conflict & Security', id: 'fragility', icon: fragility },
-  { name: 'Health', id: 'health', icon: health },
-  { name: 'Marine', id: 'marine', icon: marine },
-  { name: 'Transport & Infrastructure', id: 'transport', icon: transport },
-  { name: 'Urban Sustainability', id: 'urban', icon: urban },
-  { name: 'Water Resources', id: 'water', icon: water },
-];
+const categories = {
+  agriculture,
+  climate,
+  disaster,
+  energy,
+  forest,
+  fragility,
+  health,
+  marine,
+  transport,
+  urban,
+  water,
+};
 
 export default categories;
