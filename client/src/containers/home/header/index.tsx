@@ -1,16 +1,27 @@
+'use client';
+
 import Image from 'next/image';
 
 import { FilterIcon } from 'lucide-react';
+import { useRecoilState } from 'recoil';
+
+import { filtersOpenAtom } from '@/store/home';
 
 import { Button } from '@/components/ui/button';
 import GradientLine from '@/components/ui/gradient-line';
 
 const Header = () => {
+  const [open, setOpen] = useRecoilState(filtersOpenAtom);
+
+  const handleClickFilters = () => {
+    setOpen(!open);
+  };
+
   return (
     <header className="z-10">
       <div className="flex items-center justify-between space-x-1.5 py-4">
         <div className="flex flex-1 items-center space-x-3">
-          <Button variant="icon" size="icon">
+          <Button onClick={handleClickFilters} variant="icon" size="icon">
             <FilterIcon className="h-6 w-6" />
           </Button>
           <div className="flex-1">
