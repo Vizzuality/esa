@@ -2,7 +2,7 @@ import { useRecoilState, useResetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
 
-import { categoryAtom } from '@/store/story';
+import { categoryAtom } from '@/store/home';
 
 import { Button } from '@/components/ui/button';
 

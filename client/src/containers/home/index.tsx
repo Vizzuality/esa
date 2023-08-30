@@ -15,6 +15,7 @@ import GradientLine from '@/components/ui/gradient-line';
 
 import Categories from './categories';
 import Dashboard from './dashboard';
+import { Filters } from './filters';
 import Header from './header';
 import TopStories from './top-stories';
 
@@ -32,6 +33,7 @@ export default function Home() {
   return (
     <div className="home text-primary flex h-screen w-screen flex-col justify-between px-12">
       <Header />
+      <Filters />
       <div className="mt-12 flex flex-1 justify-between">
         <Sidebar>
           <div className="2xl:w-70 w-64">

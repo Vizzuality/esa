@@ -50,11 +50,21 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        gray: {
+          200: 'hsla(60, 8%, 90%, 1)',
+          500: 'hsla(202, 15%, 66%, 1)',
+          800: 'hsla(197, 37%, 32%, 1)',
+        },
+        'enlight-yellow': {
+          400: 'hsla(43, 100%, 65%, 1)',
+          500: 'hsla(39, 97%, 54%, 1)',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        '4xl': '2rem',
       },
       keyframes: {
         'accordion-down': {
@@ -81,6 +91,9 @@ module.exports = {
       },
       screens: {
         '3xl': '1650px',
+      },
+      boxShadow: {
+        filters: '4px 0px 30px 0px hsla(var(--card-foreground))',
       },
     },
   },
