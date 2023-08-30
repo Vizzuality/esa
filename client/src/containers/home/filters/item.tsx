@@ -17,13 +17,9 @@ const FilterItem = ({ filter: { id, options, title } }: FilterItemProps) => {
   const [filter, setFilter] = useRecoilState(filterSelector(id));
   const resetFilter = useResetRecoilState(filterSelector(id));
 
-  const handleChangeFilter = (id: string, checked: boolean) => {
-    if (filter.length === 1 && !checked) {
-      resetFilter();
-      return;
-    }
+  const handleChangeFilter = (id: string) => {
     setFilter((prev) => {
-      if (checked) {
+      if (!prev.includes(id)) {
         return [...prev, id];
       }
       return prev.filter((item) => item !== id);
@@ -45,7 +41,7 @@ const FilterItem = ({ filter: { id, options, title } }: FilterItemProps) => {
               key={optionId}
               checked={filter.includes(optionId)}
               value={id}
-              onCheckedChange={(checked: boolean) => handleChangeFilter(optionId, checked)}
+              onCheckedChange={() => handleChangeFilter(optionId)}
               label={name}
             />
           );
