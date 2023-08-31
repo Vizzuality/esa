@@ -1,1 +1,1160 @@
-{"type": "FeatureCollection", "features": [{"type": "Feature", "bbox": [-134.5599943334431, 59.616443105845796, -134.3599943334431, 59.8164431058458], "id": 1, "geometry": {"type": "Point", "coordinates": [-134.459994, 59.716443]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "completed", "tags": ["nature"]}}, {"type": "Feature", "bbox": [84.18309096588322, 62.111968288373255, 84.38309096588321, 62.31196828837326], "id": 2, "geometry": {"type": "Point", "coordinates": [84.283091, 62.211968]}, "properties": {"category": "urban", "ifi": "ADB", "status": "completed", "tags": ["city", "agriculture"]}}, {"type": "Feature", "bbox": [79.73612550542518, 13.937149452874403, 79.93612550542517, 14.137149452874402], "id": 3, "geometry": {"type": "Point", "coordinates": [79.836126, 14.037149]}, "properties": {"category": "urban", "ifi": "ADB", "status": "completed", "tags": ["nature", "development", "rural"]}}, {"type": "Feature", "bbox": [6.05083978928476, 51.546650658396466, 6.250839789284759, 51.74665065839647], "id": 4, "geometry": {"type": "Point", "coordinates": [6.15084, 51.646651]}, "properties": {"category": "urban", "ifi": "World bank", "status": "in progress", "tags": ["rural", "city", "development"]}}, {"type": "Feature", "bbox": [-7.199672888401755, 18.770357710834425, -6.999672888401756, 18.970357710834428], "id": 5, "geometry": {"type": "Point", "coordinates": [-7.099673, 18.870358]}, "properties": {"category": "farm", "ifi": "IFAD", "status": "completed", "tags": ["rural", "development", "scenic"]}}, {"type": "Feature", "bbox": [25.035905974786225, 64.22052298518969, 25.235905974786228, 64.42052298518968], "id": 6, "geometry": {"type": "Point", "coordinates": [25.135906, 64.320523]}, "properties": {"category": "urban", "ifi": "ADB", "status": "completed", "tags": ["scenic"]}}, {"type": "Feature", "bbox": [42.73879826153398, 34.01709586813656, 42.93879826153398, 34.21709586813656], "id": 7, "geometry": {"type": "Point", "coordinates": [42.838798, 34.117096]}, "properties": {"category": "farm", "ifi": "World bank", "status": "in progress", "tags": ["nature"]}}, {"type": "Feature", "bbox": [103.19478959965377, 62.74781494774101, 103.39478959965376, 62.947814947741016], "id": 8, "geometry": {"type": "Point", "coordinates": [103.29479, 62.847815]}, "properties": {"category": "farm", "ifi": "World bank", "status": "completed", "tags": ["development", "nature"]}}, {"type": "Feature", "bbox": [21.389265716901086, -28.916097026483996, 21.58926571690109, -28.716097026483993], "id": 9, "geometry": {"type": "Point", "coordinates": [21.489266, -28.816097]}, "properties": {"category": "urban", "ifi": "World bank", "status": "in progress", "tags": ["scenic", "city", "rural"]}}, {"type": "Feature", "bbox": [73.83677877499792, 55.426094466252614, 74.03677877499791, 55.62609446625262], "id": 10, "geometry": {"type": "Point", "coordinates": [73.936779, 55.526094]}, "properties": {"category": "farm", "ifi": "World bank", "status": "in progress", "tags": ["rural", "scenic", "agriculture"]}}, {"type": "Feature", "bbox": [-120.32779246453109, 42.6981795467241, -120.1277924645311, 42.8981795467241], "id": 11, "geometry": {"type": "Point", "coordinates": [-120.227792, 42.79818]}, "properties": {"category": "farm", "ifi": "World bank", "status": "in progress", "tags": ["rural"]}}, {"type": "Feature", "bbox": [-85.68747876746046, 12.258850904490034, -85.48747876746047, 12.458850904490033], "id": 12, "geometry": {"type": "Point", "coordinates": [-85.587479, 12.358851]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "completed", "tags": ["development"]}}, {"type": "Feature", "bbox": [-94.73922042908755, 54.89350257201334, -94.53922042908756, 55.09350257201334], "id": 13, "geometry": {"type": "Point", "coordinates": [-94.63922, 54.993503]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "in progress", "tags": ["nature", "development"]}}, {"type": "Feature", "bbox": [-106.76016262841148, 48.08023500510941, -106.56016262841149, 48.28023500510941], "id": 14, "geometry": {"type": "Point", "coordinates": [-106.660163, 48.180235]}, "properties": {"category": "urban", "ifi": "ADB", "status": "completed", "tags": ["city"]}}, {"type": "Feature", "bbox": [31.64802213930627, 53.013910744192096, 31.848022139306273, 53.2139107441921], "id": 15, "geometry": {"type": "Point", "coordinates": [31.748022, 53.113911]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "in progress", "tags": ["city", "scenic"]}}, {"type": "Feature", "bbox": [-86.75285596312858, 15.137564232455285, -86.5528559631286, 15.337564232455284], "id": 16, "geometry": {"type": "Point", "coordinates": [-86.652856, 15.237564]}, "properties": {"category": "urban", "ifi": "ADB", "status": "in progress", "tags": ["development"]}}, {"type": "Feature", "bbox": [19.469528772791982, 23.808129387619154, 19.669528772791985, 24.008129387619157], "id": 17, "geometry": {"type": "Point", "coordinates": [19.569529, 23.908129]}, "properties": {"category": "urban", "ifi": "World bank", "status": "completed", "tags": ["nature"]}}, {"type": "Feature", "bbox": [135.54825893835775, 57.714862526062355, 135.74825893835774, 57.91486252606236], "id": 18, "geometry": {"type": "Point", "coordinates": [135.648259, 57.814863]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "completed", "tags": ["development", "agriculture", "city"]}}, {"type": "Feature", "bbox": [-133.11537846072636, 59.52439551082427, -132.91537846072637, 59.72439551082427], "id": 19, "geometry": {"type": "Point", "coordinates": [-133.015378, 59.624396]}, "properties": {"category": "farm", "ifi": "World bank", "status": "completed", "tags": ["nature"]}}, {"type": "Feature", "bbox": [60.802304430382115, 39.1279764502361, 61.00230443038212, 39.3279764502361], "id": 20, "geometry": {"type": "Point", "coordinates": [60.902304, 39.227976]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "in progress", "tags": ["agriculture", "rural", "city"]}}, {"type": "Feature", "bbox": [-89.42418571401217, 43.354346222613266, -89.22418571401218, 43.55434622261327], "id": 21, "geometry": {"type": "Point", "coordinates": [-89.324186, 43.454346]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "in progress", "tags": ["nature", "city", "agriculture"]}}, {"type": "Feature", "bbox": [131.87055587647646, -18.6766781156457, 132.07055587647645, -18.476678115645697], "id": 22, "geometry": {"type": "Point", "coordinates": [131.970556, -18.576678]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "in progress", "tags": ["scenic", "agriculture"]}}, {"type": "Feature", "bbox": [-147.95059301556248, 65.0277669511945, -147.7505930155625, 65.22776695119448], "id": 23, "geometry": {"type": "Point", "coordinates": [-147.850593, 65.127767]}, "properties": {"category": "urban", "ifi": "World bank", "status": "in progress", "tags": ["scenic", "rural"]}}, {"type": "Feature", "bbox": [-58.82546252996432, -17.94320918405932, -58.62546252996432, -17.743209184059317], "id": 24, "geometry": {"type": "Point", "coordinates": [-58.725463, -17.843209]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "completed", "tags": ["scenic", "nature"]}}, {"type": "Feature", "bbox": [107.45157331709456, 40.668862584059404, 107.65157331709455, 40.86886258405941], "id": 25, "geometry": {"type": "Point", "coordinates": [107.551573, 40.768863]}, "properties": {"category": "farm", "ifi": "ADB", "status": "completed", "tags": ["development"]}}, {"type": "Feature", "bbox": [-52.483724953222854, 4.585002885837321, -52.28372495322285, 4.78500288583732], "id": 26, "geometry": {"type": "Point", "coordinates": [-52.383725, 4.685003]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "completed", "tags": ["agriculture", "rural", "city"]}}, {"type": "Feature", "bbox": [31.444154454395367, -11.840175051069826, 31.64415445439537, -11.640175051069827], "id": 27, "geometry": {"type": "Point", "coordinates": [31.544154, -11.740175]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "completed", "tags": ["city", "development", "scenic"]}}, {"type": "Feature", "bbox": [99.3440543035849, 11.689134627204618, 99.54405430358489, 11.889134627204617], "id": 28, "geometry": {"type": "Point", "coordinates": [99.444054, 11.789135]}, "properties": {"category": "farm", "ifi": "IFAD", "status": "in progress", "tags": ["scenic", "development", "agriculture"]}}, {"type": "Feature", "bbox": [14.742662388657545, -19.92714954016464, 14.942662388657544, -19.727149540164636], "id": 29, "geometry": {"type": "Point", "coordinates": [14.842662, -19.82715]}, "properties": {"category": "farm", "ifi": "IFAD", "status": "completed", "tags": ["scenic", "agriculture"]}}, {"type": "Feature", "bbox": [-112.52644305701318, 43.42472814152196, -112.3264430570132, 43.62472814152196], "id": 30, "geometry": {"type": "Point", "coordinates": [-112.426443, 43.524728]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "in progress", "tags": ["scenic", "rural"]}}, {"type": "Feature", "bbox": [18.77254812242429, 5.904514207346276, 18.972548122424293, 6.104514207346275], "id": 31, "geometry": {"type": "Point", "coordinates": [18.872548, 6.004514]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "in progress", "tags": ["nature", "city", "scenic"]}}, {"type": "Feature", "bbox": [121.67387466754602, 52.39860985195663, 121.873874667546, 52.59860985195663], "id": 32, "geometry": {"type": "Point", "coordinates": [121.773875, 52.49861]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "completed", "tags": ["rural"]}}, {"type": "Feature", "bbox": [77.0413104771624, 50.61825544996642, 77.24131047716239, 50.81825544996642], "id": 33, "geometry": {"type": "Point", "coordinates": [77.14131, 50.718255]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "completed", "tags": ["rural", "city", "development"]}}, {"type": "Feature", "bbox": [48.964286433019275, 24.638313558966964, 49.16428643301928, 24.838313558966966], "id": 34, "geometry": {"type": "Point", "coordinates": [49.064286, 24.738314]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "completed", "tags": ["rural", "city"]}}, {"type": "Feature", "bbox": [24.881913112049766, -16.21680350897087, 25.08191311204977, -16.016803508970867], "id": 35, "geometry": {"type": "Point", "coordinates": [24.981913, -16.116804]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "completed", "tags": ["agriculture"]}}, {"type": "Feature", "bbox": [147.81123977348997, 64.70647494296749, 148.01123977348996, 64.90647494296748], "id": 36, "geometry": {"type": "Point", "coordinates": [147.91124, 64.806475]}, "properties": {"category": "farm", "ifi": "ADB", "status": "completed", "tags": ["nature"]}}, {"type": "Feature", "bbox": [116.25448767596018, 46.38323459952624, 116.45448767596017, 46.58323459952624], "id": 37, "geometry": {"type": "Point", "coordinates": [116.354488, 46.483235]}, "properties": {"category": "urban", "ifi": "ADB", "status": "in progress", "tags": ["rural", "city"]}}, {"type": "Feature", "bbox": [76.71460748507818, 38.9927092850566, 76.91460748507816, 39.1927092850566], "id": 38, "geometry": {"type": "Point", "coordinates": [76.814607, 39.092709]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "in progress", "tags": ["nature"]}}, {"type": "Feature", "bbox": [-149.7097382008896, 67.01685090430831, -149.50973820088961, 67.2168509043083], "id": 39, "geometry": {"type": "Point", "coordinates": [-149.609738, 67.116851]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "in progress", "tags": ["agriculture"]}}, {"type": "Feature", "bbox": [141.28608738150993, -5.045906937736005, 141.48608738150992, -4.845906937736006], "id": 40, "geometry": {"type": "Point", "coordinates": [141.386087, -4.945907]}, "properties": {"category": "urban", "ifi": "World bank", "status": "completed", "tags": ["development", "city", "agriculture"]}}, {"type": "Feature", "bbox": [-1.6920629718835074, 32.79762485088042, -1.4920629718835072, 32.99762485088042], "id": 41, "geometry": {"type": "Point", "coordinates": [-1.592063, 32.897625]}, "properties": {"category": "urban", "ifi": "World bank", "status": "completed", "tags": ["development", "scenic", "agriculture"]}}, {"type": "Feature", "bbox": [-6.770259174609384, 31.94012955400337, -6.570259174609385, 32.14012955400337], "id": 42, "geometry": {"type": "Point", "coordinates": [-6.670259, 32.04013]}, "properties": {"category": "urban", "ifi": "World bank", "status": "completed", "tags": ["nature", "rural", "agriculture"]}}, {"type": "Feature", "bbox": [125.38378302703339, -20.436204874839163, 125.58378302703338, -20.23620487483916], "id": 43, "geometry": {"type": "Point", "coordinates": [125.483783, -20.336205]}, "properties": {"category": "urban", "ifi": "ADB", "status": "completed", "tags": ["agriculture", "rural", "scenic"]}}, {"type": "Feature", "bbox": [-88.88751853922824, 32.71045416513761, -88.68751853922825, 32.910454165137615], "id": 44, "geometry": {"type": "Point", "coordinates": [-88.787519, 32.810454]}, "properties": {"category": "farm", "ifi": "IFAD", "status": "completed", "tags": ["development"]}}, {"type": "Feature", "bbox": [43.74637735817466, 53.22623818549402, 43.946377358174665, 53.42623818549402], "id": 45, "geometry": {"type": "Point", "coordinates": [43.846377, 53.326238]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "in progress", "tags": ["scenic", "nature", "agriculture"]}}, {"type": "Feature", "bbox": [22.750746009328473, 21.858073972823654, 22.950746009328476, 22.058073972823657], "id": 46, "geometry": {"type": "Point", "coordinates": [22.850746, 21.958074]}, "properties": {"category": "urban", "ifi": "ADB", "status": "in progress", "tags": ["agriculture"]}}, {"type": "Feature", "bbox": [20.89067318928226, 41.76463428054661, 21.090673189282263, 41.96463428054661], "id": 47, "geometry": {"type": "Point", "coordinates": [20.990673, 41.864634]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "completed", "tags": ["agriculture", "nature", "city"]}}, {"type": "Feature", "bbox": [65.07682276633287, 46.318759411620526, 65.27682276633286, 46.51875941162053], "id": 48, "geometry": {"type": "Point", "coordinates": [65.176823, 46.418759]}, "properties": {"category": "farm", "ifi": "World bank", "status": "in progress", "tags": ["development", "nature"]}}, {"type": "Feature", "bbox": [113.17995658884396, 60.29475208117653, 113.37995658884395, 60.494752081176536], "id": 49, "geometry": {"type": "Point", "coordinates": [113.279957, 60.394752]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "completed", "tags": ["development", "nature", "scenic"]}}, {"type": "Feature", "bbox": [36.02995983330015, -16.18011591707858, 36.22995983330015, -15.98011591707858], "id": 50, "geometry": {"type": "Point", "coordinates": [36.12996, -16.080116]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "completed", "tags": ["agriculture", "city", "development"]}}, {"type": "Feature", "bbox": [-42.11628094516562, -5.481248054948585, -41.91628094516562, -5.281248054948586], "id": 51, "geometry": {"type": "Point", "coordinates": [-42.016281, -5.381248]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "completed", "tags": ["rural"]}}, {"type": "Feature", "bbox": [19.175765189903494, 10.645671472813328, 19.375765189903497, 10.845671472813327], "id": 52, "geometry": {"type": "Point", "coordinates": [19.275765, 10.745671]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "in progress", "tags": ["scenic", "development"]}}, {"type": "Feature", "bbox": [77.65091645142545, 39.02800943352573, 77.85091645142543, 39.228009433525735], "id": 53, "geometry": {"type": "Point", "coordinates": [77.750916, 39.128009]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "completed", "tags": ["scenic", "rural"]}}, {"type": "Feature", "bbox": [-86.8929512205809, 44.39514329402002, -86.69295122058091, 44.595143294020026], "id": 54, "geometry": {"type": "Point", "coordinates": [-86.792951, 44.495143]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "in progress", "tags": ["development", "city"]}}, {"type": "Feature", "bbox": [-117.13481383023105, 41.7332999150644, -116.93481383023106, 41.9332999150644], "id": 55, "geometry": {"type": "Point", "coordinates": [-117.034814, 41.8333]}, "properties": {"category": "farm", "ifi": "ADB", "status": "completed", "tags": ["scenic", "development"]}}, {"type": "Feature", "bbox": [136.1583273558929, -30.55284903519043, 136.3583273558929, -30.352849035190427], "id": 56, "geometry": {"type": "Point", "coordinates": [136.258327, -30.452849]}, "properties": {"category": "farm", "ifi": "IFAD", "status": "in progress", "tags": ["city"]}}, {"type": "Feature", "bbox": [-87.78041722779477, 43.12001872360994, -87.58041722779478, 43.32001872360994], "id": 57, "geometry": {"type": "Point", "coordinates": [-87.680417, 43.220019]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "in progress", "tags": ["scenic"]}}, {"type": "Feature", "bbox": [142.04422536736408, -18.596423373408314, 142.24422536736407, -18.39642337340831], "id": 58, "geometry": {"type": "Point", "coordinates": [142.144225, -18.496423]}, "properties": {"category": "farm", "ifi": "ADB", "status": "completed", "tags": ["scenic", "agriculture", "rural"]}}, {"type": "Feature", "bbox": [75.10235582712406, 38.19727364843511, 75.30235582712405, 38.39727364843511], "id": 59, "geometry": {"type": "Point", "coordinates": [75.202356, 38.297274]}, "properties": {"category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["nature", "scenic", "development"]}}, {"type": "Feature", "bbox": [80.41145317602164, 47.57891650748248, 80.61145317602163, 47.778916507482485], "id": 60, "geometry": {"type": "Point", "coordinates": [80.511453, 47.678917]}, "properties": {"category": "urban", "ifi": "ADB", "status": "completed", "tags": ["rural"]}}, {"type": "Feature", "bbox": [-69.15111431746018, 8.794508388874492, -68.9511143174602, 8.994508388874491], "id": 61, "geometry": {"type": "Point", "coordinates": [-69.051114, 8.894508]}, "properties": {"category": "urban", "ifi": "ADB", "status": "in progress", "tags": ["rural", "development"]}}, {"type": "Feature", "bbox": [-50.73913517471352, -27.955305996776712, -50.539135174713515, -27.75530599677671], "id": 62, "geometry": {"type": "Point", "coordinates": [-50.639135, -27.855306]}, "properties": {"category": "farm", "ifi": "World bank", "status": "completed", "tags": ["scenic"]}}, {"type": "Feature", "bbox": [12.990498239763179, -18.466507863598025, 13.190498239763178, -18.266507863598022], "id": 63, "geometry": {"type": "Point", "coordinates": [13.090498, -18.366508]}, "properties": {"category": "farm", "ifi": "IFAD", "status": "in progress", "tags": ["scenic", "city"]}}, {"type": "Feature", "bbox": [24.525760062040966, 8.752778795388389, 24.72576006204097, 8.952778795388388], "id": 64, "geometry": {"type": "Point", "coordinates": [24.62576, 8.852779]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "completed", "tags": ["rural", "agriculture"]}}, {"type": "Feature", "bbox": [115.00733200475108, 46.58732314962982, 115.20733200475107, 46.78732314962982], "id": 65, "geometry": {"type": "Point", "coordinates": [115.107332, 46.687323]}, "properties": {"category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["city"]}}, {"type": "Feature", "bbox": [-105.49106083514211, 36.551406160851364, -105.29106083514212, 36.75140616085137], "id": 66, "geometry": {"type": "Point", "coordinates": [-105.391061, 36.651406]}, "properties": {"category": "farm", "ifi": "World bank", "status": "completed", "tags": ["nature", "city"]}}, {"type": "Feature", "bbox": [110.75155239781893, 47.11651832453638, 110.95155239781892, 47.31651832453638], "id": 67, "geometry": {"type": "Point", "coordinates": [110.851552, 47.216518]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "completed", "tags": ["development"]}}, {"type": "Feature", "bbox": [113.84465523055891, 24.7366756326906, 114.0446552305589, 24.9366756326906], "id": 68, "geometry": {"type": "Point", "coordinates": [113.944655, 24.836676]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "in progress", "tags": ["city"]}}, {"type": "Feature", "bbox": [45.51129882577222, 35.317565696834514, 45.711298825772225, 35.51756569683452], "id": 69, "geometry": {"type": "Point", "coordinates": [45.611299, 35.417566]}, "properties": {"category": "farm", "ifi": "IFAD", "status": "in progress", "tags": ["development", "scenic", "nature"]}}, {"type": "Feature", "bbox": [47.644918855504635, 54.98199985789805, 47.84491885550464, 55.181999857898056], "id": 70, "geometry": {"type": "Point", "coordinates": [47.744919, 55.082]}, "properties": {"category": "farm", "ifi": "World bank", "status": "in progress", "tags": ["nature"]}}, {"type": "Feature", "bbox": [44.48974198056421, 6.899251212149766, 44.689741980564214, 7.099251212149765], "id": 71, "geometry": {"type": "Point", "coordinates": [44.589742, 6.999251]}, "properties": {"category": "urban", "ifi": "World bank", "status": "completed", "tags": ["nature"]}}, {"type": "Feature", "bbox": [-153.165122614133, 67.90113224249721, -152.965122614133, 68.1011322424972], "id": 72, "geometry": {"type": "Point", "coordinates": [-153.065123, 68.001132]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "in progress", "tags": ["nature", "city"]}}, {"type": "Feature", "bbox": [-65.28103450795484, -38.65881023908721, -65.08103450795485, -38.45881023908721], "id": 73, "geometry": {"type": "Point", "coordinates": [-65.181035, -38.55881]}, "properties": {"category": "urban", "ifi": "ADB", "status": "completed", "tags": ["scenic", "rural", "agriculture"]}}, {"type": "Feature", "bbox": [35.1682080160414, 16.052695831930116, 35.3682080160414, 16.25269583193012], "id": 74, "geometry": {"type": "Point", "coordinates": [35.268208, 16.152696]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "completed", "tags": ["rural"]}}, {"type": "Feature", "bbox": [122.85584432551323, 56.75615576936678, 123.05584432551322, 56.95615576936678], "id": 75, "geometry": {"type": "Point", "coordinates": [122.955844, 56.856156]}, "properties": {"category": "farm", "ifi": "ADB", "status": "completed", "tags": ["city", "agriculture"]}}, {"type": "Feature", "bbox": [-70.93957144306464, -45.30642147638419, -70.73957144306465, -45.106421476384185], "id": 76, "geometry": {"type": "Point", "coordinates": [-70.839571, -45.206421]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "completed", "tags": ["development", "nature"]}}, {"type": "Feature", "bbox": [-140.14439085257422, 63.301269129264575, -139.94439085257423, 63.50126912926458], "id": 77, "geometry": {"type": "Point", "coordinates": [-140.044391, 63.401269]}, "properties": {"category": "farm", "ifi": "IFAD", "status": "completed", "tags": ["agriculture", "city"]}}, {"type": "Feature", "bbox": [118.86787376534019, 42.294402882018936, 119.06787376534018, 42.49440288201894], "id": 78, "geometry": {"type": "Point", "coordinates": [118.967874, 42.394403]}, "properties": {"category": "farm", "ifi": "World bank", "status": "completed", "tags": ["nature", "development"]}}, {"type": "Feature", "bbox": [118.59461071074517, 24.845121108465115, 118.79461071074516, 25.045121108465118], "id": 79, "geometry": {"type": "Point", "coordinates": [118.694611, 24.945121]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "completed", "tags": ["scenic", "development", "agriculture"]}}, {"type": "Feature", "bbox": [-79.78438711214498, 40.863450288864094, -79.584387112145, 41.0634502888641], "id": 80, "geometry": {"type": "Point", "coordinates": [-79.684387, 40.96345]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "in progress", "tags": ["rural"]}}, {"type": "Feature", "bbox": [142.8263410766193, 51.35712086517278, 143.02634107661927, 51.557120865172784], "id": 81, "geometry": {"type": "Point", "coordinates": [142.926341, 51.457121]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "completed", "tags": ["city", "scenic"]}}, {"type": "Feature", "bbox": [122.7266468745132, -28.120136991822136, 122.92664687451318, -27.920136991822133], "id": 82, "geometry": {"type": "Point", "coordinates": [122.826647, -28.020137]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "completed", "tags": ["development"]}}, {"type": "Feature", "bbox": [72.25829413768687, 31.495864764494563, 72.45829413768686, 31.695864764494566], "id": 83, "geometry": {"type": "Point", "coordinates": [72.358294, 31.595865]}, "properties": {"category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["development", "nature", "city"]}}, {"type": "Feature", "bbox": [46.12707081060403, 3.3483191482784718, 46.327070810604035, 3.548319148278472], "id": 84, "geometry": {"type": "Point", "coordinates": [46.227071, 3.448319]}, "properties": {"category": "urban", "ifi": "World bank", "status": "completed", "tags": ["nature"]}}, {"type": "Feature", "bbox": [-106.44852348300844, 33.85391387757624, -106.24852348300846, 34.05391387757624], "id": 85, "geometry": {"type": "Point", "coordinates": [-106.348523, 33.953914]}, "properties": {"category": "urban", "ifi": "IFAD", "status": "completed", "tags": ["development", "rural"]}}, {"type": "Feature", "bbox": [-52.866421838114356, -14.643495106750008, -52.66642183811435, -14.443495106750008], "id": 86, "geometry": {"type": "Point", "coordinates": [-52.766422, -14.543495]}, "properties": {"category": "urban", "ifi": "ADB", "status": "completed", "tags": ["scenic", "nature", "development"]}}, {"type": "Feature", "bbox": [107.10313255102906, 16.02162755209975, 107.30313255102905, 16.221627552099754], "id": 87, "geometry": {"type": "Point", "coordinates": [107.203133, 16.121628]}, "properties": {"category": "urban", "ifi": "World bank", "status": "completed", "tags": ["city"]}}, {"type": "Feature", "bbox": [17.380384932520677, -30.66858137961281, 17.58038493252068, -30.468581379612807], "id": 88, "geometry": {"type": "Point", "coordinates": [17.480385, -30.568581]}, "properties": {"category": "urban", "ifi": "World bank", "status": "in progress", "tags": ["development", "city", "agriculture"]}}, {"type": "Feature", "bbox": [15.769615762916255, 8.69566657636574, 15.969615762916254, 8.89566657636574], "id": 89, "geometry": {"type": "Point", "coordinates": [15.869616, 8.795667]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "completed", "tags": ["city"]}}, {"type": "Feature", "bbox": [-89.13597976663513, 37.5753279602144, -88.93597976663514, 37.775327960214405], "id": 90, "geometry": {"type": "Point", "coordinates": [-89.03598, 37.675328]}, "properties": {"category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["rural"]}}, {"type": "Feature", "bbox": [-65.00740999329763, -20.49889368491808, -64.80740999329764, -20.298893684918077], "id": 91, "geometry": {"type": "Point", "coordinates": [-64.90741, -20.398894]}, "properties": {"category": "farm", "ifi": "World bank", "status": "in progress", "tags": ["agriculture", "nature"]}}, {"type": "Feature", "bbox": [20.798490523091196, 52.51964393873161, 20.9984905230912, 52.719643938731615], "id": 92, "geometry": {"type": "Point", "coordinates": [20.898491, 52.619644]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "in progress", "tags": ["development"]}}, {"type": "Feature", "bbox": [39.23233610446962, 36.254472149490546, 39.43233610446962, 36.45447214949055], "id": 93, "geometry": {"type": "Point", "coordinates": [39.332336, 36.354472]}, "properties": {"category": "mountain", "ifi": "ADB", "status": "completed", "tags": ["development", "nature"]}}, {"type": "Feature", "bbox": [116.60363802825529, 2.8574784838306697, 116.80363802825528, 3.05747848383067], "id": 94, "geometry": {"type": "Point", "coordinates": [116.703638, 2.957478]}, "properties": {"category": "urban", "ifi": "World bank", "status": "completed", "tags": ["scenic"]}}, {"type": "Feature", "bbox": [-128.18651367640643, 62.01556560886025, -127.98651367640645, 62.21556560886025], "id": 95, "geometry": {"type": "Point", "coordinates": [-128.086514, 62.115566]}, "properties": {"category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["development"]}}, {"type": "Feature", "bbox": [-105.3802371593702, 62.4565231847507, -105.18023715937021, 62.656523184750704], "id": 96, "geometry": {"type": "Point", "coordinates": [-105.280237, 62.556523]}, "properties": {"category": "mountain", "ifi": "World bank", "status": "completed", "tags": ["rural", "city", "development"]}}, {"type": "Feature", "bbox": [13.80064781482235, 48.72029076493242, 14.000647814822349, 48.920290764932425], "id": 97, "geometry": {"type": "Point", "coordinates": [13.900648, 48.820291]}, "properties": {"category": "mountain", "ifi": "IFAD", "status": "completed", "tags": ["scenic", "city"]}}, {"type": "Feature", "bbox": [131.90950574936014, -18.492789611182097, 132.10950574936012, -18.292789611182094], "id": 98, "geometry": {"type": "Point", "coordinates": [132.009506, -18.39279]}, "properties": {"category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["rural"]}}, {"type": "Feature", "bbox": [96.58304561101644, 25.843619541618217, 96.78304561101643, 26.04361954161822], "id": 99, "geometry": {"type": "Point", "coordinates": [96.683046, 25.94362]}, "properties": {"category": "farm", "ifi": "World bank", "status": "completed", "tags": ["nature", "development", "city"]}}, {"type": "Feature", "bbox": [-66.1709728025475, 57.79040462988939, -65.97097280254751, 57.99040462988939], "id": 100, "geometry": {"type": "Point", "coordinates": [-66.070973, 57.890405]}, "properties": {"category": "farm", "ifi": "World bank", "status": "completed", "tags": ["city"]}}]}
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "bbox": [-134.5599943334431, 59.616443105845796, -134.3599943334431, 59.8164431058458],
+      "id": 1,
+      "geometry": { "type": "Point", "coordinates": [-134.459994, 59.716443] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [84.18309096588322, 62.111968288373255, 84.38309096588321, 62.31196828837326],
+      "id": 2,
+      "geometry": { "type": "Point", "coordinates": [84.283091, 62.211968] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["city", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [79.73612550542518, 13.937149452874403, 79.93612550542517, 14.137149452874402],
+      "id": 3,
+      "geometry": { "type": "Point", "coordinates": [79.836126, 14.037149] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["nature", "development", "rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [6.05083978928476, 51.546650658396466, 6.250839789284759, 51.74665065839647],
+      "id": 4,
+      "geometry": { "type": "Point", "coordinates": [6.15084, 51.646651] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["rural", "city", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-7.199672888401755, 18.770357710834425, -6.999672888401756, 18.970357710834428],
+      "id": 5,
+      "geometry": { "type": "Point", "coordinates": [-7.099673, 18.870358] },
+      "properties": {
+        "category": "farm",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["rural", "development", "scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [25.035905974786225, 64.22052298518969, 25.235905974786228, 64.42052298518968],
+      "id": 6,
+      "geometry": { "type": "Point", "coordinates": [25.135906, 64.320523] },
+      "properties": { "category": "urban", "ifi": "ADB", "status": "completed", "tags": ["scenic"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [42.73879826153398, 34.01709586813656, 42.93879826153398, 34.21709586813656],
+      "id": 7,
+      "geometry": { "type": "Point", "coordinates": [42.838798, 34.117096] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [103.19478959965377, 62.74781494774101, 103.39478959965376, 62.947814947741016],
+      "id": 8,
+      "geometry": { "type": "Point", "coordinates": [103.29479, 62.847815] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["development", "nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [21.389265716901086, -28.916097026483996, 21.58926571690109, -28.716097026483993],
+      "id": 9,
+      "geometry": { "type": "Point", "coordinates": [21.489266, -28.816097] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["scenic", "city", "rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [73.83677877499792, 55.426094466252614, 74.03677877499791, 55.62609446625262],
+      "id": 10,
+      "geometry": { "type": "Point", "coordinates": [73.936779, 55.526094] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["rural", "scenic", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-120.32779246453109, 42.6981795467241, -120.1277924645311, 42.8981795467241],
+      "id": 11,
+      "geometry": { "type": "Point", "coordinates": [-120.227792, 42.79818] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-85.68747876746046, 12.258850904490034, -85.48747876746047, 12.458850904490033],
+      "id": 12,
+      "geometry": { "type": "Point", "coordinates": [-85.587479, 12.358851] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-94.73922042908755, 54.89350257201334, -94.53922042908756, 55.09350257201334],
+      "id": 13,
+      "geometry": { "type": "Point", "coordinates": [-94.63922, 54.993503] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["nature", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-106.76016262841148, 48.08023500510941, -106.56016262841149, 48.28023500510941],
+      "id": 14,
+      "geometry": { "type": "Point", "coordinates": [-106.660163, 48.180235] },
+      "properties": { "category": "urban", "ifi": "ADB", "status": "completed", "tags": ["city"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [31.64802213930627, 53.013910744192096, 31.848022139306273, 53.2139107441921],
+      "id": 15,
+      "geometry": { "type": "Point", "coordinates": [31.748022, 53.113911] },
+      "properties": {
+        "category": "urban",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["city", "scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-86.75285596312858, 15.137564232455285, -86.5528559631286, 15.337564232455284],
+      "id": 16,
+      "geometry": { "type": "Point", "coordinates": [-86.652856, 15.237564] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [19.469528772791982, 23.808129387619154, 19.669528772791985, 24.008129387619157],
+      "id": 17,
+      "geometry": { "type": "Point", "coordinates": [19.569529, 23.908129] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [135.54825893835775, 57.714862526062355, 135.74825893835774, 57.91486252606236],
+      "id": 18,
+      "geometry": { "type": "Point", "coordinates": [135.648259, 57.814863] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["development", "agriculture", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-133.11537846072636, 59.52439551082427, -132.91537846072637, 59.72439551082427],
+      "id": 19,
+      "geometry": { "type": "Point", "coordinates": [-133.015378, 59.624396] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [60.802304430382115, 39.1279764502361, 61.00230443038212, 39.3279764502361],
+      "id": 20,
+      "geometry": { "type": "Point", "coordinates": [60.902304, 39.227976] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["agriculture", "rural", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-89.42418571401217, 43.354346222613266, -89.22418571401218, 43.55434622261327],
+      "id": 21,
+      "geometry": { "type": "Point", "coordinates": [-89.324186, 43.454346] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["nature", "city", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [131.87055587647646, -18.6766781156457, 132.07055587647645, -18.476678115645697],
+      "id": 22,
+      "geometry": { "type": "Point", "coordinates": [131.970556, -18.576678] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["scenic", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-147.95059301556248, 65.0277669511945, -147.7505930155625, 65.22776695119448],
+      "id": 23,
+      "geometry": { "type": "Point", "coordinates": [-147.850593, 65.127767] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["scenic", "rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-58.82546252996432, -17.94320918405932, -58.62546252996432, -17.743209184059317],
+      "id": 24,
+      "geometry": { "type": "Point", "coordinates": [-58.725463, -17.843209] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["scenic", "nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [107.45157331709456, 40.668862584059404, 107.65157331709455, 40.86886258405941],
+      "id": 25,
+      "geometry": { "type": "Point", "coordinates": [107.551573, 40.768863] },
+      "properties": {
+        "category": "farm",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-52.483724953222854, 4.585002885837321, -52.28372495322285, 4.78500288583732],
+      "id": 26,
+      "geometry": { "type": "Point", "coordinates": [-52.383725, 4.685003] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["agriculture", "rural", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [31.444154454395367, -11.840175051069826, 31.64415445439537, -11.640175051069827],
+      "id": 27,
+      "geometry": { "type": "Point", "coordinates": [31.544154, -11.740175] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["city", "development", "scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [99.3440543035849, 11.689134627204618, 99.54405430358489, 11.889134627204617],
+      "id": 28,
+      "geometry": { "type": "Point", "coordinates": [99.444054, 11.789135] },
+      "properties": {
+        "category": "farm",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["scenic", "development", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [14.742662388657545, -19.92714954016464, 14.942662388657544, -19.727149540164636],
+      "id": 29,
+      "geometry": { "type": "Point", "coordinates": [14.842662, -19.82715] },
+      "properties": {
+        "category": "farm",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["scenic", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-112.52644305701318, 43.42472814152196, -112.3264430570132, 43.62472814152196],
+      "id": 30,
+      "geometry": { "type": "Point", "coordinates": [-112.426443, 43.524728] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["scenic", "rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [18.77254812242429, 5.904514207346276, 18.972548122424293, 6.104514207346275],
+      "id": 31,
+      "geometry": { "type": "Point", "coordinates": [18.872548, 6.004514] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["nature", "city", "scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [121.67387466754602, 52.39860985195663, 121.873874667546, 52.59860985195663],
+      "id": 32,
+      "geometry": { "type": "Point", "coordinates": [121.773875, 52.49861] },
+      "properties": { "category": "urban", "ifi": "IFAD", "status": "completed", "tags": ["rural"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [77.0413104771624, 50.61825544996642, 77.24131047716239, 50.81825544996642],
+      "id": 33,
+      "geometry": { "type": "Point", "coordinates": [77.14131, 50.718255] },
+      "properties": {
+        "category": "urban",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["rural", "city", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [48.964286433019275, 24.638313558966964, 49.16428643301928, 24.838313558966966],
+      "id": 34,
+      "geometry": { "type": "Point", "coordinates": [49.064286, 24.738314] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["rural", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [24.881913112049766, -16.21680350897087, 25.08191311204977, -16.016803508970867],
+      "id": 35,
+      "geometry": { "type": "Point", "coordinates": [24.981913, -16.116804] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [147.81123977348997, 64.70647494296749, 148.01123977348996, 64.90647494296748],
+      "id": 36,
+      "geometry": { "type": "Point", "coordinates": [147.91124, 64.806475] },
+      "properties": { "category": "farm", "ifi": "ADB", "status": "completed", "tags": ["nature"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [116.25448767596018, 46.38323459952624, 116.45448767596017, 46.58323459952624],
+      "id": 37,
+      "geometry": { "type": "Point", "coordinates": [116.354488, 46.483235] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["rural", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [76.71460748507818, 38.9927092850566, 76.91460748507816, 39.1927092850566],
+      "id": 38,
+      "geometry": { "type": "Point", "coordinates": [76.814607, 39.092709] },
+      "properties": {
+        "category": "urban",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-149.7097382008896, 67.01685090430831, -149.50973820088961, 67.2168509043083],
+      "id": 39,
+      "geometry": { "type": "Point", "coordinates": [-149.609738, 67.116851] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [141.28608738150993, -5.045906937736005, 141.48608738150992, -4.845906937736006],
+      "id": 40,
+      "geometry": { "type": "Point", "coordinates": [141.386087, -4.945907] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["development", "city", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-1.6920629718835074, 32.79762485088042, -1.4920629718835072, 32.99762485088042],
+      "id": 41,
+      "geometry": { "type": "Point", "coordinates": [-1.592063, 32.897625] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["development", "scenic", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-6.770259174609384, 31.94012955400337, -6.570259174609385, 32.14012955400337],
+      "id": 42,
+      "geometry": { "type": "Point", "coordinates": [-6.670259, 32.04013] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["nature", "rural", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [125.38378302703339, -20.436204874839163, 125.58378302703338, -20.23620487483916],
+      "id": 43,
+      "geometry": { "type": "Point", "coordinates": [125.483783, -20.336205] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["agriculture", "rural", "scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-88.88751853922824, 32.71045416513761, -88.68751853922825, 32.910454165137615],
+      "id": 44,
+      "geometry": { "type": "Point", "coordinates": [-88.787519, 32.810454] },
+      "properties": {
+        "category": "farm",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [43.74637735817466, 53.22623818549402, 43.946377358174665, 53.42623818549402],
+      "id": 45,
+      "geometry": { "type": "Point", "coordinates": [43.846377, 53.326238] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["scenic", "nature", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [22.750746009328473, 21.858073972823654, 22.950746009328476, 22.058073972823657],
+      "id": 46,
+      "geometry": { "type": "Point", "coordinates": [22.850746, 21.958074] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [20.89067318928226, 41.76463428054661, 21.090673189282263, 41.96463428054661],
+      "id": 47,
+      "geometry": { "type": "Point", "coordinates": [20.990673, 41.864634] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["agriculture", "nature", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [65.07682276633287, 46.318759411620526, 65.27682276633286, 46.51875941162053],
+      "id": 48,
+      "geometry": { "type": "Point", "coordinates": [65.176823, 46.418759] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["development", "nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [113.17995658884396, 60.29475208117653, 113.37995658884395, 60.494752081176536],
+      "id": 49,
+      "geometry": { "type": "Point", "coordinates": [113.279957, 60.394752] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["development", "nature", "scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [36.02995983330015, -16.18011591707858, 36.22995983330015, -15.98011591707858],
+      "id": 50,
+      "geometry": { "type": "Point", "coordinates": [36.12996, -16.080116] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["agriculture", "city", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-42.11628094516562, -5.481248054948585, -41.91628094516562, -5.281248054948586],
+      "id": 51,
+      "geometry": { "type": "Point", "coordinates": [-42.016281, -5.381248] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [19.175765189903494, 10.645671472813328, 19.375765189903497, 10.845671472813327],
+      "id": 52,
+      "geometry": { "type": "Point", "coordinates": [19.275765, 10.745671] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["scenic", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [77.65091645142545, 39.02800943352573, 77.85091645142543, 39.228009433525735],
+      "id": 53,
+      "geometry": { "type": "Point", "coordinates": [77.750916, 39.128009] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["scenic", "rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-86.8929512205809, 44.39514329402002, -86.69295122058091, 44.595143294020026],
+      "id": 54,
+      "geometry": { "type": "Point", "coordinates": [-86.792951, 44.495143] },
+      "properties": {
+        "category": "urban",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["development", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-117.13481383023105, 41.7332999150644, -116.93481383023106, 41.9332999150644],
+      "id": 55,
+      "geometry": { "type": "Point", "coordinates": [-117.034814, 41.8333] },
+      "properties": {
+        "category": "farm",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["scenic", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [136.1583273558929, -30.55284903519043, 136.3583273558929, -30.352849035190427],
+      "id": 56,
+      "geometry": { "type": "Point", "coordinates": [136.258327, -30.452849] },
+      "properties": { "category": "farm", "ifi": "IFAD", "status": "in progress", "tags": ["city"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-87.78041722779477, 43.12001872360994, -87.58041722779478, 43.32001872360994],
+      "id": 57,
+      "geometry": { "type": "Point", "coordinates": [-87.680417, 43.220019] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [142.04422536736408, -18.596423373408314, 142.24422536736407, -18.39642337340831],
+      "id": 58,
+      "geometry": { "type": "Point", "coordinates": [142.144225, -18.496423] },
+      "properties": {
+        "category": "farm",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["scenic", "agriculture", "rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [75.10235582712406, 38.19727364843511, 75.30235582712405, 38.39727364843511],
+      "id": 59,
+      "geometry": { "type": "Point", "coordinates": [75.202356, 38.297274] },
+      "properties": {
+        "category": "farm",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["nature", "scenic", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [80.41145317602164, 47.57891650748248, 80.61145317602163, 47.778916507482485],
+      "id": 60,
+      "geometry": { "type": "Point", "coordinates": [80.511453, 47.678917] },
+      "properties": { "category": "urban", "ifi": "ADB", "status": "completed", "tags": ["rural"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-69.15111431746018, 8.794508388874492, -68.9511143174602, 8.994508388874491],
+      "id": 61,
+      "geometry": { "type": "Point", "coordinates": [-69.051114, 8.894508] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["rural", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-50.73913517471352, -27.955305996776712, -50.539135174713515, -27.75530599677671],
+      "id": 62,
+      "geometry": { "type": "Point", "coordinates": [-50.639135, -27.855306] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [12.990498239763179, -18.466507863598025, 13.190498239763178, -18.266507863598022],
+      "id": 63,
+      "geometry": { "type": "Point", "coordinates": [13.090498, -18.366508] },
+      "properties": {
+        "category": "farm",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["scenic", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [24.525760062040966, 8.752778795388389, 24.72576006204097, 8.952778795388388],
+      "id": 64,
+      "geometry": { "type": "Point", "coordinates": [24.62576, 8.852779] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["rural", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [115.00733200475108, 46.58732314962982, 115.20733200475107, 46.78732314962982],
+      "id": 65,
+      "geometry": { "type": "Point", "coordinates": [115.107332, 46.687323] },
+      "properties": { "category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["city"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-105.49106083514211, 36.551406160851364, -105.29106083514212, 36.75140616085137],
+      "id": 66,
+      "geometry": { "type": "Point", "coordinates": [-105.391061, 36.651406] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["nature", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [110.75155239781893, 47.11651832453638, 110.95155239781892, 47.31651832453638],
+      "id": 67,
+      "geometry": { "type": "Point", "coordinates": [110.851552, 47.216518] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [113.84465523055891, 24.7366756326906, 114.0446552305589, 24.9366756326906],
+      "id": 68,
+      "geometry": { "type": "Point", "coordinates": [113.944655, 24.836676] },
+      "properties": {
+        "category": "urban",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [45.51129882577222, 35.317565696834514, 45.711298825772225, 35.51756569683452],
+      "id": 69,
+      "geometry": { "type": "Point", "coordinates": [45.611299, 35.417566] },
+      "properties": {
+        "category": "farm",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["development", "scenic", "nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [47.644918855504635, 54.98199985789805, 47.84491885550464, 55.181999857898056],
+      "id": 70,
+      "geometry": { "type": "Point", "coordinates": [47.744919, 55.082] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [44.48974198056421, 6.899251212149766, 44.689741980564214, 7.099251212149765],
+      "id": 71,
+      "geometry": { "type": "Point", "coordinates": [44.589742, 6.999251] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-153.165122614133, 67.90113224249721, -152.965122614133, 68.1011322424972],
+      "id": 72,
+      "geometry": { "type": "Point", "coordinates": [-153.065123, 68.001132] },
+      "properties": {
+        "category": "urban",
+        "ifi": "IFAD",
+        "status": "in progress",
+        "tags": ["nature", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-65.28103450795484, -38.65881023908721, -65.08103450795485, -38.45881023908721],
+      "id": 73,
+      "geometry": { "type": "Point", "coordinates": [-65.181035, -38.55881] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["scenic", "rural", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [35.1682080160414, 16.052695831930116, 35.3682080160414, 16.25269583193012],
+      "id": 74,
+      "geometry": { "type": "Point", "coordinates": [35.268208, 16.152696] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [122.85584432551323, 56.75615576936678, 123.05584432551322, 56.95615576936678],
+      "id": 75,
+      "geometry": { "type": "Point", "coordinates": [122.955844, 56.856156] },
+      "properties": {
+        "category": "farm",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["city", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-70.93957144306464, -45.30642147638419, -70.73957144306465, -45.106421476384185],
+      "id": 76,
+      "geometry": { "type": "Point", "coordinates": [-70.839571, -45.206421] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["development", "nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-140.14439085257422, 63.301269129264575, -139.94439085257423, 63.50126912926458],
+      "id": 77,
+      "geometry": { "type": "Point", "coordinates": [-140.044391, 63.401269] },
+      "properties": {
+        "category": "farm",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["agriculture", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [118.86787376534019, 42.294402882018936, 119.06787376534018, 42.49440288201894],
+      "id": 78,
+      "geometry": { "type": "Point", "coordinates": [118.967874, 42.394403] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["nature", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [118.59461071074517, 24.845121108465115, 118.79461071074516, 25.045121108465118],
+      "id": 79,
+      "geometry": { "type": "Point", "coordinates": [118.694611, 24.945121] },
+      "properties": {
+        "category": "urban",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["scenic", "development", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-79.78438711214498, 40.863450288864094, -79.584387112145, 41.0634502888641],
+      "id": 80,
+      "geometry": { "type": "Point", "coordinates": [-79.684387, 40.96345] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [142.8263410766193, 51.35712086517278, 143.02634107661927, 51.557120865172784],
+      "id": 81,
+      "geometry": { "type": "Point", "coordinates": [142.926341, 51.457121] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["city", "scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [122.7266468745132, -28.120136991822136, 122.92664687451318, -27.920136991822133],
+      "id": 82,
+      "geometry": { "type": "Point", "coordinates": [122.826647, -28.020137] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [72.25829413768687, 31.495864764494563, 72.45829413768686, 31.695864764494566],
+      "id": 83,
+      "geometry": { "type": "Point", "coordinates": [72.358294, 31.595865] },
+      "properties": {
+        "category": "farm",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["development", "nature", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [46.12707081060403, 3.3483191482784718, 46.327070810604035, 3.548319148278472],
+      "id": 84,
+      "geometry": { "type": "Point", "coordinates": [46.227071, 3.448319] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-106.44852348300844, 33.85391387757624, -106.24852348300846, 34.05391387757624],
+      "id": 85,
+      "geometry": { "type": "Point", "coordinates": [-106.348523, 33.953914] },
+      "properties": {
+        "category": "urban",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["development", "rural"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-52.866421838114356, -14.643495106750008, -52.66642183811435, -14.443495106750008],
+      "id": 86,
+      "geometry": { "type": "Point", "coordinates": [-52.766422, -14.543495] },
+      "properties": {
+        "category": "urban",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["scenic", "nature", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [107.10313255102906, 16.02162755209975, 107.30313255102905, 16.221627552099754],
+      "id": 87,
+      "geometry": { "type": "Point", "coordinates": [107.203133, 16.121628] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [17.380384932520677, -30.66858137961281, 17.58038493252068, -30.468581379612807],
+      "id": 88,
+      "geometry": { "type": "Point", "coordinates": [17.480385, -30.568581] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["development", "city", "agriculture"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [15.769615762916255, 8.69566657636574, 15.969615762916254, 8.89566657636574],
+      "id": 89,
+      "geometry": { "type": "Point", "coordinates": [15.869616, 8.795667] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-89.13597976663513, 37.5753279602144, -88.93597976663514, 37.775327960214405],
+      "id": 90,
+      "geometry": { "type": "Point", "coordinates": [-89.03598, 37.675328] },
+      "properties": { "category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["rural"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-65.00740999329763, -20.49889368491808, -64.80740999329764, -20.298893684918077],
+      "id": 91,
+      "geometry": { "type": "Point", "coordinates": [-64.90741, -20.398894] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "in progress",
+        "tags": ["agriculture", "nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [20.798490523091196, 52.51964393873161, 20.9984905230912, 52.719643938731615],
+      "id": 92,
+      "geometry": { "type": "Point", "coordinates": [20.898491, 52.619644] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [39.23233610446962, 36.254472149490546, 39.43233610446962, 36.45447214949055],
+      "id": 93,
+      "geometry": { "type": "Point", "coordinates": [39.332336, 36.354472] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "ADB",
+        "status": "completed",
+        "tags": ["development", "nature"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [116.60363802825529, 2.8574784838306697, 116.80363802825528, 3.05747848383067],
+      "id": 94,
+      "geometry": { "type": "Point", "coordinates": [116.703638, 2.957478] },
+      "properties": {
+        "category": "urban",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["scenic"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-128.18651367640643, 62.01556560886025, -127.98651367640645, 62.21556560886025],
+      "id": 95,
+      "geometry": { "type": "Point", "coordinates": [-128.086514, 62.115566] },
+      "properties": {
+        "category": "farm",
+        "ifi": "ADB",
+        "status": "in progress",
+        "tags": ["development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-105.3802371593702, 62.4565231847507, -105.18023715937021, 62.656523184750704],
+      "id": 96,
+      "geometry": { "type": "Point", "coordinates": [-105.280237, 62.556523] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["rural", "city", "development"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [13.80064781482235, 48.72029076493242, 14.000647814822349, 48.920290764932425],
+      "id": 97,
+      "geometry": { "type": "Point", "coordinates": [13.900648, 48.820291] },
+      "properties": {
+        "category": "mountain",
+        "ifi": "IFAD",
+        "status": "completed",
+        "tags": ["scenic", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [131.90950574936014, -18.492789611182097, 132.10950574936012, -18.292789611182094],
+      "id": 98,
+      "geometry": { "type": "Point", "coordinates": [132.009506, -18.39279] },
+      "properties": { "category": "farm", "ifi": "ADB", "status": "in progress", "tags": ["rural"] }
+    },
+    {
+      "type": "Feature",
+      "bbox": [96.58304561101644, 25.843619541618217, 96.78304561101643, 26.04361954161822],
+      "id": 99,
+      "geometry": { "type": "Point", "coordinates": [96.683046, 25.94362] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["nature", "development", "city"]
+      }
+    },
+    {
+      "type": "Feature",
+      "bbox": [-66.1709728025475, 57.79040462988939, -65.97097280254751, 57.99040462988939],
+      "id": 100,
+      "geometry": { "type": "Point", "coordinates": [-66.070973, 57.890405] },
+      "properties": {
+        "category": "farm",
+        "ifi": "World bank",
+        "status": "completed",
+        "tags": ["city"]
+      }
+    }
+  ]
+}

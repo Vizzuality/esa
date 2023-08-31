@@ -13,28 +13,33 @@ export interface ContentLoaderProps extends PropsWithChildren {
   isFetching: boolean;
   isFetched: boolean;
   isError: boolean;
+  errorMessage?: string;
+  className?: string;
+  SkeletonComponent?: JSX.Element;
 }
 
 const ContentLoader = ({
-  skeletonClassName,
+  SkeletonComponent,
   children,
   data,
   isPlaceholderData,
   isFetching,
   isFetched,
   isError,
+  errorMessage,
+  className,
 }: ContentLoaderProps) => {
   return (
-    <div className="relative">
-      {isFetching && !isFetched && <Skeleton className={cn('h-20 w-full', skeletonClassName)} />}
-
+    <div className={className}>
+      {isFetching && !isFetched && !SkeletonComponent && <Skeleton className={cn('h-20 w-full')} />}
+      {isFetching && !isFetched && SkeletonComponent}
       {/* <Loading
         className="absolute z-10 flex h-full w-full items-center justify-center bg-white/50 py-2"
         iconClassName="w-5 h-5"
         visible={isFetching && !isPlaceholderData}
       /> */}
 
-      {isError && isFetched && !isFetching && 'Error'}
+      {isError && isFetched && !isFetching && (errorMessage || 'Error')}
 
       {!isPlaceholderData && !isError && isFetched && !!data && children}
 
