@@ -1,16 +1,51 @@
+import { useMemo } from 'react';
+
 import { Layer, Source } from 'react-map-gl';
+
+import { useRecoilValue } from 'recoil';
+
+import { getStoriesParams } from '@/lib/stories';
+
+import { categoryAtom } from '@/store/home';
+
+import { useGetCategories } from '@/types/generated/category';
+import { useGetStories } from '@/types/generated/story';
 
 import { useMapImage } from '@/hooks/map';
 
-import GEOSJON from '@/constants/markers.json';
-
 const StoryMarkers = () => {
-  const FeatureCollection = GEOSJON as unknown as GeoJSON.FeatureCollection<
-    GeoJSON.Point,
-    {
-      category: string;
-    }
-  >;
+  const category = useRecoilValue(categoryAtom);
+  const { data: categories } = useGetCategories();
+
+  const categoryId = useMemo(() => {
+    const categoryItem = categories?.data?.find(({ attributes }) => attributes?.slug === category);
+    return categoryItem?.id;
+  }, [categories?.data, category]);
+
+  const params = getStoriesParams({ category: categoryId });
+  const { data: stories } = useGetStories(params);
+
+  const FeatureCollection = useMemo(
+    () => ({
+      type: 'FeatureCollection',
+      features:
+        stories?.data?.map(({ id, attributes }) => {
+          return {
+            type: 'Feature',
+            bbox: attributes?.bbox,
+            id,
+            geometry: { type: 'Point', coordinates: [attributes?.longitude, attributes?.latitude] },
+            properties: {
+              category: attributes?.category?.data?.attributes?.slug,
+              ifi: 'IFAD',
+              status: 'completed',
+              tags: ['nature'],
+            },
+          };
+        }) || [],
+    }),
+    [stories?.data]
+  ) as GeoJSON.FeatureCollection<GeoJSON.Point>;
 
   useMapImage({
     name: 'story-marker',

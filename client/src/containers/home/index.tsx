@@ -52,7 +52,7 @@ export default function Home() {
           </div>
         </Sidebar>
       </div>
-      <div className="z-10 mx-auto">
+      <div className="z-10">
         <Categories />
       </div>
     </div>

@@ -1,7 +1,5 @@
 import categoryIcons from '@/constants/categories';
 
-import { Skeleton } from '@/components/ui/skeleton';
-
 export const getCategoryIcon = (slug: string) => {
   if (slug in categoryIcons) {
     return categoryIcons[slug as keyof typeof categoryIcons];
@@ -11,7 +9,7 @@ export const getCategoryIcon = (slug: string) => {
 
 const CategoryIcon = ({ slug, className }: { slug: string; className?: string }) => {
   const Icon = getCategoryIcon(slug);
-  if (!Icon) return <Skeleton className="bg-background h-10 w-10 rounded-full" />;
+  if (!Icon) return null;
   return <Icon className={className} />;
 };
 
