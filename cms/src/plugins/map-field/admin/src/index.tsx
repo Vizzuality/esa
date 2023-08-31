@@ -40,8 +40,8 @@ export default {
 
     app.customFields.register({
       name: "map-field",
-      pluginId: "map-field", // the custom field is created by a color-picker plugin
-      type: "json", // the color will be stored as a string
+      pluginId: "map-field",
+      type: "json",
       intlLabel: {
           id: `${pluginId}.plugin.name`,
           defaultMessage: "Map",
