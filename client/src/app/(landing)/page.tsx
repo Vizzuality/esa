@@ -25,22 +25,27 @@ async function prefetchQueries(searchParams: HomePageProps['searchParams']) {
   const queryClient = getQueryClient();
   try {
     // Categories
-    const { queryKey: categorieqQueryKey, queryFn: categoriesQueryFn } =
+    const { queryKey: categoriesQueryKey, queryFn: categoriesQueryFn } =
       getGetCategoriesQueryOptions();
 
     await queryClient.prefetchQuery({
-      queryKey: categorieqQueryKey,
+      queryKey: categoriesQueryKey,
       queryFn: categoriesQueryFn,
     });
 
     // Stories
-    const categories = queryClient.getQueryData<CategoryListResponse>(categorieqQueryKey);
+    let categoryId;
 
-    const category = categories?.data?.find((category) => {
-      return `"${category.attributes?.slug}"` === searchParams.category;
-    })?.id;
+    // If there is a category in the search params, we need to get the category id to use as a category filter
+    if (searchParams.category) {
+      const categories = queryClient.getQueryData<CategoryListResponse>(categoriesQueryKey);
 
-    const params = getStoriesParams({ category });
+      categoryId = categories?.data?.find((category) => {
+        return `"${category.attributes?.slug}"` === searchParams.category;
+      })?.id;
+    }
+
+    const params = getStoriesParams(categoryId ? { category: categoryId } : {});
 
     const { queryKey: storiesQueryKey, queryFn: storiesQueryFn } =
       getGetStoriesQueryOptions(params);
