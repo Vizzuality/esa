@@ -18,7 +18,10 @@ const PluginInput = ({
   intlLabel,
   value,
   onChange,
+  ...props
 }) => {
+  console.log(props);
+
   const { formatMessage } = useIntl();
 
   const initialViewState = value && JSON.parse(value) || null;

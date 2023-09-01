@@ -52,9 +52,11 @@
       "type": "json",
       "required": true
     },
-    "location": {
-      "type": "customField",
-      "customField": "plugin::map-field.map-field"
+    "steps": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::step.step",
+      "mappedBy": "story"
     }
   }
 }
