@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_map_layer_layers",
+  "info": {
+    "displayName": "layers",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "params_config": {
+      "type": "json"
+    },
+    "legend_config": {
+      "type": "json"
+    },
+    "interaction_config": {
+      "type": "json"
+    }
+  }
+}
