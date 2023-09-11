@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_step_layer_comparation_layers",
+  "info": {
+    "displayName": "comparation-step",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "side": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "right"
+      ],
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "image",
+        "layer"
+      ],
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "layer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::layer.layer"
+    }
+  }
+}

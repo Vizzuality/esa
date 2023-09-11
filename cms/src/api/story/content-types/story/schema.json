@@ -51,6 +51,11 @@
     "bbox": {
       "type": "json",
       "required": true
+    },
+    "steps": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::step.step"
     }
   }
 }

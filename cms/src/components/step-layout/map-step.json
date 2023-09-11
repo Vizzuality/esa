@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_step_layer_map_steps",
+  "info": {
+    "displayName": "map-step",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "card": {
+      "displayName": "card",
+      "type": "component",
+      "repeatable": false,
+      "component": "map-layer.card"
+    },
+    "marker": {
+      "displayName": "markers",
+      "type": "component",
+      "repeatable": true,
+      "component": "map-layer.markers"
+    },
+    "location": {
+      "displayName": "location",
+      "type": "component",
+      "repeatable": false,
+      "component": "map-layer.location",
+      "required": true
+    },
+    "story_summary": {
+      "displayName": "summary",
+      "type": "component",
+      "repeatable": true,
+      "component": "map-layer.summary"
+    },
+    "layers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::layer.layer"
+    }
+  }
+}
