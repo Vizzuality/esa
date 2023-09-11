@@ -82,6 +82,7 @@ module.exports = {
       },
       fontFamily: {
         'open-sans': ['var(--font-open-sans)'],
+        inter: ['var(--font-inter)'],
         notes: ['var(--font-esa-notes)'],
       },
       backgroundImage: {

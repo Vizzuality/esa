@@ -103,7 +103,7 @@ const MapLegends = ({ className = '' }) => {
   ]);
 
   return (
-    <div className="absolute bottom-16 right-6 z-10 w-full max-w-xs">
+    <div className="bottom-16 right-6 z-10 w-full">
       <Legend
         className={cn(
           'max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))]',

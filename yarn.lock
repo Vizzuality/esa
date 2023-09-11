@@ -2191,7 +2191,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:^0.8.8":
+"@emotion/is-prop-valid@npm:^0.8.2, @emotion/is-prop-valid@npm:^0.8.8":
   version: 0.8.8
   resolution: "@emotion/is-prop-valid@npm:0.8.8"
   dependencies:
@@ -2347,6 +2347,7 @@ __metadata:
     eslint-config-prettier: ^8.8.0
     eslint-plugin-import: 2.27.5
     eslint-plugin-prettier: ^4.2.1
+    framer-motion: ^10.16.4
     lucide-react: ^0.252.0
     mapbox-gl: 2.15.0
     next: 13.4.5
@@ -2379,6 +2380,7 @@ __metadata:
     "@strapi/strapi": 4.11.2
     pg: 8.8.0
     strapi-plugin-import-export-entries: ^1.21.0
+    strapi-plugin-populate-deep: ^3.0.0
     typescript: 5.1.3
   languageName: unknown
   linkType: soft
@@ -11902,6 +11904,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"framer-motion@npm:^10.16.4":
+  version: 10.16.4
+  resolution: "framer-motion@npm:10.16.4"
+  dependencies:
+    "@emotion/is-prop-valid": ^0.8.2
+    tslib: ^2.4.0
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  dependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 57eb252f25a2c4ee14b024295c6a1162a53a05e0321bdb9c8a22ec266fbe777832823eaa0309e42854170fcde16c42915c6c5d0208b628fd000d6fab013c501f
+  languageName: node
+  linkType: hard
+
 "fresh@npm:0.5.2, fresh@npm:~0.5.2":
   version: 0.5.2
   resolution: "fresh@npm:0.5.2"
@@ -20051,6 +20074,13 @@ __metadata:
   peerDependencies:
     "@strapi/strapi": ^4.10.5
   checksum: f76e7327a8749ef0ae10a3662393aa87525fcf81b75aeac703415510d4ee73bdac74ff893e638e0d56c4053faeec20ff0b45454ee41d5ca2aa7c213e5b0b0bd3
+  languageName: node
+  linkType: hard
+
+"strapi-plugin-populate-deep@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "strapi-plugin-populate-deep@npm:3.0.0"
+  checksum: e1487f50ac418c6149ced875c0f11bbe5e2d63bfadfd6a90b809f14c236bfb170cdd416dad580f8d17d18f3b5f86418f84ccf6e282e9613c58b59357ac1ae177
   languageName: node
   linkType: hard
 

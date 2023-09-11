@@ -1,4 +1,4 @@
-import { Open_Sans } from 'next/font/google';
+import { Open_Sans, Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const openSans = Open_Sans({
@@ -6,7 +6,16 @@ export const openSans = Open_Sans({
   variable: '--font-open-sans',
   fallback: ['system-ui', 'Helvetica Neue', 'Helvetica', 'Arial'],
   weight: ['300'],
-  style: ['italic'],
+  style: ['italic', 'normal'],
+  display: 'block',
+});
+
+export const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  fallback: ['system-ui', 'Helvetica Neue', 'Helvetica', 'Arial'],
+  weight: ['300'],
+  style: ['normal'],
   display: 'block',
 });
 

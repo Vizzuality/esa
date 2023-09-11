@@ -4,6 +4,8 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
+import { useParams } from 'next/navigation';
+
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
@@ -37,10 +39,6 @@ import Marker from '@/components/map/layers/marker';
 import { CustomMapProps } from '@/components/map/types';
 
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
-  ssr: false,
-});
-
-const Legend = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
 });
 
@@ -85,6 +83,10 @@ export default function MapContainer() {
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
   const setPopup = useSetRecoilState(popupAtom);
 
+  const params = useParams();
+
+  const isInteractive = useMemo(() => !params.id, [params]);
+
   const { data: layersInteractiveData } = useGetLayers(
     {
       filters: {
@@ -126,7 +128,6 @@ export default function MapContainer() {
         .map((v: number) => {
           return parseFloat(v.toFixed(2));
         }) as Bbox;
-
       setBbox(b);
       setTmpBbox(null);
     }
@@ -139,7 +140,7 @@ export default function MapContainer() {
         layersInteractiveData?.data &&
         layersInteractiveData?.data.some((l) => {
           const attributes = l.attributes as LayerTyped;
-          return attributes?.interaction_config?.events.some((ev) => ev.type === 'click');
+          return attributes?.interaction_config?.events.some((ev: any) => ev.type === 'click');
         })
       ) {
         const p = Object.assign({}, e, { features: e.features ?? [] });
@@ -172,7 +173,7 @@ export default function MapContainer() {
   }, []);
 
   return (
-    <div className="absolute left-0 top-0 h-screen w-screen bg-[#0a2839]">
+    <div className="fixed left-0 top-0 h-screen w-screen bg-[#0a2839]">
       <Map
         id={id}
         initialViewState={{
@@ -184,6 +185,7 @@ export default function MapContainer() {
         projection={{
           name: 'globe',
         }}
+        interactive={isInteractive}
         bounds={tmpBounds}
         minZoom={minZoom}
         maxZoom={maxZoom}
@@ -206,8 +208,6 @@ export default function MapContainer() {
         <Popup />
 
         <MapSettingsManager />
-
-        <Legend />
 
         <StoryMarkers />
 
