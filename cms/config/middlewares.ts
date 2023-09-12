@@ -1,6 +1,21 @@
 export default [
   'strapi::errors',
-  'strapi::security',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          'script-src': ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net', 'api.mapbox.com'],
+          'img-src': ["'self'", 'data:', 'blob:'],
+          'media-src': ["'self'", 'data:', 'blob:'],
+          'worker-src': ['blob:'],
+          upgradeInsecureRequests: null,
+        },
+      }
+    },
+  },
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::logger',
