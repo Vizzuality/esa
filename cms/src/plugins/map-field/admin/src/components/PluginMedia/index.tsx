@@ -1,5 +1,5 @@
 import './index.css';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Box } from '@strapi/design-system';
 
 interface PluginMediaProps {
@@ -23,7 +23,7 @@ const PluginMedia = ({
   isDragging = false,
 }: PluginMediaProps) => {
   const videoRef = React.useRef<HTMLVideoElement>(null);
-  const mediaType = media?.mime?.split('/')[0];
+  const mediaType = useMemo(() => media?.mime?.split('/')[0], [media?.mime]);
 
   const handlePlayVideo = (
     e: React.MouseEvent<HTMLVideoElement, MouseEvent>,
@@ -64,7 +64,7 @@ const PluginMedia = ({
           return null;
       }
     }
-  }, []);
+  }, [mediaType, media?.url, name]);
 
   return (
     <Box

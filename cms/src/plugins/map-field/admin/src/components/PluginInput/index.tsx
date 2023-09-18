@@ -3,8 +3,8 @@
  * PluginInput
  *
  */
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import ReactMapGL, { Marker, NavigationControl, ViewStateChangeEvent } from 'react-map-gl';
+import React, { useCallback, useEffect, useState } from 'react';
+import { MapProvider } from 'react-map-gl';
 
 import { useIntl } from 'react-intl';
 
@@ -24,48 +24,40 @@ import {
 import { MediaLibraryInput } from '@strapi/plugin-upload/admin/src/components/MediaLibraryInput';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { MarkerDragEvent, MarkerEvent } from 'react-map-gl/dist/esm/types';
+import { MarkerDragEvent } from 'react-map-gl/dist/esm/types';
 import Media from '../PluginMedia';
+import Map from '../Map';
+import { LocationType, MarkerType } from '../../types';
 
-type MarkerType = {
-  id?: number;
-  name: string;
-  lat: number;
-  lng: number;
-  media: any;
-};
-
-const mapboxAccessToken = process.env.STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN;
+const id = 'default';
 
 const PluginInput = ({ name, intlLabel, value, onChange }) => {
   const { formatMessage } = useIntl();
 
   // Location
   const initialState = (value && JSON.parse(value)) || null;
-  const [location, setLocation] = useState(initialState.location);
+  const [location, setLocation] = useState<LocationType>(initialState.location);
 
-  const handleMoveEnd = useCallback((e: ViewStateChangeEvent) => {
-    setLocation(e.viewState);
+  const handleMoveEnd = useCallback((_location: LocationType) => {
+    setLocation(_location);
   }, []);
 
   // Markers
   const [markers, setMarkers] = useState<MarkerType[]>(initialState.markers || []);
   const [editingMarker, setEditingMarker] = useState<MarkerType | null>(null);
-  const [draggingMarker, setDraggingMarker] = useState<number | null>();
 
   const handleAddMarker = (e: mapboxgl.MapLayerMouseEvent) => {
+    const markerId = Date.now();
     const newMarker = {
       ...e.lngLat,
-      name: `New marker ${markers.length + 1}`,
-      id: Date.now(),
+      name: `New marker ${markerId}`,
+      id: markerId,
       media: null,
     };
     setEditingMarker(newMarker);
   };
 
-  const handleEditMarker = (e: MarkerEvent<mapboxgl.Marker, MouseEvent>, marker: MarkerType) => {
-    e.originalEvent.stopPropagation();
-    if (draggingMarker) return;
+  const handleEditMarker = (marker: MarkerType) => {
     setEditingMarker(marker);
   };
 
@@ -110,23 +102,11 @@ const PluginInput = ({ name, intlLabel, value, onChange }) => {
     setEditingMarker({ ...editingMarker, media: e.target.value });
   };
 
-  /** Avoid unwanted click at the end of the drag event */
-  const handleDragMarkerEnd = () => {
-    setTimeout(() => setDraggingMarker(null), 500);
-  };
-
   // Update input value
   useEffect(() => {
+    console.log(markers, location);
     onChange({ target: { name, value: JSON.stringify({ markers, location }), type: 'json' } });
   }, [markers, location]);
-
-  const MARKERS = useMemo(
-    () =>
-      editingMarker?.id
-        ? [...markers.filter((marker) => marker.id !== editingMarker.id), editingMarker]
-        : markers,
-    [editingMarker, markers]
-  );
 
   const isEditing = markers.find((marker) => marker.id === editingMarker?.id);
 
@@ -146,47 +126,17 @@ const PluginInput = ({ name, intlLabel, value, onChange }) => {
         <p>Click on the map to add a marker. You can drag the marker to change its location.</p>
       </Typography>
 
-      <ReactMapGL
-        // {...value}
-        initialViewState={initialState.location}
-        mapStyle="mapbox://styles/mapbox/streets-v12"
-        mapboxAccessToken={mapboxAccessToken}
-        attributionControl={false}
-        style={{ height: '500px', width: '100%' }}
-        onMoveEnd={handleMoveEnd}
-        onClick={handleAddMarker}
-        clickTolerance={10}
-      >
-        {MARKERS.map((marker) => {
-          const { id, lat, lng, media, name } = marker;
-          return (
-            <Marker
-              key={id}
-              latitude={lat}
-              longitude={lng}
-              onDrag={(e) => handleDragMarker(e, marker)}
-              onDragEnd={handleDragMarkerEnd}
-              onDragStart={() => setDraggingMarker(id)}
-              onClick={(e) => handleEditMarker(e, marker)}
-              draggable
-              clickTolerance={0}
-              style={{
-                zIndex: draggingMarker === id ? 10 : 1,
-              }}
-            >
-              <Media
-                isDragging={draggingMarker === id}
-                isMarker={!draggingMarker || draggingMarker === id}
-                playable
-                name={name}
-                media={media}
-              />
-            </Marker>
-          );
-        })}
-        <NavigationControl showZoom showCompass visualizePitch />
-      </ReactMapGL>
-
+      <MapProvider>
+        <Map
+          id={id}
+          initialState={initialState}
+          markers={markers}
+          handleAddMarker={handleAddMarker}
+          handleMoveEnd={handleMoveEnd}
+          handleDragMarker={handleDragMarker}
+          handleEditMarker={handleEditMarker}
+        />
+      </MapProvider>
       <div>
         {editingMarker?.id && (
           <ModalLayout onClose={() => setEditingMarker(null)} labelledBy="title">
@@ -215,7 +165,7 @@ const PluginInput = ({ name, intlLabel, value, onChange }) => {
                 <Flex gap={10} marginTop={2}>
                   <Box>
                     <MediaLibraryInput
-                      intlLabel="Add media"
+                      intlLabel={{ id: 'add-marker', defaultMessage: 'Add marker' }}
                       onChange={handleChangeMedia}
                       name="media"
                       id="media"

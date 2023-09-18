@@ -12,12 +12,6 @@
       "repeatable": false,
       "component": "map-layer.card"
     },
-    "marker": {
-      "displayName": "markers",
-      "type": "component",
-      "repeatable": true,
-      "component": "map-layer.markers"
-    },
     "story_summary": {
       "displayName": "summary",
       "type": "component",
@@ -29,7 +23,7 @@
       "relation": "oneToMany",
       "target": "api::layer.layer"
     },
-    "location": {
+    "map": {
       "type": "customField",
       "customField": "plugin::map-field.map-field"
     }
