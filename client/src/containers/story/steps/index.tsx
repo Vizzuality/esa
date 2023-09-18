@@ -16,9 +16,10 @@ type StepProps = PropsWithChildren<{
   media?: StepLayoutMediaStepComponentMedia | StepLayoutOutroStepComponentMedia;
   step: StoryStepsDataItem;
   category?: StoryCategory;
+  index: number;
 }>;
 
-const Step = ({ step, category }: StepProps) => {
+const Step = ({ step, category, index }: StepProps) => {
   const { image, video } = getMedia(step?.attributes?.layout[0]?.media);
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -36,7 +37,13 @@ const Step = ({ step, category }: StepProps) => {
 
     switch (type) {
       case 'map-step': {
-        return <MapStepLayout category={category?.data?.attributes} step={stepLayout} />;
+        return (
+          <MapStepLayout
+            stepIndex={index}
+            category={category?.data?.attributes}
+            step={stepLayout}
+          />
+        );
       }
       case 'media-step':
         return <MediaStepLayout step={stepLayout} />;

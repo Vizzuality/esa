@@ -17,10 +17,10 @@ export const LegendItemButton = ({
     >
       <Icon
         className={cn({
-          'relative z-10 flex h-5 w-5 items-center justify-center rounded-full text-slate-800 transition-colors':
+          'text-primary relative z-10 flex h-5 w-5 items-center justify-center rounded-full transition-colors':
             true,
-          'group-hover:text-slate-800/50 group-active:text-slate-500': true,
-          'fill-slate-800': selected,
+          'group-active:text-slate-500': true,
+          'fill-primary': selected,
         })}
         style={{ fillOpacity: selected ? value : 1 }}
       />

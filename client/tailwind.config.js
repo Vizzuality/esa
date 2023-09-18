@@ -94,6 +94,7 @@ module.exports = {
       },
       boxShadow: {
         filters: '4px 0px 30px 0px hsla(var(--card-foreground))',
+        xs: '-4px 0px 4px 0px rgba(160, 160, 160, 0.41) inset',
       },
     },
   },

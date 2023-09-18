@@ -4,9 +4,8 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
-import { useParams } from 'next/navigation';
-
 import dynamic from 'next/dynamic';
+import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 import { LngLatBoundsLike } from 'mapbox-gl';
@@ -26,7 +25,8 @@ import { Bbox } from '@/types/map';
 
 import { MAPBOX_STYLES } from '@/constants/mapbox';
 
-import StoryMarkers from '@/containers/map/markers';
+import HomeMarkers from '@/containers/map/markers/home-markers';
+import StoryMarkers from '@/containers/map/markers/story-markers';
 import Popup from '@/containers/map/popup';
 // import MapSettings from '@/containers/map/settings';
 import MapSettingsManager from '@/containers/map/settings/manager';
@@ -85,7 +85,7 @@ export default function MapContainer() {
 
   const params = useParams();
 
-  const isInteractive = useMemo(() => !params.id, [params]);
+  const isHomePage = useMemo(() => !params.id, [params]);
 
   const { data: layersInteractiveData } = useGetLayers(
     {
@@ -185,7 +185,7 @@ export default function MapContainer() {
         projection={{
           name: 'globe',
         }}
-        interactive={isInteractive}
+        interactive={isHomePage}
         bounds={tmpBounds}
         minZoom={minZoom}
         maxZoom={maxZoom}
@@ -209,7 +209,7 @@ export default function MapContainer() {
 
         <MapSettingsManager />
 
-        <StoryMarkers />
+        {isHomePage && <HomeMarkers />}
 
         {marker && (
           <Marker
@@ -223,6 +223,7 @@ export default function MapContainer() {
             }}
           />
         )}
+        {!isHomePage && <StoryMarkers />}
       </Map>
     </div>
   );

@@ -6,14 +6,14 @@ import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 import { ArrowLeft, Share2 } from 'lucide-react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
 import { ScrollProvider } from '@/lib/scroll';
 
 import { layersAtom, tmpBboxAtom } from '@/store';
 
-import { lastStepAtom, stepAtom } from '@/store/stories';
+import { lastStepAtom, stepAtom, stepCountAtom } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
 
@@ -24,36 +24,40 @@ import { ScrollItemController } from './steps/controller/controller-item';
 import { ScrollItem } from './steps/controller/scroll-item';
 
 const Story = () => {
-  const step = useRecoilValue(stepAtom);
-  const setStep = useSetRecoilState(stepAtom);
-  const setLastStep = useSetRecoilState(lastStepAtom);
   const { push } = useRouter();
+
+  const [step, setStep] = useRecoilState(stepAtom);
+  const setStepCount = useSetRecoilState(stepCountAtom);
+  const setLastStep = useSetRecoilState(lastStepAtom);
+  const setTmpBbox = useSetRecoilState(tmpBboxAtom);
+  const setLayers = useSetRecoilState(layersAtom);
 
   const { id } = useParams();
   const { data: storyData } = useGetStoriesId(+id, {
     populate: 'deep',
   });
 
-  const setTmpBbox = useSetRecoilState(tmpBboxAtom);
-  const setLayers = useSetRecoilState(layersAtom);
+  const steps = useMemo(() => storyData?.data?.attributes?.steps?.data || [], [storyData]);
 
   useEffect(() => {
+    const stepLocation = steps?.[step]?.attributes?.layout?.[0]?.location?.location;
+    if (stepLocation) {
+    }
     if (storyData?.data?.attributes?.bbox) {
       setTmpBbox(storyData?.data?.attributes?.bbox as [number, number, number, number]);
     }
-  }, [storyData?.data?.attributes?.bbox, setTmpBbox]);
-
-  const steps = useMemo(() => storyData?.data?.attributes?.steps?.data || [], [storyData]);
+    setStepCount(storyData?.data?.attributes?.steps?.data?.length || 0);
+  }, [storyData, setTmpBbox, setStepCount]);
 
   useEffect(() => {
     const stepLayers = steps?.[step]?.attributes?.layout?.[0]?.layers;
     if (stepLayers) {
-      const layers =
+      const _layers: number[] =
         stepLayers.data?.reduce(
           (acc: number[], layer: { id: number }) => (layer.id ? [...acc, layer.id] : acc),
           []
         ) || [];
-      setLayers(layers);
+      setLayers(_layers);
     }
   }, [setLayers, step, steps]);
 
@@ -89,7 +93,7 @@ const Story = () => {
         {steps?.map((step, index) => {
           return (
             <ScrollItem step={index} key={index}>
-              <Step step={step} category={storyData?.data?.attributes?.category} />
+              <Step index={index} step={step} category={storyData?.data?.attributes?.category} />
             </ScrollItem>
           );
         })}

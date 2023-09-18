@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { MapLayerMouseEvent } from 'react-map-gl';
+import { MapLayerMouseEvent, ViewState } from 'react-map-gl';
 
 import {
   array,
