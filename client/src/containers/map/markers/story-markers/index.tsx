@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { Marker } from 'react-map-gl';
-
 import { useParams } from 'next/navigation';
 
 import { useRecoilValue } from 'recoil';
@@ -10,7 +8,7 @@ import { stepAtom } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
 
-import StoryMarkerMedia from './media';
+import StoryMarkerMedia from './marker';
 
 type StoryMarker = {
   id: number;
@@ -33,26 +31,16 @@ const StoryMarkers = () => {
 
   const markers: StoryMarker[] = useMemo(
     () =>
-      storyData?.data?.attributes?.steps?.data?.[step]?.attributes?.layout[0].location?.markers ||
-      [],
+      storyData?.data?.attributes?.steps?.data?.[step]?.attributes?.layout[0].map?.markers || [],
     [step, storyData?.data?.attributes?.steps?.data]
   );
 
   return (
-    <div>
-      {markers?.map(({ id, lng, lat, media, name }) => {
-        if (lng && lat) {
-          return (
-            <Marker key={id} longitude={lng} latitude={lat}>
-              <div className="h-[70px] w-[70px] overflow-hidden rounded-full bg-white p-2 shadow-md">
-                <StoryMarkerMedia media={media} name={name} />
-              </div>
-            </Marker>
-          );
-        }
-        return null;
-      })}
-    </div>
+    <>
+      {markers?.map((marker) => (
+        <StoryMarkerMedia key={marker.id} marker={marker} />
+      ))}
+    </>
   );
 };
 

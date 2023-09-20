@@ -26,7 +26,7 @@ export const ScrollItem = ({ children, step }: ScrollItemProps) => {
   });
 
   return (
-    <section ref={ref} id={`scroll-${step}`} className="z-20 h-full w-full">
+    <section ref={ref} id={`scroll-${step}`} className="pointer-events-none z-20 h-full w-full">
       {children}
     </section>
   );

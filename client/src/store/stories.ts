@@ -11,13 +11,3 @@ export const stepAtom = atom({
     }),
   ],
 });
-
-export const stepCountAtom = atom({
-  key: 'step-count',
-  default: 0,
-});
-
-export const lastStepAtom = atom({
-  key: 'last-step',
-  default: 0,
-});

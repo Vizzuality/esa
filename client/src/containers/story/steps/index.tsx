@@ -1,5 +1,9 @@
 import { PropsWithChildren, useEffect, useMemo, useRef } from 'react';
 
+import { useRecoilValue } from 'recoil';
+
+import { stepAtom } from '@/store/stories';
+
 import {
   StepLayoutMediaStepComponentMedia,
   StepLayoutOutroStepComponentMedia,
@@ -20,6 +24,8 @@ type StepProps = PropsWithChildren<{
 }>;
 
 const Step = ({ step, category, index }: StepProps) => {
+  const currentStep = useRecoilValue(stepAtom);
+
   const { image, video } = getMedia(step?.attributes?.layout[0]?.media);
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -42,6 +48,7 @@ const Step = ({ step, category, index }: StepProps) => {
             stepIndex={index}
             category={category?.data?.attributes}
             step={stepLayout}
+            showContent={currentStep === index}
           />
         );
       }
@@ -52,7 +59,7 @@ const Step = ({ step, category, index }: StepProps) => {
       default:
         return null;
     }
-  }, [category?.data?.attributes, category?.data?.id, step]);
+  }, [category?.data?.attributes, category?.data?.id, step, index, currentStep]);
 
   return (
     <div
@@ -72,7 +79,7 @@ const Step = ({ step, category, index }: StepProps) => {
           <source src={video.href} type={video.type} />
         </video>
       )}
-      <div className="z-20 h-full w-full px-14 pb-5 pt-[84px]">{STEP_COMPONENT}</div>
+      <div className="z-20 h-full w-full px-14 pb-6 pt-[84px]">{STEP_COMPONENT}</div>
     </div>
   );
 };

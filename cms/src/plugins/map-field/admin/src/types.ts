@@ -9,5 +9,5 @@ export type MarkerType = {
 };
 
 export type LocationType = ViewState & {
-  bounds: [number, number, number, number];
+  bbox: [number, number, number, number];
 };
