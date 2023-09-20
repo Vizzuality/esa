@@ -1,0 +1,12 @@
+.media-preview {
+  transition: all 0.3s ease-in-out;
+}
+
+.media-preview:hover {
+  width: 60px;
+  height: 60px;
+}
+
+.is-dragging {
+  z-index: 100;
+}

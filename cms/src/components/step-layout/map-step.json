@@ -12,19 +12,6 @@
       "repeatable": false,
       "component": "map-layer.card"
     },
-    "marker": {
-      "displayName": "markers",
-      "type": "component",
-      "repeatable": true,
-      "component": "map-layer.markers"
-    },
-    "location": {
-      "displayName": "location",
-      "type": "component",
-      "repeatable": false,
-      "component": "map-layer.location",
-      "required": true
-    },
     "story_summary": {
       "displayName": "summary",
       "type": "component",
@@ -35,6 +22,10 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::layer.layer"
+    },
+    "map": {
+      "type": "customField",
+      "customField": "plugin::map-field.map-field"
     }
   }
 }
