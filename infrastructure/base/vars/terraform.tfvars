@@ -1,0 +1,12 @@
+do_region               = "fra1"
+do_token                = "DO TOKEN"
+do_spaces_client_id     = "DO Spaces Client ID"
+do_spaces_secret_key    = "DO Spaces Secret Key"
+do_project_name         = "ESA COMMS project"
+project_name            = "esa-gda-comms"
+container_registry_name = "esa-gda-comms"
+postgres_size           = "db-s-1vcpu-1gb"
+postgres_db_name        = "esa"
+do_app_instance         = "basic-xs"
+do_app_instance_count   = 1
+repo_name               = "esa"
