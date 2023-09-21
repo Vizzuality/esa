@@ -10,6 +10,7 @@ import { categoryAtom } from '@/store/home';
 
 import { useGetCategories } from '@/types/generated/category';
 import { useGetStories } from '@/types/generated/story';
+import { HomeMarkerFeatureProperty } from '@/types/map';
 
 import { useMapImage } from '@/hooks/map';
 
@@ -30,22 +31,21 @@ const StoryMarkers = () => {
       type: 'FeatureCollection',
       features:
         stories?.data?.map(({ id, attributes }) => {
+          const { category, steps, ...rest } = attributes || {};
           return {
             type: 'Feature',
             bbox: attributes?.bbox,
             id,
             geometry: { type: 'Point', coordinates: [attributes?.longitude, attributes?.latitude] },
             properties: {
-              category: attributes?.category?.data?.attributes?.slug,
-              ifi: 'IFAD',
-              status: 'completed',
-              tags: ['nature'],
+              ...rest,
+              category: category?.data?.attributes,
             },
           };
         }) || [],
     }),
     [stories?.data]
-  ) as GeoJSON.FeatureCollection<GeoJSON.Point>;
+  ) as GeoJSON.FeatureCollection<GeoJSON.Point, HomeMarkerFeatureProperty>;
 
   useMapImage({
     name: 'story-marker',
