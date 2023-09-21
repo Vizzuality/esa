@@ -37,6 +37,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
    * REFS
    */
   const { [id]: mapRef } = useMap();
+
   /**
    * STATE
    */
