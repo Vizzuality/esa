@@ -76,3 +76,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+.mapboxgl-popup-content {
+  @apply z-50 !bg-transparent;
+}
+
+.mapboxgl-popup-close-button {
+  @apply font-open-sans p-2 text-xl text-gray-200;
+  /* @apply !bg-yellow-300; */
+}

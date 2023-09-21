@@ -4,10 +4,8 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
-import { useParams } from 'next/navigation';
-
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 import { LngLatBoundsLike } from 'mapbox-gl';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -28,6 +26,7 @@ import { MAPBOX_STYLES } from '@/constants/mapbox';
 
 import StoryMarkers from '@/containers/map/markers';
 import Popup from '@/containers/map/popup';
+import HomeSelectedStoryMarker from '@/containers/map/selected-story-popup';
 // import MapSettings from '@/containers/map/settings';
 import MapSettingsManager from '@/containers/map/settings/manager';
 
@@ -70,9 +69,8 @@ export default function MapContainer() {
 
   const { [id]: map } = useMap();
 
-  const { push } = useRouter();
-
   const [marker, setMarker] = useState<GeoJSON.Feature<GeoJSON.Point> | null>(null);
+  const [selectedMarker, setSelectedMarker] = useState<GeoJSON.Feature<GeoJSON.Point> | null>(null);
 
   const bbox = useRecoilValue(bboxAtom);
   const tmpBbox = useRecoilValue(tmpBboxAtom);
@@ -135,6 +133,7 @@ export default function MapContainer() {
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
+      setSelectedMarker(null);
       if (
         layersInteractive.length &&
         layersInteractiveData?.data &&
@@ -171,6 +170,8 @@ export default function MapContainer() {
       setMarker(null);
     }
   }, []);
+
+  console.log(marker);
 
   return (
     <div className="fixed left-0 top-0 h-screen w-screen bg-[#0a2839]">
@@ -218,9 +219,18 @@ export default function MapContainer() {
             latitude={marker.geometry.coordinates[1]}
             onClick={(e) => {
               e.originalEvent.stopPropagation();
+              if (marker.properties?.cluster) {
+                return;
+              }
               setMarker(null);
-              push(`/stories/${marker.id}`);
+              setSelectedMarker(marker);
             }}
+          />
+        )}
+        {selectedMarker && (
+          <HomeSelectedStoryMarker
+            handleClose={() => setSelectedMarker(null)}
+            marker={selectedMarker as any}
           />
         )}
       </Map>
