@@ -2,11 +2,10 @@
 
 import { useEffect, useMemo } from 'react';
 
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import { ArrowLeft, Share2 } from 'lucide-react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
 import { ScrollProvider } from '@/lib/scroll';
@@ -46,6 +45,8 @@ const Story = () => {
   const step = useRecoilValue(stepAtom);
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
   const setLayers = useSetRecoilState(layersAtom);
+  const resetLayers = useResetRecoilState(layersAtom);
+  const { push } = useRouter();
 
   const { id } = useParams();
   const { data: storyData } = useGetStoriesId(+id, {
@@ -54,6 +55,11 @@ const Story = () => {
 
   const story = useMemo(() => storyData?.data?.attributes, [storyData]);
   const steps = useMemo(() => story?.steps?.data || [], [story]);
+
+  const handleGoHome = () => {
+    resetLayers();
+    push('/');
+  };
 
   useEffect(() => {
     if (!steps) return;
@@ -82,9 +88,9 @@ const Story = () => {
   return (
     <div className="text-primary flex flex-col justify-between">
       <div className="fixed z-30 mt-6 flex w-full items-center justify-between px-12 text-center text-2xl font-bold">
-        <Link className={headerButtonClassName} href="/">
+        <Button value="icon" className={headerButtonClassName} onClick={handleGoHome}>
           <ArrowLeft className="h-6 w-6" />
-        </Link>
+        </Button>
         <h1>{story?.title}</h1>
         <Button value="icon" className={headerButtonClassName}>
           <Share2 className="h-6 w-6" />

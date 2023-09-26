@@ -32,9 +32,13 @@ const Step = ({ step, category, index }: StepProps) => {
 
   useEffect(() => {
     if (video?.href && videoRef.current) {
-      videoRef.current.play();
+      if (index === currentStep) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
     }
-  }, [video?.href]);
+  }, [currentStep, index, video?.href]);
 
   const STEP_COMPONENT = useMemo(() => {
     const type = getStepType(step);
@@ -66,11 +70,11 @@ const Step = ({ step, category, index }: StepProps) => {
       style={{
         ...(image && { backgroundImage: `url(${image})` }),
       }}
-      className="pointer-events-none z-10 h-screen w-screen bg-cover bg-no-repeat"
+      className="pointer-events-none z-10 h-screen w-full bg-cover bg-no-repeat"
     >
       {video && (
         <video
-          className="pointer-events-none absolute -z-10 h-screen w-screen object-cover"
+          className="pointer-events-none absolute -z-10 h-screen w-full object-cover"
           loop
           muted
           ref={videoRef}

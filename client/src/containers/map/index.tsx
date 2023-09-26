@@ -201,7 +201,6 @@ export default function MapContainer() {
         projection={{
           name: 'globe',
         }}
-        interactive={isHomePage}
         minZoom={minZoom}
         maxZoom={maxZoom}
         mapStyle={MAPBOX_STYLES.default}
@@ -210,6 +209,8 @@ export default function MapContainer() {
         // onClick={handleMapClick}
         onMouseMove={handleMapMove}
         bounds={tmpBounds}
+        scrollZoom={isHomePage}
+        dragPan={isHomePage}
         onMapViewStateChange={handleMapViewStateChange}
         className={cn(isHomePage ? 'cursor-pointer' : 'pointer-events-none cursor-default')}
       >

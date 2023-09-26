@@ -7,7 +7,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <Providers>
       <html lang="en">
-        <body className="font-notes min-h-screen w-screen">
+        <body className="font-notes min-h-screen  overflow-x-hidden">
           <main>{children}</main>
         </body>
       </html>
