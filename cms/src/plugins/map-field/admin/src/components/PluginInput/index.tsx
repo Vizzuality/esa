@@ -36,14 +36,14 @@ const PluginInput = ({ name, intlLabel, value, onChange }) => {
 
   // Location
   const initialState = (value && JSON.parse(value)) || null;
-  const [location, setLocation] = useState<LocationType>(initialState.location);
+  const [location, setLocation] = useState<LocationType>(initialState?.location);
 
   const handleMoveEnd = useCallback((_location: LocationType) => {
     setLocation(_location);
   }, []);
 
   // Markers
-  const [markers, setMarkers] = useState<MarkerType[]>(initialState.markers || []);
+  const [markers, setMarkers] = useState<MarkerType[]>(initialState?.markers || []);
   const [editingMarker, setEditingMarker] = useState<MarkerType | null>(null);
 
   const handleAddMarker = (e: mapboxgl.MapLayerMouseEvent) => {
@@ -104,7 +104,6 @@ const PluginInput = ({ name, intlLabel, value, onChange }) => {
 
   // Update input value
   useEffect(() => {
-    console.log(markers, location);
     onChange({ target: { name, value: JSON.stringify({ markers, location }), type: 'json' } });
   }, [markers, location]);
 
@@ -129,7 +128,7 @@ const PluginInput = ({ name, intlLabel, value, onChange }) => {
       <MapProvider>
         <Map
           id={id}
-          initialState={initialState}
+          initialState={initialState?.location}
           markers={markers}
           handleAddMarker={handleAddMarker}
           handleMoveEnd={handleMoveEnd}

@@ -19,6 +19,17 @@ import { MapboxGeoJSONFeature } from 'mapbox-gl';
 import { atom, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 import { urlSyncEffect } from 'recoil-sync';
 
+export type TmpBbox = {
+  bbox: readonly [number, number, number, number];
+  options: {
+    zoom: number;
+    pitch: number;
+    bearing: number;
+    longitude: number;
+    latitude: number;
+  };
+};
+
 // Map settings
 export const mapSettingsAtom = atom({
   key: 'map-settings',
@@ -51,9 +62,9 @@ export const bboxAtom = atom<readonly [number, number, number, number] | null | 
   ],
 });
 
-export const tmpBboxAtom = atom<readonly [number, number, number, number] | null>({
+export const tmpBboxAtom = atom<TmpBbox | undefined>({
   key: 'tmp-bbox',
-  default: null,
+  default: undefined,
 });
 
 // Sidebar and menus

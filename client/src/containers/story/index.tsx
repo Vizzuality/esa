@@ -1,21 +1,21 @@
 'use client';
 
-import { useCallback, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import { ArrowLeft, Share2 } from 'lucide-react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
 import { ScrollProvider } from '@/lib/scroll';
 
 import { layersAtom, tmpBboxAtom } from '@/store';
 
-import { lastStepAtom, stepAtom } from '@/store/stories';
+import { stepAtom } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
+import { Bbox } from '@/types/map';
 
 import { Button } from '@/components/ui/button';
 
@@ -23,10 +23,29 @@ import Step from './steps';
 import { ScrollItemController } from './steps/controller/controller-item';
 import { ScrollItem } from './steps/controller/scroll-item';
 
+type StepLocation = {
+  bbox: Bbox;
+  zoom: number;
+  pitch: number;
+  bearing: number;
+  padding: {
+    top: number;
+    left: number;
+    right: number;
+    bottom: number;
+  };
+  latitude: number;
+  longitude: number;
+};
+
+const headerButtonClassName =
+  'rounded-4xl h-auto border-gray-800 bg-[hsl(198,100%,14%)]/75 px-5 py-2.5 hover:bg-gray-800';
+
 const Story = () => {
   const step = useRecoilValue(stepAtom);
-  const setStep = useSetRecoilState(stepAtom);
-  const setLastStep = useSetRecoilState(lastStepAtom);
+  const setTmpBbox = useSetRecoilState(tmpBboxAtom);
+  const setLayers = useSetRecoilState(layersAtom);
+  const resetLayers = useResetRecoilState(layersAtom);
   const { push } = useRouter();
 
   const { id } = useParams();
@@ -34,62 +53,54 @@ const Story = () => {
     populate: 'deep',
   });
 
-  const setTmpBbox = useSetRecoilState(tmpBboxAtom);
-  const setLayers = useSetRecoilState(layersAtom);
+  const story = useMemo(() => storyData?.data?.attributes, [storyData]);
+  const steps = useMemo(() => story?.steps?.data || [], [story]);
+
+  const handleGoHome = () => {
+    resetLayers();
+    push('/');
+  };
 
   useEffect(() => {
-    if (storyData?.data?.attributes?.bbox) {
-      setTmpBbox(storyData?.data?.attributes?.bbox as [number, number, number, number]);
+    if (!steps) return;
+    const stepLayout = steps[step]?.attributes?.layout?.[0];
+    // Location
+    const stepLocation = stepLayout?.map?.location;
+    if (stepLocation) {
+      const { bbox, ...options } = stepLocation as StepLocation;
+      setTmpBbox({
+        bbox,
+        options,
+      });
     }
-  }, [storyData?.data?.attributes?.bbox, setTmpBbox]);
-
-  const steps = useMemo(() => storyData?.data?.attributes?.steps?.data || [], [storyData]);
-
-  useEffect(() => {
-    const stepLayers = steps?.[step]?.attributes?.layout?.[0]?.layers;
+    // Layers
+    const stepLayers = stepLayout?.layers;
     if (stepLayers) {
-      const layers =
+      const _layers: number[] =
         stepLayers.data?.reduce(
           (acc: number[], layer: { id: number }) => (layer.id ? [...acc, layer.id] : acc),
           []
         ) || [];
-      setLayers(layers);
+      setLayers(_layers);
     }
-  }, [setLayers, step, steps]);
-
-  const handleClickBack = () => {
-    push('/');
-  };
-
-  const onChange = useCallback(
-    (s: any) => {
-      if (s.data.step !== step) {
-        setLastStep(step);
-        setStep(s.data.step);
-      }
-    },
-    [setLastStep, setStep, step]
-  );
+  }, [story, setTmpBbox, setLayers, steps, step]);
 
   return (
     <div className="text-primary flex flex-col justify-between">
       <div className="fixed z-30 mt-6 flex w-full items-center justify-between px-12 text-center text-2xl font-bold">
-        <Button
-          onClick={handleClickBack}
-          className="bg-background rounded-full border-gray-800  bg-opacity-50 hover:bg-gray-800"
-        >
+        <Button value="icon" className={headerButtonClassName} onClick={handleGoHome}>
           <ArrowLeft className="h-6 w-6" />
         </Button>
-        <h1>{storyData?.data?.attributes?.title}</h1>
-        <Button className="bg-background rounded-full border-gray-800 bg-opacity-50 hover:bg-gray-800">
+        <h1>{story?.title}</h1>
+        <Button value="icon" className={headerButtonClassName}>
           <Share2 className="h-6 w-6" />
         </Button>
       </div>
-      <ScrollProvider onStepChange={onChange}>
-        {steps?.map((step, index) => {
+      <ScrollProvider>
+        {steps?.map((mapStep, index) => {
           return (
             <ScrollItem step={index} key={index}>
-              <Step step={step} category={storyData?.data?.attributes?.category} />
+              <Step index={index} step={mapStep} category={story?.category} />
             </ScrollItem>
           );
         })}

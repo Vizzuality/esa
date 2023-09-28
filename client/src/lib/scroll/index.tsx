@@ -8,10 +8,12 @@ import {
   useMemo,
   useState,
   RefObject,
-  useRef,
 } from 'react';
 
 import { motionValue, MotionValue, useMotionValueEvent, useScroll } from 'framer-motion';
+import { useSetRecoilState } from 'recoil';
+
+import { stepAtom } from '@/store/stories';
 
 type ScrollItem = {
   key: string | number;
@@ -44,9 +46,11 @@ const useIsomorphicLayoutEffect =
     ? useLayoutEffect
     : useEffect;
 
-export const ScrollProvider = ({ children, onStepChange }: PropsWithChildren<any>) => {
+export const ScrollProvider = ({ children }: PropsWithChildren<any>) => {
   const [scrollItems, setScrollItems] = useState<ScrollItem[]>([]);
   const { scrollY } = useScroll();
+
+  const setStep = useSetRecoilState(stepAtom);
 
   const addScrollItem = useCallback<ScrollContext['addScrollItem']>(
     (data) => {
@@ -69,15 +73,13 @@ export const ScrollProvider = ({ children, onStepChange }: PropsWithChildren<any
 
   const handleChange = useCallback(
     (key: number | string) => {
-      if (onStepChange) {
-        const item = scrollItems.find((i) => i.key === key);
+      const item = scrollItems.find((i) => i.key === key);
 
-        if (item) {
-          onStepChange(item);
-        }
+      if (item) {
+        setStep(item?.data?.step);
       }
     },
-    [scrollItems, onStepChange]
+    [scrollItems, setStep]
   );
 
   const scrollItemsHeights = useMemo(() => {
@@ -169,6 +171,17 @@ export function useAddScrollItem(data: ScrollItem) {
 }
 
 export const useScrollToItem = () => {
+  const { scrollToItem } = useContext(Context);
+
+  return useCallback(
+    (key: string | number) => {
+      scrollToItem(key);
+    },
+    [scrollToItem]
+  );
+};
+
+export const useScrollToNextStep = () => {
   const { scrollToItem } = useContext(Context);
 
   return useCallback(

@@ -11,11 +11,11 @@ export const LegendTypeBasic: React.FC<LegendTypeProps> = ({ className = '', ite
         [className]: !!className,
       })}
     >
-      <ul className="flex w-full flex-col space-y-1">
+      <ul className="flex w-full flex-wrap items-center gap-2">
         {items.map(({ value, color }) => (
-          <li key={`${value}`} className="flex space-x-2 text-xs">
+          <li key={`${value}`} className="font-notes flex items-center gap-x-1 font-bold">
             <div
-              className="mt-1 h-2 w-2 flex-shrink-0 border border-slate-500"
+              className="shadow-xs h-4 w-4 flex-shrink-0 rounded-sm"
               style={{
                 backgroundColor: color,
               }}

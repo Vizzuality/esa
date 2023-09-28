@@ -11,8 +11,3 @@ export const stepAtom = atom({
     }),
   ],
 });
-
-export const lastStepAtom = atom({
-  key: 'last-step',
-  default: 0,
-});

@@ -58,7 +58,9 @@ export async function generateMetadata({ params }: StoryPageProps): Promise<Meta
 async function prefetchQueries(params: StoryPageProps['params']) {
   // Prefetch datasets
   const queryClient = getQueryClient();
-  const { queryKey, queryFn } = getGetStoriesIdQueryOptions(+params.id);
+  const { queryKey, queryFn } = getGetStoriesIdQueryOptions(+params.id, {
+    populate: 'deep',
+  });
 
   await queryClient.prefetchQuery({
     queryKey,

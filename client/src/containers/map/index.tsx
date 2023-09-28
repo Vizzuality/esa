@@ -1,32 +1,34 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
-import { useParams } from 'next/navigation';
-
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 import { LngLatBoundsLike } from 'mapbox-gl';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { cn } from '@/lib/classnames';
+
 import {
   bboxAtom,
-  layersInteractiveAtom,
+  // layersInteractiveAtom,
   layersInteractiveIdsAtom,
-  popupAtom,
+  // popupAtom,
   tmpBboxAtom,
 } from '@/store';
 
-import { useGetLayers } from '@/types/generated/layer';
-import type { LayerTyped } from '@/types/layers';
+// import { useGetLayers } from '@/types/generated/layer';
+// import type { LayerTyped } from '@/types/layers';
 import { Bbox } from '@/types/map';
 
 import { MAPBOX_STYLES } from '@/constants/mapbox';
 
-import StoryMarkers from '@/containers/map/markers';
+import HomeMarkers from '@/containers/map/markers/home-markers';
+import StoryMarkers from '@/containers/map/markers/story-markers';
 import Popup from '@/containers/map/popup';
 // import MapSettings from '@/containers/map/settings';
 import MapSettingsManager from '@/containers/map/settings/manager';
@@ -76,37 +78,37 @@ export default function MapContainer() {
 
   const bbox = useRecoilValue(bboxAtom);
   const tmpBbox = useRecoilValue(tmpBboxAtom);
-  const layersInteractive = useRecoilValue(layersInteractiveAtom);
+  // const layersInteractive = useRecoilValue(layersInteractiveAtom);
   const layersInteractiveIds = useRecoilValue(layersInteractiveIdsAtom);
 
   const setBbox = useSetRecoilState(bboxAtom);
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
-  const setPopup = useSetRecoilState(popupAtom);
+  // const setPopup = useSetRecoilState(popupAtom);
 
-  const params = useParams();
+  const pathname = usePathname();
 
-  const isInteractive = useMemo(() => !params.id, [params]);
+  const isHomePage = useMemo(() => !pathname.includes('stories'), [pathname]);
 
-  const { data: layersInteractiveData } = useGetLayers(
-    {
-      filters: {
-        id: {
-          $in: layersInteractive,
-        },
-      },
-    },
-    {
-      query: {
-        enabled: !!layersInteractive.length,
-      },
-    }
-  );
+  // const { data: layersInteractiveData } = useGetLayers(
+  //   {
+  //     filters: {
+  //       id: {
+  //         $in: layersInteractive,
+  //       },
+  //     },
+  //   },
+  //   {
+  //     query: {
+  //       enabled: !!layersInteractive.length,
+  //     },
+  //   }
+  // );
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
-    if (tmpBbox) {
+    if (tmpBbox?.bbox) {
       return {
-        bbox: tmpBbox,
-        options: {
+        bbox: tmpBbox?.bbox,
+        options: tmpBbox?.options ?? {
           padding: {
             top: 50,
             bottom: 50,
@@ -129,27 +131,27 @@ export default function MapContainer() {
           return parseFloat(v.toFixed(2));
         }) as Bbox;
       setBbox(b);
-      setTmpBbox(null);
+      setTmpBbox(undefined);
     }
   }, [map, setBbox, setTmpBbox]);
 
-  const handleMapClick = useCallback(
-    (e: MapLayerMouseEvent) => {
-      if (
-        layersInteractive.length &&
-        layersInteractiveData?.data &&
-        layersInteractiveData?.data.some((l) => {
-          const attributes = l.attributes as LayerTyped;
-          return attributes?.interaction_config?.events.some((ev: any) => ev.type === 'click');
-        })
-      ) {
-        const p = Object.assign({}, e, { features: e.features ?? [] });
+  // const handleMapClick = useCallback(
+  //   (e: MapLayerMouseEvent) => {
+  //     if (
+  //       layersInteractive.length &&
+  //       layersInteractiveData?.data &&
+  //       layersInteractiveData?.data.some((l) => {
+  //         const attributes = l.attributes as LayerTyped;
+  //         return attributes?.interaction_config?.events.some((ev: any) => ev.type === 'click');
+  //       })
+  //     ) {
+  //       const p = Object.assign({}, e, { features: e.features ?? [] });
 
-        setPopup(p);
-      }
-    },
-    [layersInteractive, layersInteractiveData, setPopup]
-  );
+  //       setPopup(p);
+  //     }
+  //   },
+  //   [layersInteractive, layersInteractiveData, setPopup]
+  // );
 
   const handleMapMove = useCallback((e: MapLayerMouseEvent) => {
     if (e.features?.length) {
@@ -172,6 +174,20 @@ export default function MapContainer() {
     }
   }, []);
 
+  useEffect(() => {
+    if (map && tmpBbox?.options) {
+      const { bearing, pitch, zoom, latitude, longitude } = tmpBbox.options;
+      map.flyTo({
+        bearing,
+        pitch,
+        zoom,
+        center: [longitude, latitude],
+        duration: 1000,
+        animate: true,
+      });
+    }
+  }, [map, tmpBbox]);
+
   return (
     <div className="fixed left-0 top-0 h-screen w-screen bg-[#0a2839]">
       <Map
@@ -185,16 +201,18 @@ export default function MapContainer() {
         projection={{
           name: 'globe',
         }}
-        interactive={isInteractive}
-        bounds={tmpBounds}
         minZoom={minZoom}
         maxZoom={maxZoom}
         mapStyle={MAPBOX_STYLES.default}
         fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
-        onClick={handleMapClick}
+        // onClick={handleMapClick}
         onMouseMove={handleMapMove}
+        bounds={tmpBounds}
+        scrollZoom={isHomePage}
+        dragPan={isHomePage}
         onMapViewStateChange={handleMapViewStateChange}
+        className={cn(isHomePage ? 'cursor-pointer' : 'pointer-events-none cursor-default')}
       >
         {/* <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
           <ZoomControl />
@@ -209,9 +227,9 @@ export default function MapContainer() {
 
         <MapSettingsManager />
 
-        <StoryMarkers />
+        {isHomePage && <HomeMarkers />}
 
-        {marker && (
+        {marker && isHomePage && (
           <Marker
             key={marker.id}
             longitude={marker.geometry.coordinates[0]}
@@ -223,6 +241,7 @@ export default function MapContainer() {
             }}
           />
         )}
+        {!isHomePage && <StoryMarkers />}
       </Map>
     </div>
   );

@@ -8,9 +8,9 @@ import { cn } from '@/lib/classnames';
 
 import { LegendItemProps } from '@/components/map/legend/types';
 import { Accordion, AccordionContent, AccordionItem } from '@/components/ui/accordion';
+import Card from '@/components/ui/card';
 
 import LegendItemToolbar from './toolbar';
-import Card from '@/components/ui/card';
 
 export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
   id,
@@ -44,14 +44,14 @@ export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
 
   return (
     <Accordion type="single" value={acordionState} asChild>
-      <AccordionItem value={`${id}`} asChild>
+      <AccordionItem value={`${id}`}>
         <Card
           className={cn({
             'mb-1 w-full border-none p-0': true,
             [className]: !!className,
           })}
         >
-          <header className="sticky top-0 z-20 flex items-start justify-between space-x-8  px-2.5 py-2.5">
+          <header className="sticky top-0 z-20 flex items-start justify-between space-x-8  px-2.5 py-2">
             <div
               className={cn({
                 'relative flex items-start space-x-0.5': true,
@@ -71,7 +71,7 @@ export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
 
               <div
                 className={cn({
-                  'mt-px text-sm font-semibold text-white': true,
+                  'font-notes mt-px text-sm text-white': true,
                 })}
               >
                 {name}
@@ -91,7 +91,7 @@ export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
 
           {validChildren && (
             <AccordionContent className="grow px-2.5 transition-all">
-              <div className="-ml-0.5 pl-5 pr-7">{children}</div>
+              <div className="-ml-0.5 pb-2 pl-5 pr-7">{children}</div>
             </AccordionContent>
           )}
         </Card>

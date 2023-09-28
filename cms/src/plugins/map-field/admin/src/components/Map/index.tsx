@@ -37,18 +37,18 @@ const Map = ({
 
   const onMoveEnd = (e: ViewStateChangeEvent) => {
     if (map) {
-      const bounds = map
+      const bbox = map
         .getBounds()
         .toArray()
         .flat()
         .map((v: number) => {
           return parseFloat(v.toFixed(2));
         }) as [number, number, number, number];
-      handleMoveEnd({ ...e.viewState, bounds });
+      handleMoveEnd({ ...e.viewState, bbox });
     }
   };
 
-  const onClickMarker = (e: MarkerEvent<mapboxgl.Marker, MouseEvent>, marker) => {
+  const onClickMarker = (e: MarkerEvent<mapboxgl.Marker, MouseEvent>, marker: MarkerType) => {
     e.originalEvent.stopPropagation();
     if (draggingMarker) return;
     handleEditMarker(marker);
