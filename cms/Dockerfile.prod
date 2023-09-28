@@ -1,49 +1,59 @@
 # Build all the things
-FROM node:18.15.0-bullseye-slim as build
+FROM node:20.5-bullseye-slim AS build
 RUN apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y \
-      build-essential \
-      gcc autoconf \
-      automake \
-      zlib1g-dev \
-      libpng-dev \
-      nasm bash \
-      libvips-dev \
-    && apt-get clean
-
+  apt-get upgrade -y && \
+  apt-get install -y libc6  && \
+  apt-get clean
 ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 
 WORKDIR /app
-COPY .yarn ./.yarn
-COPY package.json .yarnrc.yml yarn.lock ./
 
-WORKDIR /app/cms
-COPY ./cms/package.json ./
+COPY .yarn ./.yarn
+COPY public ./public
+COPY src ./src
+
+COPY .browserslistrc \
+  .yarnrc.yml \
+  components.json \
+  entrypoint.sh \
+  index.js \
+  logger.js \
+  next.config.mjs \
+  package.json \
+  postcss.config.js \
+  README.md \
+  tailwind.config.ts \
+  tsconfig.json \
+  yarn.lock \
+  .env.local \
+  ./
+
 RUN yarn install
 
-COPY ./cms .
-RUN yarn prebuild
 RUN yarn build
 
 # Copy only the built files into the final image
-FROM node:18.15.0-bullseye-slim AS runner
-RUN apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y libvips-dev && \
-    apt-get clean
-
+FROM node:20.5-bullseye-slim AS runner
 ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 
 WORKDIR /app
 
 RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 strapi
+RUN adduser --system --uid 1001 nextjs
 
-COPY --from=build --chown=strapi:nodejs /app/cms ./
+COPY --from=build --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=build --chown=nextjs:nodejs /app/entrypoint.sh ./entrypoint.sh
 COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/public ./public
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/index.js ./index.js
+COPY --from=build /app/.env.local ./.env.local
 
-USER strapi
+USER nextjs
 
-EXPOSE 1337
+EXPOSE 3000
+ENV PORT 3000
+
 ENTRYPOINT ["/app/entrypoint.sh"]
