@@ -45,3 +45,14 @@ variable "do_app_image_tag" {
   type        = string
   description = "Tag of image from DO container registry"
 }
+
+variable "do_space_name" {
+  type        = string
+  description = "Name of the space"
+}
+
+variable "do_space_acl" {
+  type        = string
+  description = "ACL rules for spaces"
+  default     = "private"
+}

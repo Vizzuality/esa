@@ -10,6 +10,15 @@ module "postgresql" {
   app_id                  = module.app.app_id
 }
 
+module "space" {
+  source = "../space"
+
+  do_project_name         = var.do_project_name
+  do_region               = var.do_region
+  do_space_name           = var.do_space_name
+  do_space_acl            = var.do_space_acl
+}
+
 module "app" {
   source = "../app"
 

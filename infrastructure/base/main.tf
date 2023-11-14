@@ -89,4 +89,5 @@ module "staging" {
   do_app_instance       = var.do_app_instance
   do_app_instance_count = var.do_app_instance_count
   do_app_image_tag      = var.do_app_image_tag
+  do_space_name         = "${var.project_name}-staging"
 }
