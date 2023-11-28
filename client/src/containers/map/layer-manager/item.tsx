@@ -12,6 +12,7 @@ import { useGetLayersId } from '@/types/generated/layer';
 import { LayerResponseDataObject } from '@/types/generated/strapi.schemas';
 import { Config, LayerTyped } from '@/types/layers';
 
+import AnimatedDeckLayer from '@/components/map/layers/animated-tile-layer';
 import DeckJsonLayer from '@/components/map/layers/deck-json-layer';
 import MapboxLayer from '@/components/map/layers/mapbox-layer';
 
@@ -102,6 +103,19 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
     });
 
     return <DeckJsonLayer id={`${id}-layer`} beforeId={beforeId} config={c} />;
+  }
+
+  if (type === 'animated-tiles') {
+    const { config, params_config } = data.data.attributes;
+    return (
+      <AnimatedDeckLayer
+        type=""
+        id={`${id}-layer`}
+        beforeId={beforeId}
+        config={config}
+        paramsConfig={params_config}
+      />
+    );
   }
 };
 
