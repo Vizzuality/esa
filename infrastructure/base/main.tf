@@ -91,3 +91,15 @@ module "staging" {
   do_app_image_tag      = var.do_app_image_tag
   do_space_name         = "${var.project_name}-staging"
 }
+
+resource "digitalocean_spaces_bucket_cors_configuration" "staging_cors" {
+  bucket = module.staging.space_id
+  region = var.do_region
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD"]
+    allowed_origins = ["*"]
+    max_age_seconds = 3000
+  }
+}

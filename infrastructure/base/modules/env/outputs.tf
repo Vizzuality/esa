@@ -21,3 +21,7 @@ output "app_url" {
 output "app_domain" {
   value = module.app.domain
 }
+
+output "space_id" {
+  value = module.space.space_id
+}
