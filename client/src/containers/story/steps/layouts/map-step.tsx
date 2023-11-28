@@ -13,6 +13,7 @@ import {
 
 import CategoryIcon from '@/components/ui/category-icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import Chart from '@/components/chart';
 
 const Legend = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
@@ -32,6 +33,8 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
   const handleClickCard = () => {
     scrollToItem(stepIndex + 1);
   };
+
+  console.log(card);
 
   return (
     <div className="pointer-events-none h-full">
@@ -63,18 +66,22 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
         <div className="flex flex-1 items-end justify-end">
           <div className="h-[150vh] w-fit">
             <div className="sticky top-0 flex h-screen flex-col justify-end space-y-6 pb-6">
-              <div
-                onClick={handleClickCard}
-                className={cn(
-                  'pointer-events-auto cursor-pointer overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
-                  showContent ? 'opacity-100' : 'opacity-0'
-                )}
-              >
-                <div className="h-full w-96 space-y-1">
-                  {card?.title && <h3 className="text-2xl font-bold">{card?.title}</h3>}
-                  <p className="font-inter text-sm">{card?.content}</p>
+              {card?.map((item) => (
+                <div
+                  key={item?.id}
+                  onClick={handleClickCard}
+                  className={cn(
+                    'pointer-events-auto cursor-pointer overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
+                    showContent ? 'opacity-100' : 'opacity-0'
+                  )}
+                >
+                  <div className="h-full w-[500px] space-y-1">
+                    {item?.title && <h3 className="text-2xl font-bold">{item?.title}</h3>}
+                    {item?.content && <p className="font-inter text-sm">{item?.content}</p>}
+                    {item?.widget && <Chart options={item?.widget} />}
+                  </div>
                 </div>
-              </div>
+              ))}
               <div
                 className={cn('pointer-events-auto', {
                   'opacity-100': showContent,

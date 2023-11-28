@@ -7,6 +7,7 @@ import FUNCTIONS from '@/lib/utils';
 
 import { ParamsConfig } from '@/types/layers';
 
+import AnimatedTileLayer from '@/components/map/layers/animated-tile-layer';
 import {
   LegendTypeBasic,
   LegendTypeChoropleth,
@@ -27,6 +28,7 @@ export const JSON_CONFIGURATION = new JSONConfiguration({
     LegendTypeBasic,
     LegendTypeChoropleth,
     LegendTypeGradient,
+    AnimatedTileLayer,
   },
 });
 
@@ -68,8 +70,8 @@ interface ParseConfigurationProps {
 }
 export const parseConfig = <T>({
   config,
-  params_config,
-  settings,
+  params_config = [],
+  settings = {},
 }: ParseConfigurationProps): T | null => {
   if (!config || !params_config) {
     return null;
@@ -87,5 +89,6 @@ export const parseConfig = <T>({
       params,
     },
   });
+
   return JSON_CONVERTER.convert(config);
 };

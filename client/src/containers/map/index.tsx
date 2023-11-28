@@ -31,7 +31,7 @@ import HomeMarkers from '@/containers/map/markers/home-markers';
 import StoryMarkers from '@/containers/map/markers/story-markers';
 import Popup from '@/containers/map/popup';
 // import MapSettings from '@/containers/map/settings';
-import MapSettingsManager from '@/containers/map/settings/manager';
+// import MapSettingsManager from '@/containers/map/settings/manager';
 
 import Map from '@/components/map';
 // import Controls from '@/components/map/controls';
@@ -204,7 +204,7 @@ export default function MapContainer() {
         minZoom={minZoom}
         maxZoom={maxZoom}
         mapStyle={MAPBOX_STYLES.default}
-        fog={FOG}
+        // fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         // onClick={handleMapClick}
         onMouseMove={handleMapMove}
@@ -225,7 +225,7 @@ export default function MapContainer() {
 
         <Popup />
 
-        <MapSettingsManager />
+        {/* <MapSettingsManager /> */}
 
         {isHomePage && <HomeMarkers />}
 

@@ -21,7 +21,8 @@
       "enum": [
         "deckgl",
         "mapbox",
-        "carto"
+        "carto",
+        "animated-tiles"
       ],
       "required": true,
       "default": "mapbox"
