@@ -969,7 +969,7 @@ export const StoryCategoryDataAttributesStoriesDataItemAttributesStepsDataItemAt
     deckgl: 'deckgl',
     mapbox: 'mapbox',
     carto: 'carto',
-    'animated-deckgl': 'animated-deckgl',
+    'animated-tiles': 'animated-tiles',
   } as const;
 
 export type StoryCategoryDataAttributesStoriesDataItemAttributesStepsDataItemAttributesLayoutItemAnyOfLayersDataItemAttributesMetadata =
@@ -1829,7 +1829,7 @@ export const StepLayoutMapStepComponentLayersDataItemAttributesType = {
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-deckgl': 'animated-deckgl',
+  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type StepLayoutMapStepComponentLayersDataItemAttributesMetadata = {
@@ -2303,7 +2303,7 @@ export const LayerType = {
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-deckgl': 'animated-deckgl',
+  'animated-tiles': 'animated-tiles',
 } as const;
 
 export interface Layer {
@@ -2390,7 +2390,7 @@ export const LayerDatasetDataAttributesLayersDataItemAttributesType = {
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-deckgl': 'animated-deckgl',
+  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type LayerDatasetDataAttributesLayersDataItemAttributesMetadata = {
@@ -2732,7 +2732,7 @@ export const LayerRequestDataType = {
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-deckgl': 'animated-deckgl',
+  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type LayerRequestDataDataset = number | string;
@@ -2856,7 +2856,7 @@ export const DatasetGroupDatasetsDataItemAttributesLayersDataItemAttributesType 
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-deckgl': 'animated-deckgl',
+  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type DatasetGroupDatasetsDataItemAttributesLayersDataItemAttributesMetadata = {
@@ -3351,7 +3351,7 @@ export const DatasetDatasetGroupDataAttributesDatasetsDataItemAttributesLayersDa
     deckgl: 'deckgl',
     mapbox: 'mapbox',
     carto: 'carto',
-    'animated-deckgl': 'animated-deckgl',
+    'animated-tiles': 'animated-tiles',
   } as const;
 
 export type DatasetDatasetGroupDataAttributesDatasetsDataItemAttributesLayersDataItemAttributesMetadata =
@@ -4197,7 +4197,7 @@ export const CategoryStoriesDataItemAttributesStepsDataItemAttributesLayoutItemA
     deckgl: 'deckgl',
     mapbox: 'mapbox',
     carto: 'carto',
-    'animated-deckgl': 'animated-deckgl',
+    'animated-tiles': 'animated-tiles',
   } as const;
 
 export type CategoryStoriesDataItemAttributesStepsDataItemAttributesLayoutItemAnyOfLayersDataItemAttributesMetadata =

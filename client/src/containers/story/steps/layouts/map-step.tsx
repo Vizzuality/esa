@@ -78,7 +78,7 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
                   <div className="h-full w-[500px] space-y-1">
                     {item?.title && <h3 className="text-2xl font-bold">{item?.title}</h3>}
                     {item?.content && <p className="font-inter text-sm">{item?.content}</p>}
-                    {item?.widget && <Chart options={item?.widget} />}
+                    {!!item?.widget && <Chart options={item?.widget} />}
                   </div>
                 </div>
               ))}
