@@ -4,7 +4,7 @@ import('./src/env.mjs');
 const nextConfig = {
   transpilePackages: ['@esa/types'],
   images: {
-    domains: ['api.mapbox.com', 'localhost'],
+    domains: ['api.mapbox.com', 'localhost', 'esa-gda-comms-staging-mfafc.ondigitalocean.app'],
   },
   env: {
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: 'false',
