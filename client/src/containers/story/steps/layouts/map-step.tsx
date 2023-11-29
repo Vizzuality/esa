@@ -26,6 +26,9 @@ type MapStepLayoutProps = {
   showContent?: boolean;
 };
 
+const cardClassName =
+  'rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 py-6 px-4 backdrop-blur';
+
 const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayoutProps) => {
   const { story_summary, card } = step as StepLayoutMapStepComponent;
   const scrollToItem = useScrollToItem();
@@ -34,33 +37,45 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
     scrollToItem(stepIndex + 1);
   };
 
-  console.log(card);
-
   return (
     <div className="pointer-events-none h-full">
-      <div className="bg-yellow-400a flex h-full justify-between px-14 pt-[84px]">
-        <div className="flex-1 space-y-8">
-          <div className="pointer-events-auto w-fit space-y-4">
-            {!!story_summary?.length && (
-              <div className="space-x-2">
+      <div className="flex h-full justify-between px-14 pt-[84px]">
+        <div className="flex flex-1 flex-col space-y-8">
+          {!!story_summary?.length && (
+            <div className="pointer-events-auto min-w-fit space-y-4 lg:w-[280px]">
+              <div className={cn(cardClassName, 'space-x-2')}>
                 <CategoryIcon className="inline h-10 w-10 fill-gray-200" slug={category?.slug} />
                 <span className="font-open-sans text-sm">{category?.name}</span>
               </div>
-            )}
-            {story_summary?.map((item) => (
-              <div className="w-fit" key={item.id}>
-                <div className="text-enlight-yellow-400 flex items-center gap-2">
-                  <h3 className=" tetx-sm font-bold uppercase">{item.title}</h3>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <InfoIcon className="h-4 w-4" />
-                    </TooltipTrigger>
-                    <TooltipContent className="max-w-xs">{item.info}</TooltipContent>
-                  </Tooltip>
-                </div>
-                <p className="font-open-sans">{item.content}</p>
+
+              <div className={cn(cardClassName, 'space-y-4')}>
+                {story_summary?.map((item) => (
+                  <div className="space-y-1" key={item.id}>
+                    <div className="text-enlight-yellow-400 flex items-center gap-2">
+                      <h3 className=" tetx-sm font-bold uppercase">{item.title}</h3>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <InfoIcon className="h-4 w-4" />
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-xs">{item.info}</TooltipContent>
+                      </Tooltip>
+                    </div>
+                    <p className="font-open-sans">{item.content}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+          )}
+          <div
+            className={cn(
+              'pointer-events-auto fixed bottom-14 left-14 min-h-[44px] min-w-[280px]',
+              {
+                'opacity-100': showContent,
+                'opacity-0': !showContent,
+              }
+            )}
+          >
+            <Legend />
           </div>
         </div>
         <div className="flex flex-1 items-end justify-end">
@@ -77,19 +92,19 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
                 >
                   <div className="h-full w-[500px] space-y-1">
                     {item?.title && <h3 className="text-2xl font-bold">{item?.title}</h3>}
-                    {item?.content && <p className="font-inter text-sm">{item?.content}</p>}
+                    {!!item?.content && (
+                      <div className="space-y-4">
+                        {item.content.split('\n').map((p, i) => (
+                          <p key={i} className="font-inter text-sm">
+                            {p}
+                          </p>
+                        ))}
+                      </div>
+                    )}
                     {!!item?.widget && <Chart options={item?.widget} />}
                   </div>
                 </div>
               ))}
-              <div
-                className={cn('pointer-events-auto', {
-                  'opacity-100': showContent,
-                  'opacity-0': !showContent,
-                })}
-              >
-                <Legend />
-              </div>
             </div>
           </div>
         </div>

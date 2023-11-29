@@ -7,11 +7,11 @@ import FUNCTIONS from '@/lib/utils';
 
 import { ParamsConfig } from '@/types/layers';
 
-import AnimatedTileLayer from '@/components/map/layers/animated-tile-layer';
 import {
   LegendTypeBasic,
   LegendTypeChoropleth,
   LegendTypeGradient,
+  LegendTypeTimeline,
 } from '@/components/map/legend/item-types';
 
 export const JSON_CONFIGURATION = new JSONConfiguration({
@@ -28,7 +28,7 @@ export const JSON_CONFIGURATION = new JSONConfiguration({
     LegendTypeBasic,
     LegendTypeChoropleth,
     LegendTypeGradient,
-    AnimatedTileLayer,
+    LegendTypeTimeline,
   },
 });
 

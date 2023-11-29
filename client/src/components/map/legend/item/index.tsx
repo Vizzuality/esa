@@ -91,7 +91,7 @@ export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
 
           {validChildren && (
             <AccordionContent className="grow px-2.5 transition-all">
-              <div className="-ml-0.5 pb-2 pl-5 pr-7">{children}</div>
+              <div>{children}</div>
             </AccordionContent>
           )}
         </Card>

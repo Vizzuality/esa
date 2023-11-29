@@ -17,11 +17,17 @@ export type ParamsConfigValue = {
 export type ParamsConfig = Record<string, ParamsConfigValue>[];
 
 export type LegendConfig = {
-  type: 'basic' | 'gradient' | 'choropleth';
+  displayControllers?: boolean;
+  type: 'basic' | 'gradient' | 'choropleth' | 'timeline';
   items: {
     value: string;
     color: string;
   }[];
+  timeline?: {
+    start: number;
+    end: number;
+    autoplay: boolean;
+  };
 };
 
 export type InteractionConfig = {

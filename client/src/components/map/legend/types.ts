@@ -99,6 +99,25 @@ export interface LegendTypeProps {
     value: string;
     color: string;
   }>;
+  timeline: {
+    start: number;
+    end: number;
+    autoplay: boolean;
+    current?: number;
+  };
+}
+
+export interface LegendTimelineProps {
+  className?: string;
+  items: Array<{
+    value: string;
+    color: string;
+  }>;
+  timeline: {
+    start: number;
+    end: number;
+    autoplay: boolean;
+  };
 }
 
 export interface LegendMatrixIntersectionsProps {

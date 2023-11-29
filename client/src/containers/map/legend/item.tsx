@@ -18,6 +18,7 @@ import {
   LegendTypeBasic,
   LegendTypeChoropleth,
   LegendTypeGradient,
+  LegendTypeTimeline,
 } from '@/components/map/legend/item-types';
 import { LegendItemProps, LegendTypeProps, SettingsManager } from '@/components/map/legend/types';
 import ContentLoader from '@/components/ui/loader';
@@ -26,6 +27,7 @@ const LEGEND_TYPES: Record<LegendType, React.FC<LegendTypeProps>> = {
   basic: LegendTypeBasic,
   choropleth: LegendTypeChoropleth,
   gradient: LegendTypeGradient,
+  timeline: LegendTypeTimeline,
 };
 
 type MapLegendItemProps = LegendItemProps;
@@ -58,6 +60,7 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
 
   const attributes = data?.data?.attributes as LayerTyped;
   const legend_config = attributes?.legend_config;
+  const { displayControllers = true } = legend_config || {};
   const params_config = attributes?.params_config;
   const metadata = attributes?.metadata;
   const settingsManager = getSettingsManager(attributes);
@@ -77,7 +80,7 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
 
     if (!isValidElement(l) && 'items' in l) {
       const { type, ...props } = l;
-      return createElement(LEGEND_TYPES[type], props);
+      return createElement(LEGEND_TYPES[type], props as LegendTypeProps);
     }
 
     return null;
@@ -92,15 +95,19 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
       isPlaceholderData={isPlaceholderData}
       isError={isError}
     >
-      <LegendItem
-        id={id}
-        name={attributes?.title}
-        settingsManager={settingsManager}
-        {...props}
-        InfoContent={!!metadata && <Metadata {...attributes} />}
-      >
-        {LEGEND_COMPONENT}
-      </LegendItem>
+      {displayControllers ? (
+        <LegendItem
+          id={id}
+          name={attributes?.title}
+          settingsManager={settingsManager}
+          {...props}
+          InfoContent={!!metadata && <Metadata {...attributes} />}
+        >
+          {LEGEND_COMPONENT}
+        </LegendItem>
+      ) : (
+        LEGEND_COMPONENT
+      )}
     </ContentLoader>
   );
 };
