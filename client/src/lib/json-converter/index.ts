@@ -11,7 +11,6 @@ import {
   LegendTypeBasic,
   LegendTypeChoropleth,
   LegendTypeGradient,
-  LegendTypeTimeline,
 } from '@/components/map/legend/item-types';
 
 export const JSON_CONFIGURATION = new JSONConfiguration({
@@ -28,7 +27,6 @@ export const JSON_CONFIGURATION = new JSONConfiguration({
     LegendTypeBasic,
     LegendTypeChoropleth,
     LegendTypeGradient,
-    LegendTypeTimeline,
   },
 });
 

@@ -1,10 +1,11 @@
 import React, { useCallback, useMemo } from 'react';
 
+import { Root, Track, Thumb } from '@radix-ui/react-slider';
+import { PauseIcon, PlayIcon } from 'lucide-react';
+
 import { cn } from '@/lib/classnames';
 
-import { Root, Track, Range, Thumb } from '@radix-ui/react-slider';
 import { Button } from '@/components/ui/button';
-import { PauseIcon, PlayIcon } from 'lucide-react';
 
 type LegendTypeTimelineProps = {
   timeline: {

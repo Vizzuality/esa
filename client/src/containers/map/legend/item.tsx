@@ -18,7 +18,6 @@ import {
   LegendTypeBasic,
   LegendTypeChoropleth,
   LegendTypeGradient,
-  LegendTypeTimeline,
 } from '@/components/map/legend/item-types';
 import { LegendItemProps, LegendTypeProps, SettingsManager } from '@/components/map/legend/types';
 import ContentLoader from '@/components/ui/loader';
@@ -27,7 +26,6 @@ const LEGEND_TYPES: Record<LegendType, React.FC<LegendTypeProps>> = {
   basic: LegendTypeBasic,
   choropleth: LegendTypeChoropleth,
   gradient: LegendTypeGradient,
-  timeline: LegendTypeTimeline,
 };
 
 type MapLegendItemProps = LegendItemProps;
@@ -80,7 +78,7 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
 
     if (!isValidElement(l) && 'items' in l) {
       const { type, ...props } = l;
-      return createElement(LEGEND_TYPES[type], props as LegendTypeProps);
+      return createElement(LEGEND_TYPES[type], props);
     }
 
     return null;
