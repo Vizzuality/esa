@@ -5,11 +5,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { useScroll, motion, useTransform } from 'framer-motion';
-import { useResetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 import env from '@/env.mjs';
 
-import { tmpBboxAtom } from '@/store';
+import { isFlyingBackAtom } from '@/store';
 
 import { StepLayoutItem, StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
@@ -24,7 +24,7 @@ type MediaStepLayoutProps = {
 const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   const { push } = useRouter();
 
-  const resetBbox = useResetRecoilState(tmpBboxAtom);
+  const setIsFlyingBack = useSetRecoilState(isFlyingBackAtom);
 
   const { content, title } = step as StepLayoutOutroStepComponent;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,7 +49,10 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
 
   useTransform(scrollYProgress, (v) => {
     if (v > 0.6) {
-      resetBbox();
+      setIsFlyingBack(true);
+      setTimeout(() => {
+        setIsFlyingBack(false);
+      }, 3000);
       push('/');
     }
   });
