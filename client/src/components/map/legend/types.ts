@@ -101,6 +101,19 @@ export interface LegendTypeProps {
   }>;
 }
 
+export interface LegendTimelineProps {
+  className?: string;
+  items: Array<{
+    value: string;
+    color: string;
+  }>;
+  timeline: {
+    start: number;
+    end: number;
+    autoplay: boolean;
+  };
+}
+
 export interface LegendMatrixIntersectionsProps {
   intersections: Array<{
     id: number;

@@ -17,6 +17,7 @@ export type ParamsConfigValue = {
 export type ParamsConfig = Record<string, ParamsConfigValue>[];
 
 export type LegendConfig = {
+  displayControllers?: boolean;
   type: 'basic' | 'gradient' | 'choropleth';
   items: {
     value: string;

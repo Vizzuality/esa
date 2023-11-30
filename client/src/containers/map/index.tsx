@@ -189,7 +189,12 @@ export default function MapContainer() {
   }, [map, tmpBbox]);
 
   return (
-    <div className="fixed left-0 top-0 h-screen w-screen bg-[#0a2839]">
+    <div
+      className={cn(
+        'fixed left-0 top-0 h-screen w-screen bg-[#0a2839]',
+        isHomePage ? 'cursor-pointer' : 'pointer-events-none cursor-default'
+      )}
+    >
       <Map
         id={id}
         initialViewState={{

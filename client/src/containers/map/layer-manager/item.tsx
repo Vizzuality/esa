@@ -107,6 +107,12 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
 
   if (type === 'animated-tiles') {
     const { config, params_config } = data.data.attributes;
+    const c = parseConfig({
+      // TODO: type
+      config,
+      params_config,
+      settings,
+    });
     return (
       <AnimatedDeckLayer
         type=""
@@ -114,6 +120,7 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
         beforeId={beforeId}
         config={config}
         paramsConfig={params_config}
+        c={c}
       />
     );
   }

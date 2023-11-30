@@ -58,6 +58,7 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
 
   const attributes = data?.data?.attributes as LayerTyped;
   const legend_config = attributes?.legend_config;
+  const { displayControllers = true } = legend_config || {};
   const params_config = attributes?.params_config;
   const metadata = attributes?.metadata;
   const settingsManager = getSettingsManager(attributes);
@@ -92,15 +93,19 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
       isPlaceholderData={isPlaceholderData}
       isError={isError}
     >
-      <LegendItem
-        id={id}
-        name={attributes?.title}
-        settingsManager={settingsManager}
-        {...props}
-        InfoContent={!!metadata && <Metadata {...attributes} />}
-      >
-        {LEGEND_COMPONENT}
-      </LegendItem>
+      {displayControllers ? (
+        <LegendItem
+          id={id}
+          name={attributes?.title}
+          settingsManager={settingsManager}
+          {...props}
+          InfoContent={!!metadata && <Metadata {...attributes} />}
+        >
+          {LEGEND_COMPONENT}
+        </LegendItem>
+      ) : (
+        LEGEND_COMPONENT
+      )}
     </ContentLoader>
   );
 };

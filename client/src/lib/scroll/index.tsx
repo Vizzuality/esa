@@ -48,7 +48,9 @@ const useIsomorphicLayoutEffect =
 
 export const ScrollProvider = ({ children }: PropsWithChildren<any>) => {
   const [scrollItems, setScrollItems] = useState<ScrollItem[]>([]);
-  const { scrollY } = useScroll();
+  const { scrollY } = useScroll({
+    offset: ['start end', 'start center'],
+  });
 
   const setStep = useSetRecoilState(stepAtom);
 
