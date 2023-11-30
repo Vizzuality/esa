@@ -16,13 +16,7 @@ export default [
       }
     },
   },
-  {
-    name: 'strapi::cors',
-    config: {
-      enabled: true,
-      origin: ['http://localhost:3000', 'http://localhost:1337', 'http://localhost:8000']
-    }
-  },
+  'strapi::cors',
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
