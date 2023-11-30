@@ -9,7 +9,7 @@ import { useSetRecoilState } from 'recoil';
 
 import env from '@/env.mjs';
 
-import { isFlyingBackAtom, layersAtom } from '@/store';
+import { isFlyingBackAtom } from '@/store';
 
 import { StepLayoutItem, StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
@@ -23,7 +23,6 @@ type MediaStepLayoutProps = {
 
 const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   const { push } = useRouter();
-  const setLayers = useSetRecoilState(layersAtom);
 
   const setIsFlyingBack = useSetRecoilState(isFlyingBackAtom);
 
@@ -45,9 +44,6 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   });
 
   useEffect(() => {
-    // TEMPORARY FIX
-    setLayers([5]);
-
     if (!showContent) setShow(false);
   }, [showContent]);
 
