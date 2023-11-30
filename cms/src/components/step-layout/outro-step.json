@@ -27,6 +27,10 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::layer.layer"
+    },
+    "map": {
+      "type": "customField",
+      "customField": "plugin::map-field.map-field"
     }
   }
 }
