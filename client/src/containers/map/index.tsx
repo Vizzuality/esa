@@ -19,6 +19,7 @@ import {
   layersInteractiveIdsAtom,
   // popupAtom,
   tmpBboxAtom,
+  isFlyingBackAtom,
 } from '@/store';
 
 // import { useGetLayers } from '@/types/generated/layer';
@@ -78,16 +79,19 @@ export default function MapContainer() {
 
   const bbox = useRecoilValue(bboxAtom);
   const tmpBbox = useRecoilValue(tmpBboxAtom);
-  // const layersInteractive = useRecoilValue(layersInteractiveAtom);
+  const isFlyingBack = useRecoilValue(isFlyingBackAtom);
+
   const layersInteractiveIds = useRecoilValue(layersInteractiveIdsAtom);
 
   const setBbox = useSetRecoilState(bboxAtom);
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
-  // const setPopup = useSetRecoilState(popupAtom);
 
   const pathname = usePathname();
 
-  const isHomePage = useMemo(() => !pathname.includes('stories'), [pathname]);
+  const isHomePage = useMemo(
+    () => !pathname.includes('stories') && !isFlyingBack,
+    [pathname, isFlyingBack]
+  );
 
   // const { data: layersInteractiveData } = useGetLayers(
   //   {

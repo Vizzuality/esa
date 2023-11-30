@@ -115,6 +115,11 @@ export const markerAtom = atom<MapboxGeoJSONFeature | null>({
   default: null,
 });
 
+export const isFlyingBackAtom = atom<boolean>({
+  key: 'is-flying-back',
+  default: false,
+});
+
 export const DEFAULT_SETTINGS = {
   expand: true,
 };
