@@ -38,7 +38,7 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
   };
 
   return (
-    <div className="pointer-events-none h-full">
+    <div className="pointer-events-none h-full max-h-screen ">
       <div className="flex h-full justify-between px-14 pt-[84px]">
         <div className="flex flex-1 flex-col space-y-8">
           {!!story_summary?.length && (
@@ -78,34 +78,32 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
             <Legend />
           </div>
         </div>
-        <div className="flex flex-1 items-end justify-end">
-          <div className="h-[150vh] w-fit">
-            <div className="sticky top-0 flex h-screen flex-col justify-end space-y-6 pb-6">
-              {card?.map((item) => (
-                <div
-                  key={item?.id}
-                  onClick={handleClickCard}
-                  className={cn(
-                    'pointer-events-auto cursor-pointer overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
-                    showContent ? 'opacity-100' : 'opacity-0'
+        <div className="">
+          <div className="flex h-fit min-h-full flex-col items-end justify-center space-y-6 pb-6">
+            {card?.map((item) => (
+              <div
+                key={item?.id}
+                onClick={handleClickCard}
+                className={cn(
+                  'pointer-events-auto cursor-pointer overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
+                  showContent ? 'opacity-100' : 'opacity-0'
+                )}
+              >
+                <div className="w-[500px] space-y-1">
+                  {item?.title && <h3 className="text-2xl font-bold">{item?.title}</h3>}
+                  {!!item?.content && (
+                    <div className="space-y-4">
+                      {item.content.split('\n').map((p, i) => (
+                        <p key={i} className="font-inter text-sm">
+                          {p}
+                        </p>
+                      ))}
+                    </div>
                   )}
-                >
-                  <div className="h-full w-[500px] space-y-1">
-                    {item?.title && <h3 className="text-2xl font-bold">{item?.title}</h3>}
-                    {!!item?.content && (
-                      <div className="space-y-4">
-                        {item.content.split('\n').map((p, i) => (
-                          <p key={i} className="font-inter text-sm">
-                            {p}
-                          </p>
-                        ))}
-                      </div>
-                    )}
-                    {!!item?.widget && <Chart options={item?.widget} />}
-                  </div>
+                  {!!item?.widget && <Chart options={item?.widget} />}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

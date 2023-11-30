@@ -22,6 +22,11 @@
         "images",
         "videos"
       ]
+    },
+    "layers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::layer.layer"
     }
   }
 }
