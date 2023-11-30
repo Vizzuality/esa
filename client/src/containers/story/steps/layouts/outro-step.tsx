@@ -82,14 +82,16 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   return (
     <div ref={containerRef} className="flex h-[300vh]">
       {showContent && show && (
-        <motion.div className="fixed top-0 flex h-screen w-screen flex-col items-center justify-center sm:px-14 2xl:px-24">
+        <motion.div className="fixed top-0 flex h-screen w-screen flex-col items-center justify-center 2xl:px-12">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
-            className="step-blur bg-background/10 fixed bottom-0 left-0 h-full w-screen backdrop-blur-sm"
-          />
-          <div className="flex w-full flex-1 items-center">
+            className="fixed bottom-0 left-0 h-full w-screen backdrop-blur-sm"
+          >
+            <div className="h-full w-full bg-slate-900/60"></div>
+          </motion.div>
+          <div className="flex  w-full flex-1 items-center justify-between">
             <div className="flex w-full flex-1 flex-col justify-between gap-12 lg:flex-row">
               {isVideo && (
                 <motion.div
@@ -97,8 +99,8 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 2 }}
-                  className="flex-1"
                   style={{ scale: scaleContent }}
+                  className="relative z-50 w-full flex-1"
                 >
                   <video
                     width="100%"
@@ -108,9 +110,9 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                     muted
                     loop
                     autoPlay={true}
-                    className={''}
                     onMouseEnter={(e) => handlePlayVideo(e, 'play')}
                     onMouseLeave={(e) => handlePlayVideo(e, 'pause')}
+                    controls={true}
                   >
                     <source src={mediaSrc} type={mediaMime} />
                   </video>

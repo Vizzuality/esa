@@ -89,6 +89,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
           ref={videoRef}
           muted
           loop
+          controls={isFullScreen}
           autoPlay={isFullScreen}
           className={mediaClassName}
           onMouseEnter={(e) => handlePlayVideo(e, 'play')}
