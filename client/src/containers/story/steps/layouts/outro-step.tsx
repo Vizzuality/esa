@@ -82,7 +82,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   return (
     <div ref={containerRef} className="flex h-[300vh]">
       {showContent && show && (
-        <motion.div className="fixed top-0 flex h-screen w-screen flex-col items-center justify-center 2xl:px-12">
+        <motion.div className="sticky top-0 flex h-screen w-screen flex-col items-center justify-center 2xl:px-12">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -91,7 +91,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
           >
             <div className="h-full w-full bg-slate-900/60"></div>
           </motion.div>
-          <div className="flex  w-full flex-1 items-center justify-between">
+          <div className="pointer-events-auto flex w-full flex-1 items-center justify-between">
             <div className="flex w-full flex-1 flex-col justify-between gap-12 lg:flex-row">
               {isVideo && (
                 <motion.div
@@ -112,7 +112,6 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                     autoPlay={true}
                     onMouseEnter={(e) => handlePlayVideo(e, 'play')}
                     onMouseLeave={(e) => handlePlayVideo(e, 'pause')}
-                    controls={true}
                   >
                     <source src={mediaSrc} type={mediaMime} />
                   </video>

@@ -4,9 +4,11 @@ import { useEffect } from 'react';
 
 import Link from 'next/link';
 
-import { useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
-import { tmpBboxAtom } from '@/store';
+import { layersAtom, tmpBboxAtom } from '@/store';
+
+import { stepAtom } from '@/store/stories';
 
 import Sidebar from '@/containers/home/sidebar';
 
@@ -29,11 +31,18 @@ const HOME_MAP_OPTIONS = {
 
 export default function Home() {
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
+  const resetLayers = useResetRecoilState(layersAtom);
+  const resetStep = useResetRecoilState(stepAtom);
 
   useEffect(() => {
     const tmpbbox: [number, number, number, number] = [-50.45, -66.05, 107.79, 85.05];
     setTmpBbox({ bbox: tmpbbox, options: HOME_MAP_OPTIONS });
   }, [setTmpBbox]);
+
+  useEffect(() => {
+    resetLayers();
+    resetStep();
+  }, []);
 
   return (
     <div className="home text-primary flex h-screen w-screen flex-col justify-between px-12">

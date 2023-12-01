@@ -67,13 +67,10 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
             </div>
           )}
           <div
-            className={cn(
-              'pointer-events-auto fixed bottom-14 left-14 min-h-[44px] min-w-[280px]',
-              {
-                'opacity-100': showContent,
-                'opacity-0': !showContent,
-              }
-            )}
+            className={cn('pointer-events-auto fixed bottom-14 left-14 min-h-[44px]', {
+              'w-auto opacity-100': showContent,
+              'w-0 opacity-0': !showContent,
+            })}
           >
             <Legend />
           </div>
