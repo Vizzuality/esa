@@ -27,7 +27,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
   const [hovered, setHovered] = useState(false);
   const mediaType = media?.mime?.split('/')[0];
 
-  const mediaSrc = `${apiBaseUrl}${(!isFullScreen && media.formats?.thumbnail?.url) || media.url}`;
+  const mediaSrc = `${apiBaseUrl}${media?.url}`;
   const mediaMime = media?.mime;
 
   const handlePlayVideo = useCallback(

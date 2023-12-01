@@ -29,11 +29,11 @@ const StoryMarkers = () => {
     populate: 'deep',
   });
 
-  const markers: StoryMarker[] = useMemo(
-    () =>
-      storyData?.data?.attributes?.steps?.data?.[step]?.attributes?.layout[0].map?.markers || [],
-    [step, storyData?.data?.attributes?.steps?.data]
-  );
+  const markers: StoryMarker[] = useMemo(() => {
+    return (
+      storyData?.data?.attributes?.steps?.data?.[step]?.attributes?.layout[0].map?.markers || []
+    );
+  }, [step, storyData?.data?.attributes?.steps?.data]);
 
   return (
     <>

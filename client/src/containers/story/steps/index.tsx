@@ -58,8 +58,8 @@ const Step = ({ step, category, index }: StepProps) => {
   }, [category?.data?.attributes, category?.data?.id, step, index, currentStep]);
 
   return (
-    <div className="pointer-events-none z-10 h-screen w-full ">
-      <div className="z-20 h-full w-full px-14">{STEP_COMPONENT}</div>
+    <div className="pointer-events-none h-screen w-full ">
+      <div className="h-full w-full px-14">{STEP_COMPONENT}</div>
     </div>
   );
 };

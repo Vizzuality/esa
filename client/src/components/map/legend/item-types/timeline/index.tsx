@@ -58,7 +58,7 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
     >
       <Button
         variant="default"
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
+        className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
         onClick={onPlay}
       >
         {isPlaying ? (
@@ -77,7 +77,7 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
         className={cn('relative flex w-full touch-none select-none items-center', className)}
       >
         <Track className="w-full">
-          <svg width={width} height={height} className="overflow-visible">
+          <svg width={width} height={height} className="cursor-pointer overflow-visible">
             <text x={-textMarginX} y={textMarginY} className="font-open-sans fill-white text-sm">
               {years[0] !== value && years[0]}
             </text>
