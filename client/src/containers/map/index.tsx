@@ -26,6 +26,7 @@ import {
 // import type { LayerTyped } from '@/types/layers';
 import { Bbox } from '@/types/map';
 
+import { DEFAULT_MAP_STATE } from '@/constants/map';
 import { MAPBOX_STYLES } from '@/constants/mapbox';
 
 import HomeMarkers from '@/containers/map/markers/home-markers';
@@ -47,26 +48,19 @@ const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
 
 const DEFAULT_PROPS: CustomMapProps = {
   id: 'default',
-  initialViewState: {
-    longitude: 0,
-    latitude: 0,
-    zoom: 2.01,
-    pitch: 0,
-    bearing: 0,
-    // bounds: [-159.86, 6.31, -65.75, 60.67],
-  },
+  initialViewState: DEFAULT_MAP_STATE,
   minZoom: 2,
   maxZoom: 20,
 };
 
-const FOG = {
-  range: [0.5, 8],
-  'horizon-blend': 0.125,
-  color: '#2a6981',
-  'high-color': '#0a2839',
-  'space-color': '#0a2839',
-  'star-intensity': 0.25,
-};
+// const FOG = {
+//   range: [0.5, 8],
+//   'horizon-blend': 0.125,
+//   color: '#2a6981',
+//   'high-color': '#0a2839',
+//   'space-color': '#0a2839',
+//   'star-intensity': 0.25,
+// };
 
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
