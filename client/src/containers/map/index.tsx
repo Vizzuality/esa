@@ -27,7 +27,6 @@ import {
 import { Bbox } from '@/types/map';
 
 import { DEFAULT_MAP_STATE } from '@/constants/map';
-// import { MAPBOX_STYLES } from '@/constants/mapbox';
 import MAPBOX_STYLE_GLOBE from '@/constants/mapbox-style-globe.json';
 import MAPBOX_STYLE_DEFAULT from '@/constants/mapbox-style.json';
 
@@ -208,7 +207,6 @@ export default function MapContainer() {
         }}
         minZoom={minZoom}
         maxZoom={maxZoom}
-        // mapStyle={MAPBOX_STYLES.default}
         mapStyle={(isHomePage ? MAPBOX_STYLE_GLOBE : MAPBOX_STYLE_DEFAULT) as Style}
         // fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
