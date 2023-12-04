@@ -56,7 +56,7 @@ const DEFAULT_PROPS: CustomMapProps = {
     // bounds: [-159.86, 6.31, -65.75, 60.67],
   },
   minZoom: 2,
-  maxZoom: 20,
+  maxZoom: 14,
 };
 
 const FOG = {

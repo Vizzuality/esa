@@ -16,7 +16,7 @@ const HomeTooltip = (props: HomeTooltipProps) => {
     <RPopup
       {...props}
       className={cn({
-        'home-tooltip animate-in zoom-in items-left relative flex w-56 -translate-x-1/2 cursor-pointer flex-col justify-center rounded border border-white bg-[#335E6F80] px-6 py-4 text-white duration-150':
+        'home-tooltip items-left relative flex w-56 -translate-x-1/2 cursor-pointer flex-col justify-center rounded border border-white bg-[#335E6F80] px-6 py-4 text-white transition-opacity':
           true,
       })}
     >
