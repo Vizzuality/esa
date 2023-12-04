@@ -37,9 +37,11 @@ const StoryMarkers = () => {
             geometry: { type: 'Point', coordinates: [attributes?.longitude, attributes?.latitude] },
             properties: {
               category: attributes?.category?.data?.attributes?.slug,
+              categoryName: attributes?.category?.data?.attributes?.name,
               ifi: 'IFAD',
               status: 'completed',
               tags: ['nature'],
+              title: attributes?.title,
             },
           };
         }) || [],
