@@ -78,7 +78,7 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
           if (!tile || !data) return null;
 
           const {
-            z,
+            zoom,
             bbox: { west, south, east, north },
           } = tile;
 
@@ -93,7 +93,7 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
               getPolygonOffset: () => {
                 return [0, 5000];
               },
-              zoom: z,
+              zoom,
               visible,
               opacity,
             });

@@ -11,9 +11,9 @@ import {
   StoryCategoryDataAttributes,
 } from '@/types/generated/strapi.schemas';
 
+import Chart from '@/components/chart';
 import CategoryIcon from '@/components/ui/category-icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import Chart from '@/components/chart';
 
 const Legend = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
@@ -52,7 +52,7 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
                 {story_summary?.map((item) => (
                   <div className="space-y-1" key={item.id}>
                     <div className="text-enlight-yellow-400 flex items-center gap-2">
-                      <h3 className=" tetx-sm font-bold uppercase">{item.title}</h3>
+                      <h2 className="tetx-sm font-bold uppercase">{item.title}</h2>
                       <Tooltip>
                         <TooltipTrigger>
                           <InfoIcon className="h-4 w-4" />
@@ -86,12 +86,12 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
                   showContent ? 'opacity-100' : 'opacity-0'
                 )}
               >
-                <div className="w-[500px] space-y-1">
-                  {item?.title && <h3 className="text-2xl font-bold">{item?.title}</h3>}
+                <div className="w-[400px] space-y-1">
+                  {item?.title && <h2 className="font-notes text-2xl font-bold">{item?.title}</h2>}
                   {!!item?.content && (
-                    <div className="space-y-4">
+                    <div className="font-open-sans space-y-4">
                       {item.content.split('\n').map((p, i) => (
-                        <p key={i} className="font-inter text-sm">
+                        <p key={i} className="text-sm">
                           {p}
                         </p>
                       ))}
