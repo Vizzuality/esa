@@ -236,8 +236,7 @@ export default function MapContainer() {
             longitude={marker.geometry.coordinates[0]}
             latitude={marker.geometry.coordinates[1]}
             properties={marker.properties}
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
+            onClick={() => {
               setMarker(null);
               push(`/stories/${marker.id}`);
             }}

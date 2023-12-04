@@ -33,7 +33,7 @@ const HomeTooltip = (props: HomeTooltipProps) => {
         <Button
           variant="secondary"
           className="h-8 w-full rounded-3xl bg-teal-500 py-2 text-xs text-white"
-          onClick={() => onClick}
+          onClick={onClick as () => void}
         >
           Discover story
         </Button>
