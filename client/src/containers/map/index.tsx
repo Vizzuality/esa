@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-import { LngLatBoundsLike } from 'mapbox-gl';
+import { LngLatBoundsLike, Style } from 'mapbox-gl';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
@@ -27,7 +27,9 @@ import {
 import { Bbox } from '@/types/map';
 
 import { DEFAULT_MAP_STATE } from '@/constants/map';
-import { MAPBOX_STYLES } from '@/constants/mapbox';
+// import { MAPBOX_STYLES } from '@/constants/mapbox';
+import MAPBOX_STYLE_GLOBE from '@/constants/mapbox-style-globe.json';
+import MAPBOX_STYLE_DEFAULT from '@/constants/mapbox-style.json';
 
 import HomeMarkers from '@/containers/map/markers/home-markers';
 import StoryMarkers from '@/containers/map/markers/story-markers';
@@ -206,7 +208,8 @@ export default function MapContainer() {
         }}
         minZoom={minZoom}
         maxZoom={maxZoom}
-        mapStyle={MAPBOX_STYLES.default}
+        // mapStyle={MAPBOX_STYLES.default}
+        mapStyle={(isHomePage ? MAPBOX_STYLE_GLOBE : MAPBOX_STYLE_DEFAULT) as Style}
         // fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         // onClick={handleMapClick}

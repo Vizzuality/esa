@@ -11,9 +11,9 @@ import {
   StoryCategoryDataAttributes,
 } from '@/types/generated/strapi.schemas';
 
+import Chart from '@/components/chart';
 import CategoryIcon from '@/components/ui/category-icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import Chart from '@/components/chart';
 
 const Legend = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
