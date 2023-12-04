@@ -104,8 +104,8 @@ const Story = () => {
             </ScrollItem>
           );
         })}
-        <div className="fixed right-6 z-30 flex h-full flex-col justify-center space-y-2">
-          {steps?.map((_, index) => (
+        <div className="fixed right-6 z-30 flex h-full flex-col justify-center">
+          {steps?.map((s, index) => (
             <ScrollItemController
               className={cn(
                 'hover:outline-secondary h-2 w-2 rounded-full border-[1.5px] border-gray-800 outline outline-[1.5px] transition-all duration-200',
@@ -113,6 +113,7 @@ const Story = () => {
               )}
               key={index}
               newStep={index}
+              title={s.attributes?.layout[0]?.card && s.attributes?.layout[0]?.card[0]?.title}
             />
           ))}
         </div>
