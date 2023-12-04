@@ -5,7 +5,7 @@ export const openSans = Open_Sans({
   subsets: ['latin'],
   variable: '--font-open-sans',
   fallback: ['system-ui', 'Helvetica Neue', 'Helvetica', 'Arial'],
-  weight: ['300'],
+  weight: ['300', '400'],
   style: ['italic', 'normal'],
   display: 'block',
 });

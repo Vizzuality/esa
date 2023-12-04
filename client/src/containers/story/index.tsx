@@ -87,14 +87,16 @@ const Story = () => {
 
   return (
     <div className="text-primary flex flex-col justify-between">
-      <div className="fixed z-30 mt-6 flex w-full items-center justify-between px-12 text-center text-2xl font-bold">
-        <Button value="icon" className={headerButtonClassName} onClick={handleGoHome}>
-          <ArrowLeft className="h-6 w-6" />
-        </Button>
-        <h1>{story?.title}</h1>
-        <Button value="icon" className={headerButtonClassName}>
-          <Share2 className="h-6 w-6" />
-        </Button>
+      <div className="fixed left-0 top-0 z-30 w-full bg-gradient-to-b from-[#0C3E54] to-transparent">
+        <div className="flex items-center justify-between px-12 py-6 text-center text-2xl font-bold">
+          <Button value="icon" className={headerButtonClassName} onClick={handleGoHome}>
+            <ArrowLeft className="h-6 w-6" />
+          </Button>
+          <h1 className="font-notes font-normal">{story?.title}</h1>
+          <Button value="icon" className={headerButtonClassName}>
+            <Share2 className="h-6 w-6" />
+          </Button>
+        </div>
       </div>
       <ScrollProvider>
         {steps?.map((mapStep, index) => {
