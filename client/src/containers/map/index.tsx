@@ -217,6 +217,7 @@ export default function MapContainer() {
         dragPan={isHomePage}
         onMapViewStateChange={handleMapViewStateChange}
         className={cn(isHomePage ? 'cursor-pointer' : 'pointer-events-none cursor-default')}
+        padding={{ top: 50, bottom: 50, left: 200, right: 300 }}
       >
         {/* <Controls className="absolute right-5 top-12 z-40 sm:right-6 sm:top-6">
           <ZoomControl />
