@@ -85,9 +85,11 @@ export default function MapContainer() {
   const pathname = usePathname();
 
   const isHomePage = useMemo(
-    () => !pathname.includes('stories') && !isFlyingBack,
+    () => !pathname.includes('stories'),
     [pathname, isFlyingBack]
   );
+
+  console.log('isHomePage', isHomePage);
 
   // const { data: layersInteractiveData } = useGetLayers(
   //   {
