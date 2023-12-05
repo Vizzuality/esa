@@ -6,8 +6,6 @@ RUN apt-get update -y && \
     apt-get clean
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
-ARG basePath="/impact-sphere"
-ENV NEXT_PUBLIC_BASE_PATH $basePath
 
 WORKDIR /app
 COPY .yarn ./.yarn
@@ -24,9 +22,7 @@ RUN yarn build
 # Copy only the built files into the final image
 FROM node:18.15.0-bullseye-slim AS runner
 ENV NODE_ENV production
-ARG basePath="/impact-sphere"
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV NEXT_PUBLIC_BASE_PATH $basePath
 
 WORKDIR /app
 
@@ -38,6 +34,7 @@ COPY --from=build --chown=nextjs:nodejs /app/client/entrypoint.sh ./entrypoint.s
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/client/public ./public
 COPY --from=build /app/client/package.json ./package.json
+COPY --from=build /app/client/.env.local ./.env.local
 
 USER nextjs
 
