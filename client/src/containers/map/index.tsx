@@ -75,7 +75,7 @@ export default function MapContainer() {
 
   const bbox = useRecoilValue(bboxAtom);
   const tmpBbox = useRecoilValue(tmpBboxAtom);
-  const isFlyingBack = useRecoilValue(isFlyingBackAtom);
+  // const isFlyingBack = useRecoilValue(isFlyingBackAtom);
 
   const layersInteractiveIds = useRecoilValue(layersInteractiveIdsAtom);
 
@@ -84,10 +84,7 @@ export default function MapContainer() {
 
   const pathname = usePathname();
 
-  const isHomePage = useMemo(
-    () => !pathname.includes('stories'),
-    [pathname, isFlyingBack]
-  );
+  const isHomePage = useMemo(() => !pathname.includes('stories'), [pathname]);
 
   console.log('isHomePage', isHomePage);
 
