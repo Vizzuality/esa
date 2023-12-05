@@ -12,7 +12,7 @@ const StorySummary = ({ story }: StorySummaryProps) => {
       <div className="shrink-0">
         <Image
           alt={story.attributes?.title || 'Story image'}
-          src="/images/story-card-image.png"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-card-image.png`}
           width={72}
           height={72}
         />

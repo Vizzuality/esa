@@ -52,7 +52,7 @@ const StoryMarkers = () => {
 
   useMapImage({
     name: 'story-marker',
-    url: '/images/map/story-marker.png',
+    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker.png`,
   });
 
   return (

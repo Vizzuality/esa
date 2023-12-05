@@ -407,7 +407,7 @@
   "bearing": 0,
   "pitch": 0,
   "fog": {
-    "color": "rgba(225, 244, 237, 0.07)",
+    "color": "rgba(0, 50, 71, 0.8)",
     "range": [
       "interpolate",
       [
