@@ -1,4 +1,4 @@
-export default [
+export default ({ env }) => [
   'strapi::errors',
   {
     name: 'strapi::security',
@@ -8,8 +8,8 @@ export default [
         directives: {
           'connect-src': ["'self'", 'https:'],
           'script-src': ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net', 'api.mapbox.com'],
-          'img-src': ["'self'", 'data:', 'blob:'],
-          'media-src': ["'self'", 'data:', 'blob:'],
+          'img-src': ["'self'", 'data:', 'blob:', `${env('DO_SPACE_FULL_PATH')}`],
+          'media-src': ["'self'", 'data:', 'blob:', `${env('DO_SPACE_FULL_PATH')}`],
           'worker-src': ['blob:'],
           upgradeInsecureRequests: null,
         },

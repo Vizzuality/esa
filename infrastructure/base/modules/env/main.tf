@@ -55,6 +55,7 @@ resource "digitalocean_spaces_bucket_cors_configuration" "space_cms_cors" {
     allowed_headers = ["*"]
     allowed_methods = ["GET", "HEAD", "PUT", "POST", "DELETE"]
     allowed_origins = ["*"]
+    expose_headers  = ["ETag", "Access-Control-Allow-Origin"]
     max_age_seconds = 3000
   }
 }
