@@ -65,6 +65,7 @@ locals {
   }
   staging_client_env = {
     NEXT_PUBLIC_URL                            = "${module.staging.app_url}/impact-sphere"
+    NEXT_PUBLIC_BASE_PATH                      = "/impact-sphere"
     NEXT_PUBLIC_ENVIRONMENT                    = "production"
     NEXT_PUBLIC_API_URL                        = "${module.staging.app_url}/impact-sphere/cms/api"
     NEXT_PUBLIC_GA_TRACKING_ID                 = var.ga_tracking_id
