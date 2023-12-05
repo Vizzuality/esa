@@ -8,6 +8,8 @@ import { cn } from '@/lib/classnames';
 
 import { StoryStepMapMarkerMedia } from '@/types/story';
 
+import Video from '@/containers/story/video';
+
 import { Button } from '@/components/ui/button';
 
 type StoryMarkerMediaProps = {
@@ -20,14 +22,6 @@ type StoryMarkerMediaProps = {
 const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMediaProps) => {
   const [hovered, setHovered] = useState(false);
   const mediaType = media?.mime?.split('/')[0];
-
-  const mediaMime = media?.mime;
-
-  // MOCKUP IMAGE FOR STORY 1 STEP 1 !! REMOVE WHEN REAL IMAGE IS AVAILABLE
-  // !TODO: Add video thumbnail
-  const mediaSrc = mediaMime.includes('image')
-    ? `${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-1-image-mockup.png`
-    : `${process.env.NEXT_PUBLIC_BASE_PATH}${media?.url}`;
 
   const mediaClassName = useMemo(
     () =>
@@ -67,7 +61,8 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
         <Image
           width={isFullScreen ? 1500 : hovered ? 200 : 70}
           height={isFullScreen ? 1500 : hovered ? 200 : 70}
-          src={mediaSrc}
+          // !TODO: Add real image
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-1-image-mockup.png`}
           className={mediaClassName}
           alt={name}
         />
@@ -77,6 +72,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
           <Image
             width={isFullScreen ? 1500 : hovered ? 200 : 70}
             height={isFullScreen ? 1500 : hovered ? 200 : 70}
+            // !TODO: Add video thumbnail
             src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-1-image-mockup.png`}
             className={mediaClassName}
             alt={name}
@@ -86,12 +82,13 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
       )}
       {mediaType === 'video' && hovered && (
         <>
-          <Image
-            width={isFullScreen ? 1500 : hovered ? 200 : 70}
-            height={isFullScreen ? 1500 : hovered ? 200 : 70}
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-1-image-mockup.png`}
-            className={mediaClassName}
-            alt={name}
+          <Video
+            playing
+            loop
+            // !TODO: Add real video
+            url="https://youtu.be/vCzmxg9y7gA?si=A9TTn_tvyzo-r00c"
+            height="100%"
+            width="100%"
           />
         </>
       )}
