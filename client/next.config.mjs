@@ -2,6 +2,7 @@ import('./src/env.mjs');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: '/impact-sphere',
   transpilePackages: ['@esa/types'],
   images: {
     domains: ['api.mapbox.com', 'localhost', 'esa-gda-comms-staging-mfafc.ondigitalocean.app'],
