@@ -1,18 +1,14 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Image from 'next/image';
 
-import { ExpandIcon } from 'lucide-react';
-
-import env from '@/env.mjs';
+import { ExpandIcon, Play } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
 import { StoryStepMapMarkerMedia } from '@/types/story';
 
 import { Button } from '@/components/ui/button';
-
-const apiBaseUrl = env.NEXT_PUBLIC_API_URL.replace('/api', '');
 
 type StoryMarkerMediaProps = {
   isFullScreen: boolean;
@@ -22,26 +18,16 @@ type StoryMarkerMediaProps = {
 };
 
 const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMediaProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   const [hovered, setHovered] = useState(false);
   const mediaType = media?.mime?.split('/')[0];
 
   const mediaMime = media?.mime;
 
   // MOCKUP IMAGE FOR STORY 1 STEP 1 !! REMOVE WHEN REAL IMAGE IS AVAILABLE
+  // !TODO: Add video thumbnail
   const mediaSrc = mediaMime.includes('image')
     ? `${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-1-image-mockup.png`
-    : `${apiBaseUrl}${media?.url}`;
-
-  const handlePlayVideo = useCallback(
-    (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, action: 'play' | 'pause') => {
-      if (isFullScreen) return;
-      if (action === 'play') e.currentTarget.play();
-      else e.currentTarget.pause();
-    },
-    [isFullScreen]
-  );
+    : `${process.env.NEXT_PUBLIC_BASE_PATH}${media?.url}`;
 
   const mediaClassName = useMemo(
     () =>
@@ -64,7 +50,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
 
   return (
     <div
-      className="flex h-full max-h-screen w-full items-center justify-center"
+      className="relative flex h-full max-h-screen w-full items-center justify-center"
       onMouseEnter={() => handleHover(true)}
       onMouseLeave={() => handleHover(false)}
     >
@@ -77,7 +63,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
           <ExpandIcon className="h-6 w-6" />
         </Button>
       )}
-      {mediaType === 'image' ? (
+      {mediaType === 'image' && (
         <Image
           width={isFullScreen ? 1500 : hovered ? 200 : 70}
           height={isFullScreen ? 1500 : hovered ? 200 : 70}
@@ -85,23 +71,30 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
           className={mediaClassName}
           alt={name}
         />
-      ) : mediaType === 'video' ? (
-        <video
-          width="100%"
-          height="100%"
-          src={mediaSrc}
-          ref={videoRef}
-          muted
-          loop
-          controls={isFullScreen}
-          autoPlay={isFullScreen}
-          className={mediaClassName}
-          onMouseEnter={(e) => handlePlayVideo(e, 'play')}
-          onMouseLeave={(e) => handlePlayVideo(e, 'pause')}
-        >
-          <source src={mediaSrc} type={mediaMime} />
-        </video>
-      ) : null}
+      )}
+      {mediaType === 'video' && !hovered && (
+        <>
+          <Image
+            width={isFullScreen ? 1500 : hovered ? 200 : 70}
+            height={isFullScreen ? 1500 : hovered ? 200 : 70}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-1-image-mockup.png`}
+            className={mediaClassName}
+            alt={name}
+          />
+          <Play className="absolute z-10 h-6 w-6 fill-white" />
+        </>
+      )}
+      {mediaType === 'video' && hovered && (
+        <>
+          <Image
+            width={isFullScreen ? 1500 : hovered ? 200 : 70}
+            height={isFullScreen ? 1500 : hovered ? 200 : 70}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-1-image-mockup.png`}
+            className={mediaClassName}
+            alt={name}
+          />
+        </>
+      )}
     </div>
   );
 };
