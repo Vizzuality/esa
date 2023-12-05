@@ -7,7 +7,6 @@ RUN apt-get update -y && \
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 ARG basePath="/impact-sphere"
-RUN echo "Base path: $basePath"
 ENV NEXT_PUBLIC_BASE_PATH $basePath
 
 WORKDIR /app
@@ -25,6 +24,7 @@ RUN yarn build
 # Copy only the built files into the final image
 FROM node:18.15.0-bullseye-slim AS runner
 ENV NODE_ENV production
+ARG basePath="/impact-sphere"
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NEXT_PUBLIC_BASE_PATH $basePath
 
