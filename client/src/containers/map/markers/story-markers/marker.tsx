@@ -19,17 +19,17 @@ type StoryMarkerProps = {
 const MOCK_IMAGES = [
   {
     id: 0,
-    img: '/images/mock/carousel.png',
+    img: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/mock/carousel.png`,
     legend: 'Summary of GDA Urban EO Information and Use Cases 1',
   },
   {
     id: 1,
-    img: '/images/mock/carousel.png',
+    img: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/mock/carousel.png`,
     legend: 'Summary of GDA Urban EO Information and Use Cases 2',
   },
   {
     id: 2,
-    img: '/images/mock/carousel.png',
+    img: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/mock/carousel.png`,
     legend: 'Summary of GDA Urban EO Information and Use Cases 3',
   },
 ];

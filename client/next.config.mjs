@@ -2,10 +2,10 @@ import('./src/env.mjs');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: '/impact-sphere',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   transpilePackages: ['@esa/types'],
   images: {
-    domains: ['api.mapbox.com', 'localhost', 'esa-gda-comms-staging-mfafc.ondigitalocean.app'],
+    domains: ['api.mapbox.com', 'localhost', process.env.NEXT_PUBLIC_API_URL],
   },
   env: {
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: 'false',

@@ -37,10 +37,20 @@ const Header = () => {
           </div>
           <div className="flex items-center space-x-3">
             <a href="https://gda.esa.int/" target="_blank" rel="noreferrer">
-              <Image src="/images/logos/GDA-logo.png" alt="Impact Sphere" width={50} height={50} />
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/logos/GDA-logo.png`}
+                alt="Impact Sphere"
+                width={50}
+                height={50}
+              />
             </a>
             <a href="https://www.esa.int/" target="_blank" rel="noreferrer">
-              <Image src="/images/logos/esa-logo.png" alt="Impact Sphere" width={69} height={32} />
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/logos/esa-logo.png`}
+                alt="Impact Sphere"
+                width={69}
+                height={32}
+              />
             </a>
           </div>
         </div>
