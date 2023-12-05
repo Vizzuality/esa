@@ -77,7 +77,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
             className={mediaClassName}
             alt={name}
           />
-          <Play className="absolute z-10 h-6 w-6 fill-white" />
+          <Play className="absolute z-10 h-5 w-5 fill-white stroke-white" />
         </>
       )}
       {mediaType === 'video' && hovered && (

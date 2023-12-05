@@ -8,6 +8,8 @@ import { motion } from 'framer-motion';
 
 import { StoryStepMapMarker } from '@/types/story';
 
+import Video from '@/containers/story/video';
+
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 import StoryMarkerMedia from './media';
@@ -16,7 +18,7 @@ type StoryMarkerProps = {
   marker: StoryStepMapMarker;
 };
 
-const MOCK_IMAGES = [
+const MOCK_MEDIA = [
   {
     id: 0,
     img: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/mock/carousel.png`,
@@ -24,7 +26,7 @@ const MOCK_IMAGES = [
   },
   {
     id: 1,
-    img: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/mock/carousel.png`,
+    video: 'https://youtu.be/vCzmxg9y7gA?si=JLwAHz3sPJzNR3DM',
     legend: 'Summary of GDA Urban EO Information and Use Cases 2',
   },
   {
@@ -38,14 +40,14 @@ const StoryMarker = ({ marker: { media, name, id, lat, lng } }: StoryMarkerProps
   const [isFullScreen, setIsFullScreen] = useState(false);
   const handleClickExpand = () => setIsFullScreen((prev) => !prev);
 
-  const [currentImage, setCurrentImage] = useState(MOCK_IMAGES[1]);
+  const [currentMedia, setCurrentMedia] = useState(MOCK_MEDIA[1]);
 
   const setPrevImage = () => {
-    setCurrentImage(MOCK_IMAGES[currentImage.id - 1]);
+    setCurrentMedia(MOCK_MEDIA[currentMedia.id - 1]);
   };
 
   const setNextImage = () => {
-    setCurrentImage(MOCK_IMAGES[currentImage.id + 1]);
+    setCurrentMedia(MOCK_MEDIA[currentMedia.id + 1]);
   };
 
   const variants = {
@@ -75,14 +77,14 @@ const StoryMarker = ({ marker: { media, name, id, lat, lng } }: StoryMarkerProps
       <Dialog modal onOpenChange={(open) => setIsFullScreen(open)} open={isFullScreen}>
         <DialogContent className="flex h-screen w-screen flex-col items-center bg-transparent text-white backdrop-blur-lg">
           <p className="font-notes mt-10 text-2xl text-white">
-            {currentImage.id + 1} of {MOCK_IMAGES.length}
+            {currentMedia?.id + 1} of {MOCK_MEDIA.length}
           </p>
           <div className="flex h-full w-screen items-center justify-center">
             <div className="relative flex h-3/6 w-2/12 items-center">
-              {MOCK_IMAGES[currentImage.id - 1] && (
+              {MOCK_MEDIA[currentMedia?.id - 1]?.img && (
                 <button onClick={setPrevImage} className="h-full">
                   <Image
-                    src={MOCK_IMAGES[currentImage.id - 1].img}
+                    src={MOCK_MEDIA[currentMedia.id - 1].img || ''}
                     style={{
                       objectFit: 'cover',
                       height: '100%',
@@ -97,28 +99,52 @@ const StoryMarker = ({ marker: { media, name, id, lat, lng } }: StoryMarkerProps
                   />
                 </button>
               )}
+              {MOCK_MEDIA[currentMedia?.id - 1]?.video && (
+                <button
+                  onClick={setPrevImage}
+                  className="h-full"
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: '-60%',
+                  }}
+                >
+                  <Video
+                    loop
+                    playing={false}
+                    url={MOCK_MEDIA[currentMedia.id - 1].video}
+                    height={300}
+                    width={500}
+                  />
+                </button>
+              )}
             </div>
             <motion.div
-              key={currentImage.id}
+              key={currentMedia.id}
               className="flex w-8/12 flex-col items-center space-y-3"
               variants={variants}
               animate={'show'}
               initial="hide"
             >
-              <Image src={currentImage.img} height={1000} width={1000} alt="mock" />
-              <p className="font-sans text-sm text-white">{MOCK_IMAGES[currentImage.id].legend}</p>
+              {currentMedia?.img && (
+                <Image src={currentMedia.img} height={1000} width={1000} alt="mock" />
+              )}
+              {currentMedia?.video && (
+                <Video loop playing={false} url={currentMedia?.video} height={600} width={1000} />
+              )}
+              <p className="font-sans text-sm text-white">{MOCK_MEDIA[currentMedia?.id]?.legend}</p>
             </motion.div>
             <motion.div
               className="relative flex h-3/6 w-2/12 items-center"
-              key={currentImage.legend}
+              key={currentMedia.legend}
               variants={variants}
               animate={'show'}
               initial="hide"
             >
-              {MOCK_IMAGES[currentImage.id + 1] && (
+              {MOCK_MEDIA[currentMedia?.id + 1]?.img && (
                 <button onClick={setNextImage} className="h-full">
                   <Image
-                    src={MOCK_IMAGES[currentImage.id + 1].img}
+                    src={MOCK_MEDIA[currentMedia?.id + 1].img || ''}
                     style={{
                       objectFit: 'cover',
                       height: '100%',
@@ -130,6 +156,25 @@ const StoryMarker = ({ marker: { media, name, id, lat, lng } }: StoryMarkerProps
                     height={1200}
                     width={500}
                     alt="mock"
+                  />
+                </button>
+              )}
+              {MOCK_MEDIA[currentMedia?.id + 1]?.video && (
+                <button
+                  onClick={setPrevImage}
+                  className="h-full"
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: '-60%',
+                  }}
+                >
+                  <Video
+                    loop
+                    playing={false}
+                    url={MOCK_MEDIA[currentMedia?.id + 1].video}
+                    height={300}
+                    width={500}
                   />
                 </button>
               )}
