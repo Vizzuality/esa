@@ -53,6 +53,7 @@ module.exports = {
         gray: {
           200: 'hsla(60, 8%, 90%, 1)',
           500: 'hsla(202, 15%, 66%, 1)',
+          700: '#5A7A8A',
           800: 'hsla(197, 37%, 32%, 1)',
         },
         'enlight-yellow': {

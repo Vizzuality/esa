@@ -40,8 +40,9 @@ import Map from '@/components/map';
 // import Controls from '@/components/map/controls';
 // import SettingsControl from '@/components/map/controls/settings';
 // import ZoomControl from '@/components/map/controls/zoom';
-import Marker from '@/components/map/layers/marker';
 import { CustomMapProps } from '@/components/map/types';
+
+import HomeTooltip from './tooltips/home-tooltip';
 
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
@@ -51,7 +52,7 @@ const DEFAULT_PROPS: CustomMapProps = {
   id: 'default',
   initialViewState: DEFAULT_MAP_STATE,
   minZoom: 2,
-  maxZoom: 20,
+  maxZoom: 14,
 };
 
 // const FOG = {
@@ -235,12 +236,12 @@ export default function MapContainer() {
         {isHomePage && <HomeMarkers />}
 
         {marker && isHomePage && (
-          <Marker
+          <HomeTooltip
             key={marker.id}
             longitude={marker.geometry.coordinates[0]}
             latitude={marker.geometry.coordinates[1]}
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
+            properties={marker.properties}
+            onClick={() => {
               setMarker(null);
               push(`/stories/${marker.id}`);
             }}

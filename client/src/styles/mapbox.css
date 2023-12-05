@@ -632,3 +632,16 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
 #home-globe .mapboxgl-ctrl-logo {
   display: none;
 }
+
+
+.home-tooltip {
+  .mapboxgl-popup-close-button {
+   display: none;
+  }
+  .mapboxgl-popup-content {
+    background: transparent;
+  }
+  .mapboxgl-popup-tip {
+   display: none;
+  }
+}

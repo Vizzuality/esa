@@ -64,6 +64,7 @@ const Story = () => {
   useEffect(() => {
     if (!steps) return;
     const stepLayout = steps[step]?.attributes?.layout?.[0];
+
     // Location
     const stepLocation = stepLayout?.map?.location;
     if (stepLocation) {
@@ -106,15 +107,16 @@ const Story = () => {
             </ScrollItem>
           );
         })}
-        <div className="fixed right-6 z-30 flex h-full flex-col justify-center space-y-2">
-          {steps?.map((_, index) => (
+        <div className="fixed right-6 z-30 flex h-full flex-col justify-center">
+          {steps?.map((s, index) => (
             <ScrollItemController
               className={cn(
-                'hover:bg-secondary block h-2 w-2 rounded-full transition-all duration-200',
-                index === step ? 'bg-secondary scale-125' : 'scale-100 bg-gray-800'
+                'hover:outline-secondary h-2 w-2 rounded-full border-[1.5px] border-gray-800 outline outline-[1.5px] transition-all duration-200',
+                index === step ? 'bg-secondary outline-secondary' : 'bg-gray-800 outline-gray-700'
               )}
               key={index}
               newStep={index}
+              title={s.attributes?.layout[0]?.card && s.attributes?.layout[0]?.card[0]?.title}
             />
           ))}
         </div>
