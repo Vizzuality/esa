@@ -16,6 +16,7 @@ export const Video = ({
   config,
   loop = false,
   playing = false,
+  muted = false,
   url,
   height,
   width,
@@ -30,6 +31,7 @@ export const Video = ({
       url={url}
       loop={loop}
       playing={playing}
+      muted={muted}
       config={config}
       controls={false}
     />

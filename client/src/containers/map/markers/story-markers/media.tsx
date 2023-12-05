@@ -85,6 +85,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
           <Video
             playing
             loop
+            muted
             // !TODO: Add real video
             url="https://youtu.be/vCzmxg9y7gA?si=A9TTn_tvyzo-r00c"
             height="100%"
