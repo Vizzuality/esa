@@ -36,6 +36,7 @@ const StoryMarkers = () => {
             id,
             geometry: { type: 'Point', coordinates: [attributes?.longitude, attributes?.latitude] },
             properties: {
+              // TODO:  Category should be saved with all the attributes, not just slug or name
               category: attributes?.category?.data?.attributes?.slug,
               categoryName: attributes?.category?.data?.attributes?.name,
               ifi: 'IFAD',

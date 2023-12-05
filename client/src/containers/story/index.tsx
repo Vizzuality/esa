@@ -64,6 +64,7 @@ const Story = () => {
   useEffect(() => {
     if (!steps) return;
     const stepLayout = steps[step]?.attributes?.layout?.[0];
+
     // Location
     const stepLocation = stepLayout?.map?.location;
     if (stepLocation) {

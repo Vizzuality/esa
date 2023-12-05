@@ -36,6 +36,7 @@ export const ScrollItemController = ({ title, newStep, className }: ScrollItemCo
         <TooltipContent
           align="end"
           alignOffset={-10}
+          sideOffset={0}
           className="rounded-none px-1 py-px font-normal"
         >
           {title && <p>{title}</p>}
