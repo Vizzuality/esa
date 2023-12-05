@@ -43,6 +43,7 @@ locals {
     CMS_URL                          = "${module.staging.app_url}/cms/"
     STRAPI_ADMIN_API_BASE_URL        = "${module.staging.app_url}/cms/api"
     STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN = var.mapbox_api_token
+    STRAPI_MEDIA_LIBRARY_PROVIDER    = "digitalocean"
 
     # DigitalOcean Spaces to store media content
     DO_SPACE_ACCESS_KEY              = var.do_spaces_client_id
