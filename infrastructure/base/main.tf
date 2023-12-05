@@ -43,6 +43,10 @@ locals {
     CMS_URL                          = "${module.staging.app_url}/cms/"
     STRAPI_ADMIN_API_BASE_URL        = "${module.staging.app_url}/cms/api"
     STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN = var.mapbox_api_token
+    DO_SPACE_ACCESS_KEY              = var.do_spaces_client_id
+    DO_SPACE_SECRET_KEY              = var.do_spaces_secret_key
+    DO_SPACE_ENDPOINT                = "https://${var.do_region}.digitaloceanspaces.com"
+    DO_SPACE_BUCKET                  = "${var.project_name}-staging-cms"
 
     # Database
     DATABASE_CLIENT                  = "postgres"
@@ -90,6 +94,7 @@ module "staging" {
   do_app_instance_count = var.do_app_instance_count
   do_app_image_tag      = var.do_app_image_tag
   do_space_name         = "${var.project_name}-staging"
+  do_cms_space_name     = "${var.project_name}-staging-cms"
 }
 
 resource "digitalocean_spaces_bucket_cors_configuration" "staging_cors" {

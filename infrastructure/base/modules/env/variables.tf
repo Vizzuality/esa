@@ -56,3 +56,8 @@ variable "do_space_acl" {
   description = "ACL rules for spaces"
   default     = "private"
 }
+
+variable "do_cms_space_name" {
+  type        = string
+  description = "Name of the space"
+}

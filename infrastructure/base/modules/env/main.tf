@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    digitalocean = {
+      source = "digitalocean/digitalocean"
+      version = "~> 2.0"
+    }
+  }
+}
+
 module "postgresql" {
   source = "../postgresql"
 
@@ -16,7 +25,14 @@ module "space" {
   do_project_name         = var.do_project_name
   do_region               = var.do_region
   do_space_name           = var.do_space_name
-  do_space_acl            = var.do_space_acl
+}
+
+module "space_cms" {
+  source = "../space"
+
+  do_project_name         = var.do_project_name
+  do_region               = var.do_region
+  do_space_name           = var.do_cms_space_name
 }
 
 module "app" {
@@ -29,4 +45,16 @@ module "app" {
   do_app_instance         = var.do_app_instance
   do_app_instance_count   = var.do_app_instance_count
   do_app_image_tag        = var.do_app_image_tag
+}
+
+resource "digitalocean_spaces_bucket_cors_configuration" "space_cms_cors" {
+  bucket = module.space_cms.space_id
+  region = var.do_region
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD", "PUT", "POST", "DELETE"]
+    allowed_origins = ["*"]
+    max_age_seconds = 3000
+  }
 }
