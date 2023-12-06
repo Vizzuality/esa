@@ -4,6 +4,10 @@ RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y libc6  && \
     apt-get clean
+
+ARG NEXT_PUBLIC_BASE_PATH
+ENV NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH
+
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -17,6 +21,7 @@ RUN yarn install
 
 COPY ./client .
 
+RUN echo "NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH"
 RUN yarn build
 
 # Copy only the built files into the final image
