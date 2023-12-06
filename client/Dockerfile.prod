@@ -1,5 +1,5 @@
 # Build all the things
-FROM node:18.15.0-bullseye-slim AS build
+FROM node:20.5-bullseye-slim AS build
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y libc6  && \
@@ -16,18 +16,17 @@ ARG RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED
 
 WORKDIR /app
 COPY .yarn ./.yarn
-COPY package.json .yarnrc.yml yarn.lock .prettierrc.js ./
+COPY package.json .yarnrc.yml yarn.lock .prettierrc.js .nvmrc ./
 
 WORKDIR /app/client
-COPY ./client/package.json ./
-RUN yarn install
-
 COPY ./client .
+
+RUN yarn install
 
 RUN yarn build
 
 # Copy only the built files into the final image
-FROM node:18.15.0-bullseye-slim AS runner
+FROM node:20.5-bullseye-slim AS runner
 ARG NEXT_PUBLIC_URL
 ARG NEXT_PUBLIC_BASE_PATH
 ARG NEXT_PUBLIC_ENVIRONMENT
