@@ -43,7 +43,7 @@ resource "digitalocean_app" "app" {
       }
 
       routes {
-        path                 = "/impact-sphere"
+        path                 = "/"
         preserve_path_prefix = false
       }
     }
@@ -68,7 +68,7 @@ resource "digitalocean_app" "app" {
       }
 
       routes {
-        path                 = "/impact-sphere/cms"
+        path                 = "/cms"
         preserve_path_prefix = false
       }
     }
