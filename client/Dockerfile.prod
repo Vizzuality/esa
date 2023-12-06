@@ -35,7 +35,6 @@ RUN yarn install
 
 COPY ./client .
 
-RUN echo "NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH"
 RUN yarn build
 
 # Copy only the built files into the final image
