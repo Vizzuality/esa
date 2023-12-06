@@ -1,70 +1,62 @@
 # Build all the things
-FROM node:18.15.0-bullseye-slim AS build
+FROM node:18-bullseye-slim AS base
+
+# Install dependencies
+FROM base as deps
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y libc6  && \
     apt-get clean
+WORKDIR /app
 
-ARG NEXT_PUBLIC_URL
-ARG NEXT_PUBLIC_BASE_PATH
-ARG NEXT_PUBLIC_ENVIRONMENT
-ARG NEXT_PUBLIC_API_URL
-ARG NEXT_PUBLIC_GA_TRACKING_ID
-ARG NEXT_PUBLIC_MAPBOX_API_TOKEN
-ARG LOG_LEVEL
-ARG RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED
+# Install node dependencies
+COPY .yarn ./.yarn
+COPY package.json .yarnrc.yml yarn.lock ./
+COPY ./client/package.json ./client/package.json
+RUN yarn client install
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+# Build the app
+FROM base AS builder
 
 WORKDIR /app
-COPY .yarn ./.yarn
-COPY package.json .yarnrc.yml yarn.lock .prettierrc.js .nvmrc ./
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/.yarn ./.yarn
+COPY --from=deps /app/.yarnrc.yml ./.yarnrc.yml
+COPY --from=deps /app/yarn.lock ./yarn.lock
+COPY --from=deps /app/package.json ./package.json
+COPY ./.prettierrc.js ./.prettierrc.js
 
 WORKDIR /app/client
 COPY ./client .
 
-RUN yarn install
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN yarn build
 
 # Copy only the built files into the final image
-FROM node:18.15.0-bullseye-slim AS runner
-ARG NEXT_PUBLIC_URL
-ARG NEXT_PUBLIC_BASE_PATH
-ARG NEXT_PUBLIC_ENVIRONMENT
-ARG NEXT_PUBLIC_API_URL
-ARG NEXT_PUBLIC_GA_TRACKING_ID
-ARG NEXT_PUBLIC_MAPBOX_API_TOKEN
-ARG LOG_LEVEL
-ARG RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED
+FROM base AS runner
+WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
-ENV NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH
-ENV NEXT_PUBLIC_ENVIRONMENT=$NEXT_PUBLIC_ENVIRONMENT
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_GA_TRACKING_ID=$NEXT_PUBLIC_GA_TRACKING_ID
-ENV NEXT_PUBLIC_MAPBOX_API_TOKEN=$NEXT_PUBLIC_MAPBOX_API_TOKEN
-ENV LOG_LEVEL=$LOG_LEVEL
-ENV RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=$RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED
-
-WORKDIR /app
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=build --chown=nextjs:nodejs /app/client/.next ./.next
-COPY --from=build --chown=nextjs:nodejs /app/client/entrypoint.sh ./entrypoint.sh
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/client/public ./public
-COPY --from=build /app/client/package.json ./package.json
-COPY --from=build /app/client/.env.local ./.env.local
+# Set the correct permission for prerender cache
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/client/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/client/.next/static ./client/.next/static
+COPY --from=builder /app/client/public ./client/public
 
 USER nextjs
 
 EXPOSE 3000
 ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["node", "./client/server.js"]
