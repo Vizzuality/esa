@@ -55,14 +55,14 @@ const DEFAULT_PROPS: CustomMapProps = {
   maxZoom: 14,
 };
 
-// const FOG = {
-//   range: [0.5, 8],
-//   'horizon-blend': 0.125,
-//   color: '#2a6981',
-//   'high-color': '#0a2839',
-//   'space-color': '#0a2839',
-//   'star-intensity': 0.25,
-// };
+const FOG = {
+  range: [0.5, 8],
+  'horizon-blend': 0.125,
+  color: '#2a6981',
+  'high-color': '#0a2839',
+  'space-color': '#0a2839',
+  'star-intensity': 0.25,
+};
 
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
@@ -153,8 +153,12 @@ export default function MapContainer() {
   // );
 
   const handleMapMove = useCallback((e: MapLayerMouseEvent) => {
+    console.log(e.features);
+
     if (e.features?.length) {
       const f = e.features[0];
+
+      console.log(f);
 
       if (f.source === 'story-markers') {
         setMarker({
@@ -208,7 +212,7 @@ export default function MapContainer() {
         minZoom={minZoom}
         maxZoom={maxZoom}
         mapStyle={(isHomePage ? MAPBOX_STYLE_GLOBE : MAPBOX_STYLE_DEFAULT) as Style}
-        // fog={FOG}
+        fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         // onClick={handleMapClick}
         onMouseMove={handleMapMove}
