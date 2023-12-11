@@ -634,14 +634,15 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
 }
 
 
-.home-tooltip {
-  .mapboxgl-popup-close-button {
-   display: none;
-  }
-  .mapboxgl-popup-content {
-    background: transparent;
-  }
-  .mapboxgl-popup-tip {
-   display: none;
-  }
+
+.home-tooltip .mapboxgl-popup-close-button {
+  display: none;
+}
+
+.home-tooltip .mapboxgl-popup-content {
+  background: transparent;
+}
+
+.home-tooltip .mapboxgl-popup-tip {
+  display: none;
 }

@@ -19,7 +19,6 @@ import {
   layersInteractiveIdsAtom,
   // popupAtom,
   tmpBboxAtom,
-  isFlyingBackAtom,
 } from '@/store';
 
 // import { useGetLayers } from '@/types/generated/layer';
@@ -40,9 +39,8 @@ import Map from '@/components/map';
 // import Controls from '@/components/map/controls';
 // import SettingsControl from '@/components/map/controls/settings';
 // import ZoomControl from '@/components/map/controls/zoom';
+import Marker from '@/components/map/layers/marker';
 import { CustomMapProps } from '@/components/map/types';
-
-import HomeTooltip from './tooltips/home-tooltip';
 
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
@@ -155,7 +153,6 @@ export default function MapContainer() {
       const f = e.features[0];
 
       if (f.source === 'story-markers') {
-        console.log('f', f);
         setMarker({
           ...f,
           geometry: f.geometry as GeoJSON.Point,
@@ -234,7 +231,7 @@ export default function MapContainer() {
         {isHomePage && <HomeMarkers />}
 
         {marker && isHomePage && (
-          <HomeTooltip
+          <Marker
             key={marker.id}
             longitude={marker.geometry.coordinates[0]}
             latitude={marker.geometry.coordinates[1]}
