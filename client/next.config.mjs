@@ -3,12 +3,14 @@ import('./src/env.mjs');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  output: 'standalone',
   transpilePackages: ['@esa/types'],
   images: {
     domains: ['api.mapbox.com', 'localhost', process.env.NEXT_PUBLIC_API_URL],
   },
   env: {
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: 'false',
+    NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH || '',
   },
   webpack(config) {
     config.module.rules.push({
