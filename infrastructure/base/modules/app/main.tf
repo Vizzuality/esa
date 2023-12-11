@@ -44,7 +44,7 @@ resource "digitalocean_app" "app" {
 
       routes {
         path                 = "/impact-sphere"
-        preserve_path_prefix = false
+        preserve_path_prefix = true
       }
     }
 
