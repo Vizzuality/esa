@@ -89,7 +89,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
           height="100%"
           src={mediaSrc}
           ref={videoRef}
-          muted
+          muted={!isFullScreen}
           loop
           controls={isFullScreen}
           autoPlay={isFullScreen}

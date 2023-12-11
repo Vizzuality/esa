@@ -17,7 +17,7 @@ const Marker = (props: MarkerProps) => {
   const { properties, onClick } = props;
   return (
     <RMarker {...props}>
-      <Tooltip delayDuration={0}>
+      <Tooltip open delayDuration={0}>
         <TooltipTrigger asChild>
           <div
             className={cn({
@@ -36,7 +36,10 @@ const Marker = (props: MarkerProps) => {
             </div>
           </div>
         </TooltipTrigger>
-        <TooltipContent asChild>
+        <TooltipContent
+          className="bg-[rgba(51, 94, 111, 0.50)] max-w-[230px] p-4 text-white backdrop-blur-lg"
+          asChild
+        >
           <div onMouseMove={(e) => e.stopPropagation()}>
             <div className="mb-2 flex  items-center space-x-4">
               <CategoryIcon
@@ -50,7 +53,7 @@ const Marker = (props: MarkerProps) => {
 
             <Button
               variant="secondary"
-              className="h-8 w-full rounded-3xl bg-teal-500 py-2 text-xs text-white"
+              className="h-8 w-full rounded-3xl bg-teal-500 py-2 text-xs text-white hover:bg-teal-500/50"
               onClick={onClick}
             >
               Discover story

@@ -120,7 +120,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
     if (!bounds) return undefined;
 
     const { options } = bounds;
-    const animationDuration = options?.duration || 0;
+    const animationDuration = options?.duration || 1000;
     let timeoutId: number;
 
     if (isFlying) {
