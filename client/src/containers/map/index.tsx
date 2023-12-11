@@ -86,8 +86,6 @@ export default function MapContainer() {
 
   const isHomePage = useMemo(() => !pathname.includes('stories'), [pathname]);
 
-  console.log('isHomePage', isHomePage);
-
   // const { data: layersInteractiveData } = useGetLayers(
   //   {
   //     filters: {
@@ -153,14 +151,11 @@ export default function MapContainer() {
   // );
 
   const handleMapMove = useCallback((e: MapLayerMouseEvent) => {
-    console.log(e.features);
-
     if (e.features?.length) {
       const f = e.features[0];
 
-      console.log(f);
-
       if (f.source === 'story-markers') {
+        console.log('f', f);
         setMarker({
           ...f,
           geometry: f.geometry as GeoJSON.Point,

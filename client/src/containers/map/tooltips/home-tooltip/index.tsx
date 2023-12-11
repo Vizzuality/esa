@@ -12,6 +12,8 @@ interface HomeTooltipProps extends RMarkerProps {
 const HomeTooltip = (props: HomeTooltipProps) => {
   const { properties, onClick } = props;
 
+  console.log({ props });
+
   return (
     <RPopup
       {...props}
