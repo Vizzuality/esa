@@ -43,13 +43,16 @@ module.exports = ({env}) => ({
   ...(env('STRAPI_MEDIA_LIBRARY_PROVIDER') === 'digitalocean' && {
     upload: {
       config: {
-        provider: "strapi-provider-upload-do",
+        provider: "aws-s3",
         providerOptions: {
-          key: env('DO_SPACE_ACCESS_KEY'),
-          secret: env('DO_SPACE_SECRET_KEY'),
-          endpoint: `https://${env('DO_SPACE_REGION')}.digitaloceanspaces.com`,
-          space: env('DO_SPACE_BUCKET'),
-        }
+          accessKeyId: env("BUCKET_ACCESS_KEY"),
+          secretAccessKey: env("BUCKET_SECRET_KEY"),
+          endpoint: env("BUCKET_ENDPOINT"),
+          region: env("BUCKET_REGION"),
+          params: {
+            Bucket: env("BUCKET_BUCKET")
+          },
+        },
       },
     },
   }),

@@ -46,10 +46,11 @@ locals {
     STRAPI_MEDIA_LIBRARY_PROVIDER    = "digitalocean"
 
     # DigitalOcean Spaces to store media content
-    DO_SPACE_ACCESS_KEY              = var.do_spaces_client_id
-    DO_SPACE_SECRET_KEY              = var.do_spaces_secret_key
-    DO_SPACE_REGION                  = var.do_region
-    DO_SPACE_BUCKET                  = "${var.project_name}-staging-cms"
+    BUCKET_ACCESS_KEY              = var.do_spaces_client_id
+    BUCKET_SECRET_KEY              = var.do_spaces_secret_key
+    BUCKET_REGION                  = var.do_region
+    BUCKET_BUCKET                  = "${var.project_name}-staging-cms"
+    BUCKET_ENDPOINT                = "https://${var.do_region}.digitaloceanspaces.com"
 
     # Database
     DATABASE_CLIENT                  = "postgres"

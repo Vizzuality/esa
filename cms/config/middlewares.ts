@@ -8,9 +8,9 @@ export default ({ env }) => [
         directives: {
           'connect-src': ["'self'", 'https:'],
           'script-src': ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net', 'api.mapbox.com'],
-          'img-src': ["'self'", 'data:', 'blob:', `https://${env('DO_SPACE_BUCKET')}.${env('DO_SPACE_REGION')}.digitaloceanspaces.com`, `${env('DO_SPACE_REGION')}.digitaloceanspaces.com/${env('DO_SPACE_BUCKET')}`],
-          'media-src': ["'self'", 'data:', 'blob:', `https://${env('DO_SPACE_BUCKET')}.${env('DO_SPACE_REGION')}.digitaloceanspaces.com`, `${env('DO_SPACE_REGION')}.digitaloceanspaces.com/${env('DO_SPACE_BUCKET')}`],
-          'worker-src': ['blob:', `https://${env('DO_SPACE_BUCKET')}.${env('DO_SPACE_REGION')}.digitaloceanspaces.com`, `${env('DO_SPACE_REGION')}.digitaloceanspaces.com/${env('DO_SPACE_BUCKET')}`],
+          'img-src': ["'self'", 'data:', 'blob:', `*.${env('BUCKET_REGION')}.digitaloceanspaces.com`, `${env('BUCKET_REGION')}.digitaloceanspaces.com`],
+          'media-src': ["'self'", 'data:', 'blob:', `*.${env('BUCKET_REGION')}.digitaloceanspaces.com`, `${env('BUCKET_REGION')}.digitaloceanspaces.com`],
+          'worker-src': ['blob:'],
           upgradeInsecureRequests: null,
         },
       }
