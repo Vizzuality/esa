@@ -40,8 +40,8 @@ locals {
     ADMIN_JWT_SECRET                 = random_password.admin_jwt_secret.result
     TRANSFER_TOKEN_SALT              = random_password.transfer_token_salt.result
     JWT_SECRET                       = random_password.jwt_secret.result
-    CMS_URL                          = "${module.staging.app_url}/cms"
-    STRAPI_ADMIN_API_BASE_URL        = "${module.staging.app_url}/cms/api"
+    CMS_URL                          = "${module.staging.app_url}/impact-sphere/cms"
+    STRAPI_ADMIN_API_BASE_URL        = "${module.staging.app_url}/impact-sphere/cms/api"
     STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN = var.mapbox_api_token
     STRAPI_MEDIA_LIBRARY_PROVIDER    = "digitalocean"
 
@@ -64,10 +64,10 @@ locals {
 
   }
   staging_client_env = {
-    NEXT_PUBLIC_URL                            = module.staging.app_url
-    NEXT_PUBLIC_BASE_PATH                      = ""
+    NEXT_PUBLIC_URL                            = "${module.staging.app_url}/impact-sphere"
+    NEXT_PUBLIC_BASE_PATH                      = "/impact-sphere"
     NEXT_PUBLIC_ENVIRONMENT                    = "production"
-    NEXT_PUBLIC_API_URL                        = "${module.staging.app_url}/cms/api"
+    NEXT_PUBLIC_API_URL                        = "${module.staging.app_url}/impact-sphere/cms/api"
     NEXT_PUBLIC_GA_TRACKING_ID                 = var.ga_tracking_id
     NEXT_PUBLIC_MAPBOX_API_TOKEN               = var.mapbox_api_token
     LOG_LEVEL                                  = "info"
