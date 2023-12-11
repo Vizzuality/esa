@@ -8,8 +8,8 @@ export default ({ env }) => [
         directives: {
           'connect-src': ["'self'", 'https:'],
           'script-src': ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net', 'api.mapbox.com'],
-          'img-src': ["'self'", 'data:', 'blob:', `${env('DO_SPACE_FULL_PATH')}`],
-          'media-src': ["'self'", 'data:', 'blob:', `${env('DO_SPACE_FULL_PATH')}`],
+          'img-src': ["'self'", 'data:', 'blob:', `*.${env('BUCKET_REGION')}.digitaloceanspaces.com`, `${env('BUCKET_REGION')}.digitaloceanspaces.com`],
+          'media-src': ["'self'", 'data:', 'blob:', `*.${env('BUCKET_REGION')}.digitaloceanspaces.com`, `${env('BUCKET_REGION')}.digitaloceanspaces.com`],
           'worker-src': ['blob:'],
           upgradeInsecureRequests: null,
         },

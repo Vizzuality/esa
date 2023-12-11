@@ -40,17 +40,17 @@ locals {
     ADMIN_JWT_SECRET                 = random_password.admin_jwt_secret.result
     TRANSFER_TOKEN_SALT              = random_password.transfer_token_salt.result
     JWT_SECRET                       = random_password.jwt_secret.result
-    CMS_URL                          = "${module.staging.app_url}/cms"
-    STRAPI_ADMIN_API_BASE_URL        = "${module.staging.app_url}/cms/api"
+    CMS_URL                          = "${module.staging.app_url}/impact-sphere/cms"
+    STRAPI_ADMIN_API_BASE_URL        = "${module.staging.app_url}/impact-sphere/cms/api"
     STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN = var.mapbox_api_token
     STRAPI_MEDIA_LIBRARY_PROVIDER    = "digitalocean"
 
     # DigitalOcean Spaces to store media content
-    DO_SPACE_ACCESS_KEY              = var.do_spaces_client_id
-    DO_SPACE_SECRET_KEY              = var.do_spaces_secret_key
-    DO_SPACE_ENDPOINT                = "https://${var.do_region}.digitaloceanspaces.com"
-    DO_SPACE_BUCKET                  = "${var.project_name}-staging-cms"
-    DO_SPACE_FULL_PATH               = "https://${var.project_name}-staging-cms.${var.do_region}.digitaloceanspaces.com"
+    BUCKET_ACCESS_KEY              = var.do_spaces_client_id
+    BUCKET_SECRET_KEY              = var.do_spaces_secret_key
+    BUCKET_REGION                  = var.do_region
+    BUCKET_BUCKET                  = "${var.project_name}-staging-cms"
+    BUCKET_ENDPOINT                = "https://${var.do_region}.digitaloceanspaces.com"
 
     # Database
     DATABASE_CLIENT                  = "postgres"
@@ -64,10 +64,10 @@ locals {
 
   }
   staging_client_env = {
-    NEXT_PUBLIC_URL                            = module.staging.app_url
-    NEXT_PUBLIC_BASE_PATH                      = ""
+    NEXT_PUBLIC_URL                            = "${module.staging.app_url}/impact-sphere"
+    NEXT_PUBLIC_BASE_PATH                      = "/impact-sphere"
     NEXT_PUBLIC_ENVIRONMENT                    = "production"
-    NEXT_PUBLIC_API_URL                        = "${module.staging.app_url}/cms/api"
+    NEXT_PUBLIC_API_URL                        = "${module.staging.app_url}/impact-sphere/cms/api"
     NEXT_PUBLIC_GA_TRACKING_ID                 = var.ga_tracking_id
     NEXT_PUBLIC_MAPBOX_API_TOKEN               = var.mapbox_api_token
     LOG_LEVEL                                  = "info"
