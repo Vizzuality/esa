@@ -63,7 +63,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
 
   const mediaType = media?.mime?.split('/')[0];
 
-  const mediaSrc = `${apiBaseUrl}${media.url}`;
+  const mediaSrc = media?.url;
   const mediaMime = media?.mime;
 
   const isVideo = mediaType.includes('video');
@@ -86,7 +86,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 2 }}
+            transition={{ duration: 1.5 }}
             className="fixed bottom-0 left-0 h-full w-screen backdrop-blur-sm"
           >
             <div className="h-full w-full bg-slate-900/60"></div>
@@ -98,7 +98,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                   initial={{ opacity: 0, x: '-300%' }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 2 }}
+                  transition={{ duration: 1.5 }}
                   style={{ scale: scaleContent }}
                   className="relative z-50 w-full flex-1"
                 >
@@ -122,7 +122,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                 initial={{ opacity: 0, x: '300%' }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 2.5 }}
+                transition={{ duration: 1.5 }}
                 style={{ scale: scaleContent }}
               >
                 <div className="max-w-lg space-y-4">

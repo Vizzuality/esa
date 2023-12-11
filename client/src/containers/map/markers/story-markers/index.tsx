@@ -1,4 +1,6 @@
-import { useMemo } from 'react';
+'use client';
+
+import { useMemo, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
@@ -9,6 +11,8 @@ import { stepAtom } from '@/store/stories';
 import { useGetStoriesId } from '@/types/generated/story';
 
 import StoryMarkerMedia from './marker';
+// import Carousel from './carousel';
+// import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 type StoryMarker = {
   id: number;
@@ -28,6 +32,7 @@ const StoryMarkers = () => {
   const { data: storyData } = useGetStoriesId(+id, {
     populate: 'deep',
   });
+  // const [currentMedia, setCurrentMedia] = useState<number>();
 
   const markers: StoryMarker[] = useMemo(() => {
     return (
@@ -35,11 +40,36 @@ const StoryMarkers = () => {
     );
   }, [step, storyData?.data?.attributes?.steps?.data]);
 
+  // const medias = useMemo(() => {
+  //   return markers?.map((marker) => ({
+  //     id: marker?.id,
+  //     url: marker?.media?.url,
+  //     mime: marker?.media?.mime,
+  //     type: marker?.media?.mime?.includes('video') ? 'video' : 'image',
+  //   }));
+  // }, [markers]);
+
+  // const handleClickMarker = (markerIndex: number) => {
+  //   setCurrentMedia(markerIndex);
+  // };
+
   return (
     <>
-      {markers?.map((marker) => (
-        <StoryMarkerMedia key={marker.id} marker={marker} />
+      {markers?.map((marker, index) => (
+        <StoryMarkerMedia
+          key={marker.id}
+          marker={marker}
+          // onClick={() => handleClickMarker(index)}
+        />
       ))}
+      {/* <Dialog
+        onOpenChange={() => setCurrentMedia(undefined)}
+        open={typeof currentMedia === 'number'}
+      >
+        <DialogContent className="bg-transparent">
+          <Carousel medias={medias} currentMedia={currentMedia} setCurrentMedia={setCurrentMedia} />
+        </DialogContent>
+      </Dialog> */}
     </>
   );
 };
