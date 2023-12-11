@@ -30,9 +30,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
   const mediaMime = media?.mime;
 
   // MOCKUP IMAGE FOR STORY 1 STEP 1 !! REMOVE WHEN REAL IMAGE IS AVAILABLE
-  const mediaSrc = mediaMime.includes('image')
-    ? `${process.env.NEXT_PUBLIC_BASE_PATH}/images/story-1-image-mockup.png`
-    : `${apiBaseUrl}${media?.url}`;
+  const mediaSrc = media?.url;
 
   const handlePlayVideo = useCallback(
     (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, action: 'play' | 'pause') => {

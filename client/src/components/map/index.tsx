@@ -31,6 +31,10 @@ export const MapMapbox: FC<CustomMapProps> = ({
   bounds,
   onMapViewStateChange,
   onLoad,
+  dragPan,
+  dragRotate,
+  scrollZoom,
+  doubleClickZoom,
   ...mapboxProps
 }: CustomMapProps) => {
   /**
@@ -140,6 +144,10 @@ export const MapMapbox: FC<CustomMapProps> = ({
         mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
         onMove={handleMapMove}
         onLoad={handleMapLoad}
+        dragPan={!isFlying && dragPan}
+        dragRotate={!isFlying && dragRotate}
+        scrollZoom={!isFlying && scrollZoom}
+        doubleClickZoom={!isFlying && doubleClickZoom}
         {...mapboxProps}
         {...localViewState}
       >
