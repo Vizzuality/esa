@@ -1,3 +1,4 @@
+'use client';
 import { PropsWithChildren, useMemo } from 'react';
 
 import { useRecoilValue } from 'recoil';

@@ -26,7 +26,7 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
 
   const { minZoom, maxZoom, data } = c;
 
-  const { frames = 0, interval = 1000, start, end, autoplay = false, delay = 3000 } = c.timeline;
+  const { interval = 1000, start, end, autoplay = false, delay = 3000 } = c.timeline;
 
   const createLayer = useCallback(
     (data: { visible: boolean; url: string; opacity: number }, id: string, beforeId: string) => {
@@ -43,7 +43,6 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
             index: { x, y, z },
             signal,
           } = tile;
-
           const tileUrl = url.replace('{z}', z).replace('{x}', x).replace('{y}', y);
 
           const response = fetch(tileUrl, { signal });
@@ -57,7 +56,7 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
             .then((buffer) => {
               const apng = parseAPNG(buffer);
               if (apng instanceof Error) {
-                throw apng;
+                return null;
               }
               return apng.frames.map((f: any) => {
                 return {
@@ -75,6 +74,7 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
           if (!sl) return null;
 
           const { id: subLayerId, data, tile, visible, opacity = 1, frame: f } = sl;
+
           if (!tile || !data) return null;
 
           const {
@@ -124,11 +124,11 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
     if (isPlaying) {
       return;
     }
-    const lastFrame = frames;
+    const lastFrame = end - start;
     let newFrame = frame === lastFrame ? 0 : frame + 1;
     setFrame(newFrame);
     intervalRef.current = setInterval(() => {
-      if (newFrame + 1 === lastFrame + 1) {
+      if (newFrame === lastFrame) {
         clearInterval(intervalRef.current);
         setIsPlaying(false);
       } else {
@@ -136,7 +136,7 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
         newFrame++;
       }
     }, interval);
-  }, [frame, frames, interval, isPlaying]);
+  }, [end, frame, interval, isPlaying, start]);
 
   const handleChangeFrame = (_frame: number) => {
     setIsPlaying(false);
@@ -184,7 +184,7 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
           timeline={{
             start: start,
             end: end,
-            current: frame,
+            currentFrame: frame,
           }}
           onChangeCurrent={handleChangeFrame}
           onPlay={handlePlay}
