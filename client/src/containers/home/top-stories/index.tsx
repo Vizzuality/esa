@@ -47,7 +47,7 @@ const topStories = [
 
 const TopStories = () => {
   return (
-    <div className="max-h-[250px] space-y-4 overflow-y-auto">
+    <div className="max-h-[45vh] space-y-4 overflow-y-auto">
       {topStories.map((story) => (
         <TopStoriesItem key={story.id} story={story} />
       ))}

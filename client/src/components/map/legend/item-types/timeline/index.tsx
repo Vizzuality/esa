@@ -11,7 +11,7 @@ type LegendTypeTimelineProps = {
   timeline: {
     start: number;
     end: number;
-    current: number;
+    currentFrame: number;
   };
   onChangeCurrent: (year: number) => void;
   onPlay: () => void;
@@ -40,7 +40,7 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   );
 
   const lastYear = years[years.length - 1];
-  const value = years[timeline?.current];
+  const value = years[timeline?.currentFrame];
 
   const yearScale = useCallback(
     (year: number) =>
@@ -69,10 +69,10 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
       </Button>
 
       <Root
-        max={22}
+        max={timeline.end - timeline.start}
         min={0}
         step={1}
-        value={[timeline.current]}
+        value={[timeline.currentFrame]}
         onValueChange={([v]) => onChangeCurrent(v)}
         className={cn('relative flex w-full touch-none select-none items-center', className)}
       >
