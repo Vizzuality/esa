@@ -53,9 +53,11 @@
       "required": true
     },
     "steps": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::step.step"
+      "type": "dynamiczone",
+      "components": [
+        "step-layout.map-step",
+        "step-layout.outro-step"
+      ]
     }
   }
 }

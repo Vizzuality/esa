@@ -16,12 +16,16 @@
       "type": "dynamiczone",
       "components": [
         "step-layout.map-step",
-        "step-layout.media-step",
         "step-layout.outro-step"
       ],
       "required": false,
       "min": 1,
       "max": 1
+    },
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
     }
   }
 }

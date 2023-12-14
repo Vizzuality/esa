@@ -8,7 +8,7 @@ import {
   StepLayoutMediaStepComponentMedia,
   StepLayoutOutroStepComponentMedia,
   StoryCategory,
-  StoryStepsDataItem,
+  StoryStepsItem,
 } from '@/types/generated/strapi.schemas';
 
 import MapStepLayout from './layouts/map-step';
@@ -18,7 +18,7 @@ import { getStepType } from './utils';
 
 type StepProps = PropsWithChildren<{
   media?: StepLayoutMediaStepComponentMedia | StepLayoutOutroStepComponentMedia;
-  step: StoryStepsDataItem;
+  step: StoryStepsItem;
   category?: StoryCategory;
   index: number;
 }>;
@@ -28,8 +28,7 @@ const Step = ({ step, category, index }: StepProps) => {
 
   const STEP_COMPONENT = useMemo(() => {
     const type = getStepType(step);
-    const stepLayout = step?.attributes?.layout?.[0];
-    if (!type || !stepLayout) return null;
+    if (!type || !step) return null;
 
     switch (type) {
       case 'map-step': {
@@ -37,17 +36,17 @@ const Step = ({ step, category, index }: StepProps) => {
           <MapStepLayout
             stepIndex={index}
             category={category?.data?.attributes}
-            step={stepLayout}
+            step={step}
             showContent={currentStep === index}
           />
         );
       }
       case 'media-step':
-        return <MediaStepLayout step={stepLayout} />;
+        return <MediaStepLayout step={step} />;
       case 'outro-step':
         return (
           <OutroStepLayout
-            step={stepLayout}
+            step={step}
             showContent={currentStep === index}
             categoryId={category?.data?.id}
           />

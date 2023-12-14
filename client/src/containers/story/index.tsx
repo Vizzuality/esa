@@ -15,28 +15,13 @@ import { layersAtom, tmpBboxAtom } from '@/store';
 import { stepAtom } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
-import { Bbox } from '@/types/map';
 
 import { Button } from '@/components/ui/button';
 
 import Step from './steps';
 import { ScrollItemController } from './steps/controller/controller-item';
 import { ScrollItem } from './steps/controller/scroll-item';
-
-type StepLocation = {
-  bbox: Bbox;
-  zoom: number;
-  pitch: number;
-  bearing: number;
-  padding: {
-    top: number;
-    left: number;
-    right: number;
-    bottom: number;
-  };
-  latitude: number;
-  longitude: number;
-};
+import { isMapNotEmpty } from './utils';
 
 const headerButtonClassName =
   'rounded-4xl h-auto border-gray-800 bg-[hsl(198,100%,14%)]/75 px-5 py-2.5 hover:bg-gray-800';
@@ -54,7 +39,7 @@ const Story = () => {
   });
 
   const story = useMemo(() => storyData?.data?.attributes, [storyData]);
-  const steps = useMemo(() => story?.steps?.data || [], [story]);
+  const steps = useMemo(() => story?.steps || [], [story]);
 
   const handleGoHome = () => {
     resetLayers();
@@ -63,23 +48,28 @@ const Story = () => {
 
   useEffect(() => {
     if (!steps) return;
-    const stepLayout = steps[step]?.attributes?.layout?.[0];
+    const currStep = steps[step];
 
-    // Location
-    const stepLocation = stepLayout?.map?.location;
+    if (!currStep || !isMapNotEmpty(currStep.map)) {
+      return;
+    }
+
+    // Bbox
+    const stepLocation = currStep?.map.location;
     if (stepLocation) {
-      const { bbox, ...options } = stepLocation as StepLocation;
+      const { bbox, ...options } = stepLocation;
       setTmpBbox({
         bbox,
         options,
       });
     }
+
     // Layers
-    const stepLayers = stepLayout?.layers;
+    const stepLayers = currStep.layers;
     if (stepLayers) {
       const _layers: number[] =
         stepLayers.data?.reduce(
-          (acc: number[], layer: { id: number }) => (layer.id ? [...acc, layer.id] : acc),
+          (acc: number[], layer) => (layer.id ? [...acc, layer.id] : acc),
           []
         ) || [];
       setLayers(_layers);
@@ -116,7 +106,7 @@ const Story = () => {
               )}
               key={index}
               newStep={index}
-              title={s.attributes?.layout[0]?.card && s.attributes?.layout[0]?.card[0]?.title}
+              title=""
             />
           ))}
         </div>

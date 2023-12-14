@@ -26,6 +26,10 @@
     "map": {
       "type": "customField",
       "customField": "plugin::map-field.map-field"
+    },
+    "title": {
+      "type": "string",
+      "required": true
     }
   }
 }

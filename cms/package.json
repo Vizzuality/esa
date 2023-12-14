@@ -19,7 +19,8 @@
     "@strapi/strapi": "4.11.2",
     "pg": "8.8.0",
     "strapi-plugin-import-export-entries": "^1.21.0",
-    "strapi-plugin-populate-deep": "^3.0.0"
+    "strapi-plugin-populate-deep": "^3.0.0",
+    "strapi-plugin-preview-button": "^2.2.1"
   },
   "devDependencies": {
     "typescript": "5.1.3"
