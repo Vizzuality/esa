@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useScroll, motion, useTransform } from 'framer-motion';
 import { useSetRecoilState } from 'recoil';
 
-import env from '@/env.mjs';
+import { getImageSrc } from '@/lib/image-src';
 
 import { isFlyingBackAtom } from '@/store';
 
@@ -165,12 +165,8 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                     <div className="flex gap-2">
                       {d.logos &&
                         d.logos?.data?.map((logo, index) => {
-                          const src =
-                            env.NEXT_PUBLIC_ENVIRONMENT === 'development'
-                              ? `${env.NEXT_PUBLIC_API_URL.replace('/api', '')}${
-                                  logo?.attributes?.url
-                                }`
-                              : logo?.attributes?.url || '';
+                          const src = getImageSrc(logo?.attributes?.url);
+
                           const url = links[i][index];
                           return url ? (
                             <a
