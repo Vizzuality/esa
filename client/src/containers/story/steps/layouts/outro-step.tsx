@@ -112,7 +112,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 1.5 }}
                   style={{ scale: scaleContent }}
-                  className="relative z-50 w-full flex-1"
+                  className="relative z-50 mt-10 flex w-full flex-1 items-center justify-center"
                 >
                   <video
                     width="100%"
@@ -122,8 +122,6 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                     muted
                     loop
                     autoPlay={true}
-                    onMouseEnter={(e) => handlePlayVideo(e, 'play')}
-                    onMouseLeave={(e) => handlePlayVideo(e, 'pause')}
                   >
                     <source src={mediaSrc} type={mediaMime} />
                   </video>
