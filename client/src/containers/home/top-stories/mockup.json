@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1",
+    "title": "Urban Sustainability: Updating the Revised Strategic Transport Plan for Dhaka, Bangladesh",
+    "region": "Dhaka, Bangladesh",
+    "image": "/images/mock/top-stories/story-1.png",
+    "active": true
+  },
+
+  {
+    "id": "2",
+    "title": "Urban Wetlands: EO-based tools to support wetland restoration in Rwanda",
+    "region": "Kigali, Ruanda",
+    "image": "/images/mock/top-stories/story-2.jpeg",
+    "active": false
+  },
+
+  {
+    "id": "3",
+    "title": "Soil monitoring helps build climate resilience for Nigeria's farmers",
+    "region": "Nigeria",
+    "image": "/images/mock/top-stories/story-3.jpeg",
+    "active": false
+  },
+
+  {
+    "id": "4",
+    "title": "Satellite Data and Sustainability-Linked Bonds: Monitoring Land Use in Peruvian Amazon",
+    "region": "Peru",
+    "image": "/images/mock/top-stories/story-4.jpeg",
+    "active": false
+  },
+
+  {
+    "id": "5",
+    "title": "Changing Grey to Green in Sargodha, Pakistan - Using Satellite Earth Observation",
+    "region": "Sargodha, Pakistan",
+    "image": "/images/mock/top-stories/story-5.png",
+    "active": false
+  }
+]

@@ -45,6 +45,7 @@ const StoryMarkers = () => {
               status: 'completed',
               tags: ['nature'],
               title: attributes?.title,
+              active: attributes?.active,
             },
           };
         }) || [],

@@ -31,6 +31,12 @@
     "map": {
       "type": "customField",
       "customField": "plugin::map-field.map-field"
+    },
+    "disclaimer": {
+      "displayName": "discalimer",
+      "type": "component",
+      "repeatable": true,
+      "component": "disclaimer.discalimer"
     }
   }
 }
