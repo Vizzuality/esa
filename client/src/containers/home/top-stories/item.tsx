@@ -22,12 +22,14 @@ const TopStoriesItem = ({ story }: TopStoriesItemProps) => {
     }
   };
 
+  const src = story?.image;
+
   return (
     <div onClick={handleClickStory} className={cn('flex gap-2', story.active && 'cursor-pointer')}>
       <div className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-full">
         <Image
           alt={story.title}
-          src={story.image}
+          src={src}
           width={72}
           height={72}
           className="h-full w-full object-cover object-center"
