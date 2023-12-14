@@ -42,12 +42,12 @@ export default function Home() {
       <Filters />
       <div className="mt-12 flex flex-1 justify-between">
         <Sidebar>
-          <div className="2xl:w-70 w-64">
+          <div className="2xl:w-70 w-[280px]">
             <Dashboard />
           </div>
         </Sidebar>
         <Sidebar>
-          <div className="2xl:w-70 w-64">
+          <div className="2xl:w-70 w-[280px]">
             <Card title="Impact indicator">
               <a
                 target="_blank"
@@ -57,7 +57,7 @@ export default function Home() {
               </a>
             </Card>
             <GradientLine />
-            <Card title="Top stories (6)">
+            <Card title="Top stories (5)">
               <TopStories />
             </Card>
           </div>

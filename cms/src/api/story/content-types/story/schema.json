@@ -56,6 +56,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::step.step"
+    },
+    "active": {
+      "type": "boolean"
     }
   }
 }

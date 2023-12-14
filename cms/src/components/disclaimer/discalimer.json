@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_disclaimer_discalimers",
+  "info": {
+    "displayName": "discalimer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "logos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "text": {
+      "type": "text"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}
