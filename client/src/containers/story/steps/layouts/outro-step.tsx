@@ -2,24 +2,36 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { useScroll, motion, useTransform } from 'framer-motion';
 import { useSetRecoilState } from 'recoil';
 
-import env from '@/env.mjs';
+import { getImageSrc } from '@/lib/image-src';
 
 import { isFlyingBackAtom } from '@/store';
 
-import { StepLayoutItem, StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
-
-const apiBaseUrl = env.NEXT_PUBLIC_API_URL.replace('/api', '');
+import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
 type MediaStepLayoutProps = {
-  step: StepLayoutItem;
+  step: StepLayoutOutroStepComponent;
   categoryId?: number;
   showContent: boolean;
 };
+
+const links = [
+  [
+    'https://www.gaf.de/',
+    '',
+    'https://site.tre-altamira.com/',
+    'http://www.gisat.cz/',
+    'https://www.ait.ac.at/en/',
+    'https://www.caribou.space/',
+  ],
+  ['https://www.adb.org/'],
+  ['https://www.esa.int/'],
+];
 
 const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   const { push } = useRouter();
@@ -91,7 +103,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
           >
             <div className="h-full w-full bg-slate-900/60"></div>
           </motion.div>
-          <div className="pointer-events-auto flex w-full flex-1 items-center justify-between">
+          <div className="pointer-events-auto flex w-full flex-1 flex-col items-center justify-between p-10">
             <div className="flex w-full flex-1 flex-col justify-between gap-12 lg:flex-row">
               {isVideo && (
                 <motion.div
@@ -100,7 +112,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 1.5 }}
                   style={{ scale: scaleContent }}
-                  className="relative z-50 w-full flex-1"
+                  className="relative z-50 mt-10 flex w-full flex-1 items-center justify-center"
                 >
                   <video
                     width="100%"
@@ -110,8 +122,6 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                     muted
                     loop
                     autoPlay={true}
-                    onMouseEnter={(e) => handlePlayVideo(e, 'play')}
-                    onMouseLeave={(e) => handlePlayVideo(e, 'pause')}
                   >
                     <source src={mediaSrc} type={mediaMime} />
                   </video>
@@ -125,7 +135,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                 transition={{ duration: 1.5 }}
                 style={{ scale: scaleContent }}
               >
-                <div className="max-w-lg space-y-4">
+                <div className="max-w-lg space-y-4 p-10">
                   <h3 className="text-enlight-yellow-500 text-2xl font-bold tracking-wider">
                     {title}
                   </h3>
@@ -134,15 +144,61 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
               </motion.div>
             </div>
           </div>
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2.5 }}
             style={{ scale }}
-            className="font-notes z-10 w-full place-self-end pb-[10vh] text-center text-sm italic text-white"
+            className="font-notes z-10 w-full space-y-4 place-self-end pb-[10vh] text-center text-sm italic text-white"
           >
-            Continue scrolling to explore more stories
+            <p>Continue scrolling to explore more stories</p>
           </motion.div>
+          {showContent && show && step.disclaimer && (
+            <div className="font-notes pointer-events-auto relative w-screen bg-white p-4 text-xs italic text-black">
+              <ul className="flex items-center justify-center gap-x-10 gap-y-2">
+                {step.disclaimer.map((d, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <p>{d.title}</p>
+                    <div className="flex gap-2">
+                      {d.logos &&
+                        d.logos?.data?.map((logo, index) => {
+                          const src = getImageSrc(logo?.attributes?.url);
+
+                          const url = links[i][index];
+                          return url ? (
+                            <a
+                              key={logo?.attributes?.url}
+                              href={links[i][index]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <Image
+                                src={src}
+                                width={50}
+                                height={30}
+                                alt=""
+                                className="h-8 w-full object-contain object-center"
+                              />
+                            </a>
+                          ) : (
+                            <div>
+                              <Image
+                                src={src}
+                                width={50}
+                                height={30}
+                                alt=""
+                                className="h-8 w-full object-contain object-center"
+                              />
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </motion.div>
       )}
     </div>

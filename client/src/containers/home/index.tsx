@@ -2,8 +2,6 @@
 
 import { useEffect } from 'react';
 
-import Link from 'next/link';
-
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { layersAtom, tmpBboxAtom } from '@/store';
@@ -15,13 +13,13 @@ import { DEFAULT_MAP_BBOX, DEFAULT_MAP_STATE } from '@/constants/map';
 import Sidebar from '@/containers/home/sidebar';
 
 import Card from '@/components/ui/card';
-// import GradientLine from '@/components/ui/gradient-line';
+import GradientLine from '@/components/ui/gradient-line';
 
 import Categories from './categories';
 import Dashboard from './dashboard';
 import { Filters } from './filters';
 import Header from './header';
-// import TopStories from './top-stories';
+import TopStories from './top-stories';
 
 export default function Home() {
   const setTmpBbox = useSetRecoilState(tmpBboxAtom);
@@ -44,19 +42,24 @@ export default function Home() {
       <Filters />
       <div className="mt-12 flex flex-1 justify-between">
         <Sidebar>
-          <div className="2xl:w-70 w-64">
+          <div className="2xl:w-70 w-[280px]">
             <Dashboard />
           </div>
         </Sidebar>
         <Sidebar>
-          <div className="2xl:w-70 w-64">
+          <div className="2xl:w-70 w-[280px]">
             <Card title="Impact indicator">
-              <Link href="#">View links</Link>
+              <a
+                target="_blank"
+                href="https://lookerstudio.google.com/reporting/b6d8f54c-558e-48dc-bc79-a7eca193da6f/page/p_2ehvdzg47c"
+              >
+                View links
+              </a>
             </Card>
-            {/* <GradientLine />
-            <Card title="Top stories (6)">
+            <GradientLine />
+            <Card title="Top stories (5)">
               <TopStories />
-            </Card> */}
+            </Card>
           </div>
         </Sidebar>
       </div>

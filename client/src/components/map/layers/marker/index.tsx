@@ -14,9 +14,9 @@ type MarkerProps = RMarkerProps & {
 };
 
 const Marker = (props: MarkerProps) => {
-  const { properties, onClick } = props;
+  const { properties, onClick, ...rest } = props;
   return (
-    <RMarker {...props}>
+    <RMarker {...properties} {...rest}>
       <Tooltip open delayDuration={0}>
         <TooltipTrigger asChild>
           <div
@@ -27,12 +27,12 @@ const Marker = (props: MarkerProps) => {
           >
             <div
               className={cn({
-                'absolute left-1/2 top-1/2 flex h-3 w-3 -translate-x-1/2 -translate-y-1/2 rotate-45 items-center justify-center border border-[#FFE094] transition-all':
+                'absolute left-1/2 top-1/2 flex h-3 w-3 -translate-x-1/2 -translate-y-1/2 rotate-45 items-center justify-center border-[1.5px] border-[#FFE094] transition-all':
                   true,
-                'scale-[2] bg-[#FFE094]': true,
+                'bg-background scale-[1.25] border-gray-200': true,
               })}
             >
-              <div className="h-1.5 w-1.5 bg-[#FFE094]"></div>
+              <div className="h-[5px] w-[5px] bg-gray-200"></div>
             </div>
           </div>
         </TooltipTrigger>
@@ -55,6 +55,7 @@ const Marker = (props: MarkerProps) => {
               variant="secondary"
               className="h-8 w-full rounded-3xl bg-teal-500 py-2 text-xs text-white hover:bg-teal-500/50"
               onClick={onClick}
+              disabled={!properties?.active}
             >
               Discover story
             </Button>

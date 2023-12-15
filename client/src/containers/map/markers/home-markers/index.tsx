@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 
 import { Layer, Source } from 'react-map-gl';
@@ -43,6 +45,7 @@ const StoryMarkers = () => {
               status: 'completed',
               tags: ['nature'],
               title: attributes?.title,
+              active: attributes?.active,
             },
           };
         }) || [],

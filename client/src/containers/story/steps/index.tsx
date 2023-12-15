@@ -1,6 +1,9 @@
+'use client';
 import { PropsWithChildren, useMemo } from 'react';
 
 import { useRecoilValue } from 'recoil';
+
+import { cn } from '@/lib/classnames';
 
 import { stepAtom } from '@/store/stories';
 
@@ -25,10 +28,11 @@ type StepProps = PropsWithChildren<{
 
 const Step = ({ step, category, index }: StepProps) => {
   const currentStep = useRecoilValue(stepAtom);
+  const type = getStepType(step);
 
   const STEP_COMPONENT = useMemo(() => {
-    const type = getStepType(step);
-    if (!type || !step) return null;
+    const stepLayout = step?.attributes?.layout?.[0];
+    if (!type || !stepLayout) return null;
 
     switch (type) {
       case 'map-step': {
@@ -54,11 +58,18 @@ const Step = ({ step, category, index }: StepProps) => {
       default:
         return null;
     }
-  }, [category?.data?.attributes, category?.data?.id, step, index, currentStep]);
+  }, [
+    step?.attributes?.layout,
+    type,
+    currentStep,
+    index,
+    category?.data?.id,
+    category?.data?.attributes,
+  ]);
 
   return (
     <div className="pointer-events-none h-screen w-full ">
-      <div className="h-full w-full px-14">{STEP_COMPONENT}</div>
+      <div className={cn('h-full w-full', type !== 'outro-step' && 'px-14')}>{STEP_COMPONENT}</div>
     </div>
   );
 };

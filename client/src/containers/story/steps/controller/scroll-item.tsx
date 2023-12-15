@@ -1,3 +1,4 @@
+'use client';
 import { PropsWithChildren, useRef } from 'react';
 
 import { useScroll } from 'framer-motion';
