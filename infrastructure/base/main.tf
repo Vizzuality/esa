@@ -31,6 +31,12 @@ resource "random_password" "jwt_secret" {
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
+resource "random_password" "preview_secret" {
+  length           = 12
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
 locals {
   staging_cms_env = {
     HOST                             = "0.0.0.0"
@@ -43,6 +49,8 @@ locals {
     CMS_URL                          = "${module.staging.app_url}/impact-sphere/cms"
     STRAPI_ADMIN_API_BASE_URL        = "${module.staging.app_url}/impact-sphere/cms/api"
     STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN = var.mapbox_api_token
+    STRAPI_ADMIN_PREVIEW_URL         = "${module.staging.app_url}/impact-sphere"
+    STRAPI_ADMIN_PREVIEW_SECRET      = random_password.preview_secret.result
     STRAPI_MEDIA_LIBRARY_PROVIDER    = "digitalocean"
 
     # DigitalOcean Spaces to store media content
@@ -70,6 +78,7 @@ locals {
     NEXT_PUBLIC_API_URL                        = "${module.staging.app_url}/impact-sphere/cms/api"
     NEXT_PUBLIC_GA_TRACKING_ID                 = var.ga_tracking_id
     NEXT_PUBLIC_MAPBOX_API_TOKEN               = var.mapbox_api_token
+    NEXT_PUBLIC_PREVIEW_SECRET                 = random_password.preview_secret.result
     LOG_LEVEL                                  = "info"
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false
   }
