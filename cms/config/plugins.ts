@@ -1,5 +1,5 @@
 
-module.exports = ({env}) => ({
+module.exports = ({ env }) => ({
   documentation: {
     config: {
       "x-strapi-config": {
@@ -56,4 +56,24 @@ module.exports = ({env}) => ({
       },
     },
   }),
+  'preview-button': {
+    config: {
+      contentTypes: [
+        {
+          uid: 'api::story.story',
+          draft: {
+            url: `${env('STRAPI_ADMIN_PREVIEW_URL')}/api/preview`,
+            query: {
+              secret: env('STRAPI_ADMIN_PREVIEW_SECRET'),
+              slug: '{id}'
+            },
+          },
+          published: {
+            url: 'http://localhost:3000/stories/{id}',
+          },
+        },
+      ],
+    },
+  },
 });
+

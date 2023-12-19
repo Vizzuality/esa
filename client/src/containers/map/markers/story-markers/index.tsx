@@ -11,6 +11,7 @@ import { stepAtom } from '@/store/stories';
 import { useGetStoriesId } from '@/types/generated/story';
 
 import StoryMarkerMedia from './marker';
+import { StoryStepMap } from '@/types/story';
 // import Carousel from './carousel';
 // import { Dialog, DialogContent } from '@/components/ui/dialog';
 
@@ -33,12 +34,9 @@ const StoryMarkers = () => {
     populate: 'deep',
   });
   // const [currentMedia, setCurrentMedia] = useState<number>();
-
   const markers: StoryMarker[] = useMemo(() => {
-    return (
-      storyData?.data?.attributes?.steps?.data?.[step]?.attributes?.layout[0].map?.markers || []
-    );
-  }, [step, storyData?.data?.attributes?.steps?.data]);
+    return (storyData?.data?.attributes?.steps?.[step]?.map as StoryStepMap)?.markers || [];
+  }, [step, storyData?.data?.attributes?.steps]);
 
   // const medias = useMemo(() => {
   //   return markers?.map((marker) => ({

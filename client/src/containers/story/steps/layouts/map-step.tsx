@@ -8,7 +8,7 @@ import { useScrollToItem } from '@/lib/scroll';
 
 import {
   StepLayoutMapStepComponent,
-  StepLayoutItem,
+  StoryStepsItem,
   StoryCategoryDataAttributes,
 } from '@/types/generated/strapi.schemas';
 
@@ -21,7 +21,7 @@ const Legend = dynamic(() => import('@/containers/map/legend'), {
 });
 
 type MapStepLayoutProps = {
-  step: StepLayoutItem;
+  step: StoryStepsItem;
   category: StoryCategoryDataAttributes | undefined;
   stepIndex: number;
   showContent?: boolean;
@@ -78,30 +78,34 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
         </div>
         <div className="">
           <div className="flex h-fit min-h-full flex-col items-end justify-center space-y-6 pb-6">
-            {card?.map((item) => (
-              <div
-                key={item?.id}
-                onClick={handleClickCard}
-                className={cn(
-                  'pointer-events-auto cursor-pointer overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
-                  showContent ? 'opacity-100' : 'opacity-0'
-                )}
-              >
-                <div className="w-[400px] space-y-1">
-                  {item?.title && <h2 className="font-notes text-2xl font-bold">{item?.title}</h2>}
-                  {!!item?.content && (
-                    <div className="font-open-sans space-y-4">
-                      {item.content.split('\n').map((p, i) => (
-                        <p key={i} className="text-sm">
-                          {p}
-                        </p>
-                      ))}
-                    </div>
+            {card?.map((item) => {
+              return (
+                <div
+                  key={item?.id}
+                  onClick={handleClickCard}
+                  className={cn(
+                    'pointer-events-auto cursor-pointer overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
+                    showContent ? 'opacity-100' : 'opacity-0'
                   )}
-                  {!!item?.widget && <Chart options={item?.widget} />}
+                >
+                  <div className="w-[400px] space-y-1">
+                    {item?.title && (
+                      <h2 className="font-notes text-2xl font-bold">{item?.title}</h2>
+                    )}
+                    {!!item?.content && (
+                      <div className="font-open-sans space-y-4">
+                        {item.content.split('\n').map((p, i) => (
+                          <p key={i} className="text-sm">
+                            {p}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                    {!!item?.widget && <Chart options={item?.widget} />}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

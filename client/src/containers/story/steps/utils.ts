@@ -1,16 +1,13 @@
 import {
-  StepLayoutMediaStepComponentMedia,
   StepLayoutOutroStepComponentMedia,
-  StepListResponseDataItem,
+  StoryStepsItem,
 } from '@/types/generated/strapi.schemas';
 
-export const getStepType = (step: StepListResponseDataItem) => {
-  return step?.attributes?.layout?.[0]?.__component?.split('.')?.[1];
+export const getStepType = (step: StoryStepsItem) => {
+  return step?.__component?.split('.')?.[1];
 };
 
-export const getMedia = (
-  media?: StepLayoutMediaStepComponentMedia | StepLayoutOutroStepComponentMedia
-) => {
+export const getMedia = (media?: StepLayoutOutroStepComponentMedia) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '')}${
     media?.data?.attributes?.url
   }`;
