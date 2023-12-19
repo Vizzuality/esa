@@ -8,19 +8,17 @@ import { cn } from '@/lib/classnames';
 import { stepAtom } from '@/store/stories';
 
 import {
-  StepLayoutMediaStepComponentMedia,
   StepLayoutOutroStepComponentMedia,
   StoryCategory,
   StoryStepsItem,
 } from '@/types/generated/strapi.schemas';
 
 import MapStepLayout from './layouts/map-step';
-import MediaStepLayout from './layouts/media-step';
 import OutroStepLayout from './layouts/outro-step';
 import { getStepType } from './utils';
 
 type StepProps = PropsWithChildren<{
-  media?: StepLayoutMediaStepComponentMedia | StepLayoutOutroStepComponentMedia;
+  media?: StepLayoutOutroStepComponentMedia;
   step: StoryStepsItem;
   category?: StoryCategory;
   index: number;
@@ -31,7 +29,7 @@ const Step = ({ step, category, index }: StepProps) => {
   const type = getStepType(step);
 
   const STEP_COMPONENT = useMemo(() => {
-    const stepLayout = step?.attributes?.layout?.[0];
+    const stepLayout = step;
     if (!type || !stepLayout) return null;
 
     switch (type) {
@@ -45,8 +43,7 @@ const Step = ({ step, category, index }: StepProps) => {
           />
         );
       }
-      case 'media-step':
-        return <MediaStepLayout step={step} />;
+
       case 'outro-step':
         return (
           <OutroStepLayout
@@ -58,14 +55,7 @@ const Step = ({ step, category, index }: StepProps) => {
       default:
         return null;
     }
-  }, [
-    step?.attributes?.layout,
-    type,
-    currentStep,
-    index,
-    category?.data?.id,
-    category?.data?.attributes,
-  ]);
+  }, [step, type, currentStep, index, category?.data?.id, category?.data?.attributes]);
 
   return (
     <div className="pointer-events-none h-screen w-full ">

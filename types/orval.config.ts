@@ -89,7 +89,7 @@ module.exports = {
     input: {
       target: '../cms/dist/src/extensions/documentation/documentation/1.0.0/full_documentation.json',
       filters: {
-        tags: ['Dataset', 'Dataset-group', 'Layer', 'Story', 'Category', 'Step'],
+        tags: ['Dataset', 'Dataset-group', 'Layer', 'Story', 'Category'],
       },
     }
   }

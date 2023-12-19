@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -80,13 +80,13 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
 
   const isVideo = mediaType.includes('video');
 
-  const handlePlayVideo = useCallback(
-    (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, action: 'play' | 'pause') => {
-      if (action === 'play') e.currentTarget.play();
-      else e.currentTarget.pause();
-    },
-    []
-  );
+  // const handlePlayVideo = useCallback(
+  //   (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, action: 'play' | 'pause') => {
+  //     if (action === 'play') e.currentTarget.play();
+  //     else e.currentTarget.pause();
+  //   },
+  //   []
+  // );
 
   const scale = useTransform(scrollYProgress, [0.5, 0.7], ['1', '2']);
   const scaleContent = useTransform(scrollYProgress, [0.5, 0.7], ['1', '0.75']);

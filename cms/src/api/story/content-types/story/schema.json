@@ -23,7 +23,10 @@
     },
     "status": {
       "type": "enumeration",
-      "enum": ["Completed", "In progress"],
+      "enum": [
+        "Completed",
+        "In progress"
+      ],
       "default": "In progress",
       "required": true
     },
@@ -51,7 +54,13 @@
     },
     "steps": {
       "type": "dynamiczone",
-      "components": ["step-layout.map-step", "step-layout.outro-step"]
+      "components": [
+        "step-layout.map-step",
+        "step-layout.outro-step"
+      ]
+    },
+    "active": {
+      "type": "boolean"
     }
   }
 }
