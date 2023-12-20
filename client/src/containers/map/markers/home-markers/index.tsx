@@ -12,6 +12,7 @@ import { categoryAtom } from '@/store/home';
 
 import { useGetCategories } from '@/types/generated/category';
 import { useGetStories } from '@/types/generated/story';
+import { StoryStepMap } from '@/types/story';
 
 import { useMapImage } from '@/hooks/map';
 
@@ -26,17 +27,19 @@ const StoryMarkers = () => {
 
   const params = getStoriesParams({ category: categoryId });
   const { data: stories } = useGetStories(params);
-
   const FeatureCollection = useMemo(
     () => ({
       type: 'FeatureCollection',
       features:
         stories?.data?.map(({ id, attributes }) => {
+          const marker = (attributes?.marker as StoryStepMap)?.markers?.[0];
+          const lat = marker?.lat;
+          const lng = marker?.lng;
           return {
             type: 'Feature',
-            bbox: attributes?.bbox,
+            // bbox: attributes?.bbox,
             id,
-            geometry: { type: 'Point', coordinates: [attributes?.longitude, attributes?.latitude] },
+            geometry: { type: 'Point', coordinates: [lng, lat] },
             properties: {
               // TODO:  Category should be saved with all the attributes, not just slug or name
               category: attributes?.category?.data?.attributes?.slug,

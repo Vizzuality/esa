@@ -9,7 +9,6 @@ import { MapProvider } from 'react-map-gl';
 import { useIntl } from 'react-intl';
 
 import {
-  Stack,
   Typography,
   Button,
   TextInput,
@@ -28,7 +27,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { MarkerDragEvent } from 'react-map-gl/dist/esm/types';
 import Media from '../PluginMedia';
 import Map from '../Map';
-import { LocationType, MarkerType } from '../../types';
+import { LocationType, MarkerType } from '../../types/types';
 import MapInputs from '../MapInputs';
 
 const id = 'default';
@@ -36,7 +35,7 @@ const id = 'default';
 const map_location_inputs = ['longitude', 'latitude', 'zoom', 'bearing', 'pitch'];
 const map_marker_inputs = ['lat', 'lng'];
 
-const PluginInput = ({ name, intlLabel, value, onChange, ...rest }) => {
+const PluginInput = ({ name, intlLabel, value, onChange, ...rest }: any) => {
   const { formatMessage } = useIntl();
 
   // Open the map in the story location if there is a story marker
@@ -187,7 +186,6 @@ const PluginInput = ({ name, intlLabel, value, onChange, ...rest }) => {
                 handleMoveEnd={handleMoveEnd}
                 handleDragMarker={handleDragMarker}
                 handleEditMarker={handleEditMarker}
-                location={location}
               />
               {locationType !== 'marker' && location && (
                 <MapInputs

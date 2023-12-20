@@ -4,8 +4,7 @@ import ReactMapGL, { Marker, NavigationControl, ViewStateChangeEvent, useMap } f
 
 import Media from '../PluginMedia';
 import { MarkerDragEvent, MarkerEvent, ViewState } from 'react-map-gl/dist/esm/types';
-import { LocationType, MarkerType } from '../../types';
-import { useDebounce } from '../../utils/useDebounce';
+import { LocationType, MarkerType } from '../../types/types';
 
 const mapboxAccessToken = process.env.STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN;
 
@@ -17,7 +16,6 @@ type MapProps = {
   handleAddMarker: (e: mapboxgl.MapLayerMouseEvent) => void;
   handleDragMarker: (e: MarkerDragEvent<mapboxgl.Marker>, marker: MarkerType) => void;
   handleEditMarker: (marker: MarkerType) => void;
-  location?: LocationType;
 };
 
 const Map = ({
@@ -28,7 +26,6 @@ const Map = ({
   handleAddMarker,
   handleDragMarker,
   handleEditMarker,
-  location,
 }: MapProps) => {
   const { [id]: map } = useMap();
   const [draggingMarker, setDraggingMarker] = useState<number | null>();
@@ -57,12 +54,6 @@ const Map = ({
     if (draggingMarker) return;
     handleEditMarker(marker);
   };
-
-  const mapViewState = useMemo(() => {
-    if (!location) return;
-    const { bbox, ...vState } = location;
-    return { ...vState, width: 500, height: 500 };
-  }, [location]);
 
   return (
     <ReactMapGL
