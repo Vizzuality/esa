@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import ReactMapGL, { Marker, NavigationControl, ViewStateChangeEvent, useMap } from 'react-map-gl';
 
 import Media from '../PluginMedia';
-import { MarkerDragEvent, MarkerEvent } from 'react-map-gl/dist/esm/types';
+import { MarkerDragEvent, MarkerEvent, ViewState } from 'react-map-gl/dist/esm/types';
 import { LocationType, MarkerType } from '../../types';
+import { useDebounce } from '../../utils/useDebounce';
 
 const mapboxAccessToken = process.env.STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN;
 
@@ -16,6 +17,7 @@ type MapProps = {
   handleAddMarker: (e: mapboxgl.MapLayerMouseEvent) => void;
   handleDragMarker: (e: MarkerDragEvent<mapboxgl.Marker>, marker: MarkerType) => void;
   handleEditMarker: (marker: MarkerType) => void;
+  location?: LocationType;
 };
 
 const Map = ({
@@ -26,6 +28,7 @@ const Map = ({
   handleAddMarker,
   handleDragMarker,
   handleEditMarker,
+  location,
 }: MapProps) => {
   const { [id]: map } = useMap();
   const [draggingMarker, setDraggingMarker] = useState<number | null>();
@@ -50,9 +53,16 @@ const Map = ({
 
   const onClickMarker = (e: MarkerEvent<mapboxgl.Marker, MouseEvent>, marker: MarkerType) => {
     e.originalEvent.stopPropagation();
+    if (marker.isStoryMarker) return;
     if (draggingMarker) return;
     handleEditMarker(marker);
   };
+
+  const mapViewState = useMemo(() => {
+    if (!location) return;
+    const { bbox, ...vState } = location;
+    return { ...vState, width: 500, height: 500 };
+  }, [location]);
 
   return (
     <ReactMapGL
@@ -83,13 +93,26 @@ const Map = ({
               zIndex: draggingMarker === id ? 10 : 1,
             }}
           >
-            <Media
-              isDragging={draggingMarker === id}
-              isMarker={!draggingMarker || draggingMarker === id}
-              playable
-              name={name}
-              media={media}
-            />
+            {marker.isStoryMarker ? (
+              <div
+                style={{
+                  backgroundColor: '#FFE094',
+                  width: 16,
+                  height: 16,
+                  transform: 'rotate(45deg)',
+                  border: '1.5px solid black',
+                  boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                }}
+              ></div>
+            ) : (
+              <Media
+                isDragging={draggingMarker === id}
+                isMarker={!draggingMarker || draggingMarker === id}
+                playable
+                name={name}
+                media={media}
+              />
+            )}
           </Marker>
         );
       })}

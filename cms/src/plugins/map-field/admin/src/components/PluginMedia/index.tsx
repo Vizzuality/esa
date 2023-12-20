@@ -40,11 +40,14 @@ const PluginMedia = ({
     }
   }, [isDragging, playable]);
 
+  const mediaSrc =
+    process.env.NEXT_PUBLIC_API_URL === 'development' ? `${apiBaseUrl}${media?.url}` : media?.url;
+
   const MediaComponent = useCallback(() => {
     {
       switch (mediaType) {
         case 'image':
-          return <img width="100%" height="100%" src={`${apiBaseUrl}${media?.url}`} alt={name} />;
+          return <img width="100%" height="100%" src={mediaSrc} alt={name} />;
         case 'video':
           return (
             <video
@@ -53,7 +56,7 @@ const PluginMedia = ({
               }}
               width="100%"
               height="100%"
-              src={`${apiBaseUrl}${media?.url}`}
+              src={mediaSrc}
               ref={videoRef}
               muted
               onMouseEnter={(e) => handlePlayVideo(e, 'play')}
