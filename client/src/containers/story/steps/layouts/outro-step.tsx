@@ -79,7 +79,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
 
   const mediaMime = media?.mime;
 
-  const isVideo = mediaType.includes('video');
+  const isVideo = mediaType?.includes('video');
 
   // const handlePlayVideo = useCallback(
   //   (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, action: 'play' | 'pause') => {
