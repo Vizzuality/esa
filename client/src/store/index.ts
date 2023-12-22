@@ -138,7 +138,7 @@ export function useSyncLayersAndSettings() {
 
         // Reset layersettings that are not in layers
         Object.keys(lysSettings).forEach((ly) => {
-          if (!lys.includes(parseInt(ly))) {
+          if (!lys?.includes(parseInt(ly))) {
             setTimeout(async () => {
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               const { [ly]: _, ...rest } = lysSettings;
@@ -151,7 +151,7 @@ export function useSyncLayersAndSettings() {
         // If I don't use setTimeout, the url will not be updated
         // setTimeout is needed to put this function to the end of the js queue
         setTimeout(() => {
-          const newLysInteractive = lysInteractive.filter((ly) => lys.includes(ly));
+          const newLysInteractive = lysInteractive.filter((ly) => lys?.includes(ly));
           set(layersInteractiveAtom, newLysInteractive);
 
           if (!newLysInteractive.length) {
