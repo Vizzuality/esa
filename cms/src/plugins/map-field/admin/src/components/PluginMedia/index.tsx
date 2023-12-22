@@ -1,6 +1,7 @@
 import './index.css';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { Box } from '@strapi/design-system';
+import { apiBaseUrl } from '../../constants';
 
 interface PluginMediaProps {
   media: any;
@@ -11,7 +12,6 @@ interface PluginMediaProps {
   isMarker?: boolean;
   isDragging?: boolean;
 }
-const apiBaseUrl = process.env.STRAPI_ADMIN_API_BASE_URL;
 
 const PluginMedia = ({
   media,

@@ -1,12 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 import ReactMapGL, { Marker, NavigationControl, ViewStateChangeEvent, useMap } from 'react-map-gl';
 
 import Media from '../PluginMedia';
-import { MarkerDragEvent, MarkerEvent, ViewState } from 'react-map-gl/dist/esm/types';
-import { LocationType, MarkerType } from '../../types/types';
-
-const mapboxAccessToken = process.env.STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN;
+import { MarkerDragEvent, MarkerEvent } from 'react-map-gl/dist/esm/types';
+import { LocationType, MarkerType } from '../../types';
+import { MAPBOX_ACCESS_TOKEN } from '../../constants';
 
 type MapProps = {
   id?: string;
@@ -16,6 +15,7 @@ type MapProps = {
   handleAddMarker: (e: mapboxgl.MapLayerMouseEvent) => void;
   handleDragMarker: (e: MarkerDragEvent<mapboxgl.Marker>, marker: MarkerType) => void;
   handleEditMarker: (marker: MarkerType) => void;
+  isStoryMarker?: boolean;
 };
 
 const Map = ({
@@ -26,6 +26,7 @@ const Map = ({
   handleAddMarker,
   handleDragMarker,
   handleEditMarker,
+  isStoryMarker,
 }: MapProps) => {
   const { [id]: map } = useMap();
   const [draggingMarker, setDraggingMarker] = useState<number | null>();
@@ -49,8 +50,11 @@ const Map = ({
   };
 
   const onClickMarker = (e: MarkerEvent<mapboxgl.Marker, MouseEvent>, marker: MarkerType) => {
+    // Avoid map click event
     e.originalEvent.stopPropagation();
-    if (marker.isStoryMarker) return;
+    // Story Markers are not editable
+    if (isStoryMarker) return;
+    // Avoid editing marker when dragging
     if (draggingMarker) return;
     handleEditMarker(marker);
   };
@@ -60,12 +64,13 @@ const Map = ({
       id={id}
       initialViewState={initialState}
       mapStyle="mapbox://styles/mapbox/streets-v12"
-      mapboxAccessToken={mapboxAccessToken}
+      mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
       attributionControl={false}
       style={{ height: '500px', width: '100%' }}
       onMoveEnd={onMoveEnd}
       onClick={handleAddMarker}
       clickTolerance={10}
+      minZoom={1}
     >
       {markers.map((marker) => {
         const { id, lat, lng, media, name } = marker;
@@ -84,7 +89,7 @@ const Map = ({
               zIndex: draggingMarker === id ? 10 : 1,
             }}
           >
-            {marker.isStoryMarker ? (
+            {isStoryMarker ? (
               <div
                 style={{
                   backgroundColor: '#FFE094',

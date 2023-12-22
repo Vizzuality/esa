@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Typography, Flex, Box } from '@strapi/design-system';
 import { useMap } from 'react-map-gl';
+import { CONTROLS } from '../../constants';
 
 type MapInputsProps = {
-  inputs?: [string, any][];
+  inputs?: [string, number][];
   handleChange: (key: string, value: number) => void;
   locationType?: string;
 };
@@ -48,14 +49,17 @@ const MapInputs = ({ inputs, handleChange, locationType }: MapInputsProps) => {
             </label>
             <input
               id={key}
-              step={0.1}
+              step="any"
+              max={CONTROLS[key]?.max}
+              min={CONTROLS[key]?.min}
               type="number"
               name={key}
               value={value?.toFixed(4)}
               onChange={(e) => onChange(key, e.target.valueAsNumber)}
-              style={{ maxWidth: '125px' }}
-              inputMode="numeric"
+              style={{ maxWidth: '300px', width: '100%' }}
+              inputMode="decimal"
               pattern="\d*"
+              formNoValidate={true}
             />
           </Box>
         ))}

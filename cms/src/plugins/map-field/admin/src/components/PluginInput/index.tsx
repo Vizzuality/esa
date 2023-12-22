@@ -3,7 +3,8 @@
  * PluginInput
  *
  */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import './index.css';
+import React, { useCallback, useMemo, useState } from 'react';
 import { MapProvider } from 'react-map-gl';
 
 import { useIntl } from 'react-intl';
@@ -27,45 +28,74 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { MarkerDragEvent } from 'react-map-gl/dist/esm/types';
 import Media from '../PluginMedia';
 import Map from '../Map';
-import { LocationType, MarkerType } from '../../types/types';
+import { LocationType, MarkerType } from '../../types';
 import MapInputs from '../MapInputs';
-
-const id = 'default';
-
-const map_location_inputs = ['longitude', 'latitude', 'zoom', 'bearing', 'pitch'];
-const map_marker_inputs = ['lat', 'lng'];
+import StaticMap from '../StaticMap';
+import { initialLocation, map_location_inputs, id, map_marker_inputs } from '../../constants';
 
 const PluginInput = ({ name, intlLabel, value, onChange, ...rest }: any) => {
   const { formatMessage } = useIntl();
 
   // Open the map in the story location if there is a story marker
   const CMEditViewDataManager = useCMEditViewDataManager();
-  const storyMarkerLocation: LocationType | undefined = useMemo(() => {
+
+  // Location type: if the map is setting the story marker in the globe (type === marker) or the location in map steps (type === map)
+  const locationType = rest.attribute.options?.format || 'map';
+
+  const lastLocation: LocationType | undefined = useMemo(() => {
+    // If there is a value in the input, do not set the location
+    if (value && JSON.parse(value)?.location) {
+      return;
+    }
+
+    // Take the story marker location from marker
+    if (locationType === 'marker' && value) {
+      const marker = JSON.parse(value)?.markers?.[0];
+      if (marker) {
+        return {
+          ...initialLocation,
+          latitude: marker.lat,
+          longitude: marker.lng,
+        };
+      }
+    }
+
+    // Take the last step location
+    const storySteps = CMEditViewDataManager?.modifiedData?.steps;
+    if (Array.isArray(storySteps) && storySteps?.length) {
+      const lastStepMap = [...storySteps].reverse().find((step) => step?.map)?.map;
+      if (lastStepMap) {
+        const parsedData = JSON.parse(lastStepMap);
+        if (parsedData?.location) return parsedData?.location;
+      }
+    }
+
+    // Take the story marker location
     if (CMEditViewDataManager?.modifiedData?.marker) {
       const parsedData = JSON.parse(CMEditViewDataManager?.modifiedData?.marker);
       if (parsedData?.markers?.length) {
         const storyMarker = parsedData?.markers[0];
         return {
+          ...initialLocation,
           latitude: storyMarker.lat,
           longitude: storyMarker.lng,
-          zoom: parsedData?.location?.zoom,
-          bearing: parsedData?.location?.bearing,
-          pitch: parsedData?.location?.pitch,
-          padding: parsedData?.location?.padding,
-          bbox: parsedData?.location?.bbox,
         };
       }
     }
-  }, [CMEditViewDataManager?.modifiedData?.marker]);
-
-  // Location type: if the map is setting the story marker in the globe (type === marker) or the location in map steps (type === map)
-  const locationType = rest.attribute.options?.format || 'map';
+  }, [CMEditViewDataManager?.modifiedData?.marker, value, locationType]);
 
   // Map modal
   const [open, setOpen] = useState(false);
 
   // Location
-  const initialState = (value && JSON.parse(value)) || { location: storyMarkerLocation };
+  const initialState = useMemo(() => {
+    const parsedValue = value && JSON.parse(value);
+    return {
+      location: parsedValue?.location || lastLocation,
+      markers: parsedValue?.markers || [],
+    };
+  }, []);
+
   const [location, setLocation] = useState<LocationType>(initialState?.location);
 
   const handleMoveEnd = useCallback((_location: LocationType) => {
@@ -73,7 +103,7 @@ const PluginInput = ({ name, intlLabel, value, onChange, ...rest }: any) => {
   }, []);
 
   // Markers
-  const [markers, setMarkers] = useState<MarkerType[]>(initialState?.markers || []);
+  const [markers, setMarkers] = useState<MarkerType[]>(initialState?.markers);
   const [editingMarker, setEditingMarker] = useState<MarkerType | null>(null);
 
   const handleAddMarker = (e: mapboxgl.MapLayerMouseEvent) => {
@@ -84,8 +114,9 @@ const PluginInput = ({ name, intlLabel, value, onChange, ...rest }: any) => {
       id: markerId,
       media: null,
     };
+    // If the location type is marker, only one marker is allowed
     if (locationType === 'marker') {
-      setMarkers([{ ...newMarker, isStoryMarker: true }]);
+      setMarkers([newMarker]);
       setEditingMarker(null);
       return;
     }
@@ -138,151 +169,190 @@ const PluginInput = ({ name, intlLabel, value, onChange, ...rest }: any) => {
     setEditingMarker({ ...editingMarker, media: e.target.value });
   };
 
-  // Update input value
-  useEffect(() => {
+  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+    // Avoid submitting the Story form
+    e.stopPropagation();
+    e.preventDefault();
+    // Save input value
     onChange({ target: { name, value: JSON.stringify({ markers, location }), type: 'json' } });
-  }, [markers, location]);
+    setOpen(false);
+  };
 
   const isEditing = markers.find((marker) => marker.id === editingMarker?.id);
 
+  /** Story marker. The first marker when the location type 'marker' */
   const storyMarker = useMemo(
     () => (locationType === 'marker' && markers.length ? markers[0] : undefined),
     [markers, locationType]
   );
 
+  const handleCancel = () => {
+    setOpen(false);
+    setLocation(initialState?.location);
+    setEditingMarker(null);
+    setMarkers(initialState?.markers || []);
+  };
+
+  /** Inputs used when location type is 'map' */
+  const locationInputs =
+    location &&
+    (Object.entries(location)
+      .filter(([key]) => map_location_inputs.includes(key))
+      .sort(([aKey], [bKey]) => (aKey > bKey ? 1 : -1)) as [string, number][]);
+
   return (
-    <Flex gap={4} align-center>
-      <Box>
+    <div>
+      <Box marginBottom={1}>
         <Typography textColor="neutral800" as="label" variant="pi" fontWeight="bold">
-          {formatMessage(intlLabel)}
+          {formatMessage(intlLabel)} <span className="--required">*</span>
         </Typography>
       </Box>
-      <Box>
-        <Button onClick={() => setOpen(true)}>
-          {locationType === 'marker'
-            ? `${markers.length ? 'Edit' : 'Add '} story marker`
-            : location?.latitude
-            ? 'Edit location'
-            : 'Add location'}
-        </Button>
-      </Box>
-      {open && (
-        <ModalLayout onClose={() => setOpen(false)}>
-          <ModalHeader>
-            <Typography textColor="neutral800" as="label" variant="pi">
-              {/* Explain that this map is for setting the location, zoom, rotation and tilt of the map. */}
-              <p>
-                Click on the map to add a marker. You can drag the marker to change its location.
-              </p>
+      <Flex gap={4} align-center marginBottom={4}>
+        <Box>
+          {!open && <StaticMap locationType={locationType} location={location} markers={markers} />}
+          <Box marginTop={1}>
+            <Typography textColor="neutral800" as="p" variant="pi">
+              This is an image of the selected location and may differ from the actual map.
             </Typography>
-          </ModalHeader>
-          <ModalBody>
-            <MapProvider>
-              <Map
-                id={id}
-                initialState={initialState?.location}
-                markers={markers}
-                handleAddMarker={handleAddMarker}
-                handleMoveEnd={handleMoveEnd}
-                handleDragMarker={handleDragMarker}
-                handleEditMarker={handleEditMarker}
-              />
-              {locationType !== 'marker' && location && (
-                <MapInputs
-                  inputs={[
-                    ...Object.entries(location).filter(([key]) =>
-                      map_location_inputs.includes(key)
-                    ),
-                  ]}
-                  locationType="map"
-                  handleChange={(k, v) => setLocation((_l) => ({ ..._l, [k]: v }))}
-                />
-              )}
-            </MapProvider>
-            <div>
-              {editingMarker?.id && (
-                <ModalLayout onClose={() => setEditingMarker(null)} labelledBy="title">
-                  <ModalHeader>
-                    <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
-                      {isEditing ? 'Edit' : 'Add'} marker
-                    </Typography>
-                  </ModalHeader>
-                  <ModalBody>
-                    <TextInput
-                      onChange={handleChangeMarker}
-                      name="name"
-                      label="Name"
-                      value={editingMarker.name}
-                    />
-                    <Box marginTop={6}>
-                      <Typography
-                        marginBotton={6}
-                        htmlFor="media"
-                        textColor="neutral800"
-                        as="label"
-                        id="title"
-                      >
-                        Media
-                      </Typography>
-                      <Flex gap={10} marginTop={2}>
-                        <Box>
-                          <MediaLibraryInput
-                            intlLabel={{ id: 'add-marker', defaultMessage: 'Add marker' }}
-                            onChange={handleChangeMedia}
-                            name="media"
-                            id="media"
-                            attribute={{
-                              allowedTypes: ['videos', 'images', 'audios'],
-                            }}
-                          />
-                        </Box>
-                        <Box>
-                          {editingMarker?.media?.url && (
-                            <Media
-                              width="150px"
-                              height="150px"
-                              name={editingMarker?.name}
-                              media={editingMarker?.media}
-                            />
-                          )}
-                        </Box>
-                      </Flex>
-                    </Box>
-                  </ModalBody>
-                  <ModalFooter
-                    startActions={
-                      isEditing ? (
-                        <Button onClick={handleDeleteMarker} variant="danger">
-                          Delete
-                        </Button>
-                      ) : null
-                    }
-                    endActions={
-                      <>
-                        <Button onClick={() => setEditingMarker(null)} variant="tertiary">
-                          Cancel
-                        </Button>
-                        <Button onClick={handleSaveMarker}>Save</Button>
-                      </>
-                    }
-                  />
-                </ModalLayout>
-              )}
-            </div>
+          </Box>
+        </Box>
+        <Box>
+          <Button onClick={() => setOpen(true)}>
             {locationType === 'marker'
-              ? !!storyMarker && (
-                  <MapInputs
-                    inputs={Object.entries(storyMarker).filter(([key]) =>
-                      map_marker_inputs.includes(key)
-                    )}
-                    handleChange={(k, v) => setMarkers((_m) => [{ ..._m[0], [k]: v }])}
+              ? `${markers.length ? 'Edit' : 'Add '}`
+              : location?.latitude
+              ? 'Edit'
+              : 'Add'}
+          </Button>
+        </Box>
+        {open && (
+          <ModalLayout style={{ width: '60vw', maxHeight: '70vh' }} onClose={() => setOpen(false)}>
+            <form onSubmit={handleSave}>
+              <ModalHeader>
+                <Typography textColor="neutral800" as="label" variant="pi">
+                  {/* Explain that this map is for setting the location, zoom, rotation and tilt of the map. */}
+                  <p>
+                    Click on the map to add a marker. You can drag the marker to change its
+                    location.
+                  </p>
+                </Typography>
+              </ModalHeader>
+              <ModalBody>
+                <MapProvider>
+                  <Map
+                    id={id}
+                    initialState={initialState?.location}
+                    markers={markers}
+                    handleAddMarker={handleAddMarker}
+                    handleMoveEnd={handleMoveEnd}
+                    handleDragMarker={handleDragMarker}
+                    handleEditMarker={handleEditMarker}
+                    isStoryMarker={locationType === 'marker'}
                   />
-                )
-              : null}
-          </ModalBody>
-        </ModalLayout>
-      )}
-    </Flex>
+                  {locationType !== 'marker' && location && (
+                    <MapInputs
+                      inputs={locationInputs}
+                      locationType="map"
+                      handleChange={(k, v) => setLocation((_l) => ({ ..._l, [k]: v }))}
+                    />
+                  )}
+                </MapProvider>
+                <div>
+                  {editingMarker?.id && (
+                    <ModalLayout onClose={() => setEditingMarker(null)} labelledBy="title">
+                      <ModalHeader>
+                        <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
+                          {isEditing ? 'Edit' : 'Add'} marker
+                        </Typography>
+                      </ModalHeader>
+                      <ModalBody>
+                        <TextInput
+                          onChange={handleChangeMarker}
+                          name="name"
+                          label="Name"
+                          value={editingMarker.name}
+                        />
+                        <Box marginTop={6}>
+                          <Typography
+                            marginBotton={6}
+                            htmlFor="media"
+                            textColor="neutral800"
+                            as="label"
+                            id="title"
+                          >
+                            Media
+                          </Typography>
+                          <Flex gap={10} marginTop={2}>
+                            <Box>
+                              <MediaLibraryInput
+                                intlLabel={{ id: 'add-marker', defaultMessage: 'Add marker' }}
+                                onChange={handleChangeMedia}
+                                name="media"
+                                id="media"
+                                attribute={{
+                                  allowedTypes: ['videos', 'images', 'audios'],
+                                }}
+                              />
+                            </Box>
+                            <Box>
+                              {editingMarker?.media?.url && (
+                                <Media
+                                  width="150px"
+                                  height="150px"
+                                  name={editingMarker?.name}
+                                  media={editingMarker?.media}
+                                />
+                              )}
+                            </Box>
+                          </Flex>
+                        </Box>
+                      </ModalBody>
+                      <ModalFooter
+                        startActions={
+                          isEditing ? (
+                            <Button onClick={handleDeleteMarker} variant="danger">
+                              Delete
+                            </Button>
+                          ) : null
+                        }
+                        endActions={
+                          <>
+                            <Button onClick={() => setEditingMarker(null)} variant="tertiary">
+                              Cancel
+                            </Button>
+                            <Button onClick={handleSaveMarker}>Save</Button>
+                          </>
+                        }
+                      />
+                    </ModalLayout>
+                  )}
+                </div>
+                {locationType === 'marker'
+                  ? !!storyMarker && (
+                      <MapInputs
+                        inputs={Object.entries(storyMarker).filter(([key]) =>
+                          map_marker_inputs.includes(key)
+                        )}
+                        handleChange={(k, v) => setMarkers((_m) => [{ ..._m[0], [k]: v }])}
+                      />
+                    )
+                  : null}
+              </ModalBody>
+              <ModalFooter
+                endActions={
+                  <>
+                    <Button onClick={handleCancel} variant="tertiary">
+                      Cancel
+                    </Button>
+                    <Button type="submit">Save</Button>
+                  </>
+                }
+              />
+            </form>
+          </ModalLayout>
+        )}
+      </Flex>
+    </div>
   );
 };
 
