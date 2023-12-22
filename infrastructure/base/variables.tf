@@ -77,3 +77,15 @@ variable "mapbox_api_token" {
   default     = ""
   description = "MAPBOX api token"
 }
+
+variable "mapbox_username" {
+  type        = string
+  default     = ""
+  description = "MAPBOX username"
+}
+
+variable "mapbox_style_id" {
+  type        = string
+  default     = ""
+  description = "MAPBOX style ID"
+}

@@ -52,6 +52,8 @@ locals {
     STRAPI_ADMIN_PREVIEW_URL         = "${module.staging.app_url}/impact-sphere"
     STRAPI_ADMIN_PREVIEW_SECRET      = random_password.preview_secret.result
     STRAPI_MEDIA_LIBRARY_PROVIDER    = "digitalocean"
+    STRAPI_ADMIN_MAPBOX_USERNAME     = var.mapbox_username
+    STRAPI_ADMIN_MAPBOX_STYLE_ID     = var.mapbox_style_id
 
     # DigitalOcean Spaces to store media content
     BUCKET_ACCESS_KEY              = var.do_spaces_client_id
