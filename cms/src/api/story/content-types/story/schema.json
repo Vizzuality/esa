@@ -30,37 +30,31 @@
       "default": "In progress",
       "required": true
     },
-    "latitude": {
-      "max": 90,
-      "min": -90,
-      "required": true,
-      "type": "float"
-    },
-    "longitude": {
-      "type": "float",
-      "required": true,
-      "max": 180,
-      "min": -180
-    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "stories"
     },
-    "bbox": {
-      "type": "json",
-      "required": true
-    },
     "steps": {
       "type": "dynamiczone",
       "components": [
         "step-layout.map-step",
         "step-layout.outro-step"
-      ]
+      ],
+      "required": false
     },
     "active": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": true
+    },
+    "marker": {
+      "type": "customField",
+      "options": {
+        "format": "marker"
+      },
+      "customField": "plugin::map-field.map-field",
+      "required": true
     }
   }
 }

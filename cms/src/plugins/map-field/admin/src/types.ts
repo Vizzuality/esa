@@ -6,6 +6,7 @@ export type MarkerType = {
   lat: number;
   lng: number;
   media: any;
+  isStoryMarker?: boolean;
 };
 
 export type LocationType = ViewState & {

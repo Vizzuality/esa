@@ -5,15 +5,12 @@ import Image from 'next/image';
 
 import { ExpandIcon } from 'lucide-react';
 
-import env from '@/env.mjs';
-
 import { cn } from '@/lib/classnames';
+import { getImageSrc } from '@/lib/image-src';
 
 import { StoryStepMapMarkerMedia } from '@/types/story';
 
 import { Button } from '@/components/ui/button';
-
-const apiBaseUrl = env.NEXT_PUBLIC_API_URL.replace('/api', '');
 
 type StoryMarkerMediaProps = {
   isFullScreen: boolean;
@@ -31,7 +28,7 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
   const mediaMime = media?.mime;
 
   // MOCKUP IMAGE FOR STORY 1 STEP 1 !! REMOVE WHEN REAL IMAGE IS AVAILABLE
-  const mediaSrc = media?.url;
+  const mediaSrc = getImageSrc(media?.url);
 
   const handlePlayVideo = useCallback(
     (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, action: 'play' | 'pause') => {

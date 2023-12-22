@@ -596,20 +596,18 @@ export const StoryStatus = {
 } as const;
 
 export interface Story {
-  bbox: unknown;
+  active?: boolean;
   category?: StoryCategory;
   createdAt?: string;
   createdBy?: StoryCreatedBy;
-  latitude: number;
-  longitude: number;
+  marker: unknown;
   publishedAt?: string;
   slug?: string;
   status: StoryStatus;
-  steps?: StoryStepsItem[];
+  steps: StoryStepsItem[];
   title: string;
   updatedAt?: string;
   updatedBy?: StoryUpdatedBy;
-  active?: boolean;
 }
 
 export type StoryCreatedByDataAttributes = { [key: string]: any };
@@ -677,12 +675,11 @@ export type StoryCategoryDataAttributesStoriesDataItemAttributesUpdatedBy = {
 };
 
 export type StoryCategoryDataAttributesStoriesDataItemAttributes = {
-  bbox?: unknown;
+  active?: boolean;
   category?: StoryCategoryDataAttributesStoriesDataItemAttributesCategory;
   createdAt?: string;
   createdBy?: StoryCategoryDataAttributesStoriesDataItemAttributesCreatedBy;
-  latitude?: number;
-  longitude?: number;
+  marker?: unknown;
   publishedAt?: string;
   slug?: string;
   status?: StoryCategoryDataAttributesStoriesDataItemAttributesStatus;
@@ -1572,13 +1569,12 @@ export const StoryRequestDataStatus = {
 export type StoryRequestDataCategory = number | string;
 
 export type StoryRequestData = {
-  bbox: unknown;
+  active?: boolean;
   category?: StoryRequestDataCategory;
-  latitude: number;
-  longitude: number;
+  marker: unknown;
   slug?: string;
   status: StoryRequestDataStatus;
-  steps?: StoryRequestDataStepsItem[];
+  steps: StoryRequestDataStepsItem[];
   title: string;
 };
 
@@ -3031,12 +3027,11 @@ export type CategoryStoriesDataItemAttributesUpdatedBy = {
 };
 
 export type CategoryStoriesDataItemAttributes = {
-  bbox?: unknown;
+  active?: boolean;
   category?: CategoryStoriesDataItemAttributesCategory;
   createdAt?: string;
   createdBy?: CategoryStoriesDataItemAttributesCreatedBy;
-  latitude?: number;
-  longitude?: number;
+  marker?: unknown;
   publishedAt?: string;
   slug?: string;
   status?: CategoryStoriesDataItemAttributesStatus;

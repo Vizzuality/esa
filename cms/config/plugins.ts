@@ -69,7 +69,7 @@ module.exports = ({ env }) => ({
             },
           },
           published: {
-            url: 'http://localhost:3000/stories/{id}',
+            url: `${env('STRAPI_ADMIN_PREVIEW_URL')}/stories/{id}`,
           },
         },
       ],

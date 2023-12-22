@@ -75,7 +75,8 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
 
   const mediaType = media?.mime?.split('/')[0];
 
-  const mediaSrc = media?.url;
+  const mediaSrc = getImageSrc(media?.url);
+
   const mediaMime = media?.mime;
 
   const isVideo = mediaType.includes('video');
