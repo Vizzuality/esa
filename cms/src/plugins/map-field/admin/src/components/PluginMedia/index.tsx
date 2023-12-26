@@ -76,7 +76,9 @@ const PluginMedia = ({
       borderRadius="50%"
       backgroundColor="neutral800"
       overflow="hidden"
-      className={`${isMarker && !isDragging && 'media-preview'} ${isDragging && 'is-dragging'}`}
+      className={`media ${isMarker && !isDragging && 'media-preview'} ${
+        isDragging && 'is-dragging'
+      }`}
     >
       <MediaComponent />
     </Box>
