@@ -1,5 +1,4 @@
 'use client';
-import dynamic from 'next/dynamic';
 
 import { InfoIcon } from 'lucide-react';
 
@@ -17,10 +16,6 @@ import {
 import Chart from '@/components/chart';
 import CategoryIcon from '@/components/ui/category-icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-
-const Legend = dynamic(() => import('@/containers/map/legend'), {
-  ssr: false,
-});
 
 type MapStepLayoutProps = {
   step: StoryStepsItem;
@@ -69,14 +64,6 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
               </div>
             </div>
           )}
-          <div
-            className={cn('pointer-events-auto fixed bottom-14 left-14 min-h-[44px]', {
-              'w-auto opacity-100': showContent,
-              'w-0 opacity-0': !showContent,
-            })}
-          >
-            <Legend />
-          </div>
         </div>
         <div className="">
           <div className="flex h-fit min-h-full flex-col items-end justify-center space-y-6 pb-6">

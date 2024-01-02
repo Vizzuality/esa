@@ -49,6 +49,7 @@ module.exports = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
+          map: 'var(--card-map)',
         },
         gray: {
           200: 'hsla(60, 8%, 90%, 1)',

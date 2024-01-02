@@ -1,18 +1,17 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { parseConfig } from '@/lib/json-converter';
 
-import { layersInteractiveAtom, layersInteractiveIdsAtom } from '@/store';
+import { layersInteractiveAtom, layersInteractiveIdsAtom, layersSettingsAtom } from '@/store';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerResponseDataObject } from '@/types/generated/strapi.schemas';
 import { Config, LayerTyped } from '@/types/layers';
 
-import AnimatedDeckLayer from '@/components/map/layers/animated-tile-layer';
 import DeckJsonLayer from '@/components/map/layers/deck-json-layer';
 import MapboxLayer from '@/components/map/layers/mapbox-layer';
 
@@ -28,6 +27,7 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
   const layersInteractive = useRecoilValue(layersInteractiveAtom);
   const setLayersInteractive = useSetRecoilState(layersInteractiveAtom);
   const setLayersInteractiveIds = useSetRecoilState(layersInteractiveIdsAtom);
+  const setLayersSettings = useSetRecoilState(layersSettingsAtom);
 
   const handleAddMapboxLayer = useCallback(
     ({ styles }: Config) => {
@@ -67,6 +67,24 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
     [data?.data?.attributes, id, setLayersInteractive, setLayersInteractiveIds]
   );
 
+  useEffect(() => {
+    if (data?.data?.attributes) {
+      const { params_config } = data.data.attributes as LayerTyped;
+      if (params_config?.length) {
+        setLayersSettings((prev) => ({
+          ...prev,
+          [id]: params_config.reduce(
+            (acc, curr) => ({
+              ...acc,
+              [curr.key as unknown as string]: curr.default,
+            }),
+            {}
+          ),
+        }));
+      }
+    }
+  }, [data?.data?.attributes]);
+
   if (!data?.data?.attributes) return null;
 
   const { type } = data.data.attributes as LayerTyped;
@@ -103,26 +121,6 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
     });
 
     return <DeckJsonLayer id={`${id}-layer`} beforeId={beforeId} config={c} />;
-  }
-
-  if (type === 'animated-tiles') {
-    const { config, params_config } = data.data.attributes;
-    const c = parseConfig({
-      // TODO: type
-      config,
-      params_config,
-      settings,
-    });
-    return (
-      <AnimatedDeckLayer
-        type=""
-        id={`${id}-layer`}
-        beforeId={beforeId}
-        config={config}
-        paramsConfig={params_config}
-        c={c}
-      />
-    );
   }
 };
 

@@ -5,7 +5,7 @@ import ReactMapGL, { Marker, NavigationControl, ViewStateChangeEvent, useMap } f
 import Media from '../PluginMedia';
 import { MarkerDragEvent, MarkerEvent } from 'react-map-gl/dist/esm/types';
 import { LocationType, MarkerType } from '../../types';
-import { MAPBOX_ACCESS_TOKEN } from '../../constants';
+import { MAPBOX_ACCESS_TOKEN, STYLE_ID, USERNAME } from '../../constants';
 
 type MapProps = {
   id?: string;
@@ -63,7 +63,7 @@ const Map = ({
     <ReactMapGL
       id={id}
       initialViewState={initialState}
-      mapStyle="mapbox://styles/mapbox/streets-v12"
+      mapStyle={`mapbox://styles/${USERNAME}/${STYLE_ID}`}
       mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
       attributionControl={false}
       style={{ height: '500px', width: '100%' }}
