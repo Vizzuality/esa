@@ -4,6 +4,8 @@ import { FormatProps } from '@/lib/utils/formats';
 
 import type { Layer } from '@/types/generated/strapi.schemas';
 
+import { LegendType } from './map';
+
 export type Config = {
   source: RMSSourceProps;
   styles: RMLayerProps[];
@@ -18,7 +20,7 @@ export type ParamsConfig = Record<string, ParamsConfigValue>[];
 
 export type LegendConfig = {
   displayControllers?: boolean;
-  type: 'basic' | 'gradient' | 'choropleth';
+  type: LegendType;
   items: {
     value: string;
     color: string;
@@ -47,7 +49,7 @@ export type LayerProps = {
 export type LayerTyped = Layer & {
   config: Config;
   params_config: ParamsConfig;
-  legend_config: LegendConfig;
+  legend_config: LegendConfig[];
   interaction_config: InteractionConfig;
   metadata: Record<string, unknown>;
 };

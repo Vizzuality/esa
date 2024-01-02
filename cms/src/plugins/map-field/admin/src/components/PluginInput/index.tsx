@@ -94,7 +94,7 @@ const PluginInput = ({ name, intlLabel, value, onChange, ...rest }: any) => {
       location: parsedValue?.location || lastLocation,
       markers: parsedValue?.markers || [],
     };
-  }, []);
+  }, [value, lastLocation]);
 
   const [location, setLocation] = useState<LocationType>(initialState?.location);
 

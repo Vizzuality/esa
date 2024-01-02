@@ -41,12 +41,7 @@ const LayerManager = () => {
         {layers.map((l, i) => {
           const beforeId = i === 0 ? 'custom-layers' : `${layers[i - 1]}-layer`;
           return (
-            <LayerManagerItem
-              key={l}
-              id={l}
-              beforeId={beforeId}
-              settings={layersSettings[l] ?? { opacity: 1, visibility: true, expand: true }}
-            />
+            <LayerManagerItem key={l} id={l} beforeId={beforeId} settings={layersSettings?.[l]} />
           );
         })}
       </>

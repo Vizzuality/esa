@@ -7,10 +7,12 @@ import FUNCTIONS from '@/lib/utils';
 
 import { ParamsConfig } from '@/types/layers';
 
+import { AnimatedTile } from '@/components/map/layers/animated-tile';
 import {
   LegendTypeBasic,
   LegendTypeChoropleth,
   LegendTypeGradient,
+  LegendTypeTimeline,
 } from '@/components/map/legend/item-types';
 
 export const JSON_CONFIGURATION = new JSONConfiguration({
@@ -19,7 +21,8 @@ export const JSON_CONFIGURATION = new JSONConfiguration({
     //
     {},
     require('@deck.gl/layers'),
-    require('@deck.gl/aggregation-layers')
+    require('@deck.gl/aggregation-layers'),
+    { AnimatedTile }
   ),
   functions: FUNCTIONS,
   enumerations: {},
@@ -27,6 +30,7 @@ export const JSON_CONFIGURATION = new JSONConfiguration({
     LegendTypeBasic,
     LegendTypeChoropleth,
     LegendTypeGradient,
+    LegendTypeTimeline,
   },
 });
 

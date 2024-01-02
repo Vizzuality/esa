@@ -41,7 +41,10 @@ import Map from '@/components/map';
 // import ZoomControl from '@/components/map/controls/zoom';
 import Marker from '@/components/map/layers/marker';
 import { CustomMapProps } from '@/components/map/types';
-
+// import MapLegends from './legend';
+const MapLegends = dynamic(() => import('@/containers/map/legend'), {
+  ssr: false,
+});
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
 });
@@ -186,7 +189,7 @@ export default function MapContainer() {
   return (
     <div
       className={cn(
-        'fixed left-0 top-0 h-screen w-screen bg-[#0a2839]',
+        'fixed left-0 top-0 h-screen w-full bg-[#0a2839]',
         isHomePage ? 'cursor-pointer' : 'pointer-events-none cursor-default'
       )}
     >
@@ -244,6 +247,9 @@ export default function MapContainer() {
         )}
         {!isHomePage && <StoryMarkers />}
       </Map>
+      <div className="absolute bottom-0 left-0 z-20 w-full p-4">
+        <MapLegends />
+      </div>
     </div>
   );
 }

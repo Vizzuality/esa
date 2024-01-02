@@ -30,7 +30,7 @@ const ContentLoader = ({
   className,
 }: ContentLoaderProps) => {
   return (
-    <div className={className}>
+    <>
       {isFetching && !isFetched && !SkeletonComponent && <Skeleton className={cn('h-20 w-full')} />}
       {isFetching && !isFetched && SkeletonComponent}
       {/* <Loading
@@ -44,7 +44,7 @@ const ContentLoader = ({
       {!isPlaceholderData && !isError && isFetched && !!data && children}
 
       {!isPlaceholderData && !isError && isFetched && !data && 'No data'}
-    </div>
+    </>
   );
 };
 

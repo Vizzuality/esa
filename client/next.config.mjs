@@ -12,6 +12,7 @@ const nextConfig = {
       process.env.NEXT_PUBLIC_API_URL,
       'esa-gda-comms-staging-cms.fra1.digitaloceanspaces.com',
       'fra1.digitaloceanspaces.com',
+      'esa-gda-comms-staging-mfafc.ondigitalocean.app',
     ],
   },
   env: {
