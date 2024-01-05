@@ -15,6 +15,7 @@ import {
 import Chart from '@/components/chart';
 import CategoryIcon from '@/components/ui/category-icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import ChartJs from '@/components/chart/chart';
 
 const Legend = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
@@ -31,7 +32,7 @@ const cardClassName =
   'rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 py-6 px-4 backdrop-blur';
 
 const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayoutProps) => {
-  const { story_summary, card } = step as StepLayoutMapStepComponent;
+  const { story_summary, card, widget } = step as StepLayoutMapStepComponent;
   const scrollToItem = useScrollToItem();
 
   const handleClickCard = () => {
@@ -101,7 +102,8 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
                         ))}
                       </div>
                     )}
-                    {!!item?.widget && <Chart options={item?.widget} />}
+                    {/* {!!item?.widget && <Chart options={item?.widget} />} */}
+                    {!!widget && <ChartJs widget={widget} />}
                   </div>
                 </div>
               );

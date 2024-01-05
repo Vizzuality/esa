@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_widget_widgets",
+  "info": {
+    "displayName": "widget",
+    "icon": "chartPie"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "bar",
+        "line",
+        "scatter",
+        "bubble",
+        "pie",
+        "doughnut",
+        "polarArea",
+        "radar"
+      ],
+      "required": true
+    },
+    "data": {
+      "type": "json",
+      "required": true
+    },
+    "options": {
+      "type": "json"
+    }
+  }
+}

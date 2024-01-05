@@ -30,6 +30,12 @@
     "title": {
       "type": "string",
       "required": true
+    },
+    "widget": {
+      "displayName": "widget",
+      "type": "component",
+      "repeatable": false,
+      "component": "widget.widget"
     }
   }
 }
