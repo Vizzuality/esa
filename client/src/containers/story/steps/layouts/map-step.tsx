@@ -10,6 +10,8 @@ import {
   StepLayoutMapStepComponent,
   StoryStepsItem,
   StoryCategoryDataAttributes,
+  WidgetWidgetComponent,
+  MapLayerCardComponent,
 } from '@/types/generated/strapi.schemas';
 
 import Chart from '@/components/chart';
@@ -31,7 +33,7 @@ const cardClassName =
   'rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 py-6 px-4 backdrop-blur';
 
 const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayoutProps) => {
-  const { story_summary, card } = step as StepLayoutMapStepComponent;
+  const { story_summary, card, widget } = step as StepLayoutMapStepComponent;
   const scrollToItem = useScrollToItem();
 
   const handleClickCard = () => {
@@ -78,7 +80,8 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
         </div>
         <div className="">
           <div className="flex h-fit min-h-full flex-col items-end justify-center space-y-6 pb-6">
-            {card?.map((item) => {
+            {[card, widget]?.map((item, index) => {
+              if (!item) return null;
               return (
                 <div
                   key={item?.id}
@@ -92,16 +95,17 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
                     {item?.title && (
                       <h2 className="font-notes text-2xl font-bold">{item?.title}</h2>
                     )}
-                    {!!item?.content && (
+                    {index === 0 ? (
                       <div className="font-open-sans space-y-4">
-                        {item.content.split('\n').map((p, i) => (
+                        {(item as MapLayerCardComponent)?.content?.split('\n').map((p, i) => (
                           <p key={i} className="text-sm">
                             {p}
                           </p>
                         ))}
                       </div>
+                    ) : (
+                      <Chart widget={item as WidgetWidgetComponent} />
                     )}
-                    {!!item?.widget && <Chart options={item?.widget} />}
                   </div>
                 </div>
               );

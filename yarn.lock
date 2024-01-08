@@ -2847,6 +2847,7 @@ __metadata:
     apng-js: ^1.1.1
     autoprefixer: 10.4.14
     axios: ^1.4.0
+    chart.js: ^4.4.1
     class-variance-authority: ^0.6.0
     clsx: ^1.2.1
     d3-array: 3.2.4
@@ -2857,8 +2858,6 @@ __metadata:
     eslint-plugin-import: 2.27.5
     eslint-plugin-prettier: ^4.2.1
     framer-motion: ^10.16.4
-    highcharts: ^11.2.0
-    highcharts-react-official: ^3.2.1
     lucide-react: ^0.252.0
     mapbox-gl: 2.15.0
     next: 13.4.5
@@ -2866,6 +2865,7 @@ __metadata:
     prettier: ^2.8.8
     prettier-plugin-tailwindcss: ^0.3.0
     react: 18.2.0
+    react-chartjs-2: ^5.2.0
     react-dom: 18.2.0
     react-hook-form: ^7.45.0
     react-map-gl: 7.1.5
@@ -3618,6 +3618,13 @@ __metadata:
     methods: ^1.1.2
     path-to-regexp: ^6.1.0
   checksum: 3475f4235576d24eaa218d55e845fb81946288d65b87aa8aeda1a23b11b5556a02b9a8ff1ea520bb988ec7201523c41cff5abce9285fd12b9e839d7590cd2ce1
+  languageName: node
+  linkType: hard
+
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.2
+  resolution: "@kurkle/color@npm:0.3.2"
+  checksum: 79e97b31f8f6efb28c69d373f94b0c7480226fe8ec95221f518ac998e156444a496727ce47de6d728eb5c3369288e794cba82cae34253deb0d472d3bfe080e49
   languageName: node
   linkType: hard
 
@@ -9640,6 +9647,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chart.js@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "chart.js@npm:4.4.1"
+  dependencies:
+    "@kurkle/color": ^0.3.0
+  checksum: 8c108f137824ea0e3d79914708b409298c12ed7d16da99a40ca3cab51466ef7b0068ad82ac0addeb288b938fe0621d3e5a6a913b60e72a729aa42aa96705fcad
+  languageName: node
+  linkType: hard
+
 "cheerio-select@npm:^2.1.0":
   version: 2.1.0
   resolution: "cheerio-select@npm:2.1.0"
@@ -13479,23 +13495,6 @@ __metadata:
   version: 6.2.0
   resolution: "helmet@npm:6.2.0"
   checksum: cf01e024244205bd10d70fd2f3874244b72ba37a10a4604e4383bbd63fe1438ee24bae7672c4ee5c5e16e6cd88ac58003274034fab0ba199761471555a322b37
-  languageName: node
-  linkType: hard
-
-"highcharts-react-official@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "highcharts-react-official@npm:3.2.1"
-  peerDependencies:
-    highcharts: ">=6.0.0"
-    react: ">=16.8.0"
-  checksum: 615f1a352eb95f0e78189506e7d551071438fc11eabff78c55aeb6cc63658f4c284f4920f9e9c85113b319661bf5745c668ef22b71920c1a9f24749e49584aaf
-  languageName: node
-  linkType: hard
-
-"highcharts@npm:^11.2.0":
-  version: 11.2.0
-  resolution: "highcharts@npm:11.2.0"
-  checksum: cc314db7533d6e92e4a15e8f29db2e85cda0c5f01023cfd9242630c40e5208183ae8113bc517c8c47cd5374409c86bf68e39a77a845412dec6b7c0a932302325
   languageName: node
   linkType: hard
 
@@ -18684,6 +18683,16 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
+  languageName: node
+  linkType: hard
+
+"react-chartjs-2@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "react-chartjs-2@npm:5.2.0"
+  peerDependencies:
+    chart.js: ^4.1.1
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: ace702185be1450e5888a8bcd8b5fc1995067e3b11d236764a67f5567a3d7c32ff16923b8d48d3d39bda6e45135da6c044c9b43fbe8e1978f95aca9d2c0ce348
   languageName: node
   linkType: hard
 
