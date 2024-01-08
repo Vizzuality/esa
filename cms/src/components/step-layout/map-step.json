@@ -9,7 +9,7 @@
     "card": {
       "displayName": "card",
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "map-layer.card"
     },
     "story_summary": {

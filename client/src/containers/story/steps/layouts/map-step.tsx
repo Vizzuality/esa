@@ -10,12 +10,13 @@ import {
   StepLayoutMapStepComponent,
   StoryStepsItem,
   StoryCategoryDataAttributes,
+  WidgetWidgetComponent,
+  MapLayerCardComponent,
 } from '@/types/generated/strapi.schemas';
 
 import Chart from '@/components/chart';
 import CategoryIcon from '@/components/ui/category-icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import ChartJs from '@/components/chart/chart';
 
 const Legend = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
@@ -79,7 +80,8 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
         </div>
         <div className="">
           <div className="flex h-fit min-h-full flex-col items-end justify-center space-y-6 pb-6">
-            {card?.map((item) => {
+            {[card, widget]?.map((item, index) => {
+              if (!item) return null;
               return (
                 <div
                   key={item?.id}
@@ -93,17 +95,17 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
                     {item?.title && (
                       <h2 className="font-notes text-2xl font-bold">{item?.title}</h2>
                     )}
-                    {!!item?.content && (
+                    {index === 0 ? (
                       <div className="font-open-sans space-y-4">
-                        {item.content.split('\n').map((p, i) => (
+                        {(item as MapLayerCardComponent)?.content?.split('\n').map((p, i) => (
                           <p key={i} className="text-sm">
                             {p}
                           </p>
                         ))}
                       </div>
+                    ) : (
+                      <Chart widget={item as WidgetWidgetComponent} />
                     )}
-                    {/* {!!item?.widget && <Chart options={item?.widget} />} */}
-                    {!!widget && <ChartJs widget={widget} />}
                   </div>
                 </div>
               );

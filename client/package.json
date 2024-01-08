@@ -49,8 +49,6 @@
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
     "framer-motion": "^10.16.4",
-    "highcharts": "^11.2.0",
-    "highcharts-react-official": "^3.2.1",
     "lucide-react": "^0.252.0",
     "mapbox-gl": "2.15.0",
     "next": "13.4.5",

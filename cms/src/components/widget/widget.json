@@ -2,7 +2,8 @@
   "collectionName": "components_widget_widgets",
   "info": {
     "displayName": "widget",
-    "icon": "chartPie"
+    "icon": "chartPie",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -26,6 +27,9 @@
     },
     "options": {
       "type": "json"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

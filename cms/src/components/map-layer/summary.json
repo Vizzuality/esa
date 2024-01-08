@@ -11,12 +11,11 @@
       "required": true
     },
     "content": {
-      "type": "richtext",
+      "type": "string",
       "required": true
     },
     "info": {
-      "type": "richtext",
-      "required": true
+      "type": "string"
     }
   }
 }
