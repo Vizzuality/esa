@@ -97,7 +97,7 @@ const Story = () => {
             </ScrollItem>
           );
         })}
-        <div className="fixed right-6 z-30 flex h-full flex-col justify-center">
+        <div className="fixed right-6 z-30 flex h-full flex-col justify-center gap-2">
           {steps?.map((s, index) => (
             <ScrollItemController
               className={cn(
@@ -106,7 +106,7 @@ const Story = () => {
               )}
               key={index}
               newStep={index}
-              title=""
+              title={s.title || ''}
             />
           ))}
         </div>
