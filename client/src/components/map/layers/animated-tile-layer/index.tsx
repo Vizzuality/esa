@@ -16,9 +16,10 @@ import { LegendTypeTimeline } from '../../legend/item-types';
 export type DeckLayerProps<T> = LayerProps &
   T & {
     c: any;
+    beforeId: string;
   };
 
-const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
+const AnimatedTileLayer = <T,>({ id = '', c, beforeId }: DeckLayerProps<T>) => {
   const { addLayer, removeLayer } = useDeckMapboxOverlayContext();
   const [frame, setFrame] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -31,12 +32,13 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
   const createLayer = useCallback(
     (data: { visible: boolean; url: string; opacity: number }, id: string, beforeId: string) => {
       const { url, visible = true, opacity = 1 } = data;
-
+      console.log({ beforeId, id });
       return new TileLayer({
         id,
         beforeId,
         frame,
         minZoom,
+        fp64: true,
         maxZoom,
         getTileData: (tile: any) => {
           const {
@@ -87,12 +89,13 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
           if (FRAME) {
             return new BitmapLayer({
               id: subLayerId,
-              beforeId: id,
+              beforeId,
               image: FRAME.bitmapData,
               bounds: [west, south, east, north],
               getPolygonOffset: () => {
-                return [0, 5000];
+                return [2, 5 * 10000];
               },
+              fp64: true,
               zoom,
               visible,
               opacity,
@@ -108,7 +111,11 @@ const AnimatedTileLayer = <T,>({ id = '', c }: DeckLayerProps<T>) => {
   const [DATA, setDATA] = useState(Array.isArray(data) ? data : [data]);
 
   const LAYERS = useMemo(
-    () => DATA.map((d, index) => createLayer(d, d.id, index === 0 ? id : data[index - 1].id)),
+    () =>
+      DATA.map((d, index) => {
+        console.log(d);
+        return createLayer(d, d.id, id);
+      }),
     [DATA, createLayer, data, id]
   );
 
