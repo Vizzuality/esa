@@ -1,3 +1,3 @@
-import env from '@/env.mjs';
+// import env from '@/env.mjs';
 
-export const getImageSrc = (url?: string) => url;
+export const getImageSrc = (url?: string) => url || '';
