@@ -4,20 +4,13 @@ import { Chart } from 'react-chartjs-2';
 
 import {
   Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
   ChartData,
   ChartType,
   ChartTypeRegistry,
   Point,
   BubbleDataPoint,
   Filler,
+  registerables,
 } from 'chart.js';
 import { ChartJSOrUndefined } from 'react-chartjs-2/dist/types';
 
@@ -40,17 +33,7 @@ const chartTypes = [
   'radar',
 ] as const;
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-);
+ChartJS.register(...registerables, Filler);
 
 ChartJS.defaults.font.size = 10;
 
@@ -62,24 +45,24 @@ const ChartJs = ({ widget, ...props }: ChartJsProps) => {
     unknown
   > | null>(null);
 
-  const dataWithDefaults = useMemo(() => getChartDefaultData(data, chartRef), [data]);
+  const dataWithDefaults = useMemo(
+    () => getChartDefaultData(data, chartRef),
+    [data, chartRef.current]
+  );
   const optionsWithDefaults = useMemo(() => getChartDefaultOptions(options), [options]);
 
   const chartType = type as ChartType;
 
-  // If the type is incorrect of there is no dataset return null
-  if (!chartTypes.includes(chartType) || !data || !(data as ChartData).datasets) {
-    return null;
-  }
-
   return (
     <div {...props}>
-      <Chart
-        ref={chartRef}
-        type={chartType}
-        options={optionsWithDefaults}
-        data={dataWithDefaults}
-      />
+      {!chartTypes.includes(chartType) || !data || !(data as ChartData).datasets ? null : (
+        <Chart
+          ref={chartRef}
+          type={chartType}
+          options={optionsWithDefaults}
+          data={dataWithDefaults}
+        />
+      )}
     </div>
   );
 };
