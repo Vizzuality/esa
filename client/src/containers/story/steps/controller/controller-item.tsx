@@ -31,7 +31,12 @@ export const ScrollItemController = ({ title, newStep, className }: ScrollItemCo
   return (
     <>
       <Tooltip delayDuration={300}>
-        <TooltipTrigger type="button" aria-label="Change layer opacity" className="h-5">
+        <TooltipTrigger
+          type="button"
+          aria-label={`Scroll to step ${newStep}`}
+          className="h-5"
+          asChild
+        >
           <Button variant="icon" className={className} onClick={handleSCrollToItem} size="icon" />
         </TooltipTrigger>
 
