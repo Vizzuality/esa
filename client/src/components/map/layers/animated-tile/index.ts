@@ -9,6 +9,7 @@ export interface AnimatedTileProps extends LayerProps {
   source: RasterSource;
   opacity: number;
   visibility: boolean;
+  beforeId: string;
   decodeFunction: string;
   decodeParams: Record<string, unknown>;
   frame: number;
@@ -71,11 +72,10 @@ export class AnimatedTile {
         if (FRAME) {
           return new BitmapLayer({
             id: subLayerId,
-            beforeId: id,
             image: FRAME.bitmapData,
             bounds: [west, south, east, north],
             getPolygonOffset: () => {
-              return [0, 5000];
+              return [0, 20000];
             },
             zoom,
             visible,

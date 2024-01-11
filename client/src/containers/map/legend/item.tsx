@@ -75,8 +75,7 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
   const settingsManager = getSettingsManager(attributes);
 
   const LEGEND_COMPONENTS = useMemo(() => {
-    const LC = Array.isArray(legend_config) ? legend_config : [legend_config];
-    return LC?.map((lc: LegendConfig) => {
+    return legend_config?.map((lc: LegendConfig) => {
       const l = parseConfig<LegendConfig | ReactElement | null>({
         config: { ...lc, layerId: id, layerTitle: attributes?.title },
         params_config,

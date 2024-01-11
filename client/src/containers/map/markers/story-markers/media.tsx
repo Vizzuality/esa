@@ -27,7 +27,6 @@ const StoryMarker = ({ media, name, isFullScreen, onClickExpand }: StoryMarkerMe
 
   const mediaMime = media?.mime;
 
-  // MOCKUP IMAGE FOR STORY 1 STEP 1 !! REMOVE WHEN REAL IMAGE IS AVAILABLE
   const mediaSrc = getImageSrc(media?.url);
 
   const handlePlayVideo = useCallback(
