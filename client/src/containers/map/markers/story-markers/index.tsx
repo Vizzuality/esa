@@ -9,11 +9,12 @@ import { useRecoilValue } from 'recoil';
 import { stepAtom } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
-
-import StoryMarkerMedia from './marker';
 import { StoryStepMap } from '@/types/story';
-// import Carousel from './carousel';
-// import { Dialog, DialogContent } from '@/components/ui/dialog';
+
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+
+import Carousel from './carousel';
+import StoryMarkerMedia from './marker';
 
 type StoryMarker = {
   id: number;
@@ -33,23 +34,24 @@ const StoryMarkers = () => {
   const { data: storyData } = useGetStoriesId(+id, {
     populate: 'deep',
   });
-  // const [currentMedia, setCurrentMedia] = useState<number>();
+  const [currentMedia, setCurrentMedia] = useState<number>();
   const markers: StoryMarker[] = useMemo(() => {
     return (storyData?.data?.attributes?.steps?.[step]?.map as StoryStepMap)?.markers || [];
   }, [step, storyData?.data?.attributes?.steps]);
 
-  // const medias = useMemo(() => {
-  //   return markers?.map((marker) => ({
-  //     id: marker?.id,
-  //     url: marker?.media?.url,
-  //     mime: marker?.media?.mime,
-  //     type: marker?.media?.mime?.includes('video') ? 'video' : 'image',
-  //   }));
-  // }, [markers]);
+  const medias = useMemo(() => {
+    return markers?.map((marker) => ({
+      title: marker?.name,
+      id: marker?.id,
+      url: marker?.media?.url,
+      mime: marker?.media?.mime,
+      type: marker?.media?.mime?.includes('video') ? 'video' : 'image',
+    }));
+  }, [markers]);
 
-  // const handleClickMarker = (markerIndex: number) => {
-  //   setCurrentMedia(markerIndex);
-  // };
+  const handleClickMarker = (markerIndex: number) => {
+    setCurrentMedia(markerIndex);
+  };
 
   return (
     <>
@@ -57,17 +59,17 @@ const StoryMarkers = () => {
         <StoryMarkerMedia
           key={marker.id}
           marker={marker}
-          // onClick={() => handleClickMarker(index)}
+          onClick={() => handleClickMarker(index)}
         />
       ))}
-      {/* <Dialog
+      <Dialog
         onOpenChange={() => setCurrentMedia(undefined)}
         open={typeof currentMedia === 'number'}
       >
         <DialogContent className="bg-transparent">
           <Carousel medias={medias} currentMedia={currentMedia} setCurrentMedia={setCurrentMedia} />
         </DialogContent>
-      </Dialog> */}
+      </Dialog>
     </>
   );
 };
