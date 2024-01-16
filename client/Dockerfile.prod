@@ -1,5 +1,5 @@
 # Build all the things
-FROM node:18-bullseye-slim AS base
+FROM node:18.16-bookworm-slim AS base
 
 # Install dependencies
 FROM base as deps
