@@ -71,7 +71,7 @@ export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
 
               <div
                 className={cn({
-                  'font-notes mt-px text-sm text-white': true,
+                  'font-open-sans mt-px text-sm font-semibold text-white': true,
                 })}
               >
                 {name}

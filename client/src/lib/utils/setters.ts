@@ -26,15 +26,9 @@ export const setVisibility = ({ v = true, type = 'mapbox' }: SetVisibilityProps)
   return v;
 };
 
-type SetFrameProps = { frame: number };
-export const setFrame = ({ frame = 0 }: SetFrameProps) => {
-  return frame;
-};
-
 const SETTERS = {
   setOpacity,
   setVisibility,
-  setFrame,
 } as const;
 
 export default SETTERS;

@@ -6,13 +6,9 @@ import { layersSettingsAtom } from '@/store';
 
 import { Switch } from '@/components/ui/switch';
 
-type LegendTypeSwitchProps = {
-  layerId: number;
-  param: string;
-  layerTitle: string;
-};
+import { LegendTypeSwitchProps } from '../../types';
 
-const LegendTypeSwitch = ({ layerId, param, layerTitle, ...rest }: LegendTypeSwitchProps) => {
+const LegendTypeSwitch = ({ layerId, param, layerTitle }: LegendTypeSwitchProps) => {
   const layersSettings = useRecoilValue(layersSettingsAtom);
   const checked = useMemo(() => layersSettings[layerId]?.[param], [layerId, layersSettings, param]);
 

@@ -16,7 +16,7 @@ const DeckJsonLayer = <T,>({ id, config }: DeckJsonLayerProps<T>) => {
   // Render deck config
   const i = `${id}-deck`;
   const { addLayer, removeLayer } = useDeckMapboxOverlayContext();
-
+  console.log(config);
   useEffect(() => {
     const timeout = setTimeout(() => {
       addLayer(config.clone({ id: i, beforeId: id }));

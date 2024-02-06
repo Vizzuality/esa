@@ -8,16 +8,8 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { layersSettingsAtom, timelineAtom } from '@/store';
 
+import { LegendTypeTimelineProps } from '@/components/map/legend/types';
 import { Button } from '@/components/ui/button';
-
-type LegendTypeTimelineProps = {
-  description: string;
-  startYear: number;
-  endYear: number;
-  id: number;
-  layerId: number;
-  interval?: number;
-};
 
 export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   startYear,

@@ -2,15 +2,15 @@ import React, { useMemo, Children, isValidElement } from 'react';
 
 import { cn } from '@/lib/classnames';
 
-// import SortableList from './sortable/list';
+import SortableList from './sortable/list';
 import { LegendProps } from './types';
 
 export const Legend: React.FC<LegendProps> = ({
   children,
   className = '',
-}: // sortable,
-// onChangeOrder,
-LegendProps) => {
+  sortable,
+  onChangeOrder,
+}: LegendProps) => {
   const isChildren = useMemo(() => {
     return !!Children.count(Children.toArray(children).filter((c) => isValidElement(c)));
   }, [children]);
@@ -26,11 +26,11 @@ LegendProps) => {
       {isChildren && (
         <div className="relative flex h-full flex-col overflow-hidden">
           <div className="flex items-end gap-4 overflow-y-auto overflow-x-hidden">
-            {/* {!!sortable.enabled && !!onChangeOrder && (
+            {!!sortable.enabled && !!onChangeOrder && (
               <SortableList sortable={sortable} onChangeOrder={onChangeOrder}>
                 {children}
               </SortableList>
-            )} */}
+            )}
 
             {children}
           </div>
