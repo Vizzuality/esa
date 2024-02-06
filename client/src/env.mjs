@@ -31,6 +31,8 @@ export const env = createEnv({
     NEXT_PUBLIC_GA_TRACKING_ID: z.string().optional(),
     NEXT_PUBLIC_BASE_PATH: z.string().optional(),
     NEXT_PUBLIC_PREVIEW_SECRET: z.string().optional(),
+    NEXT_PUBLIC_MAPBOX_USERNAME: z.string().optional(),
+    NEXT_PUBLIC_MAPBOX_STYLE_ID: z.string().optional(),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -48,6 +50,8 @@ export const env = createEnv({
       process.env.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED,
     NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH,
     NEXT_PUBLIC_PREVIEW_SECRET: process.env.NEXT_PUBLIC_PREVIEW_SECRET,
+    NEXT_PUBLIC_MAPBOX_USERNAME: process.env.NEXT_PUBLIC_MAPBOX_USERNAME,
+    NEXT_PUBLIC_MAPBOX_STYLE_ID: process.env.NEXT_PUBLIC_MAPBOX_STYLE_ID,
   },
 });
 

@@ -15,6 +15,7 @@
 
     --card: 198, 100%, 14%, 0.05;
     --card-foreground: 198, 100%, 14%, 0.5;
+    --card-map: rgba(51, 94, 111, 0.5);
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
@@ -73,6 +74,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased font-open-sans;
+    @apply bg-background text-foreground font-open-sans antialiased;
   }
 }

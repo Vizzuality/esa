@@ -1,4 +1,5 @@
 'use-client';
+
 import { ReactElement, createElement, isValidElement, useMemo } from 'react';
 
 import { useRecoilValue } from 'recoil';
@@ -9,7 +10,7 @@ import { layersSettingsAtom } from '@/store';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerTyped, LegendConfig } from '@/types/layers';
-import { LegendType } from '@/types/map';
+import { LEGEND_TYPE, LegendType } from '@/types/map';
 
 import Metadata from '@/containers/metadata';
 
@@ -18,14 +19,22 @@ import {
   LegendTypeBasic,
   LegendTypeChoropleth,
   LegendTypeGradient,
+  LegendTypeTimeline,
 } from '@/components/map/legend/item-types';
-import { LegendItemProps, LegendTypeProps, SettingsManager } from '@/components/map/legend/types';
+import LegendTypeSwitch from '@/components/map/legend/item-types/switch';
+import { LegendItemProps, LegendTypesProps, SettingsManager } from '@/components/map/legend/types';
 import ContentLoader from '@/components/ui/loader';
 
-const LEGEND_TYPES: Record<LegendType, React.FC<LegendTypeProps>> = {
+type LEGEND_TYPES_T = {
+  [key in LegendType]: React.FC<LegendTypesProps<key>>;
+};
+
+const LEGEND_TYPES: LEGEND_TYPES_T = {
   basic: LegendTypeBasic,
   choropleth: LegendTypeChoropleth,
   gradient: LegendTypeGradient,
+  timeline: LegendTypeTimeline,
+  switch: LegendTypeSwitch,
 };
 
 type MapLegendItemProps = LegendItemProps;
@@ -45,7 +54,7 @@ const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManage
   return {
     ...p,
     info: !!metadata,
-    expand: !!legend_config && !!legend_config.type,
+    expand: !!legend_config,
   };
 };
 
@@ -57,57 +66,72 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
   });
 
   const attributes = data?.data?.attributes as LayerTyped;
-  const legend_config = attributes?.legend_config;
-  const { displayControllers = true } = legend_config || {};
+
+  const legend_config = useMemo(() => {
+    if (!attributes?.legend_config) return [];
+    return Array.isArray(attributes?.legend_config)
+      ? attributes.legend_config
+      : [attributes.legend_config];
+  }, [attributes?.legend_config]);
+
   const params_config = attributes?.params_config;
   const metadata = attributes?.metadata;
   const settingsManager = getSettingsManager(attributes);
 
-  const LEGEND_COMPONENT = useMemo(() => {
-    const l = parseConfig<LegendConfig | ReactElement | null>({
-      config: legend_config,
-      params_config,
-      settings: layersSettings[id] ?? {},
+  const LEGEND_COMPONENTS = useMemo(() => {
+    const legends: ReactElement[] = [];
+    legend_config?.forEach((lc: LegendConfig) => {
+      const l = parseConfig<LegendConfig | ReactElement | null>({
+        config: { ...lc, layerId: id, layerTitle: attributes?.title },
+        params_config,
+        settings: layersSettings[id] ?? {},
+      });
+
+      if (!l) return;
+
+      if (isValidElement(l)) {
+        legends.push(l);
+      }
+
+      const { type, ...props } = l;
+      if (typeof type !== 'string' || !LEGEND_TYPE.includes(type as LegendType)) return;
+      // TODO: Fix this type
+      const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
+
+      legends.push(createElement(LEGEND, props));
     });
 
-    if (!l) return null;
+    return legends;
+  }, [legend_config, id, attributes?.title, params_config, layersSettings]);
 
-    if (isValidElement(l)) {
-      return l;
-    }
-
-    if (!isValidElement(l) && 'items' in l) {
-      const { type, ...props } = l;
-      return createElement(LEGEND_TYPES[type], props);
-    }
-
-    return null;
-  }, [id, legend_config, params_config, layersSettings]);
-
-  return (
-    <ContentLoader
-      skeletonClassName="h-10"
-      data={data?.data}
-      isFetching={isFetching}
-      isFetched={isFetched}
-      isPlaceholderData={isPlaceholderData}
-      isError={isError}
-    >
-      {displayControllers ? (
-        <LegendItem
-          id={id}
-          name={attributes?.title}
-          settingsManager={settingsManager}
-          {...props}
-          InfoContent={!!metadata && <Metadata {...attributes} />}
-        >
-          {LEGEND_COMPONENT}
-        </LegendItem>
-      ) : (
-        LEGEND_COMPONENT
-      )}
-    </ContentLoader>
-  );
+  return LEGEND_COMPONENTS?.map((LEGEND_COMPONENT, i) => {
+    const useLegendItem = legend_config?.[i]?.displayControllers !== false;
+    return (
+      <ContentLoader
+        skeletonClassName="h-10"
+        data={data?.data}
+        isFetching={isFetching}
+        isFetched={isFetched}
+        isPlaceholderData={isPlaceholderData}
+        isError={isError}
+        key={`${id}-${i}`}
+      >
+        {useLegendItem ? (
+          <LegendItem
+            id={id}
+            name={attributes?.title}
+            settingsManager={settingsManager}
+            {...props}
+            InfoContent={!!metadata && <Metadata {...attributes} />}
+          >
+            {LEGEND_COMPONENT}
+          </LegendItem>
+        ) : (
+          LEGEND_COMPONENT
+        )}
+      </ContentLoader>
+    );
+  });
 };
 
 export default MapLegendItem;

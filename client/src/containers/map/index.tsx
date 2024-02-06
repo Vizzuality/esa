@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-import { LngLatBoundsLike, Style } from 'mapbox-gl';
+import { LngLatBoundsLike } from 'mapbox-gl';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
@@ -25,9 +25,9 @@ import {
 // import type { LayerTyped } from '@/types/layers';
 import { Bbox } from '@/types/map';
 
-import { DEFAULT_MAP_STATE } from '@/constants/map';
-import MAPBOX_STYLE_GLOBE from '@/constants/mapbox-style-globe.json';
-import MAPBOX_STYLE_DEFAULT from '@/constants/mapbox-style.json';
+import { DEFAULT_MAP_STATE, MAPBOX_STYLES } from '@/constants/map';
+// import MAPBOX_STYLE_GLOBE from '@/constants/mapbox-style-globe.json';
+// import MAPBOX_STYLE_DEFAULT from '@/constants/mapbox-style.json';
 
 import HomeMarkers from '@/containers/map/markers/home-markers';
 import StoryMarkers from '@/containers/map/markers/story-markers';
@@ -41,7 +41,10 @@ import Map from '@/components/map';
 // import ZoomControl from '@/components/map/controls/zoom';
 import Marker from '@/components/map/layers/marker';
 import { CustomMapProps } from '@/components/map/types';
-
+// import MapLegends from './legend';
+const MapLegends = dynamic(() => import('@/containers/map/legend'), {
+  ssr: false,
+});
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
 });
@@ -186,7 +189,7 @@ export default function MapContainer() {
   return (
     <div
       className={cn(
-        'fixed left-0 top-0 h-screen w-screen bg-[#0a2839]',
+        'fixed left-0 top-0 h-screen w-full bg-[#0a2839]',
         isHomePage ? 'cursor-pointer' : 'pointer-events-none cursor-default'
       )}
     >
@@ -203,7 +206,7 @@ export default function MapContainer() {
         }}
         minZoom={minZoom}
         maxZoom={maxZoom}
-        mapStyle={(isHomePage ? MAPBOX_STYLE_GLOBE : MAPBOX_STYLE_DEFAULT) as Style}
+        mapStyle={MAPBOX_STYLES.default}
         fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         // onClick={handleMapClick}
@@ -244,6 +247,9 @@ export default function MapContainer() {
         )}
         {!isHomePage && <StoryMarkers />}
       </Map>
+      <div className="absolute bottom-0 left-0 z-20 w-full p-4">
+        <MapLegends />
+      </div>
     </div>
   );
 }

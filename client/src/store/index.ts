@@ -124,6 +124,11 @@ export const DEFAULT_SETTINGS = {
   expand: true,
 };
 
+export const timelineAtom = atom<{ [id: number]: { frame: number; layers: number[] } }>({
+  key: 'timeline',
+  default: {},
+});
+
 export function useSyncLayersAndSettings() {
   const layers = useRecoilValue(layersAtom);
 
