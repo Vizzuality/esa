@@ -81,6 +81,8 @@ locals {
     NEXT_PUBLIC_GA_TRACKING_ID                 = var.ga_tracking_id
     NEXT_PUBLIC_MAPBOX_API_TOKEN               = var.mapbox_api_token
     NEXT_PUBLIC_PREVIEW_SECRET                 = random_password.preview_secret.result
+    NEXT_PUBLIC_MAPBOX_USERNAME                = var.mapbox_username
+    NEXT_PUBLIC_MAPBOX_STYLE_ID                = var.mapbox_style_id
     LOG_LEVEL                                  = "info"
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false
   }
