@@ -41,7 +41,6 @@ export const DeckMapboxOverlayProvider = ({ children }: PropsWithChildren) => {
   const addLayer = useCallback(
     (layer: any) => {
       const newLayers = [...layersRef.current.filter((l) => l.id !== layer.id), layer];
-
       layersRef.current = newLayers;
       return OVERLAY.setProps({ layers: newLayers });
     },
@@ -51,7 +50,6 @@ export const DeckMapboxOverlayProvider = ({ children }: PropsWithChildren) => {
   const removeLayer = useCallback(
     (id: string) => {
       const newLayers = [...layersRef.current.filter((l) => l.id !== id)];
-
       layersRef.current = newLayers;
       OVERLAY.setProps({ layers: newLayers });
     },

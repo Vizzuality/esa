@@ -15,8 +15,20 @@ import {
   tuple,
   writableDict,
 } from '@recoiljs/refine';
+import { MapboxGeoJSONFeature } from 'mapbox-gl';
 import { atom, useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 import { urlSyncEffect } from 'recoil-sync';
+
+export type TmpBbox = {
+  bbox: readonly [number, number, number, number];
+  options: {
+    zoom: number;
+    pitch: number;
+    bearing: number;
+    longitude: number;
+    latitude: number;
+  };
+};
 
 // Map settings
 export const mapSettingsAtom = atom({
@@ -50,9 +62,9 @@ export const bboxAtom = atom<readonly [number, number, number, number] | null | 
   ],
 });
 
-export const tmpBboxAtom = atom<readonly [number, number, number, number] | null>({
+export const tmpBboxAtom = atom<TmpBbox | undefined>({
   key: 'tmp-bbox',
-  default: null,
+  default: undefined,
 });
 
 // Sidebar and menus
@@ -89,7 +101,7 @@ export const layersInteractiveAtom = atom<number[]>({
 
 export const layersInteractiveIdsAtom = atom<string[]>({
   key: 'layers-interactive-ids',
-  default: [],
+  default: ['story-markers-cluster', 'story-markers-cluster-count', 'story-markers-unclustered'],
 });
 
 export const popupAtom = atom<MapLayerMouseEvent | null>({
@@ -98,9 +110,24 @@ export const popupAtom = atom<MapLayerMouseEvent | null>({
   dangerouslyAllowMutability: true,
 });
 
+export const markerAtom = atom<MapboxGeoJSONFeature | null>({
+  key: 'marker',
+  default: null,
+});
+
+export const isFlyingBackAtom = atom<boolean>({
+  key: 'is-flying-back',
+  default: false,
+});
+
 export const DEFAULT_SETTINGS = {
   expand: true,
 };
+
+export const timelineAtom = atom<{ [id: number]: { frame: number; layers: number[] } }>({
+  key: 'timeline',
+  default: {},
+});
 
 export function useSyncLayersAndSettings() {
   const layers = useRecoilValue(layersAtom);

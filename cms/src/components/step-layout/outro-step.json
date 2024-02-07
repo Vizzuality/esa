@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_outro_layer_outro_steps",
+  "info": {
+    "displayName": "outro-step",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "media": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "layers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::layer.layer"
+    },
+    "map": {
+      "type": "customField",
+      "customField": "plugin::map-field.map-field"
+    },
+    "disclaimer": {
+      "displayName": "discalimer",
+      "type": "component",
+      "repeatable": true,
+      "component": "disclaimer.discalimer"
+    }
+  }
+}

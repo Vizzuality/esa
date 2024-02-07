@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_map_layer_locations",
+  "info": {
+    "displayName": "location",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "longitude": {
+      "type": "float",
+      "required": true
+    },
+    "latitude": {
+      "type": "float",
+      "required": true
+    },
+    "zoom": {
+      "type": "float",
+      "required": true,
+      "min": 0,
+      "max": 22,
+      "default": 10
+    },
+    "pitch": {
+      "type": "float",
+      "required": true
+    },
+    "bearing": {
+      "type": "float"
+    }
+  }
+}

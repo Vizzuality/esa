@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 
-import ReactMapGL, { ViewState, ViewStateChangeEvent, MapboxEvent, useMap } from 'react-map-gl';
+import ReactMapGL, { ViewState, ViewStateChangeEvent, MapEvent, useMap } from 'react-map-gl';
 
 // * If you plan to use Mapbox (and not a fork):
 // * 1) remove maplibre-gl,
@@ -30,11 +30,11 @@ export const MapMapbox: FC<CustomMapProps> = ({
   initialViewState,
   bounds,
   onMapViewStateChange,
+  onLoad,
   dragPan,
   dragRotate,
   scrollZoom,
   doubleClickZoom,
-  onLoad,
   ...mapboxProps
 }: CustomMapProps) => {
   /**
@@ -93,7 +93,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
   );
 
   const handleMapLoad = useCallback(
-    (e: MapboxEvent<undefined>) => {
+    (e: MapEvent<undefined>) => {
       setLoaded(true);
 
       if (onLoad) {
@@ -120,7 +120,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
     if (!bounds) return undefined;
 
     const { options } = bounds;
-    const animationDuration = options?.duration || 0;
+    const animationDuration = options?.duration || 1000;
     let timeoutId: number;
 
     if (isFlying) {
@@ -141,18 +141,17 @@ export const MapMapbox: FC<CustomMapProps> = ({
       <ReactMapGL
         id={id}
         initialViewState={initialViewState}
+        mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
+        onMove={handleMapMove}
+        onLoad={handleMapLoad}
         dragPan={!isFlying && dragPan}
         dragRotate={!isFlying && dragRotate}
         scrollZoom={!isFlying && scrollZoom}
         doubleClickZoom={!isFlying && doubleClickZoom}
-        mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-        // projection="globe"
-        onMove={handleMapMove}
-        onLoad={handleMapLoad}
         {...mapboxProps}
         {...localViewState}
       >
-        {!!mapRef && loaded && !!children && children(mapRef.getMap())}
+        {!!mapRef && loaded && children}
       </ReactMapGL>
     </div>
   );

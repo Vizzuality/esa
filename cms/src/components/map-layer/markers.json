@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_map_layer_markers",
+  "info": {
+    "displayName": "markers",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "media": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos",
+        "audios"
+      ]
+    },
+    "longitude": {
+      "type": "float",
+      "required": true
+    },
+    "latitude": {
+      "type": "float",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "image",
+        "audio",
+        "video"
+      ]
+    }
+  }
+}

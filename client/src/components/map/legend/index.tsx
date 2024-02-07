@@ -18,21 +18,21 @@ export const Legend: React.FC<LegendProps> = ({
   return (
     <div
       className={cn({
-        'relative flex grow flex-col overflow-hidden': true,
+        'relative flex-col overflow-hidden': true,
         hidden: !isChildren,
         [className]: !!className,
       })}
     >
       {isChildren && (
         <div className="relative flex h-full flex-col overflow-hidden">
-          <div className="overflow-y-auto overflow-x-hidden">
+          <div className="flex items-end gap-4 overflow-y-auto overflow-x-hidden">
             {!!sortable.enabled && !!onChangeOrder && (
               <SortableList sortable={sortable} onChangeOrder={onChangeOrder}>
                 {children}
               </SortableList>
             )}
 
-            {!sortable.enabled && children}
+            {children}
           </div>
         </div>
       )}

@@ -49,12 +49,24 @@ module.exports = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
+          map: 'var(--card-map)',
+        },
+        gray: {
+          200: 'hsla(60, 8%, 90%, 1)',
+          500: 'hsla(202, 15%, 66%, 1)',
+          700: '#5A7A8A',
+          800: 'hsla(197, 37%, 32%, 1)',
+        },
+        'enlight-yellow': {
+          400: 'hsla(43, 100%, 65%, 1)',
+          500: 'hsla(39, 97%, 54%, 1)',
         },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        '4xl': '2rem',
       },
       keyframes: {
         'accordion-down': {
@@ -71,8 +83,20 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        'open-sans': ['var(--font-open-sans)'],
+        inter: ['var(--font-inter)'],
         notes: ['var(--font-esa-notes)'],
+      },
+      backgroundImage: {
+        'header-line':
+          'linear-gradient(90deg, rgba(0, 174, 157, 0.00) 0%, rgba(0, 174, 157, 0.70) 51.56%, rgba(0, 174, 157, 0.00) 98.43%)',
+      },
+      screens: {
+        '3xl': '1650px',
+      },
+      boxShadow: {
+        filters: '4px 0px 30px 0px hsla(var(--card-foreground))',
+        xs: '-4px 0px 4px 0px rgba(160, 160, 160, 0.41) inset',
       },
     },
   },

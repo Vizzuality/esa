@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Urban Sustainability: Updating the Revised Strategic Transport Plan for Dhaka, Bangladesh",
+    "region": "Dhaka, Bangladesh",
+    "image": "https://esa-gda-comms-staging-cms.fra1.digitaloceanspaces.com/story_1_90a5fc0766.png",
+    "active": true
+  },
+  {
+    "id": "2",
+    "title": "Urban Wetlands: EO-based tools to support wetland restoration in Rwanda",
+    "region": "Kigali, Ruanda",
+    "image": "https://esa-gda-comms-staging-cms.fra1.digitaloceanspaces.com/story_2_e62b45087c.png",
+    "active": false
+  },
+  {
+    "id": "3",
+    "title": "Soil monitoring helps build climate resilience for Nigeria's farmers",
+    "region": "Nigeria",
+    "image": "https://esa-gda-comms-staging-cms.fra1.digitaloceanspaces.com/story_3_82beedeff6.png",
+    "active": false
+  },
+  {
+    "id": "4",
+    "title": "Satellite Data and Sustainability-Linked Bonds: Monitoring Land Use in Peruvian Amazon",
+    "region": "Peru",
+    "image": "https://esa-gda-comms-staging-cms.fra1.digitaloceanspaces.com/story_4_322b71cf63.png",
+    "active": false
+  },
+  {
+    "id": "5",
+    "title": "Changing Grey to Green in Sargodha, Pakistan - Using Satellite Earth Observation",
+    "region": "Sargodha, Pakistan",
+    "image": "https://esa-gda-comms-staging-cms.fra1.digitaloceanspaces.com/story_5_fb1456f0dd.png",
+    "active": false
+  }
+]

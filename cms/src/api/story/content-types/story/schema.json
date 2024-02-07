@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stories",
+  "info": {
+    "singularName": "story",
+    "pluralName": "stories",
+    "displayName": "Story",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "required": false,
+      "targetField": "title"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Completed",
+        "In progress"
+      ],
+      "default": "In progress",
+      "required": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "stories"
+    },
+    "steps": {
+      "type": "dynamiczone",
+      "components": [
+        "step-layout.map-step",
+        "step-layout.outro-step"
+      ],
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "marker": {
+      "type": "customField",
+      "options": {
+        "format": "marker"
+      },
+      "customField": "plugin::map-field.map-field",
+      "required": true
+    }
+  }
+}

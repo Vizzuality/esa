@@ -4,6 +4,8 @@ import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListeners } from '@dnd-kit/core/dist/hooks/utilities';
 import { LucideIcon } from 'lucide-react';
 
+import { LegendType } from '@/types/map';
+
 type Sortable = {
   enabled: boolean;
   handle?: boolean;
@@ -101,9 +103,38 @@ export interface LegendTypeProps {
   }>;
 }
 
+export interface LegendTypeTimelineProps {
+  isPlaying?: boolean;
+  className?: string;
+  description: string;
+  startYear: number;
+  endYear: number;
+  id: number;
+  layerId: number;
+  interval?: number;
+}
+
 export interface LegendMatrixIntersectionsProps {
   intersections: Array<{
     id: number;
     color: string;
   }>;
 }
+
+export interface LegendTypeSwitchProps {
+  layerId: number;
+  param: string;
+  layerTitle: string;
+}
+
+type ItemLegends = Extract<LegendType, 'basic' | 'choropleth' | 'gradient'>;
+
+export type LegendTypesProps<T> = T extends ItemLegends
+  ? LegendTypeProps
+  : T extends 'timeline'
+  ? LegendTypeTimelineProps
+  : T extends 'switch'
+  ? LegendTypeSwitchProps
+  : T extends 'matrix'
+  ? LegendMatrixIntersectionsProps
+  : never;

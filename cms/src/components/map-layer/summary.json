@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_map_layer_summaries",
+  "info": {
+    "displayName": "summary",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "string",
+      "required": true
+    },
+    "info": {
+      "type": "string"
+    }
+  }
+}
