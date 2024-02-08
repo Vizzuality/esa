@@ -1,15 +1,15 @@
 import { useCallback } from 'react';
 
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAtomValue, useSetAtom } from 'jotai';
 
-import { mapSettingsAtom } from '@/store/index';
+import { mapSettingsAtom } from '@/store/map';
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 
 const Boundaries = () => {
-  const { boundaries } = useRecoilValue(mapSettingsAtom);
-  const setMapSettings = useSetRecoilState(mapSettingsAtom);
+  const { boundaries } = useAtomValue(mapSettingsAtom);
+  const setMapSettings = useSetAtom(mapSettingsAtom);
 
   const handleChange = useCallback(
     (v: boolean) => {

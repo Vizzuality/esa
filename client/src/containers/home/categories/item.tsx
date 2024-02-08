@@ -1,8 +1,6 @@
-import { useRecoilState, useResetRecoilState } from 'recoil';
-
 import { cn } from '@/lib/classnames';
 
-import { categoryAtom } from '@/store/home';
+import { useCategoryAtom } from '@/store/home';
 
 import { Category } from '@/types/generated/strapi.schemas';
 
@@ -13,12 +11,12 @@ import { TooltipTrigger, TooltipContent, Tooltip } from '@/components/ui/tooltip
 type CategoryProps = Pick<Category, 'name' | 'slug'>;
 
 const Category = ({ name, slug }: CategoryProps) => {
-  const [category, setCategory] = useRecoilState(categoryAtom);
-  const resetCategory = useResetRecoilState(categoryAtom);
+  const [category, setCategory] = useCategoryAtom();
 
   const handleClick = (slug: string) => {
     if (category === slug) {
-      return resetCategory();
+      setCategory(null);
+      return;
     }
     setCategory(slug);
   };

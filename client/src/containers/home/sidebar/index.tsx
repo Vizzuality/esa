@@ -2,14 +2,14 @@
 
 import { PropsWithChildren } from 'react';
 
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 
 import { cn } from '@/lib/classnames';
 
-import { sidebarOpenAtom } from '@/store';
+import { sidebarOpenAtom } from '@/store/map';
 
 export default function Sidebar({ children }: PropsWithChildren) {
-  const open = useRecoilValue(sidebarOpenAtom);
+  const open = useAtomValue(sidebarOpenAtom);
 
   return (
     <div

@@ -1,13 +1,10 @@
-import { number } from '@recoiljs/refine';
-import { atom } from 'recoil';
-import { urlSyncEffect } from 'recoil-sync';
+'use client';
+import { parseAsInteger, useQueryState } from 'nuqs';
 
-export const stepAtom = atom({
-  key: 'step',
-  default: 0,
-  effects: [
-    urlSyncEffect({
-      refine: number(),
-    }),
-  ],
-});
+const DEFAULT_STEP = 1;
+
+export const useStep = () => {
+  const [step, setStep] = useQueryState('step', parseAsInteger.withDefault(DEFAULT_STEP));
+  const removeStep = () => setStep(null);
+  return { step, setStep, removeStep };
+};

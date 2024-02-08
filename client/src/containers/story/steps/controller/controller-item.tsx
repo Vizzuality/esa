@@ -2,11 +2,9 @@
 
 import { useCallback } from 'react';
 
-import { useRecoilValue } from 'recoil';
-
 import { useScrollToItem } from '@/lib/scroll';
 
-import { stepAtom } from '@/store/stories';
+import { useStep } from '@/store/stories';
 
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -20,7 +18,7 @@ type ScrollItemControllerProps = {
 export const ScrollItemController = ({ title, newStep, className }: ScrollItemControllerProps) => {
   const scrollToItem = useScrollToItem();
 
-  const currStep = useRecoilValue(stepAtom);
+  const { step: currStep } = useStep();
 
   const handleSCrollToItem = useCallback(() => {
     if (newStep !== currStep) {

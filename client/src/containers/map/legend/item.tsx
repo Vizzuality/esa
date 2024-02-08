@@ -2,11 +2,11 @@
 
 import { ReactElement, createElement, isValidElement, useMemo } from 'react';
 
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 
 import { parseConfig } from '@/lib/json-converter';
 
-import { layersSettingsAtom } from '@/store';
+import { layersSettingsAtom } from '@/store/map';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerTyped, LegendConfig } from '@/types/layers';
@@ -59,7 +59,7 @@ const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManage
 };
 
 const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
-  const layersSettings = useRecoilValue(layersSettingsAtom);
+  const layersSettings = useAtomValue(layersSettingsAtom);
 
   const { data, isError, isFetched, isFetching, isPlaceholderData } = useGetLayersId(id, {
     populate: 'metadata',

@@ -4,15 +4,15 @@ import { useEffect, useMemo } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
+import { useSetAtom } from 'jotai';
+import { useResetAtom } from 'jotai/utils';
 import { ArrowLeft, Share2 } from 'lucide-react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
 import { ScrollProvider } from '@/lib/scroll';
 
-import { layersAtom, tmpBboxAtom } from '@/store';
-
-import { stepAtom } from '@/store/stories';
+import { layersAtom, tmpBboxAtom } from '@/store/map';
+import { useStep } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
 
@@ -27,10 +27,10 @@ const headerButtonClassName =
   'rounded-4xl h-auto border-gray-800 bg-[hsl(198,100%,14%)]/75 px-5 py-2.5 hover:bg-gray-800';
 
 const Story = () => {
-  const step = useRecoilValue(stepAtom);
-  const setTmpBbox = useSetRecoilState(tmpBboxAtom);
-  const setLayers = useSetRecoilState(layersAtom);
-  const resetLayers = useResetRecoilState(layersAtom);
+  const { step } = useStep();
+  const setTmpBbox = useSetAtom(tmpBboxAtom);
+  const setLayers = useSetAtom(layersAtom);
+  const resetLayers = useResetAtom(layersAtom);
   const { push } = useRouter();
 
   const { id } = useParams();
@@ -48,7 +48,7 @@ const Story = () => {
 
   useEffect(() => {
     if (!steps) return;
-    const currStep = steps[step];
+    const currStep = steps[step - 1];
 
     if (!currStep || !isMapNotEmpty(currStep.map)) {
       return;
@@ -92,8 +92,8 @@ const Story = () => {
       <ScrollProvider>
         {steps?.map((mapStep, index) => {
           return (
-            <ScrollItem step={index} key={index}>
-              <Step index={index} step={mapStep} category={story?.category} />
+            <ScrollItem step={index + 1} key={index + 1}>
+              <Step index={index + 1} step={mapStep} category={story?.category} />
             </ScrollItem>
           );
         })}
@@ -102,10 +102,12 @@ const Story = () => {
             <ScrollItemController
               className={cn(
                 'hover:outline-secondary h-2 w-2 rounded-full border-[1.5px] border-gray-800 outline outline-[1.5px] transition-all duration-200',
-                index === step ? 'bg-secondary outline-secondary' : 'bg-gray-800 outline-gray-700'
+                index + 1 === step
+                  ? 'bg-secondary outline-secondary'
+                  : 'bg-gray-800 outline-gray-700'
               )}
-              key={index}
-              newStep={index}
+              key={index + 1}
+              newStep={index + 1}
               title={s.title || ''}
             />
           ))}

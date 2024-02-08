@@ -11,9 +11,8 @@ import {
 } from 'react';
 
 import { motionValue, MotionValue, useMotionValueEvent, useScroll } from 'framer-motion';
-import { useSetRecoilState } from 'recoil';
 
-import { stepAtom } from '@/store/stories';
+import { useStep } from '@/store/stories';
 
 type ScrollItem = {
   key: string | number;
@@ -52,7 +51,7 @@ export const ScrollProvider = ({ children }: PropsWithChildren<any>) => {
     offset: ['start end', 'start center'],
   });
 
-  const setStep = useSetRecoilState(stepAtom);
+  const { setStep } = useStep();
 
   const addScrollItem = useCallback<ScrollContext['addScrollItem']>(
     (data) => {

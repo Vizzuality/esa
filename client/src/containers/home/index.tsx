@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react';
 
-import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useSetAtom } from 'jotai';
+import { useResetAtom } from 'jotai/utils';
 
-import { layersAtom, tmpBboxAtom } from '@/store';
-
-import { stepAtom } from '@/store/stories';
+import { layersAtom, tmpBboxAtom } from '@/store/map';
+import { useStep } from '@/store/stories';
 
 import { DEFAULT_MAP_BBOX, DEFAULT_MAP_STATE } from '@/constants/map';
 
@@ -22,9 +22,9 @@ import Header from './header';
 import TopStories from './top-stories';
 
 export default function Home() {
-  const setTmpBbox = useSetRecoilState(tmpBboxAtom);
-  const resetLayers = useResetRecoilState(layersAtom);
-  const resetStep = useResetRecoilState(stepAtom);
+  const setTmpBbox = useSetAtom(tmpBboxAtom);
+  const resetLayers = useResetAtom(layersAtom);
+  const { removeStep } = useStep();
 
   useEffect(() => {
     const tmpbbox: [number, number, number, number] = DEFAULT_MAP_BBOX;
@@ -33,7 +33,7 @@ export default function Home() {
 
   useEffect(() => {
     resetLayers();
-    resetStep();
+    removeStep();
   }, []);
 
   return (

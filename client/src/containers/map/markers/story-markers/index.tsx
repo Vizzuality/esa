@@ -4,9 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
-import { useRecoilValue } from 'recoil';
-
-import { stepAtom } from '@/store/stories';
+import { useStep } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
 import { StoryStepMap } from '@/types/story';
@@ -28,7 +26,7 @@ type StoryMarker = {
 };
 
 const StoryMarkers = () => {
-  const step = useRecoilValue(stepAtom);
+  const { step } = useStep();
 
   const { id } = useParams();
   const { data: storyData } = useGetStoriesId(+id, {

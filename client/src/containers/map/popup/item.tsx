@@ -3,11 +3,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useMap } from 'react-map-gl';
 
 import type { Feature } from 'geojson';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 
 import { format } from '@/lib/utils/formats';
 
-import { layersInteractiveIdsAtom, popupAtom } from '@/store';
+import { layersInteractiveIdsAtom, popupAtom } from '@/store/map';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerTyped } from '@/types/layers';
@@ -23,8 +23,8 @@ const PopupItem = ({ id }: PopupItemProps) => {
 
   const { default: map } = useMap();
 
-  const popup = useRecoilValue(popupAtom);
-  const layersInteractiveIds = useRecoilValue(layersInteractiveIdsAtom);
+  const popup = useAtomValue(popupAtom);
+  const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
 
   const { data, isFetching, isFetched, isError, isPlaceholderData } = useGetLayersId(id, {
     populate: 'metadata',
