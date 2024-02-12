@@ -5,7 +5,6 @@ import { useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
 import { useSetAtom } from 'jotai';
-import { useResetAtom } from 'jotai/utils';
 import { ArrowLeft, Share2 } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
@@ -30,7 +29,6 @@ const Story = () => {
   const { step } = useStep();
   const setTmpBbox = useSetAtom(tmpBboxAtom);
   const setLayers = useSetAtom(layersAtom);
-  const resetLayers = useResetAtom(layersAtom);
   const { push } = useRouter();
 
   const { id } = useParams();
@@ -42,7 +40,7 @@ const Story = () => {
   const steps = useMemo(() => story?.steps || [], [story]);
 
   const handleGoHome = () => {
-    resetLayers();
+    setLayers([]);
     push('/');
   };
 
