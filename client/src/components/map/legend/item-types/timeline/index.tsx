@@ -3,28 +3,43 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Root, Track, Thumb } from '@radix-ui/react-slider';
-import { PauseIcon, PlayIcon } from 'lucide-react';
+import {
+  eachYearOfInterval,
+  eachMonthOfInterval,
+  format as dateFnsFormat,
+  eachDayOfInterval,
+  eachHourOfInterval,
+  eachMinuteOfInterval,
+} from 'date-fns';
 import { useAtomValue, useSetAtom } from 'jotai';
+import { PauseIcon, PlayIcon } from 'lucide-react';
 
-import { layersSettingsAtom, timelineAtom } from '@/store/map';
+import { cn } from '@/lib/classnames';
+
+import { layersAtom, layersSettingsAtom, timelineAtom } from '@/store/map';
 
 import { LegendTypeTimelineProps } from '@/components/map/legend/types';
 import { Button } from '@/components/ui/button';
 
+const width = 200;
+const height = 12;
+const textMarginY = -5;
+
 export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
-  startYear,
-  endYear,
+  start,
+  end,
+  dateType = 'year',
   id,
+  interval = 1,
+  format,
   layerId,
-  ...rest
+  description,
+  animationInterval = 1000,
 }) => {
-  const width = 200;
-  const height = 12;
-  const textMarginY = -10;
-  const textMarginX = 16;
   const intervalRef = useRef<NodeJS.Timer>();
 
   const setLayersSettings = useSetAtom(layersSettingsAtom);
+  const layers = useAtomValue(layersAtom);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -76,17 +91,57 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
     [id, setLayersSettings, setTimelines, timelines]
   );
 
+  const TIMELINE = useMemo(() => {
+    if (!start || !end) return [];
+
+    const startDate = new Date(String(start));
+    const endDate = new Date(String(end));
+
+    let defaultFormat = 'yyyy';
+
+    const extractFunction = () => {
+      switch (dateType) {
+        case 'year':
+          return eachYearOfInterval;
+        case 'month':
+          defaultFormat = 'MMM yyyy';
+          return eachMonthOfInterval;
+        case 'day':
+          defaultFormat = 'dd MMM yyyy';
+          return eachDayOfInterval;
+        case 'hour':
+          defaultFormat = 'HH:mm dd';
+          return eachHourOfInterval;
+        case 'minute':
+          defaultFormat = 'HH:mm';
+          return eachMinuteOfInterval;
+        default:
+          return eachYearOfInterval;
+      }
+    };
+
+    const timelineValues: Date[] = extractFunction()(
+      { start: startDate, end: endDate },
+      { step: interval }
+    );
+
+    return (
+      timelineValues?.map((d, index) => ({
+        value: index,
+        label: dateFnsFormat(d, format || defaultFormat),
+      })) || []
+    );
+  }, [start, end, dateType, interval, format]);
+
   const handlePlay = useCallback(() => {
     clearInterval(intervalRef.current);
     setIsPlaying(!isPlaying);
     if (isPlaying) {
       return;
     }
-    const lastFrame = endYear - startYear;
+    const lastFrame = TIMELINE.length - 1;
     let newFrame = frame === lastFrame ? 0 : frame + 1;
     setFrame(newFrame);
-
-    const { interval = 1000 } = rest;
 
     intervalRef.current = setInterval(() => {
       if (newFrame === lastFrame) {
@@ -96,38 +151,46 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
         setFrame(newFrame + 1);
         newFrame++;
       }
-    }, interval);
-  }, [isPlaying, endYear, startYear, frame, setFrame, rest]);
+    }, animationInterval);
+  }, [isPlaying, TIMELINE?.length, frame, setFrame, animationInterval]);
 
-  const years = useMemo(
-    () =>
-      startYear && endYear
-        ? Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i)
-        : [],
-    [endYear, startYear]
-  );
-
-  const lastYear = years[years.length - 1];
-  const value = years[frame];
-
-  const yearScale = useCallback(
-    (year: number) =>
-      startYear && endYear ? ((year - startYear) / (endYear - startYear)) * (width - 2) : 0,
-    [endYear, startYear]
-  );
+  const value = TIMELINE[frame]?.value;
 
   const onChangeFrame = (f: number) => {
+    if (isPlaying) {
+      clearInterval(intervalRef.current);
+      setIsPlaying(false);
+    }
     setFrame(f);
   };
 
+  const firstTimelineLayer = useMemo(
+    () => layers.find((l) => timelines[id]?.layers.includes(l)),
+    [id, layers, timelines]
+  );
+
+  const maxValue = TIMELINE?.length || 1;
+  const minValue = 0;
+  const yearScale = useCallback(
+    (year: number) => (year / (maxValue - minValue)) * (width - 2),
+    [maxValue, minValue]
+  );
+
+  const currValueText = useRef<SVGTextElement>(null);
+  const firstValueText = useRef<SVGTextElement>(null);
   // If the layer is not the first one in the timeline, don't render the component
-  if (timelines[id]?.layers?.length > 1 && timelines[id]?.layers[0] !== layerId) {
+  if (firstTimelineLayer !== layerId) {
     return null;
   }
+  const currTextSize = currValueText.current?.getBBox().width || 0;
+  const firstTextSize = currValueText.current?.getBBox().width || 0;
+  const currYearX = yearScale(value) - currTextSize / 2;
+  const minYearX = Math.max(-firstTextSize / 2, -15);
+  const maxYearX = width - Math.min(firstTextSize / 2, 25) - 5;
 
   return (
     <div className="w-full flex-1 overflow-visible">
-      <div className="bg-card-map z-30 flex h-[60px] w-fit items-center justify-between gap-8 rounded-full px-4 backdrop-blur-sm">
+      <div className="bg-card-map z-30 flex h-[62px] w-fit items-center justify-between gap-8 rounded-full px-4 backdrop-blur-sm">
         <Button
           variant="default"
           className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
@@ -141,28 +204,36 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
         </Button>
 
         <Root
-          max={endYear - startYear}
+          max={(TIMELINE?.length || 1) - 1}
           min={0}
-          step={1}
+          step={interval}
           value={[frame]}
           onValueChange={([v]) => onChangeFrame(v)}
-          className="relative flex w-full -translate-x-3 translate-y-2 touch-none select-none items-center"
+          className="relative flex w-full -translate-x-3 translate-y-3 touch-none select-none items-center"
         >
           <Track className="w-full">
             <svg width={width} height={height} className="cursor-pointer overflow-visible">
               {/* Min value text */}
-              <text x={-textMarginX} y={textMarginY} className="font-open-sans fill-white text-sm">
-                {value - years[0] > 3 && years[0]}
+              <text
+                x={minYearX}
+                y={textMarginY}
+                className={cn(
+                  'font-open-sans fill-white text-xs',
+                  currYearX - minYearX > firstTextSize ? 'opacity-100' : 'opacity-25'
+                )}
+                ref={firstValueText}
+              >
+                {TIMELINE[0]?.label}
               </text>
 
               {/* Years lines */}
-              {years.map((year) => {
-                const position = year % 10 === 0 ? 0 : 4;
+              {TIMELINE?.map(({ value }) => {
+                const position = value % 10 === 0 ? 0 : 4;
                 return (
                   <line
-                    key={year}
-                    x1={yearScale(year)}
-                    x2={yearScale(year)}
+                    key={value}
+                    x1={yearScale(value)}
+                    x2={yearScale(value)}
                     y1={position}
                     y2={height}
                     strokeWidth={2}
@@ -173,19 +244,23 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
 
               {/* Max value text */}
               <text
-                className="font-open-sans fill-white text-sm"
-                x={width - textMarginX}
+                className={cn(
+                  'font-open-sans fill-white text-xs',
+                  maxYearX - currYearX > firstTextSize ? 'opacity-100' : 'opacity-25'
+                )}
+                x={maxYearX}
                 y={textMarginY}
+                ref={currValueText}
               >
-                {lastYear !== value && lastYear}
+                {TIMELINE?.[TIMELINE.length - 1]?.label}
               </text>
               {/* Current value text */}
               <text
-                x={yearScale(value) - textMarginX}
-                y={textMarginY - 5}
+                x={currYearX}
+                y={textMarginY - 10}
                 className="font-open-sans fill-white text-sm font-bold"
               >
-                {value}
+                {TIMELINE?.[value]?.label}
               </text>
             </svg>
           </Track>

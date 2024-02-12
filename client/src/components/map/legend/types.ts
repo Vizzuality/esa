@@ -104,14 +104,16 @@ export interface LegendTypeProps {
 }
 
 export interface LegendTypeTimelineProps {
-  isPlaying?: boolean;
   className?: string;
-  description: string;
-  startYear: number;
-  endYear: number;
+  description?: string;
   id: number;
   layerId: number;
   interval?: number;
+  start: string;
+  end: string;
+  dateType?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second';
+  format?: string;
+  animationInterval?: number;
 }
 
 export interface LegendMatrixIntersectionsProps {
