@@ -9,9 +9,9 @@ import { Provider } from 'jotai';
 export default function Providers({ children }: PropsWithChildren) {
   return (
     <>
-      <Provider>
-        <MapProvider>{children}</MapProvider>
-      </Provider>
+      <MapProvider>
+        <Provider>{children}</Provider>
+      </MapProvider>
     </>
   );
 }

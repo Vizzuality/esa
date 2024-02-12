@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 
 import { useSetAtom } from 'jotai';
-import { useResetAtom } from 'jotai/utils';
 
 import { layersAtom, tmpBboxAtom } from '@/store/map';
 import { useStep } from '@/store/stories';
@@ -23,7 +22,7 @@ import TopStories from './top-stories';
 
 export default function Home() {
   const setTmpBbox = useSetAtom(tmpBboxAtom);
-  const resetLayers = useResetAtom(layersAtom);
+  const setLayers = useSetAtom(layersAtom);
   const { removeStep } = useStep();
 
   useEffect(() => {
@@ -32,7 +31,7 @@ export default function Home() {
   }, [setTmpBbox]);
 
   useEffect(() => {
-    resetLayers();
+    setLayers([]);
     removeStep();
   }, []);
 

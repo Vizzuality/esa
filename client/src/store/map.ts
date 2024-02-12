@@ -1,7 +1,6 @@
 import { MapLayerMouseEvent } from 'react-map-gl';
 
 import { atom } from 'jotai';
-import { atomWithReset } from 'jotai/utils';
 import { MapboxGeoJSONFeature } from 'mapbox-gl';
 
 export type TmpBbox = {
@@ -32,14 +31,18 @@ export const tmpBboxAtom = atom<TmpBbox | undefined>(undefined);
 export const sidebarOpenAtom = atom<boolean>(true);
 
 // Map layers
-export const layersAtom = atomWithReset<readonly number[]>([]);
+export const layersAtom = atom<number[]>([]);
 
 export type LayersSettingsAtom = Record<number, Record<string, string | number | boolean>>;
 export const layersSettingsAtom = atom<LayersSettingsAtom>({});
 
 export const layersInteractiveAtom = atom<number[]>([]);
 
-export const layersInteractiveIdsAtom = atom<string[]>([]);
+export const layersInteractiveIdsAtom = atom<string[]>([
+  'story-markers-cluster',
+  'story-markers-cluster-count',
+  'story-markers-unclustered',
+]);
 
 export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 

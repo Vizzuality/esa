@@ -67,7 +67,7 @@ const MapLegends = ({ className = '' }) => {
   );
 
   const ITEMS = useMemo(() => {
-    return layers.map((layer) => {
+    return layers?.map((layer) => {
       const settings = layersSettings[layer] ?? { opacity: 1, visibility: true, expand: true };
 
       return (
