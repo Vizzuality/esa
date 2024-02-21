@@ -6,7 +6,7 @@ import { Layer, Source } from 'react-map-gl';
 
 import { getStoriesParams } from '@/lib/stories';
 
-import { useCategoryAtom } from '@/store/home';
+import { useSyncCategory } from '@/store/home';
 
 import { useGetCategories } from '@/types/generated/category';
 import { useGetStories } from '@/types/generated/story';
@@ -15,7 +15,7 @@ import { StoryStepMap } from '@/types/story';
 import { useMapImage } from '@/hooks/map';
 
 const StoryMarkers = () => {
-  const [category] = useCategoryAtom();
+  const [category] = useSyncCategory();
   const { data: categories } = useGetCategories();
 
   const categoryId = useMemo(() => {

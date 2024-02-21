@@ -1,6 +1,6 @@
 import { cn } from '@/lib/classnames';
 
-import { useCategoryAtom } from '@/store/home';
+import { useSyncCategory } from '@/store/home';
 
 import { Category } from '@/types/generated/strapi.schemas';
 
@@ -11,7 +11,7 @@ import { TooltipTrigger, TooltipContent, Tooltip } from '@/components/ui/tooltip
 type CategoryProps = Pick<Category, 'name' | 'slug'>;
 
 const Category = ({ name, slug }: CategoryProps) => {
-  const [category, setCategory] = useCategoryAtom();
+  const [category, setCategory] = useSyncCategory();
 
   const handleClick = (slug: string) => {
     if (category === slug) {
