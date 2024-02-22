@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
-import { useStep } from '@/store/stories';
+import { useSyncStep } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
 import { StoryStepMap } from '@/types/story';
@@ -26,7 +26,7 @@ type StoryMarker = {
 };
 
 const StoryMarkers = () => {
-  const { step } = useStep();
+  const { step } = useSyncStep();
 
   const { id } = useParams();
   const { data: storyData } = useGetStoriesId(+id, {

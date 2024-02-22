@@ -3,7 +3,7 @@ import { PropsWithChildren, useMemo } from 'react';
 
 import { cn } from '@/lib/classnames';
 
-import { useStep } from '@/store/stories';
+import { useSyncStep } from '@/store/stories';
 
 import {
   StepLayoutOutroStepComponentMedia,
@@ -23,7 +23,7 @@ type StepProps = PropsWithChildren<{
 }>;
 
 const Step = ({ step, category, index }: StepProps) => {
-  const { step: currentStep } = useStep();
+  const { step: currentStep } = useSyncStep();
   const type = getStepType(step);
 
   const STEP_COMPONENT = useMemo(() => {

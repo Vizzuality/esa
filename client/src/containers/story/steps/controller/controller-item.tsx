@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 import { useScrollToItem } from '@/lib/scroll';
 
-import { useStep } from '@/store/stories';
+import { useSyncStep } from '@/store/stories';
 
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -18,7 +18,7 @@ type ScrollItemControllerProps = {
 export const ScrollItemController = ({ title, newStep, className }: ScrollItemControllerProps) => {
   const scrollToItem = useScrollToItem();
 
-  const { step: currStep } = useStep();
+  const { step: currStep } = useSyncStep();
 
   const handleSCrollToItem = useCallback(() => {
     if (newStep !== currStep) {
