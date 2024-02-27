@@ -75,7 +75,7 @@ export class AnimatedTile {
             image: FRAME.bitmapData,
             bounds: [west, south, east, north],
             getPolygonOffset: () => {
-              return [0, 20000];
+              return [0, 100000];
             },
             zoom,
             visible,
