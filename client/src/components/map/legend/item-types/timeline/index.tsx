@@ -4,9 +4,9 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Root, Track, Thumb } from '@radix-ui/react-slider';
 import { PauseIcon, PlayIcon } from 'lucide-react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAtomValue, useSetAtom } from 'jotai';
 
-import { layersSettingsAtom, timelineAtom } from '@/store';
+import { layersSettingsAtom, timelineAtom } from '@/store/map';
 
 import { LegendTypeTimelineProps } from '@/components/map/legend/types';
 import { Button } from '@/components/ui/button';
@@ -24,12 +24,12 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   const textMarginX = 16;
   const intervalRef = useRef<NodeJS.Timer>();
 
-  const setLayersSettings = useSetRecoilState(layersSettingsAtom);
+  const setLayersSettings = useSetAtom(layersSettingsAtom);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const timelines = useRecoilValue(timelineAtom);
-  const setTimelines = useSetRecoilState(timelineAtom);
+  const timelines = useAtomValue(timelineAtom);
+  const setTimelines = useSetAtom(timelineAtom);
 
   const frame = useMemo(() => timelines[id]?.frame || 0, [id, timelines]);
 

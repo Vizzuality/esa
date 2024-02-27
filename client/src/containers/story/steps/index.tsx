@@ -1,11 +1,9 @@
 'use client';
 import { PropsWithChildren, useMemo } from 'react';
 
-import { useRecoilValue } from 'recoil';
-
 import { cn } from '@/lib/classnames';
 
-import { stepAtom } from '@/store/stories';
+import { useSyncStep } from '@/store/stories';
 
 import {
   StepLayoutOutroStepComponentMedia,
@@ -25,7 +23,7 @@ type StepProps = PropsWithChildren<{
 }>;
 
 const Step = ({ step, category, index }: StepProps) => {
-  const currentStep = useRecoilValue(stepAtom);
+  const { step: currentStep } = useSyncStep();
   const type = getStepType(step);
 
   const STEP_COMPONENT = useMemo(() => {

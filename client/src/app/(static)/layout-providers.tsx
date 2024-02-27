@@ -2,12 +2,12 @@
 
 import { PropsWithChildren } from 'react';
 
-import { RecoilRoot } from 'recoil';
+import { Provider } from 'jotai';
 
 export default function Providers({ children }: PropsWithChildren) {
   return (
     <>
-      <RecoilRoot>{children}</RecoilRoot>
+      <Provider>{children}</Provider>
     </>
   );
 }

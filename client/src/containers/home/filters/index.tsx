@@ -1,9 +1,9 @@
+import { useAtom } from 'jotai';
 import { XIcon } from 'lucide-react';
-import { useRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
 
-import { FilterName, filtersOpenAtom } from '@/store/home';
+import { filtersOpenAtom } from '@/store/home';
 
 import { Button } from '@/components/ui/button';
 
@@ -11,7 +11,7 @@ import FilterItem from './item';
 
 const filtersData: {
   title: string;
-  id: FilterName;
+  id: string;
   options: { name: string; id: string }[];
 }[] = [
   {
@@ -48,7 +48,7 @@ const filtersData: {
 ];
 
 export const Filters = () => {
-  const [isOpen, setIsOpen] = useRecoilState(filtersOpenAtom);
+  const [isOpen, setIsOpen] = useAtom(filtersOpenAtom);
 
   return (
     <div

@@ -8,8 +8,8 @@ import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
+import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { cn } from '@/lib/classnames';
 
@@ -19,7 +19,7 @@ import {
   layersInteractiveIdsAtom,
   // popupAtom,
   tmpBboxAtom,
-} from '@/store';
+} from '@/store/map';
 
 // import { useGetLayers } from '@/types/generated/layer';
 // import type { LayerTyped } from '@/types/layers';
@@ -74,14 +74,14 @@ export default function MapContainer() {
 
   const [marker, setMarker] = useState<GeoJSON.Feature<GeoJSON.Point> | null>(null);
 
-  const bbox = useRecoilValue(bboxAtom);
-  const tmpBbox = useRecoilValue(tmpBboxAtom);
-  // const isFlyingBack = useRecoilValue(isFlyingBackAtom);
+  const bbox = useAtomValue(bboxAtom);
+  const tmpBbox = useAtomValue(tmpBboxAtom);
+  // const isFlyingBack = useAtomValue(isFlyingBackAtom);
 
-  const layersInteractiveIds = useRecoilValue(layersInteractiveIdsAtom);
+  const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
 
-  const setBbox = useSetRecoilState(bboxAtom);
-  const setTmpBbox = useSetRecoilState(tmpBboxAtom);
+  const setBbox = useSetAtom(bboxAtom);
+  const setTmpBbox = useSetAtom(tmpBboxAtom);
 
   const pathname = usePathname();
 
