@@ -5,14 +5,13 @@ import { useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
 import { useSetAtom } from 'jotai';
-import { useResetAtom } from 'jotai/utils';
 import { ArrowLeft, Share2 } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 import { ScrollProvider } from '@/lib/scroll';
 
 import { layersAtom, tmpBboxAtom } from '@/store/map';
-import { useStep } from '@/store/stories';
+import { useSyncStep } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
 
@@ -27,10 +26,9 @@ const headerButtonClassName =
   'rounded-4xl h-auto border-gray-800 bg-[hsl(198,100%,14%)]/75 px-5 py-2.5 hover:bg-gray-800';
 
 const Story = () => {
-  const { step } = useStep();
+  const { step } = useSyncStep();
   const setTmpBbox = useSetAtom(tmpBboxAtom);
   const setLayers = useSetAtom(layersAtom);
-  const resetLayers = useResetAtom(layersAtom);
   const { push } = useRouter();
 
   const { id } = useParams();
@@ -42,7 +40,7 @@ const Story = () => {
   const steps = useMemo(() => story?.steps || [], [story]);
 
   const handleGoHome = () => {
-    resetLayers();
+    setLayers([]);
     push('/');
   };
 

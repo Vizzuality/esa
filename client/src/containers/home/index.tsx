@@ -3,10 +3,9 @@
 import { useEffect } from 'react';
 
 import { useSetAtom } from 'jotai';
-import { useResetAtom } from 'jotai/utils';
 
 import { layersAtom, tmpBboxAtom } from '@/store/map';
-import { useStep } from '@/store/stories';
+import { useSyncStep } from '@/store/stories';
 
 import { DEFAULT_MAP_BBOX, DEFAULT_MAP_STATE } from '@/constants/map';
 
@@ -23,8 +22,8 @@ import TopStories from './top-stories';
 
 export default function Home() {
   const setTmpBbox = useSetAtom(tmpBboxAtom);
-  const resetLayers = useResetAtom(layersAtom);
-  const { removeStep } = useStep();
+  const setLayers = useSetAtom(layersAtom);
+  const { removeStep } = useSyncStep();
 
   useEffect(() => {
     const tmpbbox: [number, number, number, number] = DEFAULT_MAP_BBOX;
@@ -32,7 +31,7 @@ export default function Home() {
   }, [setTmpBbox]);
 
   useEffect(() => {
-    resetLayers();
+    setLayers([]);
     removeStep();
   }, []);
 

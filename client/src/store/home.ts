@@ -1,13 +1,17 @@
 import { atom } from 'jotai';
 import { parseAsArrayOf, useQueryStates, parseAsString, useQueryState } from 'nuqs';
 
-export const useCategoryAtom = () => useQueryState('category', parseAsString);
+// NUQS SYNC STATE HOOKS
 
-export const filtersOpenAtom = atom<boolean>(false);
+export const useSyncCategory = () => useQueryState('category', parseAsString);
 
-export const useFilters = () =>
+export const useSyncFilters = () =>
   useQueryStates({
     tags: parseAsArrayOf(parseAsString),
     ifi: parseAsArrayOf(parseAsString),
     status: parseAsArrayOf(parseAsString),
   });
+
+// JOTAI ATOMS
+
+export const filtersOpenAtom = atom<boolean>(false);

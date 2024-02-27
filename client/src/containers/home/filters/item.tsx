@@ -1,4 +1,4 @@
-import { useFilters } from '@/store/home';
+import { useSyncFilters } from '@/store/home';
 
 import { Button } from '@/components/ui/button';
 import { CheckboxButton } from '@/components/ui/checkbox-button';
@@ -12,7 +12,7 @@ type FilterItemProps = {
 };
 
 const FilterItem = ({ filter: { id, options, title } }: FilterItemProps) => {
-  const [filters, setFilters] = useFilters();
+  const [filters, setFilters] = useSyncFilters();
 
   const filter = filters[id as keyof typeof filters];
 
