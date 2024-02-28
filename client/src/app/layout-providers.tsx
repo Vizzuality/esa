@@ -19,7 +19,6 @@ export default function Providers({ children }: PropsWithChildren) {
           --font-esa-notes: ${notesESA.style.fontFamily};
         }
       `}</style>
-
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>{children}</TooltipProvider>
       </QueryClientProvider>

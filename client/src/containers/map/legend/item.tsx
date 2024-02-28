@@ -59,11 +59,11 @@ const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManage
 };
 
 const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
-  const layersSettings = useAtomValue(layersSettingsAtom);
-
   const { data, isError, isFetched, isFetching, isPlaceholderData } = useGetLayersId(id, {
     populate: 'metadata',
   });
+
+  const layersSettings = useAtomValue(layersSettingsAtom);
 
   const attributes = data?.data?.attributes as LayerTyped;
 
@@ -93,12 +93,12 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
         legends.push(l);
       }
 
-      const { type, ...props } = l;
+      const { type, ...props } = l as LegendConfig;
       if (typeof type !== 'string' || !LEGEND_TYPE.includes(type as LegendType)) return;
       // TODO: Fix this type
       const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
 
-      legends.push(createElement(LEGEND, props));
+      legends.push(<div style={props.style}>{createElement(LEGEND, props)}</div>);
     });
 
     return legends;

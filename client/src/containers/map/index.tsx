@@ -247,7 +247,7 @@ export default function MapContainer() {
         )}
         {!isHomePage && <StoryMarkers />}
       </Map>
-      <div className="absolute bottom-0 left-0 z-20 w-full p-4">
+      <div className="absolute bottom-0 left-0 z-20 w-full p-4 pb-16">
         <MapLegends />
       </div>
     </div>
