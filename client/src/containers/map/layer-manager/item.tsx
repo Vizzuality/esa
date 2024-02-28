@@ -1,10 +1,15 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { parseConfig } from '@/lib/json-converter';
 
-import { layersInteractiveAtom, layersInteractiveIdsAtom } from '@/store/map';
+import {
+  LayersSettingsAtom,
+  layersInteractiveAtom,
+  layersInteractiveIdsAtom,
+  layersSettingsAtom,
+} from '@/store/map';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerResponseDataObject } from '@/types/generated/strapi.schemas';
@@ -25,6 +30,8 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
   const layersInteractive = useAtomValue(layersInteractiveAtom);
   const setLayersInteractive = useSetAtom(layersInteractiveAtom);
   const setLayersInteractiveIds = useSetAtom(layersInteractiveIdsAtom);
+
+  const setLayersSettings = useSetAtom(layersSettingsAtom);
 
   const handleAddMapboxLayer = useCallback(
     ({ styles }: Config) => {
@@ -63,6 +70,21 @@ const LayerManagerItem = ({ id, beforeId, settings }: LayerManagerItemProps) => 
     },
     [data?.data?.attributes, id, setLayersInteractive, setLayersInteractiveIds]
   );
+
+  useEffect(() => {
+    if (data?.data?.attributes) {
+      const { params_config } = data.data.attributes as LayerTyped;
+      if (params_config?.length) {
+        const newSettings = params_config.reduce((acc: LayersSettingsAtom, curr) => {
+          return {
+            ...acc,
+            [curr.key as unknown as string]: curr.default,
+          };
+        }, {});
+        setLayersSettings((prev) => ({ ...prev, [id]: newSettings }));
+      }
+    }
+  }, [data?.data?.attributes, id, setLayersSettings]);
 
   if (!data?.data?.attributes) return null;
 

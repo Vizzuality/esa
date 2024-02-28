@@ -1,12 +1,12 @@
 'use-client';
 
-import { ReactElement, createElement, isValidElement, useEffect, useMemo } from 'react';
+import { ReactElement, createElement, isValidElement, useMemo } from 'react';
 
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 import { parseConfig } from '@/lib/json-converter';
 
-import { LayersSettingsAtom, layersSettingsAtom } from '@/store/map';
+import { layersSettingsAtom } from '@/store/map';
 
 import { useGetLayersId } from '@/types/generated/layer';
 import { LayerTyped, LegendConfig } from '@/types/layers';
@@ -64,27 +64,6 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
   });
 
   const layersSettings = useAtomValue(layersSettingsAtom);
-  const setLayersSettings = useSetAtom(layersSettingsAtom);
-
-  useEffect(() => {
-    if (data?.data?.attributes) {
-      const { params_config } = data.data.attributes as LayerTyped;
-      if (params_config?.length) {
-        const newSettings = params_config.reduce((acc: LayersSettingsAtom, curr) => {
-          return {
-            ...acc,
-            [curr.key as unknown as string]: curr.default,
-          };
-        }, {});
-
-        const newLayerSettings = {
-          ...layersSettings,
-          [id]: newSettings,
-        };
-        setLayersSettings(newLayerSettings);
-      }
-    }
-  }, [data?.data?.attributes, id, setLayersSettings]);
 
   const attributes = data?.data?.attributes as LayerTyped;
 
