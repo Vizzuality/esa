@@ -34,7 +34,7 @@ const StoryMarkers = () => {
   });
   const [currentMedia, setCurrentMedia] = useState<number>();
   const markers: StoryMarker[] = useMemo(() => {
-    return (storyData?.data?.attributes?.steps?.[step]?.map as StoryStepMap)?.markers || [];
+    return (storyData?.data?.attributes?.steps?.[step - 1]?.map as StoryStepMap)?.markers || [];
   }, [step, storyData?.data?.attributes?.steps]);
 
   const medias = useMemo(() => {
