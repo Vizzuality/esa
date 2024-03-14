@@ -1,3 +1,9 @@
-// import env from '@/env.mjs';
+import env from '@/env.mjs';
 
-export const getImageSrc = (url?: string) => url || '';
+export const getImageSrc = (url?: string) => {
+  if (!url) return '';
+  if (url.includes('http')) {
+    return url;
+  }
+  return `${env.NEXT_PUBLIC_API_URL}${url}`;
+};
