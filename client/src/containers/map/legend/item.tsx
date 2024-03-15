@@ -39,6 +39,7 @@ type MapLegendItemProps = LegendItemProps & {
   isError: boolean;
 };
 
+<<<<<<< HEAD
 const MapLegendItem = ({ id, layer, ...legendProps }: MapLegendItemProps) => {
   const layersSettings = useAtomValue(layersSettingsAtom);
 
@@ -52,6 +53,49 @@ const MapLegendItem = ({ id, layer, ...legendProps }: MapLegendItemProps) => {
       config: { ...legend_config, layerId: id, layerTitle: layer?.title },
       params_config,
       settings: layersSettings[id] ?? {},
+=======
+const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
+  const { data, isError, isFetched, isFetching, isPlaceholderData } = useGetLayersId(id, {
+    populate: 'metadata',
+  });
+
+  const layersSettings = useAtomValue(layersSettingsAtom);
+
+  const attributes = data?.data?.attributes as LayerTyped;
+
+  const legend_config = useMemo(() => {
+    if (!attributes?.legend_config) return [];
+    return Array.isArray(attributes?.legend_config)
+      ? attributes.legend_config
+      : [attributes.legend_config];
+  }, [attributes?.legend_config]);
+
+  const params_config = attributes?.params_config;
+  const metadata = attributes?.metadata;
+  const settingsManager = getSettingsManager(attributes);
+
+  const LEGEND_COMPONENTS = useMemo(() => {
+    const legends: ReactElement[] = [];
+    legend_config?.forEach((lc: LegendConfig) => {
+      const l = parseConfig<LegendConfig | ReactElement | null>({
+        config: { ...lc, layerId: id, layerTitle: attributes?.title },
+        params_config,
+        settings: layersSettings[id] ?? {},
+      });
+
+      if (!l) return;
+
+      if (isValidElement(l)) {
+        legends.push(l);
+      }
+
+      const { type, ...props } = l as LegendConfig;
+      if (typeof type !== 'string' || !LEGEND_TYPE.includes(type as LegendType)) return;
+      // TODO: Fix this type
+      const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
+
+      legends.push(<div style={props.style}>{createElement(LEGEND, props)}</div>);
+>>>>>>> ebf3e15 (Update main (#52))
     });
 
     if (!l) return;

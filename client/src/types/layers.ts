@@ -23,7 +23,10 @@ export type ParamsConfig = ParamsConfigValue[];
 export type LegendConfig = {
   type: LegendType;
   style?: CSSProperties;
+<<<<<<< HEAD
   title?: string;
+=======
+>>>>>>> ebf3e15 (Update main (#52))
   items: {
     value: string;
     color: string;

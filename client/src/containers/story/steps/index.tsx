@@ -16,9 +16,15 @@ type StepProps = PropsWithChildren<{
   story?: Story;
 }>;
 
+<<<<<<< HEAD
 const Step = ({ story }: StepProps) => {
   const steps = useMemo(() => story?.steps || [], [story]);
   const { step: currentStep } = useSyncStep();
+=======
+const Step = ({ step, category, index }: StepProps) => {
+  const { step: currentStep } = useSyncStep();
+  const type = getStepType(step);
+>>>>>>> ebf3e15 (Update main (#52))
 
   const storySummary = useMemo(() => {
     if (currentStep !== 1) {

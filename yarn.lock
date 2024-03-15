@@ -2916,10 +2916,7 @@ __metadata:
     class-variance-authority: ^0.6.0
     clsx: ^1.2.1
     d3-array: 3.2.4
-    date-fns: ^3.3.1
-    deck.gl: 9.1.12
-    embla-carousel: ^8.3.0
-    embla-carousel-react: ^8.3.0
+    deck.gl: 8.9.19
     eslint: 8.42.0
     eslint-config-next: 13.4.5
     eslint-config-prettier: ^8.8.0
@@ -2939,10 +2936,9 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: ^7.45.0
     react-map-gl: 7.1.5
-    react-markdown: ^9.0.1
-    rehype-raw: ^7.0.0
-    remark-gfm: ^4.0.0
-    remark-unwrap-images: ^4.0.0
+    react-markdown: 8.0.7
+    recoil: ^0.7.7
+    recoil-sync: ^0.2.0
     rooks: 7.14.1
     tailwind-merge: ^1.13.2
     tailwindcss: 3.3.2
@@ -14068,10 +14064,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"h3-js@npm:^4.1.0":
-  version: 4.2.1
-  resolution: "h3-js@npm:4.2.1"
-  checksum: 79ae480454620c0dec63cf312d2b7de168bacd3dc952646e8fb0360a1a79c402bcb9b3e4ecd04cfbdac1acd2b9c8421bf013b1f1bdac55ed5c659492f088186d
+"hammerjs@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "hammerjs@npm:2.0.8"
+  checksum:  b092da7d1565a165d7edb53ef0ce212837a8b11f897aa3cf81a7818b66686b0ab3f4747fbce8fc8a41d1376594639ce3a054b0fd4889ca8b5b136a29ca500e27
+  languageName: node
+  linkType: hard
+
+"hamt_plus@npm:1.0.2":
+  version: 1.0.2
+  resolution: "hamt_plus@npm:1.0.2"
+  checksum: af26ea32db03009019cc83dfa9411521a2fa16079443de1a502c9be46d8b3c975acda8ed93fc5750ef08d3186d35901e2d8cfe717dd54bea67b358601fa74e4c
   languageName: node
   linkType: hard
 

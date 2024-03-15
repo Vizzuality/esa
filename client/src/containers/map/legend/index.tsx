@@ -5,10 +5,13 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { cn } from '@/lib/classnames';
 
 import { layersSettingsAtom, layersAtom, DEFAULT_SETTINGS } from '@/store/map';
+<<<<<<< HEAD
 
 import { useGetLayers } from '@/types/generated/layer';
 import { Layer } from '@/types/generated/strapi.schemas';
 import { LegendConfig } from '@/types/layers';
+=======
+>>>>>>> ebf3e15 (Update main (#52))
 
 import MapLegendItem from '@/containers/map/legend/item';
 
@@ -76,6 +79,7 @@ const MapLegends = ({ className = '' }) => {
     [setLayersSettings]
   );
 
+<<<<<<< HEAD
   const {
     data: layersData,
     isFetching,
@@ -95,6 +99,11 @@ const MapLegends = ({ className = '' }) => {
       },
     }
   );
+=======
+  const ITEMS = useMemo(() => {
+    return layers?.map((layer) => {
+      const settings = layersSettings[layer] ?? { opacity: 1, visibility: true, expand: true };
+>>>>>>> ebf3e15 (Update main (#52))
 
   const LEGENDS = useMemo(() => {
     return layersData?.data?.reduce<LegendProps[]>((acc, curr) => {

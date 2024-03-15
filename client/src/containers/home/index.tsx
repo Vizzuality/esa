@@ -2,12 +2,19 @@
 
 import { useEffect, useState, useMemo, useCallback } from 'react';
 
+<<<<<<< HEAD
 import { useMap } from 'react-map-gl';
 
 import Link from 'next/link';
 
 import { motion, useTransform } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
+=======
+import { useSetAtom } from 'jotai';
+
+import { layersAtom, tmpBboxAtom } from '@/store/map';
+import { useSyncStep } from '@/store/stories';
+>>>>>>> ebf3e15 (Update main (#52))
 
 import { homeMarkerAtom } from '@/store/home';
 import { mapScrollAtom } from '@/store/map';
@@ -19,6 +26,7 @@ import { Dialog, DialogContentHome } from '@/components/ui/dialog';
 
 import Header from '../header';
 
+<<<<<<< HEAD
 import { SATELLITE_MARKERS, SatelliteMarkerId } from './constants';
 import SatelliteButton from './satellite-button';
 import Satellite from './satellite-content';
@@ -63,6 +71,12 @@ const Home = () => {
       easing: (n) => n,
     });
   }, [isMobile, isXl, map, size.height, size.width]);
+=======
+export default function Home() {
+  const setTmpBbox = useSetAtom(tmpBboxAtom);
+  const setLayers = useSetAtom(layersAtom);
+  const { removeStep } = useSyncStep();
+>>>>>>> ebf3e15 (Update main (#52))
 
   useEffect(() => {
     if (map) {
@@ -77,6 +91,7 @@ const Home = () => {
   }, [map, spin, size]);
 
   useEffect(() => {
+<<<<<<< HEAD
     setSelectedMarker(null);
 
     const handleResize = () => {
@@ -107,6 +122,11 @@ const Home = () => {
 
   const mapScroll = useAtomValue(mapScrollAtom);
   const opacity = useTransform(mapScroll, [0, 0.2, 0.8], [1, 1, 0]);
+=======
+    setLayers([]);
+    removeStep();
+  }, []);
+>>>>>>> ebf3e15 (Update main (#52))
 
   return (
     <>
