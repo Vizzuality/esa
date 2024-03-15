@@ -1,16 +1,16 @@
 'use client';
 
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAtomValue, useSetAtom } from 'jotai';
 
-import { layersAtom } from '@/store';
+import { layersAtom } from '@/store/map';
 
 import { LayerListResponseDataItem } from '@/types/generated/strapi.schemas';
 
 import { Switch } from '@/components/ui/switch';
 
 export default function LayersItem({ id, attributes }: Required<LayerListResponseDataItem>) {
-  const layers = useRecoilValue(layersAtom);
-  const setLayers = useSetRecoilState(layersAtom);
+  const layers = useAtomValue(layersAtom);
+  const setLayers = useSetAtom(layersAtom);
 
   const handleLayerChange = () => {
     if (!id) return;

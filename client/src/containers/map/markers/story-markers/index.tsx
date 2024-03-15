@@ -4,9 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
-import { useRecoilValue } from 'recoil';
-
-import { stepAtom } from '@/store/stories';
+import { useSyncStep } from '@/store/stories';
 
 import { useGetStoriesId } from '@/types/generated/story';
 import { StoryStepMap } from '@/types/story';
@@ -28,7 +26,7 @@ type StoryMarker = {
 };
 
 const StoryMarkers = () => {
-  const step = useRecoilValue(stepAtom);
+  const { step } = useSyncStep();
 
   const { id } = useParams();
   const { data: storyData } = useGetStoriesId(+id, {
@@ -36,7 +34,7 @@ const StoryMarkers = () => {
   });
   const [currentMedia, setCurrentMedia] = useState<number>();
   const markers: StoryMarker[] = useMemo(() => {
-    return (storyData?.data?.attributes?.steps?.[step]?.map as StoryStepMap)?.markers || [];
+    return (storyData?.data?.attributes?.steps?.[step - 1]?.map as StoryStepMap)?.markers || [];
   }, [step, storyData?.data?.attributes?.steps]);
 
   const medias = useMemo(() => {

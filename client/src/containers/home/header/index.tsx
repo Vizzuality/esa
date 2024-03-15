@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 
+import { useAtom } from 'jotai';
 import { FilterIcon } from 'lucide-react';
-import { useRecoilState } from 'recoil';
 
 import { filtersOpenAtom } from '@/store/home';
 
@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import GradientLine from '@/components/ui/gradient-line';
 
 const Header = () => {
-  const [open, setOpen] = useRecoilState(filtersOpenAtom);
+  const [open, setOpen] = useAtom(filtersOpenAtom);
 
   const handleClickFilters = () => {
     setOpen(!open);

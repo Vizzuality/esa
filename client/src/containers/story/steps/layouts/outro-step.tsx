@@ -6,11 +6,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { useScroll, motion, useTransform } from 'framer-motion';
-import { useSetRecoilState } from 'recoil';
+import { useSetAtom } from 'jotai';
 
 import { getImageSrc } from '@/lib/image-src';
 
-import { isFlyingBackAtom } from '@/store';
+import { isFlyingBackAtom } from '@/store/map';
 
 import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
@@ -36,7 +36,7 @@ const links = [
 const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   const { push } = useRouter();
 
-  const setIsFlyingBack = useSetRecoilState(isFlyingBackAtom);
+  const setIsFlyingBack = useSetAtom(isFlyingBackAtom);
 
   const { content, title } = step as StepLayoutOutroStepComponent;
   const containerRef = useRef<HTMLDivElement>(null);

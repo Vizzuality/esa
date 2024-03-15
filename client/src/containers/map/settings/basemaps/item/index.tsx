@@ -3,11 +3,11 @@ import { useCallback } from 'react';
 
 import Image from 'next/image';
 
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { cn } from '@/lib/classnames';
 
-import { mapSettingsAtom } from '@/store/index';
+import { mapSettingsAtom } from '@/store/map';
 
 export interface BasemapItemProps {
   label: string;
@@ -16,8 +16,8 @@ export interface BasemapItemProps {
 }
 
 const BasemapItem = ({ label, value, preview }: BasemapItemProps) => {
-  const { basemap } = useRecoilValue(mapSettingsAtom);
-  const setMapSettings = useSetRecoilState(mapSettingsAtom);
+  const { basemap } = useAtomValue(mapSettingsAtom);
+  const setMapSettings = useSetAtom(mapSettingsAtom);
 
   const handleToggleBasemap = useCallback(() => {
     setMapSettings((prev) => ({

@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 import { SourceProps as RMSSourceProps, LayerProps as RMLayerProps } from 'react-map-gl';
 
 import { FormatProps } from '@/lib/utils/formats';
@@ -16,11 +18,12 @@ export type ParamsConfigValue = {
   default: unknown;
 };
 
-export type ParamsConfig = Record<string, ParamsConfigValue>[];
+export type ParamsConfig = ParamsConfigValue[];
 
 export type LegendConfig = {
   displayControllers?: boolean;
   type: LegendType;
+  style?: CSSProperties;
   items: {
     value: string;
     color: string;

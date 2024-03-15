@@ -1,18 +1,18 @@
 import { useCallback, useMemo } from 'react';
 
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAtomValue, useSetAtom } from 'jotai';
 
-import { layersSettingsAtom } from '@/store';
+import { layersSettingsAtom } from '@/store/map';
 
 import { Switch } from '@/components/ui/switch';
 
 import { LegendTypeSwitchProps } from '../../types';
 
 const LegendTypeSwitch = ({ layerId, param, layerTitle }: LegendTypeSwitchProps) => {
-  const layersSettings = useRecoilValue(layersSettingsAtom);
+  const layersSettings = useAtomValue(layersSettingsAtom);
   const checked = useMemo(() => layersSettings[layerId]?.[param], [layerId, layersSettings, param]);
 
-  const setLayersSettings = useSetRecoilState(layersSettingsAtom);
+  const setLayersSettings = useSetAtom(layersSettingsAtom);
 
   const handleChangeVisibility = useCallback(
     (checked: boolean) => {
