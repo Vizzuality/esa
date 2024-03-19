@@ -12,7 +12,7 @@ const nextConfig = {
       'esa-gda-comms-staging-cms.fra1.digitaloceanspaces.com',
       'fra1.digitaloceanspaces.com',
       'esa-gda-comms-staging-mfafc.ondigitalocean.app',
-      'https://impact-sphere-gda.esa.int',
+      'impact-sphere-gda.esa.int',
     ],
   },
   env: {
