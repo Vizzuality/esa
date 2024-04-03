@@ -56,8 +56,10 @@ const Step = ({ step, category, index }: StepProps) => {
   }, [step, type, currentStep, index, category?.data?.id, category?.data?.attributes]);
 
   return (
-    <div className="pointer-events-none h-screen w-full ">
-      <div className={cn('h-full w-full', type !== 'outro-step' && 'px-14')}>{STEP_COMPONENT}</div>
+    <div
+      className={cn('pointer-events-none min-h-screen w-full ', type !== 'outro-step' && 'px-14')}
+    >
+      {STEP_COMPONENT}
     </div>
   );
 };

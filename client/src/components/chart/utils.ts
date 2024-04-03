@@ -30,11 +30,9 @@ const extractPluginCallbackFunction = (options: Record<string, any>) => {
   if (!plugins) return options;
   for (const key in plugins) {
     const plugin = plugins[key];
-    console.log(key, plugin);
     if (plugin?.callbacks) {
       for (const callback in plugin.callbacks) {
         const pluginCallback = plugin.callbacks[callback];
-        // console.log(pluginCallback)
         if (typeof pluginCallback === 'string' && pluginCallback in PluginCallbacks) {
           plugins[key].callbacks[callback] =
             PluginCallbacks[pluginCallback as keyof typeof PluginCallbacks];
