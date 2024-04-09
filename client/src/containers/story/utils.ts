@@ -6,5 +6,7 @@ export const isMapStep = (step: StoryStepsItem): step is StepLayoutMapStepCompon
 };
 
 export const isMapNotEmpty = (map: StoryStepsItem['map']): map is StoryStepMap => {
-  return Object.values((map as StoryStepMap)?.location).length > 0;
+  return (
+    !!map && typeof map === 'object' && Object.values((map as StoryStepMap)?.location).length > 0
+  );
 };

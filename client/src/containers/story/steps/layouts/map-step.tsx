@@ -65,7 +65,7 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
         )}
       </div>
       <div className="relative min-h-screen pt-[84px]">
-        <div className="flex min-h-full flex-col items-end justify-end space-y-6 pb-6">
+        <div className="flex min-h-full flex-col items-end justify-end space-y-6 pb-16">
           {[card, widget]?.map((item, index) => {
             if (!item) return null;
             return (
