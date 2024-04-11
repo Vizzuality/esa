@@ -565,6 +565,7 @@ export interface MapLayerSummaryComponent {
   content?: string;
   id?: number;
   info?: string;
+  link?: string;
   title?: string;
 }
 
@@ -1117,6 +1118,7 @@ export type StoryCategoryDataAttributesStoriesDataItemAttributesStepsItemAnyOfSt
   content?: string;
   id?: number;
   info?: string;
+  link?: string;
   title?: string;
 };
 
@@ -1180,7 +1182,6 @@ export const StoryCategoryDataAttributesStoriesDataItemAttributesStepsItemAnyOfL
     deckgl: 'deckgl',
     mapbox: 'mapbox',
     carto: 'carto',
-    'animated-tiles': 'animated-tiles',
   } as const;
 
 export type StoryCategoryDataAttributesStoriesDataItemAttributesStepsItemAnyOfLayersDataItemAttributesMetadata =
@@ -1670,7 +1671,6 @@ export const LayerType = {
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type LayerDataset = {
@@ -1745,7 +1745,6 @@ export const LayerDatasetDataAttributesLayersDataItemAttributesType = {
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type LayerDatasetDataAttributesLayersDataItemAttributesMetadata = {
@@ -2078,7 +2077,6 @@ export const LayerRequestDataType = {
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type LayerRequestDataDataset = number | string;
@@ -2185,7 +2183,6 @@ export const DatasetGroupDatasetsDataItemAttributesLayersDataItemAttributesType 
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type DatasetGroupDatasetsDataItemAttributesLayersDataItemAttributesMetadata = {
@@ -2702,7 +2699,6 @@ export const DatasetDatasetGroupDataAttributesDatasetsDataItemAttributesLayersDa
     deckgl: 'deckgl',
     mapbox: 'mapbox',
     carto: 'carto',
-    'animated-tiles': 'animated-tiles',
   } as const;
 
 export type DatasetDatasetGroupDataAttributesDatasetsDataItemAttributesLayersDataItemAttributesMetadata =
@@ -3483,6 +3479,7 @@ export type CategoryStoriesDataItemAttributesStepsItemAnyOfStorySummaryItem = {
   content?: string;
   id?: number;
   info?: string;
+  link?: string;
   title?: string;
 };
 
@@ -3517,7 +3514,6 @@ export const CategoryStoriesDataItemAttributesStepsItemAnyOfLayersDataItemAttrib
   deckgl: 'deckgl',
   mapbox: 'mapbox',
   carto: 'carto',
-  'animated-tiles': 'animated-tiles',
 } as const;
 
 export type CategoryStoriesDataItemAttributesStepsItemAnyOfLayersDataItemAttributesMetadata = {

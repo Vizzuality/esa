@@ -33,8 +33,8 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   interval = 1,
   format,
   layerId,
-  description,
   animationInterval = 1000,
+  ...props
 }) => {
   const intervalRef = useRef<NodeJS.Timer>();
 
@@ -189,84 +189,85 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   const maxYearX = width - Math.min(firstTextSize / 2, 25) - 5;
 
   return (
-    <div className="w-full flex-1 overflow-visible">
-      <div className="bg-card-map z-30 flex h-[62px] w-fit items-center justify-between gap-8 rounded-full px-4 backdrop-blur-sm">
-        <Button
-          variant="default"
-          className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
-          onClick={handlePlay}
-        >
-          {isPlaying ? (
-            <PauseIcon className="fill-secondary stroke-secondary h-5" />
-          ) : (
-            <PlayIcon className="fill-secondary stroke-secondary h-5 translate-x-0.5" />
-          )}
-        </Button>
+    <div
+      style={props?.style}
+      className="z-30 flex h-[62px] w-fit items-center justify-between gap-8"
+    >
+      <Button
+        variant="default"
+        className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
+        onClick={handlePlay}
+      >
+        {isPlaying ? (
+          <PauseIcon className="fill-secondary stroke-secondary h-5" />
+        ) : (
+          <PlayIcon className="fill-secondary stroke-secondary h-5 translate-x-0.5" />
+        )}
+      </Button>
 
-        <Root
-          max={(TIMELINE?.length || 1) - 1}
-          min={0}
-          step={interval}
-          value={[frame]}
-          onValueChange={([v]) => onChangeFrame(v)}
-          className="relative flex w-full -translate-x-3 translate-y-3 touch-none select-none items-center"
-        >
-          <Track className="w-full">
-            <svg width={width} height={height} className="cursor-pointer overflow-visible">
-              {/* Min value text */}
-              <text
-                x={minYearX}
-                y={textMarginY}
-                className={cn(
-                  'font-open-sans fill-white text-xs',
-                  currYearX - minYearX > firstTextSize ? 'opacity-100' : 'opacity-25'
-                )}
-                ref={firstValueText}
-              >
-                {TIMELINE[0]?.label}
-              </text>
+      <Root
+        max={(TIMELINE?.length || 1) - 1}
+        min={0}
+        step={interval}
+        value={[frame]}
+        onValueChange={([v]) => onChangeFrame(v)}
+        className="relative flex w-full -translate-x-3 translate-y-3 touch-none select-none items-center"
+      >
+        <Track className="w-full">
+          <svg width={width} height={height} className="cursor-pointer overflow-visible">
+            {/* Min value text */}
+            <text
+              x={minYearX}
+              y={textMarginY}
+              className={cn(
+                'font-open-sans fill-white text-xs',
+                currYearX - minYearX > firstTextSize ? 'opacity-100' : 'opacity-25'
+              )}
+              ref={firstValueText}
+            >
+              {TIMELINE[0]?.label}
+            </text>
 
-              {/* Years lines */}
-              {TIMELINE?.map(({ value }) => {
-                const position = value % 10 === 0 ? 0 : 4;
-                return (
-                  <line
-                    key={value}
-                    x1={yearScale(value)}
-                    x2={yearScale(value)}
-                    y1={position}
-                    y2={height}
-                    strokeWidth={2}
-                    className="stroke-gray-400"
-                  />
-                );
-              })}
+            {/* Years lines */}
+            {TIMELINE?.map(({ value }) => {
+              const position = value % 10 === 0 ? 0 : 4;
+              return (
+                <line
+                  key={value}
+                  x1={yearScale(value)}
+                  x2={yearScale(value)}
+                  y1={position}
+                  y2={height}
+                  strokeWidth={2}
+                  className="stroke-gray-400"
+                />
+              );
+            })}
 
-              {/* Max value text */}
-              <text
-                className={cn(
-                  'font-open-sans fill-white text-xs',
-                  maxYearX - currYearX > firstTextSize ? 'opacity-100' : 'opacity-25'
-                )}
-                x={maxYearX}
-                y={textMarginY}
-                ref={currValueText}
-              >
-                {TIMELINE?.[TIMELINE.length - 1]?.label}
-              </text>
-              {/* Current value text */}
-              <text
-                x={currYearX}
-                y={textMarginY - 10}
-                className="font-open-sans fill-white text-sm font-bold"
-              >
-                {TIMELINE?.[value]?.label}
-              </text>
-            </svg>
-          </Track>
-          <Thumb className="block h-5 w-0 -translate-x-[1px] -translate-y-1 cursor-pointer border-r-[2px] bg-white" />
-        </Root>
-      </div>
+            {/* Max value text */}
+            <text
+              className={cn(
+                'font-open-sans fill-white text-xs',
+                maxYearX - currYearX > firstTextSize ? 'opacity-100' : 'opacity-25'
+              )}
+              x={maxYearX}
+              y={textMarginY}
+              ref={currValueText}
+            >
+              {TIMELINE?.[TIMELINE.length - 1]?.label}
+            </text>
+            {/* Current value text */}
+            <text
+              x={currYearX}
+              y={textMarginY - 10}
+              className="font-open-sans fill-white text-sm font-bold"
+            >
+              {TIMELINE?.[value]?.label}
+            </text>
+          </svg>
+        </Track>
+        <Thumb className="block h-5 w-0 -translate-x-[1px] -translate-y-1 cursor-pointer border-r-[2px] bg-white" />
+      </Root>
     </div>
   );
 };

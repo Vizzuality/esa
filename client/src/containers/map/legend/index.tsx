@@ -97,7 +97,7 @@ const MapLegends = ({ className = '' }) => {
     <div className="pointer-events-auto z-10 w-full">
       <Legend
         className={cn(
-          'max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))] w-full',
+          'max-h-[calc(100vh_-_theme(space.16)_-_theme(space.6)_-_theme(space.48))] w-fit',
           className
         )}
         sortable={{

@@ -50,14 +50,27 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
                 <div className="space-y-1" key={item.id}>
                   <div className="text-enlight-yellow-400 flex items-center gap-2">
                     <h2 className="tetx-sm font-bold uppercase">{item.title}</h2>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <InfoIcon className="h-4 w-4" />
-                      </TooltipTrigger>
-                      <TooltipContent className="max-w-xs">{item.info}</TooltipContent>
-                    </Tooltip>
+                    {item.info && (
+                      <Tooltip delayDuration={100}>
+                        <TooltipTrigger disabled={true}>
+                          <InfoIcon className="h-4 w-4" />
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-xs">{item.info}</TooltipContent>
+                      </Tooltip>
+                    )}
                   </div>
-                  <p className="font-open-sans">{item.content}</p>
+                  {item.link ? (
+                    <a
+                      className="font-open-sans"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.content}
+                    </a>
+                  ) : (
+                    <p className="font-open-sans">{item.content}</p>
+                  )}
                 </div>
               ))}
             </div>

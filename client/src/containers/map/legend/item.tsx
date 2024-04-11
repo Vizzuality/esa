@@ -58,7 +58,7 @@ const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManage
   };
 };
 
-const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
+const MapLegendItem = ({ id, ...legendProps }: MapLegendItemProps) => {
   const { data, isError, isFetched, isFetching, isPlaceholderData } = useGetLayersId(id, {
     populate: 'metadata',
   });
@@ -97,41 +97,50 @@ const MapLegendItem = ({ id, ...props }: MapLegendItemProps) => {
       if (typeof type !== 'string' || !LEGEND_TYPE.includes(type as LegendType)) return;
       // TODO: Fix this type
       const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
-
-      legends.push(<div style={props.style}>{createElement(LEGEND, props)}</div>);
-    });
-
-    return legends;
-  }, [legend_config, id, attributes?.title, params_config, layersSettings]);
-
-  return LEGEND_COMPONENTS?.map((LEGEND_COMPONENT, i) => {
-    const useLegendItem = legend_config?.[i]?.displayControllers !== false;
-    return (
-      <ContentLoader
-        skeletonClassName="h-10"
-        data={data?.data}
-        isFetching={isFetching}
-        isFetched={isFetched}
-        isPlaceholderData={isPlaceholderData}
-        isError={isError}
-        key={`${id}-${i}`}
-      >
-        {useLegendItem ? (
+      const LegendElement = createElement(LEGEND, props);
+      if (!isValidElement(LegendElement)) return;
+      if (props.displayControllers) {
+        legends.push(
           <LegendItem
             id={id}
             name={attributes?.title}
             settingsManager={settingsManager}
             {...props}
+            {...legendProps}
             InfoContent={!!metadata && <Metadata {...attributes} />}
           >
-            {LEGEND_COMPONENT}
+            {LegendElement}
           </LegendItem>
-        ) : (
-          LEGEND_COMPONENT
-        )}
-      </ContentLoader>
-    );
-  });
+        );
+        return;
+      }
+      legends.push(LegendElement);
+    });
+
+    return legends;
+  }, [
+    legend_config,
+    id,
+    attributes,
+    params_config,
+    layersSettings,
+    settingsManager,
+    legendProps,
+    metadata,
+  ]);
+
+  return (
+    <ContentLoader
+      skeletonClassName="h-10"
+      data={data?.data}
+      isFetching={isFetching}
+      isFetched={isFetched}
+      isPlaceholderData={isPlaceholderData}
+      isError={isError}
+    >
+      {LEGEND_COMPONENTS}
+    </ContentLoader>
+  );
 };
 
 export default MapLegendItem;
