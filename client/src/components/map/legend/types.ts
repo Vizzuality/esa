@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { CSSProperties, PropsWithChildren, ReactNode } from 'react';
 
 import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListeners } from '@dnd-kit/core/dist/hooks/utilities';
@@ -55,7 +55,7 @@ export interface LegendItemProps extends LegendItemEvents {
   InfoContent?: ReactNode;
 
   // sortable
-  sortable: Sortable;
+  sortable?: Sortable;
   listeners?: SyntheticListeners;
   attributes?: DraggableAttributes;
 
@@ -114,6 +114,7 @@ export interface LegendTypeTimelineProps {
   dateType?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second';
   format?: string;
   animationInterval?: number;
+  style?: CSSProperties;
 }
 
 export interface LegendMatrixIntersectionsProps {
@@ -127,6 +128,8 @@ export interface LegendTypeSwitchProps {
   layerId: number;
   param: string;
   layerTitle: string;
+  style?: CSSProperties;
+  color?: string;
 }
 
 type ItemLegends = Extract<LegendType, 'basic' | 'choropleth' | 'gradient'>;

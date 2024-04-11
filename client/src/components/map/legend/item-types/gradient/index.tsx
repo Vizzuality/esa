@@ -12,7 +12,7 @@ export const LegendTypeGradient: React.FC<LegendTypeProps> = ({ className = '', 
       })}
     >
       <div
-        className="flex h-3 w-72"
+        className="min-w-72 flex h-3"
         style={{
           backgroundImage: `linear-gradient(to right, ${items.map((i) => i.color).join(',')})`,
         }}
