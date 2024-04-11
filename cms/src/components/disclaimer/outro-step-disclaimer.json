@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_disclaimer_outro_step_disclaimers",
+  "info": {
+    "displayName": "outro_step_disclaimer"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

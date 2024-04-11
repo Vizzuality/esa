@@ -32,11 +32,11 @@
       "type": "customField",
       "customField": "plugin::map-field.map-field"
     },
-    "disclaimer": {
-      "displayName": "discalimer",
+    "story_disclaimer": {
+      "displayName": "disclaimer",
       "type": "component",
       "repeatable": true,
-      "component": "disclaimer.discalimer"
+      "component": "story-outro-disclaimer.disclaimer"
     }
   }
 }

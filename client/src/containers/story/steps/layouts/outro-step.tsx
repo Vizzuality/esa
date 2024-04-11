@@ -20,19 +20,6 @@ type MediaStepLayoutProps = {
   showContent: boolean;
 };
 
-const links = [
-  [
-    'https://www.gaf.de/',
-    '',
-    'https://site.tre-altamira.com/',
-    'http://www.gisat.cz/',
-    'https://www.ait.ac.at/en/',
-    'https://www.caribou.space/',
-  ],
-  ['https://www.adb.org/'],
-  ['https://www.esa.int/'],
-];
-
 const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   const { push } = useRouter();
 
@@ -80,14 +67,6 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   const mediaMime = media?.mime;
 
   const isVideo = mediaType?.includes('video');
-
-  // const handlePlayVideo = useCallback(
-  //   (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, action: 'play' | 'pause') => {
-  //     if (action === 'play') e.currentTarget.play();
-  //     else e.currentTarget.pause();
-  //   },
-  //   []
-  // );
 
   const scale = useTransform(scrollYProgress, [0.5, 0.7], ['1', '2']);
   const scaleContent = useTransform(scrollYProgress, [0.5, 0.7], ['1', '0.75']);
@@ -155,25 +134,20 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
           >
             <p>Continue scrolling to explore more stories</p>
           </motion.div>
-          {showContent && show && step.disclaimer && (
+          {showContent && show && step.story_disclaimer?.length && (
             <div className="font-notes pointer-events-auto relative w-screen bg-white p-4 text-xs italic text-black">
               <ul className="flex items-center justify-center gap-x-10 gap-y-2">
-                {step.disclaimer.map((d, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <p>{d.title}</p>
+                {step.story_disclaimer.map((sd) => (
+                  <li key={sd.title} className="flex items-center gap-2">
+                    <p>{sd.title}</p>
                     <div className="flex gap-2">
-                      {d.logos &&
-                        d.logos?.data?.map((logo, index) => {
-                          const src = getImageSrc(logo?.attributes?.url);
+                      {sd.disclaimer?.length &&
+                        sd.disclaimer?.map((d) => {
+                          const src = getImageSrc(d.logo?.data?.attributes?.url);
 
-                          const url = links[i][index];
+                          const url = d.url;
                           return url ? (
-                            <a
-                              key={logo?.attributes?.url}
-                              href={links[i][index]}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                            <a key={d.id} href={d.url} target="_blank" rel="noopener noreferrer">
                               <Image
                                 src={src}
                                 width={50}
