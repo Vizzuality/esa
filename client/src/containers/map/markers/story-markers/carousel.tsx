@@ -38,7 +38,10 @@ const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
         loop
         controls={isCurrentMedia}
         autoPlay={isCurrentMedia}
-        className="h-full max-h-[calc(100vh-152px)] w-full object-cover"
+        className={cn(
+          'h-full max-h-[calc(100vh-152px)] w-full',
+          isCurrentMedia ? 'object-contain' : 'object-cover'
+        )}
       >
         <source src={media.url} type={media.mime} />
       </video>
@@ -47,7 +50,10 @@ const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
   return (
     <Image
       src={media?.url}
-      className="h-full max-h-[calc(100vh-152px)] w-full object-cover"
+      className={cn(
+        'h-full max-h-[calc(100vh-152px)] w-full',
+        isCurrentMedia ? 'object-contain' : 'object-cover'
+      )}
       height={1200}
       width={500}
       alt={media.title}
