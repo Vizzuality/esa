@@ -81,13 +81,20 @@ const MapLegends = ({ className = '' }) => {
     isFetching,
     isFetched,
     isError,
-  } = useGetLayers({
-    filters: {
-      id: {
-        $in: layers,
+  } = useGetLayers(
+    {
+      filters: {
+        id: {
+          $in: layers,
+        },
       },
     },
-  });
+    {
+      query: {
+        enabled: !!layers.length,
+      },
+    }
+  );
 
   const LEGENDS = useMemo(() => {
     return layersData?.data?.reduce<LegendProps[]>((acc, curr) => {
