@@ -8,7 +8,6 @@ import { parseConfig } from '@/lib/json-converter';
 
 import { layersSettingsAtom } from '@/store/map';
 
-import { useGetLayersId } from '@/types/generated/layer';
 import { LayerTyped, LegendConfig } from '@/types/layers';
 import { LEGEND_TYPE, LegendType } from '@/types/map';
 
@@ -37,7 +36,11 @@ const LEGEND_TYPES: LEGEND_TYPES_T = {
   switch: LegendTypeSwitch,
 };
 
-type MapLegendItemProps = LegendItemProps;
+type MapLegendItemProps = LegendItemProps & {
+  isFetching: boolean;
+  isFetched: boolean;
+  isError: boolean;
+};
 
 const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManager => {
   const { params_config, legend_config, metadata } = data;
@@ -58,70 +61,55 @@ const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManage
   };
 };
 
-const MapLegendItem = ({ id, ...legendProps }: MapLegendItemProps) => {
-  const { data, isError, isFetched, isFetching, isPlaceholderData } = useGetLayersId(id, {
-    populate: 'metadata',
-  });
-
+const MapLegendItem = ({ id, layer, ...legendProps }: MapLegendItemProps) => {
   const layersSettings = useAtomValue(layersSettingsAtom);
 
-  const attributes = data?.data?.attributes as LayerTyped;
+  const legend_config = layer?.legend_config as LegendConfig;
 
-  const legend_config = useMemo(() => {
-    if (!attributes?.legend_config) return [];
-    return Array.isArray(attributes?.legend_config)
-      ? attributes.legend_config
-      : [attributes.legend_config];
-  }, [attributes?.legend_config]);
+  const params_config = layer?.params_config;
+  const metadata = layer?.metadata;
+  const settingsManager = getSettingsManager(layer as LayerTyped);
 
-  const params_config = attributes?.params_config;
-  const metadata = attributes?.metadata;
-  const settingsManager = getSettingsManager(attributes);
-
-  const LEGEND_COMPONENTS = useMemo(() => {
-    const legends: ReactElement[] = [];
-    legend_config?.forEach((lc: LegendConfig) => {
-      const l = parseConfig<LegendConfig | ReactElement | null>({
-        config: { ...lc, layerId: id, layerTitle: attributes?.title },
-        params_config,
-        settings: layersSettings[id] ?? {},
-      });
-
-      if (!l) return;
-
-      if (isValidElement(l)) {
-        legends.push(l);
-      }
-
-      const { type, ...props } = l as LegendConfig;
-      if (typeof type !== 'string' || !LEGEND_TYPE.includes(type as LegendType)) return;
-      // TODO: Fix this type
-      const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
-      const LegendElement = createElement(LEGEND, props);
-      if (!isValidElement(LegendElement)) return;
-      if (props.displayControllers) {
-        legends.push(
-          <LegendItem
-            id={id}
-            name={attributes?.title}
-            settingsManager={settingsManager}
-            {...props}
-            {...legendProps}
-            InfoContent={!!metadata && <Metadata {...attributes} />}
-          >
-            {LegendElement}
-          </LegendItem>
-        );
-        return;
-      }
-      legends.push(LegendElement);
+  const LEGEND_COMPONENT = useMemo(() => {
+    const l = parseConfig<LegendConfig | ReactElement | null>({
+      config: { ...legend_config, layerId: id, layerTitle: layer?.title },
+      params_config,
+      settings: layersSettings[id] ?? {},
     });
 
-    return legends;
+    if (!l) return;
+
+    if (isValidElement(l)) {
+      return l;
+    }
+
+    const { type, ...props } = l as LegendConfig;
+    if (typeof type !== 'string' || !LEGEND_TYPE.includes(type as LegendType)) return;
+    // TODO: Fix this type
+    const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
+    const LegendElement = createElement(LEGEND, props);
+    if (!isValidElement(LegendElement)) return;
+    if (props.displayControllers) {
+      return (
+        <LegendItem
+          key={id}
+          id={id}
+          name={legend_config?.title || layer?.title}
+          settingsManager={settingsManager}
+          {...props}
+          {...legendProps}
+          InfoContent={!!metadata && <Metadata {...(layer as LayerTyped)} />}
+        >
+          {LegendElement}
+        </LegendItem>
+      );
+    } else {
+      return LegendElement;
+    }
   }, [
     legend_config,
     id,
-    attributes,
+    layer,
     params_config,
     layersSettings,
     settingsManager,
@@ -132,13 +120,13 @@ const MapLegendItem = ({ id, ...legendProps }: MapLegendItemProps) => {
   return (
     <ContentLoader
       skeletonClassName="h-10"
-      data={data?.data}
-      isFetching={isFetching}
-      isFetched={isFetched}
-      isPlaceholderData={isPlaceholderData}
-      isError={isError}
+      data={layer}
+      isFetching={legendProps.isFetching}
+      isFetched={legendProps.isFetched}
+      isPlaceholderData={false}
+      isError={legendProps.isError}
     >
-      {LEGEND_COMPONENTS}
+      {LEGEND_COMPONENT}
     </ContentLoader>
   );
 };

@@ -39,7 +39,7 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
     <div className="flex justify-between">
       <div className="flex flex-1 flex-col space-y-8 pt-[84px]">
         {!!story_summary?.length && (
-          <div className="pointer-events-auto min-w-fit space-y-4 lg:w-[280px]">
+          <div className="pointer-events-auto w-72 space-y-4 ">
             <div className={cn(cardClassName, 'space-x-2')}>
               <CategoryIcon className="inline h-10 w-10 fill-gray-200" slug={category?.slug} />
               <span className="font-open-sans text-sm">{category?.name}</span>

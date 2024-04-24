@@ -4,6 +4,7 @@ import { DraggableAttributes } from '@dnd-kit/core';
 import { SyntheticListeners } from '@dnd-kit/core/dist/hooks/utilities';
 import { LucideIcon } from 'lucide-react';
 
+import { Layer } from '@/types/generated/strapi.schemas';
 import { LegendType } from '@/types/map';
 
 type Sortable = {
@@ -58,11 +59,14 @@ export interface LegendItemProps extends LegendItemEvents {
   sortable?: Sortable;
   listeners?: SyntheticListeners;
   attributes?: DraggableAttributes;
+  displayControllers?: boolean;
 
   // settings
   // I extends Dataset['id'] so you can get the correct setting depending on the dataset id
   settings?: Settings;
   settingsManager?: SettingsManager;
+
+  layer?: Layer;
 }
 
 export interface LegendItemToolbarProps extends LegendItemEvents {
@@ -101,6 +105,7 @@ export interface LegendTypeProps {
     value: string;
     color: string;
   }>;
+  title?: string;
 }
 
 export interface LegendTypeTimelineProps {
@@ -115,6 +120,8 @@ export interface LegendTypeTimelineProps {
   format?: string;
   animationInterval?: number;
   style?: CSSProperties;
+  labels?: string[];
+  title?: string;
 }
 
 export interface LegendMatrixIntersectionsProps {
@@ -130,6 +137,7 @@ export interface LegendTypeSwitchProps {
   layerTitle: string;
   style?: CSSProperties;
   color?: string;
+  title?: string;
 }
 
 type ItemLegends = Extract<LegendType, 'basic' | 'choropleth' | 'gradient'>;

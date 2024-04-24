@@ -76,7 +76,6 @@ export default function MapContainer() {
 
   const bbox = useAtomValue(bboxAtom);
   const tmpBbox = useAtomValue(tmpBboxAtom);
-  // const isFlyingBack = useAtomValue(isFlyingBackAtom);
 
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
 
@@ -120,6 +119,7 @@ export default function MapContainer() {
   }, [tmpBbox]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleMapViewStateChange = useCallback(() => {
+    console.log('viewStateChange');
     if (map) {
       const b = map
         .getBounds()
@@ -151,7 +151,7 @@ export default function MapContainer() {
   //   [layersInteractive, layersInteractiveData, setPopup]
   // );
 
-  const handleMapMove = useCallback((e: MapLayerMouseEvent) => {
+  const handleMouseMove = useCallback((e: MapLayerMouseEvent) => {
     if (e.features?.length) {
       const f = e.features[0];
 
@@ -187,12 +187,7 @@ export default function MapContainer() {
   }, [map, tmpBbox]);
 
   return (
-    <div
-      className={cn(
-        'fixed left-0 top-0 h-screen w-full bg-[#0a2839]',
-        isHomePage ? 'cursor-pointer' : 'pointer-events-none cursor-default'
-      )}
-    >
+    <div className={cn('fixed left-0 top-0 h-screen w-full bg-[#0a2839]')}>
       <Map
         id={id}
         initialViewState={{
@@ -210,7 +205,7 @@ export default function MapContainer() {
         fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         // onClick={handleMapClick}
-        onMouseMove={handleMapMove}
+        onMouseMove={handleMouseMove}
         bounds={tmpBounds}
         scrollZoom={isHomePage}
         dragPan={isHomePage}
@@ -247,7 +242,7 @@ export default function MapContainer() {
         )}
         {!isHomePage && <StoryMarkers />}
       </Map>
-      <div className="absolute bottom-0 left-0 z-20 w-full p-4 pb-16">
+      <div className="absolute bottom-0 left-0 z-20 w-full p-4 pb-16 pl-14">
         <MapLegends />
       </div>
     </div>

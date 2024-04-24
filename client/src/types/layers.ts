@@ -24,6 +24,7 @@ export type LegendConfig = {
   displayControllers?: boolean;
   type: LegendType;
   style?: CSSProperties;
+  title?: string;
   items: {
     value: string;
     color: string;

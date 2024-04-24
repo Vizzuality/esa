@@ -8,7 +8,13 @@ import { Switch } from '@/components/ui/switch';
 
 import { LegendTypeSwitchProps } from '../../types';
 
-const LegendTypeSwitch = ({ layerId, param, layerTitle, ...props }: LegendTypeSwitchProps) => {
+const LegendTypeSwitch = ({
+  layerId,
+  param,
+  layerTitle,
+  title,
+  ...props
+}: LegendTypeSwitchProps) => {
   const layersSettings = useAtomValue(layersSettingsAtom);
   const checked = useMemo(() => layersSettings[layerId]?.[param], [layerId, layersSettings, param]);
 
@@ -28,16 +34,19 @@ const LegendTypeSwitch = ({ layerId, param, layerTitle, ...props }: LegendTypeSw
   );
 
   return (
-    <div style={props.style} className="flex justify-between">
+    <div style={props.style} className="flex items-center justify-between gap-2">
       <div className="flex">
-        <label className="cursor-pointer text-white" htmlFor={`${layerId}-switch`}>
+        <label
+          className="font-open-sans cursor-pointer text-sm text-white"
+          htmlFor={`${layerId}-switch`}
+        >
           {props.color && (
             <span
               className="mr-2 inline-block h-3 w-3 rounded-sm"
               style={{ backgroundColor: props.color }}
             />
           )}
-          {layerTitle}
+          {title || layerTitle}
         </label>
       </div>
       <Switch
