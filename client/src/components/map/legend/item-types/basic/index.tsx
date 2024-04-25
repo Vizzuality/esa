@@ -3,11 +3,13 @@ import React from 'react';
 import { cn } from '@/lib/classnames';
 
 import { LegendTypeProps } from '../../types';
+import LegendHeader from '../header';
 
 export const LegendTypeBasic: React.FC<LegendTypeProps> = ({
   className = '',
   items = [],
   title,
+  info,
 }) => {
   return (
     <div
@@ -15,7 +17,7 @@ export const LegendTypeBasic: React.FC<LegendTypeProps> = ({
         [className]: !!className,
       })}
     >
-      {title && <p className="mb-2 text-sm text-white">{title}</p>}
+      <LegendHeader title={title} info={info} />
       <ul className="flex w-full flex-wrap items-center gap-3">
         {items.map(({ value, color }) => (
           <li key={`${value}`} className="flex items-center gap-x-1 text-white">

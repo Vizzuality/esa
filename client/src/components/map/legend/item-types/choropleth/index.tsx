@@ -3,11 +3,13 @@ import React from 'react';
 import { cn } from '@/lib/classnames';
 
 import { LegendTypeProps } from '../../types';
+import LegendHeader from '../header';
 
 export const LegendTypeChoropleth: React.FC<LegendTypeProps> = ({
   className = '',
   items,
   title,
+  info,
 }) => {
   return (
     <div
@@ -15,7 +17,7 @@ export const LegendTypeChoropleth: React.FC<LegendTypeProps> = ({
         [className]: !!className,
       })}
     >
-      {title && <p className="mb-2 text-sm text-white">{title}</p>}
+      <LegendHeader title={title} info={info} />
       <ul className="flex w-full">
         {items.map(({ color, value }) => (
           <li
