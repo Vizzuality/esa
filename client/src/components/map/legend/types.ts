@@ -112,6 +112,7 @@ export interface LegendTypeProps extends Legend {
     value: string;
     color: string;
   }>;
+  title?: string;
 }
 
 export interface LegendTypeTimelineProps extends Legend {
@@ -139,6 +140,7 @@ export interface LegendTypeSwitchProps extends Legend {
   param: string;
   layerTitle: string;
   color?: string;
+  title?: string;
 }
 
 type ItemLegends = Extract<LegendType, 'basic' | 'choropleth' | 'gradient'>;
