@@ -8,12 +8,9 @@ import { parseConfig } from '@/lib/json-converter';
 
 import { layersSettingsAtom } from '@/store/map';
 
-import { LayerTyped, LegendConfig } from '@/types/layers';
+import { LegendConfig } from '@/types/layers';
 import { LEGEND_TYPE, LegendType } from '@/types/map';
 
-import Metadata from '@/containers/metadata';
-
-import LegendItem from '@/components/map/legend/item';
 import {
   LegendTypeBasic,
   LegendTypeChoropleth,
@@ -21,7 +18,7 @@ import {
   LegendTypeTimeline,
 } from '@/components/map/legend/item-types';
 import LegendTypeSwitch from '@/components/map/legend/item-types/switch';
-import { LegendItemProps, LegendTypesProps, SettingsManager } from '@/components/map/legend/types';
+import { LegendItemProps, LegendTypesProps } from '@/components/map/legend/types';
 import ContentLoader from '@/components/ui/loader';
 
 type LEGEND_TYPES_T = {
@@ -42,33 +39,13 @@ type MapLegendItemProps = LegendItemProps & {
   isError: boolean;
 };
 
-const getSettingsManager = (data: LayerTyped = {} as LayerTyped): SettingsManager => {
-  const { params_config, legend_config, metadata } = data;
-
-  if (!params_config?.length) return {};
-  const p = params_config.reduce((acc: Record<string, boolean>, { key }) => {
-    if (!key) return acc;
-    return {
-      ...acc,
-      [`${key}`]: true,
-    };
-  }, {});
-
-  return {
-    ...p,
-    info: !!metadata,
-    expand: !!legend_config,
-  };
-};
-
 const MapLegendItem = ({ id, layer, ...legendProps }: MapLegendItemProps) => {
   const layersSettings = useAtomValue(layersSettingsAtom);
 
-  const legend_config = layer?.legend_config as LegendConfig;
+  const legend_config = layer?.legend_config as LegendTypesProps<any>;
+  const legendType = legend_config?.type;
 
   const params_config = layer?.params_config;
-  const metadata = layer?.metadata;
-  const settingsManager = getSettingsManager(layer as LayerTyped);
 
   const LEGEND_COMPONENT = useMemo(() => {
     const l = parseConfig<LegendConfig | ReactElement | null>({
@@ -83,39 +60,20 @@ const MapLegendItem = ({ id, layer, ...legendProps }: MapLegendItemProps) => {
       return l;
     }
 
-    const { type, ...props } = l as LegendConfig;
+    const { type, ...props } = l as LegendTypesProps<typeof legendType>;
     if (typeof type !== 'string' || !LEGEND_TYPE.includes(type as LegendType)) return;
     // TODO: Fix this type
     const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
-    const LegendElement = createElement(LEGEND, props);
+    const elementProps = {
+      ...props,
+      title: props.title || layer?.title,
+      info: props.info || layer?.metadata?.description,
+    };
+    const LegendElement = createElement(LEGEND, elementProps);
     if (!isValidElement(LegendElement)) return;
-    if (props.displayControllers) {
-      return (
-        <LegendItem
-          key={id}
-          id={id}
-          name={legend_config?.title || layer?.title}
-          settingsManager={settingsManager}
-          {...props}
-          {...legendProps}
-          InfoContent={!!metadata && <Metadata {...(layer as LayerTyped)} />}
-        >
-          {LegendElement}
-        </LegendItem>
-      );
-    } else {
-      return LegendElement;
-    }
-  }, [
-    legend_config,
-    id,
-    layer,
-    params_config,
-    layersSettings,
-    settingsManager,
-    legendProps,
-    metadata,
-  ]);
+
+    return LegendElement;
+  }, [legend_config, id, layer, params_config, layersSettings]);
 
   return (
     <ContentLoader

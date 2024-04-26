@@ -119,7 +119,6 @@ export default function MapContainer() {
   }, [tmpBbox]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleMapViewStateChange = useCallback(() => {
-    console.log('viewStateChange');
     if (map) {
       const b = map
         .getBounds()

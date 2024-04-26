@@ -99,8 +99,15 @@ export interface SortableItemProps extends PropsWithChildren {
   sortable: Sortable;
 }
 
-export interface LegendTypeProps {
+export interface Legend {
   className?: string;
+  title?: string;
+  style?: CSSProperties;
+  info?: string;
+  type: LegendType;
+}
+
+export interface LegendTypeProps extends Legend {
   items: Array<{
     value: string;
     color: string;
@@ -108,8 +115,7 @@ export interface LegendTypeProps {
   title?: string;
 }
 
-export interface LegendTypeTimelineProps {
-  className?: string;
+export interface LegendTypeTimelineProps extends Legend {
   description?: string;
   id: number;
   layerId: number;
@@ -119,23 +125,20 @@ export interface LegendTypeTimelineProps {
   dateType?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second';
   format?: string;
   animationInterval?: number;
-  style?: CSSProperties;
   labels?: string[];
-  title?: string;
 }
 
-export interface LegendMatrixIntersectionsProps {
+export interface LegendMatrixIntersectionsProps extends Legend {
   intersections: Array<{
     id: number;
     color: string;
   }>;
 }
 
-export interface LegendTypeSwitchProps {
+export interface LegendTypeSwitchProps extends Legend {
   layerId: number;
   param: string;
   layerTitle: string;
-  style?: CSSProperties;
   color?: string;
   title?: string;
 }
@@ -143,6 +146,8 @@ export interface LegendTypeSwitchProps {
 type ItemLegends = Extract<LegendType, 'basic' | 'choropleth' | 'gradient'>;
 
 export type LegendTypesProps<T> = T extends ItemLegends
+  ? LegendTypeProps
+  : T extends 'basic' | 'choropleth' | 'gradient'
   ? LegendTypeProps
   : T extends 'timeline'
   ? LegendTypeTimelineProps

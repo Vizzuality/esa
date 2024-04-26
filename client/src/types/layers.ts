@@ -21,7 +21,6 @@ export type ParamsConfigValue = {
 export type ParamsConfig = ParamsConfigValue[];
 
 export type LegendConfig = {
-  displayControllers?: boolean;
   type: LegendType;
   style?: CSSProperties;
   title?: string;
