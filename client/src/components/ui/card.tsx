@@ -6,10 +6,11 @@ import { cn } from '@/lib/classnames';
 
 type CardProps = PropsWithChildren & {
   title?: string;
+  info?: string;
   className?: string;
 };
 
-const Card = ({ children, title, className }: CardProps) => {
+const Card = ({ children, title, info, className }: CardProps) => {
   return (
     <div
       className={cn(
@@ -19,7 +20,8 @@ const Card = ({ children, title, className }: CardProps) => {
     >
       {title && (
         <div className="mb-2 flex justify-between">
-          <p>{title}</p> <InfoIcon className="h-4 w-4" />
+          <p>{title}</p>
+          {info && <InfoIcon className="h-4 w-4" />}
         </div>
       )}
       {children}
