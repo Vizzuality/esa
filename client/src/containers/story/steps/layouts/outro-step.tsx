@@ -102,6 +102,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                     muted
                     loop
                     autoPlay={true}
+                    controls
                   >
                     <source src={mediaSrc} type={mediaMime} />
                   </video>
@@ -153,7 +154,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                                 width={50}
                                 height={30}
                                 alt=""
-                                className="h-8 w-full object-contain object-center"
+                                className="h-8 w-full max-w-[125px] object-contain object-center"
                               />
                             </a>
                           ) : (
@@ -163,7 +164,7 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                                 width={50}
                                 height={30}
                                 alt=""
-                                className="h-8 w-full object-contain object-center"
+                                className="h-8 w-full max-w-[125px] object-contain object-center"
                               />
                             </div>
                           );
