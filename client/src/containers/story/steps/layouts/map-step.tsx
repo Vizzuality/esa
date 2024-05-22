@@ -3,18 +3,18 @@
 import { InfoIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
-import { useScrollToItem } from '@/lib/scroll';
+// import { useScrollToItem } from '@/lib/scroll';
 
 import {
   StepLayoutMapStepComponent,
   StoryStepsItem,
   StoryCategoryDataAttributes,
   WidgetWidgetComponent,
-  MapLayerCardComponent,
 } from '@/types/generated/strapi.schemas';
 
 import Chart from '@/components/chart';
 import CategoryIcon from '@/components/ui/category-icon';
+import RichText from '@/components/ui/rich-text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type MapStepLayoutProps = {
@@ -29,11 +29,11 @@ const cardClassName =
 
 const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayoutProps) => {
   const { story_summary, card, widget } = step as StepLayoutMapStepComponent;
-  const scrollToItem = useScrollToItem();
+  // const scrollToItem = useScrollToItem();
 
-  const handleClickCard = () => {
-    scrollToItem(stepIndex + 1);
-  };
+  // const handleClickCard = () => {
+  //   scrollToItem(stepIndex + 1);
+  // };
 
   return (
     <div className="flex justify-between">
@@ -49,7 +49,7 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
               {story_summary?.map((item) => (
                 <div className="space-y-1" key={item.id}>
                   <div className="text-enlight-yellow-400 flex items-center gap-2">
-                    <h2 className="tetx-sm font-bold uppercase">{item.title}</h2>
+                    <h2 className="text-sm font-bold uppercase">{item.title}</h2>
                     {item.info && (
                       <Tooltip delayDuration={100}>
                         <TooltipTrigger disabled={true}>
@@ -79,34 +79,35 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
       </div>
       <div className="relative min-h-screen pt-[84px]">
         <div className="flex min-h-full flex-col items-end justify-end space-y-6 pb-16">
-          {[card, widget]?.map((item, index) => {
-            if (!item) return null;
-            return (
-              <div
-                key={item?.id}
-                onClick={handleClickCard}
-                className={cn(
-                  'pointer-events-auto cursor-pointer overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
-                  showContent ? 'opacity-100' : 'opacity-0'
-                )}
-              >
-                <div className="w-[400px] space-y-1">
-                  {item?.title && <h2 className="font-notes text-2xl font-bold">{item?.title}</h2>}
-                  {index === 0 ? (
-                    <div className="font-open-sans space-y-4">
-                      {(item as MapLayerCardComponent)?.content?.split('\n').map((p, i) => (
-                        <p key={i} className="text-sm">
-                          {p}
-                        </p>
-                      ))}
-                    </div>
-                  ) : (
-                    <Chart widget={item as WidgetWidgetComponent} />
-                  )}
+          {!!card && (
+            <div
+              className={cn(
+                'pointer-events-auto overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
+                showContent ? 'opacity-100' : 'opacity-0'
+              )}
+            >
+              <div className="w-[400px] space-y-2">
+                {card?.title && <h2 className="font-notes text-2xl font-bold">{card?.title}</h2>}
+                <div className="font-open-sans space-y-4">
+                  <RichText className="text-white">{card?.content}</RichText>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          )}
+          {!!widget?.id && (
+            <div
+              className={cn(
+                'pointer-events-auto overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
+                showContent ? 'opacity-100' : 'opacity-0'
+              )}
+            >
+              <div className="w-[400px] space-y-2">
+                {widget?.title && <h2 className="font-notes text-xl font-bold">{widget?.title}</h2>}
+                <Chart widget={widget as WidgetWidgetComponent} />
+                {widget?.legend && <RichText>{widget.legend}</RichText>}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
