@@ -104,7 +104,7 @@ const MapStepLayout = ({ step, category, showContent, stepIndex }: MapStepLayout
               <div className="w-[400px] space-y-2">
                 {widget?.title && <h2 className="font-notes text-xl font-bold">{widget?.title}</h2>}
                 <Chart widget={widget as WidgetWidgetComponent} />
-                {widget?.legend && <RichText>{widget.legend}</RichText>}
+                {(widget as any)?.legend && <RichText>{(widget as any).legend}</RichText>}
               </div>
             </div>
           )}
