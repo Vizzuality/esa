@@ -47,6 +47,10 @@ module "app" {
   do_app_image_tag        = var.do_app_image_tag
 }
 
+resource "digitalocean_cdn" "space_cdn" {
+  origin = module.space.bucket_domain_name
+}
+
 resource "digitalocean_spaces_bucket_cors_configuration" "space_cms_cors" {
   bucket = module.space_cms.space_id
   region = var.do_region

@@ -62,6 +62,9 @@ locals {
     BUCKET_BUCKET                  = "${var.project_name}-staging-cms"
     BUCKET_ENDPOINT                = "https://${var.do_region}.digitaloceanspaces.com"
 
+    # DigitalOcean Spaces to store map data
+    BUCKET_MAP_DATA_ENDPOINT = "https://${var.project_name}-staging.${var.do_region}.cdn.digitaloceanspaces.com"
+
     # Database
     DATABASE_CLIENT                  = "postgres"
     DATABASE_HOST                    = module.staging.postgresql_host
