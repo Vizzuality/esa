@@ -5,21 +5,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-<<<<<<< HEAD
 import { useScroll, motion, useTransform, useMotionValueEvent } from 'framer-motion';
-=======
-import { useScroll, motion, useTransform } from 'framer-motion';
-import { useSetAtom } from 'jotai';
->>>>>>> ebf3e15 (Update main (#52))
 
 import { cn } from '@/lib/classnames';
 import { getImageSrc } from '@/lib/image-src';
 
-<<<<<<< HEAD
-=======
-import { isFlyingBackAtom } from '@/store/map';
-
->>>>>>> ebf3e15 (Update main (#52))
 import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
 import { useIsMobile } from '@/hooks/screen-size';
@@ -46,11 +36,6 @@ type MediaStepLayoutProps = {
 const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps) => {
   const { push } = useRouter();
 
-<<<<<<< HEAD
-=======
-  const setIsFlyingBack = useSetAtom(isFlyingBackAtom);
-
->>>>>>> ebf3e15 (Update main (#52))
   const { content, title } = step as StepLayoutOutroStepComponent;
 
   // Merge all partners from the step and category disclaimer

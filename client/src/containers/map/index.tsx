@@ -9,25 +9,12 @@ import { useParams, usePathname } from 'next/navigation';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
-<<<<<<< HEAD
 import { useDebouncedValue } from 'rooks';
 
 import { cn } from '@/lib/classnames';
 
 import { bboxAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store/map';
 import { useSyncStep } from '@/store/stories';
-=======
-
-import { cn } from '@/lib/classnames';
-
-import {
-  bboxAtom,
-  // layersInteractiveAtom,
-  layersInteractiveIdsAtom,
-  // popupAtom,
-  tmpBboxAtom,
-} from '@/store/map';
->>>>>>> ebf3e15 (Update main (#52))
 
 import { useGetStoriesId } from '@/types/generated/story';
 import { Bbox } from '@/types/map';
@@ -59,17 +46,8 @@ export default function MapContainer() {
   const bbox = useAtomValue(bboxAtom);
   const tmpBbox = useAtomValue(tmpBboxAtom);
 
-<<<<<<< HEAD
   const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
 
-=======
-  const bbox = useAtomValue(bboxAtom);
-  const tmpBbox = useAtomValue(tmpBboxAtom);
-  // const isFlyingBack = useAtomValue(isFlyingBackAtom);
-
-  const layersInteractiveIds = useAtomValue(layersInteractiveIdsAtom);
-
->>>>>>> ebf3e15 (Update main (#52))
   const setBbox = useSetAtom(bboxAtom);
   const setTmpBbox = useSetAtom(tmpBboxAtom);
 
@@ -208,12 +186,6 @@ export default function MapContainer() {
 
         <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
       </Map>
-<<<<<<< HEAD
-=======
-      <div className="absolute bottom-0 left-0 z-20 w-full p-4 pb-16">
-        <MapLegends />
-      </div>
->>>>>>> ebf3e15 (Update main (#52))
     </div>
   );
 }

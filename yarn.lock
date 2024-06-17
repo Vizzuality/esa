@@ -2936,9 +2936,7 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: ^7.45.0
     react-map-gl: 7.1.5
-    react-markdown: 8.0.7
-    recoil: ^0.7.7
-    recoil-sync: ^0.2.0
+    react-markdown: 8.0.7 
     rooks: 7.14.1
     tailwind-merge: ^1.13.2
     tailwindcss: 3.3.2
@@ -8276,30 +8274,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mapbox__point-geometry@npm:*, @types/mapbox__point-geometry@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "@types/mapbox__point-geometry@npm:0.1.4"
-  checksum: d315f3e396bebd40f1cab682595f3d1c5ac46c5ddb080cf65dfcd0401dc6a3f235a7ac9ada2d28e6c49485fa5f231458f29fee87069e42a137e20e5865801dd1
-  languageName: node
-  linkType: hard
-
-"@types/mapbox__vector-tile@npm:^1.3.4":
-  version: 1.3.4
-  resolution: "@types/mapbox__vector-tile@npm:1.3.4"
-  dependencies:
-    "@types/geojson": "*"
-    "@types/mapbox__point-geometry": "*"
-    "@types/pbf": "*"
-  checksum: 5715d9da88a5ecadb63e3ca4d52272ead2c1d63fcf616841932719788e458fc10dd9919ad01aa9c95b15c83e9074dae9ffc7193a7ae4ae7b8436d26630f0e269
-  languageName: node
-  linkType: hard
-
 "@types/mdast@npm:^4.0.0":
   version: 4.0.4
-  resolution: "@types/mdast@npm:4.0.4"
+  resolution: "@types/mdast@npm:4.0.4" 
   dependencies:
-    "@types/unist": "*"
-  checksum: 20c4e9574cc409db662a35cba52b068b91eb696b3049e94321219d47d34c8ccc99a142be5c76c80a538b612457b03586bc2f6b727a3e9e7530f4c8568f6282ee
+    "@types/unist": ^2 
+  checksum: af85042a4e3af3f879bde4059fa9e76c71cb552dffc896cdcc6cf9dc1fd38e37035c2dbd6245cfa6535b433f1f0478f5549696234ccace47a64055a10c656530
   languageName: node
   linkType: hard
 
@@ -8377,14 +8357,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/pbf@npm:*, @types/pbf@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "@types/pbf@npm:3.0.5"
-  checksum: 9115eb3cc61e535748dd6de98c7a8bd64e02a4052646796013b075fed66fd52a3a2aaae6b75648e9c0361e8ed462a50549ca0af1015e2e48296cd8c31bb54577
-  languageName: node
-  linkType: hard
-
-"@types/prop-types@npm:*":
+"@types/prop-types@npm:*, @types/prop-types@npm:^15.0.0": 
   version: 15.7.11
   resolution: "@types/prop-types@npm:15.7.11"
   checksum: 7519ff11d06fbf6b275029fe03fff9ec377b4cb6e864cac34d87d7146c7f5a7560fd164bdc1d2dbe00b60c43713631251af1fd3d34d46c69cd354602bc0c7c54
@@ -10217,7 +10190,7 @@ __metadata:
   version: 5.0.2
   resolution: "cartocolor@npm:5.0.2"
   dependencies:
-    colorbrewer: 1.5.6
+    colorbrewer: 1.5.6 
   checksum: ea9ffe5080489fd3166145ec763d5ce2a830772dac3991b3e09472238933bc004dfadb775e439421c8cb3d6a380c5d00dbe5eedff513e4baea06df6f8a2e77df
   languageName: node
   linkType: hard
@@ -10229,7 +10202,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:4.1.2, chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
+"ccount@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "ccount@npm:2.0.1"
+  checksum: 48193dada54c9e260e0acf57fc16171a225305548f9ad20d5471e0f7a8c026aedd8747091dccb0d900cde7df4e4ddbd235df0d8de4a64c71b12f0d3303eeafd4
+  languageName: node
+  linkType: hard 
+
+"chalk@npm:4.1.2, chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2": 
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -16890,24 +16870,6 @@ __metadata:
   bin:
     markdown-it: bin/markdown-it.js
   checksum: 890555711c1c00fa03b936ca2b213001a3b9b37dea140d8445ae4130ce16628392aad24b12e2a0a9935336ca5951f2957a38f4e5309a2e38eab44e25ff32a41e
-  languageName: node
-  linkType: hard
-
-"markdown-table@npm:^3.0.0":
-  version: 3.0.3
-  resolution: "markdown-table@npm:3.0.3"
-  checksum: 8fcd3d9018311120fbb97115987f8b1665a603f3134c93fbecc5d1463380c8036f789e2a62c19432058829e594fff8db9ff81c88f83690b2f8ed6c074f8d9e10
-  languageName: node
-  linkType: hard
-
-"martinez-polygon-clipping@npm:^0.7.4":
-  version: 0.7.4
-  resolution: "martinez-polygon-clipping@npm:0.7.4"
-  dependencies:
-    robust-predicates: ^2.0.4
-    splaytree: ^0.1.4
-    tinyqueue: ^1.2.0
-  checksum: 22dc1f9ce84a4c74ea470aa2badfb039950db247d549e15c4509fe6d28b29ed4a010e1ea60646e064392102c9887c588b973330330917ae082b4be891e059288
   languageName: node
   linkType: hard
 
@@ -24173,19 +24135,5 @@ __metadata:
   version: 3.22.4
   resolution: "zod@npm:3.22.4"
   checksum: 80bfd7f8039b24fddeb0718a2ec7c02aa9856e4838d6aa4864335a047b6b37a3273b191ef335bf0b2002e5c514ef261ffcda5a589fb084a48c336ffc4cdbab7f
-  languageName: node
-  linkType: hard
-
-"zstd-codec@npm:^0.1":
-  version: 0.1.5
-  resolution: "zstd-codec@npm:0.1.5"
-  checksum: ba62bf643c3ca9759fedc090b73a0c3b1e506364fcae902a70b112c1f5b30bc6aabff3184808cc4430f2ab6644cabae979368152ae908c1d8ef39cd8c3223c85
-  languageName: node
-  linkType: hard
-
-"zwitch@npm:^2.0.0":
-  version: 2.0.4
-  resolution: "zwitch@npm:2.0.4"
-  checksum: f22ec5fc2d5f02c423c93d35cdfa83573a3a3bd98c66b927c368ea4d0e7252a500df2a90a6b45522be536a96a73404393c958e945fdba95e6832c200791702b6
   languageName: node
   linkType: hard

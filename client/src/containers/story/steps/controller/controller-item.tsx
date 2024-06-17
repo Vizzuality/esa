@@ -2,10 +2,7 @@
 
 import { useCallback } from 'react';
 
-<<<<<<< HEAD
 import { cn } from '@/lib/classnames';
-=======
->>>>>>> ebf3e15 (Update main (#52))
 import { useScrollToItem } from '@/lib/scroll';
 
 import { useSyncStep } from '@/store/stories';

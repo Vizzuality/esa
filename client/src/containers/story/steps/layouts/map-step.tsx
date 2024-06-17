@@ -189,7 +189,52 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                       name={marker.title}
                     />
                   </div>
-                ))}
+                  {item.link ? (
+                    <a
+                      className="font-open-sans"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.content}
+                    </a>
+                  ) : (
+                    <p className="font-open-sans">{item.content}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="relative min-h-screen pt-[84px]">
+        <div className="flex min-h-full flex-col items-end justify-end space-y-6 pb-16">
+          {!!card && (
+            <div
+              className={cn(
+                'pointer-events-auto overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
+                showContent ? 'opacity-100' : 'opacity-0'
+              )}
+            >
+              <div className="w-[400px] space-y-2">
+                {card?.title && <h2 className="font-notes text-2xl font-bold">{card?.title}</h2>}
+                <div className="font-open-sans space-y-4">
+                  <RichText className="text-white">{card?.content}</RichText>
+                </div>
+              </div>
+            </div>
+          )}
+          {!!widget?.id && (
+            <div
+              className={cn(
+                'pointer-events-auto overflow-hidden rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 p-8 backdrop-blur transition-all duration-300 ease-in-out',
+                showContent ? 'opacity-100' : 'opacity-0'
+              )}
+            >
+              <div className="w-[400px] space-y-2">
+                {widget?.title && <h2 className="font-notes text-xl font-bold">{widget?.title}</h2>}
+                <Chart widget={widget as WidgetWidgetComponent} />
+                {(widget as any)?.legend && <RichText>{(widget as any).legend}</RichText>}
               </div>
             </div>
           )} */}

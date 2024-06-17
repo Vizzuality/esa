@@ -20,10 +20,10 @@ module.exports = {
           options: {
             staleTime: 10000,
           },
-          signal: true
+          signal: true,
         },
         operations: {
-          "get/datasets/{id}": {
+          'get/datasets/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -31,9 +31,9 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
+            },
           },
-          "get/dataset-groups/{id}": {
+          'get/dataset-groups/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -41,9 +41,9 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
+            },
           },
-          "get/layers/{id}": {
+          'get/layers/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -51,9 +51,9 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
+            },
           },
-          "get/categories/{id}": {
+          'get/categories/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -61,9 +61,9 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
+            },
           },
-          "get/stories/{id}": {
+          'get/stories/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -71,9 +71,9 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
+            },
           },
-          "get/steps/{id}": {
+          'get/steps/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -81,9 +81,9 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
+            },
           },
-          "get/top-stories/{id}": {
+          'get/top-stories/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -91,9 +91,9 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
+            },
           },
-          "get/ifis/{id}": {
+          'get/ifis/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -101,9 +101,9 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
+            },
           },
-          "get/tags/{id}": {
+          'get/tags/{id}': {
             query: {
               useQuery: true,
               useInfinite: false,
@@ -111,16 +111,17 @@ module.exports = {
               options: {
                 staleTime: 10000,
               },
-            }
-          }
-        }
+            },
+          },
+        },
       },
     },
     input: {
-      target: '../cms/dist/src/extensions/documentation/documentation/1.0.0/full_documentation.json',
+      target:
+        '../cms/dist/src/extensions/documentation/documentation/1.0.0/full_documentation.json',
       filters: {
         tags: ['Dataset', 'Dataset-group', 'Layer', 'Story', 'Category', 'Top-story', 'Ifi', 'Tag'],
       },
-    }
-  }
-}
+    },
+  },
+};
