@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { PopoverArrow } from '@radix-ui/react-popover';
-import { Eye, Info, EyeOff, Droplet, ChevronDown } from 'lucide-react';
+import { Eye, Info, EyeOff, Droplet } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
@@ -21,10 +21,9 @@ export const LegendItemToolbar: React.FC<LegendItemToolbarProps> = ({
   settingsManager,
   onChangeOpacity,
   onChangeVisibility,
-  onChangeExpand,
 }: LegendItemToolbarProps) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
-  const { opacity = 1, visibility = true, expand = true } = settings || {};
+  const { opacity = 1, visibility = true } = settings || {};
 
   return (
     <div id="legend-toolbar" className="mt-0.5 flex divide-x">
@@ -138,41 +137,6 @@ export const LegendItemToolbar: React.FC<LegendItemToolbarProps> = ({
           </div>
         )}
       </div>
-
-      {settingsManager?.expand && (
-        <div className="pl-2">
-          <div className="flex items-start">
-            <Tooltip delayDuration={500}>
-              {/* <AccordionTrigger> */}
-              <TooltipTrigger
-                type="button"
-                aria-label={expand ? 'Collapse layer' : 'Expand layer'}
-                className={cn({
-                  'pointer-events-none': popoverOpen,
-                })}
-                onClick={() => {
-                  if (onChangeExpand) onChangeExpand(!expand);
-                }}
-              >
-                <LegendItemButton
-                  Icon={ChevronDown}
-                  className={cn({
-                    'rotate-180': !expand,
-                    'rotate-0 transform transition-transform': expand,
-                  })}
-                />
-              </TooltipTrigger>
-              {/* </AccordionTrigger> */}
-
-              <TooltipContent side="top" align="end" alignOffset={-10}>
-                <div className="text-xxs">{expand ? 'Collapse layer' : 'Expand layer'}</div>
-
-                <TooltipArrow className="fill-white" width={10} height={5} />
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

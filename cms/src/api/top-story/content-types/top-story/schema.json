@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "top_stories",
+  "info": {
+    "singularName": "top-story",
+    "pluralName": "top-stories",
+    "displayName": "Top story",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
+    },
+    "index": {
+      "type": "integer",
+      "required": true,
+      "unique": true,
+      "min": 0,
+      "max": 5
+    },
+    "cover_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

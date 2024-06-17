@@ -3,16 +3,23 @@ import React from 'react';
 import { cn } from '@/lib/classnames';
 
 import { LegendTypeProps } from '../../types';
+import LegendHeader from '../header';
 
-export const LegendTypeGradient: React.FC<LegendTypeProps> = ({ className = '', items }) => {
+export const LegendTypeGradient: React.FC<LegendTypeProps> = ({
+  className = '',
+  items,
+  title,
+  info,
+}) => {
   return (
     <div
       className={cn({
         [className || '']: !!className,
       })}
     >
+      <LegendHeader title={title} info={info} />
       <div
-        className="flex h-3 w-72"
+        className="min-w-72 flex h-3"
         style={{
           backgroundImage: `linear-gradient(to right, ${items.map((i) => i.color).join(',')})`,
         }}

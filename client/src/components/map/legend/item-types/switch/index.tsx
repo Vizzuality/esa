@@ -8,7 +8,13 @@ import { Switch } from '@/components/ui/switch';
 
 import { LegendTypeSwitchProps } from '../../types';
 
-const LegendTypeSwitch = ({ layerId, param, layerTitle }: LegendTypeSwitchProps) => {
+const LegendTypeSwitch = ({
+  layerId,
+  param,
+  layerTitle,
+  title,
+  ...props
+}: LegendTypeSwitchProps) => {
   const layersSettings = useAtomValue(layersSettingsAtom);
   const checked = useMemo(() => layersSettings[layerId]?.[param], [layerId, layersSettings, param]);
 
@@ -28,7 +34,21 @@ const LegendTypeSwitch = ({ layerId, param, layerTitle }: LegendTypeSwitchProps)
   );
 
   return (
-    <div className="bg-card-map rounded-full px-2 backdrop-blur-sm">
+    <div style={props.style} className="flex items-center justify-between gap-2">
+      <div className="flex">
+        <label
+          className="font-open-sans cursor-pointer text-sm text-white"
+          htmlFor={`${layerId}-switch`}
+        >
+          {props.color && (
+            <span
+              className="mr-2 inline-block h-3 w-3 rounded-sm"
+              style={{ backgroundColor: props.color }}
+            />
+          )}
+          {title || layerTitle}
+        </label>
+      </div>
       <Switch
         onCheckedChange={(c) => handleChangeVisibility(c)}
         value={layerId}
@@ -36,9 +56,6 @@ const LegendTypeSwitch = ({ layerId, param, layerTitle }: LegendTypeSwitchProps)
         defaultChecked={!!checked}
         id={`${layerId}-switch`}
       />
-      <label className="ml-3 cursor-pointer text-white" htmlFor={`${layerId}-switch`}>
-        {layerTitle}
-      </label>
     </div>
   );
 };

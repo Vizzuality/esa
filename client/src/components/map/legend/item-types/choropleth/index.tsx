@@ -3,14 +3,21 @@ import React from 'react';
 import { cn } from '@/lib/classnames';
 
 import { LegendTypeProps } from '../../types';
+import LegendHeader from '../header';
 
-export const LegendTypeChoropleth: React.FC<LegendTypeProps> = ({ className = '', items }) => {
+export const LegendTypeChoropleth: React.FC<LegendTypeProps> = ({
+  className = '',
+  items,
+  title,
+  info,
+}) => {
   return (
     <div
-      className={cn({
+      className={cn('font-open', {
         [className]: !!className,
       })}
     >
+      <LegendHeader title={title} info={info} />
       <ul className="flex w-full">
         {items.map(({ color, value }) => (
           <li
@@ -28,7 +35,7 @@ export const LegendTypeChoropleth: React.FC<LegendTypeProps> = ({ className = ''
         {items.map(({ color, value }) => (
           <li
             key={`${color}-${value}`}
-            className="flex-shrink-0 text-center text-xs"
+            className="font-open-sans flex-shrink-0 text-center text-sm text-white"
             style={{
               width: `${100 / items.length}%`,
             }}

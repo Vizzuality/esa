@@ -56,7 +56,7 @@ export default function Home() {
               </a>
             </Card>
             <GradientLine />
-            <Card title="Top stories (5)">
+            <Card title="Top stories">
               <TopStories />
             </Card>
           </div>

@@ -21,9 +21,7 @@ import { layersAtom, layersSettingsAtom, timelineAtom } from '@/store/map';
 import { LegendTypeTimelineProps } from '@/components/map/legend/types';
 import { Button } from '@/components/ui/button';
 
-const width = 200;
-const height = 12;
-const textMarginY = -5;
+import LegendHeader from '../header';
 
 export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   start,
@@ -33,8 +31,11 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   interval = 1,
   format,
   layerId,
-  description,
+  labels,
+  title,
   animationInterval = 1000,
+  info,
+  ...props
 }) => {
   const intervalRef = useRef<NodeJS.Timer>();
 
@@ -125,13 +126,16 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
       { step: interval }
     );
 
+    const useConfigLabels = labels?.length === timelineValues?.length;
+
     return (
       timelineValues?.map((d, index) => ({
         value: index,
-        label: dateFnsFormat(d, format || defaultFormat),
+        label: useConfigLabels ? labels?.[index] : dateFnsFormat(d, format || defaultFormat),
       })) || []
     );
-  }, [start, end, dateType, interval, format]);
+  }, [start, end, dateType, interval, format, labels]);
+  const thumbLabelRef = useRef<HTMLDivElement>(null);
 
   const handlePlay = useCallback(() => {
     clearInterval(intervalRef.current);
@@ -169,28 +173,18 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
     [id, layers, timelines]
   );
 
-  const maxValue = TIMELINE?.length || 1;
+  const maxValue = TIMELINE?.length - 1 || 1;
   const minValue = 0;
-  const yearScale = useCallback(
-    (year: number) => (year / (maxValue - minValue)) * (width - 2),
-    [maxValue, minValue]
-  );
 
-  const currValueText = useRef<SVGTextElement>(null);
-  const firstValueText = useRef<SVGTextElement>(null);
   // If the layer is not the first one in the timeline, don't render the component
   if (firstTimelineLayer !== layerId) {
     return null;
   }
-  const currTextSize = currValueText.current?.getBBox().width || 0;
-  const firstTextSize = currValueText.current?.getBBox().width || 0;
-  const currYearX = yearScale(value) - currTextSize / 2;
-  const minYearX = Math.max(-firstTextSize / 2, -15);
-  const maxYearX = width - Math.min(firstTextSize / 2, 25) - 5;
 
   return (
-    <div className="w-full flex-1 overflow-visible">
-      <div className="bg-card-map z-30 flex h-[62px] w-fit items-center justify-between gap-8 rounded-full px-4 backdrop-blur-sm">
+    <div style={props?.style} className="z-30 mt-4">
+      <LegendHeader title={title} info={info} />
+      <div className="flex items-center gap-8">
         <Button
           variant="default"
           className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
@@ -204,67 +198,51 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
         </Button>
 
         <Root
-          max={(TIMELINE?.length || 1) - 1}
-          min={0}
-          step={interval}
+          max={maxValue}
+          min={minValue}
           value={[frame]}
           onValueChange={([v]) => onChangeFrame(v)}
-          className="relative flex w-full -translate-x-3 translate-y-3 touch-none select-none items-center"
+          className="relative flex w-[200px] touch-none select-none flex-col justify-end"
         >
-          <Track className="w-full">
-            <svg width={width} height={height} className="cursor-pointer overflow-visible">
-              {/* Min value text */}
-              <text
-                x={minYearX}
-                y={textMarginY}
-                className={cn(
-                  'font-open-sans fill-white text-xs',
-                  currYearX - minYearX > firstTextSize ? 'opacity-100' : 'opacity-25'
-                )}
-                ref={firstValueText}
-              >
-                {TIMELINE[0]?.label}
-              </text>
-
-              {/* Years lines */}
-              {TIMELINE?.map(({ value }) => {
-                const position = value % 10 === 0 ? 0 : 4;
-                return (
-                  <line
-                    key={value}
-                    x1={yearScale(value)}
-                    x2={yearScale(value)}
-                    y1={position}
-                    y2={height}
-                    strokeWidth={2}
-                    className="stroke-gray-400"
-                  />
-                );
+          <div
+            style={{ marginTop: thumbLabelRef?.current?.clientHeight }}
+            className="mb-2 flex justify-between"
+          >
+            <div
+              className={cn('font-open-sans text-xs leading-none text-white', {
+                'text-gray-400': value === minValue,
               })}
-
-              {/* Max value text */}
-              <text
-                className={cn(
-                  'font-open-sans fill-white text-xs',
-                  maxYearX - currYearX > firstTextSize ? 'opacity-100' : 'opacity-25'
-                )}
-                x={maxYearX}
-                y={textMarginY}
-                ref={currValueText}
-              >
-                {TIMELINE?.[TIMELINE.length - 1]?.label}
-              </text>
-              {/* Current value text */}
-              <text
-                x={currYearX}
-                y={textMarginY - 10}
-                className="font-open-sans fill-white text-sm font-bold"
-              >
-                {TIMELINE?.[value]?.label}
-              </text>
-            </svg>
+            >
+              {TIMELINE?.[minValue]?.label}
+            </div>
+            <div
+              className={cn('font-open-sans text-xs leading-none text-white', {
+                'text-gray-400': value === maxValue,
+              })}
+            >
+              {TIMELINE?.[maxValue]?.label}
+            </div>
+          </div>
+          <Track className="flex h-3 w-full justify-between">
+            {TIMELINE?.map((t, index) => (
+              <div key={index} className="h-full w-0.5 bg-gray-400" />
+            ))}
           </Track>
-          <Thumb className="block h-5 w-0 -translate-x-[1px] -translate-y-1 cursor-pointer border-r-[2px] bg-white" />
+          <Thumb className="block h-6 w-0.5 cursor-pointer bg-white">
+            <span
+              className={cn(
+                'font-open-sans block w-max text-xs font-semibold leading-none text-white',
+                `translate-y-[calc(-16px-100%)]`,
+                {
+                  '-translate-x-full': value === maxValue,
+                  '-translate-x-1/2': value !== maxValue && value !== minValue,
+                }
+              )}
+              ref={thumbLabelRef}
+            >
+              {TIMELINE?.[value]?.label}
+            </span>
+          </Thumb>
         </Root>
       </div>
     </div>

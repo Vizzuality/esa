@@ -12,11 +12,11 @@ import {
   Filler,
   registerables,
 } from 'chart.js';
-import { ChartJSOrUndefined } from 'react-chartjs-2/dist/types';
+import { ChartJSOrUndefined, ChartProps } from 'react-chartjs-2/dist/types';
 
 import { WidgetWidgetComponent } from '@/types/generated/strapi.schemas';
 
-import { getChartDefaultData, getChartDefaultOptions } from './utils';
+import { bubbleDefaultOptions, getChartDefaultData, getChartDefaultOptions } from './utils';
 
 type ChartJsProps = {
   widget: WidgetWidgetComponent;
@@ -49,19 +49,24 @@ const ChartJs = ({ widget, ...props }: ChartJsProps) => {
     () => getChartDefaultData(data, chartRef),
     [data, chartRef.current]
   );
-  const optionsWithDefaults = useMemo(() => getChartDefaultOptions(options), [options]);
 
   const chartType = type as ChartType;
+
+  const optionsWithDefaults: Partial<ChartProps['options']> = getChartDefaultOptions(options);
+
+  const OPTIONS = {
+    ...optionsWithDefaults,
+    datasets: {
+      ...(chartType === 'bubble'
+        ? { bubble: { ...bubbleDefaultOptions, ...optionsWithDefaults?.datasets?.bubble } }
+        : {}),
+    },
+  };
 
   return (
     <div {...props}>
       {!chartTypes.includes(chartType) || !data || !(data as ChartData).datasets ? null : (
-        <Chart
-          ref={chartRef}
-          type={chartType}
-          options={optionsWithDefaults}
-          data={dataWithDefaults}
-        />
+        <Chart ref={chartRef} type={chartType} options={OPTIONS} data={dataWithDefaults} />
       )}
     </div>
   );

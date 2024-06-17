@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_story_outro_disclaimer_disclaimers",
+  "info": {
+    "displayName": "disclaimer"
+  },
+  "options": {},
+  "attributes": {
+    "disclaimer": {
+      "type": "component",
+      "repeatable": true,
+      "required": true,
+      "component": "disclaimer.outro-step-disclaimer"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
