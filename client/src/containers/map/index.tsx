@@ -56,15 +56,6 @@ const DEFAULT_PROPS: CustomMapProps = {
   maxZoom: 14,
 };
 
-const FOG = {
-  range: [0.5, 8],
-  'horizon-blend': 0.125,
-  color: '#2a6981',
-  'high-color': '#0a2839',
-  'space-color': '#0a2839',
-  'star-intensity': 0.25,
-};
-
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
 
@@ -201,7 +192,6 @@ export default function MapContainer() {
         minZoom={minZoom}
         maxZoom={maxZoom}
         mapStyle={MAPBOX_STYLES.default}
-        fog={FOG}
         interactiveLayerIds={layersInteractiveIds}
         // onClick={handleMapClick}
         onMouseMove={handleMouseMove}
