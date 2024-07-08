@@ -1,73 +1,226 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 
-import { useSetAtom } from 'jotai';
+import { useMap } from 'react-map-gl';
 
-import { layersAtom, tmpBboxAtom } from '@/store/map';
-import { useSyncStep } from '@/store/stories';
+import Link from 'next/link';
 
-import { DEFAULT_MAP_BBOX, DEFAULT_MAP_STATE } from '@/constants/map';
+import { motion } from 'framer-motion';
+import { useAtomValue, useSetAtom } from 'jotai';
+import resolveConfig from 'tailwindcss/resolveConfig';
 
-import Sidebar from '@/containers/home/sidebar';
+import { homeMarkerAtom } from '@/store/home';
 
-import Card from '@/components/ui/card';
-import GradientLine from '@/components/ui/gradient-line';
+import { Dialog, DialogContentHome } from '@/components/ui/dialog';
 
-import Categories from './categories';
-import Dashboard from './dashboard';
-import { Filters } from './filters';
-import Header from './header';
-import TopStories from './top-stories';
+import Header from '../header';
 
-export default function Home() {
-  const setTmpBbox = useSetAtom(tmpBboxAtom);
-  const setLayers = useSetAtom(layersAtom);
-  const { removeStep } = useSyncStep();
+import { SATELLITE_MARKERS, SatelliteMarkerId } from './constants';
+import SatelliteButton from './satellite-button';
+import Satellite from './satellite-content';
+
+import tailwindConfig from '@/../tailwind.config';
+const { theme } = resolveConfig(tailwindConfig);
+
+const getThemeSize = (size: string) => {
+  if (theme?.screens && size in theme?.screens) {
+    const screenSize = (theme?.screens?.[size as keyof typeof theme.screens] as string)?.replace(
+      'px',
+      ''
+    );
+    if (isFinite(Number(screenSize))) {
+      return Number(screenSize);
+    }
+  }
+  return 1;
+};
+
+const Home = () => {
+  const { default: map } = useMap();
+
+  const selectedMarker = useAtomValue(homeMarkerAtom);
+  const setSelectedMarker = useSetAtom(homeMarkerAtom);
+
+  const [size, setSize] = useState({
+    width: 1,
+    height: 1,
+  });
+
+  const spin = useCallback(() => {
+    if (!map) return;
+
+    const currCenter = map.getCenter();
+    const nextLng = (currCenter.lng + 5) % 360;
+    const nextLat = currCenter.lat + 3;
+    const lat = nextLat < -90 ? nextLat + 180 : nextLat > 90 ? nextLat - 180 : nextLat;
+
+    map?.easeTo({
+      bearing: 0,
+      pitch: 0,
+      zoom: size.width >= getThemeSize('3xl') ? 2 : 1.5,
+      center: { lng: nextLng, lat },
+      duration: 5000,
+      padding: {
+        left: size.width * 0.45,
+        right: 0,
+        top: 0,
+        bottom: size.width >= getThemeSize('xl') ? 0 : size.height * 0.5,
+      },
+      easing: (n) => n,
+    });
+  }, [size, map]);
 
   useEffect(() => {
-    const tmpbbox: [number, number, number, number] = DEFAULT_MAP_BBOX;
-    setTmpBbox({ bbox: tmpbbox, options: DEFAULT_MAP_STATE });
-  }, [setTmpBbox]);
+    if (map) {
+      map?.easeTo({
+        bearing: 0,
+        pitch: 0,
+        zoom: size.width >= getThemeSize('3xl') ? 2 : 1.5,
+        center: { lng: 0, lat: 0 },
+        duration: 500,
+        padding: {
+          left: size.width * 0.45,
+          right: 0,
+          top: 0,
+          bottom: size.width >= getThemeSize('xl') ? 0 : size.height * 0.5,
+        },
+        easing: (n) => n,
+      });
+      map.on('moveend', spin);
+      return () => {
+        map.stop();
+        map.off('moveend', spin);
+      };
+    }
+  }, [map, spin, size]);
 
   useEffect(() => {
-    setLayers([]);
-    removeStep();
-  }, []);
+    setSelectedMarker(null);
+
+    const handleResize = () => {
+      const w = window?.innerWidth || 1;
+      const h = window?.innerHeight || 1;
+      setSize({ width: w, height: h });
+    };
+
+    if (typeof window !== 'undefined') {
+      handleResize();
+      window?.addEventListener('resize', handleResize);
+      return () => {
+        window?.removeEventListener('resize', handleResize);
+      };
+    }
+  }, [setSelectedMarker]);
+
+  const w = useMemo(() => size.width * 0.6, [size.width]);
+
+  const handleSelectMarker = (id: SatelliteMarkerId) => {
+    setSelectedMarker(id);
+  };
+
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
 
   return (
-    <div className="home text-primary flex h-screen w-screen flex-col justify-between overflow-y-hidden px-12">
-      <Header />
-      <Filters />
-      <div className="flex max-h-full flex-1 justify-between overflow-hidden pb-6 pt-12">
-        <Sidebar>
-          <div className="2xl:w-70 w-[280px]">
-            <Dashboard />
-          </div>
-        </Sidebar>
-        <div className="2xl:w-70 flex h-full w-[280px] flex-col">
-          <div className="flex max-h-[calc(100%-110px)] flex-col justify-between">
-            <Card title="Top stories" className="max-h-[calc(100%-33px)]">
-              <TopStories />
-            </Card>
-            <GradientLine />
-          </div>
-          <div className="h-fit">
-            <Card title="Programme Dashboard">
-              <a
-                target="_blank"
-                className="font-open-sans text-sm leading-snug"
-                href="https://lookerstudio.google.com/reporting/b6d8f54c-558e-48dc-bc79-a7eca193da6f/page/p_2ehvdzg47c"
+    <div className="text-primary font-notes pointer-events-none flex h-screen w-screen flex-col justify-between overflow-hidden">
+      <div className="z-50 flex h-full flex-col">
+        <div className="mx-12">
+          <Header />
+        </div>
+        <div className="container flex flex-1 items-end justify-center pb-12 xl:items-center xl:justify-start">
+          <div className="pointer-events-auto max-w-full xl:max-w-lg">
+            <div className="flex flex-col items-start justify-center gap-8">
+              <div className="flex flex-col items-start justify-center gap-2">
+                <div className="font-notes text-xs font-bold uppercase leading-normal tracking-wide text-slate-400">
+                  Welcome to the
+                </div>
+                <div className="font-notes text-3xl font-bold uppercase leading-10 tracking-[10px] text-zinc-100 lg:text-[40px] xl:tracking-[16px]">
+                  Impact Sphere
+                </div>
+              </div>
+              <div className="h-[1px] w-full bg-gradient-to-r from-teal-500/70 via-teal-500/60 to-teal-500/0"></div>
+              <div className="text-balance w-[455px] max-w-full">
+                <span className="font-open-sans text-base font-normal leading-normal text-stone-200">
+                  Uncover the stories told by powerful satellites, revealing their crucial role in
+                  addressing global challenges. From monitoring climate change to enhancing
+                  precision agriculture, the GDA program utilises satellite data to accelerate
+                  impact.
+                </span>
+                <span className="font-open-sans text-base font-normal leading-normal text-stone-200">
+                  Dive into these uplifting stories and discover how satellites are shaping a more
+                  sustainable and interconnected future for our planet.
+                </span>
+                <span className="font-open-sans text-base font-bold leading-normal text-stone-200">
+                  {' '}
+                  Ready to explore GDA stories
+                </span>
+                <span className="font-open-sans text-base font-normal leading-normal text-stone-200">
+                  ?
+                </span>
+              </div>
+            </div>
+            <div className="mt-6 h-[124px] w-[124px] rounded-full bg-teal-500/50 p-2.5 transition-all duration-500 hover:p-0">
+              <Link
+                onClick={() => map?.stop()}
+                className="font-bold uppercase tracking-wide"
+                href="/globe"
               >
-                Detailed report dashboard on ESA GDA programme.
-              </a>
-            </Card>
+                <div className="flex h-full w-full items-center justify-center rounded-full bg-teal-500">
+                  Explore
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
+
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={variants}
+          transition={{ duration: 2, delay: 1, ease: 'easeIn' }}
+          style={{ width: w, height: '100%', right: w * -0.045, top: 0 }}
+          className="3xl:scale-80 absolute z-50 hidden max-h-screen scale-125 items-center overflow-hidden xl:flex xl:scale-100"
+        >
+          <div style={{ height: w }} className="w-full">
+            <div className="3xl:rotate-[55deg] flex h-full rotate-45 items-end justify-center rounded-full border border-dashed border-slate-600 p-[50px] xl:p-[70px]">
+              <div className="3xl:rotate-[-100deg] relative flex h-full w-full -rotate-90 justify-center rounded-full border border-dashed border-slate-600">
+                <SatelliteButton
+                  handleSelectMarker={handleSelectMarker}
+                  satellite={SATELLITE_MARKERS[0]}
+                  className="-translate-y-1/2"
+                />
+                <SatelliteButton
+                  handleSelectMarker={handleSelectMarker}
+                  satellite={SATELLITE_MARKERS[0]}
+                  className="translate-y-1/2 rotate-90 place-self-end"
+                />
+              </div>
+              <SatelliteButton
+                handleSelectMarker={handleSelectMarker}
+                satellite={SATELLITE_MARKERS[1]}
+                className="translate-y-[calc(50px+50%)] xl:translate-y-[calc(70px+50%)]"
+              />
+            </div>
+          </div>
+        </motion.div>
       </div>
-      <div className="z-10">
-        <Categories />
-      </div>
+      <Dialog
+        open={!!selectedMarker}
+        onOpenChange={(open) => {
+          if (!open) {
+            setSelectedMarker(null);
+          }
+        }}
+      >
+        <DialogContentHome className="w-[498px]">
+          <Satellite id={selectedMarker} handleSelectSatellite={(id) => setSelectedMarker(id)} />
+        </DialogContentHome>
+      </Dialog>
     </div>
   );
-}
+};
+
+export default Home;

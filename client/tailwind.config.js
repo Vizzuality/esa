@@ -22,6 +22,7 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        'map-background': 'hsl(var(--map-style-background))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -56,6 +57,7 @@ module.exports = {
           500: 'hsla(202, 15%, 66%, 1)',
           700: '#5A7A8A',
           800: 'hsla(197, 37%, 32%, 1)',
+          900: 'hsla(198, 100%, 14%, 1)',
         },
         'enlight-yellow': {
           400: 'hsla(43, 100%, 65%, 1)',

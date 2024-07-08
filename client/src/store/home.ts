@@ -1,17 +1,5 @@
 import { atom } from 'jotai';
-import { parseAsArrayOf, useQueryStates, parseAsString, useQueryState } from 'nuqs';
 
-// NUQS SYNC STATE HOOKS
+import { SatelliteMarkerId } from '@/containers/home/constants';
 
-export const useSyncCategory = () => useQueryState('category', parseAsString);
-
-export const useSyncFilters = () =>
-  useQueryStates({
-    tags: parseAsArrayOf(parseAsString),
-    ifi: parseAsArrayOf(parseAsString),
-    status: parseAsArrayOf(parseAsString),
-  });
-
-// JOTAI ATOMS
-
-export const filtersOpenAtom = atom<boolean>(false);
+export const homeMarkerAtom = atom<SatelliteMarkerId | null>(null);
