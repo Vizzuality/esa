@@ -11,7 +11,7 @@
     "@strapi/design-system": "^1.9.0",
     "@strapi/helper-plugin": "4.11.2",
     "@strapi/icons": "^1.6.3",
-    "mapbox-gl": "2.15.0",
+    "mapbox-gl": "3.0.1",
     "prop-types": "^15.7.2",
     "react": "^18.2.0",
     "react-map-gl": "^7.1.5"
