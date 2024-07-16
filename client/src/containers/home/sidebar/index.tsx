@@ -14,13 +14,14 @@ export default function Sidebar({ children }: PropsWithChildren) {
   return (
     <div
       className={cn({
-        'pointer-events-none h-full max-w-[400px]  flex-col transition-transform duration-500':
-          true,
+        'pointer-events-none h-full max-w-[400px] flex-col transition-transform duration-500': true,
         'translate-x-0': open,
         '-translate-x-full': !open,
       })}
     >
-      <div className="pointer-events-auto flex grow flex-col overflow-y-auto">{children}</div>
+      <div className="pointer-events-auto flex h-[inherit] flex-col overflow-y-auto">
+        {children}
+      </div>
     </div>
   );
 }
