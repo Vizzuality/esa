@@ -66,7 +66,7 @@ const StoryMarkers = () => {
         type="circle"
         filter={['has', 'point_count']}
         paint={{
-          'circle-color': '#000',
+          'circle-color': '#FFE094',
           'circle-radius': 12,
         }}
         layout={{
@@ -85,7 +85,7 @@ const StoryMarkers = () => {
           'text-allow-overlap': true,
         }}
         paint={{
-          'text-color': '#fff',
+          'text-color': '#003247',
         }}
       />
 

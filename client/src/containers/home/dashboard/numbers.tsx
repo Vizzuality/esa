@@ -8,9 +8,9 @@ const DashboardNumbers = () => {
   return (
     <div className="flex gap-x-1">
       {numbers.map(({ stat, number }) => (
-        <div key={stat} className="text-xs">
-          <p className="text-3xl font-bold">{number}</p>
-          <p>{stat}</p>
+        <div key={stat} className="space-y-1 text-center text-xs">
+          <p className="text-4xl font-bold">{number}</p>
+          <p className="font-open-sans font-semibold text-gray-400">{stat}</p>
         </div>
       ))}
     </div>
