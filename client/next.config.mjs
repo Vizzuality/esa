@@ -20,6 +20,33 @@ const nextConfig = {
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: 'false',
     NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH || '',
   },
+  redirects: async () => {
+    return [
+      {
+        source: '/',
+        has: [
+          {
+            type: 'cookie',
+            key: 'esa-visited',
+            value: 'true',
+          },
+        ],
+        permanent: false,
+        destination: '/globe',
+      },
+      {
+        source: '/',
+        missing: [
+          {
+            type: 'cookie',
+            key: 'esa-visited',
+          },
+        ],
+        permanent: false,
+        destination: '/home',
+      },
+    ];
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
