@@ -4,76 +4,48 @@ import { InfoIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
+import { useSyncStep } from '@/store/stories';
+
 import {
   StepLayoutMapStepComponent,
+  StoryIfisDataItem,
   StoryStepsItem,
-  StoryCategoryDataAttributes,
+  StoryTagsDataItem,
   WidgetWidgetComponent,
 } from '@/types/generated/strapi.schemas';
 
 import Chart from '@/components/chart';
-import CategoryIcon from '@/components/ui/category-icon';
 import RichText from '@/components/ui/rich-text';
+import ScrollExplanation from '@/components/ui/scroll-explanation';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import MapContent from './components/map-content';
 
-type MapStepLayoutProps = {
-  step: StoryStepsItem;
-  category: StoryCategoryDataAttributes | undefined;
-  stepIndex: number;
-  showContent?: boolean;
+export type StorySummary = {
+  title: string;
+  content?: (StoryIfisDataItem | StoryTagsDataItem)[];
 };
 
-const cardClassName =
-  'rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 py-6 px-4 backdrop-blur';
+type MapStepLayoutProps = {
+  step: StoryStepsItem;
+  showContent?: boolean;
+  storySummary?: StorySummary[] | null;
+};
 
-const MapStepLayout = ({ step, category, showContent }: MapStepLayoutProps) => {
-  const { story_summary, card, widget } = step as StepLayoutMapStepComponent;
+const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) => {
+  const { card, widget } = step as StepLayoutMapStepComponent;
+
+  const { step: currentStep } = useSyncStep();
+
   return (
-    <div className="flex justify-between">
-      <div className="flex flex-1 flex-col space-y-8 pt-[84px]">
-        {!!story_summary?.length && (
-          <div className="pointer-events-auto w-72 space-y-4 ">
-            <div className={cn(cardClassName, 'space-x-2')}>
-              <CategoryIcon className="inline h-10 w-10 fill-gray-200" slug={category?.slug} />
-              <span className="font-open-sans text-sm">{category?.name}</span>
-            </div>
-
-            <div className={cn(cardClassName, 'space-y-4')}>
-              {story_summary?.map((item) => (
-                <div className="space-y-1" key={item.id}>
-                  <div className="text-enlight-yellow-400 flex items-center gap-2">
-                    <h2 className="text-sm font-bold uppercase">{item.title}</h2>
-                    {item.info && (
-                      <Tooltip delayDuration={100}>
-                        <TooltipTrigger disabled={true}>
-                          <InfoIcon className="h-4 w-4" />
-                        </TooltipTrigger>
-                        <TooltipContent className="max-w-xs">{item.info}</TooltipContent>
-                      </Tooltip>
-                    )}
-                  </div>
-                  {item.link ? (
-                    <a
-                      className="font-open-sans"
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.content}
-                    </a>
-                  ) : (
-                    <p className="font-open-sans">{item.content}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+    <div className="flex justify-end">
+      <div
+        className={cn(
+          'relative pt-[84px]',
+          currentStep === 1 ? 'min-h-[calc(100vh-48px)]' : 'min-h-screen'
         )}
-      </div>
-      <div className="relative min-h-screen pt-[84px]">
-        <div className="flex min-h-full flex-col items-end justify-end space-y-6 pb-16">
+      >
+        <div className="flex min-h-full w-[468px] flex-col items-end justify-end space-y-6 pb-8">
           {!!card && (
             <MapContent
               showContent={showContent}
@@ -91,8 +63,58 @@ const MapStepLayout = ({ step, category, showContent }: MapStepLayoutProps) => {
               </div>
             </MapContent>
           )}
+          {!!storySummary?.length && (
+            <div className="pointer-events-auto flex w-full max-w-full flex-wrap justify-between gap-4 rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 px-6 py-4 backdrop-blur">
+              {storySummary?.map((item) => (
+                <div className="space-y-1" key={item.title}>
+                  <div className="text-enlight-yellow-400 flex items-center gap-2">
+                    <h2 className="text-sm font-bold uppercase">{item.title}</h2>
+                  </div>
+                  <div className="space-y-2">
+                    {item.content?.map((c) => {
+                      return (
+                        <div key={c.id} className="flex gap-2">
+                          <>
+                            {c.attributes?.link ? (
+                              <a
+                                className="font-open-sans block w-max leading-none hover:underline"
+                                href={c.attributes.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {c.attributes?.name}
+                              </a>
+                            ) : (
+                              <p className="font-open-sans w-max leading-none">
+                                {c.attributes?.name}
+                              </p>
+                            )}
+                            {c.attributes?.description && (
+                              <Tooltip>
+                                <TooltipTrigger>
+                                  <InfoIcon className="h-4 w-4" />
+                                </TooltipTrigger>
+                                <TooltipContent className="max-w-md">
+                                  {c.attributes?.description}
+                                </TooltipContent>
+                              </Tooltip>
+                            )}
+                          </>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
+      {currentStep === 1 && (
+        <div className="absolute bottom-8 left-0 flex w-screen items-center">
+          <ScrollExplanation>Scroll down to explore the story</ScrollExplanation>
+        </div>
+      )}
     </div>
   );
 };

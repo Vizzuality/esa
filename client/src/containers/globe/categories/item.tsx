@@ -30,12 +30,12 @@ const CategoryItem = ({ name, slug }: CategoryProps) => {
           title={name}
           onClick={() => handleClick(slug)}
           className={cn(
-            'hover:fill-secondary transition-all delay-200 ease-out hover:-translate-y-2 hover:opacity-100',
+            'hover:fill-secondary pointer-events-auto transition-all delay-200 ease-out hover:-translate-y-2 hover:opacity-100',
             slug === 'placeholder-category'
               ? 'animate-pulse'
               : category === slug
               ? 'fill-secondary opacity-70'
-              : 'fill-primary  opacity-50'
+              : 'fill-primary'
           )}
         >
           <CategoryIcon slug={slug} />

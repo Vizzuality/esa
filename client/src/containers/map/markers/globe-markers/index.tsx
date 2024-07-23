@@ -6,7 +6,7 @@ import { Layer, Source } from 'react-map-gl';
 
 import { getStoriesParams } from '@/lib/stories';
 
-import { useSyncCategory } from '@/store/globe';
+import { useSyncCategory, useSyncFilters, useSyncSearch } from '@/store/globe';
 
 import { useGetCategories } from '@/types/generated/category';
 import { useGetStories } from '@/types/generated/story';
@@ -16,6 +16,8 @@ import { useMapImage } from '@/hooks/map';
 
 const GlobeMarkers = () => {
   const [category] = useSyncCategory();
+  const [search] = useSyncSearch();
+  const [filters] = useSyncFilters();
   const { data: categories } = useGetCategories();
 
   const categoryId = useMemo(() => {
@@ -23,7 +25,7 @@ const GlobeMarkers = () => {
     return categoryItem?.id;
   }, [categories?.data, category]);
 
-  const params = getStoriesParams({ category: categoryId });
+  const params = getStoriesParams({ category: categoryId, title: search, ...filters });
   const { data: stories } = useGetStories(params);
   const FeatureCollection = useMemo(
     () => ({
@@ -35,16 +37,12 @@ const GlobeMarkers = () => {
           const lng = marker?.lng;
           return {
             type: 'Feature',
-            // bbox: attributes?.bbox,
             id,
             geometry: { type: 'Point', coordinates: [lng, lat] },
             properties: {
-              // TODO:  Category should be saved with all the attributes, not just slug or name
               category: attributes?.category?.data?.attributes?.slug,
               categoryName: attributes?.category?.data?.attributes?.name,
-              ifi: 'IFAD',
-              status: 'completed',
-              tags: ['nature'],
+              location: attributes?.location,
               title: attributes?.title,
               active: attributes?.active,
             },
@@ -60,7 +58,7 @@ const GlobeMarkers = () => {
   });
 
   return (
-    <Source id="story-markers" type="geojson" data={FeatureCollection} cluster clusterRadius={16}>
+    <Source id="story-markers" type="geojson" data={FeatureCollection}>
       <Layer
         id="story-markers-cluster"
         type="circle"

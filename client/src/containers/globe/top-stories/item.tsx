@@ -37,7 +37,7 @@ const TopStoriesItem = ({ topStory }: TopStoriesItemProps) => {
         />
       </div>
       <div className="space-y-1 text-gray-300">
-        <h3 className="text-sm font-bold leading-4 text-gray-300">
+        <h3 className="line-clamp-3 text-sm font-bold leading-4 text-gray-300">
           {storyData?.attributes?.title}
         </h3>
         <p className="font-open-sans text-xs font-light italic">{topStory?.location}</p>

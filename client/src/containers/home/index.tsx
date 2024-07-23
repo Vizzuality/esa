@@ -128,9 +128,9 @@ const Home = () => {
     <div className="text-primary font-notes pointer-events-none flex h-screen w-screen flex-col justify-between overflow-hidden">
       <div className="z-50 flex h-full flex-col">
         <div className="mx-12">
-          <Header />
+          <Header pathname="home" />
         </div>
-        <div className="container flex flex-1 items-end justify-center pb-12 xl:items-center xl:justify-start">
+        <div className="container flex flex-1 items-end pb-12 xl:items-center xl:justify-start">
           <div className="pointer-events-auto max-w-full xl:max-w-lg">
             <div className="flex flex-col items-start justify-center gap-8">
               <div className="flex flex-col items-start justify-center gap-2">
@@ -142,24 +142,20 @@ const Home = () => {
                 </div>
               </div>
               <div className="h-[1px] w-full bg-gradient-to-r from-teal-500/70 via-teal-500/60 to-teal-500/0"></div>
-              <div className="text-balance w-[455px] max-w-full">
-                <span className="font-open-sans text-base font-normal leading-normal text-stone-200">
+              <div className="text-balance w-[455px] max-w-full space-y-4">
+                <p className="font-open-sans text-base font-normal leading-normal text-stone-200">
                   Uncover the stories told by powerful satellites, revealing their crucial role in
                   addressing global challenges. From monitoring climate change to enhancing
                   precision agriculture, the GDA program utilises satellite data to accelerate
                   impact.
-                </span>
-                <span className="font-open-sans text-base font-normal leading-normal text-stone-200">
+                </p>
+                <p className="font-open-sans text-base font-normal leading-normal text-stone-200">
                   Dive into these uplifting stories and discover how satellites are shaping a more
-                  sustainable and interconnected future for our planet.
-                </span>
-                <span className="font-open-sans text-base font-bold leading-normal text-stone-200">
-                  {' '}
-                  Ready to explore GDA stories
-                </span>
-                <span className="font-open-sans text-base font-normal leading-normal text-stone-200">
-                  ?
-                </span>
+                  sustainable and interconnected future for our planet.{' '}
+                  <span className="font-open-sans text-base font-bold leading-normal text-stone-200">
+                    Ready to explore GDA stories?
+                  </span>
+                </p>
               </div>
             </div>
             <div className="mt-6 h-[124px] w-[124px] rounded-full bg-teal-500/50 p-2.5 transition-all duration-500 hover:p-0">

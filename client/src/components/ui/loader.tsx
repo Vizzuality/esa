@@ -38,12 +38,12 @@ const ContentLoader = ({
         iconClassName="w-5 h-5"
         visible={isFetching && !isPlaceholderData}
       /> */}
-
-      {isError && isFetched && !isFetching && (errorMessage || 'Error')}
+      <div className="text-center">
+        {isError && isFetched && !isFetching && (errorMessage || 'Error')}
+        {!isPlaceholderData && !isError && isFetched && !data && 'No data'}
+      </div>
 
       {!isPlaceholderData && !isError && isFetched && !!data && children}
-
-      {!isPlaceholderData && !isError && isFetched && !data && 'No data'}
     </>
   );
 };

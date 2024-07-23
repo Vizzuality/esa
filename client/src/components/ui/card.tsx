@@ -4,7 +4,7 @@ import { InfoIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-// import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 type CardProps = PropsWithChildren & {
   title?: string;
@@ -26,11 +26,9 @@ const Card = ({ children, title, info, className }: CardProps) => {
           {info && <InfoIcon className="h-4 w-4" />}
         </div>
       )}
-      {/* <ScrollArea className={cn('h-full px-4')}> */}
-      <div className={cn('h-full overflow-y-auto px-4')}>
+      <ScrollArea type="always" className={cn('px-4', !title ? 'h-[calc(100%-20px)]' : 'h-full')}>
         <div className="pb-4">{children}</div>
-      </div>
-      {/* </ScrollArea> */}
+      </ScrollArea>
     </div>
   );
 };

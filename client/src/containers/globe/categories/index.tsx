@@ -1,5 +1,3 @@
-import { cn } from '@/lib/classnames';
-
 import { useGetCategories } from '@/types/generated/category';
 
 import ContentLoader from '@/components/ui/loader';
@@ -8,12 +6,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import Category from './item';
 
 const Categories = () => {
-  const { data, isError, isSuccess, isPlaceholderData, isFetched, isFetching } = useGetCategories();
+  const { data, isError, isPlaceholderData, isFetched, isFetching } = useGetCategories();
 
   const categories = data?.data;
 
   return (
-    <div className="w-full">
+    <div className="pointer-events-none w-full">
       <ContentLoader
         isPlaceholderData={isPlaceholderData}
         data={data}
@@ -21,24 +19,19 @@ const Categories = () => {
         isFetched={isFetched}
         isFetching={isFetching}
         errorMessage="Error loading the categories"
-        className="3xl:mb-4 mx-auto mb-14 h-10 w-full max-w-3xl text-center"
+        className="mx-auto mb-8 h-10 w-full max-w-3xl text-center"
         SkeletonComponent={
-          <div className="flex w-full gap-8">
+          <div className="mb-8 flex w-full items-center justify-center gap-8">
             {[...Array(11)].map((_, i) => (
               <Skeleton key={i} className="bg-background h-10 w-10 rounded-full" />
             ))}
           </div>
         }
       >
-        <div className="3xl:mb-4 mx-auto mb-14 mt-4 w-full max-w-3xl">
-          <div className="flex w-full gap-8">
-            <div className="w-12">
-              <p
-                className={cn(
-                  'text-center text-sm leading-4',
-                  isSuccess ? 'text-primary' : 'text-gray-500'
-                )}
-              >
+        <div className="mx-auto mb-8 mt-4 w-full max-w-3xl">
+          <div className="flex w-full gap-8 xl:flex-col xl:items-center xl:gap-4">
+            <div className="w-min xl:w-fit">
+              <p className="font-notes text-center text-sm font-bold leading-4 text-gray-500">
                 Select category
               </p>
             </div>

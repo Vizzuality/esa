@@ -6,15 +6,19 @@ import DashboardRegions from './regions';
 
 const Dashboard = () => {
   return (
-    <div className="w-60">
-      <Card>
-        <DashboardNumbers />
-      </Card>
-      <GradientLine />
-      <Card title="Regions">
+    <>
+      <div>
+        <Card className="h-fit">
+          <DashboardNumbers />
+        </Card>
+        <div>
+          <GradientLine />
+        </div>
+      </div>
+      <Card className="max-h-[calc(100%-142px)]" title="Regions">
         <DashboardRegions />
       </Card>
-    </div>
+    </>
   );
 };
 

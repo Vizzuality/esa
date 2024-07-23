@@ -19,9 +19,7 @@ export default function Sidebar({ children }: PropsWithChildren) {
         '-translate-x-full': !open,
       })}
     >
-      <div className="pointer-events-auto flex h-[inherit] flex-col overflow-y-auto">
-        {children}
-      </div>
+      <div className="pointer-events-auto flex flex-col">{children}</div>
     </div>
   );
 }
