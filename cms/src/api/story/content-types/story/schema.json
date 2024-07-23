@@ -55,6 +55,22 @@
       },
       "customField": "plugin::map-field.map-field",
       "required": true
+    },
+    "ifis": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ifi.ifi"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
+    },
+    "location": {
+      "type": "string"
+    },
+    "impacted_people": {
+      "type": "string"
     }
   }
 }
