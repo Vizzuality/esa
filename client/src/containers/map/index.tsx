@@ -6,7 +6,6 @@ import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
@@ -24,8 +23,9 @@ import StoryMarkers from '@/containers/map/markers/story-markers';
 import Popup from '@/containers/map/popup';
 
 import Map from '@/components/map';
-import Marker from '@/components/map/layers/marker';
 import { CustomMapProps } from '@/components/map/types';
+
+import SelectedStoriesMarker from './markers/selected-stories-marker';
 
 const MapLegends = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
@@ -46,9 +46,7 @@ export default function MapContainer() {
 
   const { [id]: map } = useMap();
 
-  const { push } = useRouter();
-
-  const [marker, setMarker] = useState<GeoJSON.Feature<GeoJSON.Point> | null>(null);
+  const [markers, setMarkers] = useState<(GeoJSON.Feature<GeoJSON.Point> | null)[]>([]);
 
   const bbox = useAtomValue(bboxAtom);
   const tmpBbox = useAtomValue(tmpBboxAtom);
@@ -94,22 +92,22 @@ export default function MapContainer() {
 
   const handleMouseMove = useCallback((e: MapLayerMouseEvent) => {
     if (e.features?.length) {
-      const f = e.features[0];
-
-      if (f.source === 'story-markers') {
-        setMarker({
+      const storyMarkersFeatures = e.features
+        .filter((f) => f.source === 'story-markers')
+        .map((f) => ({
           ...f,
           geometry: f.geometry as GeoJSON.Point,
-        });
-      }
+        }));
 
-      if (f.source !== 'story-markers') {
-        setMarker(null);
+      if (storyMarkersFeatures.length) {
+        setMarkers(storyMarkersFeatures as GeoJSON.Feature<GeoJSON.Point>[]);
+      } else {
+        setMarkers([]);
       }
     }
 
     if (e.features?.length === 0) {
-      setMarker(null);
+      setMarkers([]);
     }
   }, []);
 
@@ -158,21 +156,10 @@ export default function MapContainer() {
         <LayerManager />
         <Popup />
         {(isGlobePage || pathname.includes('home')) && <GlobeMarkers />}
-        {marker && isGlobePage && (
-          <Marker
-            key={marker.id}
-            longitude={marker.geometry.coordinates[0]}
-            latitude={marker.geometry.coordinates[1]}
-            properties={marker.properties}
-            onClick={() => {
-              setMarker(null);
-              push(`/stories/${marker.id}`);
-            }}
-          />
-        )}
+        <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
         {pathname.includes('stories') && <StoryMarkers />}
       </Map>
-      <div className="absolute bottom-0 left-0 z-20 w-full p-4 pb-16 pl-14">
+      <div className="absolute bottom-8 left-14 z-20 w-full ">
         <MapLegends />
       </div>
     </div>

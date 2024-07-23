@@ -7,6 +7,7 @@ import { getStoriesParams } from '@/lib/stories';
 import { getGetCategoriesQueryOptions } from '@/types/generated/category';
 import { getGetStoriesQueryOptions } from '@/types/generated/story';
 import { CategoryListResponse } from '@/types/generated/strapi.schemas';
+import { getGetTopStoriesQueryOptions } from '@/types/generated/top-story';
 
 import Globe from '@/containers/globe';
 
@@ -53,6 +54,18 @@ async function prefetchQueries(searchParams: HomePageProps['searchParams']) {
     await queryClient.prefetchQuery({
       queryKey: storiesQueryKey,
       queryFn: storiesQueryFn,
+    });
+
+    const { queryKey: topStoriesQueryKey, queryFn: topStoriesQueryFn } =
+      getGetTopStoriesQueryOptions({
+        'pagination[limit]': 5,
+        populate: 'story,cover_image',
+        sort: 'index:asc',
+      });
+
+    await queryClient.prefetchQuery({
+      queryKey: topStoriesQueryKey,
+      queryFn: topStoriesQueryFn,
     });
 
     return dehydrate(queryClient);

@@ -27,6 +27,12 @@
       "relation": "oneToMany",
       "target": "api::story.story",
       "mappedBy": "category"
+    },
+    "disclaimer": {
+      "displayName": "partners",
+      "type": "component",
+      "repeatable": true,
+      "component": "partners.partners"
     }
   }
 }

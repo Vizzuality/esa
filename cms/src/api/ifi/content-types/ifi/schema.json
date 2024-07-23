@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ifis",
+  "info": {
+    "singularName": "ifi",
+    "pluralName": "ifis",
+    "displayName": "IFI"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}

@@ -16,7 +16,7 @@ const GlobeTooltip = (props: GlobeTooltipProps) => {
     <RPopup
       {...props}
       className={cn({
-        'home-tooltip items-left relative flex w-56 -translate-x-1/2 cursor-pointer flex-col justify-center rounded border border-white bg-[#335E6F80] px-6 py-4 text-white transition-opacity':
+        'home-tooltip items-left relative flex w-56 -translate-x-1/2 cursor-pointer flex-col justify-center rounded border border-white bg-[#335E6F] px-6 py-4 text-white transition-opacity':
           true,
       })}
     >
@@ -32,7 +32,7 @@ const GlobeTooltip = (props: GlobeTooltipProps) => {
         <p className="mb-4 text-xs italic text-gray-300">{properties?.location}</p>
         <Button
           variant="secondary"
-          className="h-8 w-full rounded-3xl bg-teal-500 py-2 text-xs text-white"
+          className="h-8 w-full rounded-3xl bg-red-700 py-2 text-xs text-white"
           onClick={onClick as () => void}
         >
           Discover story

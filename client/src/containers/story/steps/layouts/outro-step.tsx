@@ -14,13 +14,25 @@ import { isFlyingBackAtom } from '@/store/map';
 
 import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
-type MediaStepLayoutProps = {
-  step: StepLayoutOutroStepComponent;
-  categoryId?: number;
-  showContent: boolean;
+import ScrollExplanation from '@/components/ui/scroll-explanation';
+
+type Disclaimer = {
+  id: number;
+  title: string;
+  partners: {
+    id: number;
+    logo: { data: { id: number; attributes: { url: string } } };
+    url: string;
+  }[];
 };
 
-const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
+type MediaStepLayoutProps = {
+  step: StepLayoutOutroStepComponent;
+  showContent: boolean;
+  disclaimer?: unknown;
+};
+
+const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps) => {
   const { push } = useRouter();
 
   const setIsFlyingBack = useSetAtom(isFlyingBackAtom);
@@ -67,9 +79,11 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
   const mediaMime = media?.mime;
 
   const isVideo = mediaType?.includes('video');
+  const isImage = mediaType?.includes('image');
 
-  const scale = useTransform(scrollYProgress, [0.5, 0.7], ['1', '2']);
   const scaleContent = useTransform(scrollYProgress, [0.5, 0.7], ['1', '0.75']);
+
+  const categoryDisclaimer = disclaimer as Disclaimer[];
 
   return (
     <div ref={containerRef} className="flex h-[300vh]">
@@ -85,15 +99,15 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
           </motion.div>
           <div className="pointer-events-auto flex w-full flex-1 flex-col items-center justify-between p-10">
             <div className="flex w-full flex-1 flex-col justify-between gap-12 lg:flex-row">
-              {isVideo && (
-                <motion.div
-                  initial={{ opacity: 0, x: '-300%' }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 1.5 }}
-                  style={{ scale: scaleContent }}
-                  className="relative z-50 mt-10 flex w-full flex-1 items-center justify-center"
-                >
+              <motion.div
+                initial={{ opacity: 0, x: '-300%' }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5 }}
+                style={{ scale: scaleContent }}
+                className="relative z-50 mt-10 flex w-full flex-1 items-center justify-center"
+              >
+                {isVideo && (
                   <video
                     width="100%"
                     height="100%"
@@ -106,8 +120,18 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
                   >
                     <source src={mediaSrc} type={mediaMime} />
                   </video>
-                </motion.div>
-              )}
+                )}
+                {isImage && (
+                  <Image
+                    className="aspect-video w-full object-cover"
+                    src={mediaSrc}
+                    width={534}
+                    height={330}
+                    alt="story conclusion image"
+                  />
+                )}
+              </motion.div>
+
               <motion.div
                 className="flex w-full max-w-5xl flex-1 items-center justify-center space-y-16"
                 initial={{ opacity: 0, x: '300%' }}
@@ -126,49 +150,48 @@ const OutroStepLayout = ({ step, showContent }: MediaStepLayoutProps) => {
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2.5 }}
-            style={{ scale }}
-            className="font-notes z-10 w-full space-y-4 place-self-end pb-[10vh] text-center text-sm italic text-white"
-          >
-            <p>Continue scrolling to explore more stories</p>
-          </motion.div>
-          {showContent && show && step.story_disclaimer?.length && (
-            <div className="font-notes pointer-events-auto relative w-screen bg-white p-4 text-xs italic text-black">
-              <ul className="flex items-center justify-center gap-x-10 gap-y-2">
-                {step.story_disclaimer.map((sd) => (
-                  <li key={sd.title} className="flex items-center gap-2">
-                    <p>{sd.title}</p>
-                    <div className="flex gap-2">
-                      {sd.disclaimer?.length &&
-                        sd.disclaimer?.map((d) => {
-                          const src = getImageSrc(d.logo?.data?.attributes?.url);
+          <div className="z-10 mb-8">
+            <ScrollExplanation>Continue scrolling to explore more stories</ScrollExplanation>
+          </div>
 
-                          const url = d.url;
-                          return url ? (
-                            <a key={d.id} href={d.url} target="_blank" rel="noopener noreferrer">
-                              <Image
-                                src={src}
-                                width={50}
-                                height={30}
-                                alt=""
-                                className="h-8 w-full max-w-[125px] object-contain object-center"
-                              />
-                            </a>
-                          ) : (
-                            <div>
-                              <Image
-                                src={src}
-                                width={50}
-                                height={30}
-                                alt=""
-                                className="h-8 w-full max-w-[125px] object-contain object-center"
-                              />
-                            </div>
-                          );
-                        })}
+          {showContent && show && categoryDisclaimer?.length && (
+            <div className="font-notes pointer-events-auto relative w-screen bg-white/10 p-4 text-xs italic text-white">
+              <ul className="flex items-center justify-center gap-x-10 gap-y-2">
+                {categoryDisclaimer.map((item) => (
+                  <li key={item.title} className="flex items-center gap-2">
+                    <p>{item.title}</p>
+                    <div className="flex gap-2">
+                      {item.partners?.map((partner) => {
+                        const src = getImageSrc(partner.logo?.data?.attributes?.url);
+
+                        const url = partner.url;
+                        return url ? (
+                          <a
+                            key={partner.id}
+                            href={partner.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Image
+                              src={src}
+                              width={50}
+                              height={30}
+                              alt=""
+                              className="h-8 w-full max-w-[125px] object-contain object-center"
+                            />
+                          </a>
+                        ) : (
+                          <div>
+                            <Image
+                              src={src}
+                              width={50}
+                              height={30}
+                              alt=""
+                              className="h-8 w-full max-w-[125px] object-contain object-center"
+                            />
+                          </div>
+                        );
+                      })}
                     </div>
                   </li>
                 ))}
