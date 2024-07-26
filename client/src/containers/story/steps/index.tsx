@@ -31,13 +31,13 @@ const Step = ({ story }: StepProps) => {
         content: [{ attributes: { name: story.location } }],
       });
     }
-    if (story?.ifis) {
+    if (story?.ifis?.data?.length) {
       summary.push({
         title: 'Institutions',
         content: story.ifis?.data,
       });
     }
-    if (story?.tags) {
+    if (story?.tags?.data?.length) {
       summary.push({
         title: 'Tags',
         content: story.tags?.data,

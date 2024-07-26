@@ -182,7 +182,7 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   }
 
   return (
-    <div style={props?.style} className="z-30 mt-4">
+    <div style={props?.style} className="z-30 mt-3">
       <LegendHeader title={title} info={info} />
       <div className="flex items-center gap-8">
         <Button

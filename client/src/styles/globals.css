@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 198, 100%, 14%;
+    --background: 198 100% 14%;
     --foreground: 222.2 84% 4.9%;
 
     --map-style-background: 223, 50%, 5%, 1;
@@ -25,11 +25,10 @@
     --primary: 60, 8%, 90%, 1;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 161, 43%, 62%, 1;
+    --secondary: 161 43% 62%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --accent: 210 40% 96.1%;
-    --accent-foreground: ;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;

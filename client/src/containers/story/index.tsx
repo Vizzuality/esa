@@ -66,6 +66,7 @@ const Story = () => {
       <Header
         categorySlug={story?.category?.data?.attributes?.slug}
         title={story?.title}
+        storyId={id}
         categoryTitle={story?.category?.data?.attributes?.name}
       />
       <ScrollProvider>

@@ -60,22 +60,22 @@ const DialogContentHome = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <DialogPortal>
-    <DialogOverlay className="bg-background opacity-60" />
+    <DialogOverlay className="bg-background/40" />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-[50%] top-[50%] z-50 grid w-[498px] max-w-[45vw] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-t-2xl border border-gray-800 bg-[hsla(198,100%,14%,0.31)] leading-relaxed text-white shadow-lg backdrop-blur-2xl duration-200 sm:rounded-lg',
+        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] group fixed left-[50%] top-[50%] z-50 grid w-[498px] max-w-[45vw] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-t-2xl border border-gray-800 bg-[hsla(198,100%,14%,0.31)] leading-relaxed text-white shadow-lg backdrop-blur-2xl duration-200 sm:rounded-lg',
         className
       )}
       {...props}
     >
-      <div className="">{children}</div>
+      <div>{children}</div>
       <DialogPrimitive.Close
         className={cn(
-          'ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute  right-1/2  top-0 -translate-y-1/2  translate-x-1/2 rounded-full border border-gray-800 bg-gray-900 p-4 px-4 py-2 opacity-100 backdrop-blur-lg transition-opacity hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none'
+          'ring-offset-background focus:ring-ring hover:border-secondary hover:text-secondary transition-color absolute right-1/2 top-0 -translate-y-1/2 translate-x-1/2 rounded-full border border-gray-800 bg-gray-900 p-4 px-4 py-2 text-gray-200 duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none group-data-[button-side=right]:right-6 group-data-[button-side=right]:-translate-x-0'
         )}
       >
-        <X className="h-6 w-6 fill-white" />
+        <X className="h-6 w-6" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

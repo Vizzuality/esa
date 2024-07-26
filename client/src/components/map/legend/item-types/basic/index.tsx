@@ -13,7 +13,7 @@ export const LegendTypeBasic: React.FC<LegendTypeProps> = ({
 }) => {
   return (
     <div
-      className={cn({
+      className={cn('mt-3', {
         [className]: !!className,
       })}
     >
