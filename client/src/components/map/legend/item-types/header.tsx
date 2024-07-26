@@ -10,7 +10,7 @@ type LegendHeaderProps = {
 
 const LegendHeader = ({ title, info }: LegendHeaderProps) => {
   return (
-    <div className="font-open-sans mb-4 flex items-center justify-between gap-2 text-white">
+    <div className="font-open-sans mb-2 flex items-center justify-between gap-2 text-white">
       {!!title && <div className="text-sm font-semibold text-white">{title}</div>}
       {!!info && (
         <Popover>

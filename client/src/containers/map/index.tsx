@@ -16,13 +16,14 @@ import { bboxAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store/map';
 
 import { Bbox } from '@/types/map';
 
-import { DEFAULT_MAP_STATE, MAPBOX_STYLES } from '@/constants/map';
+import { MAPBOX_STYLES } from '@/constants/map';
 
 import GlobeMarkers from '@/containers/map/markers/globe-markers';
 import StoryMarkers from '@/containers/map/markers/story-markers';
 import Popup from '@/containers/map/popup';
 
 import Map from '@/components/map';
+import { DEFAULT_PROPS } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
 
 import SelectedStoriesMarker from './markers/selected-stories-marker';
@@ -33,13 +34,6 @@ const MapLegends = dynamic(() => import('@/containers/map/legend'), {
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
 });
-
-const DEFAULT_PROPS: CustomMapProps = {
-  id: 'default',
-  initialViewState: DEFAULT_MAP_STATE,
-  minZoom: 1,
-  maxZoom: 14,
-};
 
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;

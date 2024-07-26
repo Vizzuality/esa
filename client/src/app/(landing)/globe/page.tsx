@@ -35,7 +35,7 @@ async function prefetchQueries(searchParams: HomePageProps['searchParams']) {
     });
 
     // Stories
-    let categoryId;
+    let categoryId: string | undefined;
 
     // If there is a category in the search params, we need to get the category id to use as a category filter
     if (searchParams.category) {
@@ -43,7 +43,7 @@ async function prefetchQueries(searchParams: HomePageProps['searchParams']) {
 
       categoryId = categories?.data?.find((category) => {
         return `"${category.attributes?.slug}"` === searchParams.category;
-      })?.id;
+      })?.attributes?.slug;
     }
 
     const params = getStoriesParams(categoryId ? { category: categoryId } : {});

@@ -15,9 +15,9 @@ const DashboardRegions = () => {
 
   return (
     <div>
-      <ul className="space-y-4">
+      <ul>
         {regions.map(({ name, stories }) => (
-          <li key={name} className="space-y-2">
+          <li key={name} className="space-y-2 px-4 py-2 hover:bg-white/10">
             <div className="flex justify-between text-sm">
               <p>{name}</p>
               <p className="font-semibold">{stories}</p>
