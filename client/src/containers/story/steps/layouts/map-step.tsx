@@ -67,13 +67,16 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
             <div className="pointer-events-auto flex w-full max-w-full flex-wrap justify-between gap-4 rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 px-6 py-4 backdrop-blur">
               {storySummary?.map((item) => (
                 <div className="space-y-1" key={item.title}>
-                  <div className="text-enlight-yellow-400 flex items-center gap-2">
+                  <div
+                    key={`${item.title}-title`}
+                    className="text-enlight-yellow-400 flex items-center gap-2"
+                  >
                     <h2 className="text-sm font-bold uppercase">{item.title}</h2>
                   </div>
-                  <div className="space-y-2">
+                  <div key={`${item.title}-content`} className="space-y-2">
                     {item.content?.map((c) => {
                       return (
-                        <div key={c.id} className="flex gap-2">
+                        <div key={`${c.id}-${c.attributes?.name}`} className="flex gap-2">
                           <>
                             {c.attributes?.link ? (
                               <a
@@ -85,9 +88,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                                 {c.attributes?.name}
                               </a>
                             ) : (
-                              <p className="font-open-sans w-max leading-none">
-                                {c.attributes?.name}
-                              </p>
+                              <p className="font-open-sans leading-tight">{c.attributes?.name}</p>
                             )}
                             {c.attributes?.description && (
                               <Tooltip>

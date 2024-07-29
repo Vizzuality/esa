@@ -2,8 +2,11 @@
 
 import { useEffect } from 'react';
 
+import { useMap } from 'react-map-gl';
+
 import { useSetAtom } from 'jotai';
 import { ExternalLinkIcon } from 'lucide-react';
+import mapboxgl from 'mapbox-gl';
 
 import { cn } from '@/lib/classnames';
 
@@ -13,8 +16,7 @@ import { useSyncStep } from '@/store/stories';
 
 import useStories from '@/hooks/stories/useStories';
 
-import { DEFAULT_MAP_BBOX, DEFAULT_MAP_STATE } from '@/constants/map';
-
+import { DEFAULT_VIEW_STATE } from '@/components/map/constants';
 import { Button } from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import GradientLine from '@/components/ui/gradient-line';
@@ -27,6 +29,13 @@ import Filters from './filters';
 import SearchStories from './search';
 import TopStories from './top-stories';
 
+type StoryMarker = {
+  markers: {
+    lat: number;
+    lng: number;
+  }[];
+};
+
 export default function Home() {
   const setTmpBbox = useSetAtom(tmpBboxAtom);
   const setLayers = useSetAtom(layersAtom);
@@ -35,11 +44,24 @@ export default function Home() {
 
   const { data: storiesData } = useStories();
   const storiesLength = storiesData?.data?.length;
+  const { default: map } = useMap();
 
   useEffect(() => {
-    const tmpbbox: [number, number, number, number] = DEFAULT_MAP_BBOX;
-    setTmpBbox({ bbox: tmpbbox, options: DEFAULT_MAP_STATE });
-  }, [setTmpBbox]);
+    const bounds = new mapboxgl.LngLatBounds();
+    storiesData?.data?.forEach(({ attributes }) => {
+      if (!(attributes?.marker as StoryMarker)?.markers?.length) return;
+      const { lat, lng } = (attributes?.marker as StoryMarker)?.markers?.[0] || {};
+      if (typeof lat != 'number' || typeof lng != 'number') return;
+      bounds.extend([lng, lat]);
+    });
+    if (bounds.isEmpty() || !map) return;
+    const center = bounds.getCenter();
+
+    setTmpBbox({
+      bbox: bounds.toArray().flat() as [number, number, number, number],
+      options: { ...DEFAULT_VIEW_STATE, latitude: center.lat, longitude: center.lng },
+    });
+  }, [map, setTmpBbox, storiesData?.data]);
 
   useEffect(() => {
     setLayers([]);
