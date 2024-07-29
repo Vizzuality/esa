@@ -34,15 +34,15 @@ const FilterItem = ({ filter: { id, options, title } }: FilterItemProps) => {
     }
   };
 
-  const isMoreThanOneSelected = !!filter && filter.length > 1;
+  const isMoreThanOneSelected = filter?.length === options.length;
 
   const handleSelectAll = () => {
     if (isMoreThanOneSelected) {
       setFilter([]);
     } else {
       setFilter(
-        options.reduce<string[]>((acc, { attributes }) => {
-          return !!attributes?.name ? [...acc, attributes?.name] : acc;
+        options.reduce<(number | string)[]>((acc, { id }) => {
+          return !!id ? [...acc, id] : acc;
         }, [])
       );
     }
