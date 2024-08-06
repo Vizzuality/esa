@@ -9,12 +9,15 @@ import { usePathname } from 'next/navigation';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 
 import { cn } from '@/lib/classnames';
 
 import { bboxAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store/map';
 
 import { Bbox } from '@/types/map';
+
+import useStories from '@/hooks/stories/useStories';
 
 import { MAPBOX_STYLES } from '@/constants/map';
 
@@ -23,7 +26,7 @@ import StoryMarkers from '@/containers/map/markers/story-markers';
 import Popup from '@/containers/map/popup';
 
 import Map from '@/components/map';
-import { DEFAULT_PROPS } from '@/components/map/constants';
+import { DEFAULT_PROPS, DEFAULT_VIEW_STATE } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
 
 import SelectedStoriesMarker from './markers/selected-stories-marker';
@@ -34,6 +37,13 @@ const MapLegends = dynamic(() => import('@/containers/map/legend'), {
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
 });
+
+type StoryMarker = {
+  markers: {
+    lat: number;
+    lng: number;
+  }[];
+};
 
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
@@ -125,13 +135,37 @@ export default function MapContainer() {
     }
   }, [map, tmpBbox]);
 
+  const { data: storiesData } = useStories();
+
+  const bounds = useMemo(() => {
+    const b = new mapboxgl.LngLatBounds();
+    storiesData?.data?.forEach(({ attributes }) => {
+      if (!(attributes?.marker as StoryMarker)?.markers?.length) return;
+      const { lat, lng } = (attributes?.marker as StoryMarker)?.markers?.[0] || {};
+      if (typeof lat != 'number' || typeof lng != 'number') return;
+      b.extend([lng, lat]);
+    });
+    if (b.isEmpty() || !map) return;
+    const center = b.getCenter();
+    return {
+      bbox: b.toArray().flat() as [number, number, number, number],
+      options: { ...DEFAULT_VIEW_STATE, latitude: center.lat, longitude: center.lng },
+    };
+  }, [map, storiesData?.data]);
+
+  useMemo(() => {
+    if (bounds) {
+      setTmpBbox(bounds);
+    }
+  }, [bounds]);
+
   return (
     <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-full')}>
       <Map
         id={id}
         initialViewState={{
           ...initialViewState,
-          ...(bbox && {
+          ...(bounds && {
             bounds: bbox as LngLatBoundsLike,
           }),
         }}
