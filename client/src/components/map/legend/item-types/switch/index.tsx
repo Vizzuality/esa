@@ -34,7 +34,7 @@ const LegendTypeSwitch = ({
   );
 
   return (
-    <div style={props.style} className="flex items-center justify-between gap-2">
+    <div style={props.style} className="mt-3 flex items-center justify-between gap-2">
       <div className="flex">
         <label
           className="font-open-sans cursor-pointer text-sm text-white"

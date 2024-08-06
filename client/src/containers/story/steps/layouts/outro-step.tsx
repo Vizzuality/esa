@@ -155,7 +155,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
           </div>
 
           {showContent && show && categoryDisclaimer?.length && (
-            <div className="font-notes pointer-events-auto relative w-screen bg-white/10 p-4 text-xs italic text-white">
+            <div className="font-notes pointer-events-auto relative w-screen bg-white p-4 text-xs italic text-gray-900">
               <ul className="flex items-center justify-center gap-x-10 gap-y-2">
                 {categoryDisclaimer.map((item) => (
                   <li key={item.title} className="flex items-center gap-2">

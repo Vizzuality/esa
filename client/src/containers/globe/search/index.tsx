@@ -12,17 +12,20 @@ const SearchStories = () => {
   };
 
   return (
-    <div className="bg-background flex items-center gap-2 rounded-sm border border-gray-800 py-1 pl-4 pr-2">
-      <SearchIcon className="h-5 w-5 shrink-0 stroke-gray-200" />
+    <div className="bg-background hover:border-secondary relative flex items-center gap-2 rounded-sm border border-gray-800">
+      <SearchIcon className="absolute left-4 w-[18px] shrink-0 stroke-gray-200" />
       <input
         value={search || ''}
-        className="placeholder:gray-600 font-open-sans w-full bg-transparent p-1 text-sm text-white placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300 disabled:cursor-not-allowed disabled:opacity-50"
+        className="placeholder:gray-600 font-open-sans h-full w-full bg-transparent py-2 pl-11 pr-8 text-sm text-white placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300 disabled:cursor-not-allowed disabled:opacity-50"
         placeholder="Search story"
         onChange={handleChange}
       />
       <XIcon
         onClick={() => setSearch(null)}
-        className={cn('h-5 w-5 cursor-pointer stroke-gray-200', !!search ? 'block' : 'hidden')}
+        className={cn(
+          'absolute right-3 h-4 w-4 cursor-pointer stroke-gray-200',
+          !!search ? 'block' : 'hidden'
+        )}
       />
     </div>
   );

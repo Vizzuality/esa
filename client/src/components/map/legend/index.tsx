@@ -23,28 +23,28 @@ export const Legend: React.FC<LegendProps> = ({
     isChildren && (
       <div
         className={cn({
-          'bg-card-map relative flex-col space-y-2 rounded-lg p-2 px-3 backdrop-blur-sm': true,
+          'bg-card-map relative flex-col space-y-2 rounded-lg p-4 backdrop-blur-sm': true,
           hidden: !isChildren,
           [className]: !!className,
         })}
       >
         {isChildren && (
-          <div className="flex flex-col gap-4 overflow-x-hidden">
+          <div className="flex flex-col overflow-x-hidden">
             {!!sortable?.enabled && !!onChangeOrder ? (
               <SortableList sortable={sortable} onChangeOrder={onChangeOrder}>
                 {children}
               </SortableList>
             ) : Array.isArray(children) && children.length > 1 ? (
-              <Collapsible defaultOpen className="space-y-2">
+              <Collapsible defaultOpen>
                 <CollapsibleTrigger className="font-open-sans group flex w-full items-center justify-between gap-2 text-sm font-semibold text-white">
-                  Legends <ChevronDown className="w-5 group-data-[state=closed]:rotate-180" />
+                  Legend <ChevronDown className="w-5 group-data-[state=closed]:rotate-180" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="flex flex-col gap-2 overflow-x-hidden">
+                <CollapsibleContent className="flex flex-col overflow-x-hidden">
                   {children}
                 </CollapsibleContent>
               </Collapsible>
             ) : (
-              children
+              <div className="-mt-3">{children}</div>
             )}
           </div>
         )}

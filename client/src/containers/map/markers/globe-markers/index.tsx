@@ -4,29 +4,14 @@ import { useMemo } from 'react';
 
 import { Layer, Source } from 'react-map-gl';
 
-import { getStoriesParams } from '@/lib/stories';
-
-import { useSyncCategory, useSyncFilters, useSyncSearch } from '@/store/globe';
-
-import { useGetCategories } from '@/types/generated/category';
-import { useGetStories } from '@/types/generated/story';
 import { StoryStepMap } from '@/types/story';
 
 import { useMapImage } from '@/hooks/map';
+import useStories from '@/hooks/stories/useStories';
 
 const GlobeMarkers = () => {
-  const [category] = useSyncCategory();
-  const [search] = useSyncSearch();
-  const [filters] = useSyncFilters();
-  const { data: categories } = useGetCategories();
+  const { data: stories } = useStories();
 
-  const categoryId = useMemo(() => {
-    const categoryItem = categories?.data?.find(({ attributes }) => attributes?.slug === category);
-    return categoryItem?.id;
-  }, [categories?.data, category]);
-
-  const params = getStoriesParams({ category: categoryId, title: search, ...filters });
-  const { data: stories } = useGetStories(params);
   const FeatureCollection = useMemo(
     () => ({
       type: 'FeatureCollection',
@@ -98,8 +83,6 @@ const GlobeMarkers = () => {
           'icon-image': 'story-marker',
           'icon-ignore-placement': true,
           'icon-allow-overlap': true,
-          // 'icon-pitch-alignment': 'map',
-          // 'icon-rotation-alignment': 'map',
         }}
       />
     </Source>

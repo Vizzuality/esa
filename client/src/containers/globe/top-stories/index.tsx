@@ -10,7 +10,7 @@ const TopStories = () => {
   });
 
   return (
-    <div className="space-y-4">
+    <div>
       {topStories?.data?.map((topStory) => (
         <TopStoriesItem key={topStory.id} topStory={topStory.attributes} />
       ))}

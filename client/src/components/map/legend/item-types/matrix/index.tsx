@@ -10,7 +10,7 @@ export const LegendTypeMatrix: React.FC<LegendTypeProps & LegendMatrixIntersecti
   intersections = [],
 }) => {
   return (
-    <div className="flex items-center space-x-14">
+    <div className="mt-3 flex items-center space-x-14">
       <div className="relative ml-10 w-16 flex-shrink-0 py-12">
         <p className="font-heading absolute left-1/2 top-1 -translate-x-1/2 transform text-xs font-medium text-white">
           Always

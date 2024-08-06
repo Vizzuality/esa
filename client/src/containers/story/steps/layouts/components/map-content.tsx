@@ -31,7 +31,7 @@ const MapContent = ({ showContent, title, titlePlaceholder, children }: MapConte
             </span>
           )}
         </h2>
-        <ChevronDownIcon className="h-6 w-6 shrink-0 group-data-[state=open]:rotate-180" />
+        <ChevronDownIcon className="h-6 w-6 shrink-0 group-data-[state=closed]:rotate-180" />
       </CollapsibleTrigger>
       <CollapsibleContent>
         <div className={cn('w-full space-y-2 px-4 pb-4', title && ' pt-2')}>

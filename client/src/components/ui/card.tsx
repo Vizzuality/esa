@@ -16,7 +16,7 @@ const Card = ({ children, title, info, className }: CardProps) => {
   return (
     <div
       className={cn(
-        'animate-in slide-in-from-top-5 fade-in bg-card flex h-full flex-col rounded border border-[#335E6F] pt-4 backdrop-blur-sm',
+        'animate-in slide-in-from-top-5 fade-in bg-background/30 flex h-full flex-col rounded border border-[#335E6F] pt-4 backdrop-blur-sm',
         className
       )}
     >
@@ -26,7 +26,10 @@ const Card = ({ children, title, info, className }: CardProps) => {
           {info && <InfoIcon className="h-4 w-4" />}
         </div>
       )}
-      <ScrollArea type="always" className={cn('px-4', !title ? 'h-[calc(100%-20px)]' : 'h-full')}>
+      <ScrollArea
+        type="always"
+        className={cn('overflow-x-visible', !title ? 'h-[calc(100%-20px)]' : 'h-full')}
+      >
         <div className="pb-4">{children}</div>
       </ScrollArea>
     </div>

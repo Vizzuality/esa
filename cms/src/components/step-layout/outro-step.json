@@ -31,12 +31,6 @@
     "map": {
       "type": "customField",
       "customField": "plugin::map-field.map-field"
-    },
-    "story_disclaimer": {
-      "displayName": "disclaimer",
-      "type": "component",
-      "repeatable": true,
-      "component": "story-outro-disclaimer.disclaimer"
     }
   }
 }

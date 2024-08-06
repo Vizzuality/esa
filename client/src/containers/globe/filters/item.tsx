@@ -25,22 +25,25 @@ const FilterItem = ({ filter: { id, options, title } }: FilterItemProps) => {
 
   const setFilter = (value: (string | number)[] | null) => setFilters({ ...filters, [id]: value });
 
-  const handleChangeFilter = (optionId: string | number) => {
-    if (!filter?.includes(optionId)) {
-      setFilter([...(filter || []), optionId]);
+  const handleChangeFilter = (option?: string | number) => {
+    if (!option) return;
+    if (!filter?.includes(option)) {
+      setFilter([...(filter || []), option]);
     } else {
-      setFilter(filter?.filter((item) => item !== optionId) || null);
+      setFilter(filter?.filter((item) => item !== option) || null);
     }
   };
 
-  const isMoreThanOneSelected = !!filter && filter.length > 1;
+  const isMoreThanOneSelected = filter?.length === options.length;
 
   const handleSelectAll = () => {
     if (isMoreThanOneSelected) {
       setFilter([]);
     } else {
       setFilter(
-        options.reduce<(string | number)[]>((acc, { id }) => (!!id ? [...acc, id] : acc), [])
+        options.reduce<(number | string)[]>((acc, { id }) => {
+          return !!id ? [...acc, id] : acc;
+        }, [])
       );
     }
   };
@@ -62,7 +65,7 @@ const FilterItem = ({ filter: { id, options, title } }: FilterItemProps) => {
       </div>
       <div className="flex flex-wrap gap-2">
         {options.map(({ id: optionId, attributes }) => {
-          if (!optionId) return null;
+          if (!optionId || !attributes?.name) return null;
           return (
             <CheckboxButton
               key={optionId}

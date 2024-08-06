@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { cn } from '@/lib/classnames';
 import { getImageSrc } from '@/lib/image-src';
@@ -11,21 +11,17 @@ type TopStoriesItemProps = {
 };
 
 const TopStoriesItem = ({ topStory }: TopStoriesItemProps) => {
-  const { push } = useRouter();
   const storyData = topStory?.story?.data;
-
-  const handleClickStory = () => {
-    if (storyData?.id) {
-      push(`/stories/${storyData?.id}`);
-    }
-  };
 
   const src = getImageSrc(topStory?.cover_image?.data?.attributes?.url);
 
   return (
-    <div
-      onClick={handleClickStory}
-      className={cn('flex gap-2', storyData?.attributes?.active && 'cursor-pointer')}
+    <Link
+      href={`/stories/${storyData?.id}`}
+      className={cn(
+        'relative flex gap-2 px-4 py-2 hover:bg-white/10',
+        storyData?.attributes?.active && 'cursor-pointer'
+      )}
     >
       <div className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-full">
         <Image
@@ -42,7 +38,7 @@ const TopStoriesItem = ({ topStory }: TopStoriesItemProps) => {
         </h3>
         <p className="font-open-sans text-xs font-light italic">{topStory?.location}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

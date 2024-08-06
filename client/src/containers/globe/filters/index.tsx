@@ -10,12 +10,18 @@ import {
 } from '@radix-ui/react-dialog';
 import { FilterIcon, XIcon } from 'lucide-react';
 
+import { cn } from '@/lib/classnames';
+
 import { useGetIfis } from '@/types/generated/ifi';
 import { useGetTags } from '@/types/generated/tag';
 
 import FilterItem from './item';
 
-export const Filters = () => {
+type FiltersProps = {
+  filtersActive: boolean;
+};
+
+const Filters = ({ filtersActive }: FiltersProps) => {
   const { data: tagsData } = useGetTags({ 'pagination[limit]': 1000 });
   const { data: ifisData } = useGetIfis({ 'pagination[limit]': 1000 });
 
@@ -30,8 +36,8 @@ export const Filters = () => {
         title: 'Status',
         id: 'status',
         options: [
-          { attributes: { name: 'In progress' }, id: 'in-progress' },
-          { attributes: { name: 'Completed' }, id: 'completed' },
+          { attributes: { name: 'In progress' }, id: 'In progress' },
+          { attributes: { name: 'Completed' }, id: 'Completed' },
         ],
       },
       {
@@ -45,16 +51,24 @@ export const Filters = () => {
   return (
     <div>
       <Dialog>
-        <DialogTrigger className="bg-background flex items-center gap-2 rounded-sm border border-gray-800 px-4 py-2">
-          <FilterIcon className="h-4 w-4" />
+        <DialogTrigger className="bg-background hover:border-secondary hover:text-secondary flex items-center gap-2 rounded-sm border border-gray-800 px-4 py-2 text-gray-200">
+          <div className="relative">
+            <div
+              className={cn(
+                'bg-secondary absolute right-0 h-1.5 w-1.5 rounded-full transition-opacity duration-300',
+                filtersActive ? 'opacity-100' : 'opacity-0'
+              )}
+            ></div>
+            <FilterIcon className="h-4 w-4" />
+          </div>
           Filters
         </DialogTrigger>
         <DialogPortal>
           <DialogOverlay />
           <DialogContent className="bg-card-foreground shadow-filters absolute left-0 top-0 z-50 h-screen w-[345px] overflow-hidden rounded-lg backdrop-blur-lg transition-all duration-500">
             <div className="">
-              <DialogClose className="bg-map-background absolute right-4 top-4 rounded-full border border-gray-800 px-4 py-2 text-gray-200">
-                <XIcon className="h-4 w-4 stroke-gray-200" />
+              <DialogClose className="bg-map-background hover:border-secondary hover:text-secondary absolute right-4 top-4 rounded-full border border-gray-800 px-4  py-2 text-gray-200">
+                <XIcon className="h-4 w-4" />
               </DialogClose>
 
               <div className="space-y-8 p-8">
@@ -81,3 +95,5 @@ export const Filters = () => {
     </div>
   );
 };
+
+export default Filters;
