@@ -51,8 +51,8 @@ const Home = () => {
     if (!map) return;
 
     const currCenter = map.getCenter();
-    const nextLng = (currCenter.lng + 5) % 360;
-    const nextLat = currCenter.lat + 3;
+    const nextLng = (currCenter.lng + 0.5) % 360;
+    const nextLat = currCenter.lat + 0.3;
     const lat = nextLat < -90 ? nextLat + 180 : nextLat > 90 ? nextLat - 180 : nextLat;
 
     map?.easeTo({
@@ -60,7 +60,7 @@ const Home = () => {
       pitch: 0,
       zoom: 2,
       center: { lng: nextLng, lat },
-      duration: 5000,
+      duration: 500,
       padding: {
         left: size.width * 0.45,
         right: 0,
@@ -73,19 +73,7 @@ const Home = () => {
 
   useEffect(() => {
     if (map) {
-      map?.easeTo({
-        bearing: 0,
-        pitch: 0,
-        zoom: 2,
-        duration: 500,
-        padding: {
-          left: size.width * 0.45,
-          right: 0,
-          top: 0,
-          bottom: size.width >= getThemeSize('xl') ? 0 : size.height * 0.5,
-        },
-        easing: (n) => n,
-      });
+      spin();
       map.on('moveend', spin);
       return () => {
         map.stop();
