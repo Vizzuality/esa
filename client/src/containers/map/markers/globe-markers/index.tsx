@@ -1,28 +1,16 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
-import { Layer, Source, useMap } from 'react-map-gl';
-
-import mapboxgl from 'mapbox-gl';
+import { Layer, Source } from 'react-map-gl';
 
 import { StoryStepMap } from '@/types/story';
 
 import { useMapImage } from '@/hooks/map';
 import useStories from '@/hooks/stories/useStories';
 
-import { DEFAULT_VIEW_STATE } from '@/components/map/constants';
-
-type StoryMarker = {
-  markers: {
-    lat: number;
-    lng: number;
-  }[];
-};
-
 const GlobeMarkers = () => {
   const { data: stories } = useStories();
-  const { current: map } = useMap();
 
   const FeatureCollection = useMemo(
     () => ({
@@ -53,20 +41,6 @@ const GlobeMarkers = () => {
     name: 'story-marker',
     url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker.png`,
   });
-
-  useEffect(() => {
-    const bounds = new mapboxgl.LngLatBounds();
-    stories?.data?.forEach(({ attributes }) => {
-      if (!(attributes?.marker as StoryMarker)?.markers?.length) return;
-      const { lat, lng } = (attributes?.marker as StoryMarker)?.markers?.[0] || {};
-      if (typeof lat != 'number' || typeof lng != 'number') return;
-      bounds.extend([lng, lat]);
-    });
-
-    if (bounds.isEmpty() || !map) return;
-
-    map.fitBounds(bounds, { ...DEFAULT_VIEW_STATE, duration: 500 });
-  }, [map, stories?.data]);
 
   return (
     <Source id="story-markers" type="geojson" data={FeatureCollection}>

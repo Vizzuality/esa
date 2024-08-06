@@ -51,16 +51,16 @@ const Home = () => {
     if (!map) return;
 
     const currCenter = map.getCenter();
-    const nextLng = (currCenter.lng + 5) % 360;
-    const nextLat = currCenter.lat + 3;
+    const nextLng = (currCenter.lng + 0.5) % 360;
+    const nextLat = currCenter.lat + 0.3;
     const lat = nextLat < -90 ? nextLat + 180 : nextLat > 90 ? nextLat - 180 : nextLat;
 
     map?.easeTo({
       bearing: 0,
       pitch: 0,
-      zoom: size.width >= getThemeSize('3xl') ? 2 : 1.5,
+      zoom: 2,
       center: { lng: nextLng, lat },
-      duration: 5000,
+      duration: 500,
       padding: {
         left: size.width * 0.45,
         right: 0,
@@ -73,20 +73,7 @@ const Home = () => {
 
   useEffect(() => {
     if (map) {
-      map?.easeTo({
-        bearing: 0,
-        pitch: 0,
-        zoom: size.width >= getThemeSize('3xl') ? 2 : 1.5,
-        center: { lng: 0, lat: 0 },
-        duration: 500,
-        padding: {
-          left: size.width * 0.45,
-          right: 0,
-          top: 0,
-          bottom: size.width >= getThemeSize('xl') ? 0 : size.height * 0.5,
-        },
-        easing: (n) => n,
-      });
+      spin();
       map.on('moveend', spin);
       return () => {
         map.stop();
@@ -125,7 +112,7 @@ const Home = () => {
   };
 
   return (
-    <div className="text-primary font-notes pointer-events-none flex h-screen w-screen flex-col justify-between overflow-hidden">
+    <div className="text-primary font-notes pointer-events-none relative flex h-screen w-screen flex-col justify-between overflow-hidden">
       <div className="z-50 flex h-full flex-col">
         <div className="mx-12">
           <Header pathname="home" />
@@ -178,11 +165,11 @@ const Home = () => {
           variants={variants}
           transition={{ duration: 2, delay: 1, ease: 'easeIn' }}
           style={{ width: w, height: '100%', right: w * -0.045, top: 0 }}
-          className="3xl:scale-80 absolute z-50 hidden max-h-screen scale-125 items-center overflow-hidden xl:flex xl:scale-100"
+          className="3xl:scale-100 absolute z-50 hidden max-h-screen scale-125 items-center overflow-hidden xl:flex xl:scale-110"
         >
           <div style={{ height: w }} className="w-full">
-            <div className="3xl:rotate-[55deg] flex h-full rotate-45 items-end justify-center rounded-full border border-dashed border-slate-600 p-[50px] xl:p-[70px]">
-              <div className="3xl:rotate-[-100deg] relative flex h-full w-full -rotate-90 justify-center rounded-full border border-dashed border-slate-600">
+            <div className="flex h-full rotate-45 items-end justify-center rounded-full border border-dashed border-slate-600 p-[50px] xl:rotate-[55deg] xl:p-[70px]">
+              <div className="relative flex h-full w-full -rotate-90 justify-center rounded-full border border-dashed border-slate-600 xl:rotate-[-100deg]">
                 <SatelliteButton
                   handleSelectMarker={handleSelectMarker}
                   satellite={SATELLITE_MARKERS[0]}
