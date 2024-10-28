@@ -125,41 +125,40 @@ const MapLegends = ({ className = '' }) => {
   }, [layersData?.data, layersSettings]);
 
   return (
-    <div className="pointer-events-auto z-10 w-full">
-      <Legend
-        className={cn('w-fit min-w-[280px] max-w-[400px]', className)}
-        sortable={{
-          enabled: false,
-          handle: false,
-        }}
-        onChangeOrder={handleChangeOrder}
-      >
-        {LEGENDS?.map((legend, index) => (
-          <MapLegendItem
-            id={legend.id}
-            key={`${legend.id}-${index}`}
-            layer={legend}
-            settings={legend.settings}
-            onChangeOpacity={(opacity: number) => {
-              handleChangeOpacity(legend.id, opacity);
-            }}
-            onChangeVisibility={(visibility: boolean) => {
-              handleChangeVisibility(legend.id, visibility);
-            }}
-            onChangeExpand={(expand: boolean) => {
-              handleChangeExpand(legend.id, expand);
-            }}
-            isFetching={isFetching}
-            isFetched={isFetched}
-            isError={isError}
-            sortable={{
-              enabled: false,
-              handle: false,
-            }}
-          />
-        ))}
-      </Legend>
-    </div>
+    <Legend
+      className={cn('pointer-events-auto z-10 sm:min-w-[280px] sm:max-w-[400px] ', className)}
+      sortable={{
+        enabled: false,
+        handle: false,
+      }}
+      onChangeOrder={handleChangeOrder}
+      key={layers?.join('-')}
+    >
+      {LEGENDS?.map((legend, index) => (
+        <MapLegendItem
+          id={legend.id}
+          key={`${legend.id}-${index}`}
+          layer={legend}
+          settings={legend.settings}
+          onChangeOpacity={(opacity: number) => {
+            handleChangeOpacity(legend.id, opacity);
+          }}
+          onChangeVisibility={(visibility: boolean) => {
+            handleChangeVisibility(legend.id, visibility);
+          }}
+          onChangeExpand={(expand: boolean) => {
+            handleChangeExpand(legend.id, expand);
+          }}
+          isFetching={isFetching}
+          isFetched={isFetched}
+          isError={isError}
+          sortable={{
+            enabled: false,
+            handle: false,
+          }}
+        />
+      ))}
+    </Legend>
   );
 };
 

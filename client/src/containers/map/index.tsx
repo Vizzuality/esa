@@ -28,9 +28,6 @@ import { CustomMapProps } from '@/components/map/types';
 
 import SelectedStoriesMarker from './markers/selected-stories-marker';
 
-const MapLegends = dynamic(() => import('@/containers/map/legend'), {
-  ssr: false,
-});
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
 });
@@ -53,18 +50,15 @@ export default function MapContainer() {
   const pathname = usePathname();
 
   const isGlobePage = pathname.includes('globe');
+  const isLandingPage = pathname.includes('home');
+  const isStoriesPage = pathname.includes('stories');
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox?.bbox) {
       return {
         bbox: tmpBbox?.bbox,
         options: tmpBbox?.options ?? {
-          padding: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
-          },
+          padding: initialViewState?.padding,
         },
       };
     }
@@ -115,46 +109,41 @@ export default function MapContainer() {
         center: [longitude, latitude],
         duration: 1000,
         animate: true,
-        padding: {
-          top: 50,
-          bottom: 50,
-          left: 50,
-          right: 50,
-        },
+        padding: initialViewState?.padding,
       });
     }
-  }, [map, tmpBbox]);
+  }, [map, initialViewState, tmpBbox]);
 
   return (
-    <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-full')}>
-      <Map
-        id={id}
-        initialViewState={{
-          ...initialViewState,
-          ...(bbox && {
-            bounds: bbox as LngLatBoundsLike,
-          }),
-        }}
-        projection={{
-          name: 'globe',
-        }}
-        minZoom={minZoom}
-        maxZoom={maxZoom}
-        bounds={tmpBounds}
-        mapStyle={MAPBOX_STYLES.default}
-        interactiveLayerIds={layersInteractiveIds}
-        onMouseMove={handleMouseMove}
-        onMapViewStateChange={handleMapViewStateChange}
-        className={cn(!isGlobePage && 'pointer-events-none cursor-default')}
-      >
-        <LayerManager />
-        <Popup />
-        {(isGlobePage || pathname.includes('home')) && <GlobeMarkers />}
-        <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
-        {pathname.includes('stories') && <StoryMarkers />}
-      </Map>
-      <div className="absolute bottom-8 left-14 z-20 w-full ">
-        <MapLegends />
+    <div>
+      <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-full')}>
+        <Map
+          id={id}
+          initialViewState={{
+            ...initialViewState,
+            ...(bbox && {
+              bounds: bbox as LngLatBoundsLike,
+            }),
+          }}
+          projection={{
+            name: 'globe',
+          }}
+          minZoom={minZoom}
+          maxZoom={maxZoom}
+          bounds={tmpBounds}
+          mapStyle={MAPBOX_STYLES.default}
+          interactiveLayerIds={layersInteractiveIds}
+          onMouseMove={handleMouseMove}
+          onMapViewStateChange={handleMapViewStateChange}
+          className={cn(!isGlobePage && 'pointer-events-none cursor-default')}
+          interactive={isGlobePage}
+        >
+          <LayerManager />
+          <Popup />
+          {(isGlobePage || isLandingPage) && <GlobeMarkers />}
+          <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
+          {isStoriesPage && <StoryMarkers />}
+        </Map>
       </div>
     </div>
   );

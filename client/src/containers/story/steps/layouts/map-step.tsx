@@ -1,5 +1,7 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
 import { InfoIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
@@ -21,6 +23,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 import MapContent from './components/map-content';
 
+const MapLegends = dynamic(() => import('@/containers/map/legend'), {
+  ssr: false,
+});
+
 export type StorySummary = {
   title: string;
   content?: (StoryIfisDataItem | StoryTagsDataItem)[];
@@ -41,11 +47,15 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
     <div className="flex justify-end">
       <div
         className={cn(
-          'relative pt-[84px]',
-          currentStep === 1 ? 'min-h-[calc(100vh-48px)]' : 'min-h-screen'
+          'relative space-y-4 pt-[80vh] sm:pt-[84px]',
+          currentStep === 1 ? 'sm:min-h-[calc(100vh-48px)]' : 'min-h-screen',
+          showContent ? 'opacity-100' : 'opacity-0'
         )}
       >
-        <div className="flex min-h-full w-[468px] flex-col items-end justify-end space-y-6 pb-8">
+        <div className="absolute left-0 top-[80vh] z-50 w-full -translate-y-full px-4 sm:fixed sm:bottom-8 sm:left-14 sm:top-auto sm:w-fit sm:translate-y-0 sm:px-0">
+          <MapLegends className="" />
+        </div>
+        <div className="rounded-4xl flex flex-col items-end justify-end bg-[#335e6f]/80 pb-4 backdrop-blur sm:min-h-full sm:w-[468px] sm:space-y-6 sm:rounded-none sm:bg-[#335e6f]/0 sm:pb-8 sm:backdrop-blur-0">
           {!!card && (
             <MapContent
               showContent={showContent}
@@ -64,7 +74,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
             </MapContent>
           )}
           {!!storySummary?.length && (
-            <div className="pointer-events-auto flex w-full max-w-full flex-wrap justify-between gap-4 rounded border border-gray-800 bg-[#335e6f] bg-opacity-50 px-6 py-4 backdrop-blur">
+            <div className="pointer-events-auto flex w-full max-w-full flex-wrap justify-between gap-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
               {storySummary?.map((item) => (
                 <div className="space-y-1" key={item.title}>
                   <div
@@ -112,7 +122,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
         </div>
       </div>
       {currentStep === 1 && (
-        <div className="absolute bottom-8 left-0 flex w-screen items-center">
+        <div className="bottom-8 left-0  hidden w-screen items-center sm:fixed sm:flex">
           <ScrollExplanation>Scroll down to explore the story</ScrollExplanation>
         </div>
       )}

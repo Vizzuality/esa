@@ -16,6 +16,13 @@ import { useGetIfis } from '@/types/generated/ifi';
 import { useGetTags } from '@/types/generated/tag';
 
 import FilterItem from './item';
+import { useGetCategories } from '@/types/generated/category';
+import { useSyncCategory } from '@/store/globe';
+import { RadioGroup, RadioGroupItem } from '@radix-ui/react-radio-group';
+import { useBreakpoint } from '@/hooks/screen-size';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { DialogHeader } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 type FiltersProps = {
   filtersActive: boolean;
@@ -24,7 +31,10 @@ type FiltersProps = {
 const Filters = ({ filtersActive }: FiltersProps) => {
   const { data: tagsData } = useGetTags({ 'pagination[limit]': 1000 });
   const { data: ifisData } = useGetIfis({ 'pagination[limit]': 1000 });
+  const { data: categoriesData } = useGetCategories();
 
+  const breakpoint = useBreakpoint();
+  const isMobile = !breakpoint('sm');
   const filtersData = useMemo(() => {
     return [
       {
@@ -48,6 +58,16 @@ const Filters = ({ filtersActive }: FiltersProps) => {
     ];
   }, [ifisData?.data, tagsData?.data]);
 
+  const [category, setCategory] = useSyncCategory();
+
+  const handleClick = (slug: string) => {
+    if (category === slug) {
+      setCategory(null);
+      return;
+    }
+    setCategory(slug);
+  };
+
   return (
     <div>
       <Dialog>
@@ -65,19 +85,20 @@ const Filters = ({ filtersActive }: FiltersProps) => {
         </DialogTrigger>
         <DialogPortal>
           <DialogOverlay />
-          <DialogContent className="bg-card-foreground shadow-filters absolute left-0 top-0 z-50 h-screen w-[345px] overflow-hidden rounded-lg backdrop-blur-lg transition-all duration-500">
-            <div className="">
-              <DialogClose className="bg-map-background hover:border-secondary hover:text-secondary absolute right-4 top-4 rounded-full border border-gray-800 px-4  py-2 text-gray-200">
-                <XIcon className="h-4 w-4" />
-              </DialogClose>
-
+          <DialogContent className="bg-card-foreground shadow-filters absolute left-0 top-0 z-50 h-screen overflow-hidden rounded-lg backdrop-blur-lg transition-all duration-500 sm:w-[345px]">
+            <ScrollArea type="hover" className="h-full">
+              <DialogHeader className="flex flex-row items-end justify-between px-8 pt-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-bold uppercase leading-none tracking-[1.8px] text-white">
+                    Filters
+                  </h3>
+                </div>
+                <DialogClose className="bg-map-background hover:border-secondary hover:text-secondary w-min rounded-full border border-gray-800 px-4 py-2 text-gray-200">
+                  <XIcon className="h-4 w-4" />
+                </DialogClose>
+              </DialogHeader>
               <div className="space-y-8 p-8">
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold uppercase tracking-[1.8px] text-white">
-                      Filters
-                    </h3>
-                  </div>
                   <div>
                     <p className="font-open-sans text-sm text-gray-500">
                       Filter stories on the globe by
@@ -87,8 +108,45 @@ const Filters = ({ filtersActive }: FiltersProps) => {
                 {filtersData.map((filter) =>
                   filter?.options?.length ? <FilterItem key={filter.id} filter={filter} /> : null
                 )}
+
+                {isMobile && (
+                  <>
+                    <div className="flex items-center justify-between text-gray-200">
+                      <h3 className="font-notes text-sm font-bold uppercase tracking-widest text-gray-700">
+                        Category
+                      </h3>
+                      <Button
+                        className="font-open-sans text-sm"
+                        size="sm"
+                        variant="link"
+                        onClick={() => setCategory(null)}
+                      >
+                        {!!category && 'Unselect'}
+                      </Button>
+                    </div>
+                    <div>
+                      <RadioGroup className="inline-flex flex-wrap gap-2" value={category || ''}>
+                        {categoriesData?.data?.map(({ id, attributes }) => {
+                          if (attributes?.name && attributes?.slug) {
+                            return (
+                              <RadioGroupItem
+                                className="data-[state=checked]:text-background data-[state=checked]:border-secondary data-[state=checked]:bg-secondary w-fit rounded-3xl border border-gray-200 px-6 py-2 text-sm text-gray-200 transition-all duration-300 data-[state=checked]:border data-[state=checked]:opacity-70 data-[state=checked]:hover:opacity-100"
+                                value={attributes.slug}
+                                key={attributes.slug}
+                                onClick={(e) => handleClick(e.currentTarget?.value)}
+                              >
+                                {attributes?.name}
+                              </RadioGroupItem>
+                            );
+                          }
+                          return null;
+                        })}
+                      </RadioGroup>
+                    </div>
+                  </>
+                )}
               </div>
-            </div>
+            </ScrollArea>
           </DialogContent>
         </DialogPortal>
       </Dialog>

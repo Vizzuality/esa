@@ -4,14 +4,18 @@ import ContentLoader from '@/components/ui/loader';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import Category from './item';
+import { cn } from '@/lib/classnames';
 
-const Categories = () => {
+type CategoriesProps = {
+  className?: string;
+};
+const Categories = ({ className }: CategoriesProps) => {
   const { data, isError, isPlaceholderData, isFetched, isFetching } = useGetCategories();
 
   const categories = data?.data;
 
   return (
-    <div className="pointer-events-none w-full">
+    <div className={cn('pointer-events-none w-full', className)}>
       <ContentLoader
         isPlaceholderData={isPlaceholderData}
         data={data}

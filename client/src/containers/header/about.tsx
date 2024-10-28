@@ -6,8 +6,8 @@ const About = () => {
   return (
     <Dialog>
       <DialogTrigger className="text-sm font-bold uppercase tracking-widest">About</DialogTrigger>
-      <DialogContentHome>
-        <div className="space-y-4 p-10">
+      <DialogContentHome className="">
+        <div className="space-y-4 p-6 sm:p-10">
           <div className="font-notes items-start justify-start text-2xl font-bold leading-9 text-white">
             About the Impact Sphere
           </div>
@@ -18,7 +18,7 @@ const About = () => {
             habitasse sed eget semper pellentesque malesuada. Turpis.
           </div>
           <div className="inline-flex items-start justify-center gap-2 self-stretch">
-            <div className="inline-flex w-[418px] flex-col items-start justify-start gap-1">
+            <div className="inline-flex w-full flex-col items-start justify-start gap-1 sm:w-[418px]">
               <div className="inline-flex items-center justify-start gap-1">
                 <div className="font-notes text-sm font-bold uppercase leading-[21px] tracking-wide text-slate-400">
                   contatcs

@@ -9,9 +9,9 @@ import { useSyncStep } from '@/store/stories';
 import { useGetStoriesId } from '@/types/generated/story';
 import { StoryStepMap } from '@/types/story';
 
+import Carousel from '@/components/ui/carousel';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
-import Carousel from './carousel';
 import StoryMarkerMedia from './marker';
 
 type StoryMarker = {
@@ -64,8 +64,8 @@ const StoryMarkers = () => {
         onOpenChange={() => setCurrentMedia(undefined)}
         open={typeof currentMedia === 'number'}
       >
-        <DialogContent className="bg-transparent">
-          <Carousel medias={medias} currentMedia={currentMedia} setCurrentMedia={setCurrentMedia} />
+        <DialogContent className="h-screen bg-transparent">
+          <Carousel selected={currentMedia} options={{ loop: true }} medias={medias} />
         </DialogContent>
       </Dialog>
     </>
