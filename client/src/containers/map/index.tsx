@@ -49,9 +49,9 @@ export default function MapContainer() {
 
   const pathname = usePathname();
 
-  const isGlobePage = pathname.includes('globe');
-  const isLandingPage = pathname.includes('home');
-  const isStoriesPage = pathname.includes('stories');
+  const isGlobePage = useMemo(() => pathname.includes('globe'), [pathname]);
+  const isLandingPage = useMemo(() => pathname.includes('home'), [pathname]);
+  const isStoriesPage = useMemo(() => pathname.includes('stories'), [pathname]);
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox?.bbox) {
@@ -116,7 +116,7 @@ export default function MapContainer() {
 
   return (
     <div>
-      <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-full')}>
+      <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-screen')}>
         <Map
           id={id}
           initialViewState={{

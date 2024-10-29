@@ -18,7 +18,8 @@ type SelectedStoriesMarkerProps = {
 const SelectedStoriesMarker = ({ markers, onCloseMarker }: SelectedStoriesMarkerProps) => {
   const { push } = useRouter();
 
-  const isMobile = !useBreakpoint()('sm');
+  const breakpoint = useBreakpoint();
+  const isMobile = !breakpoint('sm');
   const { ['default']: map } = useMap();
 
   useEffect(() => {

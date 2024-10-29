@@ -89,7 +89,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     >
       <motion.div
         className={cn(
-          'top-0 flex h-screen w-screen flex-col items-center justify-center opacity-0 sm:sticky 2xl:px-12'
+          'sticky top-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:min-h-screen 2xl:px-12'
         )}
         initial={{ opacity: 0 }}
         animate={{ opacity: showContent && show ? 1 : 0 }}

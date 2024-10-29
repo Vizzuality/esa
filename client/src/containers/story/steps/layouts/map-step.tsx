@@ -52,7 +52,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
           showContent ? 'opacity-100' : 'opacity-0'
         )}
       >
-        <div className="absolute left-0 top-[80vh] z-50 w-full -translate-y-full px-4 sm:fixed sm:bottom-8 sm:left-14 sm:top-auto sm:w-fit sm:translate-y-0 sm:px-0">
+        <div className="absolute left-0 top-[80vh] z-10 w-full -translate-y-full px-4 sm:fixed sm:bottom-8 sm:left-14 sm:top-auto sm:w-fit sm:translate-y-0 sm:px-0">
           <MapLegends className="" />
         </div>
         <div className="rounded-4xl flex flex-col items-end justify-end bg-[#335e6f]/80 pb-4 backdrop-blur sm:min-h-full sm:w-[468px] sm:space-y-6 sm:rounded-none sm:bg-[#335e6f]/0 sm:pb-8 sm:backdrop-blur-0">
