@@ -19,7 +19,7 @@ type CarouselMediaProps = {
   isCurrentMedia?: boolean;
 };
 
-const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
+export const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const mediaSrc = getImageSrc(media?.url);

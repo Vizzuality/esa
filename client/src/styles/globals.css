@@ -75,6 +75,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-open-sans antialiased;
+    @apply bg-map-background text-foreground font-open-sans antialiased;
   }
 }

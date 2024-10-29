@@ -5,14 +5,14 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { useScroll, motion, useTransform } from 'framer-motion';
-import { useSetAtom } from 'jotai';
+import { useScroll, motion, useTransform, useMotionValueEvent } from 'framer-motion';
 
+import { cn } from '@/lib/classnames';
 import { getImageSrc } from '@/lib/image-src';
 
-import { isFlyingBackAtom } from '@/store/map';
-
 import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
+
+import { useBreakpoint } from '@/hooks/screen-size';
 
 import ScrollExplanation from '@/components/ui/scroll-explanation';
 
@@ -35,8 +35,6 @@ type MediaStepLayoutProps = {
 const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps) => {
   const { push } = useRouter();
 
-  const setIsFlyingBack = useSetAtom(isFlyingBackAtom);
-
   const { content, title } = step as StepLayoutOutroStepComponent;
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -48,23 +46,22 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
 
   const [show, setShow] = useState(false);
 
-  useTransform(scrollYProgress, (v) => {
-    if (!show && showContent && v > 0.2) {
-      setShow(true);
-    }
-  });
+  const breakpoint = useBreakpoint();
+  const isMobile = !breakpoint('sm');
 
   useEffect(() => {
     if (!showContent) setShow(false);
   }, [showContent]);
 
-  useTransform(scrollYProgress, (v) => {
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    if (!show && showContent && v > 0.2) {
+      if (!isMobile && v > 0.2) setShow(true);
+      if (isMobile && v > 0.1) setShow(true);
+    }
+    if (show && v < 0.2) setShow(false);
+
     if (v > 0.6) {
-      setIsFlyingBack(true);
-      setTimeout(() => {
-        setIsFlyingBack(false);
-      }, 3000);
-      push('/');
+      push('/globe');
     }
   });
 
@@ -86,120 +83,132 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   const categoryDisclaimer = disclaimer as Disclaimer[];
 
   return (
-    <div ref={containerRef} className="flex h-[300vh]">
-      {showContent && show && (
-        <motion.div className="sticky top-0 flex h-screen w-screen flex-col items-center justify-center 2xl:px-12">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
-            className="fixed bottom-0 left-0 h-full w-screen backdrop-blur-sm"
-          >
-            <div className="h-full w-full bg-slate-900/60"></div>
-          </motion.div>
-          <div className="pointer-events-auto flex w-full flex-1 flex-col items-center justify-between p-10">
-            <div className="flex w-full flex-1 flex-col justify-between gap-12 lg:flex-row">
-              <motion.div
-                initial={{ opacity: 0, x: '-300%' }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.5 }}
-                style={{ scale: scaleContent }}
-                className="relative z-50 mt-10 flex w-full flex-1 items-center justify-center"
-              >
-                {isVideo && (
-                  <video
-                    width="100%"
-                    height="100%"
-                    src={mediaSrc}
-                    ref={videoRef}
-                    muted
-                    loop
-                    autoPlay={true}
-                    controls
-                  >
-                    <source src={mediaSrc} type={mediaMime} />
-                  </video>
-                )}
-                {isImage && (
-                  <Image
-                    className="aspect-video w-full object-cover"
-                    src={mediaSrc}
-                    width={534}
-                    height={330}
-                    alt="story conclusion image"
-                  />
-                )}
-              </motion.div>
-
-              <motion.div
-                className="flex w-full max-w-5xl flex-1 items-center justify-center space-y-16"
-                initial={{ opacity: 0, x: '300%' }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.5 }}
-                style={{ scale: scaleContent }}
-              >
-                <div className="max-w-lg space-y-4 p-10">
-                  <h3 className="text-enlight-yellow-500 text-2xl font-bold tracking-wider">
-                    {title}
-                  </h3>
-                  <p>{content}</p>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-
-          <div className="z-10 mb-8">
-            <ScrollExplanation>Continue scrolling to explore more stories</ScrollExplanation>
-          </div>
-
-          {showContent && show && categoryDisclaimer?.length && (
-            <div className="font-notes pointer-events-auto relative w-screen bg-white p-4 text-xs italic text-gray-900">
-              <ul className="flex items-center justify-center gap-x-10 gap-y-2">
-                {categoryDisclaimer.map((item) => (
-                  <li key={item.title} className="flex items-center gap-2">
-                    <p>{item.title}</p>
-                    <div className="flex gap-2">
-                      {item.partners?.map((partner) => {
-                        const src = getImageSrc(partner.logo?.data?.attributes?.url);
-
-                        const url = partner.url;
-                        return url ? (
-                          <a
-                            key={partner.id}
-                            href={partner.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <Image
-                              src={src}
-                              width={50}
-                              height={30}
-                              alt=""
-                              className="h-8 w-full max-w-[125px] object-contain object-center"
-                            />
-                          </a>
-                        ) : (
-                          <div>
-                            <Image
-                              src={src}
-                              width={50}
-                              height={30}
-                              alt=""
-                              className="h-8 w-full max-w-[125px] object-contain object-center"
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+    <div
+      ref={containerRef}
+      className="absolute flex h-[250vh] items-center sm:h-[300vh] sm:items-start"
+    >
+      <motion.div
+        className={cn(
+          'sticky top-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:min-h-screen 2xl:px-12'
+        )}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showContent && show ? 1 : 0 }}
+        transition={{ duration: 1.5 }}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: showContent && show ? 1 : 0 }}
+          transition={{ duration: 1.5 }}
+          className="fixed bottom-0 left-0 h-full w-screen backdrop-blur-sm"
+        >
+          <div className="h-full w-full bg-slate-900/60"></div>
         </motion.div>
-      )}
+
+        <div className="pointer-events-auto flex w-full flex-1 flex-col items-center justify-between sm:p-10">
+          <div className="flex w-full flex-1 flex-col justify-between sm:gap-12 lg:flex-row">
+            <motion.div
+              initial={{ opacity: 0, x: '-300%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5 }}
+              style={{ scale: scaleContent }}
+              className="relative z-50 flex w-full flex-1 items-center justify-center sm:mt-10"
+            >
+              {isVideo && (
+                <video
+                  width="100%"
+                  height="100%"
+                  src={mediaSrc}
+                  ref={videoRef}
+                  muted
+                  loop
+                  autoPlay={true}
+                  controls
+                >
+                  <source src={mediaSrc} type={mediaMime} />
+                </video>
+              )}
+              {isImage && (
+                <Image
+                  className="aspect-video w-full object-cover"
+                  src={mediaSrc}
+                  width={534}
+                  height={330}
+                  alt="story conclusion image"
+                />
+              )}
+            </motion.div>
+
+            <motion.div
+              className="flex w-full max-w-5xl flex-1 items-center justify-center space-y-16"
+              initial={{ opacity: 0, x: '300%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5 }}
+              style={{ scale: scaleContent }}
+            >
+              <div className="max-w-lg space-y-4 p-4 sm:p-10">
+                <h3 className="text-enlight-yellow-500 text-2xl font-bold tracking-wider">
+                  {title}
+                </h3>
+                <p>{content}</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="z-10 mb-8">
+          <ScrollExplanation>Continue scrolling to explore more stories</ScrollExplanation>
+        </div>
+
+        <div
+          className={cn(
+            'font-notes pointer-events-auto relative w-screen bg-white p-4 text-xs italic text-gray-900 opacity-0',
+            showContent && show && categoryDisclaimer?.length && 'opacity-100'
+          )}
+        >
+          <ul className="flex flex-col flex-wrap items-center justify-center gap-x-10 gap-y-2 sm:flex-row">
+            {categoryDisclaimer.map((item) => (
+              <li key={item.title} className="flex items-center gap-2">
+                <p className="shrink-0">{item.title}</p>
+                <div className="flex flex-wrap gap-2">
+                  {item.partners?.map((partner) => {
+                    const src = getImageSrc(partner.logo?.data?.attributes?.url);
+
+                    const url = partner.url;
+                    return url ? (
+                      <a
+                        key={partner.id}
+                        href={partner.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Image
+                          src={src}
+                          width={50}
+                          height={30}
+                          alt=""
+                          className="h-8 w-full max-w-[125px] shrink-0 object-contain object-center"
+                        />
+                      </a>
+                    ) : (
+                      <div>
+                        <Image
+                          src={src}
+                          width={50}
+                          height={30}
+                          alt=""
+                          className="h-8 w-full max-w-[125px] object-contain object-center"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </motion.div>
     </div>
   );
 };

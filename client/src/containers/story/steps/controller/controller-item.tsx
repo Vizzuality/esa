@@ -40,7 +40,7 @@ export const ScrollItemController = ({ title, newStep }: ScrollItemControllerPro
             variant="icon"
             className={cn(
               'outline-secondary h-4 w-4 rounded-full border-[1.5px] border-gray-800 bg-gray-900 transition-all duration-200 hover:outline',
-              newStep === currStep ? 'border-secondary borde' : 'border-gray-700'
+              newStep === currStep ? 'border-secondary border' : 'border-gray-700'
             )}
             onClick={handleSCrollToItem}
             size="icon"

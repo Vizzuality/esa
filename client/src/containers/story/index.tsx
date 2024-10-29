@@ -62,7 +62,7 @@ const Story = () => {
   }, [story, setTmpBbox, setLayers, steps, step]);
 
   return (
-    <div className="text-primary flex flex-col justify-between">
+    <div className="text-primary max-w-screen flex flex-col justify-between overflow-x-hidden">
       <Header
         categorySlug={story?.category?.data?.attributes?.slug}
         title={story?.title}
@@ -71,7 +71,7 @@ const Story = () => {
       />
       <ScrollProvider>
         <Steps story={story} />
-        <div className="fixed right-6 z-30 flex h-full flex-col justify-center gap-2">
+        <div className="right-6 z-30 hidden h-full flex-col justify-center gap-2 sm:fixed sm:flex">
           {steps?.map((s, index) => (
             <ScrollItemController key={index + 1} newStep={index + 1} title={s.title || ''} />
           ))}

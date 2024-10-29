@@ -2855,6 +2855,8 @@ __metadata:
     d3-array: 3.2.4
     date-fns: ^3.3.1
     deck.gl: 8.9.19
+    embla-carousel: ^8.3.0
+    embla-carousel-react: ^8.3.0
     eslint: 8.42.0
     eslint-config-next: 13.4.5
     eslint-config-prettier: ^8.8.0
@@ -11487,6 +11489,34 @@ __metadata:
     minimalistic-assert: ^1.0.1
     minimalistic-crypto-utils: ^1.0.1
   checksum: d56d21fd04e97869f7ffcc92e18903b9f67f2d4637a23c860492fbbff5a3155fd9ca0184ce0c865dd6eb2487d234ce9551335c021c376cd2d3b7cb749c7d10f4
+  languageName: node
+  linkType: hard
+
+"embla-carousel-react@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "embla-carousel-react@npm:8.3.0"
+  dependencies:
+    embla-carousel: 8.3.0
+    embla-carousel-reactive-utils: 8.3.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.1 || ^18.0.0
+  checksum: 414bf10ea5b983fdf2f64aeb7806ebaf69b2790617c8ff13b13e7bb6cc4671f243544a786fc6be33dde18965513402e4c4d78474ca928f4031af7db9e276be26
+  languageName: node
+  linkType: hard
+
+"embla-carousel-reactive-utils@npm:8.3.0":
+  version: 8.3.0
+  resolution: "embla-carousel-reactive-utils@npm:8.3.0"
+  peerDependencies:
+    embla-carousel: 8.3.0
+  checksum: 687eb69c5db4bf1c9fc09090ea4441e60ab94dd04de7b8e69139eff26fed3d9ba62e6804cc1c44616838c14924fe1b07e31864222a6106365c7129fd95d7d741
+  languageName: node
+  linkType: hard
+
+"embla-carousel@npm:8.3.0, embla-carousel@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "embla-carousel@npm:8.3.0"
+  checksum: c2d3c89c93e105133e6931dfdba5899f44f01b32ea0fa331999030150819a2a51c4699df49b69540bc935b63def219f7484f6ca363becaacaf7609e863e39b72
   languageName: node
   linkType: hard
 

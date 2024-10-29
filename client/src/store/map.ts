@@ -48,8 +48,6 @@ export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 
 export const markerAtom = atom<MapboxGeoJSONFeature | null>(null);
 
-export const isFlyingBackAtom = atom<boolean>(false);
-
 export const DEFAULT_SETTINGS = {
   expand: true,
 };

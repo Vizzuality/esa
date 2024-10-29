@@ -69,7 +69,7 @@ const Step = ({ story }: StepProps) => {
             <div
               className={cn(
                 'pointer-events-none min-h-screen w-full ',
-                type !== 'outro-step' && 'px-14'
+                type !== 'outro-step' && 'sm:px-14'
               )}
             >
               {type === 'map-step' && (
