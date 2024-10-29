@@ -96,21 +96,39 @@ const StoryHeader = ({ categorySlug, title, categoryTitle, storyId }: StoryHeade
                 <div className="font-notes text-lg font-bold uppercase leading-[27px] tracking-widest text-white">
                   Share story
                 </div>
-                <div className="flex w-full items-center justify-start gap-2 rounded-[32px] border border-gray-200 py-2 pl-4 pr-2">
-                  <div className="flex shrink grow basis-0 flex-col items-start justify-start gap-1.5">
-                    <div className="font-open-sans text-sm font-normal leading-tight text-gray-300">
-                      {storyUrl}
+                <div className="space-y-2">
+                  <div className="font-open-sans text-sm font-normal leading-tight text-gray-300">
+                    Copy and paste link to share
+                  </div>
+                  <div className="flex w-full items-center justify-start gap-2 rounded-[32px] border border-gray-200 py-2 pl-4 pr-2">
+                    <div className="flex shrink grow basis-0 flex-col items-start justify-start gap-1.5">
+                      <div className="font-open-sans text-sm font-normal leading-tight text-gray-300">
+                        {storyUrl}
+                      </div>
+                    </div>
+                    <div className="flex items-start justify-start">
+                      <Button
+                        onClick={handleCopyToClipboard}
+                        variant="secondary"
+                        className="ont-open-sans h-fit rounded-full bg-teal-500 px-4 py-2 text-sm font-normal leading-none text-white hover:bg-teal-500/80"
+                      >
+                        Copy
+                      </Button>
                     </div>
                   </div>
-                  <div className="flex items-start justify-start">
-                    <Button
-                      onClick={handleCopyToClipboard}
-                      variant="secondary"
-                      className="ont-open-sans h-fit rounded-full bg-teal-500 px-4 py-2 text-sm font-normal leading-none text-white hover:bg-teal-500/80"
+                </div>
+                <div className="space-x-2">
+                  {shareIcons.map(({ icon: Icon, link }) => (
+                    <a
+                      key={`${link}${env.NEXT_PUBLIC_URL}${env.NEXT_PUBLIC_BASE_PATH}/stories/${storyId}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 px-0 py-0"
+                      href={link}
                     >
-                      Copy
-                    </Button>
-                  </div>
+                      <Icon className="h-4 w-4 fill-gray-200 stroke-none" />
+                    </a>
+                  ))}
                 </div>
               </div>
             </DialogContentHome>
