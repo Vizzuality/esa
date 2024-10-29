@@ -83,10 +83,13 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   const categoryDisclaimer = disclaimer as Disclaimer[];
 
   return (
-    <div ref={containerRef} className="flex h-[250vh] items-center sm:h-[300vh] sm:items-start">
+    <div
+      ref={containerRef}
+      className="absolute flex h-[250vh] items-center sm:h-[300vh] sm:items-start"
+    >
       <motion.div
         className={cn(
-          'sticky top-0 flex h-screen w-screen flex-col items-center justify-center opacity-0 2xl:px-12'
+          'top-0 flex h-screen w-screen flex-col items-center justify-center opacity-0 sm:sticky 2xl:px-12'
         )}
         initial={{ opacity: 0 }}
         animate={{ opacity: showContent && show ? 1 : 0 }}
