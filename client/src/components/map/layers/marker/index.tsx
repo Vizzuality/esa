@@ -1,3 +1,5 @@
+'use client';
+
 import { Marker as RMarker } from 'react-map-gl';
 
 import { XIcon } from 'lucide-react';

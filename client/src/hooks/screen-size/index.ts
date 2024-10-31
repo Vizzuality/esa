@@ -1,4 +1,5 @@
-import { useMediaMatch } from 'rooks';
+import { useEffect, useState } from 'react';
+
 import resolveConfig from 'tailwindcss/resolveConfig';
 
 import tailwindConfig from '@/../tailwind.config';
@@ -18,13 +19,25 @@ const getThemeSize = (size: string) => {
   return 1;
 };
 
-export const useBreakpoint = (size: string) => {
-  const themeSize = getThemeSize(size);
-  return useMediaMatch(`(max-width: ${themeSize}px)`);
-};
+export function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+
+    const listener = () => setMatches(media.matches);
+    media.addEventListener('change', listener);
+    return () => window.removeEventListener('change', listener);
+  }, [matches, query]);
+
+  return matches;
+}
 
 export const useIsMobile = () => {
-  const mobileSize = getThemeSize('sm');
-  const isMobile = useMediaMatch(`(max-width: ${mobileSize}px)`);
-  return isMobile;
+  const smSize = getThemeSize('sm');
+  return useMediaQuery(`(max-width: ${smSize}px)`);
 };

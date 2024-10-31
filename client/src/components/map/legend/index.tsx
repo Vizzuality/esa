@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo, Children, isValidElement } from 'react';
 
 import { ChevronDown } from 'lucide-react';
