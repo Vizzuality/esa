@@ -1,12 +1,13 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
+import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
 
@@ -20,7 +21,6 @@ import { MAPBOX_STYLES } from '@/constants/map';
 
 import GlobeMarkers from '@/containers/map/markers/globe-markers';
 import StoryMarkers from '@/containers/map/markers/story-markers';
-import Popup from '@/containers/map/popup';
 
 import Map from '@/components/map';
 import { DEFAULT_PROPS } from '@/components/map/constants';
@@ -34,7 +34,7 @@ const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
 
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
-
+  const router = useRouter();
   const { [id]: map } = useMap();
 
   const [markers, setMarkers] = useState<(GeoJSON.Feature<GeoJSON.Point> | null)[]>([]);
@@ -49,9 +49,9 @@ export default function MapContainer() {
 
   const pathname = usePathname();
 
-  const isGlobePage = useMemo(() => pathname.includes('globe'), [pathname]);
-  const isLandingPage = useMemo(() => pathname.includes('home'), [pathname]);
   const isStoriesPage = useMemo(() => pathname.includes('stories'), [pathname]);
+  const isLandingPage = useMemo(() => pathname.includes('home'), [pathname]);
+  const isGlobePage = useMemo(() => pathname.includes('globe'), [pathname]);
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox?.bbox) {
@@ -78,26 +78,30 @@ export default function MapContainer() {
     }
   }, [map, setBbox, setTmpBbox]);
 
-  const handleMouseMove = useCallback((e: MapLayerMouseEvent) => {
-    if (e.features?.length) {
-      const storyMarkersFeatures = e.features
-        .filter((f) => f.source === 'story-markers')
-        .map((f) => ({
-          ...f,
-          geometry: f.geometry as GeoJSON.Point,
-        }));
+  const handleMouseMove = useCallback(
+    (e: MapLayerMouseEvent) => {
+      if (!isGlobePage) return;
+      if (e.features?.length) {
+        const storyMarkersFeatures = e.features
+          .filter((f) => f.source === 'story-markers')
+          .map((f) => ({
+            ...f,
+            geometry: f.geometry as GeoJSON.Point,
+          }));
 
-      if (storyMarkersFeatures.length) {
-        setMarkers(storyMarkersFeatures as GeoJSON.Feature<GeoJSON.Point>[]);
-      } else {
+        if (storyMarkersFeatures.length) {
+          setMarkers(storyMarkersFeatures as GeoJSON.Feature<GeoJSON.Point>[]);
+        } else {
+          setMarkers([]);
+        }
+      }
+
+      if (e.features?.length === 0) {
         setMarkers([]);
       }
-    }
-
-    if (e.features?.length === 0) {
-      setMarkers([]);
-    }
-  }, []);
+    },
+    [isGlobePage]
+  );
 
   useEffect(() => {
     if (map && tmpBbox?.options) {
@@ -114,9 +118,41 @@ export default function MapContainer() {
     }
   }, [map, initialViewState, tmpBbox]);
 
+  const targetRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    axis: 'y',
+    offset: ['start start', 'end end'],
+    layoutEffect: false,
+    smooth: 0.5,
+    container: containerRef,
+  });
+
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    if (isLandingPage && v > 0.9) {
+      router.push('/globe');
+    }
+  });
+
   return (
-    <div>
-      <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-screen')}>
+    <div
+      className={cn(
+        'absolute left-0 top-0 h-screen w-screen overflow-hidden',
+        isLandingPage && 'h-[150vh] overflow-y-auto sm:h-screen'
+      )}
+      ref={containerRef}
+    >
+      <div
+        ref={targetRef}
+        className={cn(
+          'bg-map-background left-0 top-0 w-screen',
+          isLandingPage
+            ? 'sticky top-[120vh] h-[200vh] sm:fixed sm:top-0 sm:h-screen'
+            : 'fixed h-screen'
+        )}
+      >
         <Map
           id={id}
           initialViewState={{
@@ -135,12 +171,21 @@ export default function MapContainer() {
           interactiveLayerIds={layersInteractiveIds}
           onMouseMove={handleMouseMove}
           onMapViewStateChange={handleMapViewStateChange}
-          className={cn(!isGlobePage && 'pointer-events-none cursor-default')}
-          interactive={isGlobePage}
+          boxZoom={false}
+          scrollZoom={false}
+          dragPan={false}
+          dragRotate={false}
+          keyboard={false}
+          doubleClickZoom={false}
+          touchZoomRotate={false}
+          className={cn(
+            isGlobePage
+              ? 'pointer-events-auto cursor-pointer'
+              : 'pointer-events-none cursor-default'
+          )}
         >
           <LayerManager />
-          <Popup />
-          {(isGlobePage || isLandingPage) && <GlobeMarkers />}
+          <GlobeMarkers />
           <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
           {isStoriesPage && <StoryMarkers />}
         </Map>

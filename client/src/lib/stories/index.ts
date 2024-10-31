@@ -1,3 +1,5 @@
+import { MapRef } from 'react-map-gl';
+
 import { GetCategoriesParams } from '@/types/generated/strapi.schemas';
 
 export const getStoriesParams = (params?: {

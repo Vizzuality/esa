@@ -1,10 +1,11 @@
+import { cn } from '@/lib/classnames';
+
 import { useGetCategories } from '@/types/generated/category';
 
 import ContentLoader from '@/components/ui/loader';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import Category from './item';
-import { cn } from '@/lib/classnames';
 
 type CategoriesProps = {
   className?: string;

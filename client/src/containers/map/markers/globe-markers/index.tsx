@@ -1,12 +1,14 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
-import { Layer, Source } from 'react-map-gl';
+import { Layer, Source, useMap } from 'react-map-gl';
+
+import { usePathname } from 'next/navigation';
 
 import { StoryStepMap } from '@/types/story';
 
-import { useMapImage } from '@/hooks/map';
+import { setMapEnable, useMapImage } from '@/hooks/map';
 import useStories from '@/hooks/stories/useStories';
 
 const GlobeMarkers = () => {
@@ -42,6 +44,20 @@ const GlobeMarkers = () => {
     url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker.png`,
   });
 
+  const pathname = usePathname();
+  const visibility = useMemo(
+    () => (!pathname.includes('stories') ? 'visible' : 'none'),
+    [pathname]
+  );
+
+  const { default: map } = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+    const MAP = map.getMap();
+    setMapEnable(MAP, pathname.includes('globe'));
+  }, [pathname, map]);
+
   return (
     <Source id="story-markers" type="geojson" data={FeatureCollection}>
       <Layer
@@ -53,7 +69,7 @@ const GlobeMarkers = () => {
           'circle-radius': 12,
         }}
         layout={{
-          visibility: 'visible',
+          visibility,
         }}
       />
 
@@ -66,6 +82,7 @@ const GlobeMarkers = () => {
           'text-size': 12,
           'text-ignore-placement': true,
           'text-allow-overlap': true,
+          visibility,
         }}
         paint={{
           'text-color': '#003247',
@@ -83,6 +100,7 @@ const GlobeMarkers = () => {
           'icon-image': 'story-marker',
           'icon-ignore-placement': true,
           'icon-allow-overlap': true,
+          visibility,
         }}
       />
     </Source>

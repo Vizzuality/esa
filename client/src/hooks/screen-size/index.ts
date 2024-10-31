@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-
+import { useMediaMatch } from 'rooks';
 import resolveConfig from 'tailwindcss/resolveConfig';
 
 import tailwindConfig from '@/../tailwind.config';
+
 const { theme } = resolveConfig(tailwindConfig);
 
 const getThemeSize = (size: string) => {
@@ -18,28 +18,13 @@ const getThemeSize = (size: string) => {
   return 1;
 };
 
-export const useBreakpoint = () => {
-  const [width, setWidth] = useState(0);
+export const useBreakpoint = (size: string) => {
+  const themeSize = getThemeSize(size);
+  return useMediaMatch(`(max-width: ${themeSize}px)`);
+};
 
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    setWidth(window.innerWidth);
-
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return (screenSize: string) => {
-    return width >= getThemeSize(screenSize);
-  };
+export const useIsMobile = () => {
+  const mobileSize = getThemeSize('sm');
+  const isMobile = useMediaMatch(`(max-width: ${mobileSize}px)`);
+  return isMobile;
 };

@@ -12,7 +12,7 @@ import { getImageSrc } from '@/lib/image-src';
 
 import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
-import { useBreakpoint } from '@/hooks/screen-size';
+import { useIsMobile } from '@/hooks/screen-size';
 
 import ScrollExplanation from '@/components/ui/scroll-explanation';
 
@@ -46,8 +46,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
 
   const [show, setShow] = useState(false);
 
-  const breakpoint = useBreakpoint();
-  const isMobile = !breakpoint('sm');
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!showContent) setShow(false);
@@ -85,11 +84,11 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   return (
     <div
       ref={containerRef}
-      className="absolute flex h-[250vh] items-center sm:h-[300vh] sm:items-start"
+      className="absolute flex h-[250vh] items-end sm:h-[300vh] sm:items-start"
     >
       <motion.div
         className={cn(
-          'sticky top-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:min-h-screen 2xl:px-12'
+          'sticky bottom-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:top-0 sm:min-h-screen 2xl:px-12'
         )}
         initial={{ opacity: 0 }}
         animate={{ opacity: showContent && show ? 1 : 0 }}

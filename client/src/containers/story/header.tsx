@@ -1,7 +1,7 @@
+import { use, useRef, useState } from 'react';
+
 import { useRouter } from 'next/navigation';
 
-import { useSetAtom } from 'jotai';
-import { ArrowLeft, FacebookIcon, LinkedinIcon, Share2, TwitterIcon, XIcon } from 'lucide-react';
 import {
   motion,
   useMotionValue,
@@ -9,6 +9,9 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion';
+import { useSetAtom } from 'jotai';
+import { ArrowLeft, FacebookIcon, LinkedinIcon, Share2, TwitterIcon, XIcon } from 'lucide-react';
+
 import env from '@/env.mjs';
 
 import { layersAtom } from '@/store/map';
@@ -17,7 +20,6 @@ import { Button } from '@/components/ui/button';
 import CategoryIcon from '@/components/ui/category-icon';
 import { Dialog, DialogContentHome, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/classnames';
-import { use, useRef, useState } from 'react';
 
 const headerButtonClassName =
   'h-8 px-4 py-2 rounded-4xl sm:h-auto border border-gray-800 bg-gray-900 sm:px-5 sm:py-2.5 hover:bg-gray-800';
