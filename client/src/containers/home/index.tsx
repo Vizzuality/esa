@@ -143,6 +143,7 @@ const Home = () => {
                   onClick={() => map?.stop()}
                   className="font-bold uppercase tracking-wide"
                   href="/globe"
+                  prefetch
                 >
                   <div className="flex h-full w-full items-center justify-center rounded-full bg-teal-500">
                     Explore
