@@ -11,7 +11,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 
 import { homeMarkerAtom } from '@/store/home';
 
-import { useBreakpoint, useIsMobile } from '@/hooks/screen-size';
+import { useIsMobile } from '@/hooks/screen-size';
 
 import { DEFAULT_MOBILE_ZOOM } from '@/components/map/constants';
 import { Dialog, DialogContentHome } from '@/components/ui/dialog';
@@ -33,7 +33,7 @@ const Home = () => {
     width: 1,
     height: 1,
   });
-  const isLg = useBreakpoint('xl');
+
   const isMobile = useIsMobile();
 
   const spin = useCallback(() => {
@@ -52,12 +52,12 @@ const Home = () => {
       padding: {
         left: !isMobile ? size.width * 0.45 : 0,
         right: 0,
-        top: isMobile ? 0 : 0,
-        bottom: isLg || isMobile ? 0 : size.height * 0.5,
+        top: 0,
+        bottom: 0,
       },
       easing: (n) => n,
     });
-  }, [isLg, isMobile, map, size.height, size.width]);
+  }, [isMobile, map, size.width]);
 
   useEffect(() => {
     if (map) {

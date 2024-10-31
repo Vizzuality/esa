@@ -44,7 +44,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     smooth: 10000,
   });
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   const isMobile = useIsMobile();
 
@@ -58,8 +58,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
       if (isMobile && v > 0.1) setShow(true);
     }
     if (show && v < 0.2) setShow(false);
-
-    if (v > 0.6) {
+    if (v > 0.7) {
       push('/globe');
     }
   });
@@ -82,10 +81,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   const categoryDisclaimer = disclaimer as Disclaimer[];
 
   return (
-    <div
-      ref={containerRef}
-      className="absolute flex h-[250vh] items-end sm:h-[300vh] sm:items-start"
-    >
+    <div ref={containerRef} className="absolute flex h-[300vh] items-end pt-[50vh] sm:items-start">
       <motion.div
         className={cn(
           'sticky bottom-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:top-0 sm:min-h-screen 2xl:px-12'
