@@ -6,7 +6,7 @@ import { useMap } from 'react-map-gl';
 
 import { useRouter } from 'next/navigation';
 
-import { useBreakpoint } from '@/hooks/screen-size';
+import { useIsMobile } from '@/hooks/screen-size';
 
 import Marker from '@/components/map/layers/marker';
 
@@ -18,8 +18,7 @@ type SelectedStoriesMarkerProps = {
 const SelectedStoriesMarker = ({ markers, onCloseMarker }: SelectedStoriesMarkerProps) => {
   const { push } = useRouter();
 
-  const breakpoint = useBreakpoint();
-  const isMobile = !breakpoint('sm');
+  const isMobile = useIsMobile();
   const { ['default']: map } = useMap();
 
   useEffect(() => {

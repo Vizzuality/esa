@@ -5,7 +5,6 @@ import { PropsWithChildren, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { TooltipProvider } from '@/components/ui/tooltip';
-
 import { notesESA, openSans } from '@/styles/fonts';
 
 export default function Providers({ children }: PropsWithChildren) {

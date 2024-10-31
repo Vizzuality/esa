@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import resolveConfig from 'tailwindcss/resolveConfig';
 
 import tailwindConfig from '@/../tailwind.config';
+
 const { theme } = resolveConfig(tailwindConfig);
 
 const getThemeSize = (size: string) => {
@@ -18,28 +19,25 @@ const getThemeSize = (size: string) => {
   return 1;
 };
 
-export const useBreakpoint = () => {
-  const [width, setWidth] = useState(0);
+export function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
+    const media = window.matchMedia(query);
+
+    if (media.matches !== matches) {
+      setMatches(media.matches);
     }
 
-    setWidth(window.innerWidth);
+    const listener = () => setMatches(media.matches);
+    media.addEventListener('change', listener);
+    return () => window.removeEventListener('change', listener);
+  }, [matches, query]);
 
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
+  return matches;
+}
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return (screenSize: string) => {
-    return width >= getThemeSize(screenSize);
-  };
+export const useIsMobile = () => {
+  const smSize = getThemeSize('sm');
+  return useMediaQuery(`(max-width: ${smSize}px)`);
 };

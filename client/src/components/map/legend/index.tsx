@@ -1,10 +1,12 @@
+'use client';
+
 import React, { useMemo, Children, isValidElement } from 'react';
 
 import { ChevronDown } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
-import { useBreakpoint } from '@/hooks/screen-size';
+import { useIsMobile } from '@/hooks/screen-size';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -15,8 +17,7 @@ export const Legend: React.FC<LegendProps> = ({ children, className = '' }: Lege
     return !!Children.count(Children.toArray(children).filter((c) => isValidElement(c)));
   }, [children]);
 
-  const breakpoint = useBreakpoint();
-  const isMobile = !breakpoint('sm');
+  const isMobile = useIsMobile();
 
   return (
     isChildren && (

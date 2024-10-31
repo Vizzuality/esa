@@ -12,7 +12,7 @@ import { getImageSrc } from '@/lib/image-src';
 
 import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
-import { useBreakpoint } from '@/hooks/screen-size';
+import { useIsMobile } from '@/hooks/screen-size';
 
 import ScrollExplanation from '@/components/ui/scroll-explanation';
 
@@ -44,10 +44,9 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     smooth: 10000,
   });
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
-  const breakpoint = useBreakpoint();
-  const isMobile = !breakpoint('sm');
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!showContent) setShow(false);
@@ -59,8 +58,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
       if (isMobile && v > 0.1) setShow(true);
     }
     if (show && v < 0.2) setShow(false);
-
-    if (v > 0.6) {
+    if (v > 0.7) {
       push('/globe');
     }
   });
@@ -83,13 +81,10 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   const categoryDisclaimer = disclaimer as Disclaimer[];
 
   return (
-    <div
-      ref={containerRef}
-      className="absolute flex h-[250vh] items-center sm:h-[300vh] sm:items-start"
-    >
+    <div ref={containerRef} className="absolute flex h-[300vh] items-end pt-[50vh] sm:items-start">
       <motion.div
         className={cn(
-          'sticky top-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:min-h-screen 2xl:px-12'
+          'sticky bottom-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:top-0 sm:min-h-screen 2xl:px-12'
         )}
         initial={{ opacity: 0 }}
         animate={{ opacity: showContent && show ? 1 : 0 }}

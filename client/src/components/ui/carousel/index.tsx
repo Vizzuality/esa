@@ -8,12 +8,14 @@ import React, {
   useState,
 } from 'react';
 
+import Image from 'next/image';
+
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import Image from 'next/image';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+
 import { cn } from '@/lib/classnames';
 import { getImageSrc } from '@/lib/image-src';
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 type UseDotButtonType = {
   selectedIndex: number;

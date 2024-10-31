@@ -1,11 +1,15 @@
+'use client';
+
 import { Marker as RMarker } from 'react-map-gl';
+
+import { XIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
+import { useIsMobile } from '@/hooks/screen-size';
+
 import { Button } from '@/components/ui/button';
 import CategoryIcon from '@/components/ui/category-icon';
-import { useBreakpoint } from '@/hooks/screen-size';
-import { XIcon } from 'lucide-react';
 
 type MarkerProps = {
   markers?: (GeoJSON.Feature<GeoJSON.Point> | null)[];
@@ -16,7 +20,7 @@ type MarkerProps = {
 const Marker = ({ markers, handleClick, handleClose }: MarkerProps) => {
   const { coordinates } = markers?.[0]?.geometry || {};
 
-  const isMobile = !useBreakpoint()('sm');
+  const isMobile = useIsMobile();
 
   if (!coordinates?.length) return null;
 
@@ -55,9 +59,9 @@ const Marker = ({ markers, handleClick, handleClose }: MarkerProps) => {
                 />
                 <p className="font-open-sans text-xs">{marker?.properties?.categoryName}</p>
                 <Button
-                  className="absolute right-0 top-0"
+                  className="absolute right-0 top-0 sm:hidden"
                   size="icon"
-                  variant="ghost"
+                  variant="icon"
                   onClick={handleClose}
                 >
                   <XIcon className="h-5 w-5" />

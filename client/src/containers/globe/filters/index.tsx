@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 
 import {
@@ -8,21 +10,24 @@ import {
   DialogPortal,
   DialogOverlay,
 } from '@radix-ui/react-dialog';
+import { RadioGroup, RadioGroupItem } from '@radix-ui/react-radio-group';
 import { FilterIcon, XIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
+import { useSyncCategory } from '@/store/globe';
+
+import { useGetCategories } from '@/types/generated/category';
 import { useGetIfis } from '@/types/generated/ifi';
 import { useGetTags } from '@/types/generated/tag';
 
-import FilterItem from './item';
-import { useGetCategories } from '@/types/generated/category';
-import { useSyncCategory } from '@/store/globe';
-import { RadioGroup, RadioGroupItem } from '@radix-ui/react-radio-group';
-import { useBreakpoint } from '@/hooks/screen-size';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { DialogHeader } from '@/components/ui/dialog';
+import { useIsMobile } from '@/hooks/screen-size';
+
 import { Button } from '@/components/ui/button';
+import { DialogHeader } from '@/components/ui/dialog';
+import { ScrollArea } from '@/components/ui/scroll-area';
+
+import FilterItem from './item';
 
 type FiltersProps = {
   filtersActive: boolean;
@@ -33,8 +38,7 @@ const Filters = ({ filtersActive }: FiltersProps) => {
   const { data: ifisData } = useGetIfis({ 'pagination[limit]': 1000 });
   const { data: categoriesData } = useGetCategories();
 
-  const breakpoint = useBreakpoint();
-  const isMobile = !breakpoint('sm');
+  const isMobile = useIsMobile();
   const filtersData = useMemo(() => {
     return [
       {

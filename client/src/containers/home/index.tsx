@@ -1,18 +1,17 @@
 'use client';
 
-import { useEffect, useState, useMemo, useCallback, useRef } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 
 import { useMap } from 'react-map-gl';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { homeMarkerAtom } from '@/store/home';
 
-import { useBreakpoint } from '@/hooks/screen-size';
+import { useIsMobile } from '@/hooks/screen-size';
 
 import { DEFAULT_MOBILE_ZOOM } from '@/components/map/constants';
 import { Dialog, DialogContentHome } from '@/components/ui/dialog';
@@ -34,11 +33,8 @@ const Home = () => {
     width: 1,
     height: 1,
   });
-  const breakpoint = useBreakpoint();
-  const isMobile = !breakpoint('sm');
-  const isLg = breakpoint('xl');
 
-  const [paddingTop, setPaddingTop] = useState(0);
+  const isMobile = useIsMobile();
 
   const spin = useCallback(() => {
     if (!map) return;
@@ -56,16 +52,17 @@ const Home = () => {
       padding: {
         left: !isMobile ? size.width * 0.45 : 0,
         right: 0,
-        top: isMobile ? paddingTop : 0,
-        bottom: isLg || isMobile ? 0 : size.height * 0.5,
+        top: 0,
+        bottom: 0,
       },
       easing: (n) => n,
     });
-  }, [isLg, isMobile, map, paddingTop, size.height, size.width]);
+  }, [isMobile, map, size.width]);
 
   useEffect(() => {
     if (map) {
       spin();
+      map.resize();
       map.on('moveend', spin);
       return () => {
         map.stop();
@@ -81,7 +78,6 @@ const Home = () => {
       const w = window?.innerWidth || 1;
       const h = window?.innerHeight || 1;
       setSize({ width: w, height: h });
-      setPaddingTop(h * 1);
     };
 
     if (typeof window !== 'undefined') {
@@ -104,42 +100,9 @@ const Home = () => {
     visible: { opacity: 1 },
   };
 
-  const [firstRender, setFirstRender] = useState(true);
-
-  useEffect(() => {
-    // Scroll to top on first render
-    if (typeof window !== 'undefined') {
-      window.scroll({ top: 0 });
-    }
-    // Prevent pushing to globe before scrolling top on first render
-    setFirstRender(false);
-  }, []);
-
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    axis: 'y',
-    offset: ['start start', 'end end'],
-    layoutEffect: false,
-  });
-
-  const router = useRouter();
-  useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    if (!isMobile || firstRender) return;
-    setPaddingTop(size.height * (1 - v));
-
-    if (v > 0.8) {
-      router.push('/globe');
-    }
-  });
-
   return (
     <>
-      <div
-        ref={containerRef}
-        className="text-primary font-notes pointer-events-none absolute flex h-[150vh] min-h-screen w-screen flex-col justify-between sm:h-screen sm:overflow-hidden"
-      >
+      <div className="text-primary font-notes pointer-events-none absolute flex h-screen min-h-screen w-screen flex-col justify-between">
         <div className="fixed top-0 flex h-screen w-screen flex-col overflow-hidden">
           <div className="sm:mx-12">
             <Header pathname="home" />

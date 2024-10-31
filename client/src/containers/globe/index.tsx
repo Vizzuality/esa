@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+
 import { useMap } from 'react-map-gl';
 
 import { useSetAtom } from 'jotai';
@@ -14,7 +14,8 @@ import { useSyncFilters } from '@/store/globe';
 import { layersAtom, tmpBboxAtom } from '@/store/map';
 import { useSyncStep } from '@/store/stories';
 
-import { useBreakpoint } from '@/hooks/screen-size';
+import { setMapEnable } from '@/hooks/map';
+import { useIsMobile } from '@/hooks/screen-size';
 import useStories from '@/hooks/stories/useStories';
 
 import { DEFAULT_MOBILE_ZOOM, DEFAULT_VIEW_STATE } from '@/components/map/constants';
@@ -47,8 +48,7 @@ export default function Home() {
   const storiesLength = storiesData?.data?.length;
   const { default: map } = useMap();
 
-  const breakpoint = useBreakpoint();
-  const isMobile = !breakpoint('sm');
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const bounds = new mapboxgl.LngLatBounds();
@@ -74,6 +74,10 @@ export default function Home() {
         zoom: isMobile ? DEFAULT_MOBILE_ZOOM : DEFAULT_VIEW_STATE.zoom,
       },
     });
+
+    const MAP = map?.getMap();
+    setMapEnable(MAP, true);
+    map?.resize();
   }, [isMobile, map, setTmpBbox, storiesData?.data]);
 
   useEffect(() => {
