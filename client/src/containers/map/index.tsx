@@ -17,6 +17,8 @@ import { bboxAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store/map';
 
 import { Bbox } from '@/types/map';
 
+import { useIsMobile } from '@/hooks/screen-size';
+
 import { MAPBOX_STYLES } from '@/constants/map';
 
 import GlobeMarkers from '@/containers/map/markers/globe-markers';
@@ -120,6 +122,7 @@ export default function MapContainer() {
 
   const targetRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -131,7 +134,7 @@ export default function MapContainer() {
   });
 
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    if (isLandingPage && v > 0.9) {
+    if (isLandingPage && isMobile && v > 0.9) {
       router.push('/globe');
     }
   });

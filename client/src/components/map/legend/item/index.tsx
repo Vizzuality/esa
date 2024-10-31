@@ -12,7 +12,6 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import LegendItemToolbar from './toolbar';
 
 export const LegendItem: React.FC<PropsWithChildren & LegendItemProps> = ({
-  id,
   children,
   name,
   className = '',

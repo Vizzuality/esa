@@ -130,7 +130,7 @@ const Filters = ({ filtersActive }: FiltersProps) => {
                     </div>
                     <div>
                       <RadioGroup className="inline-flex flex-wrap gap-2" value={category || ''}>
-                        {categoriesData?.data?.map(({ id, attributes }) => {
+                        {categoriesData?.data?.map(({ attributes }) => {
                           if (attributes?.name && attributes?.slug) {
                             return (
                               <RadioGroupItem
