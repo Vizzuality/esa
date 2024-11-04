@@ -5,6 +5,7 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useMap } from 'react-map-gl';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { motion } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -13,7 +14,7 @@ import { homeMarkerAtom } from '@/store/home';
 
 import { useIsMobile } from '@/hooks/screen-size';
 
-import { DEFAULT_MOBILE_ZOOM } from '@/components/map/constants';
+import { DEFAULT_MOBILE_ZOOM, DEFAULT_VIEW_STATE } from '@/components/map/constants';
 import { Dialog, DialogContentHome } from '@/components/ui/dialog';
 import ScrollExplanation from '@/components/ui/scroll-explanation';
 
@@ -46,7 +47,7 @@ const Home = () => {
     map?.easeTo({
       bearing: 0,
       pitch: 0,
-      zoom: isMobile ? DEFAULT_MOBILE_ZOOM : 2,
+      zoom: isMobile ? DEFAULT_MOBILE_ZOOM : DEFAULT_VIEW_STATE.zoom,
       center: { lng: nextLng, lat },
       duration: 500,
       padding: {
@@ -59,10 +60,15 @@ const Home = () => {
     });
   }, [isMobile, map, size.width]);
 
+  const router = useRouter();
+  useEffect(() => {
+    router.prefetch('/globe');
+  }, []);
+
   useEffect(() => {
     if (map) {
       spin();
-      map.resize();
+      map?.resize();
       map.on('moveend', spin);
       return () => {
         map.stop();
@@ -143,7 +149,6 @@ const Home = () => {
                   onClick={() => map?.stop()}
                   className="font-bold uppercase tracking-wide"
                   href="/globe"
-                  prefetch
                 >
                   <div className="flex h-full w-full items-center justify-center rounded-full bg-teal-500">
                     Explore

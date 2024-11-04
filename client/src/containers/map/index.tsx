@@ -25,7 +25,7 @@ import GlobeMarkers from '@/containers/map/markers/globe-markers';
 import StoryMarkers from '@/containers/map/markers/story-markers';
 
 import Map from '@/components/map';
-import { DEFAULT_PROPS } from '@/components/map/constants';
+import { DEFAULT_MOBILE_ZOOM, DEFAULT_PROPS } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
 
 import SelectedStoriesMarker from './markers/selected-stories-marker';
@@ -104,6 +104,7 @@ export default function MapContainer() {
     },
     [isGlobePage]
   );
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (map && tmpBbox?.options) {
@@ -111,18 +112,17 @@ export default function MapContainer() {
       map.flyTo({
         bearing,
         pitch,
-        zoom,
+        zoom: isMobile ? DEFAULT_MOBILE_ZOOM : zoom,
         center: [longitude, latitude],
         duration: 1000,
         animate: true,
         padding: initialViewState?.padding,
       });
     }
-  }, [map, initialViewState, tmpBbox]);
+  }, [map, initialViewState, tmpBbox, isMobile]);
 
   const targetRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
