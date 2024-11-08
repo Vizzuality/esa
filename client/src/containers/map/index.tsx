@@ -13,7 +13,7 @@ import { LngLatBoundsLike } from 'mapbox-gl';
 
 import { cn } from '@/lib/classnames';
 
-import { bboxAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store/map';
+import { bboxAtom, layersInteractiveIdsAtom, mapScrollAtom, tmpBboxAtom } from '@/store/map';
 
 import { Bbox } from '@/types/map';
 
@@ -25,7 +25,7 @@ import GlobeMarkers from '@/containers/map/markers/globe-markers';
 import StoryMarkers from '@/containers/map/markers/story-markers';
 
 import Map from '@/components/map';
-import { DEFAULT_MOBILE_ZOOM, DEFAULT_PROPS } from '@/components/map/constants';
+import { DEFAULT_PROPS } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
 
 import SelectedStoriesMarker from './markers/selected-stories-marker';
@@ -112,7 +112,7 @@ export default function MapContainer() {
       map.flyTo({
         bearing,
         pitch,
-        zoom: isMobile ? DEFAULT_MOBILE_ZOOM : zoom,
+        zoom,
         center: [longitude, latitude],
         duration: 1000,
         animate: true,
@@ -133,11 +133,16 @@ export default function MapContainer() {
     container: containerRef,
   });
 
+  const setMapScroll = useSetAtom(mapScrollAtom);
+
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    if (isLandingPage && isMobile && v > 0.9) {
+    setMapScroll(scrollYProgress);
+    if (isLandingPage && isMobile && v > 0.95) {
       router.push('/globe');
     }
   });
+
+  const mapInteractionEnabled = useMemo(() => isGlobePage, [isGlobePage]);
 
   return (
     <div
@@ -174,15 +179,8 @@ export default function MapContainer() {
           interactiveLayerIds={layersInteractiveIds}
           onMouseMove={handleMouseMove}
           onMapViewStateChange={handleMapViewStateChange}
-          boxZoom={false}
-          scrollZoom={false}
-          dragPan={false}
-          dragRotate={false}
-          keyboard={false}
-          doubleClickZoom={false}
-          touchZoomRotate={false}
           className={cn(
-            isGlobePage
+            mapInteractionEnabled
               ? 'pointer-events-auto cursor-pointer'
               : 'pointer-events-none cursor-default'
           )}

@@ -1,14 +1,14 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
-import { Layer, Source, useMap } from 'react-map-gl';
+import { Layer, Source } from 'react-map-gl';
 
 import { usePathname } from 'next/navigation';
 
 import { StoryStepMap } from '@/types/story';
 
-import { setMapEnable, useMapImage } from '@/hooks/map';
+import { useMapImage } from '@/hooks/map';
 import useStories from '@/hooks/stories/useStories';
 
 const GlobeMarkers = () => {
@@ -49,14 +49,6 @@ const GlobeMarkers = () => {
     () => (!pathname.includes('stories') ? 'visible' : 'none'),
     [pathname]
   );
-
-  const { default: map } = useMap();
-
-  useEffect(() => {
-    if (!map) return;
-    const MAP = map.getMap();
-    setMapEnable(MAP, pathname.includes('globe'));
-  }, [pathname, map]);
 
   return (
     <Source id="story-markers" type="geojson" data={FeatureCollection}>

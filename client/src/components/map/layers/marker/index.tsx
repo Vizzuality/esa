@@ -25,7 +25,7 @@ const Marker = ({ markers, handleClick, handleClose }: MarkerProps) => {
   if (!coordinates?.length) return null;
 
   const MARKER = () => (
-    <div className="pointer-events-auto relative flex items-center">
+    <div className="pointer-events-auto relative flex w-full items-center">
       <div
         className={cn({
           'relative z-50 hidden h-6 w-6 -translate-x-1/2 cursor-pointer items-center justify-center sm:flex':
@@ -43,12 +43,12 @@ const Marker = ({ markers, handleClick, handleClose }: MarkerProps) => {
         </div>
       </div>
 
-      <div className="max-w-[230px] rounded border border-gray-700 bg-[rgba(51,94,111,0.50)] px-0 text-white backdrop-blur-lg sm:-translate-x-6">
+      <div className="mx-4 w-full max-w-full rounded border border-gray-700 bg-[rgba(51,94,111,0.50)] px-0 text-white backdrop-blur-lg sm:mx-0 sm:max-w-[230px] sm:-translate-x-6">
         {markers?.map((marker) => {
           if (!marker || !marker?.id) return null;
           return (
             <div
-              className="border-b border-b-gray-700 p-4 last-of-type:border-b-0"
+              className="border-b border-b-gray-700 p-6 last-of-type:border-b-0 sm:py-4"
               key={marker.id}
               onMouseMove={(e) => e.stopPropagation()}
             >

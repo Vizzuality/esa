@@ -37,7 +37,7 @@ const MapContent = ({ showContent, title, titlePlaceholder, children }: MapConte
         <div
           className={cn('w-full space-y-2 px-2 pt-4 sm:px-4 sm:pb-4 sm:pt-0', title && 'sm:pt-2')}
         >
-          <div className="font-open-sans space-y-4 text-sm">{children}</div>
+          <div className="font-open-sans space-y-4">{children}</div>
         </div>
       </CollapsibleContent>
     </Collapsible>

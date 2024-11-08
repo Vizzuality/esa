@@ -17,7 +17,7 @@ import CategoryIcon from '@/components/ui/category-icon';
 import { Dialog, DialogContentHome, DialogTrigger } from '@/components/ui/dialog';
 
 const headerButtonClassName =
-  'h-8 px-4 py-2 rounded-4xl sm:h-auto border border-gray-800 bg-gray-900 sm:px-5 sm:py-2.5 hover:bg-gray-800';
+  'h-9 sm:h-8 px-5 sm:px-4 py-2 rounded-4xl sm:h-auto border border-gray-800 bg-gray-900 sm:px-5 sm:py-2.5 hover:bg-gray-800';
 
 const shareIcons = [
   {
@@ -143,7 +143,7 @@ const StoryHeader = ({ categorySlug, title, categoryTitle, storyId }: StoryHeade
 
       <div
         className={cn(
-          'bg-background fixed left-0 top-0 z-30 h-fit min-h-fit w-screen overflow-x-hidden transition-all duration-300 sm:hidden',
+          'bg-story-header-mobile fixed left-0 top-0 z-30 h-fit min-h-fit w-screen overflow-x-hidden transition-all duration-300 sm:hidden',
           collapsed ? 'h-[56px]' : `h-[135px]`
         )}
       >
@@ -163,7 +163,12 @@ const StoryHeader = ({ categorySlug, title, categoryTitle, storyId }: StoryHeade
             <ArrowLeft className="inline-block h-4 w-4 sm:hidden" />
           </Button>
 
-          <div className={cn('flex items-center gap-2', collapsed ? 'order-2' : 'order-3')}>
+          <div
+            className={cn(
+              'flex items-center gap-2',
+              collapsed ? 'order-2 max-w-[calc(100%-148px)]' : 'order-3'
+            )}
+          >
             <CategoryIcon
               slug={categorySlug}
               className={cn('shrink-0 fill-gray-200', collapsed && 'hidden')}
@@ -171,7 +176,7 @@ const StoryHeader = ({ categorySlug, title, categoryTitle, storyId }: StoryHeade
             <h1
               className={cn(
                 'font-notes text-start text-base font-normal sm:text-center sm:text-2xl',
-                collapsed && 'max-w-[60vw] truncate'
+                collapsed && 'truncate'
               )}
             >
               {categoryTitle}: {title}

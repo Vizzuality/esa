@@ -5,7 +5,7 @@ import { cn } from '@/lib/classnames';
 
 import GradientLine from '@/components/ui/gradient-line';
 
-import About from './about';
+// import About from './about';
 
 type HeaderProps = {
   pathname?: string;
@@ -16,15 +16,15 @@ const Header = ({ pathname, className }: HeaderProps) => {
   const isHome = pathname?.includes('home');
   return (
     <header className={cn('pointer-events-auto z-50', className)}>
-      <div className="flex items-center justify-between space-x-1.5 px-4 py-4 sm:px-0">
+      <div className="flex items-center justify-between space-x-1.5 px-4 py-1.5 sm:px-0 sm:py-4">
         <div className={cn('flex items-center space-x-3', !isHome && 'flex-1')}>
           <div className="flex shrink-0 items-center space-x-3">
             <a href="https://gda.esa.int/" target="_blank" rel="noreferrer">
               <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/logos/GDA-logo.png`}
                 alt="Impact Sphere"
-                width={48}
-                height={48}
+                width={50}
+                height={44}
               />
             </a>
             <a href="https://www.esa.int/" target="_blank" rel="noreferrer">
@@ -45,12 +45,12 @@ const Header = ({ pathname, className }: HeaderProps) => {
           </p>
         </div>
 
-        <div className={cn('flex flex-1 items-center space-x-3', !isHome && 'hidden sm:flex')}>
+        {/* <div className={cn('flex flex-1 items-center space-x-3', !isHome && 'hidden sm:flex')}>
           <GradientLine className={cn('flex-1')} />
           <div className="text-sm font-bold uppercase tracking-widest">
             <About />
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   );

@@ -104,6 +104,8 @@ module.exports = {
           'linear-gradient(90deg, rgba(0, 174, 157, 0.00) 0%, rgba(0, 174, 157, 0.70) 51.56%, rgba(0, 174, 157, 0.00) 98.43%)',
         'story-header':
           'linear-gradient(180deg, rgba(12, 62, 84, 1) 43.82%, rgba(12, 62, 84, 0.00) 95.85%)',
+        'story-header-mobile':
+          'linear-gradient(172deg, #0C3E54 98.2%, rgba(12, 62, 84, 0.00) 218.84%)',
       },
       screens: {
         '3xl': '1650px',

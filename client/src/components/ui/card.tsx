@@ -16,7 +16,7 @@ const Card = ({ children, title, info, className }: CardProps) => {
   return (
     <div
       className={cn(
-        'animate-in slide-in-from-top-5 fade-in bg-background/30 flex h-full flex-col rounded border border-[#335E6F] pt-4 backdrop-blur-sm',
+        'animate-in slide-in-from-top-5 fade-in sm:bg-background/30 flex h-full flex-col rounded border border-[#335E6F] pt-4 sm:backdrop-blur-sm',
         className
       )}
     >

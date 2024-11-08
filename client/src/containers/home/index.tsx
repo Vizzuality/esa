@@ -7,10 +7,11 @@ import { useMap } from 'react-map-gl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { motion } from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { homeMarkerAtom } from '@/store/home';
+import { mapScrollAtom } from '@/store/map';
 
 import { useIsMobile } from '@/hooks/screen-size';
 
@@ -106,21 +107,27 @@ const Home = () => {
     visible: { opacity: 1 },
   };
 
+  const mapScroll = useAtomValue(mapScrollAtom);
+  const opacity = useTransform(mapScroll, [0, 0.2, 0.8], [1, 1, 0]);
+
   return (
     <>
       <div className="text-primary font-notes pointer-events-none absolute flex h-screen min-h-screen w-screen flex-col justify-between">
-        <div className="fixed top-0 flex h-screen w-screen flex-col overflow-hidden">
+        <motion.div
+          style={{ opacity }}
+          className="fixed top-0 flex h-screen w-screen flex-col overflow-hidden"
+        >
           <div className="sm:mx-12">
             <Header pathname="home" />
           </div>
-          <div className="container flex flex-1 pb-12 sm:items-end xl:items-center xl:justify-start">
+          <div className="container flex flex-1 pb-12 pt-4 sm:items-end sm:pt-0 xl:items-center xl:justify-start">
             <div className="max-w-full xl:max-w-lg">
               <div className="flex flex-col items-start justify-center gap-4  sm:gap-8">
                 <div className="flex flex-col items-start justify-center gap-2">
-                  <div className="font-notes text-xs font-bold uppercase leading-normal tracking-wide text-slate-400">
+                  <div className="font-notes text-xs font-bold uppercase leading-loose tracking-[1.2px] text-slate-400 sm:leading-normal sm:tracking-wide">
                     Welcome to the
                   </div>
-                  <div className="font-notes text-[32px] font-bold uppercase leading-none tracking-[12.8px] text-zinc-100 lg:text-[40px] xl:tracking-[16px]">
+                  <div className="font-notes text-[20px] font-bold uppercase leading-[32px] tracking-[8px] text-zinc-100 lg:text-[40px] xl:tracking-[16px]">
                     Impact Sphere
                   </div>
                 </div>
@@ -129,7 +136,7 @@ const Home = () => {
                   <p className="font-open-sans text-base font-normal leading-normal text-stone-200">
                     Uncover the stories told by powerful satellites, revealing their crucial role in
                     addressing global challenges. From monitoring climate change to enhancing
-                    precision agriculture, the GDA program utilises satellite data to accelerate
+                    precision agriculture, the GDA programme utilises satellite data to accelerate
                     impact.
                   </p>
                   <p className="font-open-sans hidden text-base font-normal leading-normal text-stone-200 sm:block">
@@ -196,7 +203,7 @@ const Home = () => {
               </div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         <Dialog
           open={!!selectedMarker}
