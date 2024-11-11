@@ -64,7 +64,7 @@ const StoryMarkers = () => {
         onOpenChange={() => setCurrentMedia(undefined)}
         open={typeof currentMedia === 'number'}
       >
-        <DialogContent className="h-screen bg-transparent">
+        <DialogContent className="h-screen rounded-none border-0 bg-transparent sm:rounded-none">
           <Carousel selected={currentMedia} options={{ loop: true }} medias={medias} />
         </DialogContent>
       </Dialog>
