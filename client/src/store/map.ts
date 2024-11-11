@@ -1,5 +1,6 @@
 import { MapLayerMouseEvent } from 'react-map-gl';
 
+import { MotionValue, motionValue } from 'framer-motion';
 import { atom } from 'jotai';
 import { MapboxGeoJSONFeature } from 'mapbox-gl';
 
@@ -53,3 +54,4 @@ export const DEFAULT_SETTINGS = {
 };
 
 export const timelineAtom = atom<{ [id: number]: { frame: number; layers: number[] } }>({});
+export const mapScrollAtom = atom<MotionValue<number>>(motionValue(0));

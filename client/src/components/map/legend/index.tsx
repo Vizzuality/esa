@@ -23,7 +23,8 @@ export const Legend: React.FC<LegendProps> = ({ children, className = '' }: Lege
     isChildren && (
       <div
         className={cn({
-          'bg-card-map relative flex-col space-y-2 rounded-lg p-4 backdrop-blur-sm': true,
+          'bg-card-map relative flex-col space-y-2 rounded-lg p-4 backdrop-blur sm:backdrop-blur-sm':
+            true,
           hidden: !isChildren,
           [className]: !!className,
         })}

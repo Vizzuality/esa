@@ -14,7 +14,6 @@ import { useSyncFilters } from '@/store/globe';
 import { layersAtom, tmpBboxAtom } from '@/store/map';
 import { useSyncStep } from '@/store/stories';
 
-import { setMapEnable } from '@/hooks/map';
 import { useIsMobile } from '@/hooks/screen-size';
 import useStories from '@/hooks/stories/useStories';
 
@@ -74,9 +73,6 @@ export default function Home() {
         zoom: isMobile ? DEFAULT_MOBILE_ZOOM : DEFAULT_VIEW_STATE.zoom,
       },
     });
-
-    const MAP = map?.getMap();
-    setMapEnable(MAP, true);
     map?.resize();
   }, [isMobile, map, setTmpBbox, storiesData?.data]);
 
@@ -142,8 +138,8 @@ export default function Home() {
         </div>
         {/* Mobile */}
         <div className="pointer-events-none fixed bottom-0 top-[160px] flex flex-col items-start overflow-y-hidden sm:hidden">
-          <div className="rounded-t-4xl z-10 max-h-[calc(100vh-150px)] overflow-y-auto">
-            <div className="rounded-t-4xl bg-background/30 pointer-events-auto z-10 mt-[60vh] p-4">
+          <div className="z-10 max-h-[calc(100vh-150px)] overflow-y-auto rounded-t">
+            <div className="bg-background/50 pointer-events-auto z-10 mt-[60vh] rounded-t p-4 backdrop-blur-[6px]">
               <div className="mx-auto mb-4 h-0.5 w-9 rounded-lg bg-gray-400"></div>
               <Dashboard />
               <GradientLine />

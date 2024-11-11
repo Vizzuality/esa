@@ -55,7 +55,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
         <div className="absolute left-0 top-[80vh] z-10 w-full -translate-y-full px-4 sm:fixed sm:bottom-8 sm:left-14 sm:top-auto sm:w-fit sm:translate-y-0 sm:px-0">
           <MapLegends className="" />
         </div>
-        <div className="rounded-4xl flex flex-col items-end justify-end bg-[#335e6f]/80 pb-4 backdrop-blur sm:min-h-full sm:w-[468px] sm:space-y-6 sm:rounded-none sm:bg-[#335e6f]/0 sm:pb-8 sm:backdrop-blur-0">
+        <div className="bg-background/80 flex flex-col items-end justify-end rounded-2xl pb-4 backdrop-blur sm:min-h-full sm:w-[468px] sm:space-y-6 sm:rounded-none sm:bg-[#335e6f]/0 sm:pb-8 sm:backdrop-blur-0">
           {!!card && (
             <MapContent
               showContent={showContent}
@@ -81,7 +81,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                     key={`${item.title}-title`}
                     className="text-enlight-yellow-400 flex items-center gap-2"
                   >
-                    <h2 className="text-sm font-bold uppercase">{item.title}</h2>
+                    <h2 className="font-bold uppercase sm:text-sm">{item.title}</h2>
                   </div>
                   <div key={`${item.title}-content`} className="space-y-2">
                     {item.content?.map((c) => {

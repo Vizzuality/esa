@@ -89,7 +89,7 @@ const Filters = ({ filtersActive }: FiltersProps) => {
         </DialogTrigger>
         <DialogPortal>
           <DialogOverlay />
-          <DialogContent className="bg-card-foreground shadow-filters absolute left-0 top-0 z-50 h-screen overflow-hidden rounded-lg backdrop-blur-lg transition-all duration-500 sm:w-[345px]">
+          <DialogContent className="bg-card-foreground shadow-filters absolute left-0 top-0 z-50 h-screen overflow-hidden backdrop-blur-[20px] transition-all duration-500 sm:w-[345px] sm:rounded-lg">
             <ScrollArea type="hover" className="h-full">
               <DialogHeader className="flex flex-row items-end justify-between px-8 pt-4">
                 <div className="flex items-center justify-between">

@@ -12,7 +12,7 @@ const SearchStories = () => {
   };
 
   return (
-    <div className="hover:border-secondary relative flex items-center gap-2 rounded-sm border border-gray-800">
+    <div className="hover:border-secondary relative flex w-full items-center gap-2 rounded-sm border border-gray-800">
       <SearchIcon className="absolute left-4 w-[18px] shrink-0 stroke-gray-200" />
       <input
         value={search || ''}
