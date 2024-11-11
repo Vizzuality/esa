@@ -114,7 +114,7 @@ const Home = () => {
     <>
       <div className="text-primary font-notes pointer-events-none absolute flex h-screen min-h-screen w-screen flex-col justify-between">
         <motion.div
-          style={{ opacity }}
+          style={{ opacity: isMobile ? opacity : 1 }}
           className="fixed top-0 flex h-screen w-screen flex-col overflow-hidden"
         >
           <div className="sm:mx-12">
