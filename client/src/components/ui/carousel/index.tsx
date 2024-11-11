@@ -226,16 +226,22 @@ const EmblaCarousel: React.FC<PropType> = ({ options, medias, selected }) => {
   return (
     <section className="embla w-full space-y-4">
       <div className="embla__viewport w-full" ref={emblaRef}>
-        <div className={cn('embla__container', medias?.length > 1 ? '-ml-4 sm:-ml-6' : '')}>
+        <div
+          className={cn(
+            'embla__container items-center',
+            medias?.length > 1 ? '-ml-4 sm:-ml-6' : ''
+          )}
+        >
           {medias?.map((media, index) => (
             <div
               className={cn(
                 'embla__slide',
-                medias?.length > 1 ? 'flex-[0_0_80%] pl-4 sm:pl-6' : 'flex-1'
+                medias?.length > 1 ? 'flex-[0_0_80%] pl-4 sm:pl-6' : 'flex-1',
+                index === currSlider ? 'h-[80vh]' : 'h-[40vh]'
               )}
               key={index}
             >
-              <div className="h-[80vh] text-white">
+              <div className={cn('h-full w-full text-white')}>
                 <CarouselMedia media={media} isCurrentMedia={index === currSlider} />
               </div>
             </div>
