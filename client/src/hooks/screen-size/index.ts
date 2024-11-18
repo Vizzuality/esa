@@ -6,7 +6,7 @@ import tailwindConfig from '@/../tailwind.config';
 
 const { theme } = resolveConfig(tailwindConfig);
 
-const getThemeSize = (size: string) => {
+export const getThemeSize = (size: string) => {
   if (theme?.screens && size in theme?.screens) {
     const screenSize = (theme?.screens?.[size as keyof typeof theme.screens] as string)?.replace(
       'px',
