@@ -1,7 +1,7 @@
 import env from '@/env.mjs';
 
 export const MAPBOX_STYLES = {
-  default: `mapbox://styles/${env.NEXT_PUBLIC_MAPBOX_USERNAME}/${env.NEXT_PUBLIC_MAPBOX_STYLE_ID}?fresh=true`,
+  default: `mapbox://styles/${env.NEXT_PUBLIC_MAPBOX_USERNAME}/${env.NEXT_PUBLIC_MAPBOX_STYLE_ID}`,
 };
 
 export const DEFAULT_MAP_STATE = {

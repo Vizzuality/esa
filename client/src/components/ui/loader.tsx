@@ -27,8 +27,8 @@ const ContentLoader = ({
   isFetched,
   isError,
   errorMessage,
-  className,
-}: ContentLoaderProps) => {
+}: // className,
+ContentLoaderProps) => {
   return (
     <>
       {isFetching && !isFetched && !SkeletonComponent && <Skeleton className={cn('h-20 w-full')} />}

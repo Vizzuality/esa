@@ -13,7 +13,7 @@ export const LegendTypeChoropleth: React.FC<LegendTypeProps> = ({
 }) => {
   return (
     <div
-      className={cn('font-open', {
+      className={cn('font-open mt-3', {
         [className]: !!className,
       })}
     >

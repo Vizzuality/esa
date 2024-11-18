@@ -4,29 +4,16 @@ import { useMemo } from 'react';
 
 import { Layer, Source } from 'react-map-gl';
 
-import { getStoriesParams } from '@/lib/stories';
+import { usePathname } from 'next/navigation';
 
-import { useSyncCategory, useSyncFilters, useSyncSearch } from '@/store/globe';
-
-import { useGetCategories } from '@/types/generated/category';
-import { useGetStories } from '@/types/generated/story';
 import { StoryStepMap } from '@/types/story';
 
 import { useMapImage } from '@/hooks/map';
+import useStories from '@/hooks/stories/useStories';
 
 const GlobeMarkers = () => {
-  const [category] = useSyncCategory();
-  const [search] = useSyncSearch();
-  const [filters] = useSyncFilters();
-  const { data: categories } = useGetCategories();
+  const { data: stories } = useStories();
 
-  const categoryId = useMemo(() => {
-    const categoryItem = categories?.data?.find(({ attributes }) => attributes?.slug === category);
-    return categoryItem?.id;
-  }, [categories?.data, category]);
-
-  const params = getStoriesParams({ category: categoryId, title: search, ...filters });
-  const { data: stories } = useGetStories(params);
   const FeatureCollection = useMemo(
     () => ({
       type: 'FeatureCollection',
@@ -57,6 +44,12 @@ const GlobeMarkers = () => {
     url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker.png`,
   });
 
+  const pathname = usePathname();
+  const visibility = useMemo(
+    () => (!pathname.includes('stories') ? 'visible' : 'none'),
+    [pathname]
+  );
+
   return (
     <Source id="story-markers" type="geojson" data={FeatureCollection}>
       <Layer
@@ -68,7 +61,7 @@ const GlobeMarkers = () => {
           'circle-radius': 12,
         }}
         layout={{
-          visibility: 'visible',
+          visibility,
         }}
       />
 
@@ -81,6 +74,7 @@ const GlobeMarkers = () => {
           'text-size': 12,
           'text-ignore-placement': true,
           'text-allow-overlap': true,
+          visibility,
         }}
         paint={{
           'text-color': '#003247',
@@ -98,8 +92,7 @@ const GlobeMarkers = () => {
           'icon-image': 'story-marker',
           'icon-ignore-placement': true,
           'icon-allow-overlap': true,
-          // 'icon-pitch-alignment': 'map',
-          // 'icon-rotation-alignment': 'map',
+          visibility,
         }}
       />
     </Source>

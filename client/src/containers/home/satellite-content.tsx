@@ -32,7 +32,7 @@ const SatelliteContent = ({ id, handleSelectSatellite }: SatelliteContentProps) 
             height={169}
           />
         </div>
-        <ScrollArea className="h-[calc(90vh-133px)] max-h-fit px-10">
+        <ScrollArea type="always" className="flex h-[calc(90vh-133px)] px-10 2xl:h-fit">
           <div className="my-10 space-y-5">
             <button
               className="text-primary font-bold opacity-40"

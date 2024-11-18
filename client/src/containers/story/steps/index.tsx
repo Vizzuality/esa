@@ -31,13 +31,13 @@ const Step = ({ story }: StepProps) => {
         content: [{ attributes: { name: story.location } }],
       });
     }
-    if (story?.ifis) {
+    if (story?.ifis?.data?.length) {
       summary.push({
         title: 'Institutions',
         content: story.ifis?.data,
       });
     }
-    if (story?.tags) {
+    if (story?.tags?.data?.length) {
       summary.push({
         title: 'Tags',
         content: story.tags?.data,
@@ -69,7 +69,7 @@ const Step = ({ story }: StepProps) => {
             <div
               className={cn(
                 'pointer-events-none min-h-screen w-full ',
-                type !== 'outro-step' && 'px-14'
+                type !== 'outro-step' && 'sm:px-14'
               )}
             >
               {type === 'map-step' && (

@@ -50,6 +50,8 @@
     "d3-array": "3.2.4",
     "date-fns": "^3.3.1",
     "deck.gl": "8.9.19",
+    "embla-carousel": "^8.3.0",
+    "embla-carousel-react": "^8.3.0",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
     "framer-motion": "^10.16.4",

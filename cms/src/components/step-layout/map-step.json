@@ -12,12 +12,6 @@
       "repeatable": false,
       "component": "map-layer.card"
     },
-    "story_summary": {
-      "displayName": "summary",
-      "type": "component",
-      "repeatable": true,
-      "component": "map-layer.summary"
-    },
     "layers": {
       "type": "relation",
       "relation": "oneToMany",

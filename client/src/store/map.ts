@@ -1,5 +1,6 @@
 import { MapLayerMouseEvent } from 'react-map-gl';
 
+import { MotionValue, motionValue } from 'framer-motion';
 import { atom } from 'jotai';
 import { MapboxGeoJSONFeature } from 'mapbox-gl';
 
@@ -48,10 +49,9 @@ export const popupAtom = atom<MapLayerMouseEvent | null>(null);
 
 export const markerAtom = atom<MapboxGeoJSONFeature | null>(null);
 
-export const isFlyingBackAtom = atom<boolean>(false);
-
 export const DEFAULT_SETTINGS = {
   expand: true,
 };
 
 export const timelineAtom = atom<{ [id: number]: { frame: number; layers: number[] } }>({});
+export const mapScrollAtom = atom<MotionValue<number>>(motionValue(0));

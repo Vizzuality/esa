@@ -28,6 +28,7 @@ interface ScrollContext {
   scrollItems: ScrollItem[];
   addScrollItem: (data: ScrollItem) => void;
   scrollToItem: (item: number | string) => void;
+  updateScrollItem: (data: ScrollItem) => void;
 }
 
 const Context = createContext<ScrollContext>({
@@ -36,6 +37,8 @@ const Context = createContext<ScrollContext>({
   addScrollItem: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   scrollToItem: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  updateScrollItem: () => {},
 });
 
 const useIsomorphicLayoutEffect =
@@ -59,6 +62,21 @@ export const ScrollProvider = ({ children }: PropsWithChildren<any>) => {
       return setScrollItems((prev) => [...prev, data]);
     },
     [scrollItems, setScrollItems]
+  );
+
+  const updateScrollItem = useCallback<ScrollContext['addScrollItem']>(
+    (data) => {
+      return setScrollItems((prev) => {
+        return prev.map((item) => {
+          if (item.key === data.key) {
+            return data;
+          }
+
+          return item;
+        });
+      });
+    },
+    [setScrollItems]
   );
 
   const scrollToItem = useCallback<ScrollContext['scrollToItem']>(
@@ -97,8 +115,9 @@ export const ScrollProvider = ({ children }: PropsWithChildren<any>) => {
       scrollItems,
       addScrollItem,
       scrollToItem,
+      updateScrollItem,
     }),
-    [scrollItems, addScrollItem, scrollToItem]
+    [scrollItems, addScrollItem, scrollToItem, updateScrollItem]
   );
 
   useMotionValueEvent(scrollY, 'change', (v) => {
@@ -108,7 +127,6 @@ export const ScrollProvider = ({ children }: PropsWithChildren<any>) => {
         const h = acc.height + currentH;
         const accH = Math.max(acc.height - window.innerHeight * 0.5, 0);
 
-        // console.log({ currentH, accHeight: acc.height, v });
         if (v < accH) {
           return {
             key: acc.key,
@@ -169,6 +187,14 @@ export function useAddScrollItem(data: ScrollItem) {
   }, [addScrollItem, data]);
 
   return null;
+}
+
+export function useUpdateScrollItem() {
+  const { updateScrollItem } = useContext(Context);
+
+  return (data: ScrollItem) => {
+    updateScrollItem(data);
+  };
 }
 
 export const useScrollToItem = () => {

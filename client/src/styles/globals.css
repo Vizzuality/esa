@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 198, 100%, 14%;
+    --background: 198 100% 14%;
     --foreground: 222.2 84% 4.9%;
 
     --map-style-background: 223, 50%, 5%, 1;
@@ -17,7 +17,7 @@
 
     --card: 198, 100%, 14%, 0.05;
     --card-foreground: 198, 100%, 14%, 0.5;
-    --card-map: rgba(51, 94, 111, 0.5);
+    --card-map: rgba(51, 94, 111, 0.6);
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
@@ -25,11 +25,10 @@
     --primary: 60, 8%, 90%, 1;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 161, 43%, 62%, 1;
+    --secondary: 161 43% 62%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --accent: 210 40% 96.1%;
-    --accent-foreground: ;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -76,6 +75,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-open-sans antialiased;
+    @apply bg-map-background text-foreground font-open-sans antialiased;
   }
 }

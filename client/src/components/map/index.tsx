@@ -137,7 +137,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
   }, [bounds, isFlying]);
 
   return (
-    <div className={cn('relative z-0 h-full w-full', className)}>
+    <div className={cn('relative z-0 h-full w-screen', className)}>
       <ReactMapGL
         id={id}
         initialViewState={initialViewState}

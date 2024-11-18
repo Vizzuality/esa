@@ -1,49 +1,41 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
+import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
 
 import { cn } from '@/lib/classnames';
 
-import { bboxAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store/map';
+import { bboxAtom, layersInteractiveIdsAtom, mapScrollAtom, tmpBboxAtom } from '@/store/map';
 
 import { Bbox } from '@/types/map';
 
-import { DEFAULT_MAP_STATE, MAPBOX_STYLES } from '@/constants/map';
+import { useIsMobile } from '@/hooks/screen-size';
+
+import { MAPBOX_STYLES } from '@/constants/map';
 
 import GlobeMarkers from '@/containers/map/markers/globe-markers';
 import StoryMarkers from '@/containers/map/markers/story-markers';
-import Popup from '@/containers/map/popup';
 
 import Map from '@/components/map';
+import { DEFAULT_PROPS } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
 
 import SelectedStoriesMarker from './markers/selected-stories-marker';
 
-const MapLegends = dynamic(() => import('@/containers/map/legend'), {
-  ssr: false,
-});
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
 });
 
-const DEFAULT_PROPS: CustomMapProps = {
-  id: 'default',
-  initialViewState: DEFAULT_MAP_STATE,
-  minZoom: 1,
-  maxZoom: 14,
-};
-
 export default function MapContainer() {
   const { id, initialViewState, minZoom, maxZoom } = DEFAULT_PROPS;
-
   const { [id]: map } = useMap();
 
   const [markers, setMarkers] = useState<(GeoJSON.Feature<GeoJSON.Point> | null)[]>([]);
@@ -58,19 +50,15 @@ export default function MapContainer() {
 
   const pathname = usePathname();
 
-  const isGlobePage = pathname.includes('globe');
+  const isStoriesPage = useMemo(() => pathname.includes('stories'), [pathname]);
+  const isGlobePage = useMemo(() => pathname.includes('globe'), [pathname]);
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
     if (tmpBbox?.bbox) {
       return {
         bbox: tmpBbox?.bbox,
         options: tmpBbox?.options ?? {
-          padding: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
-          },
+          padding: initialViewState?.padding,
         },
       };
     }
@@ -90,26 +78,31 @@ export default function MapContainer() {
     }
   }, [map, setBbox, setTmpBbox]);
 
-  const handleMouseMove = useCallback((e: MapLayerMouseEvent) => {
-    if (e.features?.length) {
-      const storyMarkersFeatures = e.features
-        .filter((f) => f.source === 'story-markers')
-        .map((f) => ({
-          ...f,
-          geometry: f.geometry as GeoJSON.Point,
-        }));
+  const handleMouseMove = useCallback(
+    (e: MapLayerMouseEvent) => {
+      if (!isGlobePage) return;
+      if (e.features?.length) {
+        const storyMarkersFeatures = e.features
+          .filter((f) => f.source === 'story-markers')
+          .map((f) => ({
+            ...f,
+            geometry: f.geometry as GeoJSON.Point,
+          }));
 
-      if (storyMarkersFeatures.length) {
-        setMarkers(storyMarkersFeatures as GeoJSON.Feature<GeoJSON.Point>[]);
-      } else {
+        if (storyMarkersFeatures.length) {
+          setMarkers(storyMarkersFeatures as GeoJSON.Feature<GeoJSON.Point>[]);
+        } else {
+          setMarkers([]);
+        }
+      }
+
+      if (e.features?.length === 0) {
         setMarkers([]);
       }
-    }
-
-    if (e.features?.length === 0) {
-      setMarkers([]);
-    }
-  }, []);
+    },
+    [isGlobePage]
+  );
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (map && tmpBbox?.options) {
@@ -121,18 +114,17 @@ export default function MapContainer() {
         center: [longitude, latitude],
         duration: 1000,
         animate: true,
-        padding: {
-          top: 50,
-          bottom: 50,
-          left: 50,
-          right: 50,
-        },
+        padding: initialViewState?.padding,
       });
     }
-  }, [map, tmpBbox]);
+  }, [map, initialViewState, tmpBbox, isMobile]);
+
+  const mapInteractionEnabled = useMemo(() => isGlobePage, [isGlobePage]);
 
   return (
-    <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-full')}>
+    <div
+      className={cn('bg-map-background absolute left-0 top-0 h-screen w-screen overflow-hidden')}
+    >
       <Map
         id={id}
         initialViewState={{
@@ -151,17 +143,17 @@ export default function MapContainer() {
         interactiveLayerIds={layersInteractiveIds}
         onMouseMove={handleMouseMove}
         onMapViewStateChange={handleMapViewStateChange}
-        className={cn(!isGlobePage && 'pointer-events-none cursor-default')}
+        className={cn(
+          mapInteractionEnabled
+            ? 'pointer-events-auto cursor-pointer'
+            : 'pointer-events-none cursor-default'
+        )}
       >
         <LayerManager />
-        <Popup />
-        {(isGlobePage || pathname.includes('home')) && <GlobeMarkers />}
+        <GlobeMarkers />
         <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
-        {pathname.includes('stories') && <StoryMarkers />}
+        {isStoriesPage && <StoryMarkers />}
       </Map>
-      <div className="absolute bottom-8 left-14 z-20 w-full ">
-        <MapLegends />
-      </div>
     </div>
   );
 }

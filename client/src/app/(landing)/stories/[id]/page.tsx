@@ -10,32 +10,6 @@ import Story from '@/containers/story';
 
 type StoryPageProps = { params: { id: string } };
 
-// You can't generate static params for dynamic routes if they are using useSearchParams https://nextjs.org/docs/messages/deopted-into-client-rendering
-// The solution is to wrap the component with Suspense
-// By doing this, we will have errors related to hydration
-// As we use it inside RecoilURLSyncNext, we can't generate static params
-
-// export async function generateStaticParams() {
-//   try {
-//     const { data: storiesData } = await getStories({
-//       'pagination[limit]': 200,
-//     });
-
-//     if (!storiesData) {
-//       throw new Error('Failed to parse storiesData');
-//     }
-
-//     console.log('storiesData', storiesData);
-
-//     return storiesData.map((s) => ({
-//       id: `${s.id}`,
-//     }));
-//   } catch (e) {
-//     console.error(e);
-//     return [];
-//   }
-// }
-
 export async function generateMetadata({ params }: StoryPageProps): Promise<Metadata> {
   try {
     // read route params

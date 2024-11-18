@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import { cn } from '@/lib/classnames';
+import { getImageSrc } from '@/lib/image-src';
 
 type CarouselMediaProps = {
   media: {
@@ -18,8 +19,10 @@ type CarouselMediaProps = {
   isCurrentMedia?: boolean;
 };
 
-const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
+export const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const mediaSrc = getImageSrc(media?.url);
 
   useEffect(() => {
     if (!isCurrentMedia && videoRef.current) {
@@ -33,7 +36,7 @@ const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
         ref={videoRef}
         width="100%"
         height="100%"
-        src={media?.url}
+        src={mediaSrc}
         muted={!isCurrentMedia}
         loop
         controls={isCurrentMedia}
@@ -49,7 +52,7 @@ const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
   }
   return (
     <Image
-      src={media?.url}
+      src={mediaSrc}
       className={cn(
         'h-full max-h-[calc(100vh-152px)] w-full',
         isCurrentMedia ? 'object-contain' : 'object-cover'

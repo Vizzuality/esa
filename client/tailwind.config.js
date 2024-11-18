@@ -83,11 +83,16 @@ module.exports = {
           '0%': { opacity: 0, transform: 'translateY(0)' },
           '100%': { opacity: 1, transform: 'translateY(20px)' },
         },
+        'fade-up': {
+          '0%': { opacity: 1, transform: 'translateY(20px)' },
+          '100%': { opacity: 0, transform: 'translateY(0px)' },
+        },
       },
       animation: {
         'fade-down': 'fade-down 2s ease-in-out infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'fade-up': 'fade-up 2s ease-in-out infinite',
       },
       fontFamily: {
         'open-sans': ['var(--font-open-sans)'],
@@ -99,6 +104,8 @@ module.exports = {
           'linear-gradient(90deg, rgba(0, 174, 157, 0.00) 0%, rgba(0, 174, 157, 0.70) 51.56%, rgba(0, 174, 157, 0.00) 98.43%)',
         'story-header':
           'linear-gradient(180deg, rgba(12, 62, 84, 1) 43.82%, rgba(12, 62, 84, 0.00) 95.85%)',
+        'story-header-mobile':
+          'linear-gradient(172deg, #0C3E54 98.2%, rgba(12, 62, 84, 0.00) 218.84%)',
       },
       screens: {
         '3xl': '1650px',

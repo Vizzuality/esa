@@ -44,7 +44,7 @@ const CategoryItem = ({ name, slug }: CategoryProps) => {
       <TooltipContent
         align="center"
         side="top"
-        className="border-none bg-transparent text-sm font-bold text-gray-200 shadow-none"
+        className="bg-background hidden border-none py-1 text-sm font-bold text-gray-200 shadow-none sm:block"
       >
         {name}
       </TooltipContent>
