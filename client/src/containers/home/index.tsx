@@ -5,7 +5,6 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useMap } from 'react-map-gl';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { motion, useTransform } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -13,11 +12,10 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { homeMarkerAtom } from '@/store/home';
 import { mapScrollAtom } from '@/store/map';
 
-import { useIsMobile } from '@/hooks/screen-size';
+import { getThemeSize, useIsMobile, useMediaQuery } from '@/hooks/screen-size';
 
 import { DEFAULT_MOBILE_ZOOM, DEFAULT_VIEW_STATE } from '@/components/map/constants';
 import { Dialog, DialogContentHome } from '@/components/ui/dialog';
-import ScrollExplanation from '@/components/ui/scroll-explanation';
 
 import Header from '../header';
 
@@ -37,6 +35,7 @@ const Home = () => {
   });
 
   const isMobile = useIsMobile();
+  const isXl = useMediaQuery(`(min-width: ${getThemeSize('2xl')}px)`);
 
   const spin = useCallback(() => {
     if (!map) return;
@@ -48,23 +47,22 @@ const Home = () => {
     map?.easeTo({
       bearing: 0,
       pitch: 0,
-      zoom: isMobile ? DEFAULT_MOBILE_ZOOM : DEFAULT_VIEW_STATE.zoom,
+      zoom: isMobile
+        ? DEFAULT_MOBILE_ZOOM
+        : isXl
+        ? DEFAULT_VIEW_STATE.zoom
+        : DEFAULT_VIEW_STATE.zoom - 0.5,
       center: { lng: nextLng, lat },
       duration: 500,
       padding: {
-        left: !isMobile ? size.width * 0.45 : 0,
+        left: size.width * 0.45,
         right: 0,
-        top: 0,
+        top: isMobile ? size.height * 0.8 : 0,
         bottom: 0,
       },
       easing: (n) => n,
     });
-  }, [isMobile, map, size.width]);
-
-  const router = useRouter();
-  useEffect(() => {
-    router.prefetch('/globe');
-  }, []);
+  }, [isMobile, isXl, map, size.height, size.width]);
 
   useEffect(() => {
     if (map) {
@@ -151,11 +149,12 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="pointer-events-auto relative z-50 mt-6 hidden h-[124px] w-[124px] rounded-full bg-teal-500/50 p-2.5 transition-all duration-500 hover:p-0 sm:block">
+              <div className="pointer-events-auto relative z-50 mt-6  h-[124px] w-[124px] rounded-full bg-teal-500/50 p-2.5 transition-all duration-500 hover:p-0 sm:block">
                 <Link
                   onClick={() => map?.stop()}
                   className="font-bold uppercase tracking-wide"
                   href="/globe"
+                  prefetch
                 >
                   <div className="flex h-full w-full items-center justify-center rounded-full bg-teal-500">
                     Explore
@@ -165,13 +164,6 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="mx-auto mb-16 flex h-fit w-fit flex-col items-center justify-center gap-2 sm:hidden">
-            <ScrollExplanation />
-            <span className="bg-background/30  mx-auto rounded px-2 backdrop-blur-sm">
-              Scroll to explore
-            </span>
-          </div>
-
           {/* Desktop orbiting satellites */}
           <motion.div
             initial="hidden"
@@ -179,7 +171,7 @@ const Home = () => {
             variants={variants}
             transition={{ duration: 2, delay: 1, ease: 'easeIn' }}
             style={{ width: w, height: '100%', right: w * -0.045, top: 0 }}
-            className="3xl:scale-100 absolute z-50 hidden max-h-screen scale-125 items-center overflow-hidden xl:flex xl:scale-110"
+            className="3xl:scale-100 absolute z-50 hidden max-h-screen scale-125 items-center overflow-hidden lg:flex xl:scale-110"
           >
             <div style={{ height: w }} className="w-full">
               <div className="flex h-full rotate-45 items-end justify-center rounded-full border border-dashed border-slate-600 p-[50px] xl:rotate-[55deg] xl:p-[70px]">
