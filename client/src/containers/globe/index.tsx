@@ -128,7 +128,7 @@ export default function Home() {
               <a
                 target="_blank"
                 className="font-open-sans flex justify-between gap-4 px-4 text-sm leading-snug"
-                href="https://lookerstudio.google.com/reporting/b6d8f54c-558e-48dc-bc79-a7eca193da6f/page/p_2ehvdzg47c"
+                href="https://gda.esa.int/impact-dashboard/"
               >
                 Detailed report dashboard on ESA GDA programme.
                 <ExternalLinkIcon className="h-4 w-4 shrink-0" />
@@ -151,7 +151,7 @@ export default function Home() {
                 <a
                   target="_blank"
                   className="font-open-sans gap- flex justify-between px-4 text-sm leading-snug"
-                  href="https://lookerstudio.google.com/reporting/b6d8f54c-558e-48dc-bc79-a7eca193da6f/page/p_2ehvdzg47c"
+                  href="https://gda.esa.int/impact-dashboard/"
                 >
                   Detailed report dashboard on ESA GDA programme.
                   <ExternalLinkIcon className="h-4 w-4 shrink-0" />
