@@ -122,9 +122,7 @@ export default function MapContainer() {
   const mapInteractionEnabled = useMemo(() => isGlobePage, [isGlobePage]);
 
   return (
-    <div
-      className={cn('bg-map-background absolute left-0 top-0 h-screen w-screen overflow-hidden')}
-    >
+    <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-screen overflow-hidden')}>
       <Map
         id={id}
         initialViewState={{
