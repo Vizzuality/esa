@@ -34,7 +34,7 @@ const Marker = ({ markers, handleClick, handleClose }: MarkerProps) => {
       >
         <div
           className={cn({
-            'absolute left-1/2 top-1/2 flex h-3 w-3 -translate-x-1/2 -translate-y-1/2 rotate-45 items-center justify-center border-[1.5px] border-[#FFE094] transition-all':
+            'absolute left-1/2 top-1/2 flex h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 items-center justify-center border-[1.5px] border-[#FFE094] transition-all':
               true,
             'bg-background scale-[1.25] border-gray-200': true,
           })}
