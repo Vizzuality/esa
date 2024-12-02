@@ -16,7 +16,7 @@ const SatelliteButton = ({ handleSelectMarker, satellite, className }: Satellite
   return (
     <button
       className={cn(
-        'pointer-events-auto absolute z-50 flex cursor-pointer items-center justify-center',
+        'pointer-events-auto absolute z-50 flex cursor-pointer items-center justify-center transition-all duration-300 hover:scale-110',
         className
       )}
       onClick={() => handleSelectMarker(satellite.id)}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Layer, Source } from 'react-map-gl';
 
@@ -44,11 +44,37 @@ const GlobeMarkers = () => {
     url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker.png`,
   });
 
+  useMapImage({
+    name: 'story-marker-lg',
+    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-lg.png`,
+  });
+
   const pathname = usePathname();
   const visibility = useMemo(
     () => (!pathname.includes('stories') ? 'visible' : 'none'),
     [pathname]
   );
+
+  const [size, setSize] = useState(1);
+
+  const [opacity, setOpacity] = useState(1);
+
+  // Animate the size and opacity of the markers
+  useEffect(() => {
+    const startTime = performance.now();
+    const velocity = 3000;
+    const minSize = 0.75;
+
+    // Set the size interpolating from 0.75 to 1 in 1 second and back
+    const interval = setInterval(() => {
+      const progress = ((performance.now() - startTime) % velocity) / velocity;
+      const size = Math.abs(Math.sin(progress * Math.PI)) * (1 - minSize) + minSize;
+      setOpacity(Math.abs(Math.sin(progress * Math.PI)));
+      setSize(size);
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Source id="story-markers" type="geojson" data={FeatureCollection}>
@@ -82,16 +108,34 @@ const GlobeMarkers = () => {
       />
 
       <Layer
-        id="story-markers-unclustered"
+        id="story-markers-unclustered-lg"
         type="symbol"
         filter={['!', ['has', 'point_count']]}
         paint={{
           'icon-color': '#FFE094',
         }}
         layout={{
+          'icon-image': 'story-marker-lg',
+          'icon-ignore-placement': true,
+          'icon-allow-overlap': true,
+          'icon-size': 0.75,
+          visibility,
+        }}
+      />
+      <Layer
+        id="story-markers-unclustered"
+        type="symbol"
+        filter={['!', ['has', 'point_count']]}
+        paint={{
+          'icon-color': '#FFE094',
+          'icon-opacity': opacity,
+        }}
+        layout={{
           'icon-image': 'story-marker',
           'icon-ignore-placement': true,
           'icon-allow-overlap': true,
+          'icon-size': size,
+          'icon-offset': [-opacity, opacity],
           visibility,
         }}
       />

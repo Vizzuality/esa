@@ -64,9 +64,15 @@ const ChartJs = ({ widget, ...props }: ChartJsProps) => {
   };
 
   return (
-    <div {...props}>
+    <div className="w-full">
       {!chartTypes.includes(chartType) || !data || !(data as ChartData).datasets ? null : (
-        <Chart ref={chartRef} type={chartType} options={OPTIONS} data={dataWithDefaults} />
+        <Chart
+          {...props}
+          ref={chartRef}
+          type={chartType}
+          options={OPTIONS}
+          data={dataWithDefaults}
+        />
       )}
     </div>
   );

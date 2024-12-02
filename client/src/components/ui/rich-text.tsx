@@ -28,6 +28,11 @@ const RichText = ({ children, className }: RichTextProps) => {
             {props.children}
           </ol>
         ),
+        li: ({ node, ...props }) => (
+          <li {...props} className="ml-4 list-disc">
+            {props.children}
+          </li>
+        ),
         img: ({ node, ...props }) => (
           <Image
             {...props}
@@ -42,7 +47,7 @@ const RichText = ({ children, className }: RichTextProps) => {
         ),
         video: ({ node, ...props }) => {
           return (
-            <video {...props} controls className="h-auto w-full">
+            <video {...props} controls className="h-auto min-h-[418px] w-full">
               <source src={props.src} />
             </video>
           );
