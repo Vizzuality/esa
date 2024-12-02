@@ -1,19 +1,18 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
-import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
 
 import { cn } from '@/lib/classnames';
 
-import { bboxAtom, layersInteractiveIdsAtom, mapScrollAtom, tmpBboxAtom } from '@/store/map';
+import { bboxAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store/map';
 
 import { Bbox } from '@/types/map';
 
