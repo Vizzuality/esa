@@ -44,7 +44,7 @@ export default function Home() {
   const { removeStep } = useSyncStep();
 
   const { data: storiesData } = useStories();
-  const storiesLength = storiesData?.data?.length;
+  const storiesLength = storiesData?.data?.length || 0;
   const { default: map } = useMap();
 
   const isMobile = useIsMobile();
@@ -98,7 +98,9 @@ export default function Home() {
               <Filters filtersActive={filtersActive} />
             </div>
             <div className="font-open-sans flex justify-between text-sm font-semibold">
-              <p className="pl-1 text-gray-800">{!!storiesLength && `${storiesLength} stories`}</p>
+              <p className="pl-1 text-gray-800">
+                {`${storiesLength} featured ${storiesLength === 1 ? 'story' : 'stories'}`}
+              </p>
               <Button
                 variant="link"
                 className={cn(

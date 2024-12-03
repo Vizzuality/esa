@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Layer, Source } from 'react-map-gl';
 
@@ -41,7 +41,12 @@ const GlobeMarkers = () => {
 
   useMapImage({
     name: 'story-marker',
-    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker.png`,
+    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-sm.png`,
+  });
+
+  useMapImage({
+    name: 'story-marker-lg',
+    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-lg.png`,
   });
 
   const pathname = usePathname();
@@ -50,7 +55,35 @@ const GlobeMarkers = () => {
     [pathname]
   );
 
-  return (
+  const [size, setSize] = useState(1);
+
+  const [opacity, setOpacity] = useState(1);
+
+  // Animate the size and opacity of the markers
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const startTime = performance.now();
+    const velocity = 3000;
+    const minSize = 0.75;
+
+    const animate = () => {
+      const progress = ((performance.now() - startTime) % velocity) / velocity;
+      const x = Math.abs(Math.sin(progress * Math.PI));
+      // Set the opacity interpolating from 0 to 1 and back
+      setOpacity(x);
+      const size = x * (1 - minSize) + minSize;
+      // Set the size interpolating from 0.75 to 1 and back
+      setSize(size);
+      requestAnimationFrame(animate);
+    };
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+    const frame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  return pathname.includes('stories') ? null : (
     <Source id="story-markers" type="geojson" data={FeatureCollection}>
       <Layer
         id="story-markers-cluster"
@@ -82,16 +115,34 @@ const GlobeMarkers = () => {
       />
 
       <Layer
-        id="story-markers-unclustered"
+        id="story-markers-unclustered-lg"
         type="symbol"
         filter={['!', ['has', 'point_count']]}
         paint={{
           'icon-color': '#FFE094',
         }}
         layout={{
+          'icon-image': 'story-marker-lg',
+          'icon-ignore-placement': true,
+          'icon-allow-overlap': true,
+          'icon-size': size,
+          visibility,
+        }}
+      />
+      <Layer
+        id="story-markers-unclustered"
+        type="symbol"
+        filter={['!', ['has', 'point_count']]}
+        paint={{
+          'icon-color': '#FFE094',
+          'icon-opacity': 1 - opacity,
+        }}
+        layout={{
           'icon-image': 'story-marker',
           'icon-ignore-placement': true,
           'icon-allow-overlap': true,
+          'icon-size': 1,
+          'icon-offset': [0.75, 1.75],
           visibility,
         }}
       />

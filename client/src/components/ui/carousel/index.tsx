@@ -4,7 +4,6 @@ import React, {
   PropsWithChildren,
   useCallback,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 
@@ -149,30 +148,18 @@ type CarouselMediaProps = {
 };
 
 export const CarouselMedia = ({ media, isCurrentMedia }: CarouselMediaProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const mediaSrc = getImageSrc(media?.url);
-
-  useEffect(() => {
-    if (!isCurrentMedia && videoRef.current) {
-      videoRef.current?.pause();
-    } else if (isCurrentMedia && videoRef.current) {
-      videoRef.current?.play();
-    }
-  }, [isCurrentMedia]);
 
   if (media?.type === 'video') {
     return (
       <video
-        ref={videoRef}
         width="100%"
         height="100%"
         src={mediaSrc}
-        muted={!isCurrentMedia}
         loop
-        controls={isCurrentMedia}
-        autoPlay={isCurrentMedia}
+        controls
         className={cn(
-          'h-full max-h-[calc(100vh-152px)] w-full',
+          'h-full max-h-[calc(100vh-152px)] w-full bg-black',
           isCurrentMedia ? 'object-contain' : 'object-cover'
         )}
       >
@@ -228,15 +215,14 @@ const EmblaCarousel: React.FC<PropType> = ({ options, medias, selected }) => {
       <div className="embla__viewport w-full" ref={emblaRef}>
         <div
           className={cn(
-            'embla__container items-center',
-            medias?.length > 1 ? '-ml-4 sm:-ml-6' : ''
+            'embla__container -ml-4 items-center sm:-ml-10',
+            medias.length === 1 && ' justify-center'
           )}
         >
           {medias?.map((media, index) => (
             <div
               className={cn(
-                'embla__slide',
-                medias?.length > 1 ? 'flex-[0_0_80%] pl-4 sm:pl-6' : 'flex-1',
+                'embla__slide flex-[0_0_60%] pl-4 sm:pl-10',
                 index === currSlider ? 'h-[80vh]' : 'h-[40vh]'
               )}
               key={index}

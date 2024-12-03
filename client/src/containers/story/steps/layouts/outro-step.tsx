@@ -14,6 +14,7 @@ import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
 import { useIsMobile } from '@/hooks/screen-size';
 
+import RichText from '@/components/ui/rich-text';
 import ScrollExplanation from '@/components/ui/scroll-explanation';
 
 type Disclaimer = {
@@ -76,7 +77,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   const isVideo = mediaType?.includes('video');
   const isImage = mediaType?.includes('image');
 
-  const scaleContent = useTransform(scrollYProgress, [0.5, 0.7], ['1', '0.75']);
+  const scrollOpacity = useTransform(scrollYProgress, [0.5, 0.8], [1, 0.1]);
 
   const categoryDisclaimer = disclaimer as Disclaimer[];
 
@@ -100,39 +101,46 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
         </motion.div>
 
         <div className="pointer-events-auto flex w-full flex-1 flex-col items-center justify-between sm:p-10">
-          <div className="flex w-full flex-1 flex-col justify-between sm:gap-12 lg:flex-row">
-            <motion.div
-              initial={{ opacity: 0, x: '-300%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5 }}
-              style={{ scale: scaleContent }}
-              className="relative z-50 flex w-full flex-1 items-center justify-center sm:mt-10"
-            >
-              {isVideo && (
-                <video
-                  width="100%"
-                  height="100%"
-                  src={mediaSrc}
-                  ref={videoRef}
-                  muted
-                  loop
-                  autoPlay={true}
-                  controls
-                >
-                  <source src={mediaSrc} type={mediaMime} />
-                </video>
-              )}
-              {isImage && (
-                <Image
-                  className="aspect-video w-full object-cover"
-                  src={mediaSrc}
-                  width={534}
-                  height={330}
-                  alt="story conclusion image"
-                />
-              )}
-            </motion.div>
+          <div
+            className={cn(
+              'flex flex-1 flex-col justify-between sm:gap-12 lg:flex-row',
+              !!mediaSrc && 'w-full'
+            )}
+          >
+            {mediaSrc && (
+              <motion.div
+                initial={{ opacity: 0, x: '-300%' }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5 }}
+                style={{ opacity: scrollOpacity }}
+                className="relative z-50 flex w-full flex-1 items-center justify-center sm:mt-10"
+              >
+                {isVideo && (
+                  <video
+                    width="100%"
+                    height="100%"
+                    src={mediaSrc}
+                    ref={videoRef}
+                    muted
+                    loop
+                    autoPlay={true}
+                    controls
+                  >
+                    <source src={mediaSrc} type={mediaMime} />
+                  </video>
+                )}
+                {isImage && (
+                  <Image
+                    className="aspect-video w-full object-cover"
+                    src={mediaSrc}
+                    width={534}
+                    height={330}
+                    alt="story conclusion image"
+                  />
+                )}
+              </motion.div>
+            )}
 
             <motion.div
               className="flex w-full max-w-5xl flex-1 items-center justify-center space-y-16"
@@ -140,13 +148,13 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5 }}
-              style={{ scale: scaleContent }}
+              style={{ opacity: scrollOpacity }}
             >
               <div className="max-w-lg space-y-4 p-4 sm:p-10">
                 <h3 className="text-enlight-yellow-500 text-2xl font-bold tracking-wider">
                   {title}
                 </h3>
-                <p>{content}</p>
+                <RichText className="text-white">{content}</RichText>
               </div>
             </motion.div>
           </div>
