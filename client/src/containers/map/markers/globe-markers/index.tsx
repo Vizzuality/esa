@@ -41,7 +41,7 @@ const GlobeMarkers = () => {
 
   useMapImage({
     name: 'story-marker',
-    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker.png`,
+    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-sm.png`,
   });
 
   useMapImage({
@@ -65,11 +65,13 @@ const GlobeMarkers = () => {
     const velocity = 3000;
     const minSize = 0.75;
 
-    // Set the size interpolating from 0.75 to 1 in 1 second and back
     const interval = setInterval(() => {
       const progress = ((performance.now() - startTime) % velocity) / velocity;
-      const size = Math.abs(Math.sin(progress * Math.PI)) * (1 - minSize) + minSize;
-      setOpacity(Math.abs(Math.sin(progress * Math.PI)));
+      const x = Math.abs(Math.sin(progress * Math.PI));
+      // Set the opacity interpolating from 0 to 1 and back
+      setOpacity(x);
+      const size = x * (1 - minSize) + minSize;
+      // Set the size interpolating from 0.75 to 1 and back
       setSize(size);
     }, 100);
 
@@ -118,7 +120,7 @@ const GlobeMarkers = () => {
           'icon-image': 'story-marker-lg',
           'icon-ignore-placement': true,
           'icon-allow-overlap': true,
-          'icon-size': 0.75,
+          'icon-size': size,
           visibility,
         }}
       />
@@ -128,14 +130,14 @@ const GlobeMarkers = () => {
         filter={['!', ['has', 'point_count']]}
         paint={{
           'icon-color': '#FFE094',
-          'icon-opacity': opacity,
+          'icon-opacity': 1 - opacity,
         }}
         layout={{
           'icon-image': 'story-marker',
           'icon-ignore-placement': true,
           'icon-allow-overlap': true,
-          'icon-size': size,
-          'icon-offset': [-opacity, opacity],
+          'icon-size': 1,
+          'icon-offset': [0.75, 1.75],
           visibility,
         }}
       />
