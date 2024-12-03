@@ -61,11 +61,12 @@ const GlobeMarkers = () => {
 
   // Animate the size and opacity of the markers
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const startTime = performance.now();
     const velocity = 3000;
     const minSize = 0.75;
 
-    const interval = setInterval(() => {
+    const animate = () => {
       const progress = ((performance.now() - startTime) % velocity) / velocity;
       const x = Math.abs(Math.sin(progress * Math.PI));
       // Set the opacity interpolating from 0 to 1 and back
@@ -73,12 +74,16 @@ const GlobeMarkers = () => {
       const size = x * (1 - minSize) + minSize;
       // Set the size interpolating from 0.75 to 1 and back
       setSize(size);
-    }, 100);
+      requestAnimationFrame(animate);
+    };
 
-    return () => clearInterval(interval);
+    // https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+    const frame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frame);
   }, []);
 
-  return (
+  return pathname.includes('stories') ? null : (
     <Source id="story-markers" type="geojson" data={FeatureCollection}>
       <Layer
         id="story-markers-cluster"
