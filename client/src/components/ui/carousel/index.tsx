@@ -188,19 +188,18 @@ type PropType = PropsWithChildren & {
 };
 
 const EmblaCarousel: React.FC<PropType> = ({ options, medias, selected }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    startIndex: selected,
+    align: 'center',
+    inViewThreshold: 0.5,
+    ...options,
+  });
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
   // const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
   //   usePrevNextButtons(emblaApi);
 
   const [currSlider, setCurrSlider] = useState(0);
-
-  useEffect(() => {
-    if (selected !== undefined && emblaApi) {
-      emblaApi.scrollTo(selected);
-      setCurrSlider(selected);
-    }
-  }, [selected, emblaApi]);
 
   const handleSelectedSlide = useCallback((embla: EmblaCarouselType) => {
     setCurrSlider(embla.selectedScrollSnap());
@@ -223,7 +222,9 @@ const EmblaCarousel: React.FC<PropType> = ({ options, medias, selected }) => {
             <div
               className={cn(
                 'embla__slide flex-[0_0_60%] pl-4 sm:pl-10',
-                index === currSlider ? 'h-[80vh]' : 'h-[40vh]'
+                index === currSlider ? 'h-[80vh]' : 'h-[40vh]',
+                medias.length === 2 && index === 0 && 'ml-[20%]',
+                medias.length === 2 && index === 1 && 'mr-[20%]'
               )}
               key={index}
             >
