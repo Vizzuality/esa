@@ -147,12 +147,8 @@ export default function MapContainer() {
         )}
       >
         <LayerManager />
-        {!isStoriesPage && (
-          <>
-            <GlobeMarkers />
-            <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
-          </>
-        )}
+        <GlobeMarkers />
+        <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
         {isStoriesPage && <StoryMarkers />}
       </Map>
     </div>
