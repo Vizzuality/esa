@@ -21,7 +21,6 @@ import { useIsMobile } from '@/hooks/screen-size';
 import { MAPBOX_STYLES } from '@/constants/map';
 
 import GlobeMarkers from '@/containers/map/markers/globe-markers';
-import StoryMarkers from '@/containers/map/markers/story-markers';
 
 import Map from '@/components/map';
 import { DEFAULT_PROPS } from '@/components/map/constants';
@@ -49,7 +48,6 @@ export default function MapContainer() {
 
   const pathname = usePathname();
 
-  const isStoriesPage = useMemo(() => pathname.includes('stories'), [pathname]);
   const isGlobePage = useMemo(() => pathname.includes('globe'), [pathname]);
 
   const tmpBounds: CustomMapProps['bounds'] = useMemo(() => {
@@ -149,7 +147,6 @@ export default function MapContainer() {
         <LayerManager />
         <GlobeMarkers />
         <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
-        {isStoriesPage && <StoryMarkers />}
       </Map>
     </div>
   );

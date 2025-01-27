@@ -47,7 +47,7 @@ const RichText = ({ children, className }: RichTextProps) => {
         ),
         video: ({ node, ...props }) => {
           return (
-            <video {...props} controls className="h-auto min-h-[418px] w-full">
+            <video {...props} controls className="!my-4 h-auto w-full">
               <source src={props.src} />
             </video>
           );

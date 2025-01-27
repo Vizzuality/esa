@@ -1,9 +1,9 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Image from 'next/image';
 
-import { ExpandIcon } from 'lucide-react';
+import { ExpandIcon, PlayIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 import { getImageSrc } from '@/lib/image-src';
@@ -21,7 +21,6 @@ type StoryMarkerMediaProps = {
 const StoryMarker = ({ media, name, onClickExpand }: StoryMarkerMediaProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [hovered, setHovered] = useState(false);
   const mediaType = media?.mime?.split('/')[0];
 
   const mediaMime = media?.mime;
@@ -36,51 +35,41 @@ const StoryMarker = ({ media, name, onClickExpand }: StoryMarkerMediaProps) => {
     else e.currentTarget.pause();
   };
 
-  const handleHover = (mouseOver: boolean) => {
-    setHovered(mouseOver);
-  };
-
   return (
-    <div
-      className={cn(
-        'relative flex h-full max-h-screen w-full items-center justify-center',
-        hovered ? 'z-20' : 'z-10'
-      )}
-      onMouseEnter={() => handleHover(true)}
-      onMouseLeave={() => handleHover(false)}
-    >
-      {hovered && (
-        <Button
-          variant="icon"
-          className="absolute z-50 h-14 w-14 rounded-full text-white backdrop-blur-lg transition-all duration-500"
-          onClick={onClickExpand}
-        >
-          <ExpandIcon className="h-6 w-6" />
-        </Button>
-      )}
-      {mediaType === 'image' ? (
-        <Image
-          width={hovered ? 200 : 70}
-          height={hovered ? 200 : 70}
-          src={mediaSrc}
-          className="h-full w-full rounded-full object-cover transition-all duration-700"
-          alt={name}
-        />
-      ) : mediaType === 'video' ? (
-        <video
-          width="100%"
-          height="100%"
-          src={mediaSrc}
-          ref={videoRef}
-          muted
-          loop
-          className="h-full w-full rounded-full object-cover transition-all duration-700"
-          onMouseEnter={(e) => handlePlayVideo(e, 'play')}
-          onMouseLeave={(e) => handlePlayVideo(e, 'pause')}
-        >
-          <source src={mediaSrc} type={mediaMime} />
-        </video>
-      ) : null}
+    <div className={cn('flex h-[88px] w-[88px] items-center justify-center')}>
+      <Button
+        variant="icon"
+        className="group absolute h-[88px] w-[88px]  border-[3px] border-gray-200 px-0 py-0 shadow-md shadow-gray-950/25 transition-all duration-300 hover:h-[105px] hover:w-[105px]"
+        onClick={onClickExpand}
+      >
+        {mediaType === 'image' ? (
+          <Image
+            width={88}
+            height={88}
+            src={mediaSrc}
+            className="h-full w-full object-cover"
+            alt={name}
+          />
+        ) : mediaType === 'video' ? (
+          <div className="h-full w-full">
+            <video
+              width="100%"
+              height="100%"
+              src={mediaSrc}
+              ref={videoRef}
+              muted
+              loop
+              className="h-full w-full object-cover"
+              onMouseEnter={(e) => handlePlayVideo(e, 'play')}
+              onMouseLeave={(e) => handlePlayVideo(e, 'pause')}
+            >
+              <source src={mediaSrc} type={mediaMime} />
+            </video>
+            <PlayIcon className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 transform fill-gray-200  opacity-100 transition-opacity duration-300 group-hover:opacity-0" />
+          </div>
+        ) : null}
+        <ExpandIcon className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 transform fill-gray-200 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      </Button>
     </div>
   );
 };
