@@ -186,6 +186,24 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
               </div>
             </MapContent>
           )}
+          {!!medias?.length && (
+            <div className="pointer-events-auto w-full max-w-full justify-between gap-4 space-y-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
+              <div className="text-enlight-yellow-400 flex items-center gap-2">
+                <h2 className="font-bold uppercase sm:text-sm">Multimedia Gallery</h2>
+              </div>
+              <div className="flex gap-2">
+                {medias.map((marker, index) => (
+                  <div key={marker.id}>
+                    <StoryMarkerMedia
+                      onClickExpand={() => handleClickMarker(index)}
+                      media={marker}
+                      name={marker.title}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           {!!storySummary?.length && (
             <div className="pointer-events-auto flex w-full max-w-full flex-wrap justify-between gap-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
               {storySummary?.map((item) => (
