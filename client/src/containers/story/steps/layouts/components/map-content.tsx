@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 
 import { ChevronDownIcon } from 'lucide-react';
 
@@ -8,7 +8,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 
 type MapContentProps = PropsWithChildren & {
   showContent?: boolean;
-  title?: string;
+  title?: ReactElement | string;
   titlePlaceholder?: string;
 };
 
