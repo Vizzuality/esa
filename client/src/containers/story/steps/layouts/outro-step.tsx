@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -37,6 +37,26 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   const { push } = useRouter();
 
   const { content, title } = step as StepLayoutOutroStepComponent;
+
+  // Merge all partners from the step and category disclaimer
+  // If the title is the same, merge the partners into a single array
+  const allPartners = useMemo(() => {
+    const stepPartners = 'disclaimer' in step ? (step.disclaimer as Disclaimer[]) : [];
+    const partners: Record<string, Disclaimer['partners']> = {};
+
+    [...((disclaimer as Disclaimer[]) || []), ...(stepPartners || [])].forEach((partner) => {
+      if (!partners[partner.title]) {
+        partners[partner.title] = [];
+      }
+      partners[partner.title] = [...partners[partner.title], ...partner.partners];
+    });
+
+    return Object.entries(partners)?.map(([title, partners]) => ({
+      title,
+      partners,
+    }));
+  }, [step, disclaimer]);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -64,18 +84,13 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     }
   });
 
-  const media = (step as any)?.media?.data?.attributes;
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const mediaType = media?.mime?.split('/')[0];
-
-  const mediaSrc = getImageSrc(media?.url);
-
-  const mediaMime = media?.mime;
-
-  const isVideo = mediaType?.includes('video');
-  const isImage = mediaType?.includes('image');
+  // const media = (step as any)?.media?.data?.attributes;
+  // const videoRef = useRef<HTMLVideoElement>(null);
+  // const mediaType = media?.mime?.split('/')[0];
+  // const mediaSrc = getImageSrc(media?.url);
+  // const mediaMime = media?.mime;
+  // const isVideo = mediaType?.includes('video');
+  // const isImage = mediaType?.includes('image');
 
   const scrollOpacity = useTransform(scrollYProgress, [0.5, 0.8], [1, 0.1]);
 
@@ -101,13 +116,8 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
         </motion.div>
 
         <div className="pointer-events-auto flex w-full flex-1 flex-col items-center justify-between sm:p-10">
-          <div
-            className={cn(
-              'flex flex-1 flex-col justify-between sm:gap-12 lg:flex-row',
-              !!mediaSrc && 'w-full'
-            )}
-          >
-            {mediaSrc && (
+          <div className={cn('flex flex-1 flex-col justify-between sm:gap-12 lg:flex-row')}>
+            {/* {mediaSrc && (
               <motion.div
                 initial={{ opacity: 0, x: '-300%' }}
                 animate={{ opacity: 1, x: 0 }}
@@ -140,7 +150,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
                   />
                 )}
               </motion.div>
-            )}
+            )} */}
 
             <motion.div
               className="flex w-full max-w-5xl flex-1 items-center justify-center space-y-16"
@@ -171,7 +181,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
           )}
         >
           <ul className="flex flex-col flex-wrap items-center justify-center gap-x-10 gap-y-2 sm:flex-row">
-            {categoryDisclaimer.map((item) => (
+            {allPartners.map((item) => (
               <li key={item.title} className="flex items-center gap-2">
                 <p className="shrink-0">{item.title}</p>
                 <div className="flex flex-wrap gap-2">

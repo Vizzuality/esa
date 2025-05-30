@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_disclaimer_story_partners",
+  "info": {
+    "displayName": "story partners"
+  },
+  "options": {},
+  "attributes": {
+    "partners": {
+      "type": "component",
+      "repeatable": true,
+      "component": "disclaimer.partners",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
