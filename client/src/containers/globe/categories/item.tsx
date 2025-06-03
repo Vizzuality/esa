@@ -5,7 +5,7 @@ import { useSyncCategory } from '@/store/globe';
 import { Category } from '@/types/generated/strapi.schemas';
 
 import { Button } from '@/components/ui/button';
-import CategoryIcon from '@/components/ui/category-icon';
+import CategoryIcon, { getCategoryIcon } from '@/components/ui/category-icon';
 import { TooltipTrigger, TooltipContent, Tooltip } from '@/components/ui/tooltip';
 
 type CategoryProps = Pick<Category, 'name' | 'slug'>;
@@ -21,6 +21,12 @@ const CategoryItem = ({ name, slug }: CategoryProps) => {
     setCategory(slug);
   };
 
+  const hasCategoryIcon = getCategoryIcon(slug);
+
+  if (!hasCategoryIcon) {
+    return null;
+  }
+
   return (
     <Tooltip delayDuration={300}>
       <TooltipTrigger asChild>
@@ -34,11 +40,11 @@ const CategoryItem = ({ name, slug }: CategoryProps) => {
             slug === 'placeholder-category'
               ? 'animate-pulse'
               : category === slug
-              ? 'fill-secondary opacity-70'
-              : 'fill-primary'
+              ? 'fill-secondary text-secondary opacity-70'
+              : 'fill-primary text-primary'
           )}
         >
-          <CategoryIcon slug={slug} />
+          <CategoryIcon className="h-10 w-10" slug={slug} />
         </Button>
       </TooltipTrigger>
       <TooltipContent

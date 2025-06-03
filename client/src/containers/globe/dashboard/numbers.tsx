@@ -1,7 +1,7 @@
 const numbers = [
-  { stat: 'Supported countries', number: 69 },
-  { stat: 'Organizations Involved', number: 41 },
-  { stat: 'IFI projects', number: 81 },
+  { stat: 'Supported countries', number: 72 },
+  { stat: 'EOIDs in progress', number: 52 },
+  { stat: 'IFI projects', number: 95 },
 ];
 
 const DashboardNumbers = () => {

@@ -1,5 +1,7 @@
 'use client';
 
+import { useMemo, useState } from 'react';
+
 import dynamic from 'next/dynamic';
 
 import { InfoIcon } from 'lucide-react';
@@ -15,19 +17,19 @@ import {
   StoryTagsDataItem,
   WidgetWidgetComponent,
 } from '@/types/generated/strapi.schemas';
+import { StoryStepMap } from '@/types/story';
 
 import Chart from '@/components/chart';
+import Carousel from '@/components/ui/carousel';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import RichText from '@/components/ui/rich-text';
 import ScrollExplanation from '@/components/ui/scroll-explanation';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import StoryMarkerMedia from '@/containers/map/markers/story-markers/media';
+// import StoryMarkerMedia from '@/containers/map/markers/story-markers/media';
 
 import MapContent from './components/map-content';
-import { useMemo, useState } from 'react';
-import { StoryStepMap } from '@/types/story';
-import Image from 'next/image';
-import Carousel from '@/components/ui/carousel';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+
+// import Image from 'next/image';
 
 const MapLegends = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
@@ -61,9 +63,9 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
 
   const [currentMedia, setCurrentMedia] = useState<number>();
 
-  const handleClickMarker = (markerIndex: number) => {
-    setCurrentMedia(markerIndex);
-  };
+  // const handleClickMarker = (markerIndex: number) => {
+  //   setCurrentMedia(markerIndex);
+  // };
 
   return (
     <div className="flex justify-end">
@@ -83,7 +85,13 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
           {!!card && (
             <MapContent
               showContent={showContent}
-              title={card.title}
+              title={
+                currentStep === 1 ? (
+                  <span className="text-enlight-yellow-400">{card.title}</span>
+                ) : (
+                  card.title
+                )
+              }
               titlePlaceholder={card.content}
             >
               <RichText>{card.content}</RichText>
@@ -99,7 +107,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
               </div>
             </MapContent>
           )}
-          {!!medias?.length && (
+          {/* {!!medias?.length && (
             <div className="pointer-events-auto w-full max-w-full justify-between gap-4 space-y-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
               <div className="text-enlight-yellow-400 flex items-center gap-2">
                 <h2 className="font-bold uppercase sm:text-sm">Multimedia Gallery</h2>
@@ -116,7 +124,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                 ))}
               </div>
             </div>
-          )}
+          )} */}
           {!!storySummary?.length && (
             <div className="pointer-events-auto flex w-full max-w-full flex-wrap justify-between gap-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
               {storySummary?.map((item) => (
@@ -170,7 +178,13 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
           {!!card && (
             <MapContent
               showContent={showContent}
-              title={card.title}
+              title={
+                currentStep === 1 ? (
+                  <span className="text-enlight-yellow-400">{card.title}</span>
+                ) : (
+                  card.title
+                )
+              }
               titlePlaceholder={card.content}
             >
               <RichText>{card.content}</RichText>
@@ -186,7 +200,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
               </div>
             </MapContent>
           )}
-          {!!medias?.length && (
+          {/* {!!medias?.length && (
             <div className="pointer-events-auto w-full max-w-full justify-between gap-4 space-y-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
               <div className="text-enlight-yellow-400 flex items-center gap-2">
                 <h2 className="font-bold uppercase sm:text-sm">Multimedia Gallery</h2>
@@ -203,7 +217,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                 ))}
               </div>
             </div>
-          )}
+          )} */}
           {!!storySummary?.length && (
             <div className="pointer-events-auto flex w-full max-w-full flex-wrap justify-between gap-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
               {storySummary?.map((item) => (
