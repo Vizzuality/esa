@@ -11,7 +11,9 @@ type CategoriesProps = {
   className?: string;
 };
 const Categories = ({ className }: CategoriesProps) => {
-  const { data, isError, isPlaceholderData, isFetched, isFetching } = useGetCategories();
+  const { data, isError, isPlaceholderData, isFetched, isFetching } = useGetCategories({
+    sort: 'id:asc',
+  });
 
   const categories = data?.data;
 

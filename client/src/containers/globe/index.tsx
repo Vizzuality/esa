@@ -88,11 +88,68 @@ export default function Home() {
   const filtersActive = Object.values(filters).some((filter) => !!filter?.length);
 
   return (
-    <div className="home text-primary flex h-screen w-screen flex-col justify-between overflow-x-hidden sm:px-12">
-      <Header />
-      <div className="flex max-h-full flex-1 flex-col justify-between overflow-x-hidden sm:flex-row sm:pb-6 sm:pt-12">
-        <div className="sticky top-0 flex max-h-full flex-col space-y-6 px-4 sm:relative sm:h-full sm:w-[280px] sm:px-0 2xl:w-80">
-          <div className="space-y-1">
+    <div>
+      {/* Desktop */}
+      <div className="home text-primary hidden h-screen w-screen flex-col justify-between overflow-x-hidden sm:flex sm:px-12">
+        <Header />
+        <div className="flex h-[calc(100vh-40px)] flex-1 flex-col justify-between overflow-x-hidden sm:flex-row sm:pb-6 sm:pt-12">
+          <div className="sticky top-0 flex max-h-full flex-col space-y-6 px-4 sm:relative sm:h-full sm:w-[280px] sm:px-0 2xl:w-80">
+            <div className="space-y-1">
+              <div className="flex gap-2">
+                <SearchStories />
+                <Filters filtersActive={filtersActive} />
+              </div>
+              <div className="font-open-sans flex justify-between text-sm font-semibold">
+                <p className="pl-1 text-gray-800">
+                  {`${storiesLength} featured ${storiesLength === 1 ? 'story' : 'stories'}`}
+                </p>
+                <Button
+                  variant="link"
+                  className={cn(
+                    'h-fit py-0 pl-0 pr-1 font-semibold transition-opacity duration-300',
+                    !filtersActive && 'pointer-events-none opacity-0'
+                  )}
+                  onClick={handleClearFilters}
+                >
+                  Clear filters
+                </Button>
+              </div>
+            </div>
+            <div className="hidden max-h-[calc(100%-88px)] sm:block">
+              <Dashboard />
+            </div>
+          </div>
+          <div className="hidden h-full w-[280px] flex-col sm:flex 2xl:w-80">
+            <div className="flex max-h-[calc(100%-100px)] flex-col justify-between">
+              <Card title="Top stories" className="max-h-[calc(100%-33px)]">
+                <TopStories />
+              </Card>
+              <GradientLine />
+            </div>
+            <div className="h-fit">
+              <Card title="Programme Dashboard">
+                <a
+                  target="_blank"
+                  className="font-open-sans flex justify-between gap-4 px-4 text-sm leading-snug"
+                  href="https://gda.esa.int/impact-dashboard/"
+                >
+                  Detailed report dashboard on ESA GDA programme.
+                  <ExternalLinkIcon className="h-4 w-4 shrink-0" />
+                </a>
+              </Card>
+            </div>
+          </div>
+        </div>
+        <div className="flex-0 z-10 hidden h-fit sm:block">
+          <Categories />
+        </div>
+      </div>
+
+      {/* Mobile */}
+      <div className="text-primary block sm:hidden">
+        <div className="fixed left-0 top-0 w-screen">
+          <Header />
+          <div className="space-y-1 px-4">
             <div className="flex gap-2">
               <SearchStories />
               <Filters filtersActive={filtersActive} />
@@ -113,58 +170,20 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="hidden max-h-[calc(100%-88px)] sm:block">
-            <Dashboard />
-          </div>
         </div>
-        {/* Desktop */}
-        <div className="hidden h-full w-[280px] flex-col sm:flex 2xl:w-80">
-          <div className="flex max-h-[calc(100%-100px)] flex-col justify-between">
-            <Card title="Top stories" className="max-h-[calc(100%-33px)]">
-              <TopStories />
-            </Card>
-            <GradientLine />
-          </div>
-          <div className="h-fit">
-            <Card title="Programme Dashboard">
-              <a
-                target="_blank"
-                className="font-open-sans flex justify-between gap-4 px-4 text-sm leading-snug"
-                href="https://gda.esa.int/impact-dashboard/"
-              >
-                Detailed report dashboard on ESA GDA programme.
-                <ExternalLinkIcon className="h-4 w-4 shrink-0" />
-              </a>
-            </Card>
-          </div>
-        </div>
-        {/* Mobile */}
-        <div className="pointer-events-none fixed bottom-0 top-[160px] flex flex-col items-start overflow-y-hidden sm:hidden">
-          <div className="z-10 max-h-[calc(100vh-150px)] overflow-y-auto rounded-t">
-            <div className="bg-background/50 pointer-events-auto z-10 mt-[60vh] rounded-t p-4 backdrop-blur-[6px]">
-              <div className="mx-auto mb-4 h-0.5 w-9 rounded-lg bg-gray-400"></div>
+        <div className="bg-background/50 absolute top-[75vh] p-4 backdrop-blur-[6px]">
+          <div className="flex w-full flex-col justify-between overflow-x-hidden">
+            <div className="flex-1 overflow-x-hidden">
               <Dashboard />
+            </div>
+            <div className="flex-0">
               <GradientLine />
               <Card title="Top stories" className="max-h-[calc(100%-33px)]">
                 <TopStories />
               </Card>
-              <GradientLine />
-              <Card className="h-min" title="Programme Dashboard">
-                <a
-                  target="_blank"
-                  className="font-open-sans gap- flex justify-between px-4 text-sm leading-snug"
-                  href="https://gda.esa.int/impact-dashboard/"
-                >
-                  Detailed report dashboard on ESA GDA programme.
-                  <ExternalLinkIcon className="h-4 w-4 shrink-0" />
-                </a>
-              </Card>
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex-0 z-10 hidden h-fit sm:block">
-        <Categories />
       </div>
     </div>
   );
