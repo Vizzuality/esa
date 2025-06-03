@@ -164,7 +164,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
                 <h3 className="text-enlight-yellow-500 text-2xl font-bold tracking-wider">
                   {title}
                 </h3>
-                <RichText className="text-white">{content}</RichText>
+                <RichText className="conclusion-list text-white">{content}</RichText>
               </div>
             </motion.div>
           </div>

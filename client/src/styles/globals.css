@@ -78,3 +78,12 @@
     @apply bg-map-background text-foreground font-open-sans antialiased;
   }
 }
+
+.conclusion-list li {
+  list-style: none;
+}
+
+.conclusion-list li::before {
+  content: "→";
+  margin-right: 0.5rem;
+}
