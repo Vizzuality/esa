@@ -8,12 +8,17 @@ import { Button } from '@/components/ui/button';
 import CategoryIcon, { getCategoryIcon } from '@/components/ui/category-icon';
 import { TooltipTrigger, TooltipContent, Tooltip } from '@/components/ui/tooltip';
 
-type CategoryProps = Pick<Category, 'name' | 'slug'>;
+type CategoryProps = Pick<Category, 'name' | 'slug'> & {
+  disabled?: boolean;
+};
 
-const CategoryItem = ({ name, slug }: CategoryProps) => {
+const CategoryItem = ({ name, slug, disabled }: CategoryProps) => {
   const [category, setCategory] = useSyncCategory();
 
   const handleClick = (slug: string) => {
+    if (disabled) {
+      return;
+    }
     if (category === slug) {
       setCategory(null);
       return;
@@ -34,6 +39,7 @@ const CategoryItem = ({ name, slug }: CategoryProps) => {
           size="icon"
           variant="icon"
           title={name}
+          // disabled={disabled}
           onClick={() => handleClick(slug)}
           className={cn(
             'hover:fill-secondary pointer-events-auto transition-all delay-200 ease-out hover:-translate-y-2 hover:opacity-100',
@@ -41,7 +47,9 @@ const CategoryItem = ({ name, slug }: CategoryProps) => {
               ? 'animate-pulse'
               : category === slug
               ? 'fill-secondary text-secondary opacity-70'
-              : 'fill-primary text-primary'
+              : 'fill-primary text-primary',
+            disabled &&
+              'hover:fill-primary cursor-auto opacity-50 hover:-translate-y-0 hover:opacity-50'
           )}
         >
           <CategoryIcon className="h-10 w-10" slug={slug} />
