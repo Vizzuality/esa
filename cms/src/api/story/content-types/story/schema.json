@@ -71,6 +71,13 @@
     },
     "impacted_people": {
       "type": "string"
+    },
+    "cover_image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
