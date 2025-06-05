@@ -13,6 +13,7 @@ type CategoriesProps = {
 const Categories = ({ className }: CategoriesProps) => {
   const { data, isError, isPlaceholderData, isFetched, isFetching } = useGetCategories({
     sort: 'id:asc',
+    populate: 'stories',
   });
 
   const categories = data?.data;
@@ -45,7 +46,14 @@ const Categories = ({ className }: CategoriesProps) => {
             <div className="flex gap-6">
               {categories?.map(({ id, attributes }) => {
                 if (attributes?.name && attributes?.slug) {
-                  return <Category name={attributes.name} slug={attributes.slug} key={id} />;
+                  return (
+                    <Category
+                      disabled={!attributes.stories?.data?.length}
+                      name={attributes.name}
+                      slug={attributes.slug}
+                      key={id}
+                    />
+                  );
                 }
                 return null;
               })}

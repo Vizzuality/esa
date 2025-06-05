@@ -34,11 +34,22 @@ type FiltersProps = {
 };
 
 const Filters = ({ filtersActive }: FiltersProps) => {
+  const isMobile = useIsMobile();
+
   const { data: tagsData } = useGetTags({ 'pagination[limit]': 1000 });
   const { data: ifisData } = useGetIfis({ 'pagination[limit]': 1000 });
-  const { data: categoriesData } = useGetCategories();
+  const { data: categoriesData } = useGetCategories(
+    {
+      sort: 'id:asc',
+      populate: 'stories',
+    },
+    {
+      query: {
+        enabled: isMobile,
+      },
+    }
+  );
 
-  const isMobile = useIsMobile();
   const filtersData = useMemo(() => {
     return [
       {
@@ -113,42 +124,41 @@ const Filters = ({ filtersActive }: FiltersProps) => {
                   filter?.options?.length ? <FilterItem key={filter.id} filter={filter} /> : null
                 )}
 
-                {isMobile && (
-                  <>
-                    <div className="flex items-center justify-between text-gray-200">
-                      <h3 className="font-notes text-sm font-bold uppercase tracking-widest text-gray-700">
-                        Category
-                      </h3>
-                      <Button
-                        className="font-open-sans text-sm"
-                        size="sm"
-                        variant="link"
-                        onClick={() => setCategory(null)}
-                      >
-                        {!!category && 'Unselect'}
-                      </Button>
-                    </div>
-                    <div>
-                      <RadioGroup className="inline-flex flex-wrap gap-2" value={category || ''}>
-                        {categoriesData?.data?.map(({ attributes }) => {
-                          if (attributes?.name && attributes?.slug) {
-                            return (
-                              <RadioGroupItem
-                                className="data-[state=checked]:text-background data-[state=checked]:border-secondary data-[state=checked]:bg-secondary w-fit rounded-3xl border border-gray-200 px-6 py-2 text-sm text-gray-200 transition-all duration-300 data-[state=checked]:border data-[state=checked]:opacity-70 data-[state=checked]:hover:opacity-100"
-                                value={attributes.slug}
-                                key={attributes.slug}
-                                onClick={(e) => handleClick(e.currentTarget?.value)}
-                              >
-                                {attributes?.name}
-                              </RadioGroupItem>
-                            );
-                          }
-                          return null;
-                        })}
-                      </RadioGroup>
-                    </div>
-                  </>
-                )}
+                <div className="sm:hidden">
+                  <div className="flex items-center justify-between text-gray-200">
+                    <h3 className="font-notes text-sm font-bold uppercase tracking-widest text-gray-700">
+                      Category
+                    </h3>
+                    <Button
+                      className="font-open-sans text-sm"
+                      size="sm"
+                      variant="link"
+                      onClick={() => setCategory(null)}
+                    >
+                      {!!category && 'Unselect'}
+                    </Button>
+                  </div>
+                  <div>
+                    <RadioGroup className="inline-flex flex-wrap gap-2" value={category || ''}>
+                      {categoriesData?.data?.map(({ attributes }) => {
+                        if (attributes?.name && attributes?.slug) {
+                          return (
+                            <RadioGroupItem
+                              className="data-[state=checked]:text-background data-[state=checked]:border-secondary data-[state=checked]:bg-secondary w-fit rounded-3xl border border-gray-200 px-6 py-2 text-sm text-gray-200 transition-all duration-300 disabled:opacity-50 data-[state=checked]:border data-[state=checked]:opacity-70 data-[state=checked]:hover:opacity-100"
+                              value={attributes.slug}
+                              key={attributes.slug}
+                              disabled={!attributes.stories?.data?.length}
+                              onClick={(e) => handleClick(e.currentTarget?.value)}
+                            >
+                              {attributes?.name}
+                            </RadioGroupItem>
+                          );
+                        }
+                        return null;
+                      })}
+                    </RadioGroup>
+                  </div>
+                </div>
               </div>
             </ScrollArea>
           </DialogContent>

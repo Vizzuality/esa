@@ -22,7 +22,7 @@
       "required": true,
       "unique": true,
       "min": 0,
-      "max": 5
+      "max": 10
     },
     "cover_image": {
       "type": "media",

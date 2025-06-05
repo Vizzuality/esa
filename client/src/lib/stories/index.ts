@@ -14,10 +14,23 @@ export const getStoriesParams = (params?: {
     'pagination[limit]': 1000,
     filters: {
       ...(category && { category: { slug: category } }),
-      ...(title && { title: { $containsi: title } }),
       ...(ifis && { ifis }),
       ...(tags && { tags }),
       ...(status && { status }),
+      ...(title && {
+        $or: [
+          {
+            title: {
+              $containsi: title,
+            },
+          },
+          {
+            location: {
+              $containsi: title,
+            },
+          },
+        ],
+      }),
     },
   };
 };

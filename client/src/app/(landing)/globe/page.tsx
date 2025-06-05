@@ -27,7 +27,10 @@ async function prefetchQueries(searchParams: HomePageProps['searchParams']) {
   try {
     // Categories
     const { queryKey: categoriesQueryKey, queryFn: categoriesQueryFn } =
-      getGetCategoriesQueryOptions();
+      getGetCategoriesQueryOptions({
+        sort: 'id:asc',
+        populate: 'stories',
+      });
 
     await queryClient.prefetchQuery({
       queryKey: categoriesQueryKey,
