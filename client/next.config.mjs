@@ -1,4 +1,3 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
@@ -7,7 +6,9 @@ const nextConfig = {
   images: {
     domains: [
       'api.mapbox.com',
-      ...(process.env.NEXT_PUBLIC_API_URL ? [new URL(process.env.NEXT_PUBLIC_API_URL).hostname] : []),
+      ...(process.env.NEXT_PUBLIC_API_URL
+        ? [new URL(process.env.NEXT_PUBLIC_API_URL).hostname]
+        : []),
       'esa-gda-comms-staging-cms.fra1.digitaloceanspaces.com',
       'fra1.digitaloceanspaces.com',
       'esa-gda-comms-staging-mfafc.ondigitalocean.app',
