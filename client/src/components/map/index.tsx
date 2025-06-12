@@ -1,4 +1,7 @@
 'use client';
+'use client';
+
+import mapboxgl from 'mapbox-gl';
 
 import { useEffect, useState, useCallback, FC } from 'react';
 
@@ -69,12 +72,30 @@ export const MapMapbox: FC<CustomMapProps> = ({
       // enabling fly mode avoids the map to be interrupted during the bounds transition
       setFlying(true);
 
+      const safeOptions: mapboxgl.FitBoundsOptions = {
+        duration: options?.duration,
+        maxZoom: options?.maxZoom,
+        bearing: options?.bearing,
+        pitch: options?.pitch,
+        offset: Array.isArray(options?.offset) ? options.offset as [number, number] : undefined,
+        padding: typeof options?.padding === 'object' && options.padding !== null
+          ? {
+              top: options.padding.top ?? 0,
+              bottom: options.padding.bottom ?? 0,
+              left: options.padding.left ?? 0,
+              right: options.padding.right ?? 0,
+            }
+          : options?.padding,
+        linear: options?.linear,
+        easing: options?.easing,
+      };
+
       mapRef.fitBounds(
         [
           [bbox[0], bbox[1]],
           [bbox[2], bbox[3]],
         ],
-        options
+        safeOptions
       );
     }
   }, [bounds, mapRef]);

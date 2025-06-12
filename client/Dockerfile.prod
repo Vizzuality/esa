@@ -1,62 +1,40 @@
-# Build all the things
-FROM node:18.16-bookworm-slim AS base
+# ---------- Builder ----------
+FROM node:18-alpine AS builder
+
+# Optional: Set working directory
+WORKDIR /app
 
 # Install dependencies
-FROM base as deps
-RUN apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y libc6  && \
-    apt-get clean
-WORKDIR /app
+COPY client/package.json client/yarn.lock ./
+RUN yarn install
 
-# Install node dependencies
-COPY .yarn ./.yarn
-COPY package.json .yarnrc.yml yarn.lock ./
-COPY ./client/package.json ./client/package.json
-RUN yarn client install
+# Copy source
+COPY client .
 
-# Build the app
-FROM base AS builder
-
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/.yarn ./.yarn
-COPY --from=deps /app/.yarnrc.yml ./.yarnrc.yml
-COPY --from=deps /app/yarn.lock ./yarn.lock
-COPY --from=deps /app/package.json ./package.json
-COPY ./.prettierrc.js ./.prettierrc.js
-
-WORKDIR /app/client
-COPY ./client .
-
-ENV NEXT_TELEMETRY_DISABLED 1
-
+# Build with standalone output
+ENV NODE_ENV=production
 RUN yarn build
 
-# Copy only the built files into the final image
-FROM base AS runner
+# ---------- Runner ----------
+FROM node:18-alpine AS runner
+
+# Set working dir
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+# Create user
+RUN addgroup -g 1001 -S nextjs \
+    && adduser -S nextjs -u 1001 -G nextjs
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Copy only the necessary files
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/client/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/client/.next/static ./client/.next/static
-COPY --from=builder /app/client/public ./client/public
-
+# Ensure proper permissions
 USER nextjs
 
+# Expose port
 EXPOSE 3000
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "./client/server.js"]
+# Default command
+CMD ["node", "server.js"]
