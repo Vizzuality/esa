@@ -1,10 +1,12 @@
-import type { ViewState, MapProps } from 'react-map-gl';
+import type { ViewState, MapProps, Projection } from 'react-map-gl';
 
 import { FitBoundsOptions } from 'mapbox-gl';
 export interface CustomMapProps extends MapProps {
   id: string;
   /** A function that returns the map instance */
   children?: React.ReactNode;
+
+  projection?: Projection;
 
   /** Custom css class for styling */
   className?: string;
