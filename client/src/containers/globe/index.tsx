@@ -159,7 +159,7 @@ export default function Home() {
               IFI projects
               <div className="pt-0.5">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/eoids-marker.png"`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/eoids-marker.png`}
                   width={24}
                   height={24}
                   priority
