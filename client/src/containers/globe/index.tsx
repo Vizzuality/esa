@@ -29,6 +29,7 @@ import Dashboard from './dashboard';
 import Filters from './filters';
 import SearchStories from './search';
 import TopStories from './top-stories';
+import Image from 'next/image';
 
 type StoryMarker = {
   markers: {
@@ -140,8 +141,34 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex-0 z-10 hidden h-fit sm:block">
-          <Categories />
+        <div className="flex-0 relative z-10 flex h-fit w-full items-center">
+          <div className="flex-0 mb-2 text-sm lg:absolute">
+            <div className="flex items-center">
+              Impact stories
+              <Image
+                src="/images/map/story-marker-lg.png"
+                width={28}
+                height={28}
+                alt="Story marker"
+                className="h-7 w-7 object-cover"
+              />
+            </div>
+            <div className="-mt-2 flex items-center gap-1">
+              IFI projects
+              <div className="pt-0.5">
+                <Image
+                  src="/images/map/eoids-marker.png"
+                  width={24}
+                  height={24}
+                  alt="Story marker"
+                  className="h-6 w-6 object-cover"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex-1">
+            <Categories />
+          </div>
         </div>
       </div>
 
@@ -168,6 +195,30 @@ export default function Home() {
               >
                 Clear filters
               </Button>
+            </div>
+            <div className="flex items-center gap-4 pl-1 pt-1 text-sm">
+              <div className="flex items-center">
+                Impact stories
+                <Image
+                  src="/images/map/story-marker-lg.png"
+                  width={28}
+                  height={28}
+                  alt="Story marker"
+                  className="h-7 w-7 object-cover"
+                />
+              </div>
+              <div className="flex items-center gap-1">
+                IFI projects
+                <div className="pt-0.5">
+                  <Image
+                    src="/images/map/eoids-marker.png"
+                    width={24}
+                    height={24}
+                    alt="Story marker"
+                    className="h-6 w-6 object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
