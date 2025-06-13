@@ -26,6 +26,7 @@ import Map from '@/components/map';
 import { DEFAULT_PROPS } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
 
+import EOIDsMarkers from './markers/eoids-markers';
 import SelectedStoriesMarker from './markers/selected-stories-marker';
 
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
@@ -145,6 +146,7 @@ export default function MapContainer() {
         )}
       >
         <LayerManager />
+        <EOIDsMarkers />
         <GlobeMarkers />
         <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
       </Map>
