@@ -4,7 +4,7 @@ import { createContext, PropsWithChildren, useCallback, useContext, useMemo, use
 
 import { useControl } from 'react-map-gl';
 
-import { MapboxOverlay, MapboxOverlayProps } from '@deck.gl/mapbox/typed';
+import { MapboxOverlay, MapboxOverlayProps } from '@deck.gl/mapbox';
 
 interface DeckMapboxOverlayContext {
   addLayer: (layer: any) => void;
@@ -42,6 +42,12 @@ export const DeckMapboxOverlayProvider = ({ children }: PropsWithChildren) => {
     (layer: any) => {
       const newLayers = [...layersRef.current.filter((l) => l.id !== layer.id), layer];
       layersRef.current = newLayers;
+
+      if (!OVERLAY) {
+        console.warn('MapboxOverlay is not initialized yet');
+        return;
+      }
+
       return OVERLAY.setProps({ layers: newLayers });
     },
     [OVERLAY]
