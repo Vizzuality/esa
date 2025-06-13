@@ -4,12 +4,7 @@ import { useEffect, useState, useCallback, FC } from 'react';
 
 import ReactMapGL, { ViewState, ViewStateChangeEvent, MapEvent, useMap } from 'react-map-gl';
 
-// * If you plan to use Mapbox (and not a fork):
-// * 1) remove maplibre-gl,
-// * 2) install Mapbox v1/v2 (v2 requires token)
-// * 3) if you installed v2: provide the token to the map through the `mapboxAccessToken` property
-// * 4) remove `mapLib` property
-
+import mapboxgl from 'mapbox-gl';
 import { useDebounce } from 'rooks';
 
 import env from '@/env.mjs';
@@ -69,12 +64,31 @@ export const MapMapbox: FC<CustomMapProps> = ({
       // enabling fly mode avoids the map to be interrupted during the bounds transition
       setFlying(true);
 
+      const safeOptions: mapboxgl.FitBoundsOptions = {
+        duration: options?.duration,
+        maxZoom: options?.maxZoom,
+        bearing: options?.bearing,
+        pitch: options?.pitch,
+        offset: Array.isArray(options?.offset) ? (options.offset as [number, number]) : undefined,
+        padding:
+          typeof options?.padding === 'object' && options.padding !== null
+            ? {
+                top: options.padding.top ?? 0,
+                bottom: options.padding.bottom ?? 0,
+                left: options.padding.left ?? 0,
+                right: options.padding.right ?? 0,
+              }
+            : options?.padding,
+        linear: options?.linear,
+        easing: options?.easing,
+      };
+
       mapRef.fitBounds(
         [
           [bbox[0], bbox[1]],
           [bbox[2], bbox[3]],
         ],
-        options
+        safeOptions
       );
     }
   }, [bounds, mapRef]);
