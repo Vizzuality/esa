@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 import { useMap } from 'react-map-gl';
 
+import Image from 'next/image';
+
 import { useSetAtom } from 'jotai';
 import { ExternalLinkIcon } from 'lucide-react';
 import mapboxgl from 'mapbox-gl';
@@ -29,7 +31,6 @@ import Dashboard from './dashboard';
 import Filters from './filters';
 import SearchStories from './search';
 import TopStories from './top-stories';
-import Image from 'next/image';
 
 type StoryMarker = {
   markers: {
@@ -146,10 +147,11 @@ export default function Home() {
             <div className="flex items-center">
               Impact stories
               <Image
-                src="/images/map/story-marker-lg.png"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-lg.png`}
                 width={28}
                 height={28}
                 alt="Story marker"
+                priority
                 className="h-7 w-7 object-cover"
               />
             </div>
@@ -157,9 +159,10 @@ export default function Home() {
               IFI projects
               <div className="pt-0.5">
                 <Image
-                  src="/images/map/eoids-marker.png"
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/eoids-marker.png"`}
                   width={24}
                   height={24}
+                  priority
                   alt="Story marker"
                   className="h-6 w-6 object-cover"
                 />

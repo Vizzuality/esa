@@ -26,8 +26,8 @@ import Map from '@/components/map';
 import { DEFAULT_PROPS } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
 
-import SelectedStoriesMarker from './markers/selected-stories-marker';
 import EOIDsMarkers from './markers/eoids-markers';
+import SelectedStoriesMarker from './markers/selected-stories-marker';
 
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
