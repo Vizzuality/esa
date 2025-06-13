@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
+import { useDebouncedValue } from 'rooks';
 
 import { cn } from '@/lib/classnames';
 
@@ -118,6 +119,7 @@ export default function MapContainer() {
   }, [map, initialViewState, tmpBbox, isMobile]);
 
   const mapInteractionEnabled = useMemo(() => isGlobePage, [isGlobePage]);
+  const [mapInteractionEnabledDebounced] = useDebouncedValue(mapInteractionEnabled, 500);
 
   return (
     <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-screen overflow-hidden')}>
@@ -140,7 +142,7 @@ export default function MapContainer() {
         onMouseMove={handleMouseMove}
         onMapViewStateChange={handleMapViewStateChange}
         className={cn(
-          mapInteractionEnabled
+          mapInteractionEnabledDebounced
             ? 'pointer-events-auto cursor-pointer'
             : 'pointer-events-none cursor-default'
         )}
