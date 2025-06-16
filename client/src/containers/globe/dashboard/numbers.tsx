@@ -1,6 +1,6 @@
 const numbers = [
   { stat: 'Supported countries', number: 72 },
-  { stat: 'EOIDs in progress', number: 52 },
+  { stat: 'Case Studies in progress', number: 52 },
   { stat: 'IFI projects', number: 95 },
 ];
 

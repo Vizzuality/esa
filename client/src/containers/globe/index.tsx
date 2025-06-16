@@ -123,7 +123,7 @@ export default function Home() {
           </div>
           <div className="hidden h-full w-[280px] flex-col sm:flex 2xl:w-80">
             <div className="flex max-h-[calc(100%-100px)] flex-col justify-between">
-              <Card title="Top stories" className="max-h-[calc(100%-33px)]">
+              <Card title="Featured stories" className="max-h-[calc(100%-33px)]">
                 <TopStories />
               </Card>
               <GradientLine />
@@ -156,7 +156,7 @@ export default function Home() {
               />
             </div>
             <div className="-mt-2 flex items-center gap-1">
-              IFI projects
+              Case Studies
               <div className="pt-0.5">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/eoids-marker.png`}
@@ -203,20 +203,22 @@ export default function Home() {
               <div className="flex items-center">
                 Impact stories
                 <Image
-                  src="/images/map/story-marker-lg.png"
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-lg.png`}
                   width={28}
                   height={28}
                   alt="Story marker"
+                  priority
                   className="h-7 w-7 object-cover"
                 />
               </div>
               <div className="flex items-center gap-1">
-                IFI projects
+                Case Studies
                 <div className="pt-0.5">
                   <Image
-                    src="/images/map/eoids-marker.png"
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/eoids-marker.png`}
                     width={24}
                     height={24}
+                    priority
                     alt="Story marker"
                     className="h-6 w-6 object-cover"
                   />
@@ -232,7 +234,7 @@ export default function Home() {
             </div>
             <div className="flex-0">
               <GradientLine />
-              <Card title="Top stories" className="max-h-[calc(100%-33px)]">
+              <Card title="Featured stories" className="max-h-[calc(100%-33px)]">
                 <TopStories />
               </Card>
             </div>
