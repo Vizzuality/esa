@@ -26,7 +26,7 @@ const DashboardRegions = () => {
     <div>
       <ul>
         {thematicAreas.map(({ name, value }) => (
-          <li key={name} className="space-y-2 px-4 py-2 hover:bg-white/10">
+          <li key={name} className="space-y-2 px-4 py-2">
             <div className="flex justify-between text-sm">
               <p>{name}</p>
               <p className="font-semibold">{value}</p>

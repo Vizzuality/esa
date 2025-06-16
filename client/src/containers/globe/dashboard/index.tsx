@@ -15,7 +15,7 @@ const Dashboard = () => {
           <GradientLine />
         </div>
       </div>
-      <Card className="max-h-[calc(100%-142px)]" title="EOIDs supporting IFI processes">
+      <Card className="max-h-[calc(100%-142px)]" title="Case Studies supporting IFI processes">
         <DashboardRegions />
       </Card>
     </>

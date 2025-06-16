@@ -132,20 +132,22 @@ const Home = () => {
                 <div className="h-[1px] w-full bg-gradient-to-r from-teal-500/70 via-teal-500/60 to-teal-500/0"></div>
                 <div className="text-balance w-[455px] max-w-full sm:space-y-4">
                   <p className="font-open-sans text-base font-normal leading-normal text-stone-200">
-                    Uncover the stories told by powerful satellites, revealing their crucial role in
-                    addressing global challenges. From monitoring climate change to enhancing
-                    precision agriculture, the GDA programme utilises satellite data to accelerate
-                    impact.
+                    Discover how Earth Observation (EO) is driving impact on the ground. The GDA
+                    Impact Sphere showcases real-world stories from ESA’s Global Development
+                    Assistance (GDA) programme, highlighting how satellite data supports
+                    international development efforts — from guiding climate adaptation to improving
+                    food systems, water access, infrastructure resilience, and more.
                   </p>
                   <p className="font-open-sans hidden text-base font-normal leading-normal text-stone-200 sm:block">
-                    Dive into these uplifting stories and discover how satellites are shaping a more
-                    sustainable and interconnected future for our planet.{' '}
-                    <span className="font-open-sans text-base font-bold leading-normal text-stone-200">
-                      Ready to explore GDA stories?
-                    </span>
+                    Through this interactive globe, development professionals and decision-makers
+                    can explore how EO is being integrated into operations by International
+                    Financial Institutions (IFIs) and local partners. Each story reflects a concrete
+                    example of how space-based insights are helping tackle complex challenges and
+                    accelerating sustainable development.
                   </p>
+
                   <p className="font-open-sans text-base font-bold leading-normal text-stone-200 sm:hidden">
-                    Ready to explore GDA stories?
+                    Ready to explore EO in action?
                   </p>
                 </div>
               </div>
