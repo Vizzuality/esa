@@ -93,6 +93,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   // const isImage = mediaType?.includes('image');
 
   const scrollOpacity = useTransform(scrollYProgress, [0.5, 0.8], [1, 0.1]);
+  const showContinueScrolling = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
 
   const categoryDisclaimer = disclaimer as Disclaimer[];
 
@@ -153,7 +154,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
             )} */}
 
             <motion.div
-              className="flex w-full max-w-5xl flex-1 items-center justify-center space-y-16"
+              className="flex w-full max-w-5xl flex-1 justify-center space-y-16 sm:items-center"
               initial={{ opacity: 0, x: '300%' }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
@@ -170,56 +171,58 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
           </div>
         </div>
 
-        <div className="z-10 mb-8">
-          <ScrollExplanation>Continue scrolling to explore more stories</ScrollExplanation>
-        </div>
+        <div className="fixed bottom-0">
+          <motion.div style={{ opacity: showContinueScrolling }} className="z-10 mb-8">
+            <ScrollExplanation>Continue scrolling to explore more stories</ScrollExplanation>
+          </motion.div>
 
-        <div
-          className={cn(
-            'font-notes pointer-events-auto relative w-screen bg-white p-4 text-xs italic text-gray-900 opacity-0',
-            showContent && show && categoryDisclaimer?.length && 'opacity-100'
-          )}
-        >
-          <ul className="flex flex-col flex-wrap items-center justify-center gap-x-10 gap-y-2 sm:flex-row">
-            {allPartners.map((item) => (
-              <li key={item.title} className="flex items-center gap-2">
-                <p className="shrink-0">{item.title}</p>
-                <div className="flex flex-wrap gap-2">
-                  {item.partners?.map((partner) => {
-                    const src = getImageSrc(partner.logo?.data?.attributes?.url);
+          <div
+            className={cn(
+              'font-notes pointer-events-auto relative w-screen bg-white p-4 text-xs italic text-gray-900 opacity-0',
+              showContent && show && categoryDisclaimer?.length && 'opacity-100'
+            )}
+          >
+            <ul className="flex flex-col flex-wrap items-center justify-center gap-x-10 gap-y-2 sm:flex-row">
+              {allPartners.map((item) => (
+                <li key={item.title} className="flex items-center gap-2">
+                  <p className="shrink-0">{item.title}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {item.partners?.map((partner) => {
+                      const src = getImageSrc(partner.logo?.data?.attributes?.url);
 
-                    const url = partner.url;
-                    return url ? (
-                      <a
-                        key={partner.id}
-                        href={partner.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Image
-                          src={src}
-                          width={50}
-                          height={30}
-                          alt=""
-                          className="h-8 w-full max-w-[125px] shrink-0 object-contain object-center"
-                        />
-                      </a>
-                    ) : (
-                      <div>
-                        <Image
-                          src={src}
-                          width={50}
-                          height={30}
-                          alt=""
-                          className="h-8 w-full max-w-[125px] object-contain object-center"
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              </li>
-            ))}
-          </ul>
+                      const url = partner.url;
+                      return url ? (
+                        <a
+                          key={partner.id}
+                          href={partner.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            src={src}
+                            width={50}
+                            height={30}
+                            alt=""
+                            className="h-8 w-full max-w-[125px] shrink-0 object-contain object-center"
+                          />
+                        </a>
+                      ) : (
+                        <div>
+                          <Image
+                            src={src}
+                            width={50}
+                            height={30}
+                            alt=""
+                            className="h-8 w-full max-w-[125px] object-contain object-center"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </motion.div>
     </div>

@@ -22,7 +22,7 @@ const Card = ({ children, title, info, className }: CardProps) => {
     >
       {title && (
         <div className="mb-2 flex justify-between px-4">
-          <p className="font-notes text-sm font-bold uppercase">{title}</p>
+          <p className="font-notes text-sm font-semibold uppercase">{title}</p>
           {info && <InfoIcon className="h-4 w-4" />}
         </div>
       )}
