@@ -8,7 +8,6 @@ import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 
 import { useAtomValue, useSetAtom } from 'jotai';
-import { X } from 'lucide-react';
 import { LngLatBoundsLike } from 'mapbox-gl';
 import { useDebouncedValue } from 'rooks';
 
@@ -27,7 +26,6 @@ import GlobeMarkers from '@/containers/map/markers/globe-markers';
 import Map from '@/components/map';
 import { DEFAULT_PROPS } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
-import { Button } from '@/components/ui/button';
 
 import EOIDsMarkers from './markers/eoids-markers';
 import SelectedStoriesMarker from './markers/selected-stories-marker';
@@ -41,7 +39,6 @@ export default function MapContainer() {
   const { [id]: map } = useMap();
 
   const [markers, setMarkers] = useState<(GeoJSON.Feature<GeoJSON.Point> | null)[]>([]);
-  const [interactWithMapClicked, setInteractWithMapClicked] = useState<string | undefined>();
 
   const bbox = useAtomValue(bboxAtom);
   const tmpBbox = useAtomValue(tmpBboxAtom);
@@ -124,34 +121,8 @@ export default function MapContainer() {
   const mapInteractionEnabled = useMemo(() => isGlobePage, [isGlobePage]);
   const [mapInteractionEnabledDebounced] = useDebouncedValue(mapInteractionEnabled, 500);
 
-  const handleCloseInteractWithMap = () => {
-    setInteractWithMapClicked('true');
-    localStorage.setItem('esa-interact-with-map-clicked', 'true');
-  };
-
-  useEffect(() => {
-    const updateBrowserStorage =
-      typeof window !== undefined && localStorage?.getItem('esa-update-browser-clicked');
-    if (updateBrowserStorage) {
-      setInteractWithMapClicked('true');
-    } else {
-      setInteractWithMapClicked('false');
-    }
-  }, []);
-
   return (
     <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-screen overflow-hidden')}>
-      {interactWithMapClicked === 'false' && (
-        <div className="bg-background/30 fixed left-1/2 top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center  gap-4 rounded border border-[#335E6F] px-4 py-1.5 text-white backdrop-blur-sm  sm:flex">
-          <p>DRAG TO ROTATE, SCROLL TO ZOOM</p>
-          <Button
-            onClick={handleCloseInteractWithMap}
-            className="bg-map-background hover:border-secondary hover:text-secondary w-min rounded-full border border-gray-800 px-4 py-2 text-gray-200"
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        </div>
-      )}
       <Map
         id={id}
         initialViewState={{

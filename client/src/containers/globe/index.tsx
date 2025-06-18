@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useMap } from 'react-map-gl';
 
 import Image from 'next/image';
 
 import { useAtomValue, useSetAtom } from 'jotai';
-import { ExternalLinkIcon } from 'lucide-react';
+import { ExternalLinkIcon, X } from 'lucide-react';
 import mapboxgl from 'mapbox-gl';
 
 import { cn } from '@/lib/classnames';
@@ -91,8 +91,36 @@ export default function Home() {
 
   const filtersActive = Object.values(filters).some((filter) => !!filter?.length);
 
+  const [interactWithMapClicked, setInteractWithMapClicked] = useState<string | undefined>();
+
+  const handleCloseInteractWithMap = () => {
+    setInteractWithMapClicked('true');
+    localStorage.setItem('esa-interact-with-map-clicked', 'true');
+  };
+
+  useEffect(() => {
+    const updateBrowserStorage =
+      typeof window !== undefined && localStorage?.getItem('esa-interact-with-map-clicked');
+    if (updateBrowserStorage) {
+      setInteractWithMapClicked('true');
+    } else {
+      setInteractWithMapClicked('false');
+    }
+  }, []);
+
   return (
     <div>
+      {interactWithMapClicked === 'false' && (
+        <div className="bg-background/30 fixed left-1/2 top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center  gap-4 rounded border border-[#335E6F] px-4 py-1.5 text-white backdrop-blur-sm  sm:flex">
+          <p>DRAG TO ROTATE, SCROLL TO ZOOM</p>
+          <Button
+            onClick={handleCloseInteractWithMap}
+            className="bg-map-background hover:border-secondary hover:text-secondary w-min rounded-full border border-gray-800 px-4 py-2 text-gray-200"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
       {/* Desktop */}
       <div
         className={cn(
