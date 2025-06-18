@@ -6,13 +6,13 @@ import { useMap } from 'react-map-gl';
 
 import Image from 'next/image';
 
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { ExternalLinkIcon } from 'lucide-react';
 import mapboxgl from 'mapbox-gl';
 
 import { cn } from '@/lib/classnames';
 
-import { useSyncFilters } from '@/store/globe';
+import { updateBrowserClickedAtom, useSyncFilters } from '@/store/globe';
 import { layersAtom, tmpBboxAtom } from '@/store/map';
 import { useSyncStep } from '@/store/stories';
 
@@ -50,6 +50,8 @@ export default function Home() {
   const { default: map } = useMap();
 
   const isMobile = useIsMobile();
+
+  const updateBrowserClicked = useAtomValue(updateBrowserClickedAtom);
 
   useEffect(() => {
     const bounds = new mapboxgl.LngLatBounds();
@@ -92,7 +94,12 @@ export default function Home() {
   return (
     <div>
       {/* Desktop */}
-      <div className="home text-primary hidden h-screen w-screen flex-col justify-between overflow-x-hidden sm:flex sm:px-12">
+      <div
+        className={cn(
+          'home text-primary hidden h-screen w-screen flex-col justify-between overflow-x-hidden sm:flex sm:px-12',
+          updateBrowserClicked === 'false' && 'pb-[54px]'
+        )}
+      >
         <Header />
         <div className="flex h-[calc(100vh-40px)] flex-1 flex-col justify-between overflow-x-hidden sm:flex-row sm:pb-6 sm:pt-12">
           <div className="sticky top-0 flex max-h-full flex-col space-y-6 px-4 sm:relative sm:h-full sm:w-[280px] sm:px-0 2xl:w-80">
