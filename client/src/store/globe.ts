@@ -17,3 +17,4 @@ export const useSyncFilters = () =>
 // JOTAI ATOMS
 
 export const filtersOpenAtom = atom<boolean>(false);
+export const updateBrowserClickedAtom = atom<string | undefined>();
