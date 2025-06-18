@@ -1,18 +1,18 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useMap } from 'react-map-gl';
 
 import Image from 'next/image';
 
-import { useSetAtom } from 'jotai';
-import { ExternalLinkIcon } from 'lucide-react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { ExternalLinkIcon, X } from 'lucide-react';
 import mapboxgl from 'mapbox-gl';
 
 import { cn } from '@/lib/classnames';
 
-import { useSyncFilters } from '@/store/globe';
+import { updateBrowserClickedAtom, useSyncFilters } from '@/store/globe';
 import { layersAtom, tmpBboxAtom } from '@/store/map';
 import { useSyncStep } from '@/store/stories';
 
@@ -50,6 +50,8 @@ export default function Home() {
   const { default: map } = useMap();
 
   const isMobile = useIsMobile();
+
+  const updateBrowserClicked = useAtomValue(updateBrowserClickedAtom);
 
   useEffect(() => {
     const bounds = new mapboxgl.LngLatBounds();
@@ -89,10 +91,43 @@ export default function Home() {
 
   const filtersActive = Object.values(filters).some((filter) => !!filter?.length);
 
+  const [interactWithMapClicked, setInteractWithMapClicked] = useState<string | undefined>();
+
+  const handleCloseInteractWithMap = () => {
+    setInteractWithMapClicked('true');
+    localStorage.setItem('esa-interact-with-map-clicked', 'true');
+  };
+
+  useEffect(() => {
+    const updateBrowserStorage =
+      typeof window !== undefined && localStorage?.getItem('esa-interact-with-map-clicked');
+    if (updateBrowserStorage) {
+      setInteractWithMapClicked('true');
+    } else {
+      setInteractWithMapClicked('false');
+    }
+  }, []);
+
   return (
     <div>
+      {interactWithMapClicked === 'false' && (
+        <div className="bg-background/30 fixed left-1/2 top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center  gap-4 rounded border border-[#335E6F] px-4 py-1.5 text-white backdrop-blur-sm  sm:flex">
+          <p>DRAG TO ROTATE, SCROLL TO ZOOM</p>
+          <Button
+            onClick={handleCloseInteractWithMap}
+            className="bg-map-background hover:border-secondary hover:text-secondary w-min rounded-full border border-gray-800 px-4 py-2 text-gray-200"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
       {/* Desktop */}
-      <div className="home text-primary hidden h-screen w-screen flex-col justify-between overflow-x-hidden sm:flex sm:px-12">
+      <div
+        className={cn(
+          'home text-primary hidden h-screen w-screen flex-col justify-between overflow-x-hidden sm:flex sm:px-12',
+          updateBrowserClicked === 'false' && 'pb-[54px]'
+        )}
+      >
         <Header />
         <div className="flex h-[calc(100vh-40px)] flex-1 flex-col justify-between overflow-x-hidden sm:flex-row sm:pb-6 sm:pt-12">
           <div className="sticky top-0 flex max-h-full flex-col space-y-6 px-4 sm:relative sm:h-full sm:w-[280px] sm:px-0 2xl:w-80">

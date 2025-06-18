@@ -66,8 +66,8 @@ export default function MapContainer() {
   const handleMapViewStateChange = useCallback(() => {
     if (map) {
       const b = map
-        .getBounds()
-        .toArray()
+        ?.getBounds()
+        ?.toArray()
         .flat()
         .map((v: number) => {
           return parseFloat(v.toFixed(2));
