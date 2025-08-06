@@ -48,50 +48,6 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   const setTimelines = useSetAtom(timelineAtom);
 
   const frame = useMemo(() => timelines[id]?.frame || 0, [id, timelines]);
-
-  useEffect(() => {
-    // Add or update timeline to timeline atom
-    setTimelines((prev) => ({
-      ...prev,
-      [id]: {
-        layers: [...(prev[id]?.layers || []), layerId].filter((v, i, a) => a.indexOf(v) === i),
-        frame,
-      },
-    }));
-  }, [id, layerId, setTimelines]);
-
-  const setFrame = useCallback(
-    (f: number) => {
-      // Update timelines
-      setTimelines((prev) => ({
-        ...prev,
-        [id]: {
-          ...prev[id],
-          frame: f,
-        },
-      }));
-
-      const layers = timelines[id]?.layers || [];
-
-      // Update the layersSettings for all layers with the same timeline id
-      setLayersSettings((prev) => {
-        return {
-          ...prev,
-          ...layers.reduce((acc, curr) => {
-            return {
-              ...acc,
-              [curr]: {
-                ...prev[curr],
-                frame: f,
-              },
-            };
-          }, {}),
-        };
-      });
-    },
-    [id, setLayersSettings, setTimelines, timelines]
-  );
-
   const TIMELINE = useMemo(() => {
     if (!start || !end) return [];
 
@@ -136,6 +92,76 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
     );
   }, [start, end, dateType, interval, format, labels]);
   const thumbLabelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    clearInterval(intervalRef.current);
+    setIsPlaying(true);
+    const lastFrame = TIMELINE.length - 1;
+    let newFrame = frame === lastFrame ? 0 : frame + 1;
+    setFrame(newFrame);
+
+    intervalRef.current = setInterval(() => {
+      if (newFrame === lastFrame) {
+        clearInterval(intervalRef.current);
+        setIsPlaying(false);
+      } else {
+        setFrame(newFrame + 1);
+        newFrame++;
+      }
+    }, animationInterval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run on first render
+
+  useEffect(() => {
+    const lastFrame = TIMELINE.length - 1;
+    if (frame === lastFrame) {
+      clearInterval(intervalRef.current);
+      setIsPlaying(false);
+    }
+  }, [setIsPlaying, intervalRef.current]);
+
+  useEffect(() => {
+    // Add or update timeline to timeline atom
+    setTimelines((prev) => ({
+      ...prev,
+      [id]: {
+        layers: [...(prev[id]?.layers || []), layerId].filter((v, i, a) => a.indexOf(v) === i),
+        frame,
+      },
+    }));
+  }, [id, layerId, setTimelines]);
+
+  const setFrame = useCallback(
+    (f: number) => {
+      // Update timelines
+      setTimelines((prev) => ({
+        ...prev,
+        [id]: {
+          ...prev[id],
+          frame: f,
+        },
+      }));
+
+      const layers = timelines[id]?.layers || [];
+
+      // Update the layersSettings for all layers with the same timeline id
+      setLayersSettings((prev) => {
+        return {
+          ...prev,
+          ...layers.reduce((acc, curr) => {
+            return {
+              ...acc,
+              [curr]: {
+                ...prev[curr],
+                frame: f,
+              },
+            };
+          }, {}),
+        };
+      });
+    },
+    [id, setLayersSettings, setTimelines, timelines]
+  );
 
   const handlePlay = useCallback(() => {
     clearInterval(intervalRef.current);
