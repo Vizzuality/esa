@@ -11,7 +11,7 @@ import {
   eachHourOfInterval,
   eachMinuteOfInterval,
 } from 'date-fns';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { PauseIcon, PlayIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
@@ -42,12 +42,12 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   const setLayersSettings = useSetAtom(layersSettingsAtom);
   const layers = useAtomValue(layersAtom);
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
-  const timelines = useAtomValue(timelineAtom);
-  const setTimelines = useSetAtom(timelineAtom);
+  const [timelines, setTimelines] = useAtom(timelineAtom);
 
   const frame = useMemo(() => timelines[id]?.frame || 0, [id, timelines]);
+
   const TIMELINE = useMemo(() => {
     if (!start || !end) return [];
 
@@ -94,31 +94,12 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   const thumbLabelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    clearInterval(intervalRef.current);
-    setIsPlaying(true);
-    const lastFrame = TIMELINE.length - 1;
-    let newFrame = frame === lastFrame ? 0 : frame + 1;
-    setFrame(newFrame);
-
-    intervalRef.current = setInterval(() => {
-      if (newFrame === lastFrame) {
-        clearInterval(intervalRef.current);
-        setIsPlaying(false);
-      } else {
-        setFrame(newFrame + 1);
-        newFrame++;
-      }
-    }, animationInterval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only run on first render
-
-  useEffect(() => {
     const lastFrame = TIMELINE.length - 1;
     if (frame === lastFrame) {
       clearInterval(intervalRef.current);
       setIsPlaying(false);
     }
-  }, [setIsPlaying, intervalRef.current]);
+  }, [setIsPlaying, TIMELINE, frame]);
 
   useEffect(() => {
     // Add or update timeline to timeline atom
@@ -129,46 +110,54 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
         frame,
       },
     }));
-  }, [id, layerId, setTimelines]);
+  }, [id, layerId, setTimelines, frame]);
 
   const setFrame = useCallback(
     (f: number) => {
-      // Update timelines
-      setTimelines((prev) => ({
-        ...prev,
-        [id]: {
-          ...prev[id],
-          frame: f,
-        },
-      }));
+      setTimelines((prev) => {
+        const existing = prev[id] || { layers: [] };
 
-      const layers = timelines[id]?.layers || [];
+        setLayersSettings((prevSettings) => {
+          return {
+            ...prevSettings,
+            ...existing.layers.reduce((acc, curr) => {
+              return {
+                ...acc,
+                [curr]: {
+                  ...prevSettings[curr],
+                  frame: f,
+                },
+              };
+            }, {}),
+          };
+        });
 
-      // Update the layersSettings for all layers with the same timeline id
-      setLayersSettings((prev) => {
         return {
           ...prev,
-          ...layers.reduce((acc, curr) => {
-            return {
-              ...acc,
-              [curr]: {
-                ...prev[curr],
-                frame: f,
-              },
-            };
-          }, {}),
+          [id]: {
+            ...existing,
+            frame: f,
+          },
         };
       });
     },
-    [id, setLayersSettings, setTimelines, timelines]
+    [id, setLayersSettings, setTimelines]
   );
+
+  // TO-DO - improve they way of handling interval. Remove the loop and check how is being set
+  const handlePause = useCallback(() => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const interval_id = window.setInterval(() => {}, Number.MAX_SAFE_INTEGER);
+    for (let i = 1; i < interval_id; i++) {
+      window.clearInterval(i);
+    }
+    setIsPlaying(false);
+  }, []);
 
   const handlePlay = useCallback(() => {
     clearInterval(intervalRef.current);
-    setIsPlaying(!isPlaying);
-    if (isPlaying) {
-      return;
-    }
+    setIsPlaying(true);
+
     const lastFrame = TIMELINE.length - 1;
     let newFrame = frame === lastFrame ? 0 : frame + 1;
     setFrame(newFrame);
@@ -182,7 +171,7 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
         newFrame++;
       }
     }, animationInterval);
-  }, [isPlaying, TIMELINE?.length, frame, setFrame, animationInterval]);
+  }, [TIMELINE?.length, frame, setFrame, animationInterval]);
 
   const value = TIMELINE[frame]?.value;
 
@@ -202,26 +191,36 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   const maxValue = TIMELINE?.length - 1 || 1;
   const minValue = 0;
 
+  useEffect(() => {
+    handlePlay();
+  }, []);
+
   // If the layer is not the first one in the timeline, don't render the component
   if (firstTimelineLayer !== layerId) {
     return null;
   }
-
   return (
     <div style={props?.style} className="z-30 mt-3">
       <LegendHeader title={title} info={info} />
       <div className="flex items-center gap-8">
-        <Button
-          variant="default"
-          className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
-          onClick={handlePlay}
-        >
-          {isPlaying ? (
+        {isPlaying && (
+          <Button
+            variant="default"
+            className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
+            onClick={handlePause}
+          >
             <PauseIcon className="fill-secondary stroke-secondary h-5" />
-          ) : (
+          </Button>
+        )}
+        {!isPlaying && (
+          <Button
+            variant="default"
+            className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-full px-0 py-0 hover:bg-white"
+            onClick={handlePlay}
+          >
             <PlayIcon className="fill-secondary stroke-secondary h-5 translate-x-0.5" />
-          )}
-        </Button>
+          </Button>
+        )}
 
         <Root
           max={maxValue}
