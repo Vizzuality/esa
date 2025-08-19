@@ -47,7 +47,6 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   const [timelines, setTimelines] = useAtom(timelineAtom);
 
   const frame = useMemo(() => timelines[id]?.frame || 0, [id, timelines]);
-
   const TIMELINE = useMemo(() => {
     if (!start || !end) return [];
 
@@ -110,7 +109,7 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
         frame,
       },
     }));
-  }, [id, layerId, setTimelines, frame]);
+  }, [id, layerId, setTimelines]);
 
   const setFrame = useCallback(
     (f: number) => {
@@ -191,8 +190,19 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
   const maxValue = TIMELINE?.length - 1 || 1;
   const minValue = 0;
 
+  // TO - DO - improve the way we handle intervals
   useEffect(() => {
     handlePlay();
+
+    return () => {
+      clearInterval(interval);
+      setFrame(0);
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const interval_id = window.setInterval(() => {}, Number.MAX_SAFE_INTEGER);
+      for (let i = 1; i < interval_id; i++) {
+        window.clearInterval(i);
+      }
+    };
   }, []);
 
   // If the layer is not the first one in the timeline, don't render the component
