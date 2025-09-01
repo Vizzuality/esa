@@ -15,5 +15,11 @@
   },
   "engines": {
     "node": "18.x"
+  },
+  "devDependencies": {
+    "eslint-config-next": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
   }
 }
