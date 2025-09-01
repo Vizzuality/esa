@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MapLayerMouseEvent, useMap } from 'react-map-gl';
 
 import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 import { LngLatBoundsLike } from 'mapbox-gl';
@@ -14,7 +14,9 @@ import { useDebouncedValue } from 'rooks';
 import { cn } from '@/lib/classnames';
 
 import { bboxAtom, layersInteractiveIdsAtom, tmpBboxAtom } from '@/store/map';
+import { useSyncStep } from '@/store/stories';
 
+import { useGetStoriesId } from '@/types/generated/story';
 import { Bbox } from '@/types/map';
 
 import { useIsMobile } from '@/hooks/screen-size';
@@ -49,6 +51,19 @@ export default function MapContainer() {
   const setTmpBbox = useSetAtom(tmpBboxAtom);
 
   const pathname = usePathname();
+  const { id: storyId } = useParams();
+  const { step } = useSyncStep();
+
+  const { data: storyData } = useGetStoriesId(+storyId, {
+    populate: 'deep',
+  });
+
+  const lastStep = useMemo(() => {
+    if (storyData?.data?.attributes?.steps) {
+      return Number(storyData.data.attributes.steps.length);
+    }
+    return null;
+  }, [storyData]);
 
   const isGlobePage = useMemo(() => pathname.includes('globe'), [pathname]);
 
@@ -120,6 +135,8 @@ export default function MapContainer() {
 
   const mapInteractionEnabled = useMemo(() => isGlobePage, [isGlobePage]);
   const [mapInteractionEnabledDebounced] = useDebouncedValue(mapInteractionEnabled, 500);
+  const projection =
+    step && lastStep && Number(step) > 1 && step < Number(lastStep) ? 'mercator' : 'globe';
 
   return (
     <div className={cn('bg-map-background fixed left-0 top-0 h-screen w-screen overflow-hidden')}>
@@ -132,7 +149,17 @@ export default function MapContainer() {
           }),
         }}
         projection={{
-          name: 'globe',
+          // The globe projection in Deck.gl has limitations at low zoom levels (≈1–6).
+          // Around that range, Deck.gl switches rendering strategy and effectively falls back to Mercator.
+          // Below ~5, Mercator tiles can be flattened onto the globe and look okay; above ~6,
+          // the globe needs more subdivisions than low-level tiles provide, causing stretching, blur, or mismatches.
+
+          // Some layers require Mercator, so we switch to it
+          // starting from step 2. When entering a story, the transition begins on the globe (flying into step 1),
+          // where the globe remains visible. From step 2 onward we use Mercator, and on the last step we return to globe.
+          // This isn’t very scalable and should be revisited.
+
+          name: projection,
         }}
         minZoom={minZoom}
         maxZoom={maxZoom}
