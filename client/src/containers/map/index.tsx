@@ -159,6 +159,8 @@ export default function MapContainer() {
           // where the globe remains visible. From step 2 onward we use Mercator, and on the last step we return to globe.
           // This isn’t very scalable and should be revisited.
 
+          //https://github.com/mapbox/mapbox-gl-js/blob/main/src/geo/projection/globe_constants.ts#L5
+
           name: projection,
         }}
         minZoom={minZoom}
