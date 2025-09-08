@@ -14,12 +14,6 @@
     "heroku-postbuild": "./heroku.build"
   },
   "engines": {
-    "node": "18.x"
-  },
-  "devDependencies": {
-    "eslint-config-next": "latest",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "node": "22.11.0"
   }
 }
