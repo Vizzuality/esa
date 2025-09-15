@@ -2,6 +2,7 @@ import { PopoverClose } from '@radix-ui/react-popover';
 import { Info, X } from 'lucide-react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import RichText from '@/components/ui/rich-text';
 
 type LegendHeaderProps = {
   title?: string;
@@ -25,7 +26,7 @@ const LegendHeader = ({ title, info }: LegendHeaderProps) => {
                 <X className="h-4 w-4 stroke-white" />
               </PopoverClose>
             </div>
-            {info}
+            <RichText>{info}</RichText>
           </PopoverContent>
         </Popover>
       )}

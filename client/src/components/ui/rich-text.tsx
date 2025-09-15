@@ -18,7 +18,7 @@ const RichText = ({ children, className }: RichTextProps) => {
   return (
     <Markdown
       components={{
-        a: ({ node, ...props }) => (
+        a: ({ node, href, ...props }) => (
           <a {...props} target="_blank" className="underline">
             {props.children}
           </a>
@@ -54,12 +54,7 @@ const RichText = ({ children, className }: RichTextProps) => {
         },
         blockquote: ({ node, ...props }) => (
           <blockquote
-            style={{
-              borderLeft: '3px solid rgba(204, 204, 204, 0.5)',
-              padding: '0 2em 0 0.7em',
-              margin: '2em 0',
-              fontStyle: 'italic',
-            }}
+            className="my-8 border-l-[3px] border-l-[rgba(204,204,204,0.5)] px-8 pl-[0.7em] pr-8 italic"
             {...props}
           />
         ),
