@@ -1,3 +1,5 @@
+import ReactMarkdown from 'react-markdown';
+
 import { PopoverClose } from '@radix-ui/react-popover';
 import { Info, X } from 'lucide-react';
 
@@ -25,7 +27,7 @@ const LegendHeader = ({ title, info }: LegendHeaderProps) => {
                 <X className="h-4 w-4 stroke-white" />
               </PopoverClose>
             </div>
-            {info}
+            <ReactMarkdown>{info}</ReactMarkdown>
           </PopoverContent>
         </Popover>
       )}
