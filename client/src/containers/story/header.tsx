@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useMotionValueEvent, useScroll } from 'framer-motion';
@@ -39,9 +40,16 @@ type StoryHeaderProps = {
   categoryTitle?: string;
   title?: string;
   storyId?: string;
+  categoryURL?: string;
 };
 
-const StoryHeader = ({ categorySlug, title, categoryTitle, storyId }: StoryHeaderProps) => {
+const StoryHeader = ({
+  categorySlug,
+  title,
+  categoryTitle,
+  storyId,
+  categoryURL,
+}: StoryHeaderProps) => {
   const { push } = useRouter();
   const setLayers = useSetAtom(layersAtom);
 
@@ -80,9 +88,23 @@ const StoryHeader = ({ categorySlug, title, categoryTitle, storyId }: StoryHeade
         <div className="flex justify-between gap-4 p-4 pb-2 text-center text-2xl font-bold sm:flex-row sm:items-center sm:px-12 sm:py-6">
           <div className="order-2 flex flex-1 items-center gap-2 sm:order-1 sm:gap-4">
             <CategoryIcon slug={categorySlug} className="hidden shrink-0 fill-gray-200 sm:block" />
-            <h1 className="font-notes text-start text-base font-normal sm:text-center sm:text-2xl">
-              {categoryTitle}: {title}
-            </h1>
+            {title && (
+              <h1 className="font-notes text-start text-base font-normal sm:text-center sm:text-2xl">
+                {categoryURL ? (
+                  <Link
+                    href={categoryURL}
+                    target="_blank"
+                    className="hover:underline"
+                    rel="noreferrer noopener"
+                  >
+                    {categoryTitle}
+                  </Link>
+                ) : (
+                  categoryTitle
+                )}
+                : {title}
+              </h1>
+            )}
           </div>
           <Dialog>
             <DialogTrigger className={cn('order-2 px-4 py-2 sm:order-1 ', headerButtonClassName)}>

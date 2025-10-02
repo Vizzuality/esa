@@ -158,7 +158,7 @@ export default function Home() {
           </div>
           <div className="hidden h-full w-[280px] flex-col sm:flex 2xl:w-80">
             <div className="flex max-h-[calc(100%-100px)] flex-col justify-between">
-              <Card title="Featured stories" className="max-h-[calc(100%-33px)]">
+              <Card title="Find more stories" className="max-h-[calc(100%-33px)]">
                 <TopStories />
               </Card>
               <GradientLine />
@@ -269,7 +269,7 @@ export default function Home() {
             </div>
             <div className="flex-0">
               <GradientLine />
-              <Card title="Featured stories" className="max-h-[calc(100%-33px)]">
+              <Card title="Find more stories" className="max-h-[calc(100%-33px)]">
                 <TopStories />
               </Card>
             </div>

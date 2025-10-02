@@ -18,8 +18,11 @@ import { WidgetWidgetComponent } from '@/types/generated/strapi.schemas';
 
 import { bubbleDefaultOptions, getChartDefaultData, getChartDefaultOptions } from './utils';
 
+import { jsonToFunction } from '@/lib/json-formatter';
+
 type ChartJsProps = {
   widget: WidgetWidgetComponent;
+  isLast?: boolean; // property needed for widgets type multiple (more than one chart in the same widget)
 };
 
 const chartTypes = [
@@ -31,6 +34,7 @@ const chartTypes = [
   'doughnut',
   'polarArea',
   'radar',
+  'multiple',
 ] as const;
 
 ChartJS.register(...registerables, Filler);
@@ -52,7 +56,10 @@ const ChartJs = ({ widget, ...props }: ChartJsProps) => {
 
   const chartType = type as ChartType;
 
-  const optionsWithDefaults: Partial<ChartProps['options']> = getChartDefaultOptions(options);
+  const optionsWithDefaults: Partial<ChartProps['options']> = getChartDefaultOptions(
+    options,
+    props.isLast
+  );
 
   const OPTIONS = {
     ...optionsWithDefaults,

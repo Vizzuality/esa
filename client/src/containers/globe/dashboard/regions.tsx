@@ -8,12 +8,10 @@
 // ];
 
 const thematicAreas = [
-  { name: 'Implementation and support', value: 95 },
-  { name: 'Preparation', value: 52 },
-  { name: 'Identification', value: 42 },
-  { name: 'Completion and evaluation', value: 19 },
-  { name: 'Appraisal', value: 3 },
-  { name: 'Negotiations and board approval', value: 3 },
+  { name: 'Implementation and support', value: 52 },
+  { name: 'Preparation', value: 35 },
+  { name: 'Identification', value: 34 },
+  { name: 'Completion and evaluation', value: 15 },
 ];
 
 const DashboardRegions = () => {

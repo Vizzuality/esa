@@ -49,6 +49,7 @@ type MapStepLayoutProps = {
 
 const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) => {
   const { card, widget, map } = step as StepLayoutMapStepComponent & { map: StoryStepMap };
+
   const medias = useMemo(() => {
     return map?.markers?.map((marker) => ({
       title: marker?.name,
@@ -97,16 +98,39 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
               <RichText>{card.content}</RichText>
             </MapContent>
           )}
+
           {!!widget?.id && (
             <MapContent showContent={showContent} title={widget.title}>
               <div className="mt-2 space-y-2">
-                <div className="mx-auto w-fit">
-                  <Chart widget={widget as WidgetWidgetComponent} />
+                <div className="mx-auto w-fit space-y-6">
+                  {widget.type !== 'multiple' ? (
+                    <Chart widget={widget as WidgetWidgetComponent} />
+                  ) : (
+                    Object.entries(widget?.data as Record<string, any>).map(
+                      ([variable, block], index, array) => {
+                        return (
+                          <Chart
+                            key={variable}
+                            isLast={index === array.length - 1}
+                            widget={{
+                              ...widget,
+                              type: block.type || 'line',
+                              data: {
+                                ...block,
+                              },
+                              title: variable,
+                            }}
+                          />
+                        );
+                      }
+                    )
+                  )}
                 </div>
                 {(widget as any)?.legend && <RichText>{(widget as any).legend}</RichText>}
               </div>
             </MapContent>
           )}
+
           {/* {!!medias?.length && (
             <div className="pointer-events-auto w-full max-w-full justify-between gap-4 space-y-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
               <div className="text-enlight-yellow-400 flex items-center gap-2">

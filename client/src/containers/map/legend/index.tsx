@@ -120,7 +120,7 @@ const MapLegends = ({ className = '' }) => {
         legend_config: legend,
       })) as LegendProps[];
 
-      return [...acc, ...layerLegends];
+      return [...acc, ...layerLegends.reverse()];
     }, []);
   }, [layersData?.data, layersSettings]);
 

@@ -41,7 +41,12 @@ const LayerManager = () => {
         {layers.map((l) => {
           const beforeId = `${l}-layer`;
           return (
-            <LayerManagerItem key={l} id={l} beforeId={beforeId} settings={layersSettings?.[l]} />
+            <LayerManagerItem
+              key={`${l}-layer-${beforeId}`}
+              id={l}
+              beforeId={beforeId}
+              settings={layersSettings?.[l]}
+            />
           );
         })}
       </>

@@ -24,9 +24,19 @@ export function formatHA(value: number, options?: Intl.NumberFormatOptions) {
   return v.format(value);
 }
 
+export function formatDate(value: Date, options?: Intl.DateTimeFormatOptions) {
+  const v = Intl.DateTimeFormat('en-US', {
+    dateStyle: 'medium',
+    ...options,
+  });
+
+  return v.format(value);
+}
+
 const FORMATS = {
   formatPercentage,
   formatHA,
+  formatDate,
 } as const;
 
 export type FormatProps = {
