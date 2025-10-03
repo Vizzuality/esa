@@ -1,45 +1,49 @@
-# ---------- Builder ----------
-FROM node:18.16-bookworm-slim AS build
-RUN apt-get update -y && apt-get upgrade -y && \
-    apt-get install -y build-essential gcc autoconf automake zlib1g-dev libpng-dev nasm bash libvips-dev && \
+# Build all the things
+FROM node:18.16-bookworm-slim as build
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+      build-essential \
+      gcc autoconf \
+      automake \
+      zlib1g-dev \
+      libpng-dev \
+      nasm bash \
+      libvips-dev \
+    && apt-get clean
+
+ENV NODE_ENV production
+
+WORKDIR /app
+COPY .yarn ./.yarn
+COPY package.json .yarnrc.yml yarn.lock ./
+
+WORKDIR /app/cms
+COPY ./cms/package.json ./
+RUN yarn install
+
+COPY ./cms .
+RUN yarn prebuild
+RUN yarn build
+
+# Copy only the built files into the final image
+FROM node:18.16-bookworm-slim AS runner
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y libvips-dev && \
     apt-get clean
 
-ENV NODE_ENV=production
+ENV NODE_ENV production
+
 WORKDIR /app
 
-# Pin Yarn like your local
-RUN corepack enable && corepack prepare yarn@3.6.1 --activate
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 strapi
 
-# Copy root manifests first (cacheable)
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
-
-# Warm cache with just workspace manifests
-COPY cms/package.json ./cms/package.json
-# (Add other internal workspace package.json files here if cms depends on them)
-
-# Install only what's needed for the cms workspace (prod deps)
-RUN yarn workspaces focus cms --production --immutable
-
-# Copy the rest of the cms source and build
-COPY cms ./cms
-WORKDIR /app/cms
-RUN yarn prebuild && yarn build
-
-# ---------- Runner ----------
-FROM node:18.16-bookworm-slim AS runner
-RUN apt-get update -y && apt-get upgrade -y && \
-    apt-get install -y libvips-dev && apt-get clean
-
-ENV NODE_ENV=production
-WORKDIR /app
-
-RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 strapi
-
-# Bring built app + node_modules focused for cms
 COPY --from=build --chown=strapi:nodejs /app/cms ./
 COPY --from=build /app/node_modules ./node_modules
 
 USER strapi
+
 EXPOSE 1337
 ENTRYPOINT ["/app/entrypoint.sh"]
