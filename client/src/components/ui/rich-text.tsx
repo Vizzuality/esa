@@ -54,7 +54,7 @@ const RichText = ({ children, className }: RichTextProps) => {
         },
         blockquote: ({ node, ...props }) => (
           <blockquote
-            className="my-8 border-l-[3px] border-l-[rgba(204,204,204,0.5)] px-8 pl-[0.7em] pr-8 italic"
+            className="border-l-[3px] border-l-[rgba(204,204,204,0.5)] px-8 pl-[0.7em] pr-8 italic"
             {...props}
           />
         ),

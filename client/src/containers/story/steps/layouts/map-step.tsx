@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { InfoIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
+import { getImageSrc } from '@/lib/image-src';
 
 import { useSyncStep } from '@/store/stories';
 
@@ -45,10 +46,25 @@ type MapStepLayoutProps = {
   showContent?: boolean;
   storySummary?: StorySummary[] | null;
   map?: StoryStepMap;
+  quote?: {
+    name: string;
+    content: string;
+    image: {
+      data: {
+        attributes: {
+          url: string;
+          image: string;
+        };
+      } | null;
+    } | null;
+  }[];
 };
 
 const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) => {
-  const { card, widget, map } = step as StepLayoutMapStepComponent & { map: StoryStepMap };
+  const { card, widget, map, quote } = step as StepLayoutMapStepComponent & {
+    map: StoryStepMap;
+    quote: MapStepLayoutProps['quote'];
+  };
 
   const medias = useMemo(() => {
     return map?.markers?.map((marker) => ({
@@ -98,6 +114,29 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
               <RichText>{card.content}</RichText>
             </MapContent>
           )}
+          {Array.isArray(quote) &&
+            quote.length > 0 &&
+            quote.map((q) => {
+              const src = getImageSrc(
+                q.image?.data?.attributes?.url || q.image?.data?.attributes?.image
+              );
+              return (
+                <MapContent key={q.name} showContent={showContent}>
+                  <div className="mb-2 flex items-center justify-between space-x-4">
+                    <div
+                      className="border-primary flex h-36 w-36 shrink-0 rounded-full border bg-cover bg-top bg-no-repeat"
+                      style={{ backgroundImage: `url(${src})` }}
+                    >
+                      {/* <Image src={src} alt={q.name} width={400} height={400} /> */}
+                    </div>
+                    <div className="flex flex-col">
+                      <RichText>{q.content}</RichText>
+                    </div>
+                  </div>
+                  <RichText>{q.name}</RichText>
+                </MapContent>
+              );
+            })}
 
           {!!widget?.id && (
             <MapContent showContent={showContent} title={widget.title}>
@@ -166,7 +205,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                           <>
                             {c.attributes?.link ? (
                               <a
-                                className="font-open-sans block w-max leading-none hover:underline"
+                                className="font-open-sans block leading-none hover:underline"
                                 href={c.attributes.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -259,7 +298,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                           <>
                             {c.attributes?.link ? (
                               <a
-                                className="font-open-sans block w-max leading-none hover:underline"
+                                className="font-open-sans block leading-none hover:underline"
                                 href={c.attributes.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
