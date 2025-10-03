@@ -10,7 +10,7 @@ COPY client/package.json client/yarn.lock ./
 RUN corepack enable && corepack prepare "$(node -p "require('./package.json').packageManager")" --activate \
  && yarn --version
 
-RUN yarn install --immutable
+RUN yarn install
 
 # Copy source
 COPY client .
