@@ -1645,6 +1645,7 @@ __metadata:
     "@svgr/webpack": ^8.1.0
     "@t3-oss/env-nextjs": 0.4.1
     "@tailwindcss/typography": 0.5.9
+    "@tanstack/query-core": ^5
     "@tanstack/react-query": ^4.29.18
     "@types/d3-array": 3.0.5
     "@types/node": 20.3.1
@@ -4010,6 +4011,13 @@ __metadata:
   version: 4.39.2
   resolution: "@tanstack/query-core@npm:4.39.2"
   checksum: 1e03e573a7b48ef962e6c07b51a2ccadeed1264d0de0ac73d6a9f0124f061dc51f0d3dc51c0d035ddef1330333cf314995e6ed7028c57b150211a66975cb7ce2
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-core@npm:^5":
+  version: 5.90.2
+  resolution: "@tanstack/query-core@npm:5.90.2"
+  checksum: ccee5dacfa717ff7cf54d3b1017f9923e160efa8acc52a9af8d1f15e428cb7da95dce2c2cca135fd029ab5837e0b821c599610a32e1671d9da3f76f5c10721e8
   languageName: node
   linkType: hard
 
