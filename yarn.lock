@@ -7556,6 +7556,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:^5.90.2":
+  version: 5.90.2
+  resolution: "@tanstack/query-core@npm:5.90.2"
+  checksum: ccee5dacfa717ff7cf54d3b1017f9923e160efa8acc52a9af8d1f15e428cb7da95dce2c2cca135fd029ab5837e0b821c599610a32e1671d9da3f76f5c10721e8
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-query@npm:^4.29.18":
   version: 4.36.1
   resolution: "@tanstack/react-query@npm:4.36.1"
@@ -12204,6 +12211,8 @@ __metadata:
 "esa@workspace:.":
   version: 0.0.0-use.local
   resolution: "esa@workspace:."
+  dependencies:
+    "@tanstack/query-core": ^5.90.2
   languageName: unknown
   linkType: soft
 
