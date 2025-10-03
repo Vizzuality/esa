@@ -17,7 +17,8 @@
         "pie",
         "doughnut",
         "polarArea",
-        "radar"
+        "radar",
+        "multiple"
       ],
       "required": true
     },

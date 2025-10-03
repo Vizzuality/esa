@@ -11,7 +11,6 @@ type MapContentProps = PropsWithChildren & {
   title?: ReactElement | string;
   titlePlaceholder?: string;
 };
-
 const MapContent = ({ showContent, title, titlePlaceholder, children }: MapContentProps) => {
   return (
     <Collapsible

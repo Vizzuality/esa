@@ -68,6 +68,7 @@ const Story = () => {
         title={story?.title}
         storyId={id}
         categoryTitle={story?.category?.data?.attributes?.name}
+        categoryURL={story?.category?.data?.attributes?.url}
       />
       <ScrollProvider>
         <Steps story={story} />
