@@ -88,6 +88,5 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0"
-  },
-  "packageManager": "yarn@3.6.1"
+  }
 }
