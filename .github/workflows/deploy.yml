@@ -48,6 +48,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Create CMS env file for build
+        run: |
+          echo "${{ secrets.STAGING_CMS_ENV_FILE }}" > cms/.env
+
       - name: Build and tag CMS image
         run: |
           docker build -f cms/Dockerfile.prod -t $IMAGE_REGISTRY/esa-gda-comms-staging-cms:staging .
@@ -76,6 +80,6 @@ jobs:
 
       - name: Trigger redeploy in DigitalOcean
         run: |
-          doctl apps update esa-gda-comms-staging \
-            --spec <(doctl apps spec get esa-gda-comms-staging | \
+          doctl apps update 5086f3eb-7ddc-4090-b6e3-ef4f6c362019 \
+            --spec <(doctl apps spec get 5086f3eb-7ddc-4090-b6e3-ef4f6c362019 | \
             yq '.services[].image.tag="staging"')
