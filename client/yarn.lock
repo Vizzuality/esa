@@ -11838,9 +11838,9 @@ __metadata:
   linkType: hard
 
 "wgsl_reflect@npm:^1.2.0":
-  version: 1.2.3
-  resolution: "wgsl_reflect@npm:1.2.3"
-  checksum: 5bf1ceb691ed4404bedb3002d31df4ec2f25d4efae93e6d4b10989078b3c67bf99d6b691e2c01f6f8c02e34ba42065fa3c0db1da36c17f358c89512218db0c9d
+  version: 1.2.1
+  resolution: "wgsl_reflect@npm:1.2.1"
+  checksum: 06f620211c337a7b814b4b0c47e1858f903da6c8b23634bb3c75c4c34ac0600fab615c893440f679bb2ad2b7686ffdf98ce8573f476106568a7d9fa32f4968e1
   languageName: node
   linkType: hard
 
