@@ -22,7 +22,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+      - name: Create client env file for build
+        run: |
+          echo "${{ secrets.STAGING_CLIENT_ENV_FILE }}" > client/.env.loca
       - name: Build and tag Client image
         run: |
           docker build -f client/Dockerfile.prod -t $IMAGE_REGISTRY/esa-gda-comms-staging-client:$GITHUB_SHA .
