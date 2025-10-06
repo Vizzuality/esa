@@ -30,8 +30,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 import MapContent from './components/map-content';
 
-import Image from 'next/image';
-
 const MapLegends = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
 });
@@ -50,12 +48,14 @@ type MapStepLayoutProps = {
     name: string;
     content: string;
     image: {
-      data: {
-        attributes: {
-          url: string;
-          image: string;
-        }[];
-      } | null;
+      data:
+        | {
+            attributes: {
+              url: string;
+              image: string;
+            };
+          }[]
+        | null;
     } | null;
   };
 };
@@ -82,7 +82,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
   // const handleClickMarker = (markerIndex: number) => {
   //   setCurrentMedia(markerIndex);
   // };
-  console.log(quote, quote?.image?.data?.[0]?.attributes?.url);
+
   return (
     <div className="flex justify-end">
       <div
@@ -137,7 +137,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                     style={{
                       backgroundImage: `url(${getImageSrc(
                         quote?.image?.data?.[0]?.attributes?.url ||
-                          quote.image?.data?.attributes?.image
+                          quote.image?.data?.[0]?.attributes?.image
                       )})`,
                     }}
                   />
