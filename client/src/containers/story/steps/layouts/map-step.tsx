@@ -132,15 +132,17 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                   <RichText>{quote.content}</RichText>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <div
-                    className="border-primary flex h-14 w-14 shrink-0 rounded-full border bg-cover bg-top bg-no-repeat"
-                    style={{
-                      backgroundImage: `url(${getImageSrc(
-                        quote?.image?.data?.[0]?.attributes?.url ||
-                          quote.image?.data?.[0]?.attributes?.image
-                      )})`,
-                    }}
-                  />
+                  {!!quote?.image?.data?.length && (
+                    <div
+                      className="border-primary flex h-14 w-14 shrink-0 rounded-full border bg-cover bg-top bg-no-repeat"
+                      style={{
+                        backgroundImage: `url(${getImageSrc(
+                          quote?.image?.data?.[0]?.attributes?.url ||
+                            quote.image?.data?.[0]?.attributes?.image
+                        )})`,
+                      }}
+                    />
+                  )}
                   <div className="text-sm">{quote.name}</div>
                 </div>
               </div>
