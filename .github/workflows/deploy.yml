@@ -25,7 +25,7 @@ jobs:
 
       - name: Build and tag Client image
         run: |
-          docker build -f client/Dockerfile.prod -t $IMAGE_REGISTRY/esa-gda-comms-staging-client:$GITHUB_SHA client
+          docker build -f client/Dockerfile.prod -t $IMAGE_REGISTRY/esa-gda-comms-staging-client:$GITHUB_SHA .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -54,7 +54,7 @@ jobs:
 
       - name: Build and tag CMS image
         run: |
-          docker build -f cms/Dockerfile.prod -t $IMAGE_REGISTRY/esa-gda-comms-staging-cms:$GITHUB_SHA cms
+          docker build -f cms/Dockerfile.prod -t $IMAGE_REGISTRY/esa-gda-comms-staging-cms:$GITHUB_SHA .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -81,7 +81,6 @@ jobs:
     steps:
       - name: Export per-component repo + tag (v2 inputs)
         run: |
-          # Define repos y tags que usará el action v2
           echo "IMAGE_REPOSITORY_ESA_GDA_COMMS_STAGING_CLIENT=esa-gda-comms-staging-client" >> $GITHUB_ENV
           echo "IMAGE_REPOSITORY_ESA_GDA_COMMS_STAGING_CMS=esa-gda-comms-staging-cms"       >> $GITHUB_ENV
 
