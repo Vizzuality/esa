@@ -11,8 +11,8 @@ on:
       - '.github/workflows/*'
 
 env:
-  PROJECT_NAME: "esa-gda-comms"
-  IMAGE_REGISTRY: "registry.digitalocean.com/esa-gda-comms"
+  PROJECT_NAME: 'esa-gda-comms'
+  IMAGE_REGISTRY: 'registry.digitalocean.com/esa-gda-comms'
 
 jobs:
   build_client_image:
@@ -24,9 +24,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Extract branch name
+        id: extract_branch
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
 
       - name: Copy env variables to docker
         env:
@@ -68,9 +68,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Extract branch name
+        id: extract_branch
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
 
       - name: Copy env variables to docker
         env:
@@ -104,34 +104,40 @@ jobs:
           buffer_size: 5
 
   deploy:
-    name: Deploy Client and CMS to DO APP Platform
+    name: Deploy Client and CMS to DO App Platform
     needs: [build_client_image, build_cms_image]
     runs-on: ubuntu-22.04
 
     steps:
-      - name: DigitalOcean App Platform deployment
-        uses: digitalocean/app_action@v1.1.5
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+
+      # Calcula nombres de componentes y crea las ENV que espera la v2:
+      # IMAGE_TAG_<NOMBRE_COMPONENTE_EN_DO_EN_MAYÚSCULAS_CON_GUIONES_A_GUIONES_BAJOS>
+      - name: Set App Platform image tags (computed)
         env:
-          IMAGE_NAME_CLIENT: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
-          IMAGE_NAME_CMS: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
+          DEPLOY_ENV: ${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
+        run: |
+          CLIENT_NAME: `${{ env.PROJECT_NAME }}-${DEPLOY_ENV}-client`
+          CMS_NAME: `${{ env.PROJECT_NAME }}-${DEPLOY_ENV}-cms`
+
+          CLIENT_ENV_NAME=$(echo "$CLIENT_NAME" | tr '[:lower:]-' '[:upper:]_')
+          CMS_ENV_NAME=$(echo "$CMS_NAME" | tr '[:lower:]-' '[:upper:]_')
+
+          # Exportar las variables que leerá el action v2
+          echo "IMAGE_TAG_${CLIENT_ENV_NAME}=${GITHUB_SHA}" >> $GITHUB_ENV
+          echo "IMAGE_TAG_${CMS_ENV_NAME}=${GITHUB_SHA}" >> $GITHUB_ENV
+
+          echo "Usando componentes:"
+          echo "  $CLIENT_NAME  -> IMAGE_TAG_${CLIENT_ENV_NAME}"
+          echo "  $CMS_NAME     -> IMAGE_TAG_${CMS_ENV_NAME}"
+
+      - name: DigitalOcean App Platform deployment (v2)
+        uses: digitalocean/app_action/deploy@v2
         with:
-          app_name: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          images: '[
-                  {
-                    "name": "${{ env.IMAGE_NAME_CLIENT }}",
-                    "image":{
-                      "registry_type": "DOCR",
-                      "repository": "${{ env.IMAGE_NAME_CLIENT }}",
-                      "tag": "${{ github.sha }}"
-                    }
-                  },
-                  {
-                    "name": "${{ env.IMAGE_NAME_CMS }}",
-                    "image":{
-                      "registry_type": "DOCR",
-                      "repository": "${{ env.IMAGE_NAME_CMS }}",
-                      "tag": "${{ github.sha }}"
-                    }
-                  }
-                ]'
+          app_name: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
+          print_build_logs: 'true'
+          print_deploy_logs: 'true'
