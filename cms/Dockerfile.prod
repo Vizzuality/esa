@@ -1,16 +1,16 @@
 # Build all the things
 FROM node:18.16-bookworm-slim as build
 RUN apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y \
-      build-essential \
-      gcc autoconf \
-      automake \
-      zlib1g-dev \
-      libpng-dev \
-      nasm bash \
-      libvips-dev \
-    && apt-get clean
+  apt-get upgrade -y && \
+  apt-get install -y \
+  build-essential \
+  gcc autoconf \
+  automake \
+  zlib1g-dev \
+  libpng-dev \
+  nasm bash \
+  libvips-dev \
+  && apt-get clean
 
 ENV NODE_ENV production
 
@@ -29,9 +29,9 @@ RUN yarn build
 # Copy only the built files into the final image
 FROM node:18.16-bookworm-slim AS runner
 RUN apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y libvips-dev && \
-    apt-get clean
+  apt-get upgrade -y && \
+  apt-get install -y libvips-dev && \
+  apt-get clean
 
 ENV NODE_ENV production
 
@@ -42,7 +42,7 @@ RUN adduser --system --uid 1001 strapi
 
 COPY --from=build --chown=strapi:nodejs /app/cms ./
 COPY --from=build /app/node_modules ./node_modules
-
+RUN chown -R strapi:nodejs /app
 USER strapi
 
 EXPOSE 1337
