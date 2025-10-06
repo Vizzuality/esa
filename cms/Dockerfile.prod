@@ -17,10 +17,12 @@ ENV NODE_ENV production
 WORKDIR /app
 COPY .yarn ./.yarn
 COPY package.json .yarnrc.yml yarn.lock ./
+RUN corepack enable && corepack prepare yarn@3.6.0 --activate
 
 WORKDIR /app/cms
-COPY ./cms/package.json ./
-RUN yarn install
+COPY ./cms/package.json ./ 
+COPY ./cms/yarn.lock ./
+RUN yarn install --immutable
 
 COPY ./cms .
 RUN yarn prebuild
