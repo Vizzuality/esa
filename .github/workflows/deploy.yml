@@ -99,8 +99,6 @@ jobs:
 
       - name: Generate App Spec with CMS envs
         run: |
-          echo "${{ secrets.STAGING_CMS_ENV_FILE }}" > cms_env.txt
-
           {
             echo "name: esa-gda-comms-staging"
             echo "services:"
@@ -122,7 +120,7 @@ jobs:
               val="${val//\"/\\\"}"
               echo "      - key: ${key}"
               echo "        value: \"${val}\""
-            done < cms_env.txt
+            done <<< "${{ secrets.STAGING_CMS_ENV_FILE }}"
           } > app-spec.yaml
 
       - name: DigitalOcean App Platform deployment (v2)
