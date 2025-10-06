@@ -52,12 +52,7 @@ const RichText = ({ children, className }: RichTextProps) => {
             </video>
           );
         },
-        blockquote: ({ node, ...props }) => (
-          <blockquote
-            className="my-8 border-l-[3px] border-l-[rgba(204,204,204,0.5)] px-8 pl-[0.7em] pr-8 italic"
-            {...props}
-          />
-        ),
+        blockquote: ({ node, ...props }) => <blockquote className="italic" {...props} />,
       }}
       className={cn('space-y-2', className)}
       urlTransform={(url) => getImageSrc(url)}

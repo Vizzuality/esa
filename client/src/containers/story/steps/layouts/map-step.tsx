@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { InfoIcon } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
+import { getImageSrc } from '@/lib/image-src';
 
 import { useSyncStep } from '@/store/stories';
 
@@ -29,8 +30,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 import MapContent from './components/map-content';
 
-// import Image from 'next/image';
-
 const MapLegends = dynamic(() => import('@/containers/map/legend'), {
   ssr: false,
 });
@@ -45,10 +44,27 @@ type MapStepLayoutProps = {
   showContent?: boolean;
   storySummary?: StorySummary[] | null;
   map?: StoryStepMap;
+  quote?: {
+    name: string;
+    content: string;
+    image: {
+      data:
+        | {
+            attributes: {
+              url: string;
+              image: string;
+            };
+          }[]
+        | null;
+    } | null;
+  };
 };
 
 const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) => {
-  const { card, widget, map } = step as StepLayoutMapStepComponent & { map: StoryStepMap };
+  const { card, widget, map, quote } = step as StepLayoutMapStepComponent & {
+    map: StoryStepMap;
+    quote: MapStepLayoutProps['quote'];
+  };
   const medias = useMemo(() => {
     return map?.markers?.map((marker) => ({
       title: marker?.name,
@@ -107,6 +123,30 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
               </div>
             </MapContent>
           )}
+
+          {quote && (
+            <MapContent key={quote.name} showContent={showContent}>
+              <div className="space-y-3">
+                <div className="flex">
+                  <span className="font-notes text-xl text-teal-500">“</span>
+                  <RichText>{quote.content}</RichText>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div
+                    className="border-primary flex h-14 w-14 shrink-0 rounded-full border bg-cover bg-top bg-no-repeat"
+                    style={{
+                      backgroundImage: `url(${getImageSrc(
+                        quote?.image?.data?.[0]?.attributes?.url ||
+                          quote.image?.data?.[0]?.attributes?.image
+                      )})`,
+                    }}
+                  />
+                  <div className="text-sm">{quote.name}</div>
+                </div>
+              </div>
+            </MapContent>
+          )}
+
           {/* {!!medias?.length && (
             <div className="pointer-events-auto w-full max-w-full justify-between gap-4 space-y-4 rounded border-gray-800 px-6 py-4 sm:border sm:bg-[#335e6f]/80 sm:backdrop-blur">
               <div className="text-enlight-yellow-400 flex items-center gap-2">
@@ -142,7 +182,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                           <>
                             {c.attributes?.link ? (
                               <a
-                                className="font-open-sans block w-max leading-none hover:underline"
+                                className="font-open-sans block leading-none hover:underline"
                                 href={c.attributes.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -235,7 +275,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                           <>
                             {c.attributes?.link ? (
                               <a
-                                className="font-open-sans block w-max leading-none hover:underline"
+                                className="font-open-sans block leading-none hover:underline"
                                 href={c.attributes.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
