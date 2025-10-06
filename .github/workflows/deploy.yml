@@ -9,7 +9,6 @@ on:
       - 'client/**'
       - 'cms/**'
       - '.github/workflows/*'
-      - '.do/app.yaml'
 
 env:
   PROJECT_NAME: 'esa-gda-comms'
