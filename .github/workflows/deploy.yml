@@ -18,18 +18,15 @@ jobs:
   build_client_image:
     name: Build Client image and push to DO Container Registry
     runs-on: ubuntu-22.04
-    outputs:
-      repo: ${{ steps.compute_repo.outputs.repo }}
-      digest: ${{ steps.get_digest.outputs.digest }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Extract branch name
-        id: extract_branch
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
 
       - name: Copy env variables to docker
         env:
@@ -37,20 +34,11 @@ jobs:
         run: |
           echo "${{ secrets[format('{0}_CLIENT_ENV_FILE', env.ENVIRONMENT)] }}" > client/.env.local
 
-      - name: Compute image repo name
-        id: compute_repo
-        run: |
-          if [ "${{ steps.extract_branch.outputs.branch }}" = "main" ]; then
-            echo "repo=${{ env.PROJECT_NAME }}-production-client" >> "$GITHUB_OUTPUT"
-          else
-            echo "repo=${{ env.PROJECT_NAME }}-staging-client" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Build Client image
+      - name: Build and tag Client image
         env:
-          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
+          IMAGE_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
         run: |
-          docker build -f client/Dockerfile.prod -t $IMAGE_REGISTRY/$IMAGE_NAME:${GITHUB_SHA} .
+          docker build -f client/Dockerfile.prod -t $IMAGE_REGISTRY/$IMAGE_NAME:$GITHUB_SHA .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -62,44 +50,27 @@ jobs:
 
       - name: Push image to DigitalOcean Container Registry
         env:
-          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
-        run: docker push $IMAGE_REGISTRY/$IMAGE_NAME:${GITHUB_SHA}
-
-      - name: Get pushed image digest
-        id: get_digest
-        env:
-          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
-        run: |
-          # Obtiene el digest (sha256:...) del tag que acabamos de pushear
-          DIGEST=$(doctl registry repository list-tags "$IMAGE_NAME" --format Tag,Digest --no-header \
-            | awk -v t="${GITHUB_SHA}" '$1==t {print $2; exit}')
-          if [ -z "$DIGEST" ]; then
-            echo "No se encontró digest para el tag ${GITHUB_SHA} en $IMAGE_NAME" >&2
-            exit 1
-          fi
-          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+          IMAGE_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
+        run: docker push $IMAGE_REGISTRY/$IMAGE_NAME:$GITHUB_SHA
 
       - name: Remove old images from Container Registry
         uses: martintomas/docr-image-remove@v1
         with:
-          image_repository: ${{ steps.compute_repo.outputs.repo }}
+          image_repository: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
           buffer_size: 5
 
   build_cms_image:
     name: Build CMS image and push to DO Container Registry
     runs-on: ubuntu-22.04
-    outputs:
-      repo: ${{ steps.compute_repo.outputs.repo }}
-      digest: ${{ steps.get_digest.outputs.digest }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Extract branch name
-        id: extract_branch
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
 
       - name: Copy env variables to docker
         env:
@@ -107,20 +78,11 @@ jobs:
         run: |
           echo "${{ secrets[format('{0}_CMS_ENV_FILE', env.ENVIRONMENT)] }}" > cms/.env
 
-      - name: Compute image repo name
-        id: compute_repo
-        run: |
-          if [ "${{ steps.extract_branch.outputs.branch }}" = "main" ]; then
-            echo "repo=${{ env.PROJECT_NAME }}-production-cms" >> "$GITHUB_OUTPUT"
-          else
-            echo "repo=${{ env.PROJECT_NAME }}-staging-cms" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Build CMS image
+      - name: Build and tag CMS image
         env:
-          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
+          IMAGE_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
         run: |
-          docker build -f cms/Dockerfile.prod -t $IMAGE_REGISTRY/$IMAGE_NAME:${GITHUB_SHA} .
+          docker build -f cms/Dockerfile.prod -t $IMAGE_REGISTRY/$IMAGE_NAME:$GITHUB_SHA .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -132,26 +94,13 @@ jobs:
 
       - name: Push image to DigitalOcean Container Registry
         env:
-          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
-        run: docker push $IMAGE_REGISTRY/$IMAGE_NAME:${GITHUB_SHA}
-
-      - name: Get pushed image digest
-        id: get_digest
-        env:
-          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
-        run: |
-          DIGEST=$(doctl registry repository list-tags "$IMAGE_NAME" --format Tag,Digest --no-header \
-            | awk -v t="${GITHUB_SHA}" '$1==t {print $2; exit}')
-          if [ -z "$DIGEST" ]; then
-            echo "No se encontró digest para el tag ${GITHUB_SHA} en $IMAGE_NAME" >&2
-            exit 1
-          fi
-          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+          IMAGE_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
+        run: docker push $IMAGE_REGISTRY/$IMAGE_NAME:$GITHUB_SHA
 
       - name: Remove old images from Container Registry
         uses: martintomas/docr-image-remove@v1
         with:
-          image_repository: ${{ steps.compute_repo.outputs.repo }}
+          image_repository: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
           buffer_size: 5
 
   deploy:
@@ -160,31 +109,29 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Extract branch name
-        id: extract_branch
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-
-      - name: Deploy the app (v2)
-        uses: digitalocean/app_action/deploy@v2
+      - name: DigitalOcean App Platform deployment
+        uses: digitalocean/app_action@v1.1.5
         env:
-          # App + servicios
-          APP_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
-          CLIENT_NAME: ${{ env.PROJECT_NAME }}-client
-          CMS_NAME: ${{ env.PROJECT_NAME }}-cms
-
-          # Repos (solo el nombre del repo en DOCR, sin la URL del registry)
-          CLIENT_REPOSITORY: ${{ needs.build_client_image.outputs.repo }}
-          CMS_REPOSITORY: ${{ needs.build_cms_image.outputs.repo }}
-
-          # Digests obtenidos tras el push
-          CLIENT_DIGEST: ${{ needs.build_client_image.outputs.digest }}
-          CMS_DIGEST: ${{ needs.build_cms_image.outputs.digest }}
+          IMAGE_NAME_CLIENT: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
+          IMAGE_NAME_CMS: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           app_name: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
-          print_build_logs: true
-          print_deploy_logs: true
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          images: '[
+            {
+            "name": "${{ env.IMAGE_NAME_CLIENT }}",
+            "image":{
+            "registry_type": "DOCR",
+            "repository": "${{ env.IMAGE_NAME_CLIENT }}",
+            "tag": "${{ github.sha }}"
+            }
+            },
+            {
+            "name": "${{ env.IMAGE_NAME_CMS }}",
+            "image":{
+            "registry_type": "DOCR",
+            "repository": "${{ env.IMAGE_NAME_CMS }}",
+            "tag": "${{ github.sha }}"
+            }
+            }
+            ]'
