@@ -18,7 +18,8 @@ jobs:
   build_client_image:
     name: Build Client image and push to DO Container Registry
     runs-on: ubuntu-22.04
-
+    outputs:
+      digest: ${{ steps.capture_digest.outputs.digest }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -28,100 +29,61 @@ jobs:
       - name: Build and tag Client image
         run: |
           docker build -f client/Dockerfile.prod -t $IMAGE_REGISTRY/esa-gda-comms-staging-client:$GITHUB_SHA .
-
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
       - name: Log in to DO Container Registry
         run: doctl registry login --expiry-seconds 600
-
       - name: Push image to DigitalOcean Container Registry
         run: docker push $IMAGE_REGISTRY/esa-gda-comms-staging-client:$GITHUB_SHA
-
-      - name: Remove old images from Container Registry
-        uses: martintomas/docr-image-remove@v1
-        with:
-          image_repository: esa-gda-comms-staging-client
-          buffer_size: 5
+      - name: Capture client image digest
+        id: capture_digest
+        run: |
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_REGISTRY/esa-gda-comms-staging-client:$GITHUB_SHA | cut -d'@' -f2)
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+          echo "Client digest: $DIGEST"
 
   build_cms_image:
     name: Build CMS image and push to DO Container Registry
     runs-on: ubuntu-22.04
-
+    outputs:
+      digest: ${{ steps.capture_digest.outputs.digest }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Build and tag CMS image
         run: |
           docker build -f cms/Dockerfile.prod -t $IMAGE_REGISTRY/esa-gda-comms-staging-cms:$GITHUB_SHA .
-
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
       - name: Log in to DO Container Registry
         run: doctl registry login --expiry-seconds 600
-
       - name: Push image to DigitalOcean Container Registry
         run: docker push $IMAGE_REGISTRY/esa-gda-comms-staging-cms:$GITHUB_SHA
+      - name: Capture CMS image digest
+        id: capture_digest
+        run: |
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE_REGISTRY/esa-gda-comms-staging-cms:$GITHUB_SHA | cut -d'@' -f2)
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+          echo "CMS digest: $DIGEST"
 
-      - name: Remove old images from Container Registry
-        uses: martintomas/docr-image-remove@v1
-        with:
-          image_repository: esa-gda-comms-staging-cms
-          buffer_size: 5
   deploy:
     name: Deploy Client and CMS to DO App Platform
     needs: [build_client_image, build_cms_image]
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      # 🔹 Espera breve por consistencia de DOCR (1 minuto)
-      - name: Wait for DOCR consistency
-        run: sleep 60
-
-      # 🔹 Verifica que los tags existen y captura sus digests
-      - name: Verify images exist in DOCR and capture digests
+      - name: Export per-component repo + digest (v2 inputs)
         run: |
-          echo "Looking for tag ${GITHUB_SHA} in DOCR…"
-
-          # CLIENT
-          doctl registry repository list-manifests esa-gda-comms-staging-client --format Digest,Tags --no-header | tee /tmp/client.txt
-          CLIENT_DIGEST=$(awk -v sha="${GITHUB_SHA}" '$0 ~ sha {print $1}' /tmp/client.txt)
-          echo "CLIENT_DIGEST=$CLIENT_DIGEST"
-
-          # CMS
-          doctl registry repository list-manifests esa-gda-comms-staging-cms --format Digest,Tags --no-header | tee /tmp/cms.txt
-          CMS_DIGEST=$(awk -v sha="${GITHUB_SHA}" '$0 ~ sha {print $1}' /tmp/cms.txt)
-          echo "CMS_DIGEST=$CMS_DIGEST"
-
-          # Exportar variables de entorno
           echo "IMAGE_REPOSITORY_ESA_GDA_COMMS_STAGING_CLIENT=esa-gda-comms-staging-client" >> $GITHUB_ENV
           echo "IMAGE_REPOSITORY_ESA_GDA_COMMS_STAGING_CMS=esa-gda-comms-staging-cms"       >> $GITHUB_ENV
-          echo "IMAGE_DIGEST_ESA_GDA_COMMS_STAGING_CLIENT=${CLIENT_DIGEST}" >> $GITHUB_ENV
-          echo "IMAGE_DIGEST_ESA_GDA_COMMS_STAGING_CMS=${CMS_DIGEST}"       >> $GITHUB_ENV
-
-          # Verifica que existen digests válidos
-          [ -n "$CLIENT_DIGEST" ] || { echo "::error::No digest found for client image tag ${GITHUB_SHA}"; exit 1; }
-          [ -n "$CMS_DIGEST" ]    || { echo "::error::No digest found for CMS image tag ${GITHUB_SHA}"; exit 1; }
-
-      - name: Echo vars for deploy (masked)
-        run: |
-          echo "Client repo: esa-gda-comms-staging-client"
-          echo "Client digest: ${IMAGE_DIGEST_ESA_GDA_COMMS_STAGING_CLIENT}"
-          echo "CMS repo: esa-gda-comms-staging-cms"
-          echo "CMS digest: ${IMAGE_DIGEST_ESA_GDA_COMMS_STAGING_CMS}"
-
-      # 🔹 Deploy con app_action usando digests
+          echo "IMAGE_DIGEST_ESA_GDA_COMMS_STAGING_CLIENT=${{ needs.build_client_image.outputs.digest }}" >> $GITHUB_ENV
+          echo "IMAGE_DIGEST_ESA_GDA_COMMS_STAGING_CMS=${{ needs.build_cms_image.outputs.digest }}"       >> $GITHUB_ENV
+          echo "Client digest: ${{ needs.build_client_image.outputs.digest }}"
+          echo "CMS digest: ${{ needs.build_cms_image.outputs.digest }}"
       - name: DigitalOcean App Platform deployment (v2)
         uses: digitalocean/app_action/deploy@v2
         with:
