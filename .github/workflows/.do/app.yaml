@@ -1,0 +1,23 @@
+# .do/app.yaml
+name: ${APP_NAME}
+
+services:
+  - name: ${CLIENT_NAME}
+    http_port: 3000
+    image:
+      registry_type: DOCR
+      repository: ${CLIENT_REPOSITORY}
+      digest: ${CLIENT_DIGEST}
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    routes:
+      - path: /
+
+  - name: ${CMS_NAME}
+    http_port: 1337
+    image:
+      registry_type: DOCR
+      repository: ${CMS_REPOSITORY}
+      digest: ${CMS_DIGEST}
+    instance_size_slug: basic-xxs
+    instance_count: 1

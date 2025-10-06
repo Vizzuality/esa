@@ -9,6 +9,7 @@ on:
       - 'client/**'
       - 'cms/**'
       - '.github/workflows/*'
+      - '.do/app.yaml'
 
 env:
   PROJECT_NAME: 'esa-gda-comms'
@@ -18,10 +19,13 @@ jobs:
   build_client_image:
     name: Build Client image and push to DO Container Registry
     runs-on: ubuntu-22.04
+    outputs:
+      repo: ${{ steps.compute_repo.outputs.repo }}
+      digest: ${{ steps.get_digest.outputs.digest }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Extract branch name
         id: extract_branch
@@ -34,11 +38,20 @@ jobs:
         run: |
           echo "${{ secrets[format('{0}_CLIENT_ENV_FILE', env.ENVIRONMENT)] }}" > client/.env.local
 
-      - name: Build and tag Client image
-        env:
-          IMAGE_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
+      - name: Compute image repo name
+        id: compute_repo
         run: |
-          docker build -f client/Dockerfile.prod -t $IMAGE_REGISTRY/$IMAGE_NAME:$GITHUB_SHA .
+          if [ "${{ steps.extract_branch.outputs.branch }}" = "main" ]; then
+            echo "repo=${{ env.PROJECT_NAME }}-production-client" >> "$GITHUB_OUTPUT"
+          else
+            echo "repo=${{ env.PROJECT_NAME }}-staging-client" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build Client image
+        env:
+          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
+        run: |
+          docker build -f client/Dockerfile.prod -t $IMAGE_REGISTRY/$IMAGE_NAME:${GITHUB_SHA} .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -50,22 +63,39 @@ jobs:
 
       - name: Push image to DigitalOcean Container Registry
         env:
-          IMAGE_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
-        run: docker push $IMAGE_REGISTRY/$IMAGE_NAME:$GITHUB_SHA
+          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
+        run: docker push $IMAGE_REGISTRY/$IMAGE_NAME:${GITHUB_SHA}
+
+      - name: Get pushed image digest
+        id: get_digest
+        env:
+          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
+        run: |
+          # Obtiene el digest (sha256:...) del tag que acabamos de pushear
+          DIGEST=$(doctl registry repository list-tags "$IMAGE_NAME" --format Tag,Digest --no-header \
+            | awk -v t="${GITHUB_SHA}" '$1==t {print $2; exit}')
+          if [ -z "$DIGEST" ]; then
+            echo "No se encontró digest para el tag ${GITHUB_SHA} en $IMAGE_NAME" >&2
+            exit 1
+          fi
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
 
       - name: Remove old images from Container Registry
         uses: martintomas/docr-image-remove@v1
         with:
-          image_repository: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-client
+          image_repository: ${{ steps.compute_repo.outputs.repo }}
           buffer_size: 5
 
   build_cms_image:
     name: Build CMS image and push to DO Container Registry
     runs-on: ubuntu-22.04
+    outputs:
+      repo: ${{ steps.compute_repo.outputs.repo }}
+      digest: ${{ steps.get_digest.outputs.digest }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Extract branch name
         id: extract_branch
@@ -78,11 +108,20 @@ jobs:
         run: |
           echo "${{ secrets[format('{0}_CMS_ENV_FILE', env.ENVIRONMENT)] }}" > cms/.env
 
-      - name: Build and tag CMS image
-        env:
-          IMAGE_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
+      - name: Compute image repo name
+        id: compute_repo
         run: |
-          docker build -f cms/Dockerfile.prod -t $IMAGE_REGISTRY/$IMAGE_NAME:$GITHUB_SHA .
+          if [ "${{ steps.extract_branch.outputs.branch }}" = "main" ]; then
+            echo "repo=${{ env.PROJECT_NAME }}-production-cms" >> "$GITHUB_OUTPUT"
+          else
+            echo "repo=${{ env.PROJECT_NAME }}-staging-cms" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build CMS image
+        env:
+          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
+        run: |
+          docker build -f cms/Dockerfile.prod -t $IMAGE_REGISTRY/$IMAGE_NAME:${GITHUB_SHA} .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -94,50 +133,59 @@ jobs:
 
       - name: Push image to DigitalOcean Container Registry
         env:
-          IMAGE_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
-        run: docker push $IMAGE_REGISTRY/$IMAGE_NAME:$GITHUB_SHA
+          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
+        run: docker push $IMAGE_REGISTRY/$IMAGE_NAME:${GITHUB_SHA}
+
+      - name: Get pushed image digest
+        id: get_digest
+        env:
+          IMAGE_NAME: ${{ steps.compute_repo.outputs.repo }}
+        run: |
+          DIGEST=$(doctl registry repository list-tags "$IMAGE_NAME" --format Tag,Digest --no-header \
+            | awk -v t="${GITHUB_SHA}" '$1==t {print $2; exit}')
+          if [ -z "$DIGEST" ]; then
+            echo "No se encontró digest para el tag ${GITHUB_SHA} en $IMAGE_NAME" >&2
+            exit 1
+          fi
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
 
       - name: Remove old images from Container Registry
         uses: martintomas/docr-image-remove@v1
         with:
-          image_repository: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-cms
+          image_repository: ${{ steps.compute_repo.outputs.repo }}
           buffer_size: 5
 
   deploy:
-    name: Deploy Client and CMS to DO App Platform
+    name: Deploy Client and CMS to DO APP Platform
     needs: [build_client_image, build_cms_image]
     runs-on: ubuntu-22.04
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Extract branch name
         id: extract_branch
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
-      # Calcula nombres de componentes y crea las ENV que espera la v2:
-      # IMAGE_TAG_<NOMBRE_COMPONENTE_EN_DO_EN_MAYÚSCULAS_CON_GUIONES_A_GUIONES_BAJOS>
-      - name: Set App Platform image tags (computed)
-        env:
-          DEPLOY_ENV: ${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
-        run: |
-          CLIENT_NAME: `${{ env.PROJECT_NAME }}-${DEPLOY_ENV}-client`
-          CMS_NAME: `${{ env.PROJECT_NAME }}-${DEPLOY_ENV}-cms`
-
-          CLIENT_ENV_NAME=$(echo "$CLIENT_NAME" | tr '[:lower:]-' '[:upper:]_')
-          CMS_ENV_NAME=$(echo "$CMS_NAME" | tr '[:lower:]-' '[:upper:]_')
-
-          # Exportar las variables que leerá el action v2
-          echo "IMAGE_TAG_${CLIENT_ENV_NAME}=${GITHUB_SHA}" >> $GITHUB_ENV
-          echo "IMAGE_TAG_${CMS_ENV_NAME}=${GITHUB_SHA}" >> $GITHUB_ENV
-
-          echo "Usando componentes:"
-          echo "  $CLIENT_NAME  -> IMAGE_TAG_${CLIENT_ENV_NAME}"
-          echo "  $CMS_NAME     -> IMAGE_TAG_${CMS_ENV_NAME}"
-
-      - name: DigitalOcean App Platform deployment (v2)
+      - name: Deploy the app (v2)
         uses: digitalocean/app_action/deploy@v2
+        env:
+          # App + servicios
+          APP_NAME: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
+          CLIENT_NAME: ${{ env.PROJECT_NAME }}-client
+          CMS_NAME: ${{ env.PROJECT_NAME }}-cms
+
+          # Repos (solo el nombre del repo en DOCR, sin la URL del registry)
+          CLIENT_REPOSITORY: ${{ needs.build_client_image.outputs.repo }}
+          CMS_REPOSITORY: ${{ needs.build_cms_image.outputs.repo }}
+
+          # Digests obtenidos tras el push
+          CLIENT_DIGEST: ${{ needs.build_client_image.outputs.digest }}
+          CMS_DIGEST: ${{ needs.build_cms_image.outputs.digest }}
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           app_name: ${{ env.PROJECT_NAME }}-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
-          print_build_logs: 'true'
-          print_deploy_logs: 'true'
+          print_build_logs: true
+          print_deploy_logs: true
