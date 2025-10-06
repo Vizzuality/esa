@@ -1,40 +1,49 @@
-# ---------- Builder ----------
-FROM node:18-alpine AS builder
+# Build all the things
+FROM node:18.16-bookworm-slim as build
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+      build-essential \
+      gcc autoconf \
+      automake \
+      zlib1g-dev \
+      libpng-dev \
+      nasm bash \
+      libvips-dev \
+    && apt-get clean
 
-# Optional: Set working directory
+ENV NODE_ENV production
+
 WORKDIR /app
+COPY .yarn ./.yarn
+COPY package.json .yarnrc.yml yarn.lock ./
 
-# Install dependencies
-COPY client/package.json client/yarn.lock ./
+WORKDIR /app/cms
+COPY ./cms/package.json ./
 RUN yarn install
 
-# Copy source
-COPY client .
-
-# Build with standalone output
-ENV NODE_ENV=production
+COPY ./cms .
+RUN yarn prebuild
 RUN yarn build
 
-# ---------- Runner ----------
-FROM node:18-alpine AS runner
+# Copy only the built files into the final image
+FROM node:18.16-bookworm-slim AS runner
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y libvips-dev && \
+    apt-get clean
 
-# Set working dir
+ENV NODE_ENV production
+
 WORKDIR /app
 
-# Create user
-RUN addgroup -g 1001 -S nextjs \
-    && adduser -S nextjs -u 1001 -G nextjs
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 strapi
 
-# Copy only the necessary files
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=build --chown=strapi:nodejs /app/cms ./
+COPY --from=build /app/node_modules ./node_modules
 
-# Ensure proper permissions
-USER nextjs
+USER strapi
 
-# Expose port
-EXPOSE 3000
-
-# Default command
-CMD ["node", "server.js"]
+EXPOSE 1337
+ENTRYPOINT ["/app/entrypoint.sh"]
