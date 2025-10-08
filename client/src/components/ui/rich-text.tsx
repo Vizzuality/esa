@@ -18,7 +18,7 @@ const RichText = ({ children, className }: RichTextProps) => {
   return (
     <Markdown
       components={{
-        a: ({ node, href, ...props }) => (
+        a: ({ node, ...props }) => (
           <a {...props} target="_blank" className="underline">
             {props.children}
           </a>
@@ -53,6 +53,7 @@ const RichText = ({ children, className }: RichTextProps) => {
           );
         },
         blockquote: ({ node, ...props }) => <blockquote className="italic" {...props} />,
+        br: ({ node, ...props }) => <br className="my-2" {...props} />,
       }}
       className={cn('space-y-2', className)}
       urlTransform={(url) => getImageSrc(url)}

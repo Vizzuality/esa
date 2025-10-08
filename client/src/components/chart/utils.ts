@@ -3,6 +3,8 @@ import { MutableRefObject } from 'react';
 import { BubbleDataPoint, ChartTypeRegistry, Point, ScriptableContext } from 'chart.js';
 import { ChartJSOrUndefined } from 'react-chartjs-2/dist/types';
 
+import { jsonToFunction } from '@/lib/json-formatter';
+
 export const PluginCallbacks = {
   PredictedTravelDemandDhakaTooltopTitle: (context: any) => {
     return `${context[0].raw.y} in ${context[0].raw.x}`;
@@ -46,8 +48,28 @@ const extractPluginCallbackFunction = (options: Record<string, any>) => {
   };
 };
 
-export const getChartDefaultOptions = (a: unknown) => {
-  const options = !!a && typeof a === 'object' ? extractPluginCallbackFunction(a) : {};
+export const getChartDefaultOptions = (a: unknown, isLast?: boolean) => {
+  // exceptions
+  const rawOptions = {
+    ...a,
+    scales: {
+      ...a?.scales,
+      x: {
+        ...a?.scales?.x,
+        ticks: {
+          ...a?.scales?.x?.ticks,
+          display: true,
+        },
+      },
+    },
+  };
+  const optionsLast = jsonToFunction(rawOptions);
+
+  const optionsCase: { [key: string]: unknown } = !isLast ? jsonToFunction(a) : optionsLast;
+  const options =
+    !!optionsCase && typeof optionsCase === 'object'
+      ? extractPluginCallbackFunction(optionsCase)
+      : {};
   return {
     borderColor: '#fff',
     interaction: {

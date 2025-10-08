@@ -116,8 +116,29 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
           {!!widget?.id && (
             <MapContent showContent={showContent} title={widget.title}>
               <div className="mt-2 space-y-2">
-                <div className="mx-auto w-fit">
-                  <Chart widget={widget as WidgetWidgetComponent} />
+                <div className="mx-auto w-fit space-y-6">
+                  {widget.type !== 'multiple' ? (
+                    <Chart widget={widget as WidgetWidgetComponent} />
+                  ) : (
+                    Object.entries(widget?.data as Record<string, any>).map(
+                      ([variable, block], index, array) => {
+                        return (
+                          <Chart
+                            key={variable}
+                            isLast={index === array.length - 1}
+                            widget={{
+                              ...widget,
+                              type: block.type || 'line',
+                              data: {
+                                ...block,
+                              },
+                              title: variable,
+                            }}
+                          />
+                        );
+                      }
+                    )
+                  )}
                 </div>
                 {(widget as any)?.legend && <RichText>{(widget as any).legend}</RichText>}
               </div>
@@ -127,23 +148,28 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
           {quote && (
             <MapContent key={quote.name} showContent={showContent}>
               <div className="space-y-3">
-                <div className="flex">
-                  <span className="font-notes text-xl text-teal-500">“</span>
-                  <RichText>{quote.content}</RichText>
-                </div>
-                <div className="flex items-center space-x-2">
-                  {!!quote?.image?.data?.length && (
-                    <div
-                      className="border-primary flex h-14 w-14 shrink-0 rounded-full border bg-cover bg-top bg-no-repeat"
-                      style={{
-                        backgroundImage: `url(${getImageSrc(
-                          quote?.image?.data?.[0]?.attributes?.url ||
-                            quote.image?.data?.[0]?.attributes?.image
-                        )})`,
-                      }}
-                    />
-                  )}
-                  <div className="text-sm">{quote.name}</div>
+                <div className="flex items-start space-x-2">
+                  <span className="font-notes flex align-text-top text-[88px] leading-[0.9] text-teal-500">
+                    “
+                  </span>
+
+                  <div className="flex flex-col space-y-2">
+                    <RichText>{quote.content}</RichText>
+                    <div className="flex items-center space-x-2">
+                      {!!quote?.image?.data?.length && (
+                        <div
+                          className="border-primary flex h-14 w-14 shrink-0 rounded-full border bg-cover bg-top bg-no-repeat"
+                          style={{
+                            backgroundImage: `url(${getImageSrc(
+                              quote?.image?.data?.[0]?.attributes?.url ||
+                                quote.image?.data?.[0]?.attributes?.image
+                            )})`,
+                          }}
+                        />
+                      )}
+                      <RichText className="text-sm">{quote.name}</RichText>
+                    </div>
+                  </div>
                 </div>
               </div>
             </MapContent>
@@ -235,8 +261,29 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
           {!!widget?.id && (
             <MapContent showContent={showContent} title={widget.title}>
               <div className="mt-2 space-y-2">
-                <div className="mx-auto w-fit">
-                  <Chart widget={widget as WidgetWidgetComponent} />
+                <div className="mx-auto w-fit space-y-6">
+                  {widget.type !== 'multiple' ? (
+                    <Chart widget={widget as WidgetWidgetComponent} />
+                  ) : (
+                    Object.entries(widget?.data as Record<string, any>).map(
+                      ([variable, block], index, array) => {
+                        return (
+                          <Chart
+                            key={variable}
+                            isLast={index === array.length - 1}
+                            widget={{
+                              ...widget,
+                              type: block.type || 'line',
+                              data: {
+                                ...block,
+                              },
+                              title: variable,
+                            }}
+                          />
+                        );
+                      }
+                    )
+                  )}
                 </div>
                 {(widget as any)?.legend && <RichText>{(widget as any).legend}</RichText>}
               </div>
