@@ -31,6 +31,7 @@ import { CustomMapProps } from '@/components/map/types';
 
 import EOIDsMarkers from './markers/eoids-markers';
 import SelectedStoriesMarker from './markers/selected-stories-marker';
+import Step1Markers from './markers/story-step-1-markers';
 
 const LayerManager = dynamic(() => import('@/containers/map/layer-manager'), {
   ssr: false,
@@ -179,6 +180,10 @@ export default function MapContainer() {
         <LayerManager />
         <EOIDsMarkers />
         <GlobeMarkers />
+        {(step === 1 || !step) && (
+          <Step1Markers markers={storyData?.data?.attributes?.steps?.[0]?.map?.markers} />
+        )}
+
         <SelectedStoriesMarker markers={markers} onCloseMarker={() => setMarkers([])} />
       </Map>
     </div>
