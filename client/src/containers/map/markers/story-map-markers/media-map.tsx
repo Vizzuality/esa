@@ -10,8 +10,6 @@ import { getImageSrc } from '@/lib/image-src';
 
 import { StoryStepMapMarkerMedia } from '@/types/story';
 
-import { Button } from '@/components/ui/button';
-
 type StoryMarkerMediaProps = {
   name: string;
   media: StoryStepMapMarkerMedia;
@@ -19,7 +17,7 @@ type StoryMarkerMediaProps = {
   isExpanded: boolean;
 };
 
-const StoryMarker = ({ media, name, onClickExpand, isExpanded }: StoryMarkerMediaProps) => {
+const StoryMarker = ({ media, name, isExpanded }: StoryMarkerMediaProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const mediaType = media?.mime?.split('/')[0];
@@ -37,7 +35,7 @@ const StoryMarker = ({ media, name, onClickExpand, isExpanded }: StoryMarkerMedi
   };
 
   return (
-    <>
+    <div className="h-full w-full rounded-full border-[3px] border-gray-200 shadow-md shadow-gray-950/25 transition-all duration-300">
       {mediaType === 'image' ? (
         <Image
           width={88}
@@ -79,7 +77,7 @@ const StoryMarker = ({ media, name, onClickExpand, isExpanded }: StoryMarkerMedi
         </div>
       ) : null}
       <ExpandIcon className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 transform fill-gray-200 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-    </>
+    </div>
   );
 };
 
