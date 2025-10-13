@@ -54,14 +54,19 @@ export default function Step1Markers({ markers }: { markers: StoryStepMapMarker[
   };
 
   const medias = useMemo(() => {
-    return markers?.map((marker) => ({
-      title: marker?.name,
-      id: marker?.id,
-      url: marker?.media?.url,
-      mime: marker?.media?.mime,
-      type: marker?.media?.mime?.includes('video') ? 'video' : 'image',
-    }));
+    return (
+      markers
+        ?.filter((marker) => marker?.media?.url && marker?.media?.mime)
+        .map((marker) => ({
+          title: marker?.name,
+          id: marker?.id,
+          url: marker?.media?.url,
+          mime: marker?.media?.mime,
+          type: marker?.media?.mime?.includes('video') ? 'video' : 'image',
+        })) || []
+    );
   }, [markers]);
+
   return markers?.map((marker) => {
     const { media, lat, lng, name, id } = marker;
     return (
@@ -75,7 +80,6 @@ export default function Step1Markers({ markers }: { markers: StoryStepMapMarker[
           </DialogContent>
         </Dialog>
         <>
-          {}
           {!!medias?.length ? (
             <Marker key={id} longitude={lng} latitude={lat}>
               <StoryMarkerMediaMap
