@@ -69,6 +69,7 @@ export default function Step1Markers({ markers }: { markers: StoryStepMapMarker[
 
   return markers?.map((marker) => {
     const { media, lat, lng, name, id } = marker;
+
     return (
       <>
         <Dialog
@@ -80,7 +81,7 @@ export default function Step1Markers({ markers }: { markers: StoryStepMapMarker[
           </DialogContent>
         </Dialog>
         <>
-          {!!medias?.length ? (
+          {media ? (
             <Marker key={id} longitude={lng} latitude={lat}>
               <StoryMarkerMediaMap
                 onClickExpand={() => handleClickMarker(markers.indexOf(marker))}
