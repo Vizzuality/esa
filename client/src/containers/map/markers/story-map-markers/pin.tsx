@@ -31,7 +31,7 @@ export const StoryPin = ({ name }: { name: string }) => {
   return (
     <div className="relative flex h-full w-full items-center justify-center">
       <div
-        className="absolute left-1/2 top-1/2 z-0 h-16 w-16 -translate-x-1/2 -translate-y-1/2 transform rounded-full border-[3px] bg-gray-800/80 will-change-[transform,opacity]"
+        className="absolute left-1/2 top-1/2 z-0 h-16 w-16 -translate-x-1/2 -translate-y-1/2 transform rounded-full border-[3px] border-gray-200 bg-gray-800/80 will-change-[transform,opacity]"
         style={
           {
             opacity,

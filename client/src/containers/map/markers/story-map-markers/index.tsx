@@ -38,7 +38,6 @@ export default function StoryMapMarkers({ markers }: { markers: StoryStepMapMark
 
   return markers?.map((marker) => {
     const { media, lat, lng, name } = marker;
-
     return (
       <>
         <Dialog
@@ -58,7 +57,13 @@ export default function StoryMapMarkers({ markers }: { markers: StoryStepMapMark
               )}
             >
               <div className="absolute left-0 top-0 h-8 w-8 -translate-x-1/2 -translate-y-full">
-                <div className="full group absolute h-14 w-14 rounded-full  px-0 py-0 shadow-md shadow-gray-950/25 transition-all duration-300 hover:h-[95px] hover:w-[95px]">
+                <div
+                  className={cn({
+                    'full group absolute h-14 w-14 rounded-full  px-0 py-0 shadow-md shadow-gray-950/25 transition-all duration-300':
+                      true,
+                    'hover:h-16 hover:w-16': media,
+                  })}
+                >
                   {media ? (
                     <StoryMarkerMediaMap
                       onClickExpand={() => handleClickMarker(markers.indexOf(marker))}
