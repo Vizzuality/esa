@@ -184,7 +184,7 @@ export default function Home() {
                     href="https://knowledge-hub-gda.esa.int/"
                   >
                     Extensive and interactive repository of European Earth Observation service
-                    capabilities..
+                    capabilities.
                     <ExternalLinkIcon className="h-4 w-4 shrink-0" />
                   </a>
                 </Card>
