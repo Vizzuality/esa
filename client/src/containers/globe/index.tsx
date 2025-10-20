@@ -157,23 +157,38 @@ export default function Home() {
             </div>
           </div>
           <div className="hidden h-full w-[280px] flex-col sm:flex 2xl:w-80">
-            <div className="flex max-h-[calc(100%-100px)] flex-col justify-between">
-              <Card title="Find more stories" className="max-h-[calc(100%-33px)]">
+            <div className="flex max-h-[calc(100%-220px)] flex-col justify-between">
+              <Card title="Find more stories" className="relative max-h-[calc(100%-33px)]">
                 <TopStories />
               </Card>
               <GradientLine />
             </div>
-            <div className="h-fit">
-              <Card title="Programme Dashboard">
-                <a
-                  target="_blank"
-                  className="font-open-sans flex justify-between gap-4 px-4 text-sm leading-snug"
-                  href="https://gda.esa.int/impact-dashboard/"
-                >
-                  Detailed report dashboard on ESA GDA programme.
-                  <ExternalLinkIcon className="h-4 w-4 shrink-0" />
-                </a>
-              </Card>
+            <div className="space-y-2">
+              <div className="h-fit">
+                <Card title="Programme Dashboard">
+                  <a
+                    target="_blank"
+                    className="font-open-sans flex justify-between gap-4 px-4 text-sm leading-snug"
+                    href="https://gda.esa.int/impact-dashboard/"
+                  >
+                    Detailed report dashboard on ESA GDA programme.
+                    <ExternalLinkIcon className="h-4 w-4 shrink-0" />
+                  </a>
+                </Card>
+              </div>
+              <div className="h-fit">
+                <Card title="Knowledge Hub">
+                  <a
+                    target="_blank"
+                    className="font-open-sans flex justify-between gap-4 px-4 text-sm leading-snug"
+                    href="https://knowledge-hub-gda.esa.int/"
+                  >
+                    Extensive and interactive repository of European Earth Observation service
+                    capabilities..
+                    <ExternalLinkIcon className="h-4 w-4 shrink-0" />
+                  </a>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
