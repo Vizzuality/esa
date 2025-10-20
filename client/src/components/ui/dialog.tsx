@@ -7,6 +7,11 @@ import { X } from 'lucide-react';
 
 import { cn } from '@/lib/classnames';
 
+interface DialogContentHomeProps
+  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
+  defaultClose?: boolean;
+}
+
 const Dialog = DialogPrimitive.Root;
 
 const DialogTrigger = DialogPrimitive.Trigger;
@@ -57,8 +62,8 @@ DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogContentHome = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  DialogContentHomeProps
+>(({ className, children, defaultClose = true, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay className="bg-background/40" />
     <DialogPrimitive.Content
@@ -70,14 +75,16 @@ const DialogContentHome = React.forwardRef<
       {...props}
     >
       <div>{children}</div>
-      <DialogPrimitive.Close
-        className={cn(
-          'ring-offset-background focus:ring-ring hover:border-secondary hover:text-secondary transition-color absolute right-1/2 top-0 -translate-y-1/2 translate-x-1/2 rounded-full border border-gray-800 bg-gray-900 p-4 px-4 py-2 text-gray-200 duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none group-data-[button-side=right]:right-6 group-data-[button-side=right]:-translate-x-0'
-        )}
-      >
-        <X className="h-6 w-6" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
+      {defaultClose && (
+        <DialogPrimitive.Close
+          className={cn(
+            'ring-offset-background focus:ring-ring hover:border-secondary hover:text-secondary transition-color absolute right-1/2 top-0 -translate-y-1/2 translate-x-1/2 rounded-full border border-gray-800 bg-gray-900 p-4 px-4 py-2 text-gray-200 duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none group-data-[button-side=right]:right-6 group-data-[button-side=right]:-translate-x-0'
+          )}
+        >
+          <X className="h-6 w-6" />
+          <span className="sr-only">Close</span>
+        </DialogPrimitive.Close>
+      )}
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
