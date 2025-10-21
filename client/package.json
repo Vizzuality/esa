@@ -2,6 +2,7 @@
   "name": "@esa/client",
   "version": "0.1.5",
   "private": true,
+  "packageManager": "yarn@3.6.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
