@@ -8,7 +8,7 @@ WORKDIR /app
 COPY .yarn ./.yarn
 COPY package.json .yarnrc.yml yarn.lock client/package.json ./
 RUN corepack enable && corepack prepare
-RUN yarn install
+RUN yarn install --immutable
 
 # Copy source
 COPY client .
