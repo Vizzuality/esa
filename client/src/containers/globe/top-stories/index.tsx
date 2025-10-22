@@ -6,7 +6,7 @@ import TopStoriesItem from './item';
 
 const TopStories = () => {
   const { data: topStories } = useGetTopStories({
-    'pagination[limit]': 10,
+    // 'pagination[limit]': 10,
     populate: 'story,cover_image',
     sort: 'index:asc',
   });
