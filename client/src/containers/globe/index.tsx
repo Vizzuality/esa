@@ -138,7 +138,7 @@ export default function Home() {
               </div>
               <div className="font-open-sans flex justify-between text-sm font-semibold">
                 <p className="pl-1 text-gray-800">
-                  {`${storiesLength} featured ${storiesLength === 1 ? 'story' : 'stories'}`}
+                  {`${storiesLength} ${storiesLength === 1 ? 'story' : 'stories'}`}
                 </p>
                 <Button
                   variant="link"
@@ -236,7 +236,7 @@ export default function Home() {
             </div>
             <div className="font-open-sans flex justify-between text-sm font-semibold">
               <p className="pl-1 text-gray-800">
-                {`${storiesLength} featured ${storiesLength === 1 ? 'story' : 'stories'}`}
+                {`${storiesLength} ${storiesLength === 1 ? 'story' : 'stories'}`}
               </p>
               <Button
                 variant="link"

@@ -21,14 +21,15 @@
       "type": "integer",
       "required": true,
       "unique": true,
-      "min": 0,
-      "max": 10
+      "min": 0
     },
     "cover_image": {
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "location": {
       "type": "string",
