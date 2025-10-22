@@ -7,7 +7,6 @@ import TopStoriesItem from './item';
 const TopStories = () => {
   const category = useSyncCategory()[0];
   const { data: topStories } = useGetTopStories({
-    // 'pagination[limit]': 10,
     populate: 'cover_image,story,story.category',
     sort: 'index:asc',
     filters: { story: { category: { slug: { $eq: category } } } },
