@@ -5,10 +5,13 @@ import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import { trackAppRouter } from '@socialgouv/matomo-next';
+
+import { env } from '@/env.mjs';
+
 // https://github.com/SocialGouv/matomo-next
 
-const MATOMO_URL = process.env.NEXT_PUBLIC_MATOMO_URL;
-const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID;
+const MATOMO_URL = env.NEXT_PUBLIC_MATOMO_URL;
+const MATOMO_SITE_ID = env.NEXT_PUBLIC_MATOMO_SITE_ID;
 
 export function MatomoAnalytics() {
   const pathname = usePathname();
