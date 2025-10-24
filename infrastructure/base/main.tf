@@ -86,6 +86,8 @@ locals {
     NEXT_PUBLIC_PREVIEW_SECRET                 = random_password.preview_secret.result
     NEXT_PUBLIC_MAPBOX_USERNAME                = var.mapbox_username
     NEXT_PUBLIC_MAPBOX_STYLE_ID                = var.mapbox_style_id
+    NEXT_PUBLIC_MATOMO_URL                     = https://gda.esa.int/eopsua/
+    NEXT_PUBLIC_MATOMO_SITE_ID                 = 3
     LOG_LEVEL                                  = "info"
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false
   }
