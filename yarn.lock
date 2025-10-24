@@ -2664,6 +2664,7 @@ __metadata:
     "@radix-ui/react-toast": ^1.1.4
     "@radix-ui/react-tooltip": ^1.0.6
     "@recoiljs/refine": ^0.1.1
+    "@socialgouv/matomo-next": ^1.10.0
     "@svgr/webpack": ^8.1.0
     "@t3-oss/env-nextjs": 0.4.1
     "@tailwindcss/typography": 0.5.9
@@ -6838,6 +6839,15 @@ __metadata:
     color: ^5.0.2
     text-hex: 1.0.x
   checksum: 893abfe47f2c23c71716c53bec6b3f700b11563d6993afb2eca1445b694cc0daf839353c0663a6139a1223289b73c629e5e9ccfcf54294b5eec1a6bc77f997de
+  languageName: node
+  linkType: hard
+
+"@socialgouv/matomo-next@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "@socialgouv/matomo-next@npm:1.10.0"
+  peerDependencies:
+    next: ">= 9.5.5"
+  checksum: bf3c5c3008677d42d775a6be996c485af65981c53dadd372a60111eaa7faad9b31d5ca71d0b419d7283d304b531c49ac12ca38ad97b28e6b037707bd6098896a
   languageName: node
   linkType: hard
 
