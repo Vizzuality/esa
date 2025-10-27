@@ -18,6 +18,7 @@ export function MatomoAnalytics() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    console.info('Matomo env (staging check):', { MATOMO_URL, MATOMO_SITE_ID });
     if (!MATOMO_URL || !MATOMO_SITE_ID) {
       return;
     }
