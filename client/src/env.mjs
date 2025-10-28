@@ -33,8 +33,8 @@ export const env = createEnv({
     NEXT_PUBLIC_PREVIEW_SECRET: z.string().optional(),
     NEXT_PUBLIC_MAPBOX_USERNAME: z.string().optional(),
     NEXT_PUBLIC_MAPBOX_STYLE_ID: z.string().optional(),
-    NEXT_PUBLIC_MATOMO_URL: z.string().url().optional(),
-    NEXT_PUBLIC_MATOMO_SITE_ID: z.string().optional(),
+    NEXT_PUBLIC_MATOMO_URL: z.string().url(),
+    NEXT_PUBLIC_MATOMO_SITE_ID: z.string(),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
