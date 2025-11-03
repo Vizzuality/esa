@@ -4,6 +4,31 @@ FROM node:18-alpine AS builder
 # Optional: Set working directory
 WORKDIR /app
 
+# Declare build arguments
+ARG NEXT_PUBLIC_ENVIRONMENT
+ARG NEXT_PUBLIC_URL
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_BASE_PATH
+ARG NEXT_PUBLIC_MAPBOX_API_TOKEN
+ARG NEXT_PUBLIC_MAPBOX_USERNAME
+ARG NEXT_PUBLIC_MAPBOX_STYLE_ID
+ARG NEXT_PUBLIC_MATOMO_URL
+ARG NEXT_PUBLIC_MATOMO_SITE_ID
+ARG NEXT_PUBLIC_PREVIEW_SECRET
+
+# Set environment variables from build args
+ENV NEXT_PUBLIC_ENVIRONMENT=$NEXT_PUBLIC_ENVIRONMENT \
+    NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL \
+    NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
+    NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH \
+    NEXT_PUBLIC_MAPBOX_API_TOKEN=$NEXT_PUBLIC_MAPBOX_API_TOKEN \
+    NEXT_PUBLIC_MAPBOX_USERNAME=$NEXT_PUBLIC_MAPBOX_USERNAME \
+    NEXT_PUBLIC_MAPBOX_STYLE_ID=$NEXT_PUBLIC_MAPBOX_STYLE_ID \
+    NEXT_PUBLIC_MATOMO_URL=$NEXT_PUBLIC_MATOMO_URL \
+    NEXT_PUBLIC_MATOMO_SITE_ID=$NEXT_PUBLIC_MATOMO_SITE_ID \
+    NEXT_PUBLIC_PREVIEW_SECRET=$NEXT_PUBLIC_PREVIEW_SECRET \
+    NODE_ENV=production
+
 # Install dependencies
 COPY .yarn ./.yarn
 COPY package.json .yarnrc.yml yarn.lock client/package.json ./
@@ -14,7 +39,6 @@ RUN yarn install
 COPY client .
 
 # Build with standalone output
-ENV NODE_ENV=production
 RUN yarn build
 
 # ---------- Runner ----------
@@ -23,14 +47,48 @@ FROM node:18-alpine AS runner
 # Set working dir
 WORKDIR /app
 
+# Install sharp and dependencies for image optimization
+RUN apk add --no-cache \
+    libc6-compat \
+    && corepack enable \
+    && yarn add sharp
+
+# Declare build arguments for runtime
+ARG NEXT_PUBLIC_ENVIRONMENT
+ARG NEXT_PUBLIC_URL
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_BASE_PATH
+ARG NEXT_PUBLIC_MAPBOX_API_TOKEN
+ARG NEXT_PUBLIC_MAPBOX_USERNAME
+ARG NEXT_PUBLIC_MAPBOX_STYLE_ID
+ARG NEXT_PUBLIC_MATOMO_URL
+ARG NEXT_PUBLIC_MATOMO_SITE_ID
+ARG NEXT_PUBLIC_PREVIEW_SECRET
+
+# Set environment variables in runtime
+ENV NEXT_PUBLIC_ENVIRONMENT=$NEXT_PUBLIC_ENVIRONMENT \
+    NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL \
+    NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
+    NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH \
+    NEXT_PUBLIC_MAPBOX_API_TOKEN=$NEXT_PUBLIC_MAPBOX_API_TOKEN \
+    NEXT_PUBLIC_MAPBOX_USERNAME=$NEXT_PUBLIC_MAPBOX_USERNAME \
+    NEXT_PUBLIC_MAPBOX_STYLE_ID=$NEXT_PUBLIC_MAPBOX_STYLE_ID \
+    NEXT_PUBLIC_MATOMO_URL=$NEXT_PUBLIC_MATOMO_URL \
+    NEXT_PUBLIC_MATOMO_SITE_ID=$NEXT_PUBLIC_MATOMO_SITE_ID \
+    NEXT_PUBLIC_PREVIEW_SECRET=$NEXT_PUBLIC_PREVIEW_SECRET \
+    NODE_ENV=production
+
 # Create user
 RUN addgroup -g 1001 -S nextjs \
     && adduser -S nextjs -u 1001 -G nextjs
 
 # Copy only the necessary files
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nextjs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nextjs /app/public ./public
+COPY --from=builder --chown=nextjs:nextjs /app/.next/static ./.next/static
+
+# Create cache directory with proper permissions
+RUN mkdir -p .next/cache && chown -R nextjs:nextjs .next/cache
 
 # Ensure proper permissions
 USER nextjs
