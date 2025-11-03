@@ -1,0 +1,10 @@
+aws_profile=""
+aws_region="eu-west-3"
+project_name="esa"
+
+github_owner="Vizzuality"
+github_repo_name="esa"
+github_token=""
+mapbox_api_token=""
+mapbox_username=""
+mapbox_style_id=""
