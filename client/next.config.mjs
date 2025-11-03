@@ -13,6 +13,7 @@ const nextConfig = {
       'fra1.digitaloceanspaces.com',
       'esa-gda-comms-staging-mfafc.ondigitalocean.app',
       'https://impact-sphere-gda.esa.int',
+      'esa-dev-public.s3.amazonaws.com',
     ],
   },
   env: {
