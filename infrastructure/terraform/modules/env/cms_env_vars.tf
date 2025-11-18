@@ -34,10 +34,6 @@ resource "random_password" "app_keys_2" {
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
-resource "aws_iam_access_key" "email_user_access_key" {
-  user = module.email.iam_user.name
-}
-
 locals {
   cms_secret_env_vars = {
     # Single DATABASE_URL instead of separate DATABASE_* variables - with SSL handling for AWS RDS  
@@ -49,10 +45,6 @@ locals {
     DATABASE_PASSWORD = module.postgresql.password
     DATABASE_USERNAME = module.postgresql.username
     DATABASE_PORT     = module.postgresql.port
-
-    AWS_SES_ACCESS_KEY_ID     = aws_iam_access_key.email_user_access_key.id
-    AWS_SES_ACCESS_KEY_SECRET = aws_iam_access_key.email_user_access_key.secret
-    AWS_SES_DOMAIN            = var.domain
 
     ADMIN_JWT_SECRET    = random_password.access_token_secret.result
     API_TOKEN_SALT      = random_password.access_token_salt.result
