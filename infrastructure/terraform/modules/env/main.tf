@@ -60,9 +60,3 @@ module "github" {
   environment_secret_map   = merge(local.cms_secret_env_vars, local.client_secret_env_vars, var.github_additional_environment_secrets)
   environment_variable_map = merge(local.cms_env_vars, local.client_env_vars, var.github_additional_environment_variables)
 }
-
-module "email" {
-  source = "../email"
-  domain = var.domain
-  region = var.aws_region
-}
