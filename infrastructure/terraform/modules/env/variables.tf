@@ -115,12 +115,6 @@ variable "rds_backup_retention_period" {
   description = "Time in days to keep db backups"
 }
 
-variable "contact_email" {
-  type        = string
-  description = "Email address where contact form submissions will be sent"
-  default     = null
-}
-
 variable "github_additional_environment_secrets" {
   type        = map(string)
   description = "Github additional environment-specific secrets"
