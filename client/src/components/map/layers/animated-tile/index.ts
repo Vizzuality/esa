@@ -47,6 +47,7 @@ export class AnimatedTile {
             if (apng instanceof Error) {
               return null;
             }
+
             return apng.frames.map((f: any) => {
               return {
                 ...f,

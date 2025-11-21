@@ -54,4 +54,5 @@ export const DEFAULT_SETTINGS = {
 };
 
 export const timelineAtom = atom<{ [id: number]: { frame: number; layers: number[] } }>({});
+export const categoriesAtom = atom<{ [id: number]: { frame: number; layers: number[] } }>({});
 export const mapScrollAtom = atom<MotionValue<number>>(motionValue(0));

@@ -128,6 +128,16 @@ export interface LegendTypeTimelineProps extends Legend {
   labels?: string[];
 }
 
+export interface LegendTypeCategoricalProps extends Legend {
+  id: number;
+  layerId: number;
+  title?: string;
+  info?: string;
+  categories: string[];
+  animationInterval?: number;
+  description?: string;
+}
+
 export interface LegendMatrixIntersectionsProps extends Legend {
   intersections: Array<{
     id: number;
@@ -148,6 +158,8 @@ type ItemLegends = Extract<LegendType, 'basic' | 'choropleth' | 'gradient'>;
 export type LegendTypesProps<T> = T extends ItemLegends
   ? LegendTypeProps
   : T extends 'basic' | 'choropleth' | 'gradient'
+  ? LegendTypeCategoricalProps
+  : T extends 'categorical'
   ? LegendTypeProps
   : T extends 'timeline'
   ? LegendTypeTimelineProps
