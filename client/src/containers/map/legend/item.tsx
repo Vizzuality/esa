@@ -13,6 +13,7 @@ import { LEGEND_TYPE, LegendType } from '@/types/map';
 
 import {
   LegendTypeBasic,
+  LegendTypeCategorical,
   LegendTypeChoropleth,
   LegendTypeGradient,
   LegendTypeTimeline,
@@ -27,6 +28,7 @@ type LEGEND_TYPES_T = {
 
 const LEGEND_TYPES: LEGEND_TYPES_T = {
   basic: LegendTypeBasic,
+  categorical: LegendTypeCategorical,
   choropleth: LegendTypeChoropleth,
   gradient: LegendTypeGradient,
   timeline: LegendTypeTimeline,
