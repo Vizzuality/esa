@@ -1,0 +1,253 @@
+name: Deploy to AWS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+
+    paths:
+      - 'client/**'
+      - 'cms/**'
+      - '.github/workflows/*'
+      - 'infrastructure/**'
+      - 'package.json'
+
+jobs:
+  set_environment:
+    runs-on: ubuntu-latest
+    name: Set Deployment Environment
+    outputs:
+      env_name: ${{ steps.set_env.outputs.env_name }}
+    steps:
+      - id: set_env
+        run: echo "env_name=${{ github.ref_name == 'infra-test' && 'dev' || github.ref_name }}" >> $GITHUB_OUTPUT
+
+  trigger_build:
+    runs-on: ubuntu-latest
+    outputs:
+      build_cms: ${{ steps.changes.outputs.cms == 'true' || github.ref_name == 'staging' || github.ref_name == 'main' }}
+      build_client: ${{ steps.changes.outputs.client == 'true' || github.ref_name == 'staging' || github.ref_name == 'main' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Detect changes in client and CMS paths
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            client:
+              - '.github/workflows/**'
+              - 'client/**'
+            cms:
+              - '.github/workflows/**'
+              - 'cms/**'
+
+  build_client:
+    needs: [set_environment, trigger_build]
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.trigger_build.outputs.build_client == 'true' }}
+    environment:
+      name: ${{ needs.set_environment.outputs.env_name }}
+    runs-on: ubuntu-latest
+    name: Build Client image and push to Amazon ECR
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.PIPELINE_USER_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PIPELINE_USER_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: 'true'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Debug environment variables
+        run: |
+          echo "NODE_ENV: ${{ vars.NODE_ENV }}"
+          echo "NEXT_PUBLIC_URL: ${{ vars.NEXT_PUBLIC_URL }}"
+          echo "NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}"
+          echo "NEXT_PUBLIC_MAPBOX_API_TOKEN: ${{ vars.NEXT_PUBLIC_MAPBOX_API_TOKEN }}"
+          echo "NEXT_PUBLIC_MAPBOX_USERNAME: ${{ vars.NEXT_PUBLIC_MAPBOX_USERNAME }}"
+          echo "NEXT_PUBLIC_MAPBOX_STYLE_ID: ${{ vars.NEXT_PUBLIC_MAPBOX_STYLE_ID }}"
+          echo "NEXT_PUBLIC_MATOMO_URL: ${{ vars.NEXT_PUBLIC_MATOMO_URL }}"
+          echo "NEXT_PUBLIC_MATOMO_SITE_ID: ${{ vars.NEXT_PUBLIC_MATOMO_SITE_ID }}"
+          echo "NEXT_PUBLIC_PREVIEW_SECRET: ${{ secrets.NEXT_PUBLIC_PREVIEW_SECRET != '' && '***SET***' || '***NOT SET***' }}"
+          echo "CLIENT_REPOSITORY_NAME: ${{ vars.CLIENT_REPOSITORY_NAME }}"
+          echo "Environment: ${{ needs.set_environment.outputs.env_name }}"
+
+      - name: Build, tag, and push Client image to Amazon ECR
+        uses: docker/build-push-action@v5
+        with:
+          build-args: |
+            NEXT_PUBLIC_ENVIRONMENT=${{ vars.NODE_ENV }}
+            NEXT_PUBLIC_URL=${{ vars.NEXT_PUBLIC_URL }}
+            NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_BASE_PATH=${{ vars.NEXT_PUBLIC_BASE_PATH }}
+            NEXT_PUBLIC_MAPBOX_API_TOKEN=${{ vars.NEXT_PUBLIC_MAPBOX_API_TOKEN }}
+            NEXT_PUBLIC_MAPBOX_USERNAME=${{ vars.NEXT_PUBLIC_MAPBOX_USERNAME }}
+            NEXT_PUBLIC_MAPBOX_STYLE_ID=${{ vars.NEXT_PUBLIC_MAPBOX_STYLE_ID }}
+            NEXT_PUBLIC_MATOMO_URL=${{ vars.NEXT_PUBLIC_MATOMO_URL }}
+            NEXT_PUBLIC_MATOMO_SITE_ID=${{ vars.NEXT_PUBLIC_MATOMO_SITE_ID }}
+            NEXT_PUBLIC_PREVIEW_SECRET=${{ secrets.NEXT_PUBLIC_PREVIEW_SECRET }}
+          context: .
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          file: ./client/Dockerfile.prod
+          push: true
+          tags: |
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.CLIENT_REPOSITORY_NAME }}:${{ github.sha }}
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.CLIENT_REPOSITORY_NAME }}:${{ needs.set_environment.outputs.env_name }}
+
+  build_cms:
+    needs: [set_environment, trigger_build]
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.trigger_build.outputs.build_cms == 'true' }}
+    environment:
+      name: ${{ needs.set_environment.outputs.env_name }}
+    runs-on: ubuntu-latest
+    name: Build CMS image and push to Amazon ECR
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.PIPELINE_USER_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PIPELINE_USER_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: 'true'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build, tag, and push CMS image to Amazon ECR
+        uses: docker/build-push-action@v5
+        with:
+          build-args: |
+            NODE_ENV=${{ vars.NODE_ENV }}
+            CMS_URL=${{ vars.CMS_URL }}
+            DATABASE_CLIENT=postgres
+            DATABASE_SSL=true
+            DATABASE_SSL_REJECT_UNAUTHORIZED=false
+            BUCKET_BUCKET=${{ vars.BUCKET_BUCKET }}
+            BUCKET_REGION=${{ vars.BUCKET_REGION }}
+            BUCKET_ENDPOINT=${{ vars.BUCKET_ENDPOINT }}
+            BUCKET_ACCESS_KEY=${{ secrets.BUCKET_ACCESS_KEY }}
+            BUCKET_SECRET_KEY=${{ secrets.BUCKET_SECRET_KEY }}
+            STRAPI_MEDIA_LIBRARY_PROVIDER=${{ vars.STRAPI_MEDIA_LIBRARY_PROVIDER }}
+            STRAPI_ADMIN_MAPBOX_ACCESS_TOKEN=${{ vars.NEXT_PUBLIC_MAPBOX_API_TOKEN }}
+            STRAPI_ADMIN_MAPBOX_USERNAME=${{ vars.NEXT_PUBLIC_MAPBOX_USERNAME }}
+            STRAPI_ADMIN_MAPBOX_STYLE_ID=${{ vars.NEXT_PUBLIC_MAPBOX_STYLE_ID }}
+            STRAPI_ADMIN_API_BASE_URL=${{ vars.STRAPI_ADMIN_API_BASE_URL }}
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            DATABASE_HOST=${{ secrets.DATABASE_HOST }}
+            DATABASE_NAME=${{ secrets.DATABASE_NAME }}
+            DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+            DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
+            DATABASE_PORT=${{ secrets.DATABASE_PORT }}
+            AWS_SES_ACCESS_KEY_ID=${{ secrets.AWS_SES_ACCESS_KEY_ID }}
+            AWS_SES_ACCESS_KEY_SECRET=${{ secrets.AWS_SES_ACCESS_KEY_SECRET }}
+            AWS_SES_DOMAIN=${{ secrets.AWS_SES_DOMAIN }}
+            ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }}
+            API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            TRANSFER_TOKEN_SALT=${{ secrets.TRANSFER_TOKEN_SALT }}
+            APP_KEYS=${{ secrets.APP_KEYS }}
+            PORT=1337
+          context: .
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          file: ./cms/Dockerfile.prod
+          push: true
+          tags: |
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.CMS_REPOSITORY_NAME }}:${{ github.sha }}
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.CMS_REPOSITORY_NAME }}:${{ needs.set_environment.outputs.env_name }}
+
+  deploy:
+    name: Deploy Services to Amazon EBS
+    needs: [set_environment, build_client, build_cms]
+    if: >
+      !failure() &&
+      (
+        needs.build_client.result == 'success' ||
+        needs.build_cms.result == 'success'
+      )
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ needs.set_environment.outputs.env_name }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.PIPELINE_USER_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PIPELINE_USER_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Generate docker compose file
+        working-directory: infrastructure/terraform/source_bundle
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY_CLIENT: ${{ vars.CLIENT_REPOSITORY_NAME }}
+          ECR_REPOSITORY_CMS: ${{ vars.CMS_REPOSITORY_NAME }}
+          IMAGE_TAG: ${{ needs.set_environment.outputs.env_name }}
+        run: |
+          cat <<EOF >> docker-compose.yml
+          services:
+            client:
+              image: $ECR_REGISTRY/$ECR_REPOSITORY_CLIENT:$IMAGE_TAG
+              restart: unless-stopped
+            cms:
+              image: $ECR_REGISTRY/$ECR_REPOSITORY_CMS:$IMAGE_TAG
+              restart: unless-stopped
+            nginx:
+              image: nginx
+              restart: unless-stopped
+              volumes:
+                - ./proxy/conf.d:/etc/nginx/conf.d
+                - "\${EB_LOG_BASE_DIR}/nginx:/var/log/nginx"
+              ports:
+                - 80:80
+              depends_on:
+                - cms
+                - client
+          EOF
+
+      - name: Generate zip file
+        working-directory: infrastructure/terraform/source_bundle
+        run: |
+          zip -r deploy.zip * .[^.]*
+
+      - name: Deploy to Amazon EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.PIPELINE_USER_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.PIPELINE_USER_SECRET_ACCESS_KEY }}
+          application_name: ${{ vars.PROJECT_NAME}}-${{ needs.set_environment.outputs.env_name }}
+          environment_name: ${{ vars.PROJECT_NAME}}-${{ needs.set_environment.outputs.env_name }}-env
+          region: ${{ vars.AWS_REGION }}
+          version_label: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          deployment_package: infrastructure/terraform/source_bundle/deploy.zip
+          wait_for_deployment: true
