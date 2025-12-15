@@ -48,7 +48,7 @@ jobs:
     needs: [set_environment, trigger_build]
     if: ${{ github.event_name == 'workflow_dispatch' || needs.trigger_build.outputs.build_client == 'true' }}
     environment:
-      name: ${{ needs.set_environment.outputs.env_name }}
+      name: dev
     runs-on: ubuntu-latest
     name: Build Client image and push to Amazon ECR
     steps:
@@ -112,7 +112,7 @@ jobs:
     needs: [set_environment, trigger_build]
     if: ${{ github.event_name == 'workflow_dispatch' || needs.trigger_build.outputs.build_cms == 'true' }}
     environment:
-      name: ${{ needs.set_environment.outputs.env_name }}
+      name: dev
     runs-on: ubuntu-latest
     name: Build CMS image and push to Amazon ECR
     steps:
@@ -189,7 +189,7 @@ jobs:
       )
     runs-on: ubuntu-latest
     environment:
-      name: ${{ needs.set_environment.outputs.env_name }}
+      name: dev
 
     steps:
       - name: Checkout code
