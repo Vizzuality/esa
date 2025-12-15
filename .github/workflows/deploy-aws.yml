@@ -89,7 +89,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           build-args: |
-            NEXT_PUBLIC_ENVIRONMENT=${{ vars.NODE_ENV }}
+            NEXT_PUBLIC_ENVIRONMENT=${{ vars.NEXT_PUBLIC_ENVIRONMENT }}
             NEXT_PUBLIC_URL=${{ vars.NEXT_PUBLIC_URL }}
             NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_BASE_PATH=${{ vars.NEXT_PUBLIC_BASE_PATH }}
