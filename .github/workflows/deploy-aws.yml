@@ -245,8 +245,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.PIPELINE_USER_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.PIPELINE_USER_SECRET_ACCESS_KEY }}
-          application_name: ${{ vars.PROJECT_NAME}}-${{ needs.set_environment.outputs.env_name }}
-          environment_name: ${{ vars.PROJECT_NAME}}-${{ needs.set_environment.outputs.env_name }}-env
+          application_name: esa-dev
+          environment_name: esa-dev-env
           region: ${{ vars.AWS_REGION }}
           version_label: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           deployment_package: infrastructure/terraform/source_bundle/deploy.zip
