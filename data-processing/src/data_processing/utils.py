@@ -443,6 +443,67 @@ def csv_to_json(input_file, output_file, skiprows=0, sep=None, round_digits=2):
     print(f"Saved JSON to {output_file}")
     return result
 
+def excel_to_json(input_file, output_file, skiprows=0, round_digits=2, date_format="%Y-%m-%d"):
+    """
+    Convert an Excel file with multiple sheets to JSON.
+    Each sheet becomes a separate dataset:
+    {
+        "datasets": [
+            { "data": [ { "x": ..., "y": ... }, ... ] },
+            { "data": [ { "x": ..., "y": ... }, ... ] },
+            ...
+        ]
+    }
+
+    Parameters:
+    - input_file: path to XLSX file
+    - output_file: path to save JSON
+    - skiprows: number of rows to skip at the top of each sheet
+    - round_digits: digits to round numeric values
+    - date_format: how to format dates in x column
+    """
+
+    input_file = Path(input_file)
+
+    # Read all sheets into a dict of DataFrames
+    xls = pd.ExcelFile(input_file)
+    datasets = []
+
+    for sheet_name in xls.sheet_names:
+        df = pd.read_excel(xls, sheet_name=sheet_name, skiprows=skiprows)
+
+        # Keep only first two columns
+        df = df.iloc[:, :2]
+        df.columns = ["x", "y"]
+
+        # Drop missing values
+        df = df.dropna(subset=["x", "y"])
+        df = df[pd.to_numeric(df["y"], errors="coerce").notna()]
+
+        # Build data list
+        data_list = []
+        for _, row in df.iterrows():
+            x_val = row["x"]
+            if isinstance(x_val, pd.Timestamp):
+                x_val = x_val.strftime(date_format)
+            else:
+                x_val = round(float(x_val), round_digits)
+
+            y_val = round(float(row["y"]), round_digits)
+
+            data_list.append({"x": x_val, "y": y_val})
+
+        datasets.append({"data": data_list})
+
+    result = {"datasets": datasets}
+
+    # Save JSON
+    with open(output_file, "w") as f:
+        json.dump(result, f, indent=2)
+
+    print(f"Saved JSON to {output_file}")
+    return result
+
 
 def reproject_raster(input_path, output_path, target_crs, resampling_method=Resampling.nearest):
     """Reproject a single raster to a new coordinate reference system."""
