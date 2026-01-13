@@ -389,6 +389,19 @@ def clip_raster_to_country_and_create_cog(
             print(f"Error creating COG: {str(e)}")
             return None
 
+
+def hex_to_rgba(hex_color):
+    """Convert a hex color string to RGBA tuple.
+
+    Args:
+        hex_color (str): Hex color string (e.g., '#FF0000' or 'FF0000')
+
+    Returns:
+        tuple: RGBA tuple with values 0-255 and alpha=255
+    """
+    h = hex_color.lstrip("#")
+    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4)) + (255,)
+
 def csv_to_json(input_file, output_file, skiprows=0, sep=None, round_digits=2):
     """
     Convert a two-column CSV to JSON in the format:
