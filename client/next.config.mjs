@@ -14,6 +14,7 @@ const nextConfig = {
       'esa-gda-comms-staging-mfafc.ondigitalocean.app',
       'https://impact-sphere-gda.esa.int',
       'esa-dev-public.s3.amazonaws.com',
+      'esa-dev-public.s3.eu-west-3.amazonaws.com'
     ],
   },
   env: {
