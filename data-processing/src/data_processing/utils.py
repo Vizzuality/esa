@@ -288,7 +288,7 @@ def resample_raster(input_file, output_file, scale_factor=5, resampling_method=R
 def clip_raster_to_country_and_create_cog(
     raster_file,
     country_name,
-    output_dir="../data/processed/WSF/",
+    output_dir,
     gadm_file="../data/raw/gadm_410-adm_0/gadm_410-adm_0.shp",
     country_col="COUNTRY",
 ):
