@@ -33,13 +33,17 @@ services:
     build:
       context: .
       dockerfile: client/Dockerfile.prod
+      args:
+        NEXT_PUBLIC_MATOMO_URL: ${NEXT_PUBLIC_MATOMO_URL}
+        NEXT_PUBLIC_MATOMO_SITE_ID: ${NEXT_PUBLIC_MATOMO_SITE_ID}
+        NEXT_PUBLIC_ENVIRONMENT: production
     ports:
       - '3000:3000'
     env_file:
       - ./client/.env.local
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:1337/api
-      - NODE_ENV=${NODE_ENV:-development}
+      - NODE_ENV=production
     links:
       - cms
     volumes:

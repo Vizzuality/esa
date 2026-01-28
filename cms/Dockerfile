@@ -12,6 +12,7 @@ RUN apt-get update -y && \
       libvips-dev \
     && apt-get clean
 
+
 WORKDIR /app/
 COPY .yarn ./.yarn
 COPY package.json .yarnrc.yml yarn.lock ./
