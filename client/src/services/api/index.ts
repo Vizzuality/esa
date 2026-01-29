@@ -20,4 +20,11 @@ export const API = <T>(config: AxiosRequestConfig): Promise<T> => {
 // In some case with react-query and swr you want to be able to override the return error type so you can also do it here like this
 export type ErrorType<Error> = AxiosError<Error>;
 
+export const GDAMasterDataAPI = Axios.create({
+  baseURL: '/api/dashboard',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
 export default API;
