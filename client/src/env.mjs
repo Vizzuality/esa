@@ -17,6 +17,8 @@ export const env = createEnv({
    */
   server: {
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: z.preprocess(castToBoolean, z.boolean()),
+    GDA_MASTER_DATA_FUNCTION_BASE_URL: z.string().url(),
+    GDA_MASTER_DATA_FUNCTION_KEY: z.string(),
   },
   /*
    * Environment variables available on the client (and server).
@@ -56,6 +58,8 @@ export const env = createEnv({
     NEXT_PUBLIC_PREVIEW_SECRET: process.env.NEXT_PUBLIC_PREVIEW_SECRET,
     NEXT_PUBLIC_MAPBOX_USERNAME: process.env.NEXT_PUBLIC_MAPBOX_USERNAME,
     NEXT_PUBLIC_MAPBOX_STYLE_ID: process.env.NEXT_PUBLIC_MAPBOX_STYLE_ID,
+    GDA_MASTER_DATA_FUNCTION_BASE_URL: process.env.GDA_MASTER_DATA_FUNCTION_BASE_URL,
+    GDA_MASTER_DATA_FUNCTION_KEY: process.env.GDA_MASTER_DATA_FUNCTION_KEY,
   },
 });
 
