@@ -35,6 +35,8 @@ export const env = createEnv({
     NEXT_PUBLIC_MAPBOX_STYLE_ID: z.string().optional(),
     NEXT_PUBLIC_MATOMO_URL: z.string().url(),
     NEXT_PUBLIC_MATOMO_SITE_ID: z.string(),
+    // NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_BASE_URL: z.string().url(),
+    // NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_KEY: z.string(),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -56,6 +58,9 @@ export const env = createEnv({
     NEXT_PUBLIC_PREVIEW_SECRET: process.env.NEXT_PUBLIC_PREVIEW_SECRET,
     NEXT_PUBLIC_MAPBOX_USERNAME: process.env.NEXT_PUBLIC_MAPBOX_USERNAME,
     NEXT_PUBLIC_MAPBOX_STYLE_ID: process.env.NEXT_PUBLIC_MAPBOX_STYLE_ID,
+    // NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_BASE_URL:
+    //   process.env.NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_BASE_URL,
+    // NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_KEY: process.env.NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_KEY,
   },
 });
 
