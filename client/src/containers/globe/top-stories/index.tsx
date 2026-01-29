@@ -1,18 +1,23 @@
-// import { ChevronDownIcon } from 'lucide-react';
+import { useSyncCategory } from '@/store/globe';
 
 import { useGetTopStories } from '@/types/generated/top-story';
 
 import TopStoriesItem from './item';
 
 const TopStories = () => {
+  const category = useSyncCategory()[0];
   const { data: topStories } = useGetTopStories({
     // 'pagination[limit]': 10,
-    populate: 'story,cover_image',
+    populate: 'cover_image,story,story.category',
     sort: 'index:asc',
+    filters: { story: { category: { slug: { $eq: category } } } },
   });
 
   return (
     <div>
+      {topStories?.data?.length === 0 && (
+        <p className="mb-4 text-center text-sm italic text-gray-500">No top stories found.</p>
+      )}
       {topStories?.data?.map((topStory) => (
         <TopStoriesItem key={topStory.id} topStory={topStory.attributes} />
       ))}
