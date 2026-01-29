@@ -1,3 +1,5 @@
+'use client';
+
 import { useDashboard, DashboardProps } from '@/hooks/dashboard';
 
 const numbers: { stat: string; number: number; slug: keyof DashboardProps }[] = [

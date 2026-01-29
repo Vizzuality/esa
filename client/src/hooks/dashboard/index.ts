@@ -1,7 +1,5 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 
-import { GDAMasterDataAPI } from '@/services/api';
-
 export type DashboardProps = {
   supportedCountries: number;
   caseStudiesInProgress: number;
@@ -16,8 +14,15 @@ export function useDashboard<TSelected = DashboardProps>(
   options?: UseQueryOptions<DashboardProps, Error, TSelected, DashboardQueryKey>
 ): UseQueryResult<TSelected, Error> {
   const fetchDashboard = async (): Promise<DashboardProps> => {
-    const res = await GDAMasterDataAPI.get<DashboardProps>('');
-    return res.data;
+    const res = await fetch('/api/dashboard', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!res.ok) {
+      throw new Error(`Dashboard API error: ${res.status}`);
+    }
+
+    return res.json();
   };
 
   return useQuery<DashboardProps, Error, TSelected, DashboardQueryKey>({
