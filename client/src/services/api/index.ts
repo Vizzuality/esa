@@ -1,5 +1,4 @@
 import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import qs from 'qs';
 
 import env from '@/env.mjs';
 
@@ -26,7 +25,7 @@ export const GDAMasterDataAPI = Axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  paramsSerializer: (params) => qs.stringify(params, { encodeValuesOnly: true }),
+  paramsSerializer: (params) => params.toString(),
 });
 
 export default API;

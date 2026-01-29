@@ -94,12 +94,12 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
 
   useEffect(() => {
     const lastFrame = TIMELINE.length - 1;
-    if (frame === lastFrame) {
+    if (frame === lastFrame && timelines[id]?.layers.length > 2) {
       clearInterval(intervalRef.current);
       setIsPlaying(false);
+      console.log('if');
     }
   }, [setIsPlaying, TIMELINE, frame]);
-
   useEffect(() => {
     // Add or update timeline to timeline atom
     setTimelines((prev) => ({
@@ -161,16 +161,34 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
     let newFrame = frame === lastFrame ? 0 : frame + 1;
     setFrame(newFrame);
 
+    const steps = TIMELINE.length ?? 0;
+
     intervalRef.current = setInterval(() => {
+      if (steps <= 1) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = undefined;
+        setIsPlaying(false);
+        return;
+      }
+
+      if (steps === 2) {
+        const next = newFrame === lastFrame ? 0 : newFrame + 1;
+        setFrame(next);
+        newFrame = next;
+        return;
+      }
+
       if (newFrame === lastFrame) {
         clearInterval(intervalRef.current);
+        intervalRef.current = undefined;
         setIsPlaying(false);
       } else {
-        setFrame(newFrame + 1);
-        newFrame++;
+        const next = newFrame + 1;
+        setFrame(next);
+        newFrame = next;
       }
     }, animationInterval);
-  }, [TIMELINE?.length, frame, setFrame, animationInterval]);
+  }, [TIMELINE?.length, frame, setFrame, animationInterval, id, timelines]);
 
   const value = TIMELINE[frame]?.value;
 

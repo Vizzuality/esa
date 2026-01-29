@@ -76,11 +76,14 @@ jobs:
           echo "NODE_ENV: ${{ vars.NODE_ENV }}"
           echo "NEXT_PUBLIC_URL: ${{ vars.NEXT_PUBLIC_URL }}"
           echo "NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}"
+          echo "NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_KEY: ${{ vars.NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_KEY }}"
+          echo "NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_BASE_URL: ${{ vars.NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_BASE_URL }}"
           echo "NEXT_PUBLIC_MAPBOX_API_TOKEN: ${{ vars.NEXT_PUBLIC_MAPBOX_API_TOKEN }}"
           echo "NEXT_PUBLIC_MAPBOX_USERNAME: ${{ vars.NEXT_PUBLIC_MAPBOX_USERNAME }}"
           echo "NEXT_PUBLIC_MAPBOX_STYLE_ID: ${{ vars.NEXT_PUBLIC_MAPBOX_STYLE_ID }}"
           echo "NEXT_PUBLIC_MATOMO_URL: ${{ vars.NEXT_PUBLIC_MATOMO_URL }}"
           echo "NEXT_PUBLIC_MATOMO_SITE_ID: ${{ vars.NEXT_PUBLIC_MATOMO_SITE_ID }}"
+          echo "NEXT_PUBLIC_ENVIRONMENT: ${{ vars.NEXT_PUBLIC_ENVIRONMENT }}"
           echo "NEXT_PUBLIC_PREVIEW_SECRET: ${{ secrets.NEXT_PUBLIC_PREVIEW_SECRET != '' && '***SET***' || '***NOT SET***' }}"
           echo "CLIENT_REPOSITORY_NAME: ${{ vars.CLIENT_REPOSITORY_NAME }}"
           echo "Environment: ${{ needs.set_environment.outputs.env_name }}"
@@ -99,6 +102,8 @@ jobs:
             NEXT_PUBLIC_MATOMO_URL=${{ vars.NEXT_PUBLIC_MATOMO_URL }}
             NEXT_PUBLIC_MATOMO_SITE_ID=${{ vars.NEXT_PUBLIC_MATOMO_SITE_ID }}
             NEXT_PUBLIC_PREVIEW_SECRET=${{ secrets.NEXT_PUBLIC_PREVIEW_SECRET }}
+            NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_KEY=${{ secrets.NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_KEY }}
+            NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_BASE_URL=${{ vars.NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_BASE_URL }}
           context: .
           cache-from: type=gha
           cache-to: type=gha,mode=max
