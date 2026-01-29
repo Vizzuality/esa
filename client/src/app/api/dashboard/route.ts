@@ -1,25 +1,26 @@
 import { NextResponse } from 'next/server';
 
-import axios from 'axios';
-
 export const runtime = 'nodejs';
 
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_BASE_URL;
-  const key = process.env.NEXT_PUBLIC_GDA_MASTER_DATA_FUNCTION_KEY;
+  const baseUrl = process.env.GDA_MASTER_DATA_FUNCTION_BASE_URL;
+  const API_KEY = process.env.GDA_MASTER_DATA_FUNCTION_KEY;
+
+  if (!baseUrl || !API_KEY) {
+    return NextResponse.json({ error: 'Missing environment variables' }, { status: 500 });
+  }
 
   try {
-    const res = await axios.get(`${baseUrl}/ExcelWebAPI`, {
+    const res = await fetch(`${baseUrl}`, {
       headers: {
-        'x-functions-key': key,
+        'Content-Type': 'application/json',
+        'x-functions-key': API_KEY || '',
       },
     });
-
-    return NextResponse.json(res.data);
+    const data = await res.json();
+    return NextResponse.json({ data });
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'Upstream error' }), {
-      status: 502,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    console.error('Error logging baseUrl:', error);
+    return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
