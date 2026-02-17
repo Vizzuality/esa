@@ -70,14 +70,45 @@ def create_apngs(tile_dir: Path):
 
 def get_files_with_years(input_folder):
     """
-    Get a list of all files in the directory sorted by full date (YYYYMMDD).
+    Get a list of all files in the directory sorted by date.
+    Handles different date formats: DDMMYYYY, MMYYYY, or YYYY.
     """
     files = os.listdir(input_folder)
-    files_with_dates = [
-        (f, int(re.search(r"_(\d{8})\.tif$", f).group(1)))
-        for f in files
-        if re.search(r"_(\d{8})\.tif$", f)
-    ]
+    files_with_dates = []
+
+    for f in files:
+        # Pattern 1: DDMMYYYY (8 digits)
+        match_8 = re.search(r"_(\d{8})\.tif$", f)
+        if match_8:
+            date_str = match_8.group(1)
+            # Convert DDMMYYYY to YYYYMMDD for sorting
+            dd = date_str[:2]
+            mm = date_str[2:4]
+            yyyy = date_str[4:]
+            normalized_date = int(yyyy + mm + dd)
+            files_with_dates.append((f, normalized_date))
+            continue
+
+        # Pattern 2: MMYYYY (6 digits)
+        match_6 = re.search(r"_(\d{6})\.tif$", f)
+        if match_6:
+            date_str = match_6.group(1)
+            # Convert MMYYYY to YYYYMM01 (assume first day of month)
+            mm = date_str[:2]
+            yyyy = date_str[2:]
+            normalized_date = int(yyyy + mm + "01")
+            files_with_dates.append((f, normalized_date))
+            continue
+
+        # Pattern 3: YYYY (4 digits)
+        match_4 = re.search(r"_(\d{4})\.tif$", f)
+        if match_4:
+            date_str = match_4.group(1)
+            # Convert YYYY to YYYY0101 (assume January 1st)
+            normalized_date = int(date_str + "0101")
+            files_with_dates.append((f, normalized_date))
+            continue
+
     sorted_files = sorted(files_with_dates, key=lambda x: x[1])
     return sorted_files
 
@@ -517,6 +548,63 @@ def excel_to_json(input_file, output_file, skiprows=0, round_digits=2, date_form
     print(f"Saved JSON to {output_file}")
     return result
 
+def csv_to_json_multiline(input_file, output_file, col_year=0, col_x=1, col_y=2,
+                          col_names=None, sep=None, round_digits=2):
+    """
+    Convert a CSV into JSON for a multi-line chart.
+
+    Parameters:
+    - input_file: path to CSV
+    - output_file: path to save JSON
+    - col_year: index of the column for the grouping variable (default 0)
+    - col_x: index of the column for x-axis (default 1)
+    - col_y: index of the column for y-axis (default 2)
+    - col_names: optional list of column names to use instead of positions
+    - sep: CSV separator
+    - round_digits: number of decimals to round y values
+
+    Returns:
+    - dict with JSON structure
+    """
+    # Load CSV
+    df = pd.read_csv(input_file, sep=sep, engine="python")
+
+    # If column names provided, use them
+    if col_names:
+        df = df[col_names]
+        year_col, x_col, y_col = col_names
+    else:
+        df = df.iloc[:, [col_year, col_x, col_y]]
+        year_col, x_col, y_col = df.columns
+
+    # Ensure numeric
+    df = df.dropna(subset=[year_col, x_col, y_col])
+    df[year_col] = pd.to_numeric(df[year_col], errors="coerce")
+    df[x_col] = pd.to_numeric(df[x_col], errors="coerce")
+    df[y_col] = pd.to_numeric(df[y_col], errors="coerce")
+    df = df.dropna(subset=[year_col, x_col, y_col])
+
+    # Group by year and build datasets
+    datasets = []
+    for year, group in df.groupby(year_col):
+        group = group.sort_values(x_col)
+        data = [
+            {"x": float(row[x_col]), "y": round(float(row[y_col]), round_digits)}
+            for _, row in group.iterrows()
+        ]
+        datasets.append({
+            "label": str(year),
+            "data": data
+        })
+
+    result = {"datasets": datasets}
+
+    # Save JSON
+    with open(output_file, "w") as f:
+        json.dump(result, f, indent=2)
+
+    print(f"Saved JSON to {output_file}")
+    return result
 
 def reproject_raster(input_path, output_path, target_crs, resampling_method=Resampling.nearest):
     """Reproject a single raster to a new coordinate reference system."""
