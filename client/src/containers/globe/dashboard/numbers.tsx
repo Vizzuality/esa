@@ -10,7 +10,6 @@ const numbers: { stat: string; number: number; slug: keyof DashboardProps }[] = 
 
 const DashboardNumbers = () => {
   const { data } = useDashboard<DashboardProps>();
-
   return (
     <div className="flex gap-x-1 px-4">
       {numbers.map(({ stat, number, slug }) => (
