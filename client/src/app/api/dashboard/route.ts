@@ -16,7 +16,8 @@ export async function GET() {
     });
     return NextResponse.json(res.data);
   } catch (error: unknown) {
-    return new NextResponse(JSON.stringify({ error }), {
+    console.error('Error fetching dashboard data:', error);
+    return new NextResponse(JSON.stringify({ error: 'Failed to fetch dashboard data' }), {
       status: 502,
       headers: { 'Content-Type': 'application/json' },
     });
