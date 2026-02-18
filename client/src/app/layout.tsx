@@ -7,16 +7,16 @@ import Providers from '@/app/layout-providers';
 
 import { MatomoAnalytics } from '@/containers/matomo-analytics';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <Providers>
       <html lang="en">
-        <body className="font-notes min-h-screen  overflow-x-hidden">
-          <main>{children}</main>
-          <Suspense fallback={null}>
+        <Suspense fallback={null}>
+          <body className="font-notes min-h-screen  overflow-x-hidden">
+            <main>{children}</main>
             <MatomoAnalytics />
-          </Suspense>
-        </body>
+          </body>
+        </Suspense>
       </html>
     </Providers>
   );
