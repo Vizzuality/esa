@@ -1,26 +1,25 @@
 import { NextResponse } from 'next/server';
 
+import axios from 'axios';
+
 export const runtime = 'nodejs';
 
 export async function GET() {
   const baseUrl = process.env.GDA_MASTER_DATA_FUNCTION_BASE_URL;
-  const API_KEY = process.env.GDA_MASTER_DATA_FUNCTION_KEY;
-
-  if (!baseUrl || !API_KEY) {
-    return NextResponse.json({ error: 'Missing environment variables' }, { status: 500 });
-  }
+  const key = process.env.GDA_MASTER_DATA_FUNCTION_KEY;
 
   try {
-    const res = await fetch(`${baseUrl}`, {
+    const res = await axios.get(`${baseUrl}/ExcelWebAPI`, {
       headers: {
-        'Content-Type': 'application/json',
-        'x-functions-key': API_KEY || '',
+        'x-functions-key': key,
       },
     });
-    const data = await res.json();
-    return NextResponse.json({ data });
-  } catch (error) {
-    console.error('Error logging baseUrl:', error);
-    return NextResponse.json({ error: String(error) }, { status: 500 });
+    return NextResponse.json(res.data);
+  } catch (error: unknown) {
+    console.error('Error fetching dashboard data:', error);
+    return new NextResponse(JSON.stringify({ error: 'Failed to fetch dashboard data' }), {
+      status: 502,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
