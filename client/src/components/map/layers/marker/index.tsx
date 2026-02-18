@@ -72,14 +72,16 @@ const Marker = ({ markers, handleClick, handleClose }: MarkerProps) => {
                 {marker?.properties?.location}
               </p>
 
-              <Button
-                variant="secondary"
-                className="h-8 w-full rounded-3xl bg-teal-500 py-2 text-xs text-white hover:bg-teal-500/50"
-                onClick={() => !!marker.id && handleClick(marker.id)}
-                disabled={!marker?.properties?.active}
-              >
-                Discover story
-              </Button>
+              {marker?.properties?.active && (
+                <Button
+                  variant="secondary"
+                  className="h-8 w-full rounded-3xl bg-teal-500 py-2 text-xs text-white hover:bg-teal-500/50"
+                  onClick={() => !!marker.id && handleClick(marker.id)}
+                  disabled={!marker?.properties?.active}
+                >
+                  Discover story
+                </Button>
+              )}
             </div>
           );
         })}
