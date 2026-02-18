@@ -45,7 +45,7 @@ async function prefetchQueries(searchParams: HomePageProps['searchParams']) {
       const categories = queryClient.getQueryData<CategoryListResponse>(categoriesQueryKey);
 
       categoryId = categories?.data?.find((category) => {
-        return `"${category.attributes?.slug}"` === searchParams.category;
+        return `${category.attributes?.slug}` === searchParams.category;
       })?.attributes?.slug;
     }
 
