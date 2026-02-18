@@ -157,11 +157,10 @@ export default function Home() {
             </div>
           </div>
           <div className="hidden h-full w-[280px] flex-col sm:flex 2xl:w-80">
-            <div className="flex h-full flex-col justify-between">
+            <div className="flex h-full max-h-fit flex-col justify-between">
               <Card title="Find more stories" className="relative h-full">
                 <TopStories />
               </Card>
-              <GradientLine />
             </div>
           </div>
         </div>
