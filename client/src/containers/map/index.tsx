@@ -103,7 +103,6 @@ export default function MapContainer() {
             ...f,
             geometry: f.geometry as GeoJSON.Point,
           }));
-
         const storyMarkersEOIDsFeatures = e.features
           .filter((f) => f.source === 'story-markers')
           .map((f) => ({
