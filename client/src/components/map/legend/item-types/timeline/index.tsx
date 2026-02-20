@@ -97,7 +97,6 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
     if (frame === lastFrame && timelines[id]?.layers.length > 2) {
       clearInterval(intervalRef.current);
       setIsPlaying(false);
-      console.log('if');
     }
   }, [setIsPlaying, TIMELINE, frame]);
   useEffect(() => {

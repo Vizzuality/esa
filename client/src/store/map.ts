@@ -43,6 +43,7 @@ export const layersInteractiveIdsAtom = atom<string[]>([
   'story-markers-cluster',
   'story-markers-cluster-count',
   'story-markers-unclustered',
+  'eoids-marker',
 ]);
 
 export const popupAtom = atom<MapLayerMouseEvent | null>(null);

@@ -98,14 +98,23 @@ export default function MapContainer() {
       if (!isGlobePage) return;
       if (e.features?.length) {
         const storyMarkersFeatures = e.features
+          .filter((f) => f.source === 'eoids-markers')
+          .map((f) => ({
+            ...f,
+            geometry: f.geometry as GeoJSON.Point,
+          }));
+        const storyMarkersEOIDsFeatures = e.features
           .filter((f) => f.source === 'story-markers')
           .map((f) => ({
             ...f,
             geometry: f.geometry as GeoJSON.Point,
           }));
 
-        if (storyMarkersFeatures.length) {
-          setMarkers(storyMarkersFeatures as GeoJSON.Feature<GeoJSON.Point>[]);
+        if (storyMarkersFeatures.length || storyMarkersEOIDsFeatures.length) {
+          setMarkers([
+            ...storyMarkersFeatures,
+            ...storyMarkersEOIDsFeatures,
+          ] as GeoJSON.Feature<GeoJSON.Point>[]);
         } else {
           setMarkers([]);
         }
