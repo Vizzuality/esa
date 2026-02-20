@@ -1,5 +1,5 @@
 # ---------- Builder ----------
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 # Optional: Set working directory
 WORKDIR /app
@@ -46,7 +46,7 @@ COPY client .
 RUN yarn build
 
 # ---------- Runner ----------
-FROM node:18-alpine AS runner
+FROM node:20-alpine AS runner
 
 # Set working dir
 WORKDIR /app

@@ -1,4 +1,4 @@
-FROM node:18.16-bookworm-slim
+FROM node:20.11-bookworm-slim
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y libc6  && \
