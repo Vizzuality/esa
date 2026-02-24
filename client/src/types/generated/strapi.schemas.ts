@@ -2185,6 +2185,7 @@ export interface StepLayoutMapStepComponent {
   map?: unknown;
   title?: string;
   widget?: WidgetWidgetComponent;
+  widget_secondary?: WidgetWidgetComponent;
 }
 
 export type StepLayoutMapStepComponentLayersDataItemAttributes = { [key: string]: any };
@@ -2211,6 +2212,7 @@ export const WidgetWidgetComponentType = {
   doughnut: 'doughnut',
   polarArea: 'polarArea',
   radar: 'radar',
+  multiple: 'multiple',
 } as const;
 
 export interface WidgetWidgetComponent {
