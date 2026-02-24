@@ -25,6 +25,7 @@ const StoryMarkers = () => {
 
   const params = getStoriesParams({ category: categoryId });
   const { data: stories } = useGetStories(params);
+
   const FeatureCollection = useMemo(
     () => ({
       type: 'FeatureCollection',
