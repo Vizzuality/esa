@@ -36,6 +36,11 @@
       "type": "component",
       "repeatable": false,
       "component": "quote.quote"
+    },
+    "widget_secondary": {
+      "type": "component",
+      "repeatable": true,
+      "component": "widget.widget"
     }
   }
 }
