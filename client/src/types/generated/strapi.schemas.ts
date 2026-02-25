@@ -2185,7 +2185,7 @@ export interface StepLayoutMapStepComponent {
   map?: unknown;
   title?: string;
   widget?: WidgetWidgetComponent;
-  widget_secondary?: WidgetWidgetComponent;
+  widget_secondary?: WidgetWidgetComponent[];
 }
 
 export type StepLayoutMapStepComponentLayersDataItemAttributes = { [key: string]: any };
