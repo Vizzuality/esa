@@ -61,7 +61,7 @@ type MapStepLayoutProps = {
 };
 
 const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) => {
-  const { card, widget, map, quote } = step as StepLayoutMapStepComponent & {
+  const { card, widget, widget_secondary, map, quote } = step as StepLayoutMapStepComponent & {
     map: StoryStepMap;
     quote: MapStepLayoutProps['quote'];
   };
@@ -141,6 +141,40 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
                   )}
                 </div>
                 {(widget as any)?.legend && <RichText>{(widget as any).legend}</RichText>}
+              </div>
+            </MapContent>
+          )}
+
+          {!!widget_secondary?.id && (
+            <MapContent showContent={showContent} title={widget_secondary.title}>
+              <div className="mt-2 space-y-2">
+                <div className="mx-auto w-fit space-y-6">
+                  {widget_secondary.type !== 'multiple' ? (
+                    <Chart widget={widget_secondary as WidgetWidgetComponent} />
+                  ) : (
+                    Object.entries(widget_secondary?.data as Record<string, any>).map(
+                      ([variable, block], index, array) => {
+                        return (
+                          <Chart
+                            key={variable}
+                            isLast={index === array.length - 1}
+                            widget={{
+                              ...widget_secondary,
+                              type: block.type || 'line',
+                              data: {
+                                ...block,
+                              },
+                              title: variable,
+                            }}
+                          />
+                        );
+                      }
+                    )
+                  )}
+                </div>
+                {(widget_secondary as any)?.legend && (
+                  <RichText>{(widget_secondary as any).legend}</RichText>
+                )}
               </div>
             </MapContent>
           )}
