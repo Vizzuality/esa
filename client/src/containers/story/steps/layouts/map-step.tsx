@@ -82,6 +82,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
   // const handleClickMarker = (markerIndex: number) => {
   //   setCurrentMedia(markerIndex);
   // };
+  const widgetSecondary = widget_secondary?.[0];
 
   return (
     <div className="flex justify-end">
@@ -113,6 +114,8 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
               <RichText>{card.content}</RichText>
             </MapContent>
           )}
+
+          {/* TO - DO - legend and title must to be independent */}
           {!!widget?.id && (
             <MapContent showContent={showContent} title={widget.title}>
               <div className="mt-2 space-y-2">
@@ -145,21 +148,21 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
             </MapContent>
           )}
 
-          {!!widget_secondary?.id && (
-            <MapContent showContent={showContent} title={widget_secondary.title}>
+          {!!widgetSecondary?.id && (
+            <MapContent showContent={showContent} title={widgetSecondary.title}>
               <div className="mt-2 space-y-2">
                 <div className="mx-auto w-fit space-y-6">
-                  {widget_secondary.type !== 'multiple' ? (
-                    <Chart widget={widget_secondary as WidgetWidgetComponent} />
+                  {widgetSecondary.type !== 'multiple' ? (
+                    <Chart widget={widgetSecondary as WidgetWidgetComponent} />
                   ) : (
-                    Object.entries(widget_secondary?.data as Record<string, any>).map(
+                    Object.entries(widgetSecondary?.data as Record<string, any>).map(
                       ([variable, block], index, array) => {
                         return (
                           <Chart
                             key={variable}
                             isLast={index === array.length - 1}
                             widget={{
-                              ...widget_secondary,
+                              ...widgetSecondary,
                               type: block.type || 'line',
                               data: {
                                 ...block,
