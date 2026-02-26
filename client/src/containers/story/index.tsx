@@ -11,6 +11,8 @@ import { ScrollProvider } from '@/lib/scroll';
 import { layersAtom, tmpBboxAtom } from '@/store/map';
 import { useSyncStep } from '@/store/stories';
 
+import { StoryStepMapLocation } from '@/types/story';
+
 import { useGetStoriesId } from '@/types/generated/story';
 
 import Header from './header';
@@ -30,6 +32,14 @@ const Story = () => {
 
   const story = useMemo(() => storyData?.data?.attributes, [storyData]);
   const steps = useMemo(() => story?.steps || [], [story]);
+
+  const mapLocation = useMemo((): StoryStepMapLocation | undefined => {
+    const firstStep = steps[0];
+    if (firstStep && isMapNotEmpty(firstStep.map)) {
+      return firstStep.map.location;
+    }
+    return undefined;
+  }, [steps]);
 
   useEffect(() => {
     if (!steps) return;
@@ -69,6 +79,7 @@ const Story = () => {
         storyId={id}
         categoryTitle={story?.category?.data?.attributes?.name}
         categoryURL={story?.category?.data?.attributes?.url}
+        mapLocation={mapLocation}
       />
       <ScrollProvider>
         <Steps story={story} />
