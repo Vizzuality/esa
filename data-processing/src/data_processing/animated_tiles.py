@@ -27,7 +27,7 @@ from rio_tiler.io import Reader, XarrayReader
 
 from helpers.raster_ops import open_raster_in_4326
 
-from .utils import clip_rasters_by_vector, create_apngs
+from .utils import clip_rasters_by_vector, create_apngs, get_files_with_years
 
 # Suppress specific warnings from rasterio
 warnings.filterwarnings("ignore", category=rasterio.errors.NotGeoreferencedWarning)
@@ -51,6 +51,8 @@ class AnimatedTiles:
     engine (str, optional): The engine to use. Defaults to "xarray".
     vector_file (Path, optional): Path to a vector file for clipping rasters
         (only for rasterio engine). Defaults to None.
+    date_format (str, optional): Expected date format in filenames. Options: "DDMMYYYY" or "YYYYMMDD".
+        Defaults to "YYYYMMDD". Only used with rasterio engine.
     """
 
     def __init__(
@@ -64,6 +66,7 @@ class AnimatedTiles:
         vmax: float = 30000,
         engine: str = "xarray",
         vector_file: Path = None,
+        date_format: str = "YYYYMMDD",
     ):
         """
         Initializes the AnimatedTiles class.
@@ -73,7 +76,7 @@ class AnimatedTiles:
         if not self.engine_class:
             raise ValueError(f"Unsupported engine: {engine}")
         self.engine_instance = self.engine_class(
-            data, output_folder, min_z, max_z, color_map, vmin, vmax, vector_file
+            data, output_folder, min_z, max_z, color_map, vmin, vmax, vector_file, date_format
         )
 
     def create(self, time_coord="time"):
@@ -108,6 +111,7 @@ class TileEngine:
         vmin: float = 0,
         vmax: float = 30000,
         vector_file: Optional[Path] = None,
+        date_format: str = "YYYYMMDD",
     ):
         """
         Initialize the BaseTiler class.
@@ -121,6 +125,7 @@ class TileEngine:
         vmin (float): The minimum value for rescaling the data.
         vmax (float): The maximum value for rescaling the data.
         vector_file (Path, optional): Path to a vector file for clipping the rasters.
+        date_format (str): Expected date format in filenames ("DDMMYYYY" or "YYYYMMDD").
         """
         self.data = data
         self.output_folder = output_folder
@@ -131,6 +136,7 @@ class TileEngine:
         self.vmin = vmin
         self.vmax = vmax
         self.vector_file = vector_file
+        self.date_format = date_format
 
     def generate_tiles(self, time_coord=None):
         """
@@ -257,21 +263,8 @@ class RasterioEngine(TileEngine):
         """
         Generate tiles from a GeoTIFF files.
         """
-        tif_files = (
-            glob.glob(os.path.join(self.data, "*.tif"))
-            + glob.glob(os.path.join(self.data, "*.tiff"))
-        )
-
-        # Sort files by extracting year from filename pattern
-        # like "CAMS_NO21KM_2019_yearly_mean.tif"
-        def extract_year(filename):
-            match = re.search(r'(\d{8})', os.path.basename(filename))
-            return int(match.group(1)) if match else 0
-
-        sorted_files = [
-            (os.path.basename(f), extract_year(f))
-            for f in sorted(tif_files, key=extract_year)
-        ]
+        # Use sophisticated date extraction logic from get_files_with_years
+        sorted_files = get_files_with_years(self.data, date_format=self.date_format)
 
         with Live(console=console, refresh_per_second=10) as live:
             for self.n, sorted_file in enumerate(sorted_files):

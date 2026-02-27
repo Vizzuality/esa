@@ -49,69 +49,67 @@ def create_apngs(tile_dir: Path):
                 [os.remove(file) for file in png_files]
 
 
-# def get_files_with_years(input_folder):
-#     """
-#     Get a list of all files in the directory sorted by year.
-
-#     Returns:
-#     list: A list of tuples, where each tuple contains the filename and the year.
-#     """
-#     # Get a list of all files in the directory
-#     files = os.listdir(input_folder)
-#     # Create a list of tuples, where each tuple contains the filename and the year
-#     files_with_years = [
-#         (f, int(re.search(r"(\d{4})\.tif$", f).group(1)))
-#         for f in files
-#         if re.search(r"(\d{4})\.tif$", f)
-#     ]
-#     # Sort the list of tuples based on the year
-#     sorted_files = sorted(files_with_years, key=lambda x: x[1])
-#     return sorted_files
-
-def get_files_with_years(input_folder):
+def get_files_with_years(input_folder, date_format="DDMMYYYY"):
     """
     Get a list of all files in the directory sorted by date.
-    Handles different date formats: DDMMYYYY, MMYYYY, or YYYY.
+    Handles different date formats based on the specified format.
+    Finds date patterns anywhere in the filename. If multiple patterns exist,
+    takes the first one found.
+
+    Args:
+        input_folder (str): Path to the folder containing files
+        date_format (str): Expected date format. Options: "DDMMYYYY" or "YYYYMMDD"
     """
     files = os.listdir(input_folder)
     files_with_dates = []
 
     for f in files:
-        # Pattern 1: DDMMYYYY (8 digits)
-        match_8 = re.search(r"_(\d{8})\.tif$", f)
+        # Pattern 1: 8 digits - highest priority
+        match_8 = re.search(r"_(\d{8})", f)
         if match_8:
             date_str = match_8.group(1)
-            # Convert DDMMYYYY to YYYYMMDD for sorting
-            dd = date_str[:2]
-            mm = date_str[2:4]
-            yyyy = date_str[4:]
-            normalized_date = int(yyyy + mm + dd)
+
+            if date_format == "YYYYMMDD":
+                # Already in YYYYMMDD format
+                normalized_date = int(date_str)
+            else:  # DDMMYYYY
+                # Convert DDMMYYYY to YYYYMMDD for sorting
+                dd = date_str[:2]
+                mm = date_str[2:4]
+                yyyy = date_str[4:]
+                normalized_date = int(yyyy + mm + dd)
+
             files_with_dates.append((f, normalized_date))
             continue
 
-        # Pattern 2: MMYYYY (6 digits)
-        match_6 = re.search(r"_(\d{6})\.tif$", f)
+        # Pattern 2: 6 digits - medium priority
+        match_6 = re.search(r"_(\d{6})", f)
         if match_6:
             date_str = match_6.group(1)
-            # Convert MMYYYY to YYYYMM01 (assume first day of month)
-            mm = date_str[:2]
-            yyyy = date_str[2:]
-            normalized_date = int(yyyy + mm + "01")
+
+            if date_format == "YYYYMMDD":
+                # YYYYMM format - assume first day of month
+                normalized_date = int(date_str + "01")
+            else:  # DDMMYYYY
+                # MMYYYY format - convert to YYYYMM01
+                mm = date_str[:2]
+                yyyy = date_str[2:]
+                normalized_date = int(yyyy + mm + "01")
+
             files_with_dates.append((f, normalized_date))
             continue
 
-        # Pattern 3: YYYY (4 digits)
-        match_4 = re.search(r"_(\d{4})\.tif$", f)
+        # Pattern 3: 4 digits - lowest priority
+        match_4 = re.search(r"_(\d{4})", f)
         if match_4:
             date_str = match_4.group(1)
-            # Convert YYYY to YYYY0101 (assume January 1st)
+            # YYYY format - assume January 1st (same for both formats)
             normalized_date = int(date_str + "0101")
             files_with_dates.append((f, normalized_date))
             continue
 
     sorted_files = sorted(files_with_dates, key=lambda x: x[1])
     return sorted_files
-
 
 
 def create_linear_segmented_colormap(colors_list: List[str]) -> Dict[int, Tuple[int, int, int]]:
