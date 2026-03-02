@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { TooltipPortal } from '@radix-ui/react-tooltip';
 import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useSetAtom } from 'jotai';
 import { FacebookIcon, LinkedinIcon, Share2, TwitterIcon } from 'lucide-react';
@@ -19,6 +20,7 @@ import { StoryStepMapLocation } from '@/types/story';
 import { Button } from '@/components/ui/button';
 import CategoryIcon from '@/components/ui/category-icon';
 import { Dialog, DialogContentHome, DialogTrigger } from '@/components/ui/dialog';
+import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 const MiniGlobe = dynamic(() => import('./mini-globe'), {
   ssr: false,
@@ -94,7 +96,7 @@ const StoryHeader = ({
   return (
     <>
       <div className="bg-story-header fixed left-0 top-0 z-30 hidden w-screen sm:block">
-        <div className="relative flex justify-between gap-4 p-4 pb-2 text-center text-2xl font-bold sm:flex-row sm:items-center sm:px-12 sm:py-6">
+        <div className="relative flex justify-between gap-12 p-4 pb-2 text-center text-2xl font-bold sm:flex-row sm:items-center sm:px-12 sm:py-6">
           <div className="flex flex-1 items-center gap-2 sm:gap-4">
             <CategoryIcon slug={categorySlug} className="hidden shrink-0 fill-gray-200 sm:block" />
             {title && (
@@ -162,15 +164,26 @@ const StoryHeader = ({
             </DialogContentHome>
           </Dialog>
           {mapLocation && (
-            <MiniGlobe
-              id="mini-globe-desktop"
-              longitude={mapLocation.longitude}
-              latitude={mapLocation.latitude}
-              bbox={mapLocation.bbox}
-              onClick={handleGoHome}
-              size={130}
-              className="absolute -right-6 -top-6"
-            />
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger>
+                <MiniGlobe
+                  id="mini-globe-desktop"
+                  longitude={mapLocation.longitude}
+                  latitude={mapLocation.latitude}
+                  onClick={handleGoHome}
+                  size={130}
+                  className="absolute -right-12 -top-12"
+                />
+              </TooltipTrigger>
+
+              <TooltipPortal>
+                <TooltipContent side="left" align="start" className="border-none bg-[#003247]">
+                  <div className="text-sm text-gray-200">Back to globe view</div>
+
+                  <TooltipArrow className="fill-[#003247]" width={10} height={5} />
+                </TooltipContent>
+              </TooltipPortal>
+            </Tooltip>
           )}
         </div>
       </div>
@@ -193,7 +206,6 @@ const StoryHeader = ({
               id="mini-globe-mobile"
               longitude={mapLocation.longitude}
               latitude={mapLocation.latitude}
-              bbox={mapLocation.bbox}
               onClick={handleGoHome}
               size={90}
               className="absolute -right-4 -top-4"
