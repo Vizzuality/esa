@@ -10,42 +10,18 @@
     {
       "type": "Feature",
       "properties": {
-        "Country": "Botswana",
-        "ISO_A3": "BWA",
-        "category": "water",
-        "categoryName": "Water",
-        "location": "Botswana",
-        "title": "Water: Botswana",
-        "active": false,
-        "fid": "water-botswana"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          25.437216113755944,
-          -22.852811348352773
-        ]
-      },
-      "id": 0
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "Country": "Kenya",
         "ISO_A3": "KEN",
-        "category": "climate-adaptation-and-finance",
-        "categoryName": "Climate Adaptation & Finance",
+        "category": "forest-management",
+        "categoryName": "Forest Management",
         "location": "Kenya",
-        "title": "Climate Adaptation & Finance: Kenya",
+        "title": "Kenya Watershed Services Improvement Program",
         "active": false,
         "fid": "climate-adaptation-and-finance-kenya"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          35.70313182196117,
-          1.5296574006724537
-        ]
+        "coordinates": [35.70313182196117, 1.5296574006724537]
       },
       "id": 1
     },
@@ -63,10 +39,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          37.18812122468422,
-          30.68548112357308
-        ]
+        "coordinates": [37.18812122468422, 30.68548112357308]
       },
       "id": 2
     },
@@ -84,10 +57,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -3.1732797401694706,
-          9.715993331703611
-        ]
+        "coordinates": [-3.1732797401694706, 9.715993331703611]
       },
       "id": 3
     },
@@ -99,16 +69,13 @@
         "category": "disaster",
         "categoryName": "Disaster Resilience",
         "location": "Thailand",
-        "title": "Disaster Resilience: Thailand",
+        "title": "Natural Disaster Liquidity Facility and Natural Disaster Guarantee facility",
         "active": false,
         "fid": "disaster-thailand"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          102.03485407512586,
-          17.83479760585358
-        ]
+        "coordinates": [102.03485407512586, 17.83479760585358]
       },
       "id": 4
     },
@@ -120,16 +87,13 @@
         "category": "disaster",
         "categoryName": "Disaster Resilience",
         "location": "Mongolia",
-        "title": "Disaster Resilience: Mongolia",
+        "title": "Sustainable Fodder Management",
         "active": false,
         "fid": "disaster-mongolia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          107.03054501971835,
-          44.43965133481109
-        ]
+        "coordinates": [107.03054501971835, 44.43965133481109]
       },
       "id": 5
     },
@@ -141,16 +105,13 @@
         "category": "disaster",
         "categoryName": "Disaster Resilience",
         "location": "Azerbaijan",
-        "title": "Disaster Resilience: Azerbaijan",
+        "title": "Disaster Risk Analytics",
         "active": false,
         "fid": "disaster-azerbaijan"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          45.84211915881549,
-          40.50351554719491
-        ]
+        "coordinates": [45.84211915881549, 40.50351554719491]
       },
       "id": 6
     },
@@ -168,10 +129,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          44.55303557367527,
-          7.053297796765159
-        ]
+        "coordinates": [44.55303557367527, 7.053297796765159]
       },
       "id": 7
     },
@@ -183,16 +141,13 @@
         "category": "agriculture",
         "categoryName": "Agriculture",
         "location": "Belize",
-        "title": "Agriculture: Belize",
+        "title": "Climate Resilient and Sustainable Agriculture Project",
         "active": false,
         "fid": "agriculture-belize"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -88.40940045419848,
-          16.84990995872359
-        ]
+        "coordinates": [-88.40940045419848, 16.84990995872359]
       },
       "id": 8
     },
@@ -204,16 +159,13 @@
         "category": "energy",
         "categoryName": "Clean Energy",
         "location": "Bangladesh",
-        "title": "Clean Energy: Bangladesh",
+        "title": "Enhancement and Strengthening of Power Transmission Network in Eastern Region",
         "active": false,
         "fid": "energy-bangladesh"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          92.15686762061848,
-          22.671954895812657
-        ]
+        "coordinates": [92.15686762061848, 22.671954895812657]
       },
       "id": 9
     },
@@ -225,16 +177,13 @@
         "category": "agriculture",
         "categoryName": "Agriculture",
         "location": "Paraguay",
-        "title": "Agriculture: Paraguay",
+        "title": "Market Access for Agricultural Products Project",
         "active": false,
         "fid": "agriculture-paraguay"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -56.571714959471166,
-          -24.945379552126674
-        ]
+        "coordinates": [-56.571714959471166, -24.945379552126674]
       },
       "id": 10
     },
@@ -252,10 +201,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          8.807076985555595,
-          14.523891727555439
-        ]
+        "coordinates": [8.807076985555595, 14.523891727555439]
       },
       "id": 11
     },
@@ -267,16 +213,13 @@
         "category": "energy",
         "categoryName": "Clean Energy",
         "location": "Cameroon",
-        "title": "Clean Energy: Cameroon",
+        "title": "Cameroon Poverty Assessment",
         "active": false,
         "fid": "energy-cameroon"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          12.742528654302163,
-          7.698940455246391
-        ]
+        "coordinates": [12.742528654302163, 7.698940455246391]
       },
       "id": 12
     },
@@ -288,16 +231,13 @@
         "category": "marine",
         "categoryName": "Marine",
         "location": "Cambodia",
-        "title": "Marine: Cambodia",
+        "title": "Cambodia : Sustainable Coastal and Marine Fisheries Project",
         "active": false,
         "fid": "marine-cambodia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          104.41608543456971,
-          11.12793404848784
-        ]
+        "coordinates": [104.41608543456971, 11.12793404848784]
       },
       "id": 13
     },
@@ -309,16 +249,13 @@
         "category": "marine",
         "categoryName": "Marine",
         "location": "Maldives",
-        "title": "Marine: Maldives",
+        "title": "Towards A Sustainable And Resilient Blue Economy In The Maldives",
         "active": false,
         "fid": "marine-maldives"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          73.5,
-          3.2
-        ]
+        "coordinates": [73.5, 3.2]
       },
       "id": 14
     },
@@ -330,16 +267,13 @@
         "category": "climate",
         "categoryName": "Climate Resilience",
         "location": "Mozambique",
-        "title": "Climate Resilience: Mozambique",
+        "title": "Next Generation MRV for Land Use ER Programs",
         "active": false,
         "fid": "climate-mozambique"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          33.87833485591771,
-          -19.914298113233773
-        ]
+        "coordinates": [33.87833485591771, -19.914298113233773]
       },
       "id": 15
     },
@@ -351,16 +285,13 @@
         "category": "marine",
         "categoryName": "Marine",
         "location": "Tunisia",
-        "title": "Marine: Tunisia",
+        "title": "Blue Economy in the Red Sea countries",
         "active": false,
         "fid": "marine-tunisia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          9.555215303377325,
-          35.95593940744272
-        ]
+        "coordinates": [9.555215303377325, 35.95593940744272]
       },
       "id": 16
     },
@@ -378,10 +309,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -61.68,
-          12.12
-        ]
+        "coordinates": [-61.68, 12.12]
       },
       "id": 17
     },
@@ -393,16 +321,13 @@
         "category": "fragility",
         "categoryName": "Fragility, Conflict & Security",
         "location": "Nigeria",
-        "title": "Fragility, Conflict & Security: Nigeria",
+        "title": "Nigeria Rural Access & Mobility",
         "active": false,
         "fid": "fragility-nigeria"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          9.078977208590235,
-          10.590754400654262
-        ]
+        "coordinates": [9.078977208590235, 10.590754400654262]
       },
       "id": 18
     },
@@ -414,16 +339,13 @@
         "category": "disaster",
         "categoryName": "Disaster Resilience",
         "location": "Indonesia",
-        "title": "Disaster Resilience: Indonesia",
+        "title": "Flood Management and Coastal protection in North Java",
         "active": false,
         "fid": "disaster-indonesia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          114.97112688613285,
-          -1.0707541212598262
-        ]
+        "coordinates": [114.97112688613285, -1.0707541212598262]
       },
       "id": 19
     },
@@ -435,16 +357,13 @@
         "category": "fragility",
         "categoryName": "Fragility, Conflict & Security",
         "location": "Pakistan",
-        "title": "Fragility, Conflict & Security: Pakistan",
+        "title": "Pakistan Community Support Project",
         "active": false,
         "fid": "fragility-pakistan"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          67.93008067710113,
-          29.239241113954943
-        ]
+        "coordinates": [67.93008067710113, 29.239241113954943]
       },
       "id": 20
     },
@@ -462,10 +381,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          40.09151177318233,
-          -2.1816033934877783
-        ]
+        "coordinates": [40.09151177318233, -2.1816033934877783]
       },
       "id": 21
     },
@@ -474,19 +390,16 @@
       "properties": {
         "Country": "Bosnia and Herzegovina",
         "ISO_A3": "BIH",
-        "category": "",
-        "categoryName": "",
+        "category": "climate",
+        "categoryName": "Climate Resilience",
         "location": "Bosnia and Herzegovina",
-        "title": "",
+        "title": "Green Cities indicators",
         "active": false,
         "fid": "unknown-bosnia-and-herzegovina"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          18.359074664051928,
-          44.758583451041815
-        ]
+        "coordinates": [18.359074664051928, 44.758583451041815]
       },
       "id": 22
     },
@@ -504,10 +417,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -16.692979063953658,
-          20.961924132006764
-        ]
+        "coordinates": [-16.692979063953658, 20.961924132006764]
       },
       "id": 23
     },
@@ -517,18 +427,15 @@
         "Country": "Georgia",
         "ISO_A3": "GEO",
         "category": "water",
-        "categoryName": "Water",
+        "categoryName": "Water Resources",
         "location": "Georgia",
-        "title": "Water: Georgia",
+        "title": "Georgia Resilient Agriculture, Irrigation, and Land Project",
         "active": false,
         "fid": "water-georgia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          44.672716284114486,
-          42.45209397888268
-        ]
+        "coordinates": [44.672716284114486, 42.45209397888268]
       },
       "id": 24
     },
@@ -538,18 +445,15 @@
         "Country": "Somalia",
         "ISO_A3": "SOM",
         "category": "water",
-        "categoryName": "Water",
+        "categoryName": "Water Resources",
         "location": "Somalia",
-        "title": "Water: Somalia",
+        "title": "Adaptive Agriculture and Rangeland Rehabilitation",
         "active": false,
         "fid": "water-somalia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          43.6153488702106,
-          0.716538434488557
-        ]
+        "coordinates": [43.6153488702106, 0.716538434488557]
       },
       "id": 25
     },
@@ -559,7 +463,7 @@
         "Country": "Lake Victoria",
         "ISO_A3": "",
         "category": "water",
-        "categoryName": "Water",
+        "categoryName": "Water Resources",
         "location": "Lake Victoria",
         "title": "Water: Lake Victoria",
         "active": false,
@@ -567,10 +471,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          37.211444671429334,
-          -0.06130518040631294
-        ]
+        "coordinates": [37.211444671429334, -0.06130518040631294]
       },
       "id": 26
     },
@@ -582,16 +483,13 @@
         "category": "climate",
         "categoryName": "Climate Resilience",
         "location": "Peru",
-        "title": "Climate Resilience: Peru",
+        "title": "Global Program for Sustainability",
         "active": false,
         "fid": "climate-peru"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -73.91909733081974,
-          -6.331850311749831
-        ]
+        "coordinates": [-73.91909733081974, -6.331850311749831]
       },
       "id": 27
     },
@@ -601,7 +499,7 @@
         "Country": "Zambezi",
         "ISO_A3": "",
         "category": "water",
-        "categoryName": "Water",
+        "categoryName": "Water Resources",
         "location": "Zambezi",
         "title": "Water: Zambezi",
         "active": false,
@@ -609,10 +507,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          31.766055649893058,
-          -23.17546748149654
-        ]
+        "coordinates": [31.766055649893058, -23.17546748149654]
       },
       "id": 28
     },
@@ -624,16 +519,13 @@
         "category": "health",
         "categoryName": "Public Health",
         "location": "Timor-Leste",
-        "title": "Public Health: Timor-Leste",
+        "title": "Timor-Leste Accelerating Human Capital PASA",
         "active": false,
         "fid": "health-timor-leste"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          126.60104505295652,
-          -8.662520653170493
-        ]
+        "coordinates": [126.60104505295652, -8.662520653170493]
       },
       "id": 29
     },
@@ -645,16 +537,13 @@
         "category": "fragility",
         "categoryName": "Fragility, Conflict & Security",
         "location": "Afghanistan",
-        "title": "Fragility, Conflict & Security: Afghanistan",
+        "title": "Enhancing Differentiated Approaches for Fragile and Conflict-Affected Situations",
         "active": false,
         "fid": "fragility-afghanistan"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          61.7248368805257,
-          33.41283956642344
-        ]
+        "coordinates": [61.7248368805257, 33.41283956642344]
       },
       "id": 30
     },
@@ -663,19 +552,16 @@
       "properties": {
         "Country": "Mexico",
         "ISO_A3": "MEX",
-        "category": "",
-        "categoryName": "",
+        "category": "forest",
+        "categoryName": "Forest Management",
         "location": "Mexico",
-        "title": "",
+        "title": "Mexico BioCarbon Emissions Reduction Program",
         "active": false,
         "fid": "unknown-mexico"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -104.55830935601021,
-          21.037514813150175
-        ]
+        "coordinates": [-104.55830935601021, 21.037514813150175]
       },
       "id": 31
     },
@@ -693,10 +579,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          40.89482710222129,
-          41.20185290294149
-        ]
+        "coordinates": [40.89482710222129, 41.20185290294149]
       },
       "id": 32
     },
@@ -714,10 +597,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          6.73,
-          0.34
-        ]
+        "coordinates": [6.73, 0.34]
       },
       "id": 33
     },
@@ -729,16 +609,13 @@
         "category": "marine",
         "categoryName": "Marine",
         "location": "Ecuador",
-        "title": "Marine: Ecuador",
+        "title": "Harnessing the potential of the ocean for sustainable development in Ecuador",
         "active": false,
         "fid": "marine-ecuador"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -78.31488141655491,
-          -2.8876891103799123
-        ]
+        "coordinates": [-78.31488141655491, -2.8876891103799123]
       },
       "id": 34
     },
@@ -750,16 +627,13 @@
         "category": "agriculture",
         "categoryName": "Agriculture",
         "location": "India",
-        "title": "Agriculture: India",
+        "title": "Integrated Project for Source Sustainability and climate Resilient Rain-fed Agriculture in Himachal Pradesh",
         "active": false,
         "fid": "agriculture-india"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          80.32240584502652,
-          24.310013918808256
-        ]
+        "coordinates": [80.32240584502652, 24.310013918808256]
       },
       "id": 35
     },
@@ -771,16 +645,13 @@
         "category": "agriculture",
         "categoryName": "Agriculture",
         "location": "Ghana",
-        "title": "Agriculture: Ghana",
+        "title": "West Africa Food System Resilience Program (FSRP)",
         "active": false,
         "fid": "agriculture-ghana"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -2.0444611991694743,
-          6.562265296174003
-        ]
+        "coordinates": [-2.0444611991694743, 6.562265296174003]
       },
       "id": 36
     },
@@ -792,16 +663,13 @@
         "category": "agriculture",
         "categoryName": "Agriculture",
         "location": "Rwanda",
-        "title": "Agriculture: Rwanda",
+        "title": "Commercialization and De-Risking for Agricultural Transformation Project",
         "active": false,
         "fid": "agriculture-rwanda"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          30.022331972698673,
-          -1.639076229510135
-        ]
+        "coordinates": [30.022331972698673, -1.639076229510135]
       },
       "id": 37
     },
@@ -813,16 +681,13 @@
         "category": "fragility",
         "categoryName": "Fragility, Conflict & Security",
         "location": "Sudan",
-        "title": "Fragility, Conflict & Security: Sudan",
+        "title": "Sustainable Natural Resources and Livelihoods Programme (SNRLP)",
         "active": false,
         "fid": "fragility-sudan"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          24.786228809603845,
-          16.179492133147658
-        ]
+        "coordinates": [24.786228809603845, 16.179492133147658]
       },
       "id": 38
     },
@@ -834,16 +699,13 @@
         "category": "climate",
         "categoryName": "Climate Resilience",
         "location": "Dem. Rep. Congo",
-        "title": "Climate Resilience: Dem. Rep. Congo",
+        "title": "Democratic Republic of Congo Country Climate Development Report",
         "active": false,
         "fid": "climate-dem-rep-congo"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          27.40993839211675,
-          1.9151327091441352
-        ]
+        "coordinates": [27.40993839211675, 1.9151327091441352]
       },
       "id": 39
     },
@@ -855,16 +717,13 @@
         "category": "fragility",
         "categoryName": "Fragility, Conflict & Security",
         "location": "Colombia",
-        "title": "Fragility, Conflict & Security: Colombia",
+        "title": "Building Rural Entrepreneurial Capacities Programme: Trust and Opportunity",
         "active": false,
         "fid": "fragility-colombia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.95266540689336,
-          6.425410108622067
-        ]
+        "coordinates": [-71.95266540689336, 6.425410108622067]
       },
       "id": 40
     },
@@ -882,10 +741,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          38.01371324401584,
-          17.530645800292554
-        ]
+        "coordinates": [38.01371324401584, 17.530645800292554]
       },
       "id": 41
     },
@@ -895,18 +751,15 @@
         "Country": "Panama",
         "ISO_A3": "PAN",
         "category": "water",
-        "categoryName": "Water",
+        "categoryName": "Water Resources",
         "location": "Panama",
-        "title": "Water: Panama",
+        "title": "Panama City and Bay Sanitation Project Supplemental Financing",
         "active": false,
         "fid": "water-panama"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -77.39938514779791,
-          8.145682621551888
-        ]
+        "coordinates": [-77.39938514779791, 8.145682621551888]
       },
       "id": 42
     },
@@ -915,19 +768,16 @@
       "properties": {
         "Country": "Serbia",
         "ISO_A3": "SRB",
-        "category": "climate-adaptation-and-finance",
-        "categoryName": "Climate Adaptation & Finance",
+        "category": "urban",
+        "categoryName": "Urban Sustainability",
         "location": "Serbia",
-        "title": "Climate Adaptation & Finance: Serbia",
+        "title": "EBRD Green Cities",
         "active": false,
         "fid": "climate-adaptation-and-finance-serbia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          21.709228814065096,
-          44.55017097600428
-        ]
+        "coordinates": [21.709228814065096, 44.55017097600428]
       },
       "id": 43
     },
@@ -945,10 +795,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          31.431097185767886,
-          -0.7688468159307202
-        ]
+        "coordinates": [31.431097185767886, -0.7688468159307202]
       },
       "id": 44
     },
@@ -966,10 +813,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          58.227508849548215,
-          43.92898643976353
-        ]
+        "coordinates": [58.227508849548215, 43.92898643976353]
       },
       "id": 45
     },
@@ -979,18 +823,15 @@
         "Country": "Sri Lanka",
         "ISO_A3": "LKA",
         "category": "water",
-        "categoryName": "Water",
+        "categoryName": "Water Resources",
         "location": "Sri Lanka",
-        "title": "Water: Sri Lanka",
+        "title": "Smallholder Agribusiness and Resilience Project (SARP)",
         "active": false,
         "fid": "water-sri-lanka"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          80.63071150180757,
-          6.240192475530663
-        ]
+        "coordinates": [80.63071150180757, 6.240192475530663]
       },
       "id": 46
     },
@@ -1002,16 +843,13 @@
         "category": "disaster",
         "categoryName": "Disaster Resilience",
         "location": "Nepal",
-        "title": "Disaster Resilience: Nepal",
+        "title": "Melamchi Water Supply Project",
         "active": false,
         "fid": "disaster-nepal"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          86.90128925892584,
-          27.393855080109716
-        ]
+        "coordinates": [86.90128925892584, 27.393855080109716]
       },
       "id": 47
     },
@@ -1023,16 +861,13 @@
         "category": "energy",
         "categoryName": "Clean Energy",
         "location": "Armenia",
-        "title": "Clean Energy: Armenia",
+        "title": "Armenia Enabling the Energy Transition Program for Results",
         "active": false,
         "fid": "energy-armenia"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          44.381443836110115,
-          40.989980488489614
-        ]
+        "coordinates": [44.381443836110115, 40.989980488489614]
       },
       "id": 48
     },
@@ -1044,16 +879,13 @@
         "category": "energy",
         "categoryName": "Clean Energy",
         "location": "Madagascar",
-        "title": "Clean Energy: Madagascar",
+        "title": "Electrification Sector Development project",
         "active": false,
         "fid": "energy-madagascar"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          46.718974003552454,
-          -18.466658161255644
-        ]
+        "coordinates": [46.718974003552454, -18.466658161255644]
       },
       "id": 49
     },
@@ -1071,10 +903,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          36.12945388226739,
-          -7.097270987516316
-        ]
+        "coordinates": [36.12945388226739, -7.097270987516316]
       },
       "id": 50
     },
@@ -1092,10 +921,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          104.96520651467935,
-          10.202575289456886
-        ]
+        "coordinates": [104.96520651467935, 10.202575289456886]
       },
       "id": 51
     }
