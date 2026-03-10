@@ -21,7 +21,10 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [35.70313182196117, 1.5296574006724537]
+        "coordinates": [
+          35.70313182196117,
+          1.5296574006724537
+        ]
       },
       "id": 1
     },
@@ -39,27 +42,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [37.18812122468422, 30.68548112357308]
+        "coordinates": [
+          37.18812122468422,
+          30.68548112357308
+        ]
       },
       "id": 2
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Côte d'Ivoire",
-        "ISO_A3": "CIV",
-        "category": "climate-adaptation-and-finance",
-        "categoryName": "Climate Adaptation & Finance",
-        "location": "Côte d'Ivoire",
-        "title": "Climate Adaptation & Finance: Côte d'Ivoire",
-        "active": false,
-        "fid": "climate-adaptation-and-finance-côte-divoire"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-3.1732797401694706, 9.715993331703611]
-      },
-      "id": 3
     },
     {
       "type": "Feature",
@@ -75,9 +63,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [102.03485407512586, 17.83479760585358]
+        "coordinates": [
+          102.03485407512586,
+          17.83479760585358
+        ]
       },
-      "id": 4
+      "id": 3
     },
     {
       "type": "Feature",
@@ -93,9 +84,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [107.03054501971835, 44.43965133481109]
+        "coordinates": [
+          107.03054501971835,
+          44.43965133481109
+        ]
       },
-      "id": 5
+      "id": 4
     },
     {
       "type": "Feature",
@@ -111,45 +105,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [45.84211915881549, 40.50351554719491]
+        "coordinates": [
+          45.84211915881549,
+          40.50351554719491
+        ]
       },
-      "id": 6
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Eastern Africa",
-        "ISO_A3": "",
-        "category": "agriculture",
-        "categoryName": "Agriculture",
-        "location": "Eastern Africa",
-        "title": "Agriculture: Eastern Africa",
-        "active": false,
-        "fid": "agriculture-eastern-africa"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [44.55303557367527, 7.053297796765159]
-      },
-      "id": 7
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Belize",
-        "ISO_A3": "BLZ",
-        "category": "agriculture",
-        "categoryName": "Agriculture",
-        "location": "Belize",
-        "title": "Climate Resilient and Sustainable Agriculture Project",
-        "active": false,
-        "fid": "agriculture-belize"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-88.40940045419848, 16.84990995872359]
-      },
-      "id": 8
+      "id": 5
     },
     {
       "type": "Feature",
@@ -165,9 +126,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [92.15686762061848, 22.671954895812657]
+        "coordinates": [
+          92.15686762061848,
+          22.671954895812657
+        ]
       },
-      "id": 9
+      "id": 6
     },
     {
       "type": "Feature",
@@ -183,27 +147,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-56.571714959471166, -24.945379552126674]
+        "coordinates": [
+          -56.571714959471166,
+          -24.945379552126674
+        ]
       },
-      "id": 10
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Niger",
-        "ISO_A3": "NER",
-        "category": "climate",
-        "categoryName": "Climate Resilience",
-        "location": "Niger",
-        "title": "Climate Resilience: Niger",
-        "active": false,
-        "fid": "climate-niger"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [8.807076985555595, 14.523891727555439]
-      },
-      "id": 11
+      "id": 7
     },
     {
       "type": "Feature",
@@ -219,9 +168,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [12.742528654302163, 7.698940455246391]
+        "coordinates": [
+          12.742528654302163,
+          7.698940455246391
+        ]
       },
-      "id": 12
+      "id": 8
     },
     {
       "type": "Feature",
@@ -237,9 +189,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [104.41608543456971, 11.12793404848784]
+        "coordinates": [
+          104.41608543456971,
+          11.12793404848784
+        ]
       },
-      "id": 13
+      "id": 9
     },
     {
       "type": "Feature",
@@ -255,9 +210,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [73.5, 3.2]
+        "coordinates": [
+          73.5,
+          3.2
+        ]
       },
-      "id": 14
+      "id": 10
     },
     {
       "type": "Feature",
@@ -273,45 +231,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [33.87833485591771, -19.914298113233773]
+        "coordinates": [
+          33.87833485591771,
+          -19.914298113233773
+        ]
       },
-      "id": 15
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Tunisia",
-        "ISO_A3": "TUN",
-        "category": "marine",
-        "categoryName": "Marine",
-        "location": "Tunisia",
-        "title": "Blue Economy in the Red Sea countries",
-        "active": false,
-        "fid": "marine-tunisia"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [9.555215303377325, 35.95593940744272]
-      },
-      "id": 16
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Grenada",
-        "ISO_A3": "",
-        "category": "marine",
-        "categoryName": "Marine",
-        "location": "Grenada",
-        "title": "Marine: Grenada",
-        "active": false,
-        "fid": "marine-grenada"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-61.68, 12.12]
-      },
-      "id": 17
+      "id": 11
     },
     {
       "type": "Feature",
@@ -327,27 +252,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [9.078977208590235, 10.590754400654262]
+        "coordinates": [
+          9.078977208590235,
+          10.590754400654262
+        ]
       },
-      "id": 18
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Indonesia",
-        "ISO_A3": "IDN",
-        "category": "disaster",
-        "categoryName": "Disaster Resilience",
-        "location": "Indonesia",
-        "title": "Flood Management and Coastal protection in North Java",
-        "active": false,
-        "fid": "disaster-indonesia"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [114.97112688613285, -1.0707541212598262]
-      },
-      "id": 19
+      "id": 12
     },
     {
       "type": "Feature",
@@ -363,27 +273,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [67.93008067710113, 29.239241113954943]
+        "coordinates": [
+          67.93008067710113,
+          29.239241113954943
+        ]
       },
-      "id": 20
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "East Africa",
-        "ISO_A3": "",
-        "category": "fragility",
-        "categoryName": "Fragility, Conflict & Security",
-        "location": "East Africa",
-        "title": "Fragility, Conflict & Security: East Africa",
-        "active": false,
-        "fid": "fragility-east-africa"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [40.09151177318233, -2.1816033934877783]
-      },
-      "id": 21
+      "id": 13
     },
     {
       "type": "Feature",
@@ -399,45 +294,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [18.359074664051928, 44.758583451041815]
+        "coordinates": [
+          18.359074664051928,
+          44.758583451041815
+        ]
       },
-      "id": 22
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "West Africa",
-        "ISO_A3": "",
-        "category": "marine",
-        "categoryName": "Marine",
-        "location": "West Africa",
-        "title": "Marine: West Africa",
-        "active": false,
-        "fid": "marine-west-africa"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-16.692979063953658, 20.961924132006764]
-      },
-      "id": 23
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Georgia",
-        "ISO_A3": "GEO",
-        "category": "water",
-        "categoryName": "Water Resources",
-        "location": "Georgia",
-        "title": "Georgia Resilient Agriculture, Irrigation, and Land Project",
-        "active": false,
-        "fid": "water-georgia"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [44.672716284114486, 42.45209397888268]
-      },
-      "id": 24
+      "id": 14
     },
     {
       "type": "Feature",
@@ -453,27 +315,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [43.6153488702106, 0.716538434488557]
+        "coordinates": [
+          43.6153488702106,
+          0.716538434488557
+        ]
       },
-      "id": 25
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Lake Victoria",
-        "ISO_A3": "",
-        "category": "water",
-        "categoryName": "Water Resources",
-        "location": "Lake Victoria",
-        "title": "Water: Lake Victoria",
-        "active": false,
-        "fid": "water-lake-victoria"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [37.211444671429334, -0.06130518040631294]
-      },
-      "id": 26
+      "id": 15
     },
     {
       "type": "Feature",
@@ -489,27 +336,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-73.91909733081974, -6.331850311749831]
+        "coordinates": [
+          -73.91909733081974,
+          -6.331850311749831
+        ]
       },
-      "id": 27
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Zambezi",
-        "ISO_A3": "",
-        "category": "water",
-        "categoryName": "Water Resources",
-        "location": "Zambezi",
-        "title": "Water: Zambezi",
-        "active": false,
-        "fid": "water-zambezi"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [31.766055649893058, -23.17546748149654]
-      },
-      "id": 28
+      "id": 16
     },
     {
       "type": "Feature",
@@ -525,9 +357,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [126.60104505295652, -8.662520653170493]
+        "coordinates": [
+          126.60104505295652,
+          -8.662520653170493
+        ]
       },
-      "id": 29
+      "id": 17
     },
     {
       "type": "Feature",
@@ -543,9 +378,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [61.7248368805257, 33.41283956642344]
+        "coordinates": [
+          61.7248368805257,
+          33.41283956642344
+        ]
       },
-      "id": 30
+      "id": 18
     },
     {
       "type": "Feature",
@@ -561,45 +399,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-104.55830935601021, 21.037514813150175]
+        "coordinates": [
+          -104.55830935601021,
+          21.037514813150175
+        ]
       },
-      "id": 31
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Turkey",
-        "ISO_A3": "TUR",
-        "category": "",
-        "categoryName": "",
-        "location": "Turkey",
-        "title": "",
-        "active": false,
-        "fid": "unknown-turkey"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [40.89482710222129, 41.20185290294149]
-      },
-      "id": 32
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Sao Tome and Principe",
-        "ISO_A3": "",
-        "category": "marine",
-        "categoryName": "Marine",
-        "location": "Sao Tome and Principe",
-        "title": "Marine: Sao Tome and Principe",
-        "active": false,
-        "fid": "marine-sao-tome-and-principe"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [6.73, 0.34]
-      },
-      "id": 33
+      "id": 19
     },
     {
       "type": "Feature",
@@ -615,9 +420,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-78.31488141655491, -2.8876891103799123]
+        "coordinates": [
+          -78.31488141655491,
+          -2.8876891103799123
+        ]
       },
-      "id": 34
+      "id": 20
     },
     {
       "type": "Feature",
@@ -633,9 +441,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [80.32240584502652, 24.310013918808256]
+        "coordinates": [
+          80.32240584502652,
+          24.310013918808256
+        ]
       },
-      "id": 35
+      "id": 21
     },
     {
       "type": "Feature",
@@ -651,9 +462,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-2.0444611991694743, 6.562265296174003]
+        "coordinates": [
+          -2.0444611991694743,
+          6.562265296174003
+        ]
       },
-      "id": 36
+      "id": 22
     },
     {
       "type": "Feature",
@@ -669,9 +483,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [30.022331972698673, -1.639076229510135]
+        "coordinates": [
+          30.022331972698673,
+          -1.639076229510135
+        ]
       },
-      "id": 37
+      "id": 23
     },
     {
       "type": "Feature",
@@ -687,9 +504,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [24.786228809603845, 16.179492133147658]
+        "coordinates": [
+          24.786228809603845,
+          16.179492133147658
+        ]
       },
-      "id": 38
+      "id": 24
     },
     {
       "type": "Feature",
@@ -705,9 +525,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [27.40993839211675, 1.9151327091441352]
+        "coordinates": [
+          27.40993839211675,
+          1.9151327091441352
+        ]
       },
-      "id": 39
+      "id": 25
     },
     {
       "type": "Feature",
@@ -723,27 +546,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-71.95266540689336, 6.425410108622067]
+        "coordinates": [
+          -71.95266540689336,
+          6.425410108622067
+        ]
       },
-      "id": 40
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "FCAS",
-        "ISO_A3": "",
-        "category": "fragility",
-        "categoryName": "Fragility, Conflict & Security",
-        "location": "FCAS",
-        "title": "Fragility, Conflict & Security: FCAS",
-        "active": false,
-        "fid": "fragility-fcas"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [38.01371324401584, 17.530645800292554]
-      },
-      "id": 41
+      "id": 26
     },
     {
       "type": "Feature",
@@ -759,9 +567,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-77.39938514779791, 8.145682621551888]
+        "coordinates": [
+          -77.39938514779791,
+          8.145682621551888
+        ]
       },
-      "id": 42
+      "id": 27
     },
     {
       "type": "Feature",
@@ -777,45 +588,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [21.709228814065096, 44.55017097600428]
+        "coordinates": [
+          21.709228814065096,
+          44.55017097600428
+        ]
       },
-      "id": 43
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Uganda",
-        "ISO_A3": "UGA",
-        "category": "agriculture",
-        "categoryName": "Agriculture",
-        "location": "Uganda",
-        "title": "Agriculture: Uganda",
-        "active": false,
-        "fid": "agriculture-uganda"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [31.431097185767886, -0.7688468159307202]
-      },
-      "id": 44
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Uzbekistan",
-        "ISO_A3": "UZB",
-        "category": "fragility",
-        "categoryName": "Fragility, Conflict & Security",
-        "location": "Uzbekistan",
-        "title": "Fragility, Conflict & Security: Uzbekistan",
-        "active": false,
-        "fid": "fragility-uzbekistan"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [58.227508849548215, 43.92898643976353]
-      },
-      "id": 45
+      "id": 28
     },
     {
       "type": "Feature",
@@ -831,9 +609,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [80.63071150180757, 6.240192475530663]
+        "coordinates": [
+          80.63071150180757,
+          6.240192475530663
+        ]
       },
-      "id": 46
+      "id": 29
     },
     {
       "type": "Feature",
@@ -849,9 +630,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [86.90128925892584, 27.393855080109716]
+        "coordinates": [
+          86.90128925892584,
+          27.393855080109716
+        ]
       },
-      "id": 47
+      "id": 30
     },
     {
       "type": "Feature",
@@ -867,9 +651,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [44.381443836110115, 40.989980488489614]
+        "coordinates": [
+          44.381443836110115,
+          40.989980488489614
+        ]
       },
-      "id": 48
+      "id": 31
     },
     {
       "type": "Feature",
@@ -885,27 +672,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [46.718974003552454, -18.466658161255644]
+        "coordinates": [
+          46.718974003552454,
+          -18.466658161255644
+        ]
       },
-      "id": 49
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Country": "Tanzania",
-        "ISO_A3": "TZA",
-        "category": "climate-adaptation-and-finance",
-        "categoryName": "Climate Adaptation & Finance",
-        "location": "Tanzania",
-        "title": "Climate Adaptation & Finance: Tanzania",
-        "active": false,
-        "fid": "climate-adaptation-and-finance-tanzania"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [36.12945388226739, -7.097270987516316]
-      },
-      "id": 50
+      "id": 32
     },
     {
       "type": "Feature",
@@ -921,9 +693,12 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [104.96520651467935, 10.202575289456886]
+        "coordinates": [
+          104.96520651467935,
+          10.202575289456886
+        ]
       },
-      "id": 51
+      "id": 33
     }
   ]
 }
