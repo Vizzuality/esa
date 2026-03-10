@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import { useMapImage } from '@/hooks/map';
 
-import data from './data_v2.json';
+import data from './data.json';
 
 const EOIDsMarkers = () => {
   const pathname = usePathname();
