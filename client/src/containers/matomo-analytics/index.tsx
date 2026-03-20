@@ -24,6 +24,12 @@ export function MatomoAnalytics() {
       return;
     }
 
+    console.info(
+      'environment detected, initializing Matomo Analytics with:',
+      env.NEXT_PUBLIC_ENVIRONMENT,
+      process.env.NODE_ENV,
+      ENVIRONMENT
+    );
     if (!MATOMO_URL || !MATOMO_SITE_ID) {
       return;
     }
