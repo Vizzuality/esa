@@ -31,6 +31,8 @@ export function MatomoAnalytics() {
       siteId: MATOMO_SITE_ID!,
       pathname,
       searchParams: urlSearchParams,
+      disableCookies: true,
+      cleanUrl: true,
       onInitialization: () => console.info('Initializing Matomo'),
       onScriptLoadingError: () => console.error('Error loading Matomo script'),
     });
