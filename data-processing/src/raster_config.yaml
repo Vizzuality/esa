@@ -1,0 +1,681 @@
+layers:
+  # Azerbaijan - DR
+  azerbaijan_wsf_built_up_height:
+    base_path: "../data/raw/Disaster Resilience/Azerbaijan/Rasters/GDA-AID-DR_UC01wbGPDRA_WSFBuiltUpHeight-V01_Azerbaijan-2012/"
+    input_file: "GDA-AID-DR_UC01wbGPDRA-V1_Product_BuiltUpHeightEstimation-pv01-Azerbaijan-2012.tif"
+    style_file: "GDA-AID-DR_UC01wbGPDRA-V1_ ProductQgisSymbology_BuiltUpHeightEstimation-pv01-Azerbaijan-2012.qml"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/WSFBuiltUpHeight.tif"
+    layer_name: "Azerbaijan_WSFBuiltUpHeight"
+    upload: false
+    max_zoom: 11
+
+  azerbaijan_wsf_settlement_extent_evolution:
+    base_path: "../data/raw/Disaster Resilience/Azerbaijan/Rasters/GDA-AID-DR_UC01wbGPDRA_WSFSettlementExtentEvolution-V01_Azerbaijan-1985to2015/"
+    input_file: "GDA-AID-DR_UC01wbGPDRA-V1_Product_WSFEvolution-pv01-Azerbaijan-1985-2015.tif"
+    style_file: "GDA-AID-DR_UC01wbGPDRA-V1_ ProductQgisSymbology_WSFEvolution-pv01-Azerbaijan-1985-2015_new.qml"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/WSFSettlementExtentEvolution.tif"
+    layer_name: "Azerbaijan_WSFSettlementExtentEvolution"
+    upload: false
+    max_zoom: 11
+
+  azerbaijan_wsf_population:
+    base_path: "../data/raw/Disaster Resilience/Azerbaijan/Rasters/GDA-AID-DR_UC01wbGPDRA_WSFPopulation-V01_Azerbaijan-2019/"
+    input_file: "GDA-AID-DR_UC01wbGPDRA-V1_Product_WSFPopulation-pv01-Azerbaijan-2019.tif"
+    style_file: "GDA-AID-DR_UC01wbGPDRA-V1_ ProductQgisSymbology_WSFPopulation-pv01-Azerbaijan-2019.qml"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/WSFPopulation.tif"
+    layer_name: "Azerbaijan_WSFPopulation"
+    upload: false
+    max_zoom: 11
+
+  azerbaijan_impact_assessment_population:
+    base_path: "../data/raw/Disaster Resilience/Azerbaijan/Rasters/GDA-AID-DR_UC01wbGPDRA_ImpactAssessment-V01_Azerbaijan-2015to2022/"
+    input_file: "GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentPopulation-V01-Azerbaijan-2015-2022.tif"
+    style_file: "GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentPopulation-V01-Azerbaijan-2015-2022.qml"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/ImpactAssessmentPopulation.tif"
+    layer_name: "Azerbaijan_ImpactAssessmentPopulation"
+    upload: false
+    max_zoom: 11
+
+  azerbaijan_impact_assessment_crops:
+    base_path: "../data/raw/Disaster Resilience/Azerbaijan/Rasters/GDA-AID-DR_UC01wbGPDRA_ImpactAssessment-V01_Azerbaijan-2015to2022/"
+    input_file: "GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentAffectedCrops-V01-Azerbaijan-2015-2022.tif"
+    style_file: "GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentAffectedCrops-V01-Azerbaijan-2015-2022.qml"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/ImpactAssessmentAffectedCrops.tif"
+    layer_name: "Azerbaijan_ImpactAssessmentAffectedCrops"
+    upload: false
+    max_zoom: 11
+
+  # Bangladesh - CE
+  bangladesh_local_maxima_frequency:
+    base_path: "../data/raw/Clean Energy/Bangladesh/Rasters/"
+    input_file: "S-5_LocalMaxima_Frequency_2019-2023.tif"
+    style_file: null
+    output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/S-5_LocalMaxima_Frequency_2019-2023.tif"
+    layer_name: "Bangladesh_LocalMaxima_Frequency_2019-2023"
+    upload: false
+    max_zoom: 11
+
+  bangladesh_local_maxima_2023:
+    base_path: "../data/raw/Clean Energy/Bangladesh/Rasters/"
+    input_file: "2023_S-5_LocalMaxima.tif"
+    style_file: null
+    output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/2023_S-5_LocalMaxima.tif"
+    layer_name: "Bangladesh_LocalMaxima_2023"
+    upload: false
+    max_zoom: 11
+
+  bangladesh_landfill_bazar:
+    base_path: "../data/raw/Clean Energy/Bangladesh/Rasters/"
+    input_file: "GHGSat_CH4_Amin Bazar_20220117.tif"
+    style_file: null
+    output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/GHGSat_CH4_Amin Bazar_20220117.tif"
+    layer_name: "Bangladesh_Landfill_Bazar"
+    upload: false
+    max_zoom: 11
+
+  bangladesh_landfill_area_2:
+    base_path: "../data/raw/Clean Energy/Bangladesh/Rasters/"
+    input_file: "GHGSat_CH4_Area 2_20210417.tif"
+    style_file: null
+    output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/GHGSat_CH4_Area 2_20210417.tif"
+    layer_name: "Bangladesh_Landfill_Area_2"
+    upload: false
+    max_zoom: 11
+
+  bangladesh_landfill_area_3:
+    base_path: "../data/raw/Clean Energy/Bangladesh/Rasters/"
+    input_file: "GHGSat_CH4_Area 3_20230703.tif"
+    style_file: null
+    output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/GHGSat_CH4_Area 3_20230703.tif"
+    layer_name: "Bangladesh_Landfill_Area_3"
+    upload: false
+    max_zoom: 11
+
+  # Botswana - Water
+  botswana_mean_annual_precipitation:
+    base_path: "../data/raw/Water Management/Botswana/Rasters/"
+    input_file: "Precipitation and Evapotranspiration/GDAWater_PotentialGroundwaterRecharge_MeanAnnualPrecipitation_monthlyCHIRPS_Botswana_2003-2022.tif"
+    style_file: "Precipitation and Evapotranspiration/GDAWater_PotentialGroundwaterRecharge_MeanAnnualPrecipitation_monthlyCHIRPS_Botswana_2003-2022.qml"
+    output_file: "../data/processed/Water Management/Botswana/Rasters/GDAWater_MeanAnnualPrecipitation_Botswana_2003-2022.tif"
+    layer_name: "Botswana_MeanAnnualPrecipitation"
+    upload: false
+    max_zoom: 11
+
+  botswana_mean_annual_pet:
+    base_path: "../data/raw/Water Management/Botswana/Rasters/"
+    input_file: "Precipitation and Evapotranspiration/GDAWater_PotentialGroundwaterRecharge_MeanAnnualPET_monthlyMODIS_Botswana_2003-2022.tif"
+    style_file: "Precipitation and Evapotranspiration/GDAWater_PotentialGroundwaterRecharge_MeanAnnualPET_monthlyMODIS_Botswana_2003-2022.qml"
+    output_file: "../data/processed/Water Management/Botswana/Rasters/GDAWater_MeanAnnualPET_Botswana_2003-2022.tif"
+    layer_name: "Botswana_MeanAnnualPET"
+    upload: false
+    max_zoom: 11
+
+  botswana_wsf_2015:
+    base_path: "../data/"
+    input_file: "processed/WSF/WSF2015_v2_Botswana.tif"
+    style_file: "processed/WSF/WSF2015_v2.qml"
+    output_file: "../data/processed/Water Management/Botswana/Rasters/WSF2015_v2_Botswana.tif"
+    layer_name: "Botswana_WSF2015"
+    upload: false
+    max_zoom: 11
+
+  # Ethiopia - Agriculture
+  ethiopia_crop_damage:
+    base_path: "../data/raw/Agriculture/East Africa/Rasters/"
+    input_file: "Crop_Damage/crop_damage_Ethiopia.tif"
+    style_file: "Crop_Damage/crop_damage_Ethiopia.qml"
+    output_file: "../data/processed/Agriculture/East Africa/Rasters/Crop_Damage_Ethiopia.tif"
+    layer_name: "Ethiopia_Crop_Damage"
+    upload: false
+    max_zoom: 11
+
+  # Jordan - Urban
+  jordan_settlement_extent_1985_2021:
+    base_path: "../data/raw/Urban Sustainability/Jordan/Rasters/"
+    input_file: "03_Settlement_Extent_and_Change_1985-2021/GDA_Urban_Phase1_DLR_JOR_Amman_Settlement_Extent_and_Change_1985-2021_1_0.tif"
+    style_file: "03_Settlement_Extent_and_Change_1985-2021/GDA_Urban_Phase1_DLR_JOR_Amman_Settlement_Extent_and_Change_1985-2021_1_0.qml"
+    output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Settlement_Extent_and_Change_1985-2021_Amman.tif"
+    layer_name: "Jordan_Settlement_Extent_and_Change_1985-2021_Amman"
+    upload: false
+    max_zoom: 11
+
+  jordan_green_and_open_areas:
+    base_path: "../data/raw/Urban Sustainability/Jordan/Rasters/"
+    input_file: "02_Green_and_Open_Areas_2020/GDA_Urban_Phase1_GST_CIV_Amman_UrbanGreen_2020_v_1_0.tif"
+    style_file: "02_Green_and_Open_Areas_2020/GDA_Urban_Phase1_GST_CIV_Amman_UrbanGreen_2020.qml"
+    output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Green_and_Open_Areas_2020_Amman.tif"
+    layer_name: "Jordan_Green_and_Open_Areas_2020_Amman"
+    upload: false
+    max_zoom: 11
+
+  jordan_land_use_land_cover_2020:
+    base_path: "../data/raw/Urban Sustainability/Jordan/Rasters/"
+    input_file: "01_Land_Use_Land_Cover_2010_2020/GDA_Urban_Phase1_GST_JOR_Amman_LULC_2020_v_1_0.tif"
+    style_file: "01_Land_Use_Land_Cover_2010_2020/GDA_Urban_Phase1_GST_JOR_Amman_LULC.qml"
+    output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Land_Use_Land_Cover_2020_Amman.tif"
+    layer_name: "Jordan_Land_Use_Land_Cover_2020_Amman"
+    upload: false
+    max_zoom: 11
+
+  jordan_simulated_future_lulc_max_dens:
+    base_path: "../data/raw/Urban Sustainability/Jordan/Rasters/"
+    input_file: "05_Urban_Growth_Model_UD_InfraSim_2035/GDA_Urban_Phase1_AIT_JOR_Amman_UD_InfraSim_Scenario2_dens_2035_1_0.tif"
+    style_file: "01_Land_Use_Land_Cover_2010_2020/GDA_Urban_Phase1_GST_JOR_Amman_LULC.qml"
+    output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Simulated_Future_LULC_MAX_DENS_Amman.tif"
+    layer_name: "Jordan_Simulated_Future_LULC_MAX_DENS_Amman"
+    upload: false
+    max_zoom: 11
+
+  jordan_simulated_future_lulc_sprawling:
+    base_path: "../data/raw/Urban Sustainability/Jordan/Rasters/"
+    input_file: "05_Urban_Growth_Model_UD_InfraSim_2035/GDA_Urban_Phase1_AIT_JOR_Amman_UD_InfraSim_Scenario1_sprawl_2035_1_0.tif"
+    style_file: "01_Land_Use_Land_Cover_2010_2020/GDA_Urban_Phase1_GST_JOR_Amman_LULC.qml"
+    output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Simulated_Future_LULC_SPRAWLING_Amman.tif"
+    layer_name: "Jordan_Simulated_Future_LULC_SPRAWLING_Amman"
+    upload: false
+    max_zoom: 11
+
+  # Kenya - Urban
+  kenya_settlement_extent_1985_2015:
+    base_path: "../data/raw/Urban Sustainability/Kenya/Rasters/"
+    input_file: "01_Settlement_Extent_and_Change/Settlement_Extent_and_Change_1985-2015.tif"
+    style_file: "01_Settlement_Extent_and_Change/Settlement_Extent_and_Change_1985-2015_dark_basemap_recommended.qml"
+    output_file: "../data/processed/Urban Sustainability/Kenya/Rasters/Settlement_Extent_and_Change_1985-2015_KEN.tif"
+    layer_name: "Kenya_Settlement_Extent_1985-2015"
+    upload: false
+    max_zoom: 11
+
+  kenya_settlement_extent_2016_2022:
+    base_path: "../data/raw/Urban Sustainability/Kenya/Rasters/"
+    input_file: "01_Settlement_Extent_and_Change/Settlement_Extent_and_Change_2016-2022_Nairobi.tif"
+    style_file: "01_Settlement_Extent_and_Change/Settlement_Extent_and_Change_2016-2022_dark_basemap_recommended.qml"
+    output_file: "../data/processed/Urban Sustainability/Kenya/Rasters/Settlement_Extent_and_Change_2016-2022_Nairobi.tif"
+    layer_name: "Kenya_Settlement_Extent_2016-2022"
+    upload: false
+    max_zoom: 11
+
+  # Niger - CE
+  niger_solar_irradiation:
+    base_path: "../data/raw/Clean Energy/Niger/"
+    input_file: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
+    style_file: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.qml"
+    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
+    layer_name: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02"
+    upload: false
+    max_zoom: 11
+
+  niger_flash_flood_depth:
+    base_path: "../data/raw/Clean Energy/Niger/"
+    input_file: "Depth_fullAOI.tif"
+    style_file: "Depth_fullAOI.qml"
+    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_Flash_flood_depth.tif"
+    layer_name: "Niger_Flash_flood_depth"
+    upload: false
+    max_zoom: 11
+
+  niger_flash_flood_hazard:
+    base_path: "../data/raw/Clean Energy/Niger/"
+    input_file: "FlashFlood_Hazard_fullAOI_classified.tif"
+    style_file: "FlashFlood_Hazard_fullAOI_classified.qml"
+    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_Flash_flood_hazard.tif"
+    layer_name: "Niger_Flash_flood_hazard"
+    upload: false
+    max_zoom: 11
+
+  # Cote d'Ivoire - Urban
+  civ_abidjan_slum_detector:
+    base_path: "../data/raw/Urban_sustainability/CIV/Rasters/01_Informal_Settlements_2019/"
+    input_file: "GDA_Urban_Phase1_GST_CIV_Abidjan_Slum_Detector_Heathmap_2019_v_1_0.tif"
+    style_file: "GDA_Urban_Phase1_GST_CIV_Abidjan_Slum_Detector_Heathmap_2019_v_1_0.qml"
+    output_file: "../data/processed/Urban_sustainability/CIV/Rasters/GDA_Urban_Phase1_GST_CIV_Abidjan_Slum_Detector_Heathmap_2019_v_1_0.tif"
+    layer_name: "CIV_Abidjan_Slum_Detector_Heathmap_2019"
+    upload: false
+    max_zoom: 11
+
+  # Thailand - DR
+  thailand_khon_kaen_flood_mapping:
+    base_path: "../data/raw/Disaster_resilience/Thailand/Rasters/GDA-AID-DR_UC02wbNBS_FloodMapping-V01/"
+    input_file: "GDA-AID-DR_UC02wbNBS_ MergedFloodCatalogS1S2-pv1_KhonKaen-2015_2022.tif"
+    style_file: "FloodMapping.qml"
+    output_file: "../data/processed/Disaster_resilience/Thailand/Rasters/Thailand_KhonKaen_FloodMapping.tif"
+    layer_name: "Thailand_KhonKaen_FloodMapping"
+    upload: false
+    max_zoom: 13
+
+  thailand_khon_kaen_flood_depth:
+    base_path: "../data/raw/Disaster_resilience/Thailand/Rasters/GDA-AID-DR_UC02wbNBS_FloodHazardMapping-V01/"
+    input_file: "GDA-AID-DR_UC02wbNBS_FloodDepthMaxExtent-pv1_KhonKaen-2015_2022.tif"
+    style_file: "FloodDepthMaxExtent.qml"
+    output_file: "../data/processed/Disaster_resilience/Thailand/Rasters/Thailand_KhonKaen_FloodDepthMaxExtent.tif"
+    layer_name: "Thailand_KhonKaen_FloodDepthMaxExtent"
+    upload: false
+    max_zoom: 13
+
+  thailand_khon_kaen_building_footprint:
+    base_path: "../data/raw/Disaster_resilience/Thailand/Rasters/GDA-AID-DR_UC02wbNBS_UrbanFloodMapping-V01/"
+    input_file: "GDA-AID-DR_UC02wbNBS_BuildingFoorprintS1-pv1_KhonKaen-2017.tif"
+    style_file: "BuildingFootprint.qml"
+    output_file: "../data/processed/Disaster_resilience/Thailand/Rasters/Thailand_KhonKaen_BuildingFootprint.tif"
+    layer_name: "Thailand_KhonKaen_BuildingFootprint"
+    upload: false
+    max_zoom: 13
+
+  # Mozambique - CR
+  mozambique_agb_estimates:
+    base_path: "../data/raw/Climate_resilience/Mozambique/Rasters/Climate_resilience_Mozambique_AGB/"
+    input_file: "WB_MRV2.0_AGB_estimates_2022_Mark_II_v1_30m_4326.tif"
+    style_file: "WB_MRV2.0_AGB_estimates_2022_Mark_II_v1_30m_4326.qml"
+    output_file: "../data/processed/Climate_resilience/Mozambique/Rasters/Mozambique_AGB_estimates_2022_v2.tif"
+    layer_name: "Mozambique_AGB_estimates_2022"
+    upload: false
+    max_zoom: 10
+
+  # Indonesia - DR
+  cirebon_wsf_imperviousness:
+    base_path: "../data/raw/Disaster_resilience/Indonesia/Rasters/GDA-AID-DR_UC06adbIND_WSFImperviousness-V01_Indonesia-2019/"
+    input_file: "GDA-AID-DR_UC06adbIND-V1_Product_WSFImperviousness-pv01-Cirebon-2019.tif"
+    style_file: "GDA-AID-DR_UC06adbIND-V1_ ProductQgisSymbology_WSFImperviousness-pv01-Indonesia-2019.qml"
+    output_file: "../data/processed/Disaster_resilience/Indonesia/Rasters/Cirebon_WSFImperviousness_2019.tif"
+    layer_name: "Cirebon_WSFImperviousness_2019"
+    upload: false
+    max_zoom: 11
+
+  # Bangladesh - DR
+  cox_bazar_land_cover:
+    base_path: "../data/raw/Disaster_resilience/Bangladesh/Rasters/GDA-AID-DR_UC08adbBAN_LandCover-V01_CoxBazar-2022/"
+    input_file: "GDA-AID-DR_uc08adbban_LandCover-V01_Bangladesh-2022.tif"
+    style_file: "GDA-AID-DR_uc08adbban_LandCover-V01_Bangladesh-2022.qml"
+    output_file: "../data/processed/Disaster_resilience/Bangladesh/Rasters/CoxBazar_LandCover_2022.tif"
+    layer_name: "CoxBazar_LandCover_2022"
+    upload: false
+    max_zoom: 11
+
+  cox_bazar_spring_water_body:
+    base_path: "../data/raw/Disaster_resilience/Bangladesh/Rasters/GDA-AID-DR_UC08adbBAN_Surface water bodies seasonal trends/"
+    input_file: "CoxBazar_Spring_water_body.tif"
+    style_file: "CoxBazar_water_body.qml"
+    output_file: "../data/processed/Disaster_resilience/Bangladesh/Rasters/CoxBazar_Spring_water_body.tif"
+    layer_name: "CoxBazar_Spring_water_body"
+    upload: false
+    max_zoom: 11
+
+  # Cameroon - CE
+  cameroon_settlement:
+    base_path: "../data/raw/Clean_energy/Cameroon_Nightlight/"
+    input_file: "WSFtracker_Cameroon_2016-2023_v0.1_clipped.tif"
+    style_file: "WSFtracker_Cameroon_2016-2023_v0.1.qml"
+    output_file: "../data/processed/Clean_energy/Cameroon/Rasters/Cameroon_settlement.tif"
+    layer_name: "Cameroon_settlement"
+    upload: false
+    max_zoom: 11
+
+  cameroon_electrification:
+    base_path: "../data/raw/Clean_energy/Cameroon_Nightlight/"
+    input_file: "year_of_electrification_clipped.tif"
+    style_file: "year_of_electrification.qml"
+    output_file: "../data/processed/Clean_energy/Cameroon/Rasters/Cameroon_electrification.tif"
+    layer_name: "Cameroon_electrification"
+    upload: false
+    max_zoom: 11
+
+  # Belize - Agriculture
+  belize_precipitation:
+    base_path: "../data/raw/Agriculture/Belize/Rasters/Precipitation"
+    input_file: "Belize_ProjectionPrecBaseline_historical.tif"
+    style_file: "precipitation.qml"
+    output_file: "../data/processed/Agriculture/Belize/Rasters/Belize_precipitation.tif"
+    layer_name: "Belize_precipitation"
+    upload: false
+    max_zoom: 11
+
+  # Georgia - Water
+  tbilisi_sea_chlorophyll:
+    base_path: "../data/raw/Water/Georgia/Rasters/"
+    input_file: "Tbilisi_Sea_Chlorophyll.tif"
+    style_file: "Tbilisi_Sea_Chlorophyll_colors.qml"
+    output_file: "../data/processed/Water/Georgia/Rasters/Tbilisi_Sea_Chlorophyll.tif"
+    layer_name: "Tbilisi_Sea_Chlorophyll"
+    upload: false
+    max_zoom: 11
+
+  # Lake Victoria - Water
+  lake_victoria_chlorophyll:
+    base_path: "../data/raw/Water/Lake Victoria/Rasters/"
+    input_file: "gda_wr_lakevictoria_chlorophyll-202210.tif"
+    style_file: "gda_wr_lakevictoria_chlorophyll-202210.qml"
+    output_file: "../data/processed/Water/Lake Victoria/Rasters/gda_wr_lakevictoria_chlorophyll-202210_2.tif"
+    layer_name: "gda_wr_lakevictoria_chlorophyll-202210"
+    upload: false
+    max_zoom: 7
+
+  lake_victoria_hotspots:
+    base_path: "../data/raw/Water/Lake Victoria/Rasters/"
+    input_file: "gda_wr_lakevictoria_hotspots.tif"
+    style_file: "gda_wr_lakevictoria_hotspots.qml"
+    output_file: "../data/processed/Water/Lake Victoria/Rasters/gda_wr_lakevictoria_hotspots_2.tif"
+    layer_name: "gda_wr_lakevictoria_hotspots"
+    upload: false
+    max_zoom: 7
+
+  lake_victoria_un_population:
+    base_path: "../data/raw/Water/Lake Victoria/Rasters/"
+    input_file: "gda_wr_lakevictoria_UNpopulation_2020.tif"
+    style_file: "gda_wr_lakevictoria_UNpopulation_2020.qml"
+    output_file: "../data/processed/Water/Lake Victoria/Rasters/gda_wr_lakevictoria_UNpopulation_2020_2.tif"
+    layer_name: "gda_wr_lakevictoria_UNpopulation_2020"
+    upload: false
+    max_zoom: 7
+
+  # Timor-Leste - Water
+  timor_leste_water_frequency:
+    base_path: "../data/raw/Water/Timor-Leste/Rasters/Section_4-Surface_water_fluctuation_2018-22"
+    input_file: "Timor-Leste_2018-2022_water_frequency.tif"
+    style_file: "Timor-Leste_2018-2022_water_frequency.qml"
+    output_file: "../data/processed/Water/Timor-Leste/Rasters/Timor-Leste_2018-2022_water_frequency.tif"
+    layer_name: "Timor-Leste_2018-2022_water_frequency"
+    upload: false
+    max_zoom: 11
+
+  # Bangladesh - CE Methane
+  bangladesh_ch4_values:
+    base_path: "../data/raw/Clean_energy/Bangladesh_Methan/05_Data4WebStory"
+    input_file: "2019-2023_S-5_Values are X-mol fraction as parts-per-billion.tif"
+    style_file: "Layerstyle_S-5_CH4_nozero.qml"
+    output_file: "../data/processed/Clean_energy/Bangladesh_Methan/2019-2023_S-5_Values are X-mol fraction as parts-per-billion.tif"
+    layer_name: "2019-2023_S-5_Values are X-mol fraction as parts-per-billion"
+    upload: false
+    max_zoom: 11
+
+  bangladesh_ch4_local_maxima:
+    base_path: "../data/raw/Clean_energy/Bangladesh_Methan/05_Data4WebStory"
+    input_file: "S-5_LocalMaxima_Frequency_2019-2023.tif"
+    style_file: "Local_Maxima_Stylefile_nozero.qml"
+    output_file: "../data/processed/Clean_energy/Bangladesh_Methan/LocalMaxima_Frequency_2019-2023.tif"
+    layer_name: "2019-2023_S-5_LocalMaxima_Frequency"
+    upload: false
+    max_zoom: 11
+
+  # Somalia - Water
+  somalia_worldcover:
+    base_path: "../data/raw/Water/Somalia/Rasters/"
+    input_file: "Clipped/WorldCover_resampled.tif"
+    style_file: "WorldCover.qml"
+    output_file: "../data/processed/Water/Somalia/Rasters/WorldCover.tif"
+    layer_name: "WorldCover"
+    upload: false
+    max_zoom: 11
+
+  somalia_groundwater_storage:
+    base_path: "../data/raw/Water/Somalia/Rasters/Clipped/"
+    input_file: "3_GDAWater_GroundwaterResourcesEstimation_MeanAnnualGroundwaterStorageBalance_Multi-annual_Somalia_2003-2024_10042025.tif"
+    style_file: "Groundwater.qml"
+    output_file: "../data/processed/Water/Somalia/Rasters/GroundwaterStorage.tif"
+    layer_name: "GroundwaterStorage"
+    upload: false
+    max_zoom: 11
+
+  # West Africa - Water
+  west_africa_precipitation:
+    base_path: "../data/raw/Water/West Africa/Rasters/"
+    input_file: "1_GDAWater_Precipitation_MeanAnnualPrecipitation_Multi-annual_WestAfrica_2003-2024_23052025_prj.tif"
+    style_file: "precipitation.qml"
+    output_file: "../data/processed/Water/West Africa/Rasters/1_GDAWater_Precipitation_MeanAnnualPrecipitation_Multi-annual_WestAfrica_2003-2024_23052025.tif"
+    layer_name: "MeanAnnualPrecipitation_WestAfrica"
+    upload: false
+    max_zoom: 5
+
+  west_africa_groundwater_availability:
+    base_path: "../data/raw/Water/West Africa/Rasters/Clipped"
+    input_file: "3a_GDAWATER_Groundwater_Availability_percentage_WestAfrica_2024_03.tif"
+    style_file: "Groundwater_Availability_percentage.qml"
+    output_file: "../data/processed/Water/West Africa/Rasters/3a_GDAWATER_Groundwater_Availability_percentage_WestAfrica_2024_03.tif"
+    layer_name: "GroundwaterAvailability_WestAfrica"
+    upload: false
+    max_zoom: 5
+
+  # Uzbekistan - Water
+  uzbekistan_water_quality:
+    base_path: "../data/raw/Water/Uzbekistan/Rasters/Water quality/"
+    input_file: "CHL_wq-scene0001_43tcf_EOMAP_20240726_060745_SENT2_m0010_32bit.tif"
+    style_file: "CHL_Uzbekistan.qml"
+    output_file: "../data/processed/Water/Uzbekistan/Rasters/Uzb_water_quality.tif"
+    layer_name: "UzbekistanWaterQuality"
+    upload: false
+    max_zoom: 12
+
+  uzbekistan_dem:
+    base_path: "../data/raw/Water/Uzbekistan/Rasters/"
+    input_file: "ALOS_Andijan.tif"
+    style_file: "DEM_Uzbekistan.qml"
+    output_file: "../data/processed/Water/Uzbekistan/Rasters/Uzb_dem.tif"
+    layer_name: "UzbekistanDEM"
+    upload: false
+    max_zoom: 12
+
+  # Lagdo & Poaches - Water
+  lagdo_turbidity:
+    base_path: "../data/raw/Water/Lagdo & Poaches/Rasters/"
+    input_file: "Lagdo_turbidity.tif"
+    style_file: "Lagdo_Turbidity.qml"
+    output_file: "../data/processed/Water/Lagdo & Poaches/Rasters/Lagdo_Turbidity.tif"
+    layer_name: "LagdoTurbidity"
+    upload: false
+    max_zoom: 11
+
+  # Zambezi - Water
+  zambezi_chlorophyll:
+    base_path: "../data/raw/Water/Zambezi/Rasters/"
+    input_file: "CHL_Upper_Zambezi.tif"
+    style_file: "CHL_Upper_Zambezi.qml"
+    output_file: "../data/processed/Water/Zambezi/Rasters/CHL_Upper_Zambezi2.tif"
+    layer_name: "CHL_Upper_Zambezi"
+    upload: false
+    max_zoom: 12
+
+  # Paraguay - Water
+  paraguay_chlorophyll:
+    base_path: "../data/raw/Water/Paraguay/Rasters/"
+    input_file: "CHL_wq-scene0001_226077_EOMAP_20230914_134804_LSAT8_m0030_32bit.tif"
+    style_file: "CHL_Paraguay.qml"
+    output_file: "../data/processed/Water/Paraguay/Rasters/CHL_Paraguay.tif"
+    layer_name: "CHL_Paraguay"
+    upload: false
+    max_zoom: 12
+
+  # Mexico - Water
+  sinaloa_urban_assessment:
+    base_path: "../data/raw/Water/Mexico/Rasters/01_Urban_assessment/"
+    input_file: "Sinaloa_urban_2023_v01.tif"
+    style_file: "Sinaloa_urban_2023_v01.qml"
+    output_file: "../data/processed/Water/Mexico/Rasters/Sinaloa_urban_assessment.tif"
+    layer_name: "Sinaloa_urban_assessment"
+    upload: false
+    max_zoom: 9
+
+  # Sri Lanka - Water
+  sri_lanka_water_frequency:
+    base_path: "../data/raw/Water/SriLanka/Rasters/2017-2025_indicators/"
+    input_file: "Sri_Lanka_2017-2025_water_frequency.tif"
+    style_file: "Sri_Lanka_2017-2025_water_frequency.qml"
+    output_file: "../data/processed/Water/SriLanka/Rasters/Sri_Lanka_2017-2025_water_frequency.tif"
+    layer_name: "Sri_Lanka_2017-2025_water_frequency"
+    upload: false
+    max_zoom: 13
+
+  # Panama - Water
+  panama_tsm_median:
+    base_path: "../data/raw/Water/Panama/Rasters/"
+    input_file: "gda_wr_panama_tsm_median_16-24.tif"
+    style_file: "gda_wr_panama_TSM.qml"
+    output_file: "../data/processed/Water/Panama/Rasters/gda_wr_panama_tsm_median_16-24.tif"
+    layer_name: "Panama_tsm_median_16-24"
+    upload: false
+    max_zoom: 11
+
+  panama_tsm_2020_09_26:
+    base_path: "../data/raw/Water/Panama/Rasters/"
+    input_file: "gda_wr_panama_tsm_2020-09-26_v1.tif"
+    style_file: "gda_wr_panama_TSM.qml"
+    output_file: "../data/processed/Water/Panama/Rasters/gda_wr_panama_tsm_2020-09-26_v1.tif"
+    layer_name: "Panama_tsm_2020-09-26_v1"
+    upload: false
+    max_zoom: 12
+
+  panama_tsm_2020_10_01:
+    base_path: "../data/raw/Water/Panama/Rasters/"
+    input_file: "gda_wr_panama_tsm_2020-10-01_v1.tif"
+    style_file: "gda_wr_panama_TSM.qml"
+    output_file: "../data/processed/Water/Panama/Rasters/gda_wr_panama_tsm_2020-10-01_v1.tif"
+    layer_name: "Panama_tsm_2020-10-01_v1"
+    upload: false
+    max_zoom: 12
+
+  panama_tsm_2020_10_16:
+    base_path: "../data/raw/Water/Panama/Rasters/"
+    input_file: "gda_wr_panama_tsm_2020-10-16_v1.tif"
+    style_file: "gda_wr_panama_TSM.qml"
+    output_file: "../data/processed/Water/Panama/Rasters/gda_wr_panama_tsm_2020-10-16_v1.tif"
+    layer_name: "Panama_tsm_2020-10-16_v1"
+    upload: false
+    max_zoom: 12
+
+  # Uganda - Transport
+  uganda_pupils_distribution:
+    base_path: "../data/raw/Transport/Uganda/PrimarySchools/Rasters/"
+    input_file: "pupils-distribution.tif"
+    style_file: "pupils-distribution.qml"
+    output_file: "../data/processed/Transport/Uganda/PrimarySchools/Rasters/pupils-distribution.tif"
+    layer_name: "Uganda_pupils-distribution"
+    upload: false
+    max_zoom: 12
+
+  uganda_accessibility_map:
+    base_path: "../data/raw/Transport/Uganda/PrimarySchools/Rasters/"
+    input_file: "accessibility-map.tif"
+    style_file: "accessibility-map.qml"
+    output_file: "../data/processed/Transport/Uganda/PrimarySchools/Rasters/accessibility-map.tif"
+    layer_name: "Uganda_accessibility-map"
+    upload: false
+    max_zoom: 12
+
+  uganda_refugees_density:
+    base_path: "../data/raw/Transport/Uganda/UgandaRefugees/Rasters/"
+    input_file: "density-service-points.tif"
+    style_file: "density-service-points.qml"
+    output_file: "../data/processed/Transport/Uganda/UgandaRefugees/Rasters/density-service-points.tif"
+    layer_name: "Uganda_density-service-points"
+    upload: false
+    max_zoom: 9
+
+  # Afghanistan - FFF
+  afghanistan_groundwater_recharge:
+    base_path: "../data/raw/FFF/Afghanistan/Rasters/Groundwater/"
+    input_file: "GDAFFF_MeanAnnualGroundwaterRecharge_LowerEstimate_Herat_2003-2022_20240612.tif"
+    style_file: "herat.qml"
+    output_file: "../data/processed/FFF/Afghanistan/Rasters/MeanAnnualGroundwaterRecharge_LowerEstimate_Herat_2003-2022_20240612.tif"
+    layer_name: "Afghanistan_MeanAnnualGroundwaterRecharge_LowerEstimate_Herat_2003-2022"
+    upload: false
+    max_zoom: 9
+
+  afghanistan_evapotranspiration:
+    base_path: "../data/raw/FFF/Afghanistan/Rasters/Water Balance/"
+    input_file: "evapotranspiration_gleam_sen_slope_annual_trend.tif"
+    style_file: "evapotranspiration_gleam_sen_slope_annual_trend_style.qml"
+    output_file: "../data/processed/FFF/Afghanistan/Rasters/evapotranspiration_gleam_sen_slope_annual_trend.tif"
+    layer_name: "Afghanistan_Evapotranspiration_Annual_Trend"
+    upload: true
+    max_zoom: 7
+
+  afghanistan_precipitation:
+    base_path: "../data/raw/FFF/Afghanistan/Rasters/Water Balance/"
+    input_file: "precipitation_chirps_sen_slope_annual_trend.tif"
+    style_file: "precipitation_chirps_sen_slope_annual_trend_style.qml"
+    output_file: "../data/processed/FFF/Afghanistan/Rasters/precipitation_chirps_sen_slope_annual_trend.tif"
+    layer_name: "Afghanistan_Precipitation_Annual_Trend"
+    upload: false
+    max_zoom: 7
+
+  afghanistan_runoff:
+    base_path: "../data/raw/FFF/Afghanistan/Rasters/Water Balance/"
+    input_file: "runoff_fldas_sen_slope_annual_trend.tif"
+    style_file: "runoff_fldas_sen_slope_annual_trend_style.qml"
+    output_file: "../data/processed/FFF/Afghanistan/Rasters/runoff_fldas_sen_slope_annual_trend.tif"
+    layer_name: "Afghanistan_Runoff_Annual_Trend"
+    upload: false
+    max_zoom: 7
+
+  # Cambodia - Marine
+  cambodia_mangroves_2017:
+    base_path: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_Mangroves/"
+    input_file: "UC07_Mangroves_2017.tif"
+    style_file: "UC07_Mangroves_2017_style.qml"
+    output_file: "../data/processed/Marine/Cambodia/Rasters/Mangroves_2017.tif"
+    layer_name: "Cambodia_Mangroves_2017"
+    upload: true
+    max_zoom: 11
+
+  cambodia_mangroves_2021:
+    base_path: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_Mangroves/"
+    input_file: "UC08_Mangroves_2021.tif"
+    style_file: "UC07_Mangroves_2021_style.qml"
+    output_file: "../data/processed/Marine/Cambodia/Rasters/Mangroves_2021.tif"
+    layer_name: "Cambodia_Mangroves_2021"
+    upload: true
+    max_zoom: 11
+
+  # Nigeria - Climate Resilience
+  nigeria_soc_1985:
+    base_path: "../data/raw/Climate_resilience/Nigeria/Topsoil SOC (1985)/"
+    input_file: "GDA-CR-SOC-Baseline_ID1090823260_dept08cm_1985.tif"
+    style_file: "GDA-CR-SOC-Baseline_ID1090823260_dept08cm_1985.qml"
+    output_file: "../data/processed/Climate_resilience/Nigeria/Rasters/Topsoil_SOC_1985.tif"
+    layer_name: "Nigeria_SOC_1985"
+    upload: true
+    max_zoom: 11
+
+  nigeria_soc_crops_1985:
+    base_path: "../data/raw/Climate_resilience/Nigeria/Topsoil SOC (1985)/"
+    input_file: "GDA-CR-SOC-Baseline_ID1090823260_dept08cm_1985_crops.tif"
+    style_file: "GDA-CR-SOC-Baseline_ID1090823260_dept08cm_1985_crops.qml"
+    output_file: "../data/processed/Climate_resilience/Nigeria/Rasters/Topsoil_SOC_1985_crops.tif"
+    layer_name: "Nigeria_SOC_crops_1985"
+    upload: true
+    max_zoom: 11
+
+  # STP - Marine
+  stp_sao_tome_bathymetry:
+    base_path: "../data/raw/Marine/GDA-Marine_ImpactSphere/UC14-WB-STP/Satellite-Derived_Bathymetry/"
+    input_file: "UC14-SDB_STP_SaoTome_2020_2023.tif"
+    style_file: "UC14-SDB_Style.qml"
+    output_file: "../data/processed/Marine/STP/Rasters/SaoTome_Bathymetry2.tif"
+    layer_name: "SaoTome_Bathymetry"
+    upload: true
+    max_zoom: 11
+
+  stp_principe_bathymetry:
+    base_path: "../data/raw/Marine/GDA-Marine_ImpactSphere/UC14-WB-STP/Satellite-Derived_Bathymetry/"
+    input_file: "UC14-SDB_STP_Principe_2020_2023.tif"
+    style_file: "UC14-SDB_Style.qml"
+    output_file: "../data/processed/Marine/STP/Rasters/Principe_Bathymetry2.tif"
+    layer_name: "Principe_Bathymetry"
+    upload: true
+    max_zoom: 11
+
+  # Ecuador - Marine
+  ecuador_mangroves:
+    base_path: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC12-WB_Ecuador/UC12_MangrovesMaps"
+    input_file: "UC12_Mangroves_Guayaquil_2023.tif"
+    style_file: "mangroves.qml"
+    output_file: "../data/processed/Marine/Ecuador/Rasters/mangroves2.tif"
+    layer_name: "Ecuador_Mangroves"
+    upload: true
+    max_zoom: 9
+
+  ecuador_ponds:
+    base_path: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC12-WB_Ecuador/UC12_PondsMaps/"
+    input_file: "UC12_AquacolturePonds_Guayaquil_2023.tif"
+    style_file: "ponds.qml"
+    output_file: "../data/processed/Marine/Ecuador/Rasters/ponds2.tif"
+    layer_name: "Ecuador_Ponds"
+    upload: true
+    max_zoom: 9
