@@ -36,7 +36,6 @@ services:
       args:
         NEXT_PUBLIC_MATOMO_URL: ${NEXT_PUBLIC_MATOMO_URL}
         NEXT_PUBLIC_MATOMO_SITE_ID: ${NEXT_PUBLIC_MATOMO_SITE_ID}
-        NEXT_PUBLIC_ENVIRONMENT: production
     ports:
       - '3000:3000'
     env_file:

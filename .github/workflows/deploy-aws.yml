@@ -83,7 +83,6 @@ jobs:
           echo "NEXT_PUBLIC_MAPBOX_STYLE_ID: ${{ vars.NEXT_PUBLIC_MAPBOX_STYLE_ID }}"
           echo "NEXT_PUBLIC_MATOMO_URL: ${{ vars.NEXT_PUBLIC_MATOMO_URL }}"
           echo "NEXT_PUBLIC_MATOMO_SITE_ID: ${{ vars.NEXT_PUBLIC_MATOMO_SITE_ID }}"
-          echo "NEXT_PUBLIC_ENVIRONMENT: ${{ vars.NEXT_PUBLIC_ENVIRONMENT }}"
           echo "NEXT_PUBLIC_PREVIEW_SECRET: ${{ secrets.NEXT_PUBLIC_PREVIEW_SECRET != '' && '***SET***' || '***NOT SET***' }}"
           echo "CLIENT_REPOSITORY_NAME: ${{ vars.CLIENT_REPOSITORY_NAME }}"
           echo "Environment: ${{ needs.set_environment.outputs.env_name }}"
@@ -92,7 +91,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           build-args: |
-            NEXT_PUBLIC_ENVIRONMENT=${{ vars.NEXT_PUBLIC_ENVIRONMENT }}
             NEXT_PUBLIC_URL=${{ vars.NEXT_PUBLIC_URL }}
             NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_BASE_PATH=${{ vars.NEXT_PUBLIC_BASE_PATH }}
