@@ -26,7 +26,6 @@ export const env = createEnv({
    * 💡 You'll get typeerrors if these are not prefixed with NEXT_PUBLIC_.
    */
   client: {
-    NEXT_PUBLIC_ENVIRONMENT: z.enum(['development', 'staging', 'production']),
     NEXT_PUBLIC_URL: z.string().url(),
     NEXT_PUBLIC_API_URL: z.string().url(),
     NEXT_PUBLIC_MAPBOX_API_TOKEN: z.string(),
@@ -45,7 +44,6 @@ export const env = createEnv({
    * 💡 You'll get typeerrors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
-    NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_MAPBOX_API_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN,

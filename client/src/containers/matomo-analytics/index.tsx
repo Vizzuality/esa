@@ -12,27 +12,16 @@ import { env } from '@/env.mjs';
 
 const MATOMO_URL = env.NEXT_PUBLIC_MATOMO_URL;
 const MATOMO_SITE_ID = env.NEXT_PUBLIC_MATOMO_SITE_ID;
-const ENVIRONMENT = env.NEXT_PUBLIC_ENVIRONMENT || process.env.NODE_ENV;
 
 export function MatomoAnalytics() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (ENVIRONMENT !== 'production') {
-      console.info('Tracking Analytics disabled: non-production environment');
-      return;
-    }
-
-    console.info(
-      'environment detected, initializing Matomo Analytics with:',
-      env.NEXT_PUBLIC_ENVIRONMENT,
-      process.env.NODE_ENV,
-      ENVIRONMENT
-    );
     if (!MATOMO_URL || !MATOMO_SITE_ID) {
       return;
     }
+
     const urlSearchParams = searchParams
       ? new URLSearchParams(Array.from(searchParams.entries()))
       : new URLSearchParams();
