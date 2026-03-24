@@ -1,0 +1,356 @@
+layers:
+
+  # Azerbaijan - DR
+  azerbaijan_financial_loss:
+    input_file: "../data/raw/Disaster Resilience/Azerbaijan/Vectors/GDA-AID-DR_UC01wbGPDRA_FinancialLoss-V01_Azerbaijan-2015to2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentFinancialLoss-V01-Azerbaijan-return_periods.shp"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Vectors/FinancialLoss.mbtiles"
+    layer_name: "Azerbaijan_FinancialLoss"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  azerbaijan_impact_assessment_roads_affected:
+    input_file: "../data/raw/Disaster Resilience/Azerbaijan/Vectors/GDA-AID-DR_UC01wbGPDRA_ImpactAssessment-V01_Azerbaijan-2015to2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentRoadsAffected-V01-Azerbaijan-2015-2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentRoadsAffected-V01-Azerbaijan-2015-2022.shp"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Vectors/ImpactAssessmentRoadsAffected.mbtiles"
+    layer_name: "Azerbaijan_ImpactAssessmentRoadsAffected"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  azerbaijan_impact_assessment_exposure_assets:
+    input_file: "../data/raw/Disaster Resilience/Azerbaijan/Vectors/GDA-AID-DR_UC01wbGPDRA_ImpactAssessment-V01_Azerbaijan-2015to2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentExposureAffected-V01-Azerbaijan-2015-2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentExposureAssets-V01-Azerbaijan-2015-2022.shp"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Vectors/ImpactAssessmentExposureAssets.mbtiles"
+    layer_name: "Azerbaijan_ImpactAssessmentExposureAssets"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  azerbaijan_impact_assessment_exposure_markers:
+    input_file: "../data/raw/Disaster Resilience/Azerbaijan/Vectors/GDA-AID-DR_UC01wbGPDRA_ImpactAssessment-V01_Azerbaijan-2015to2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentExposureMarkers-V01-Azerbaijan-2015-2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentExposureMArkers-V01-Azerbaijan-2015-2022.shp"
+    output_file: "../data/processed/Disaster Resilience/Azerbaijan/Vectors/ImpactAssessmentExposureMarkers.mbtiles"
+    layer_name: "Azerbaijan_ImpactAssessmentExposureMarkers"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  # Kenya - Urban
+  kenya_land_use_land_cover_nairobi_2022:
+    input_file: "../data/raw/Urban Sustainability/Kenya/Vectors/05_Land_Use_Land_Cover_2022/GDA_Urban_Phase1_GAF_KEN_East_Nairobi_LULC_2022_1_0.gpkg"
+    output_file: "../data/processed/Urban Sustainability/Kenya/Vectors/LandUseLandCoverNairobi2022.mbtiles"
+    layer_name: "Kenya_LandUseLandCoverNairobi2022"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  # Indonesia - DR
+  indonesia_subsidence_impact_jakarta:
+    input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_SubsidenceImpact-V01_Indonesia-2015to2022/Jakarta/GDA-AID-DR_UC06adbIND_SubsidenceImpact-V01_Jakarta_2015-2021_clipped.shp"
+    output_file: "../data/processed/Disaster_resilience/Indonesia/Vectors/Jakarta_SubsidenceImpact_2015-2021.mbtiles"
+    layer_name: "Indonesia_SubsidenceImpact_Jakarta"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  indonesia_flood_impact_jakarta:
+    input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_FloodImpact-V01_Indonesia-2015to2022/GDA-AID-DR_UC06adbIND_ProductSheet-V01_FloodImpact-V01-Jakarta-MaxExtent_SpecificEvent.shp"
+    output_file: "../data/processed/Disaster_resilience/Indonesia/Vectors/Jakarta_FloodImpact_MaxExtent_SpecificEvent.mbtiles"
+    layer_name: "Indonesia_FloodImpact_Jakarta"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  indonesia_flood_impact_cirebon:
+    input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_FloodImpact-V01_Indonesia-2015to2022/GDA-AID-DR_UC06adbIND_ProductSheet-V01_FloodImpact-V01-Cirebon-MaxExtent_SpecificEvent.shp"
+    output_file: "../data/processed/Disaster_resilience/Indonesia/Vectors/Cirebon_FloodImpact_MaxExtent_SpecificEvent.mbtiles"
+    layer_name: "Indonesia_FloodImpact_Cirebon"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  indonesia_subsidence_impact_palu:
+    input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_SubsidenceImpact-V01_Indonesia-2015to2022/Palu/GDA-AID-DR_UC06adbIND_SubsidenceImpact-V01_Palu_2015-2021_clipped.shp"
+    output_file: "../data/processed/Disaster_resilience/Indonesia/Vectors/Palu_SubsidenceImpact_2015-2021.mbtiles"
+    layer_name: "Indonesia_SubsidenceImpact_Palu"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  indonesia_combined_impact_semarang:
+    input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_CombinedImpact-V01_Indonesia-2015to2022/GDA-AID-DR_UC06adbIND_CombinedImpact-V01-Semarang-MaxExtent_SpecificEvent_clipped.shp"
+    output_file: "../data/processed/Disaster_resilience/Indonesia/Vectors/Semarang_CombinedImpact_2015-2021.mbtiles"
+    layer_name: "Indonesia_CombinedImpact_Semarang"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  # Bangladesh - DR
+  bangladesh_coxbazar_ground_motion_map:
+    input_file: "../data/raw/Disaster_resilience/Bangladesh/Vectors/GDA-AID-DR_UC08adbBAN_FullResolutionGroundMotionMap-V01_CoxBazar-2015to2022/GDA-AID-DR_UC08adbBAN_FullResolutionGroundMotionMap-V01_Bangladesh-2015-2022_D077_PS_clipped.shp"
+    output_file: "../data/processed/Disaster_resilience/Bangladesh/Vectors/CoxBazar_FullResolutionGroundMotionMap_2015-2022.mbtiles"
+    layer_name: "CoxBazar_FullResolutionGroundMotionMap_2015-2022"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  # Lake Victoria - Water
+  lake_victoria_major_rivers:
+    input_file: "../data/raw/Water/Lake Victoria/Vectors/LVB_MajorRivers_single.geojson"
+    output_file: "../data/processed/Water/Lake Victoria/Vectors/LVB_MajorRivers_single.mbtiles"
+    layer_name: "LVB_MajorRivers_single"
+    min_zoom: 6
+    max_zoom: 13
+    upload: false
+
+  lake_victoria_wetlands:
+    input_file: "../data/raw/Water/Lake Victoria/Vectors/LVB_Wetlands_single_merged.geojson"
+    output_file: "../data/processed/Water/Lake Victoria/Vectors/LVB_Wetlands_single_merged.mbtiles"
+    layer_name: "LVB_Wetlands_single_merged"
+    min_zoom: 6
+    max_zoom: 13
+    upload: false
+
+  # West Africa - Water
+  west_africa_animal_concentration:
+    input_file: "../data/raw/Water/West Africa/Vectors/3b_GDAWater_LivestockConcentration_RBM_2024-03/GDAWater_Concentration_des_Animaux_RBM_2024-03.geojson"
+    output_file: "../data/processed/Water/West Africa/Vectors/GDAWater_Concentration_des_Animaux_RBM_2024-03.mbtiles"
+    layer_name: "AnimalConcentration"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  # Georgia - Water
+  georgia_boundary:
+    input_file: "../data/raw/Water/Georgia/Vectors/Shapefiles/Georgia boundary.shp"
+    output_file: "../data/processed/Water/Georgia/Vectors/Georgia boundary.mbtiles"
+    layer_name: "GeorgiaBoundary"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  # Uzbekistan - Water
+  uzbekistan_water:
+    input_file: "../data/raw/Water/Uzbekistan/Vectors/2024_06_11_Water_Polygon_v1.shp"
+    output_file: "../data/processed/Water/Uzbekistan/Vectors/Uzb_water_06112024.mbtiles"
+    layer_name: "UzbekistanWater"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  # Somalia - Water
+  somalia_rivers:
+    input_file: "../data/raw/Water/Somalia/Vectors/Rivers/MainRivers_Somalia_Jubba&Shabelle.shp"
+    output_file: "../data/processed/Water/Somalia/Vectors/Somalia_rivers.mbtiles"
+    layer_name: "SomaliaRivers"
+    min_zoom: 2
+    max_zoom: 10
+    upload: false
+
+  # Zambezi basin - Water
+  zambezi_kafue_river_transect:
+    input_file: "../data/raw/Water/Zambezi/Vectors/Transect_Kafue_River_location.geojson"
+    output_file: "../data/processed/Water/Zambezi/Vectors/Transect_Kafue_River.mbtiles"
+    layer_name: "TransectKafueRiver"
+    min_zoom: 2
+    max_zoom: 8
+    upload: false
+
+  # Paraguay - Water
+  paraguay_ypacarai:
+    input_file: "../data/raw/Water/Paraguay/Vectors/ypacarai_exact.geojson"
+    output_file: "../data/processed/Water/Paraguay/Vectors/ypacarai_exact.mbtiles"
+    layer_name: "Paraguay_ypacarai_exact"
+    min_zoom: 8
+    max_zoom: 13
+    upload: false
+
+  # Balochistan (Pakistan) - Water
+  pakistan_pishin_lora_basin:
+    input_file: "../data/raw/Water/Pakistan/Vectors/Shapefiles/Pishin_Lora Basin.shp"
+    output_file: "../data/processed/Water/Pakistan/Vectors/Pishin_Lora_Basin.mbtiles"
+    layer_name: "Pakistan_Pishin_Lora_Basin"
+    min_zoom: 6
+    max_zoom: 11
+    upload: false
+
+  pakistan_pishin_lora_river_network:
+    input_file: "../data/raw/Water/Pakistan/Vectors/Shapefiles/Pishin_Lora River network.shp"
+    output_file: "../data/processed/Water/Pakistan/Vectors/Pishin_Lora_River_network.mbtiles"
+    layer_name: "Pakistan_Pishin_Lora_River_network"
+    min_zoom: 6
+    max_zoom: 11
+    upload: false
+
+  pakistan_pishin_lora_station:
+    input_file: "../data/raw/Water/Pakistan/Vectors/Shapefiles/Pishin_Lora Station.shp"
+    output_file: "../data/processed/Water/Pakistan/Vectors/Pishin_Lora_Station.mbtiles"
+    layer_name: "Pakistan_Pishin_Lora_Station"
+    min_zoom: 6
+    max_zoom: 11
+    upload: false
+
+  # Mexico - Water
+  mexico_dr075:
+    input_file: "../data/raw/Water/Mexico/Vectors/DR075/DR075.shp"
+    output_file: "../data/processed/Water/Mexico/Vectors/DR075.mbtiles"
+    layer_name: "Mexico_DR075"
+    min_zoom: 7
+    max_zoom: 10
+    upload: false
+
+  # Uganda Primary Schools - Transport
+  uganda_catchment_of_influence:
+    input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/catchment-of-influence.shp"
+    output_file: "../data/processed/Transport/Uganda/PrimarySchools/Vectors/catchment-of-influence.mbtiles"
+    layer_name: "Uganda_catchment-of-influence"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  uganda_transport_network:
+    input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/transport-network.shp"
+    output_file: "../data/processed/Transport/Uganda/PrimarySchools/Vectors/transport-network.mbtiles"
+    layer_name: "Uganda_transport-network"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  uganda_primary_schools:
+    input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/primary-schools.shp"
+    output_file: "../data/processed/Transport/Uganda/PrimarySchools/Vectors/primary-schools.mbtiles"
+    layer_name: "Uganda_primary-schools"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  uganda_primary_school_surplus_deficit:
+    input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/primary-school-surplus-deficit.shp"
+    output_file: "../data/processed/Transport/Uganda/PrimarySchools/Vectors/primary-school-surplus-deficit.mbtiles"
+    layer_name: "Uganda_primary-school-surplus-deficit"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  uganda_primary_school_surplus_deficit_centroids:
+    input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/primary-school-surplus-deficit-centroids.shp"
+    output_file: "../data/processed/Transport/Uganda/PrimarySchools/Vectors/primary-school-surplus-deficit-centroids.mbtiles"
+    layer_name: "Uganda_primary-school-surplus-deficit-centroids"
+    min_zoom: 8
+    max_zoom: 10
+    upload: false
+
+  # Uganda Refugees - Transport
+  uganda_rural_access_index:
+    input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/rural-access-index.shp"
+    output_file: "../data/processed/Transport/Uganda/UgandaRefugees/Vectors/rural-access-index.mbtiles"
+    layer_name: "Uganda_rural-access-index"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  uganda_rural_access_index_centroids:
+    input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/rural-access-index-centroids.shp"
+    output_file: "../data/processed/Transport/Uganda/UgandaRefugees/Vectors/rural-access-index-centroids.mbtiles"
+    layer_name: "Uganda_rural-access-index-centroids"
+    min_zoom: 8
+    max_zoom: 10
+    upload: true
+
+  uganda_main_corridor:
+    input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/main-corridor.shp"
+    output_file: "../data/processed/Transport/Uganda/UgandaRefugees/Vectors/main-corridor.mbtiles"
+    layer_name: "Uganda_main-corridor"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  uganda_least_cost_paths:
+    input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/least-cost-paths.shp"
+    output_file: "../data/processed/Transport/Uganda/UgandaRefugees/Vectors/least-cost-paths.mbtiles"
+    layer_name: "Uganda_least-cost-paths"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  uganda_refugee_camps:
+    input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/refugee-camps.shp"
+    output_file: "../data/processed/Transport/Uganda/UgandaRefugees/Vectors/refugee-camps.mbtiles"
+    layer_name: "Uganda_refugee-camps"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  uganda_accessibility_hotspots:
+    input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/Accessibility-hotspots.shp"
+    output_file: "../data/processed/Transport/Uganda/UgandaRefugees/Vectors/Accessibility-hotspots.mbtiles"
+    layer_name: "Uganda_Accessibility-hotspots"
+    min_zoom: 6
+    max_zoom: 14
+    upload: false
+
+  # Timor-Leste - Health
+  timor_leste_population_buildings_height:
+    input_file: "../data/raw/Health/Timor-Leste/Step4/Population_buildings_height.gpkg"
+    output_file: "../data/processed/Health/Timor-Leste/Vectors/Population_buildings_height.mbtiles"
+    layer_name: "Population_buildings_height"
+    min_zoom: 11
+    max_zoom: 15
+    upload: true
+
+  timor_leste_dengue_incidence:
+    input_file: "../data/raw/Health/Timor-Leste/Step5/dengue_incidence_timor.gpkg"
+    output_file: "../data/processed/Health/Timor-Leste/Vectors/dengue_incidence_timor.mbtiles"
+    layer_name: "dengue_incidence_timor"
+    min_zoom: 8
+    max_zoom: 12
+    upload: true
+
+  # Afghanistan - FFF
+  afghanistan_snow_analysis:
+    input_file: "../data/raw/FFF/Afghanistan/Vectors/Snow analysis/swe_trend_shapefile.shp"
+    output_file: "../data/processed/FFF/Afghanistan/Vectors/Snow_analysis.mbtiles"
+    layer_name: "Snow_analysis"
+    min_zoom: 3
+    max_zoom: 8
+    upload: true
+
+  afghanistan_herat_city:
+    input_file: "../data/raw/FFF/Afghanistan/Vectors/Herat_GeographicElements/gda-fff_HeratCity_Herat_Afghanistan.geojson"
+    output_file: "../data/processed/FFF/Afghanistan/Vectors/HeratCity.mbtiles"
+    layer_name: "HeratCity"
+    min_zoom: 6
+    max_zoom: 11
+    upload: true
+
+  afghanistan_cities:
+    input_file: "../data/raw/FFF/Afghanistan/Vectors/Afgh_cities/City_Herat-Kabul-Kandahar.shp"
+    output_file: "../data/processed/FFF/Afghanistan/Vectors/Afgh_cities.mbtiles"
+    layer_name: "Afgh_cities"
+    min_zoom: 4
+    max_zoom: 9
+    upload: true
+
+  # Nigeria - Climate Resilience
+  nigeria_crop_types:
+    input_file: "../data/raw/Climate_resilience/Nigeria/Crop types/GDA-CR-SOC-Baseline_ID1090823260_2019-2020-2021_maincrops_v1_phenology.shp"
+    output_file: "../data/processed/Climate_resilience/Nigeria/Vectors/Crop_types.mbtiles"
+    layer_name: "Nigeria_Crop_types"
+    min_zoom: 8
+    max_zoom: 14
+    upload: true
+
+  nigeria_soc_reduction:
+    input_file: "../data/raw/Climate_resilience/Nigeria/Topsoil SOC (2022)/GDA-CR-SOC-Baseline_ID1090823260_SOC_2022.shp"
+    output_file: "../data/processed/Climate_resilience/Nigeria/Vectors/SOC_reduction.mbtiles"
+    layer_name: "Nigeria_SOC_reduction"
+    min_zoom: 8
+    max_zoom: 14
+    upload: true
+
+  # Guinea Bissau - Marine
+  guinea_bissau_mangrove_change:
+    input_file: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC15_GuineaBissau/UC15_ChangeAnalytics/UC15_GuineaBissau_North_ChangeAnalytics.shp"
+    output_file: "../data/processed/Marine/GuineaBissau/Vectors/mangrove_change2.mbtiles"
+    layer_name: "GuineaBissau_Mangrove_Change"
+    min_zoom: 6
+    max_zoom: 10
+    upload: true

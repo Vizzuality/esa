@@ -1,0 +1,494 @@
+layers:
+
+  # Mongolia - DR
+  mongolia_iron_dzud_frost_days:
+    input_folder: "../data/raw/Disaster Resilience/Mongolia/GeoTIFFs/Iron Dzud/"
+    output_folder: "../data/processed/Disaster Resilience/Mongolia/APNGs/Iron Dzud/"
+    min_z: 2
+    max_z: 10
+    vmin: 100
+    vmax: 185
+    date_format: "YYYY"
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#f1eef6", "#c8d1e6", "#91b6d7", "#579ec8", "#2382b4", "#045a8d"]
+
+  mongolia_dzud_synoptic_assessment:
+    input_folder: "../data/raw/Disaster Resilience/Mongolia/GeoTIFFs/Dzud Synoptic Assessment/"
+    output_folder: "../data/processed/Disaster Resilience/Mongolia/APNGs/Dzud Synoptic Assessment/"
+    min_z: 2
+    max_z: 10
+    vmin: 0
+    vmax: 255
+    date_format: "YYYY"
+    upload: false
+    colormap:
+      type: categorical
+      values:
+        0: [0, 0, 0, 0]
+        1: [197, 78, 82, 255]
+        2: [100, 182, 206, 255]
+        3: [93, 79, 143, 255]
+        4: [69, 107, 167, 255]
+
+  mongolia_white_dzud_snow_cover_duration:
+    input_folder: "../data/raw/Disaster Resilience/Mongolia/GeoTIFFs/White Dzud/"
+    output_folder: "../data/processed/Disaster Resilience/Mongolia/APNGs/White Dzud/"
+    min_z: 2
+    max_z: 10
+    vmin: 0
+    vmax: 185
+    date_format: "YYYY"
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#f1eef6", "#c8d1e6", "#91b6d7", "#579ec8", "#2382b4", "#045a8d"]
+
+  mongolia_pasture_biomass:
+    input_folder: "../data/raw/Disaster_resilience/Mongolia/Rasters_masked/"
+    output_folder: "../data/processed/Disaster_resilience/Mongolia/APNGs/PastureBiomass/"
+    min_z: 7
+    max_z: 11
+    vmin: 0
+    vmax: 4
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#dc1010", "#e8932c", "#1feda8", "#50d125", "#2d7e2a"]
+
+  # Botswana - Water
+  botswana_groundwater_storage_anomalies:
+    input_folder: "../data/raw/Water Management/Botswana/Rasters/Groundwater Storage Anomalies/"
+    output_folder: "../data/processed/Water Management/Botswana/APNGs/Groundwater_Storage_Anomalies/"
+    min_z: 3
+    max_z: 8
+    vmin: 0
+    vmax: 429
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#ca0020", "#f4a582", "#f7f7f7", "#92c5de", "#0571b0"]
+
+  botswana_grace_groundwater_drought_index:
+    input_folder: "../data/raw/Water Management/Botswana/Rasters/Grace Groundwater Drought index/"
+    output_folder: "../data/processed/Water Management/Botswana/APNGs/Grace_Groundwater_Drought_Index/"
+    min_z: 3
+    max_z: 8
+    vmin: -4
+    vmax: 1
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#b30101", "#e24a32", "#fc8d58", "#fff1d9", "#ffffff"]
+
+  # Cote d'Ivoire - Urban
+  cote_divoire_percent_impervious_surfaces:
+    input_folder: "../data/raw/Urban Sustainability/Cote d'Ivoire/Rasters/03_Percent_Impervious_Surfaces_1985-2021/COGs/"
+    output_folder: "../data/processed/Urban Sustainability/Cote d'Ivoire/APNGs/PercentImperviousSurfaces/"
+    min_z: 8
+    max_z: 12
+    vmin: 0
+    vmax: 100
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#EDF8FB", "#B3CDE3", "#8C96C6", "#8856A7", "#810F7C"]
+      transparent_values: [0]
+
+  # Maldives - Marine
+  maldives_bathymetry:
+    input_folder: "../data/raw/Marine/Maldives/Rasters/"
+    output_folder: "../data/processed/Marine/Maldives/APNGs/Bathymetry/"
+    min_z: 12
+    max_z: 16
+    vmin: -12.5
+    vmax: -0.1
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#0b0405", "#382a54", "#36699f", "#4dc4ad", "#def5e5"]
+
+  maldives_seafloor_classification:
+    input_folder: "../data/raw/Marine/Maldives/Rasters/Seafloor/"
+    output_folder: "../data/processed/Marine/Maldives/APNGs/Seafloor/"
+    min_z: 12
+    max_z: 16
+    vmin: 1
+    vmax: 4
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#cc1117", "#bbd645", "#b133d8", "#54da87"]
+
+  # Tunisia - Marine
+  tunisia_phytoplankton:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere/UC01-WB-Tunisia/phytoplankton/masked/"
+    output_folder: "../data/processed/Marine/Tunisia/APNGs/Phytoplankton/"
+    min_z: 6
+    max_z: 9
+    vmin: 0
+    vmax: 0.007
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#f7fcf5", "#c7e9c0", "#74c476", "#238b45", "#00441b"]
+
+  tunisia_seagrass:
+    input_folder: "../data/raw/Marine//GDA-Marine_ImpactSphere/UC01-WB-Tunisia/seagrass/"
+    output_folder: "../data/processed/Marine/Tunisia/APNGs/Seagrass/"
+    min_z: 6
+    max_z: 9
+    vmin: 1
+    vmax: 4
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#009600", "#006600", "#f9dc86", "#0000ff"]
+
+  # Caribbean - Marine
+  caribbean_chlorophyll:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere/UC03-WB-Caribbean/Chlorophyll_from_Sentinel3/"
+    output_folder: "../data/processed/Marine/Caribbean/APNGs/"
+    min_z: 7
+    max_z: 10
+    vmin: 0
+    vmax: 10
+    upload: false
+    colormap:
+      type: binned
+      intervals: [0, 0.03, 0.5, 1.5, 5, 10]
+      colors: ["#000000", "#480bfd", "#26ff13", "#f6fa08", "#fc5a09", "#ba0340"]
+
+  # Sarajevo - FFF
+  sarajevo_cams_no2_1km:
+    input_folder: "../data/raw/FFF/Sarajevo/Rasters/CAMS_NO2_1km_masked/"
+    output_folder: "../data/processed/FFF/Sarajevo/APNGs/CAMS_NO2_1km/"
+    min_z: 8
+    max_z: 13
+    vmin: 1
+    vmax: 31
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#2b83ba", "#abdda4", "#ffffbf", "#fdae61", "#d7191c"]
+
+  # Georgia - Water
+  georgia_sioni_reservoir_sediments:
+    input_folder: "../data/raw/Water/Georgia/Rasters/Sioni Reservoir sediments/"
+    output_folder: "../data/processed/Water/Georgia/APNGs/SioniReservoir/"
+    min_z: 12
+    max_z: 14
+    vmin: 0
+    vmax: 200
+    upload: false
+    colormap:
+      type: linear_clamped
+      colors: ["#28a8b4", "#53aa90", "#7eac6c", "#aaad48", "#d5af25"]
+      clip_max_value: 20
+
+  # Timor-Leste - Water
+  timor_leste_water_seasonality:
+    input_folder: "../data/raw/Water/Timor-Leste/Rasters/Section_2-Water_Seasonality_masked/"
+    output_folder: "../data/processed/Water/Timor-Leste/APNGs/WaterSeasonality2/"
+    min_z: 12
+    max_z: 12
+    vmin: 1
+    vmax: 12
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#38acff", "#253494"]
+
+  timor_leste_water_min_extent:
+    input_folder: "../data/raw/Water/Timor-Leste/Rasters/Section_3-Minimun_Maximum_Extent/Min_masked/"
+    output_folder: "../data/processed/Water/Timor-Leste/APNGs/WaterMinExtent/"
+    min_z: 15
+    max_z: 15
+    vmin: 1
+    vmax: 1
+    upload: false
+    colormap:
+      type: single
+      color: [56, 172, 255, 255]
+      transparent_values: [0]
+
+  timor_leste_water_max_extent:
+    input_folder: "../data/raw/Water/Timor-Leste/Rasters/Section_3-Minimun_Maximum_Extent/Max_masked/"
+    output_folder: "../data/processed/Water/Timor-Leste/APNGs/WaterMaxExtent/"
+    min_z: 15
+    max_z: 15
+    vmin: 1
+    vmax: 1
+    upload: false
+    colormap:
+      type: single
+      color: [56, 172, 255, 255]
+      transparent_values: [0]
+
+  # West Africa - Water
+  west_africa_groundwater_anomalies:
+    input_folder: "../data/raw/Water/West Africa/Rasters/Clipped_animated/"
+    output_folder: "../data/processed/Water/West Africa/APNGs/GroundwaterAnomalies/"
+    min_z: 2
+    max_z: 7
+    vmin: -144
+    vmax: 144
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#67001F", "#E37D63", "#F7F6F5", "#6CADD1", "#003061"]
+
+  # Peru & Cameroon - Water
+  poechos_turbidity:
+    input_folder: "../data/raw/Water/Lagdo & Poechos/Rasters/Poechos_scene"
+    output_folder: "../data/processed/Water/Lagdo & Poechos/APNGs/PoechosTurbidity"
+    min_z: 9
+    max_z: 14
+    vmin: 0
+    vmax: 1288
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#2b83ba", "#abdda4", "#ffffbf", "#fdae61", "#d7191c"]
+
+  # Pakistan - Water
+  pakistan_turbidity:
+    input_folder: "../data/raw/Water/Pakistan/Rasters/turbidity"
+    output_folder: "../data/processed/Water/Pakistan/APNGs/turbidity/"
+    min_z: 12
+    max_z: 13
+    vmin: 0
+    vmax: 80
+    upload: false
+    colormap:
+      type: binned
+      intervals: [0, 20, 40, 60, 80]
+      colors: ["#018571", "#80cdc1", "#dfc27d", "#a6611a"]
+
+  pakistan_balochistan_drought:
+    input_folder: "../data/raw/Water/Pakistan/Rasters/drought_clipped/"
+    output_folder: "../data/processed/Water/Pakistan/APNGs/drought/"
+    min_z: 6
+    max_z: 11
+    vmin: -2
+    vmax: 2
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#d7191c", "#fedf9a", "#ffffc0", "#aaaaaa", "#edf7af", "#dbf09e", "#1a9641"]
+      transparent_values: [0]
+      reserve_zero_transparent: true
+
+  # Mexico - Water
+  mexico_nmdi:
+    input_folder: "../data/raw/Water/Mexico/Rasters/Drought/NMDI_negative/"
+    output_folder: "../data/processed/Water/Mexico/APNGs/nmdi/"
+    min_z: 7
+    max_z: 10
+    vmin: -2
+    vmax: 0
+    upload: false
+    colormap:
+      type: linear
+      colors: ["#d7191c", "#fdae61"]
+      transparent_values: [0]
+      reserve_zero_transparent: true
+
+  # Sri Lanka - Water
+  sri_lanka_min_extent:
+    input_folder: "../data/raw/Water/SriLanka/Rasters/min_extent/"
+    output_folder: "../data/processed/Water/SriLanka/APNGs/min_extent/"
+    min_z: 12
+    max_z: 13
+    vmin: 0
+    vmax: 1
+    upload: false
+    colormap:
+      type: single
+      color: [0, 0, 255, 255]
+      transparent_values: [0]
+
+  sri_lanka_max_extent:
+    input_folder: "../data/raw/Water/SriLanka/Rasters/max_extent/"
+    output_folder: "../data/processed/Water/SriLanka/APNGs/max_extent/"
+    min_z: 12
+    max_z: 13
+    vmin: 0
+    vmax: 1
+    upload: false
+    colormap:
+      type: single
+      color: [56, 173, 255, 255]
+      transparent_values: [0]
+
+  # Timor-Leste - Health
+  timor_leste_luc:
+    input_folder: "../data/raw/Health/Timor-Leste/Step3/"
+    output_folder: "../data/processed/Health/Timor-Leste/APNGs/"
+    min_z: 7
+    max_z: 12
+    vmin: 0
+    vmax: 255
+    upload: false
+    colormap:
+      type: categorical
+      values:
+        0: "#419bdf"
+        1: "#556b2f"
+        2: "#adff2f"
+        3: "#90ee90"
+        4: "#fffb35"
+        6: "#e80015"
+        7: "#a59b8f"
+
+  # Paraguay - Agriculture
+  paraguay_productivity_annual:
+    input_folder: "../data/raw/Agriculture/Paraguay/GDA-AGRI_UC9-Paraguay/QGISsesion/Dry matter productivity - seasons 2019 to 2024 - annual/"
+    output_folder: "../data/processed/Agriculture/Paraguay/APNGs/productivity_annual/"
+    min_z: 10
+    max_z: 13
+    vmin: 200
+    vmax: 5000
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: binned
+      intervals: [1400, 1800, 2200, 2600, 3000, 3400, 3800, 4200, 4600, 5000]
+      colors: ["#96714e", "#f4b982", "#d6e2b3", "#b5d178", "#4a8131", "#264f24", "#0f330d", "#041903", "#a243bf", "#622573"]
+
+  paraguay_productivity_seasons:
+    input_folder: "../data/raw/Agriculture/Paraguay/GDA-AGRI_UC9-Paraguay/QGISsesion/Dry matter productivity - seasons 2019 to 2024/"
+    output_folder: "../data/processed/Agriculture/Paraguay/APNGs/productivity_seasons/"
+    min_z: 10
+    max_z: 13
+    vmin: 0
+    vmax: 1000
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: binned
+      intervals: [0.1, 3, 6, 9, 12, 15, 18, 21, 24, 1000]
+      colors: ["#96714e", "#f4b982", "#d6e2b3", "#b5d178", "#4a8131", "#264f24", "#0f330d", "#041903", "#a243bf", "#622573"]
+
+  # Cambodia - Marine
+  cambodia_salinity:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_Salinity/"
+    output_folder: "../data/processed/Marine/Cambodia/APNGs/salinity2/"
+    min_z: 4
+    max_z: 8
+    vmin: 0
+    vmax: 36
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: sld_gradient
+      breakpoints: [24, 26, 30, 34, 36]
+      colors: ["#30123b", "#4686fb", "#a4fc3c", "#fbb938", "#e3440a"]
+      transparent_below: 24
+
+  cambodia_sea_level:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_SeaLevel/"
+    output_folder: "../data/processed/Marine/Cambodia/APNGs/sea_level2/"
+    min_z: 4
+    max_z: 8
+    vmin: 0
+    vmax: 1.5
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.3, 0.6, 0.8, 1, 1.3]
+      colors: ["#30123b", "#28bceb", "#a4fc3c", "#fb7e21", "#7a0403"]
+      transparent_below: 0.3
+
+  cambodia_wave_height:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_SignifWaveHeight/"
+    output_folder: "../data/processed/Marine/Cambodia/APNGs/wave_height2/"
+    min_z: 4
+    max_z: 8
+    vmin: 0
+    vmax: 2
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.01, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
+      colors: ["#c0cef8", "#b6c4f7", "#abc8f0", "#91c5e3", "#70b2d8", "#4a97c9", "#2979b9", "#0d58a1", "#042f6b"]
+      transparent_below: 0.01
+
+  cambodia_chlorophyll:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_WQ_Chlorophyll/"
+    output_folder: "../data/processed/Marine/Cambodia/APNGs/chlorophyll2/"
+    min_z: 4
+    max_z: 8
+    vmin: 0
+    vmax: 15
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.03, 0.5, 1.5, 7, 15]
+      colors: ["#480bfd", "#26ff13", "#f6fa08", "#fc5a09", "#ba0340"]
+      transparent_below: 0.03
+
+  cambodia_surface_temperature_model:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_WQ_SurfTemperature_Model/"
+    output_folder: "../data/processed/Marine/Cambodia/APNGs/temp_model2/"
+    min_z: 4
+    max_z: 8
+    vmin: 0
+    vmax: 35
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: sld_gradient
+      breakpoints: [25, 27, 29, 30, 31, 32, 33, 35]
+      colors: ["#30123b", "#3e9cfe", "#48f882", "#a4fc3c", "#e2dc38", "#fea331", "#ef5911", "#7a0403"]
+      transparent_below: 25
+
+  cambodia_surface_temperature_sentinel3:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_WQ_SurfTemperature_Sentinel3/"
+    output_folder: "../data/processed/Marine/Cambodia/APNGs/temp_sentinel2/"
+    min_z: 4
+    max_z: 8
+    vmin: 0
+    vmax: 35
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: sld_gradient
+      breakpoints: [25, 27, 29, 30, 31, 32, 33, 35]
+      colors: ["#30123b", "#3e9cfe", "#48f882", "#a4fc3c", "#e2dc38", "#fea331", "#ef5911", "#7a0403"]
+      transparent_below: 25
+
+  cambodia_turbidity:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC07-ADB_Cambodia/UC07_WQ_Turbidity/"
+    output_folder: "../data/processed/Marine/Cambodia/APNGs/turbidity2/"
+    min_z: 4
+    max_z: 8
+    vmin: 0
+    vmax: 25
+    date_format: "YYYYMMDD"
+    upload: false
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.5, 5, 8, 10, 25]
+      colors: ["#480bfd", "#26ff13", "#f6fa08", "#fc5a09", "#ba0340"]
+      transparent_below: 0.5
+
+  # Guinea Bissau - Marine
+  guinea_bissau_mangroves:
+    input_folder: "../data/raw/Marine/GDA-Marine_ImpactSphere_2/UC15_GuineaBissau/UC15_MangroveMaps/north/"
+    output_folder: "../data/processed/Marine/GuineaBissau/APNGs/mangroves2/"
+    min_z: 7
+    max_z: 10
+    vmin: 0
+    vmax: 1
+    date_format: "YYYY"
+    upload: false
+    colormap:
+      type: single
+      color: "#937d11"
+      transparent_values: [0]
