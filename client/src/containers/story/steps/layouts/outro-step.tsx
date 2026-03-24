@@ -22,7 +22,10 @@ type Disclaimer = {
   title: string;
   partners: {
     id: number;
-    logo: { data: { id: number; attributes: { url: string } } };
+    name: string;
+    logo: {
+      data: { id: number; attributes: { url: string; alternativeText?: string; caption?: string } };
+    };
     url: string;
   }[];
 };
@@ -199,21 +202,33 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
                           rel="noopener noreferrer"
                         >
                           <Image
+                            key={partner.id}
                             src={src}
-                            width={50}
-                            height={30}
-                            alt=""
-                            className="h-8 w-full max-w-[125px] shrink-0 object-contain object-center"
+                            width={125}
+                            height={32}
+                            alt={
+                              partner.logo?.data?.attributes?.alternativeText ||
+                              partner.name ||
+                              partner.logo?.data?.attributes?.caption ||
+                              'Partner logo'
+                            }
+                            className="h-8 w-auto max-w-[125px] shrink-0 object-contain object-center"
                           />
                         </a>
                       ) : (
                         <div>
                           <Image
+                            key={partner.id}
                             src={src}
-                            width={50}
-                            height={30}
-                            alt=""
-                            className="h-8 w-full max-w-[125px] object-contain object-center"
+                            width={125}
+                            height={32}
+                            alt={
+                              partner.logo?.data?.attributes?.alternativeText ||
+                              partner.name ||
+                              partner.logo?.data?.attributes?.caption ||
+                              'Partner logo'
+                            }
+                            className="h-8 w-auto max-w-[125px] shrink-0 object-contain object-center"
                           />
                         </div>
                       );
