@@ -354,3 +354,12 @@ layers:
     min_zoom: 6
     max_zoom: 10
     upload: true
+
+  # Turkey FIRAT - CR
+  firat_basins_stats:
+    input_file: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator/sub-basin shapefiles/SDG-Indicator_stats_output_shapefile_EPSG32637.shp"
+    output_file: "../data/processed/Climate_resilience/Turkey/Vectors/Basins_stats.mbtiles"
+    layer_name: "FIRAT_Basins_stats"
+    min_zoom: 6
+    max_zoom: 14
+    upload: true
