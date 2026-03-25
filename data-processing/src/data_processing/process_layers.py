@@ -127,7 +127,7 @@ def process_raster_layers(
 import sys
 sys.path.insert(0, sys.argv[3])
 
-from data_processing.process_layers import load_and_process_raster_layers
+from data_processing.process_layers import process_raster_layers
 
 upload_arg = sys.argv[4]
 if upload_arg == "none":
@@ -137,7 +137,7 @@ elif upload_arg == "1":
 else:
     upload_override = False
 
-processed, failed = load_and_process_raster_layers(
+processed, failed = process_raster_layers(
     config_path=sys.argv[1],
     layer_keys=[sys.argv[2]],
     _isolate=False,

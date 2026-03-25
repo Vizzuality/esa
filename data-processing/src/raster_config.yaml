@@ -679,3 +679,40 @@ layers:
     layer_name: "Ecuador_Ponds"
     upload: true
     max_zoom: 9
+
+# Turkey FIRAT - CR
+  firat_land_degradation:
+    base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
+    input_file: "GDACR_SDG-15-3-1_Turkey_2008-2023_20241108100235.tif"
+    style_file: "SDG_3_classes.qml"
+    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_degradation.tif"
+    layer_name: "FIRAT_land_degradation"
+    upload: true
+    max_zoom: 10
+
+  firat_land_productivity:
+    base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
+    input_file: "GDACR_productivity-subindicator_Turkey_2008-2023_20241108100235.tif"
+    style_file: "SDG_3_classes.qml"
+    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_productivity.tif"
+    layer_name: "FIRAT_land_productivity"
+    upload: true
+    max_zoom: 10
+
+  firat_land_cover_change:
+    base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
+    input_file: "land_cover_change.tif"
+    style_file: "SDG_3_classes.qml"
+    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_cover_change.tif"
+    layer_name: "FIRAT_land_cover_change"
+    upload: true
+    max_zoom: 10
+
+  firat_soc:
+    base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
+    input_file: "GDACR_SOC_subindicator_Turkey_2008-2023_20241108100235.tif"
+    style_file: "SDG_3_classes.qml"
+    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/soc.tif"
+    layer_name: "FIRAT_soc"
+    upload: true
+    max_zoom: 10
