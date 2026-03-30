@@ -716,3 +716,22 @@ layers:
     layer_name: "FIRAT_soc"
     upload: true
     max_zoom: 10
+
+# Cox Bazar - FCS
+  cox_bazar_hfc_teknaf:
+    base_path: "../data/raw/FCS/Bangladesh/CoxBazar/"
+    input_file: "CoxBazar_HFC_2016-2022_Teknaf.tif"
+    style_file: "legend_urbanexpansion.qml"
+    output_file: "../data/processed/FCS/Bangladesh/CoxBazar/CoxBazar_HFC_Teknaf.tif"
+    layer_name: "CoxBazar_HFC_Teknaf"
+    upload: true
+    max_zoom: 15
+  
+  cox_bazar_hfc_ukhia:
+    base_path: "../data/raw/FCS/Bangladesh/CoxBazar/"
+    input_file: "CoxBazar_HFC_2016-2022_Ukhia.tif"
+    style_file: "legend_urbanexpansion.qml"
+    output_file: "../data/processed/FCS/Bangladesh/CoxBazar/CoxBazar_HFC_Ukhia.tif"
+    layer_name: "CoxBazar_HFC_Ukhia"
+    upload: true
+    max_zoom: 15
