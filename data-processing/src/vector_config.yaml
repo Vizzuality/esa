@@ -363,3 +363,28 @@ layers:
     min_zoom: 6
     max_zoom: 14
     upload: true
+
+  # Pakistan - FCS
+  pakistan_monitgoodwill:
+    input_file: "../data/raw/FCS/Pakistan/D1.33/MonitGoodwill_Infra_Placemarks.shp"
+    output_file: "../data/processed/FCS/Pakistan/Vectors/MonitGoodwill.mbtiles"
+    layer_name: "Pakistan_MonitGoodwill"
+    min_zoom: 5
+    max_zoom: 11
+    upload: true
+
+  pakistan_CDC:
+    input_file: "../data/raw/FCS/Pakistan/CDC/CDC_Infrastructure_Monitoring.shp"
+    output_file: "../data/processed/FCS/Pakistan/Vectors/CDC.mbtiles"
+    layer_name: "Pakistan_CDC"
+    min_zoom: 5
+    max_zoom: 11
+    upload: true
+  
+  pakistan_lulc:
+    input_file: "../data/raw/FCS/Pakistan/D3.32/June2023/LULC_07062023.shp"
+    output_file: "../data/processed/FCS/Pakistan/Vectors/Pakistan_LULC.mbtiles"
+    layer_name: "Pakistan_LULC"
+    min_zoom: 5
+    max_zoom: 11
+    upload: true
