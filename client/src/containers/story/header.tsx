@@ -164,7 +164,7 @@ const StoryHeader = ({
             </DialogContentHome>
           </Dialog>
           {mapLocation && (
-            <Tooltip delayDuration={0}>
+            <Tooltip delayDuration={0} open={true}>
               <TooltipTrigger>
                 <MiniGlobe
                   id="mini-globe-desktop"
@@ -176,13 +176,15 @@ const StoryHeader = ({
                 />
               </TooltipTrigger>
 
-              <TooltipPortal>
-                <TooltipContent side="left" align="start" className="border-none bg-[#003247]">
-                  <div className="text-sm text-gray-200">Back to globe view</div>
+              <TooltipContent side="left" align="center" className="h-fit border-none bg-[#003247]">
+                <div className="text-sm text-gray-200">Back to globe view</div>
 
-                  <TooltipArrow className="fill-[#003247]" width={10} height={5} />
-                </TooltipContent>
-              </TooltipPortal>
+                <TooltipArrow
+                  className="absolute right-0 top-1/2 translate-x-1/2 fill-[#003247]"
+                  width={10}
+                  height={5}
+                />
+              </TooltipContent>
             </Tooltip>
           )}
         </div>

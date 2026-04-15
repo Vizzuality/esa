@@ -7,6 +7,7 @@ export const LEGEND_TYPE = [
   'gradient',
   'timeline',
   'switch',
+  'filter',
 ] as const;
 
 export type LegendType = (typeof LEGEND_TYPE)[number];

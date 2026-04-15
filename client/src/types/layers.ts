@@ -16,6 +16,7 @@ export type Config = {
 export type ParamsConfigValue = {
   key: string;
   default: unknown;
+  options?: { label: string; value: string }[];
 };
 
 export type ParamsConfig = ParamsConfigValue[];

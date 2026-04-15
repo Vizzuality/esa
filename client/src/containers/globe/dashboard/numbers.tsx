@@ -3,9 +3,9 @@
 import { useDashboard, DashboardProps } from '@/hooks/dashboard';
 
 const numbers: { stat: string; number: number; slug: keyof DashboardProps }[] = [
-  { stat: 'Supported countries', number: 80, slug: 'supportedCountries' },
-  { stat: 'Case Studies in progress', number: 120, slug: 'caseStudiesInProgress' },
-  { stat: 'IFI projects', number: 118, slug: 'ifiProjects' },
+  { stat: 'Supported countries', number: 88, slug: 'supportedCountries' },
+  { stat: 'Case Studies in progress', number: 133, slug: 'caseStudiesInProgress' },
+  { stat: 'IFI projects', number: 131, slug: 'ifiProjects' },
 ];
 
 const DashboardNumbers = () => {

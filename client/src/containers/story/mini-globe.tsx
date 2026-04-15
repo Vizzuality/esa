@@ -1,14 +1,12 @@
 'use client';
 
 import { useCallback, useMemo, useRef } from 'react';
-
 import ReactMapGL, { Layer, MapRef, Source } from 'react-map-gl';
+import transformRotate from '@turf/transform-rotate';
 
 import env from '@/env.mjs';
-
 import { cn } from '@/lib/classnames';
 import { pointToRoundedSquare } from '@/lib/mini-globe';
-
 import { MAPBOX_STYLES } from '@/constants/map';
 
 interface MiniGlobeProps {
@@ -20,6 +18,7 @@ interface MiniGlobeProps {
   size?: number;
   squareSizeKm?: number;
   cornerRadiusKm?: number;
+  rotation?: number;
 }
 
 const MiniGlobe = ({
@@ -31,6 +30,7 @@ const MiniGlobe = ({
   size = 100,
   squareSizeKm = 300,
   cornerRadiusKm = 150,
+  rotation = 360,
 }: MiniGlobeProps): JSX.Element => {
   const mapRef = useRef<MapRef>(null);
 
@@ -42,10 +42,19 @@ const MiniGlobe = ({
     return squareSizeKm * factor;
   }, [squareSizeKm, targetZoom]);
 
-  const square = useMemo(
-    () => pointToRoundedSquare(longitude, latitude, effectiveSquareSizeKm, cornerRadiusKm, 12),
-    [longitude, latitude, effectiveSquareSizeKm, cornerRadiusKm]
-  );
+  const square = useMemo(() => {
+    const baseSquare = pointToRoundedSquare(
+      longitude,
+      latitude,
+      effectiveSquareSizeKm,
+      cornerRadiusKm,
+      12
+    );
+
+    return transformRotate(baseSquare, rotation, {
+      pivot: [longitude, latitude],
+    });
+  }, [longitude, latitude, effectiveSquareSizeKm, cornerRadiusKm, rotation]);
 
   const handleLoad = useCallback(() => {
     const map = mapRef.current?.getMap();
@@ -58,8 +67,8 @@ const MiniGlobe = ({
     map.easeTo({
       center: [longitude, latitude],
       zoom: targetZoom,
-      pitch: 0,
-      offset: [1.5, 1.5],
+      pitch: 20,
+      offset: [-10, 30],
       duration: 900,
       essential: true,
     });
@@ -75,7 +84,7 @@ const MiniGlobe = ({
         if (e.key === 'Enter' || e.key === ' ') onClick();
       }}
       className={cn(
-        'cursor-pointer rounded-full bg-transparent outline-dashed outline-1 outline-offset-4 outline-gray-200',
+        'cursor-pointer rounded-full bg-transparent outline-dashed outline-2 outline-offset-4 outline-gray-200',
         '[&_.mapboxgl-ctrl-attrib]:!hidden [&_.mapboxgl-ctrl-logo]:!hidden',
         className
       )}
@@ -105,7 +114,7 @@ const MiniGlobe = ({
               type="line"
               paint={{
                 'line-color': '#008E7A',
-                'line-opacity': 0.7,
+                'line-opacity': 1,
                 'line-width': 2,
               }}
             />
