@@ -44,12 +44,9 @@ const LegendTypeFilter = ({
   );
 
   return (
-    <div style={props.style} className="mt-3 flex flex-col gap-1.5">
-      {(title || layerTitle) && (
-        <span className="font-open-sans text-sm text-white">{title || layerTitle}</span>
-      )}
+    <div style={props.style} className="mt-3 flex items-center gap-1.5">
       <Select value={value} onValueChange={handleChange}>
-        <SelectTrigger className="h-8 border-white/20 bg-white/10 text-sm text-white focus:ring-0 focus:ring-offset-0">
+        <SelectTrigger className="h-8 w-fit rounded-full border-white/20 bg-white/10 text-sm text-white focus:ring-0 focus:ring-offset-0">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -60,6 +57,9 @@ const LegendTypeFilter = ({
           ))}
         </SelectContent>
       </Select>
+      {(title || layerTitle) && (
+        <span className="text-sm font-semibold text-white">{title || layerTitle}</span>
+      )}
     </div>
   );
 };

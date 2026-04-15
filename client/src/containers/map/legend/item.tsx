@@ -70,7 +70,7 @@ const MapLegendItem = ({ id, layer, ...legendProps }: MapLegendItemProps) => {
     const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
     const elementProps: Record<string, unknown> = {
       ...props,
-      title: (props as { title?: string }).title || layer?.title,
+      title: (props as { title?: string }).title ?? layer?.title,
       info: (props as { info?: string }).info || layer?.metadata?.description,
     };
     if (type === 'filter') {

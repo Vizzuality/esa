@@ -164,7 +164,7 @@ const StoryHeader = ({
             </DialogContentHome>
           </Dialog>
           {mapLocation && (
-            <Tooltip delayDuration={0} open={true}>
+            <Tooltip delayDuration={0}>
               <TooltipTrigger>
                 <MiniGlobe
                   id="mini-globe-desktop"
