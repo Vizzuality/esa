@@ -6,7 +6,6 @@ layers:
     style_file: "GDA-AID-DR_UC01wbGPDRA-V1_ ProductQgisSymbology_BuiltUpHeightEstimation-pv01-Azerbaijan-2012.qml"
     output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/WSFBuiltUpHeight.tif"
     layer_name: "Azerbaijan_WSFBuiltUpHeight"
-    upload: false
     max_zoom: 11
 
   azerbaijan_wsf_settlement_extent_evolution:
@@ -15,7 +14,6 @@ layers:
     style_file: "GDA-AID-DR_UC01wbGPDRA-V1_ ProductQgisSymbology_WSFEvolution-pv01-Azerbaijan-1985-2015_new.qml"
     output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/WSFSettlementExtentEvolution.tif"
     layer_name: "Azerbaijan_WSFSettlementExtentEvolution"
-    upload: false
     max_zoom: 11
 
   azerbaijan_wsf_population:
@@ -24,7 +22,6 @@ layers:
     style_file: "GDA-AID-DR_UC01wbGPDRA-V1_ ProductQgisSymbology_WSFPopulation-pv01-Azerbaijan-2019.qml"
     output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/WSFPopulation.tif"
     layer_name: "Azerbaijan_WSFPopulation"
-    upload: false
     max_zoom: 11
 
   azerbaijan_impact_assessment_population:
@@ -33,7 +30,6 @@ layers:
     style_file: "GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentPopulation-V01-Azerbaijan-2015-2022.qml"
     output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/ImpactAssessmentPopulation.tif"
     layer_name: "Azerbaijan_ImpactAssessmentPopulation"
-    upload: false
     max_zoom: 11
 
   azerbaijan_impact_assessment_crops:
@@ -42,7 +38,6 @@ layers:
     style_file: "GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentAffectedCrops-V01-Azerbaijan-2015-2022.qml"
     output_file: "../data/processed/Disaster Resilience/Azerbaijan/Rasters/ImpactAssessmentAffectedCrops.tif"
     layer_name: "Azerbaijan_ImpactAssessmentAffectedCrops"
-    upload: false
     max_zoom: 11
 
   # Bangladesh - CE
@@ -52,7 +47,6 @@ layers:
     style_file: null
     output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/S-5_LocalMaxima_Frequency_2019-2023.tif"
     layer_name: "Bangladesh_LocalMaxima_Frequency_2019-2023"
-    upload: false
     max_zoom: 11
 
   bangladesh_local_maxima_2023:
@@ -61,7 +55,6 @@ layers:
     style_file: null
     output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/2023_S-5_LocalMaxima.tif"
     layer_name: "Bangladesh_LocalMaxima_2023"
-    upload: false
     max_zoom: 11
 
   bangladesh_landfill_bazar:
@@ -70,7 +63,6 @@ layers:
     style_file: null
     output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/GHGSat_CH4_Amin Bazar_20220117.tif"
     layer_name: "Bangladesh_Landfill_Bazar"
-    upload: false
     max_zoom: 11
 
   bangladesh_landfill_area_2:
@@ -79,7 +71,6 @@ layers:
     style_file: null
     output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/GHGSat_CH4_Area 2_20210417.tif"
     layer_name: "Bangladesh_Landfill_Area_2"
-    upload: false
     max_zoom: 11
 
   bangladesh_landfill_area_3:
@@ -88,7 +79,6 @@ layers:
     style_file: null
     output_file: "../data/processed/Clean Energy/Bangladesh/Rasters/GHGSat_CH4_Area 3_20230703.tif"
     layer_name: "Bangladesh_Landfill_Area_3"
-    upload: false
     max_zoom: 11
 
   # Botswana - Water
@@ -98,7 +88,6 @@ layers:
     style_file: "Precipitation and Evapotranspiration/GDAWater_PotentialGroundwaterRecharge_MeanAnnualPrecipitation_monthlyCHIRPS_Botswana_2003-2022.qml"
     output_file: "../data/processed/Water Management/Botswana/Rasters/GDAWater_MeanAnnualPrecipitation_Botswana_2003-2022.tif"
     layer_name: "Botswana_MeanAnnualPrecipitation"
-    upload: false
     max_zoom: 11
 
   botswana_mean_annual_pet:
@@ -107,7 +96,6 @@ layers:
     style_file: "Precipitation and Evapotranspiration/GDAWater_PotentialGroundwaterRecharge_MeanAnnualPET_monthlyMODIS_Botswana_2003-2022.qml"
     output_file: "../data/processed/Water Management/Botswana/Rasters/GDAWater_MeanAnnualPET_Botswana_2003-2022.tif"
     layer_name: "Botswana_MeanAnnualPET"
-    upload: false
     max_zoom: 11
 
   botswana_wsf_2015:
@@ -116,7 +104,6 @@ layers:
     style_file: "processed/WSF/WSF2015_v2.qml"
     output_file: "../data/processed/Water Management/Botswana/Rasters/WSF2015_v2_Botswana.tif"
     layer_name: "Botswana_WSF2015"
-    upload: false
     max_zoom: 11
 
   # Ethiopia - Agriculture
@@ -126,7 +113,6 @@ layers:
     style_file: "Crop_Damage/crop_damage_Ethiopia.qml"
     output_file: "../data/processed/Agriculture/East Africa/Rasters/Crop_Damage_Ethiopia.tif"
     layer_name: "Ethiopia_Crop_Damage"
-    upload: false
     max_zoom: 11
 
   # Jordan - Urban
@@ -136,7 +122,6 @@ layers:
     style_file: "03_Settlement_Extent_and_Change_1985-2021/GDA_Urban_Phase1_DLR_JOR_Amman_Settlement_Extent_and_Change_1985-2021_1_0.qml"
     output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Settlement_Extent_and_Change_1985-2021_Amman.tif"
     layer_name: "Jordan_Settlement_Extent_and_Change_1985-2021_Amman"
-    upload: false
     max_zoom: 11
 
   jordan_green_and_open_areas:
@@ -145,7 +130,6 @@ layers:
     style_file: "02_Green_and_Open_Areas_2020/GDA_Urban_Phase1_GST_CIV_Amman_UrbanGreen_2020.qml"
     output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Green_and_Open_Areas_2020_Amman.tif"
     layer_name: "Jordan_Green_and_Open_Areas_2020_Amman"
-    upload: false
     max_zoom: 11
 
   jordan_land_use_land_cover_2020:
@@ -154,7 +138,6 @@ layers:
     style_file: "01_Land_Use_Land_Cover_2010_2020/GDA_Urban_Phase1_GST_JOR_Amman_LULC.qml"
     output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Land_Use_Land_Cover_2020_Amman.tif"
     layer_name: "Jordan_Land_Use_Land_Cover_2020_Amman"
-    upload: false
     max_zoom: 11
 
   jordan_simulated_future_lulc_max_dens:
@@ -163,7 +146,6 @@ layers:
     style_file: "01_Land_Use_Land_Cover_2010_2020/GDA_Urban_Phase1_GST_JOR_Amman_LULC.qml"
     output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Simulated_Future_LULC_MAX_DENS_Amman.tif"
     layer_name: "Jordan_Simulated_Future_LULC_MAX_DENS_Amman"
-    upload: false
     max_zoom: 11
 
   jordan_simulated_future_lulc_sprawling:
@@ -172,7 +154,6 @@ layers:
     style_file: "01_Land_Use_Land_Cover_2010_2020/GDA_Urban_Phase1_GST_JOR_Amman_LULC.qml"
     output_file: "../data/processed/Urban Sustainability/Jordan/Rasters/Simulated_Future_LULC_SPRAWLING_Amman.tif"
     layer_name: "Jordan_Simulated_Future_LULC_SPRAWLING_Amman"
-    upload: false
     max_zoom: 11
 
   # Kenya - Urban
@@ -182,7 +163,6 @@ layers:
     style_file: "01_Settlement_Extent_and_Change/Settlement_Extent_and_Change_1985-2015_dark_basemap_recommended.qml"
     output_file: "../data/processed/Urban Sustainability/Kenya/Rasters/Settlement_Extent_and_Change_1985-2015_KEN.tif"
     layer_name: "Kenya_Settlement_Extent_1985-2015"
-    upload: false
     max_zoom: 11
 
   kenya_settlement_extent_2016_2022:
@@ -191,7 +171,6 @@ layers:
     style_file: "01_Settlement_Extent_and_Change/Settlement_Extent_and_Change_2016-2022_dark_basemap_recommended.qml"
     output_file: "../data/processed/Urban Sustainability/Kenya/Rasters/Settlement_Extent_and_Change_2016-2022_Nairobi.tif"
     layer_name: "Kenya_Settlement_Extent_2016-2022"
-    upload: false
     max_zoom: 11
 
   # Niger - CE
@@ -201,7 +180,6 @@ layers:
     style_file: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.qml"
     output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
     layer_name: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02"
-    upload: false
     max_zoom: 11
 
   niger_flash_flood_depth:
@@ -210,7 +188,6 @@ layers:
     style_file: "Depth_fullAOI.qml"
     output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_Flash_flood_depth.tif"
     layer_name: "Niger_Flash_flood_depth"
-    upload: false
     max_zoom: 11
 
   niger_flash_flood_hazard:
@@ -219,7 +196,6 @@ layers:
     style_file: "FlashFlood_Hazard_fullAOI_classified.qml"
     output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_Flash_flood_hazard.tif"
     layer_name: "Niger_Flash_flood_hazard"
-    upload: false
     max_zoom: 11
 
   # Cote d'Ivoire - Urban
@@ -229,7 +205,6 @@ layers:
     style_file: "GDA_Urban_Phase1_GST_CIV_Abidjan_Slum_Detector_Heathmap_2019_v_1_0.qml"
     output_file: "../data/processed/Urban_sustainability/CIV/Rasters/GDA_Urban_Phase1_GST_CIV_Abidjan_Slum_Detector_Heathmap_2019_v_1_0.tif"
     layer_name: "CIV_Abidjan_Slum_Detector_Heathmap_2019"
-    upload: false
     max_zoom: 11
 
   # Thailand - DR
@@ -239,7 +214,6 @@ layers:
     style_file: "FloodMapping.qml"
     output_file: "../data/processed/Disaster_resilience/Thailand/Rasters/Thailand_KhonKaen_FloodMapping.tif"
     layer_name: "Thailand_KhonKaen_FloodMapping"
-    upload: false
     max_zoom: 13
 
   thailand_khon_kaen_flood_depth:
@@ -248,7 +222,6 @@ layers:
     style_file: "FloodDepthMaxExtent.qml"
     output_file: "../data/processed/Disaster_resilience/Thailand/Rasters/Thailand_KhonKaen_FloodDepthMaxExtent.tif"
     layer_name: "Thailand_KhonKaen_FloodDepthMaxExtent"
-    upload: false
     max_zoom: 13
 
   thailand_khon_kaen_building_footprint:
@@ -257,7 +230,6 @@ layers:
     style_file: "BuildingFootprint.qml"
     output_file: "../data/processed/Disaster_resilience/Thailand/Rasters/Thailand_KhonKaen_BuildingFootprint.tif"
     layer_name: "Thailand_KhonKaen_BuildingFootprint"
-    upload: false
     max_zoom: 13
 
   # Mozambique - CR
@@ -267,7 +239,6 @@ layers:
     style_file: "WB_MRV2.0_AGB_estimates_2022_Mark_II_v1_30m_4326.qml"
     output_file: "../data/processed/Climate_resilience/Mozambique/Rasters/Mozambique_AGB_estimates_2022_v2.tif"
     layer_name: "Mozambique_AGB_estimates_2022"
-    upload: false
     max_zoom: 10
 
   # Indonesia - DR
@@ -277,7 +248,6 @@ layers:
     style_file: "GDA-AID-DR_UC06adbIND-V1_ ProductQgisSymbology_WSFImperviousness-pv01-Indonesia-2019.qml"
     output_file: "../data/processed/Disaster_resilience/Indonesia/Rasters/Cirebon_WSFImperviousness_2019.tif"
     layer_name: "Cirebon_WSFImperviousness_2019"
-    upload: false
     max_zoom: 11
 
   # Bangladesh - DR
@@ -287,7 +257,6 @@ layers:
     style_file: "GDA-AID-DR_uc08adbban_LandCover-V01_Bangladesh-2022.qml"
     output_file: "../data/processed/Disaster_resilience/Bangladesh/Rasters/CoxBazar_LandCover_2022.tif"
     layer_name: "CoxBazar_LandCover_2022"
-    upload: false
     max_zoom: 11
 
   cox_bazar_spring_water_body:
@@ -296,7 +265,6 @@ layers:
     style_file: "CoxBazar_water_body.qml"
     output_file: "../data/processed/Disaster_resilience/Bangladesh/Rasters/CoxBazar_Spring_water_body.tif"
     layer_name: "CoxBazar_Spring_water_body"
-    upload: false
     max_zoom: 11
 
   # Cameroon - CE
@@ -306,7 +274,6 @@ layers:
     style_file: "WSFtracker_Cameroon_2016-2023_v0.1.qml"
     output_file: "../data/processed/Clean_energy/Cameroon/Rasters/Cameroon_settlement.tif"
     layer_name: "Cameroon_settlement"
-    upload: false
     max_zoom: 11
 
   cameroon_electrification:
@@ -315,7 +282,6 @@ layers:
     style_file: "year_of_electrification.qml"
     output_file: "../data/processed/Clean_energy/Cameroon/Rasters/Cameroon_electrification.tif"
     layer_name: "Cameroon_electrification"
-    upload: false
     max_zoom: 11
 
   # Belize - Agriculture
@@ -325,7 +291,6 @@ layers:
     style_file: "precipitation.qml"
     output_file: "../data/processed/Agriculture/Belize/Rasters/Belize_precipitation.tif"
     layer_name: "Belize_precipitation"
-    upload: false
     max_zoom: 11
 
   # Georgia - Water
@@ -335,7 +300,6 @@ layers:
     style_file: "Tbilisi_Sea_Chlorophyll_colors.qml"
     output_file: "../data/processed/Water/Georgia/Rasters/Tbilisi_Sea_Chlorophyll.tif"
     layer_name: "Tbilisi_Sea_Chlorophyll"
-    upload: false
     max_zoom: 11
 
   # Lake Victoria - Water
@@ -345,7 +309,6 @@ layers:
     style_file: "gda_wr_lakevictoria_chlorophyll-202210.qml"
     output_file: "../data/processed/Water/Lake Victoria/Rasters/gda_wr_lakevictoria_chlorophyll-202210_2.tif"
     layer_name: "gda_wr_lakevictoria_chlorophyll-202210"
-    upload: false
     max_zoom: 7
 
   lake_victoria_hotspots:
@@ -354,7 +317,6 @@ layers:
     style_file: "gda_wr_lakevictoria_hotspots.qml"
     output_file: "../data/processed/Water/Lake Victoria/Rasters/gda_wr_lakevictoria_hotspots_2.tif"
     layer_name: "gda_wr_lakevictoria_hotspots"
-    upload: false
     max_zoom: 7
 
   lake_victoria_un_population:
@@ -363,7 +325,6 @@ layers:
     style_file: "gda_wr_lakevictoria_UNpopulation_2020.qml"
     output_file: "../data/processed/Water/Lake Victoria/Rasters/gda_wr_lakevictoria_UNpopulation_2020_2.tif"
     layer_name: "gda_wr_lakevictoria_UNpopulation_2020"
-    upload: false
     max_zoom: 7
 
   # Timor-Leste - Water
@@ -373,7 +334,6 @@ layers:
     style_file: "Timor-Leste_2018-2022_water_frequency.qml"
     output_file: "../data/processed/Water/Timor-Leste/Rasters/Timor-Leste_2018-2022_water_frequency.tif"
     layer_name: "Timor-Leste_2018-2022_water_frequency"
-    upload: false
     max_zoom: 11
 
   # Bangladesh - CE Methane
@@ -383,7 +343,6 @@ layers:
     style_file: "Layerstyle_S-5_CH4_nozero.qml"
     output_file: "../data/processed/Clean_energy/Bangladesh_Methan/2019-2023_S-5_Values are X-mol fraction as parts-per-billion.tif"
     layer_name: "2019-2023_S-5_Values are X-mol fraction as parts-per-billion"
-    upload: false
     max_zoom: 11
 
   bangladesh_ch4_local_maxima:
@@ -392,7 +351,6 @@ layers:
     style_file: "Local_Maxima_Stylefile_nozero.qml"
     output_file: "../data/processed/Clean_energy/Bangladesh_Methan/LocalMaxima_Frequency_2019-2023.tif"
     layer_name: "2019-2023_S-5_LocalMaxima_Frequency"
-    upload: false
     max_zoom: 11
 
   # Somalia - Water
@@ -402,7 +360,6 @@ layers:
     style_file: "WorldCover.qml"
     output_file: "../data/processed/Water/Somalia/Rasters/WorldCover.tif"
     layer_name: "WorldCover"
-    upload: false
     max_zoom: 11
 
   somalia_groundwater_storage:
@@ -411,7 +368,6 @@ layers:
     style_file: "Groundwater.qml"
     output_file: "../data/processed/Water/Somalia/Rasters/GroundwaterStorage.tif"
     layer_name: "GroundwaterStorage"
-    upload: false
     max_zoom: 11
 
   # West Africa - Water
@@ -421,7 +377,6 @@ layers:
     style_file: "precipitation.qml"
     output_file: "../data/processed/Water/West Africa/Rasters/1_GDAWater_Precipitation_MeanAnnualPrecipitation_Multi-annual_WestAfrica_2003-2024_23052025.tif"
     layer_name: "MeanAnnualPrecipitation_WestAfrica"
-    upload: false
     max_zoom: 5
 
   west_africa_groundwater_availability:
@@ -430,7 +385,6 @@ layers:
     style_file: "Groundwater_Availability_percentage.qml"
     output_file: "../data/processed/Water/West Africa/Rasters/3a_GDAWATER_Groundwater_Availability_percentage_WestAfrica_2024_03.tif"
     layer_name: "GroundwaterAvailability_WestAfrica"
-    upload: false
     max_zoom: 5
 
   # Uzbekistan - Water
@@ -440,7 +394,6 @@ layers:
     style_file: "CHL_Uzbekistan.qml"
     output_file: "../data/processed/Water/Uzbekistan/Rasters/Uzb_water_quality.tif"
     layer_name: "UzbekistanWaterQuality"
-    upload: false
     max_zoom: 12
 
   uzbekistan_dem:
@@ -449,7 +402,6 @@ layers:
     style_file: "DEM_Uzbekistan.qml"
     output_file: "../data/processed/Water/Uzbekistan/Rasters/Uzb_dem.tif"
     layer_name: "UzbekistanDEM"
-    upload: false
     max_zoom: 12
 
   # Lagdo & Poaches - Water
@@ -459,7 +411,6 @@ layers:
     style_file: "Lagdo_Turbidity.qml"
     output_file: "../data/processed/Water/Lagdo & Poaches/Rasters/Lagdo_Turbidity.tif"
     layer_name: "LagdoTurbidity"
-    upload: false
     max_zoom: 11
 
   # Zambezi - Water
@@ -469,7 +420,6 @@ layers:
     style_file: "CHL_Upper_Zambezi.qml"
     output_file: "../data/processed/Water/Zambezi/Rasters/CHL_Upper_Zambezi2.tif"
     layer_name: "CHL_Upper_Zambezi"
-    upload: false
     max_zoom: 12
 
   # Paraguay - Water
@@ -479,7 +429,6 @@ layers:
     style_file: "CHL_Paraguay.qml"
     output_file: "../data/processed/Water/Paraguay/Rasters/CHL_Paraguay.tif"
     layer_name: "CHL_Paraguay"
-    upload: false
     max_zoom: 12
 
   # Mexico - Water
@@ -489,7 +438,6 @@ layers:
     style_file: "Sinaloa_urban_2023_v01.qml"
     output_file: "../data/processed/Water/Mexico/Rasters/Sinaloa_urban_assessment.tif"
     layer_name: "Sinaloa_urban_assessment"
-    upload: false
     max_zoom: 9
 
   # Sri Lanka - Water
@@ -499,7 +447,6 @@ layers:
     style_file: "Sri_Lanka_2017-2025_water_frequency.qml"
     output_file: "../data/processed/Water/SriLanka/Rasters/Sri_Lanka_2017-2025_water_frequency.tif"
     layer_name: "Sri_Lanka_2017-2025_water_frequency"
-    upload: false
     max_zoom: 13
 
   # Panama - Water
@@ -509,7 +456,6 @@ layers:
     style_file: "gda_wr_panama_TSM.qml"
     output_file: "../data/processed/Water/Panama/Rasters/gda_wr_panama_tsm_median_16-24.tif"
     layer_name: "Panama_tsm_median_16-24"
-    upload: false
     max_zoom: 11
 
   panama_tsm_2020_09_26:
@@ -518,7 +464,6 @@ layers:
     style_file: "gda_wr_panama_TSM.qml"
     output_file: "../data/processed/Water/Panama/Rasters/gda_wr_panama_tsm_2020-09-26_v1.tif"
     layer_name: "Panama_tsm_2020-09-26_v1"
-    upload: false
     max_zoom: 12
 
   panama_tsm_2020_10_01:
@@ -527,7 +472,6 @@ layers:
     style_file: "gda_wr_panama_TSM.qml"
     output_file: "../data/processed/Water/Panama/Rasters/gda_wr_panama_tsm_2020-10-01_v1.tif"
     layer_name: "Panama_tsm_2020-10-01_v1"
-    upload: false
     max_zoom: 12
 
   panama_tsm_2020_10_16:
@@ -536,7 +480,6 @@ layers:
     style_file: "gda_wr_panama_TSM.qml"
     output_file: "../data/processed/Water/Panama/Rasters/gda_wr_panama_tsm_2020-10-16_v1.tif"
     layer_name: "Panama_tsm_2020-10-16_v1"
-    upload: false
     max_zoom: 12
 
   # Uganda - Transport
@@ -546,7 +489,6 @@ layers:
     style_file: "pupils-distribution.qml"
     output_file: "../data/processed/Transport/Uganda/PrimarySchools/Rasters/pupils-distribution.tif"
     layer_name: "Uganda_pupils-distribution"
-    upload: false
     max_zoom: 12
 
   uganda_accessibility_map:
@@ -555,7 +497,6 @@ layers:
     style_file: "accessibility-map.qml"
     output_file: "../data/processed/Transport/Uganda/PrimarySchools/Rasters/accessibility-map.tif"
     layer_name: "Uganda_accessibility-map"
-    upload: false
     max_zoom: 12
 
   uganda_refugees_density:
@@ -564,7 +505,6 @@ layers:
     style_file: "density-service-points.qml"
     output_file: "../data/processed/Transport/Uganda/UgandaRefugees/Rasters/density-service-points.tif"
     layer_name: "Uganda_density-service-points"
-    upload: false
     max_zoom: 9
 
   # Afghanistan - FFF
@@ -574,7 +514,6 @@ layers:
     style_file: "herat.qml"
     output_file: "../data/processed/FFF/Afghanistan/Rasters/MeanAnnualGroundwaterRecharge_LowerEstimate_Herat_2003-2022_20240612.tif"
     layer_name: "Afghanistan_MeanAnnualGroundwaterRecharge_LowerEstimate_Herat_2003-2022"
-    upload: false
     max_zoom: 9
 
   afghanistan_evapotranspiration:
@@ -583,7 +522,6 @@ layers:
     style_file: "evapotranspiration_gleam_sen_slope_annual_trend_style.qml"
     output_file: "../data/processed/FFF/Afghanistan/Rasters/evapotranspiration_gleam_sen_slope_annual_trend.tif"
     layer_name: "Afghanistan_Evapotranspiration_Annual_Trend"
-    upload: true
     max_zoom: 7
 
   afghanistan_precipitation:
@@ -592,7 +530,6 @@ layers:
     style_file: "precipitation_chirps_sen_slope_annual_trend_style.qml"
     output_file: "../data/processed/FFF/Afghanistan/Rasters/precipitation_chirps_sen_slope_annual_trend.tif"
     layer_name: "Afghanistan_Precipitation_Annual_Trend"
-    upload: false
     max_zoom: 7
 
   afghanistan_runoff:
@@ -601,7 +538,6 @@ layers:
     style_file: "runoff_fldas_sen_slope_annual_trend_style.qml"
     output_file: "../data/processed/FFF/Afghanistan/Rasters/runoff_fldas_sen_slope_annual_trend.tif"
     layer_name: "Afghanistan_Runoff_Annual_Trend"
-    upload: false
     max_zoom: 7
 
   # Cambodia - Marine
@@ -611,7 +547,6 @@ layers:
     style_file: "UC07_Mangroves_2017_style.qml"
     output_file: "../data/processed/Marine/Cambodia/Rasters/Mangroves_2017.tif"
     layer_name: "Cambodia_Mangroves_2017"
-    upload: true
     max_zoom: 11
 
   cambodia_mangroves_2021:
@@ -620,7 +555,6 @@ layers:
     style_file: "UC07_Mangroves_2021_style.qml"
     output_file: "../data/processed/Marine/Cambodia/Rasters/Mangroves_2021.tif"
     layer_name: "Cambodia_Mangroves_2021"
-    upload: true
     max_zoom: 11
 
   # Nigeria - Climate Resilience
@@ -630,7 +564,6 @@ layers:
     style_file: "GDA-CR-SOC-Baseline_ID1090823260_dept08cm_1985.qml"
     output_file: "../data/processed/Climate_resilience/Nigeria/Rasters/Topsoil_SOC_1985.tif"
     layer_name: "Nigeria_SOC_1985"
-    upload: true
     max_zoom: 11
 
   nigeria_soc_crops_1985:
@@ -639,7 +572,6 @@ layers:
     style_file: "GDA-CR-SOC-Baseline_ID1090823260_dept08cm_1985_crops.qml"
     output_file: "../data/processed/Climate_resilience/Nigeria/Rasters/Topsoil_SOC_1985_crops.tif"
     layer_name: "Nigeria_SOC_crops_1985"
-    upload: true
     max_zoom: 11
 
   # STP - Marine
@@ -649,7 +581,6 @@ layers:
     style_file: "UC14-SDB_Style.qml"
     output_file: "../data/processed/Marine/STP/Rasters/SaoTome_Bathymetry2.tif"
     layer_name: "SaoTome_Bathymetry"
-    upload: true
     max_zoom: 11
 
   stp_principe_bathymetry:
@@ -658,7 +589,6 @@ layers:
     style_file: "UC14-SDB_Style.qml"
     output_file: "../data/processed/Marine/STP/Rasters/Principe_Bathymetry2.tif"
     layer_name: "Principe_Bathymetry"
-    upload: true
     max_zoom: 11
 
   # Ecuador - Marine
@@ -668,7 +598,6 @@ layers:
     style_file: "mangroves.qml"
     output_file: "../data/processed/Marine/Ecuador/Rasters/mangroves2.tif"
     layer_name: "Ecuador_Mangroves"
-    upload: true
     max_zoom: 9
 
   ecuador_ponds:
@@ -677,7 +606,6 @@ layers:
     style_file: "ponds.qml"
     output_file: "../data/processed/Marine/Ecuador/Rasters/ponds2.tif"
     layer_name: "Ecuador_Ponds"
-    upload: true
     max_zoom: 9
 
 # Turkey FIRAT - CR
@@ -687,7 +615,6 @@ layers:
     style_file: "SDG_3_classes.qml"
     output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_degradation.tif"
     layer_name: "FIRAT_land_degradation"
-    upload: true
     max_zoom: 10
 
   firat_land_productivity:
@@ -696,7 +623,6 @@ layers:
     style_file: "SDG_3_classes.qml"
     output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_productivity.tif"
     layer_name: "FIRAT_land_productivity"
-    upload: true
     max_zoom: 10
 
   firat_land_cover_change:
@@ -705,7 +631,6 @@ layers:
     style_file: "SDG_3_classes.qml"
     output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_cover_change.tif"
     layer_name: "FIRAT_land_cover_change"
-    upload: true
     max_zoom: 10
 
   firat_soc:
@@ -714,7 +639,6 @@ layers:
     style_file: "SDG_3_classes.qml"
     output_file: "../data/processed/Climate_resilience/Turkey/Rasters/soc.tif"
     layer_name: "FIRAT_soc"
-    upload: true
     max_zoom: 10
 
 # Cox Bazar - FCS
@@ -724,7 +648,6 @@ layers:
     style_file: "legend_urbanexpansion.qml"
     output_file: "../data/processed/FCS/Bangladesh/CoxBazar/CoxBazar_HFC_Teknaf.tif"
     layer_name: "CoxBazar_HFC_Teknaf"
-    upload: true
     max_zoom: 15
   
   cox_bazar_hfc_ukhia:
@@ -733,5 +656,4 @@ layers:
     style_file: "legend_urbanexpansion.qml"
     output_file: "../data/processed/FCS/Bangladesh/CoxBazar/CoxBazar_HFC_Ukhia.tif"
     layer_name: "CoxBazar_HFC_Ukhia"
-    upload: true
     max_zoom: 15
