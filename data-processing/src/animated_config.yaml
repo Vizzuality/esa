@@ -9,7 +9,6 @@ layers:
     vmin: 100
     vmax: 185
     date_format: "YYYY"
-    upload: false
     colormap:
       type: linear
       colors: ["#f1eef6", "#c8d1e6", "#91b6d7", "#579ec8", "#2382b4", "#045a8d"]
@@ -22,7 +21,6 @@ layers:
     vmin: 0
     vmax: 255
     date_format: "YYYY"
-    upload: false
     colormap:
       type: categorical
       values:
@@ -40,7 +38,6 @@ layers:
     vmin: 0
     vmax: 185
     date_format: "YYYY"
-    upload: false
     colormap:
       type: linear
       colors: ["#f1eef6", "#c8d1e6", "#91b6d7", "#579ec8", "#2382b4", "#045a8d"]
@@ -53,7 +50,6 @@ layers:
     vmin: 0
     vmax: 4
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: linear
       colors: ["#dc1010", "#e8932c", "#1feda8", "#50d125", "#2d7e2a"]
@@ -66,7 +62,6 @@ layers:
     max_z: 8
     vmin: 0
     vmax: 429
-    upload: false
     colormap:
       type: linear
       colors: ["#ca0020", "#f4a582", "#f7f7f7", "#92c5de", "#0571b0"]
@@ -78,7 +73,6 @@ layers:
     max_z: 8
     vmin: -4
     vmax: 1
-    upload: false
     colormap:
       type: linear
       colors: ["#b30101", "#e24a32", "#fc8d58", "#fff1d9", "#ffffff"]
@@ -91,7 +85,6 @@ layers:
     max_z: 12
     vmin: 0
     vmax: 100
-    upload: false
     colormap:
       type: linear
       colors: ["#EDF8FB", "#B3CDE3", "#8C96C6", "#8856A7", "#810F7C"]
@@ -105,7 +98,6 @@ layers:
     max_z: 16
     vmin: -12.5
     vmax: -0.1
-    upload: false
     colormap:
       type: linear
       colors: ["#0b0405", "#382a54", "#36699f", "#4dc4ad", "#def5e5"]
@@ -117,7 +109,6 @@ layers:
     max_z: 16
     vmin: 1
     vmax: 4
-    upload: false
     colormap:
       type: linear
       colors: ["#cc1117", "#bbd645", "#b133d8", "#54da87"]
@@ -130,7 +121,6 @@ layers:
     max_z: 9
     vmin: 0
     vmax: 0.007
-    upload: false
     colormap:
       type: linear
       colors: ["#f7fcf5", "#c7e9c0", "#74c476", "#238b45", "#00441b"]
@@ -142,7 +132,6 @@ layers:
     max_z: 9
     vmin: 1
     vmax: 4
-    upload: false
     colormap:
       type: linear
       colors: ["#009600", "#006600", "#f9dc86", "#0000ff"]
@@ -155,7 +144,6 @@ layers:
     max_z: 10
     vmin: 0
     vmax: 10
-    upload: false
     colormap:
       type: binned
       intervals: [0, 0.03, 0.5, 1.5, 5, 10]
@@ -169,7 +157,6 @@ layers:
     max_z: 13
     vmin: 1
     vmax: 31
-    upload: false
     colormap:
       type: linear
       colors: ["#2b83ba", "#abdda4", "#ffffbf", "#fdae61", "#d7191c"]
@@ -182,7 +169,6 @@ layers:
     max_z: 14
     vmin: 0
     vmax: 200
-    upload: false
     colormap:
       type: linear_clamped
       colors: ["#28a8b4", "#53aa90", "#7eac6c", "#aaad48", "#d5af25"]
@@ -196,7 +182,6 @@ layers:
     max_z: 12
     vmin: 1
     vmax: 12
-    upload: false
     colormap:
       type: linear
       colors: ["#38acff", "#253494"]
@@ -208,7 +193,6 @@ layers:
     max_z: 15
     vmin: 1
     vmax: 1
-    upload: false
     colormap:
       type: single
       color: [56, 172, 255, 255]
@@ -221,7 +205,6 @@ layers:
     max_z: 15
     vmin: 1
     vmax: 1
-    upload: false
     colormap:
       type: single
       color: [56, 172, 255, 255]
@@ -235,7 +218,6 @@ layers:
     max_z: 7
     vmin: -144
     vmax: 144
-    upload: false
     colormap:
       type: linear
       colors: ["#67001F", "#E37D63", "#F7F6F5", "#6CADD1", "#003061"]
@@ -248,7 +230,6 @@ layers:
     max_z: 14
     vmin: 0
     vmax: 1288
-    upload: false
     colormap:
       type: linear
       colors: ["#2b83ba", "#abdda4", "#ffffbf", "#fdae61", "#d7191c"]
@@ -261,7 +242,6 @@ layers:
     max_z: 13
     vmin: 0
     vmax: 80
-    upload: false
     colormap:
       type: binned
       intervals: [0, 20, 40, 60, 80]
@@ -274,7 +254,6 @@ layers:
     max_z: 11
     vmin: -2
     vmax: 2
-    upload: false
     colormap:
       type: linear
       colors: ["#d7191c", "#fedf9a", "#ffffc0", "#aaaaaa", "#edf7af", "#dbf09e", "#1a9641"]
@@ -289,7 +268,6 @@ layers:
     max_z: 10
     vmin: -2
     vmax: 0
-    upload: false
     colormap:
       type: linear
       colors: ["#d7191c", "#fdae61"]
@@ -304,7 +282,6 @@ layers:
     max_z: 13
     vmin: 0
     vmax: 1
-    upload: false
     colormap:
       type: single
       color: [0, 0, 255, 255]
@@ -317,7 +294,6 @@ layers:
     max_z: 13
     vmin: 0
     vmax: 1
-    upload: false
     colormap:
       type: single
       color: [56, 173, 255, 255]
@@ -331,7 +307,6 @@ layers:
     max_z: 12
     vmin: 0
     vmax: 255
-    upload: false
     colormap:
       type: categorical
       values:
@@ -352,7 +327,6 @@ layers:
     vmin: 200
     vmax: 5000
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: binned
       intervals: [1400, 1800, 2200, 2600, 3000, 3400, 3800, 4200, 4600, 5000]
@@ -366,7 +340,6 @@ layers:
     vmin: 0
     vmax: 1000
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: binned
       intervals: [0.1, 3, 6, 9, 12, 15, 18, 21, 24, 1000]
@@ -381,7 +354,6 @@ layers:
     vmin: 0
     vmax: 36
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: sld_gradient
       breakpoints: [24, 26, 30, 34, 36]
@@ -396,7 +368,6 @@ layers:
     vmin: 0
     vmax: 1.5
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: sld_gradient
       breakpoints: [0.3, 0.6, 0.8, 1, 1.3]
@@ -411,7 +382,6 @@ layers:
     vmin: 0
     vmax: 2
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: sld_gradient
       breakpoints: [0.01, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
@@ -426,7 +396,6 @@ layers:
     vmin: 0
     vmax: 15
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: sld_gradient
       breakpoints: [0.03, 0.5, 1.5, 7, 15]
@@ -441,7 +410,6 @@ layers:
     vmin: 0
     vmax: 35
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: sld_gradient
       breakpoints: [25, 27, 29, 30, 31, 32, 33, 35]
@@ -456,7 +424,6 @@ layers:
     vmin: 0
     vmax: 35
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: sld_gradient
       breakpoints: [25, 27, 29, 30, 31, 32, 33, 35]
@@ -471,7 +438,6 @@ layers:
     vmin: 0
     vmax: 25
     date_format: "YYYYMMDD"
-    upload: false
     colormap:
       type: sld_gradient
       breakpoints: [0.5, 5, 8, 10, 25]
@@ -487,7 +453,6 @@ layers:
     vmin: 0
     vmax: 1
     date_format: "YYYY"
-    upload: false
     colormap:
       type: single
       color: "#937d11"

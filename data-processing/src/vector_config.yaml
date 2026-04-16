@@ -7,7 +7,6 @@ layers:
     layer_name: "Azerbaijan_FinancialLoss"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   azerbaijan_impact_assessment_roads_affected:
     input_file: "../data/raw/Disaster Resilience/Azerbaijan/Vectors/GDA-AID-DR_UC01wbGPDRA_ImpactAssessment-V01_Azerbaijan-2015to2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentRoadsAffected-V01-Azerbaijan-2015-2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentRoadsAffected-V01-Azerbaijan-2015-2022.shp"
@@ -15,7 +14,6 @@ layers:
     layer_name: "Azerbaijan_ImpactAssessmentRoadsAffected"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   azerbaijan_impact_assessment_exposure_assets:
     input_file: "../data/raw/Disaster Resilience/Azerbaijan/Vectors/GDA-AID-DR_UC01wbGPDRA_ImpactAssessment-V01_Azerbaijan-2015to2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentExposureAffected-V01-Azerbaijan-2015-2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentExposureAssets-V01-Azerbaijan-2015-2022.shp"
@@ -23,7 +21,6 @@ layers:
     layer_name: "Azerbaijan_ImpactAssessmentExposureAssets"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   azerbaijan_impact_assessment_exposure_markers:
     input_file: "../data/raw/Disaster Resilience/Azerbaijan/Vectors/GDA-AID-DR_UC01wbGPDRA_ImpactAssessment-V01_Azerbaijan-2015to2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentExposureMarkers-V01-Azerbaijan-2015-2022/GDA-AID-DR_UC01wbGPDRA_ImpactAssessmentExposureMArkers-V01-Azerbaijan-2015-2022.shp"
@@ -31,7 +28,6 @@ layers:
     layer_name: "Azerbaijan_ImpactAssessmentExposureMarkers"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   # Kenya - Urban
   kenya_land_use_land_cover_nairobi_2022:
@@ -40,7 +36,6 @@ layers:
     layer_name: "Kenya_LandUseLandCoverNairobi2022"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   # Indonesia - DR
   indonesia_subsidence_impact_jakarta:
@@ -49,7 +44,6 @@ layers:
     layer_name: "Indonesia_SubsidenceImpact_Jakarta"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   indonesia_flood_impact_jakarta:
     input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_FloodImpact-V01_Indonesia-2015to2022/GDA-AID-DR_UC06adbIND_ProductSheet-V01_FloodImpact-V01-Jakarta-MaxExtent_SpecificEvent.shp"
@@ -57,7 +51,6 @@ layers:
     layer_name: "Indonesia_FloodImpact_Jakarta"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   indonesia_flood_impact_cirebon:
     input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_FloodImpact-V01_Indonesia-2015to2022/GDA-AID-DR_UC06adbIND_ProductSheet-V01_FloodImpact-V01-Cirebon-MaxExtent_SpecificEvent.shp"
@@ -65,7 +58,6 @@ layers:
     layer_name: "Indonesia_FloodImpact_Cirebon"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   indonesia_subsidence_impact_palu:
     input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_SubsidenceImpact-V01_Indonesia-2015to2022/Palu/GDA-AID-DR_UC06adbIND_SubsidenceImpact-V01_Palu_2015-2021_clipped.shp"
@@ -73,7 +65,6 @@ layers:
     layer_name: "Indonesia_SubsidenceImpact_Palu"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   indonesia_combined_impact_semarang:
     input_file: "../data/raw/Disaster_resilience/Indonesia/Vectors/GDA-AID-DR_UC06adbIND_CombinedImpact-V01_Indonesia-2015to2022/GDA-AID-DR_UC06adbIND_CombinedImpact-V01-Semarang-MaxExtent_SpecificEvent_clipped.shp"
@@ -81,7 +72,6 @@ layers:
     layer_name: "Indonesia_CombinedImpact_Semarang"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   # Bangladesh - DR
   bangladesh_coxbazar_ground_motion_map:
@@ -90,7 +80,6 @@ layers:
     layer_name: "CoxBazar_FullResolutionGroundMotionMap_2015-2022"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   # Lake Victoria - Water
   lake_victoria_major_rivers:
@@ -99,7 +88,6 @@ layers:
     layer_name: "LVB_MajorRivers_single"
     min_zoom: 6
     max_zoom: 13
-    upload: false
 
   lake_victoria_wetlands:
     input_file: "../data/raw/Water/Lake Victoria/Vectors/LVB_Wetlands_single_merged.geojson"
@@ -107,7 +95,6 @@ layers:
     layer_name: "LVB_Wetlands_single_merged"
     min_zoom: 6
     max_zoom: 13
-    upload: false
 
   # West Africa - Water
   west_africa_animal_concentration:
@@ -116,7 +103,6 @@ layers:
     layer_name: "AnimalConcentration"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   # Georgia - Water
   georgia_boundary:
@@ -125,7 +111,6 @@ layers:
     layer_name: "GeorgiaBoundary"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   # Uzbekistan - Water
   uzbekistan_water:
@@ -134,7 +119,6 @@ layers:
     layer_name: "UzbekistanWater"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   # Somalia - Water
   somalia_rivers:
@@ -143,7 +127,6 @@ layers:
     layer_name: "SomaliaRivers"
     min_zoom: 2
     max_zoom: 10
-    upload: false
 
   # Zambezi basin - Water
   zambezi_kafue_river_transect:
@@ -152,7 +135,6 @@ layers:
     layer_name: "TransectKafueRiver"
     min_zoom: 2
     max_zoom: 8
-    upload: false
 
   # Paraguay - Water
   paraguay_ypacarai:
@@ -161,7 +143,6 @@ layers:
     layer_name: "Paraguay_ypacarai_exact"
     min_zoom: 8
     max_zoom: 13
-    upload: false
 
   # Balochistan (Pakistan) - Water
   pakistan_pishin_lora_basin:
@@ -170,7 +151,6 @@ layers:
     layer_name: "Pakistan_Pishin_Lora_Basin"
     min_zoom: 6
     max_zoom: 11
-    upload: false
 
   pakistan_pishin_lora_river_network:
     input_file: "../data/raw/Water/Pakistan/Vectors/Shapefiles/Pishin_Lora River network.shp"
@@ -178,7 +158,6 @@ layers:
     layer_name: "Pakistan_Pishin_Lora_River_network"
     min_zoom: 6
     max_zoom: 11
-    upload: false
 
   pakistan_pishin_lora_station:
     input_file: "../data/raw/Water/Pakistan/Vectors/Shapefiles/Pishin_Lora Station.shp"
@@ -186,7 +165,6 @@ layers:
     layer_name: "Pakistan_Pishin_Lora_Station"
     min_zoom: 6
     max_zoom: 11
-    upload: false
 
   # Mexico - Water
   mexico_dr075:
@@ -195,7 +173,6 @@ layers:
     layer_name: "Mexico_DR075"
     min_zoom: 7
     max_zoom: 10
-    upload: false
 
   # Uganda Primary Schools - Transport
   uganda_catchment_of_influence:
@@ -204,7 +181,6 @@ layers:
     layer_name: "Uganda_catchment-of-influence"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   uganda_transport_network:
     input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/transport-network.shp"
@@ -212,7 +188,6 @@ layers:
     layer_name: "Uganda_transport-network"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   uganda_primary_schools:
     input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/primary-schools.shp"
@@ -220,7 +195,6 @@ layers:
     layer_name: "Uganda_primary-schools"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   uganda_primary_school_surplus_deficit:
     input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/primary-school-surplus-deficit.shp"
@@ -228,7 +202,6 @@ layers:
     layer_name: "Uganda_primary-school-surplus-deficit"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   uganda_primary_school_surplus_deficit_centroids:
     input_file: "../data/raw/Transport/Uganda/PrimarySchools/Vectors/primary-school-surplus-deficit-centroids.shp"
@@ -236,7 +209,6 @@ layers:
     layer_name: "Uganda_primary-school-surplus-deficit-centroids"
     min_zoom: 8
     max_zoom: 10
-    upload: false
 
   # Uganda Refugees - Transport
   uganda_rural_access_index:
@@ -245,7 +217,6 @@ layers:
     layer_name: "Uganda_rural-access-index"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   uganda_rural_access_index_centroids:
     input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/rural-access-index-centroids.shp"
@@ -253,7 +224,6 @@ layers:
     layer_name: "Uganda_rural-access-index-centroids"
     min_zoom: 8
     max_zoom: 10
-    upload: true
 
   uganda_main_corridor:
     input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/main-corridor.shp"
@@ -261,7 +231,6 @@ layers:
     layer_name: "Uganda_main-corridor"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   uganda_least_cost_paths:
     input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/least-cost-paths.shp"
@@ -269,7 +238,6 @@ layers:
     layer_name: "Uganda_least-cost-paths"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   uganda_refugee_camps:
     input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/refugee-camps.shp"
@@ -277,7 +245,6 @@ layers:
     layer_name: "Uganda_refugee-camps"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   uganda_accessibility_hotspots:
     input_file: "../data/raw/Transport/Uganda/UgandaRefugees/Vectors/Accessibility-hotspots.shp"
@@ -285,7 +252,6 @@ layers:
     layer_name: "Uganda_Accessibility-hotspots"
     min_zoom: 6
     max_zoom: 14
-    upload: false
 
   # Timor-Leste - Health
   timor_leste_population_buildings_height:
@@ -294,7 +260,6 @@ layers:
     layer_name: "Population_buildings_height"
     min_zoom: 11
     max_zoom: 15
-    upload: true
 
   timor_leste_dengue_incidence:
     input_file: "../data/raw/Health/Timor-Leste/Step5/dengue_incidence_timor.gpkg"
@@ -302,7 +267,6 @@ layers:
     layer_name: "dengue_incidence_timor"
     min_zoom: 8
     max_zoom: 12
-    upload: true
 
   # Afghanistan - FFF
   afghanistan_snow_analysis:
@@ -311,7 +275,6 @@ layers:
     layer_name: "Snow_analysis"
     min_zoom: 3
     max_zoom: 8
-    upload: true
 
   afghanistan_herat_city:
     input_file: "../data/raw/FFF/Afghanistan/Vectors/Herat_GeographicElements/gda-fff_HeratCity_Herat_Afghanistan.geojson"
@@ -319,7 +282,6 @@ layers:
     layer_name: "HeratCity"
     min_zoom: 6
     max_zoom: 11
-    upload: true
 
   afghanistan_cities:
     input_file: "../data/raw/FFF/Afghanistan/Vectors/Afgh_cities/City_Herat-Kabul-Kandahar.shp"
@@ -327,7 +289,6 @@ layers:
     layer_name: "Afgh_cities"
     min_zoom: 4
     max_zoom: 9
-    upload: true
 
   # Nigeria - Climate Resilience
   nigeria_crop_types:
@@ -336,7 +297,6 @@ layers:
     layer_name: "Nigeria_Crop_types"
     min_zoom: 8
     max_zoom: 14
-    upload: true
 
   nigeria_soc_reduction:
     input_file: "../data/raw/Climate_resilience/Nigeria/Topsoil SOC (2022)/GDA-CR-SOC-Baseline_ID1090823260_SOC_2022.shp"
@@ -344,7 +304,6 @@ layers:
     layer_name: "Nigeria_SOC_reduction"
     min_zoom: 8
     max_zoom: 14
-    upload: true
 
   # Guinea Bissau - Marine
   guinea_bissau_mangrove_change:
@@ -353,7 +312,6 @@ layers:
     layer_name: "GuineaBissau_Mangrove_Change"
     min_zoom: 6
     max_zoom: 10
-    upload: true
 
   # Turkey FIRAT - CR
   firat_basins_stats:
@@ -362,7 +320,6 @@ layers:
     layer_name: "FIRAT_Basins_stats"
     min_zoom: 6
     max_zoom: 14
-    upload: true
 
   # Pakistan - FCS
   pakistan_monitgoodwill:
@@ -371,7 +328,6 @@ layers:
     layer_name: "Pakistan_MonitGoodwill"
     min_zoom: 5
     max_zoom: 11
-    upload: true
 
   pakistan_CDC:
     input_file: "../data/raw/FCS/Pakistan/CDC/CDC_Infrastructure_Monitoring.shp"
@@ -379,7 +335,6 @@ layers:
     layer_name: "Pakistan_CDC"
     min_zoom: 5
     max_zoom: 11
-    upload: true
   
   pakistan_lulc:
     input_file: "../data/raw/FCS/Pakistan/D3.32/June2023/LULC_07062023.shp"
@@ -387,7 +342,6 @@ layers:
     layer_name: "Pakistan_LULC"
     min_zoom: 5
     max_zoom: 11
-    upload: true
 
   # Sudan - FCS
   sudan_stock_route:
@@ -396,7 +350,6 @@ layers:
     layer_name: "Sudan_Stock_Route"
     min_zoom: 8
     max_zoom: 12
-    upload: true
   
   sudan_water_points:
     input_file: "../data/raw/FCS/Sudan/Waterpoints/Stock_route_Water_Points.shp"
@@ -404,4 +357,3 @@ layers:
     layer_name: "Sudan_Water_Points"
     min_zoom: 8
     max_zoom: 12
-    upload: true
