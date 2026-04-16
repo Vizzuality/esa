@@ -25,23 +25,36 @@ class GeoTIFFConverter(MBTilesConverter):
     """Converter for GeoTIFF files."""
 
     def convert(
-        self, input_path: Path, output_path: Path, overview_levels: list[int] = None
+        self,
+        input_path: Path,
+        output_path: Path,
+        overview_levels: list[int] = None,
+        tile_format: str = "PNG",
     ) -> None:
-        """Convert a Cloud-Optimized GeoTIFF to MBTiles with overviews."""
+        """Convert a Cloud-Optimized GeoTIFF to MBTiles with overviews.
+
+        Args:
+            tile_format: ``"PNG"`` (lossless, best for classified maps) or
+                         ``"JPEG"`` (lossy, much smaller for continuous imagery).
+        """
         if overview_levels is None:
             overview_levels = [2, 4, 8, 16, 32, 64]
-        self._convert_to_mbtiles(input_path, output_path)
+        self._convert_to_mbtiles(input_path, output_path, tile_format=tile_format)
+        self._add_overviews(output_path, overview_levels)
 
-    def _convert_to_mbtiles(self, input_path: Path, output_path: Path) -> None:
-        # Ensure output directory exists
+    def _convert_to_mbtiles(
+        self, input_path: Path, output_path: Path, tile_format: str = "PNG"
+    ) -> None:
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         command = [
             "gdal_translate",
             "-of",
             "MBTiles",
+            "-a_nodata",
+            "none",
             "-co",
-            "TILE_FORMAT=PNG",
+            f"TILE_FORMAT={tile_format}",
             "-co",
             "BLOCKSIZE=512",
             "--config",
@@ -142,10 +155,12 @@ class MBTilesConverterFactory:
         return converter_class()
 
     @classmethod
-    def convert(cls, input_path: Path, output_path: Path, **kwargs) -> None:
+    def convert(
+        cls, input_path: Path, output_path: Path, tile_format: str = "PNG", **kwargs
+    ) -> None:
         """Convenience method to convert file using appropriate converter."""
         converter = cls.create_converter(input_path)
-        converter.convert(input_path, output_path, **kwargs)
+        converter.convert(input_path, output_path, tile_format=tile_format, **kwargs)
 
     @classmethod
     def register_converter(cls, extension: str, converter_class: Type[MBTilesConverter]) -> None:

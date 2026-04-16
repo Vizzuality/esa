@@ -8,8 +8,13 @@ from typing import Optional
 
 import yaml
 
+import os
+
 from .raster_processor import RasterProcessor
 from .vector_processor import VectorProcessor
+from helpers.cog_converter import COGConverter
+from helpers.mapbox_uploader import upload_to_mapbox
+from helpers.mbtiles_converter import MBTilesConverterFactory
 
 # ── Shared helpers ────────────────────────────────────────────────────────────
 
@@ -30,6 +35,140 @@ def _resolve_upload_flag(
     if upload_layer_keys_set is not None:
         return layer_id in upload_layer_keys_set
     return layer_config.get('upload', False)
+
+
+# ── Pre-styled raster (no QML) ───────────────────────────────────────────────
+
+def _native_max_zoom(file: Path) -> int:
+    """Return the native max zoom of a raster based on its resolution."""
+    import math
+    import rasterio
+    from rasterio.warp import transform_bounds
+    with rasterio.open(file) as src:
+        bounds = transform_bounds(src.crs, "EPSG:4326", *src.bounds)
+        res_x = abs(src.transform.a)
+        # Convert native resolution to degrees, then to web mercator metres
+        lng_span = bounds[2] - bounds[0]
+        px_deg = lng_span / src.width if src.crs.is_geographic else None
+        if px_deg is None:
+            # Projected: convert pixel size to approximate degrees at scene centre
+            centre_lat = (bounds[1] + bounds[3]) / 2
+            metres_per_deg = 111320 * math.cos(math.radians(centre_lat))
+            px_deg = res_x / metres_per_deg
+    # zoom = log2(360 / (px_deg * 256))
+    zoom = math.log2(360 / (px_deg * 256))
+    return max(1, round(zoom))
+
+
+def _normalize_to_uint8(input_file: Path, output_file: Path, percentile: float = 2.0) -> None:
+    """
+    Stretch each band to uint8 using percentile clipping.
+
+    Values below the low percentile → 0, above the high percentile → 255.
+    This avoids black output when the source is float32 with a narrow value range.
+
+    Args:
+        input_file: Source float raster.
+        output_file: Destination uint8 GeoTIFF.
+        percentile: Low/high percentile used for clipping (default 2 / 98).
+    """
+    import numpy as np
+    import rasterio
+
+    with rasterio.open(input_file) as src:
+        meta = src.meta.copy()
+        data = src.read()
+        nodata = src.nodata
+
+    bands, height, width = data.shape
+    out = np.zeros((bands, height, width), dtype=np.uint8)
+
+    for i in range(bands):
+        band = data[i].astype(np.float64)
+        valid_mask = band != nodata if nodata is not None else np.ones_like(band, dtype=bool)
+        valid = band[valid_mask]
+        if valid.size == 0:
+            continue
+        lo = np.percentile(valid, percentile)
+        hi = np.percentile(valid, 100 - percentile)
+        if hi == lo:
+            continue
+        stretched = np.clip((band - lo) / (hi - lo) * 255, 0, 255)
+        out[i] = stretched.astype(np.uint8)
+
+    meta.update({"dtype": "uint8", "nodata": None})
+    with rasterio.open(output_file, "w", **meta) as dst:
+        dst.write(out)
+
+
+def process_prestyled_raster(
+    input_file: Path,
+    output_file: Path,
+    layer_name: str,
+    max_zoom: int = None,
+    percentile: float = 2.0,
+    upload: bool = False,
+):
+    """
+    Convert an already-styled (RGB/RGBA) raster to COG + MBTiles and optionally
+    upload to Mapbox. Use this when the source file already has colour bands and
+    no QML styling is needed.
+
+    Float32 inputs are automatically normalized to uint8 via percentile stretching
+    before COG/MBTiles conversion (otherwise tiles render as all black).
+
+    Args:
+        input_file: Path to the input GeoTIFF.
+        output_file: Path for the output GeoTIFF / MBTiles (same stem, different suffix).
+        layer_name: Display name used when uploading to Mapbox.
+        max_zoom: Maximum zoom level for COG conversion. If None, auto-detected
+                  from the file's native resolution.
+        percentile: Percentile used for float→uint8 contrast stretch (default 2/98).
+        upload: Whether to upload the MBTiles to Mapbox.
+    """
+    import rasterio
+
+    input_file = Path(input_file)
+    output_file = Path(output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+
+    if max_zoom is None:
+        max_zoom = _native_max_zoom(input_file)
+        print(f"🔍 Auto-detected max zoom: {max_zoom}")
+
+    # Normalize float data to uint8 so PNG tiles render correctly
+    with rasterio.open(input_file) as src:
+        needs_normalization = src.dtypes[0] not in ("uint8", "byte")
+
+    cog_input = input_file
+    if needs_normalization:
+        normalized_path = output_file.parent / f"normalized_{output_file.name}"
+        print(f"⚖️  Normalizing float32 → uint8 (percentile clip {percentile}/{100-percentile})")
+        _normalize_to_uint8(input_file, normalized_path, percentile=percentile)
+        cog_input = normalized_path
+
+    print(f"☁️  Converting to COG: {cog_input.name}")
+    COGConverter.convert(cog_input, output_file, max_zoom=max_zoom)
+
+    if needs_normalization:
+        normalized_path.unlink()
+
+    tile_format = "JPEG" if needs_normalization else "PNG"
+    mbtiles_path = output_file.with_suffix(".mbtiles")
+    print(f"📦 Converting to MBTiles ({tile_format}): {mbtiles_path.name}")
+    MBTilesConverterFactory.convert(output_file, mbtiles_path, tile_format=tile_format)
+
+    if upload:
+        print(f"☁️  Uploading to Mapbox: {layer_name}")
+        upload_to_mapbox(
+            source=mbtiles_path,
+            display_name=layer_name,
+            username=os.getenv("MAPBOX_USER"),
+            token=os.getenv("MAPBOX_TOKEN"),
+        )
+
+    print(f"✅ Done: {mbtiles_path}")
+    return mbtiles_path
 
 
 # ── Raster ────────────────────────────────────────────────────────────────────
