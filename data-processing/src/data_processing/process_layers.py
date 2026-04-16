@@ -210,11 +210,16 @@ def _process_rasters(
                 layer_id, layer_config, upload_override, upload_layer_keys_set
             )
 
+            vector_file = None
+            if layer_config.get('vector_file'):
+                vector_file = Path(layer_config['vector_file'])
+
             RasterProcessor(
                 input_file,
                 output_file=output_file,
                 qml_file=style_file,
                 layer_name=layer_config['layer_name'],
+                vector_file=vector_file,
                 upload=upload_flag,
                 max_zoom=layer_config.get('max_zoom', 11),
             ).process()

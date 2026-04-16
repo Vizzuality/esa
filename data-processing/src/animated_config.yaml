@@ -492,3 +492,22 @@ layers:
       type: single
       color: "#937d11"
       transparent_values: [0]
+
+  # Sudan - FCS
+  sudan_croptypes:
+    input_folder: "../data/raw/FCS/Sudan/Crop type maps/"
+    output_folder: "../data/processed/FCS/Sudan/APNGs/"
+    min_z: 7
+    max_z: 10
+    vmin: 0
+    vmax: 255
+    date_format: "YYYY"
+    upload: false
+    colormap:
+      type: categorical
+      values:
+        0: "#ff00ff"
+        1: "#2e41a0"
+        2: "#006724"
+        3: "#f2d33a"
+        4: "#e96a1f"

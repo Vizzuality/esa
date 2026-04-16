@@ -28,7 +28,7 @@ import Header from '../header';
 
 import Categories from './categories';
 import Dashboard from './dashboard';
-import Filters from './filters';
+// import Filters from './filters';
 import SearchStories from './search';
 import TopStories from './top-stories';
 
@@ -134,7 +134,7 @@ export default function Home() {
             <div className="space-y-1">
               <div className="flex gap-2">
                 <SearchStories />
-                <Filters filtersActive={filtersActive} />
+                {/* <Filters filtersActive={filtersActive} /> */}
               </div>
               <div className="font-open-sans flex justify-between text-sm font-semibold">
                 <p className="pl-1 text-gray-800">
@@ -204,7 +204,7 @@ export default function Home() {
           <div className="space-y-1 px-4">
             <div className="flex gap-2">
               <SearchStories />
-              <Filters filtersActive={filtersActive} />
+              {/* <Filters filtersActive={filtersActive} /> */}
             </div>
             <div className="font-open-sans flex justify-between text-sm font-semibold">
               <p className="pl-1 text-gray-800">

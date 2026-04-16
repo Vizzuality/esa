@@ -675,3 +675,38 @@ def batch_reproject_rasters(
             print(f"Error reprojecting {tiff_file.name}: {e}")
 
     print(f"\n Batch reprojection complete! Output files in: {output_folder}")
+
+
+def rename_files_date_prefix_to_suffix(directory_path: str) -> int:
+    """Move numbers from start to end of filename (YYYY_file.ext -> file_YYYY.ext)."""
+    directory = Path(directory_path)
+    if not directory.exists():
+        print(f"Directory not found: {directory_path}")
+        return 0
+
+    renamed_count = 0
+
+    for file_path in directory.iterdir():
+        if file_path.is_file():
+            filename = file_path.name
+            match = re.match(r'^(\d+)_(.+)$', filename)
+
+            if match:
+                numbers, rest = match.groups()
+
+                # Move numbers to end
+                if '.' in rest:
+                    name, ext = rest.rsplit('.', 1)
+                    new_filename = f"{name}_{numbers}.{ext}"
+                else:
+                    new_filename = f"{rest}_{numbers}"
+
+                try:
+                    file_path.rename(file_path.parent / new_filename)
+                    print(f"{filename} -> {new_filename}")
+                    renamed_count += 1
+                except Exception as e:
+                    print(f"Error: {e}")
+
+    print(f"{renamed_count} files renamed")
+    return renamed_count

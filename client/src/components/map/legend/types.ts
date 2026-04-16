@@ -153,6 +153,14 @@ export interface LegendTypeSwitchProps extends Legend {
   title?: string;
 }
 
+export interface LegendTypeFilterProps extends Legend {
+  layerId: number;
+  param: string;
+  layerTitle: string;
+  title?: string;
+  options: { label: string; value: string }[];
+}
+
 type ItemLegends = Extract<LegendType, 'basic' | 'choropleth' | 'gradient'>;
 
 export type LegendTypesProps<T> = T extends ItemLegends
@@ -165,6 +173,8 @@ export type LegendTypesProps<T> = T extends ItemLegends
   ? LegendTypeTimelineProps
   : T extends 'switch'
   ? LegendTypeSwitchProps
+  : T extends 'filter'
+  ? LegendTypeFilterProps
   : T extends 'matrix'
   ? LegendMatrixIntersectionsProps
   : never;
