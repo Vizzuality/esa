@@ -342,3 +342,18 @@ layers:
     layer_name: "Pakistan_LULC"
     min_zoom: 5
     max_zoom: 11
+
+  # Sudan - FCS
+  sudan_stock_route:
+    input_file: "../data/raw/FCS/Sudan/Sennar livestock route boundaries/Stock_routes_polygon.shp"
+    output_file: "../data/processed/FCS/Sudan/Vectors/Stock_routes.mbtiles"
+    layer_name: "Sudan_Stock_Route"
+    min_zoom: 8
+    max_zoom: 12
+  
+  sudan_water_points:
+    input_file: "../data/raw/FCS/Sudan/Waterpoints/Stock_route_Water_Points.shp"
+    output_file: "../data/processed/FCS/Sudan/Vectors/Water_points.mbtiles"
+    layer_name: "Sudan_Water_Points"
+    min_zoom: 8
+    max_zoom: 12

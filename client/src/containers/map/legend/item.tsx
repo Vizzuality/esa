@@ -8,13 +8,14 @@ import { parseConfig } from '@/lib/json-converter';
 
 import { layersSettingsAtom } from '@/store/map';
 
-import { LegendConfig } from '@/types/layers';
+import { LegendConfig, ParamsConfig } from '@/types/layers';
 import { LEGEND_TYPE, LegendType } from '@/types/map';
 
 import {
   LegendTypeBasic,
   LegendTypeCategorical,
   LegendTypeChoropleth,
+  LegendTypeFilter,
   LegendTypeGradient,
   LegendTypeTimeline,
 } from '@/components/map/legend/item-types';
@@ -30,6 +31,7 @@ const LEGEND_TYPES: LEGEND_TYPES_T = {
   basic: LegendTypeBasic,
   categorical: LegendTypeCategorical,
   choropleth: LegendTypeChoropleth,
+  filter: LegendTypeFilter,
   gradient: LegendTypeGradient,
   timeline: LegendTypeTimeline,
   switch: LegendTypeSwitch,
@@ -66,11 +68,16 @@ const MapLegendItem = ({ id, layer, ...legendProps }: MapLegendItemProps) => {
     if (typeof type !== 'string' || !LEGEND_TYPE.includes(type as LegendType)) return;
     // TODO: Fix this type
     const LEGEND = LEGEND_TYPES[type as LegendType] as React.FC<any>;
-    const elementProps = {
+    const elementProps: Record<string, unknown> = {
       ...props,
-      title: props.title || layer?.title,
-      info: props.info || layer?.metadata?.description,
+      title: (props as { title?: string }).title ?? layer?.title,
+      info: (props as { info?: string }).info || layer?.metadata?.description,
     };
+    if (type === 'filter') {
+      const paramKey = (props as { param?: string }).param;
+      const paramEntry = (params_config as ParamsConfig)?.find((p) => p.key === paramKey);
+      elementProps.options = paramEntry?.options ?? [];
+    }
     const LegendElement = createElement(LEGEND, elementProps);
     if (!isValidElement(LegendElement)) return;
 

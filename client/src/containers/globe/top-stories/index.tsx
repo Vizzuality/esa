@@ -10,6 +10,7 @@ const TopStories = () => {
     populate: 'cover_image,story,story.category',
     sort: 'index:asc',
     filters: { story: { category: { slug: { $eq: category } } } },
+    'pagination[pageSize]': 1000,
   });
 
   return (

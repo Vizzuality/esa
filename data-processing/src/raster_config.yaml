@@ -657,3 +657,22 @@ layers:
     output_file: "../data/processed/FCS/Bangladesh/CoxBazar/CoxBazar_HFC_Ukhia.tif"
     layer_name: "CoxBazar_HFC_Ukhia"
     max_zoom: 15
+  
+  # Sudan - FCS
+  sudan_livestock:
+    base_path: "../data/raw/FCS/Sudan/Livestock Buffer Cropland Encroachment Map/"
+    input_file: "stock_landuse_change_1723_cog.tif"
+    style_file: "crop_encroachment.qml"
+    output_file: "../data/processed/FCS/Sudan/Rasters/Sudan_Livestock.tif"
+    layer_name: "Sudan_Livestock"
+    max_zoom: 10
+
+  # Tajikistan - FCS
+  tajikistan_hfc:
+    base_path: "../data/raw/FCS/Tajikistan/Telespazio DropZone-56bBTqjHRbPu3xgJ"
+    input_file: "TJK_HFC_2017-2022_clipped.tif"
+    style_file: "HFC_2017-2022.qml"
+    output_file: "../data/processed/FCS/Tajikistan/Rasters/Tajikistan_HFC_2017-2022_clipped.tif"
+    layer_name: "Tajikistan_HFC_clipped"
+    max_zoom: 13
+  
