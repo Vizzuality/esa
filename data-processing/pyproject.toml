@@ -1,7 +1,56 @@
 [project]
-name="esa_gda"
-version="0.1.0"
-dependencies = []
+name = "esa_gda"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    # Geospatial
+    "rasterio>=1.4",
+    "geopandas>=1.0",
+    "shapely>=2.0",
+    "pyproj>=3.6",
+    "mercantile>=1.2",
+    "morecantile>=6.0",
+    "rio-cogeo>=5.0",
+    "rio-tiler>=7.0",
+    "pyogrio>=0.11",
+    # Data
+    "numpy>=2.0",
+    "pandas>=2.0",
+    "xarray>=2024.0",
+    "dask[complete]>=2024.0",
+    "pyarrow>=17.0",
+    # AWS / cloud
+    "boto3>=1.42",
+    # Notebooks / viz
+    "jupyterlab>=4.0",
+    "ipykernel>=6.0",
+    "ipywidgets>=8.0",
+    "ipyleaflet>=0.18",
+    "matplotlib>=3.9",
+    "plotly>=6.0",
+    "pillow>=11.0",
+    # Utilities
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+    "requests>=2.32",
+    "httpx>=0.28",
+    "tqdm>=4.67",
+    "rich>=14.0",
+    "click>=8.1",
+    "pydantic>=2.0",
+    "cachetools>=6.0",
+    "color-operations>=0.2",
+    "pystac>=1.10",
+    "earthengine-api>=1.0",
+    "apng>=0.3.4",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
 
 [tool.ruff]
 line-length = 100
