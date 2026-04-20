@@ -119,6 +119,8 @@ layers:
 
 ### Processing
 
+In `01_raster_layers.ipynb`, use the working cell at the bottom of the notebook: set `layer_keys`, run, then revert before committing. If the layer requires preprocessing (clipping, resampling, CRS assignment, etc.), add those cells above the working cell, run them, then move them into the **Preprocessing records** section with a markdown header explaining what was done.
+
 ```python
 from data_processing.process_layers import process_raster_layers
 
@@ -179,6 +181,8 @@ layers:
 | `max_zoom` | No | Maximum zoom level (default `14`) |
 
 ### Processing
+
+In `02_vector_layers.ipynb`, use the working cell at the bottom of the notebook: set `layer_keys`, run, then revert before committing. If preprocessing is needed, follow the same pattern as for raster layers.
 
 ```python
 from data_processing.process_layers import process_vector_layers
@@ -288,6 +292,8 @@ Input GeoTIFFs must have the date at the end of the filename. Files are sorted c
 
 ### Processing
 
+In `03_animated_layers.ipynb`, use the working cell at the bottom of the notebook: set `layer_ids`, run, then revert before committing. If preprocessing is needed, follow the same pattern as for raster layers.
+
 ```python
 from data_processing.process_apng import process_animated_layers
 
@@ -301,7 +307,7 @@ process_animated_layers(
 
 ### Preprocessing
 
-Preprocessing is sometimes required (masking nodata, clipping to boundary, reprojecting, etc.) and is added as cells directly before the tile creation call in the notebook. See the [Preprocessing Utilities](#preprocessing-utilities) section for available helpers.
+Preprocessing is sometimes required (masking nodata, clipping to boundary, reprojecting, etc.) and is documented as cells directly before the processor call in the **Preprocessing records** section of the notebook. See the [Preprocessing Utilities](#preprocessing-utilities) section for available helpers.
 
 ---
 
@@ -405,7 +411,7 @@ clip_raster_to_country_and_create_cog(
 )
 ```
 
-For multi-country stories, the notebook includes commented patterns for merging COGs across countries and subsetting GADM boundaries.
+For multi-country stories, the notebook includes working cells for downloading or clipping per country and merging the results into a regional mosaic. Each country is clipped to its GADM polygon boundary before merging, so no separate region boundary file is needed.
 
 ---
 
@@ -420,7 +426,7 @@ For multi-country stories, the notebook includes commented patterns for merging 
 | `batch_convert_vectors()` | Rasterise a folder of vector files |
 | `rename_files_date_prefix_to_suffix()` | Standardise date position in filenames |
 
-All from `helpers.raster_utils`.
+All from `data_processing.utils`.
 
 ---
 
