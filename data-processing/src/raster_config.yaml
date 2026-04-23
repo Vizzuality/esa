@@ -676,3 +676,11 @@ layers:
     layer_name: "Tajikistan_HFC_clipped"
     max_zoom: 13
   
+# Mozambique - CR
+  mozambique_agb_prediction:
+    base_path: "../data/raw/Climate_resilience/Mozambique/Rasters"
+    input_file: "0007MZ_GIL_L4_AGB_band1_resampled.tiff"
+    style_file: "band1.qml"
+    output_file: "../data/processed/Climate_resilience/Mozambique/Rasters/0007MZ_GIL_L4_AGB_band1.tiff"
+    layer_name: "Mozambique_prediction"
+    max_zoom: 13
