@@ -99,6 +99,7 @@ export const LegendTypeTimeline: React.FC<LegendTypeTimelineProps> = ({
       setIsPlaying(false);
     }
   }, [setIsPlaying, TIMELINE, frame]);
+
   useEffect(() => {
     // Add or update timeline to timeline atom
     setTimelines((prev) => ({

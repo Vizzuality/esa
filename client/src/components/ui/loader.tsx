@@ -20,6 +20,7 @@ export interface ContentLoaderProps extends PropsWithChildren {
 
 const ContentLoader = ({
   SkeletonComponent,
+  skeletonClassName,
   children,
   data,
   isPlaceholderData,
@@ -31,7 +32,9 @@ const ContentLoader = ({
 ContentLoaderProps) => {
   return (
     <>
-      {isFetching && !isFetched && !SkeletonComponent && <Skeleton className={cn('h-20 w-full')} />}
+      {isFetching && !isFetched && !SkeletonComponent && (
+        <Skeleton className={cn('h-20 w-full', skeletonClassName)} />
+      )}
       {isFetching && !isFetched && SkeletonComponent}
       {/* <Loading
         className="absolute z-10 flex h-full w-full items-center justify-center bg-white/50 py-2"
