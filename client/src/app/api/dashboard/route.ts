@@ -8,8 +8,23 @@ export async function GET() {
   const baseUrl = process.env.GDA_MASTER_DATA_FUNCTION_BASE_URL;
   const key = process.env.GDA_MASTER_DATA_FUNCTION_KEY;
 
+  if (!key) {
+    return NextResponse.json(
+      { error: 'Missing KEY configuration' },
+
+      { status: 500 }
+    );
+  }
+
+  if (!baseUrl || !key) {
+    return NextResponse.json(
+      { error: 'Missing API configuration' },
+
+      { status: 500 }
+    );
+  }
   try {
-    const res = await axios.get(`${baseUrl}/ExcelWebAPI`, {
+    const res = await axios.get(`${baseUrl}`, {
       headers: {
         'x-functions-key': key,
       },
