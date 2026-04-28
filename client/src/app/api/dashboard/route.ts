@@ -16,7 +16,7 @@ export async function GET() {
     );
   }
   try {
-    const res = await axios.get(`${baseUrl}/ExcelWebAPI`, {
+    const res = await axios.get(`${baseUrl}`, {
       headers: {
         'x-functions-key': key,
       },
