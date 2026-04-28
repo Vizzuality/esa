@@ -8,7 +8,14 @@ export async function GET() {
   const baseUrl = process.env.GDA_MASTER_DATA_FUNCTION_BASE_URL;
   const key = process.env.GDA_MASTER_DATA_FUNCTION_KEY;
 
-  if (!baseUrl || !key) {
+  if (!key) {
+    return NextResponse.json(
+      { error: 'Missing KEY configuration' },
+
+      { status: 500 }
+    );
+  }
+  if (!baseUrl) {
     return NextResponse.json(
       { error: 'Missing API configuration' },
 
