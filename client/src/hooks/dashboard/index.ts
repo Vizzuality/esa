@@ -17,7 +17,8 @@ export function useDashboard<TSelected = DashboardProps>(
   >
 ): UseQueryResult<TSelected, Error> {
   const fetchDashboard = async (): Promise<DashboardProps> => {
-    const res = await fetch('/api/dashboard');
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    const res = await fetch(`${basePath}/api/dashboard`);
 
     if (!res.ok) {
       throw new Error(`Dashboard API error: ${res.status}`);
