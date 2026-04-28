@@ -1,5 +1,7 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 
+import { env } from '@/env.mjs';
+
 export type DashboardProps = {
   supportedCountries: number;
   caseStudiesInProgress: number;
@@ -17,7 +19,8 @@ export function useDashboard<TSelected = DashboardProps>(
   >
 ): UseQueryResult<TSelected, Error> {
   const fetchDashboard = async (): Promise<DashboardProps> => {
-    const res = await fetch('/api/dashboard');
+    const basePath = env.NEXT_PUBLIC_BASE_PATH || '/';
+    const res = await fetch(`${basePath}api/dashboard`);
 
     if (!res.ok) {
       throw new Error(`Dashboard API error: ${res.status}`);
