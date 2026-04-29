@@ -357,3 +357,32 @@ layers:
     layer_name: "Sudan_Water_Points"
     min_zoom: 8
     max_zoom: 12
+
+  # Afghanistan - CR
+  afghanistan_provinces:
+    input_file: "../data/raw/Climate_resilience/Afghanistan/Datasets/Afghanistan_Provinces/AFG_Provinces_4326.shp"
+    output_file: "../data/processed/Climate_resilience/Afghanistan/Provinces.mbtiles"
+    layer_name: "Afghanistan_Provinces"
+    min_zoom: 3
+    max_zoom: 9
+
+  afghanistan_built_surface:
+    input_file: "../data/raw/Climate_resilience/Afghanistan/Datasets/BuiltSurface_Afghanistan/GHS_BuiltSurface_Afghanistan.shp"
+    output_file: "../data/processed/Climate_resilience/Afghanistan/BuiltSurface.mbtiles"
+    layer_name: "Afghanistan_BuiltSurface"
+    min_zoom: 3
+    max_zoom: 9
+
+  afghanistan_flood_risk:
+    input_file: "../data/raw/Climate_resilience/Afghanistan/Datasets/flood_risk/risk_50yrs.shp"
+    output_file: "../data/processed/Climate_resilience/Afghanistan/Flood_Risk_50yrs.mbtiles"
+    layer_name: "Afghanistan_Flood_Risk_50yrs"
+    min_zoom: 3
+    max_zoom: 9
+  
+  afghanistan_exposed_buildings:
+    input_file: "../data/raw/Climate_resilience/Afghanistan/Datasets/JRC_reclassified/50y_poly.shp"
+    output_file: "../data/processed/Climate_resilience/Afghanistan/Exposed_Buildings_50yrs.mbtiles"
+    layer_name: "Afghanistan_Exposed_Buildings_50yrs"
+    min_zoom: 3
+    max_zoom: 9
