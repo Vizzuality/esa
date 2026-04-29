@@ -160,7 +160,10 @@ class MBTilesConverterFactory:
     ) -> None:
         """Convenience method to convert file using appropriate converter."""
         converter = cls.create_converter(input_path)
-        converter.convert(input_path, output_path, tile_format=tile_format, **kwargs)
+        if isinstance(converter, GeoTIFFConverter):
+            converter.convert(input_path, output_path, tile_format=tile_format, **kwargs)
+        else:
+            converter.convert(input_path, output_path, **kwargs)
 
     @classmethod
     def register_converter(cls, extension: str, converter_class: Type[MBTilesConverter]) -> None:
