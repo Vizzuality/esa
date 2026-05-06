@@ -684,3 +684,30 @@ layers:
     output_file: "../data/processed/Climate_resilience/Mozambique/Rasters/0007MZ_GIL_L4_AGB_band1.tiff"
     layer_name: "Mozambique_prediction"
     max_zoom: 13
+
+# Cameroon - FCS
+  cameroon_heatmap:
+    base_path: "../data/raw/FCS/Cameroon"
+    input_file: "april_summed10_heatmap_filtered.tif"
+    style_file: "april_summed10_heatmap_filtered.qml"
+    output_file: "../data/processed/FCS/Cameroon/Cameroon_Heatmap.tif"
+    layer_name: "Cameroon_Heatmap"
+    max_zoom: 15
+
+# Nigeria - FCS
+  nigeria_settlement_extent:
+    base_path: "../data/raw/FCS/Nigeria/Rasters/SettlementExtent"
+    input_file: "Enugu_SettlementExtent_2015-2022_yearly.tif"
+    style_file: "settlement_extent.qml" # created by us
+    output_file: "../data/processed/FCS/Nigeria/Rasters/Enugu_SettlementExtent_2015-2022_yearly.tif"
+    layer_name: "Nigeria_Enugu_SettlementExtent"
+    max_zoom: 15
+
+# Nigeria - FCS
+  nigeria_yearly_changes:
+    base_path: "../data/raw/FCS/Nigeria/Rasters/YearlyChanges"
+    input_file: "NGA_HFC_2017-2022_v2_yearly_masked_Enugu_clipped.tif"
+    style_file: "years.qml" # created by us
+    output_file: "../data/processed/FCS/Nigeria/Rasters/Enugu_YearlyChanges_clipped.tif"
+    layer_name: "Nigeria_Enugu_YearlyChanges"
+    max_zoom: 15
