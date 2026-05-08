@@ -373,16 +373,16 @@ layers:
     min_zoom: 3
     max_zoom: 9
 
-  afghanistan_flood_risk:
+  afghanistan_exposed_buildings:
     input_file: "../data/raw/Climate_resilience/Afghanistan/Datasets/flood_risk/risk_50yrs.shp"
-    output_file: "../data/processed/Climate_resilience/Afghanistan/Flood_Risk_50yrs.mbtiles"
-    layer_name: "Afghanistan_Flood_Risk_50yrs"
+    output_file: "../data/processed/Climate_resilience/Afghanistan/Exposed_Buildings_50yrs.mbtiles"
+    layer_name: "Afghanistan_Exposed_Buildings_50yrs"
     min_zoom: 3
     max_zoom: 9
   
-  afghanistan_exposed_buildings:
+  afghanistan_flood_risk:
     input_file: "../data/raw/Climate_resilience/Afghanistan/Datasets/JRC_reclassified/50y_poly.shp"
-    output_file: "../data/processed/Climate_resilience/Afghanistan/Exposed_Buildings_50yrs.mbtiles"
-    layer_name: "Afghanistan_Exposed_Buildings_50yrs"
+    output_file: "../data/processed/Climate_resilience/Afghanistan/Flood_Risk_50yrs.mbtiles"
+    layer_name: "Afghanistan_Flood_Risk_50yrs"
     min_zoom: 3
     max_zoom: 9
