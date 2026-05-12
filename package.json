@@ -24,6 +24,9 @@
     "@strapi/plugin-upload/sharp": "0.32.6",
     "@stoplight/spectral-core/minimatch": "3.1.5",
     "brace-expansion@^2.0.1": "2.0.3",
-    "socks/ip-address": "10.1.1"
+    "socks/ip-address": "10.1.1",
+    "tailwindcss/postcss": "8.5.10",
+    "css-loader/postcss": "8.5.10",
+    "sanitize-html/postcss": "8.5.10"
   }
 }
