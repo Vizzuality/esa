@@ -23,6 +23,7 @@
   "resolutions": {
     "@strapi/plugin-upload/sharp": "0.32.6",
     "@stoplight/spectral-core/minimatch": "3.1.5",
-    "brace-expansion@^2.0.1": "2.0.3"
+    "brace-expansion@^2.0.1": "2.0.3",
+    "socks/ip-address": "10.1.1"
   }
 }
