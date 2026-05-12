@@ -25,17 +25,20 @@ export async function GET() {
   }
 
   try {
-    const res = await axios.get(`${baseUrl}`, {
+    const res = await axios.get(`${baseUrl}/ExcelWebAPI`, {
       headers: {
         'x-functions-key': key,
       },
+      timeout: 10_000,
     });
     return NextResponse.json(res.data);
   } catch (error: unknown) {
     console.error('Error fetching dashboard data:', error);
-    return new NextResponse(JSON.stringify({ error: 'Failed to fetch dashboard data' }), {
-      status: 502,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const upstreamStatus =
+      axios.isAxiosError(error) && error.response ? error.response.status : 502;
+    return NextResponse.json(
+      { error: 'Failed to fetch dashboard data', status: upstreamStatus },
+      { status: upstreamStatus }
+    );
   }
 }
