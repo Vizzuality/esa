@@ -40,6 +40,7 @@
     "resolve-protobuf-schema/protocol-buffers-schema": "3.6.1",
     "axios/follow-redirects": "1.16.0",
     "http-proxy/follow-redirects": "1.16.0",
+    "findup-sync/micromatch": "4.0.8",
     "ws@8.13.0": "8.17.1",
     "path-to-regexp@~0.1.12": "0.1.13",
     "path-to-regexp@6.2.1": "6.3.0",
