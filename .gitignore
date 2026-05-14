@@ -63,6 +63,9 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Local-only security audit notes
+docs/security/
+
 # PyBuilder
 target/
 
