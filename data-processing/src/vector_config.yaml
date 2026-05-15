@@ -386,3 +386,12 @@ layers:
     layer_name: "Afghanistan_Flood_Risk_50yrs"
     min_zoom: 3
     max_zoom: 9
+
+  # Nigeria - FCS
+  nigeria_districts:
+    input_file: "../data/raw/FCS/Nigeria/Vectors/AOI/Districts_merged.geojson"
+    output_file: "../data/processed/FCS/Nigeria/Vectors/Districts_merged.mbtiles"
+    layer_name: "Nigeria_Districts"
+    min_zoom: 3
+    max_zoom: 9
+
