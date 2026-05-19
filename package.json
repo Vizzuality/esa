@@ -25,7 +25,6 @@
     "@stoplight/spectral-core/minimatch": "3.1.5",
     "brace-expansion@^2.0.1": "2.0.3",
     "tailwindcss/postcss": "8.5.10",
-    "css-loader/postcss": "8.5.10",
     "sanitize-html/postcss": "8.5.10",
     "@babel/plugin-transform-modules-systemjs": "7.29.4",
     "koa": "2.16.4",
