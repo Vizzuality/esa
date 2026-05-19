@@ -24,7 +24,6 @@
     "@strapi/plugin-upload/sharp": "0.32.6",
     "@stoplight/spectral-core/minimatch": "3.1.5",
     "brace-expansion@^2.0.1": "2.0.3",
-    "@babel/plugin-transform-modules-systemjs": "7.29.4",
     "koa": "2.16.4",
     "fast-xml-parser": "4.5.5",
     "findup-sync/micromatch": "4.0.8",
