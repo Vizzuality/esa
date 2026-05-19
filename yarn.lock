@@ -20083,7 +20083,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"protocol-buffers-schema@npm:3.6.1":
+"protocol-buffers-schema@npm:^3.3.1":
   version: 3.6.1
   resolution: "protocol-buffers-schema@npm:3.6.1"
   checksum: 7bd608f6784fda2657f6ec60ef845adaaa196511f3241ed0f95d4a752cc923e799c8df7409e6601a53944aa954f84effcadf1f01925eb642f267d8204713cc61
