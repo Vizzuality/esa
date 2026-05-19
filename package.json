@@ -27,7 +27,6 @@
     "fast-xml-parser": "4.5.5",
     "findup-sync/micromatch": "4.0.8",
     "@orval/core/esbuild": "0.25.0",
-    "esbuild-loader/esbuild": "0.25.0",
-    "ws@8.13.0": "8.17.1"
+    "esbuild-loader/esbuild": "0.25.0"
   }
 }
