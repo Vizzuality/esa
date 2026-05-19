@@ -175,28 +175,38 @@ layers:
 
   # Niger - CE
   niger_solar_irradiation:
-    base_path: "../data/raw/Clean Energy/Niger/"
+    base_path: "../data/raw/Clean_energy/Niger/"
     input_file: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
     style_file: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.qml"
-    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
+    output_file: "../data/processed/Clean_energy/Niger/Rasters/Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
     layer_name: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02"
     max_zoom: 11
 
+  niger_solar_irradiation_capital:
+      base_path: "../data/raw/Clean_energy/Niger/"
+      input_file: "Niger_SolarRadiation_Mosaic_CapitalRegion.tif"
+      style_file: "Niger_SolarRadiation_Mosaic_CapitalRegion.qml"
+      output_file: "../data/processed/Clean_energy/Niger/Rasters/Niger_SolarRadiation_Mosaic_CapitalRegion.tif"
+      layer_name: "Niger_SolarRadiation_Mosaic_CapitalRegion"
+      max_zoom: 11  
+
   niger_flash_flood_depth:
-    base_path: "../data/raw/Clean Energy/Niger/"
+    base_path: "../data/raw/Clean_energy/Niger/"
     input_file: "Depth_fullAOI.tif"
     style_file: "Depth_fullAOI.qml"
-    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_Flash_flood_depth.tif"
+    vector_file: "../data/raw/Clean_energy/Niger/Extent_city.geojson"
+    output_file: "../data/processed/Clean_energy/Niger/Rasters/Niger_Flash_flood_depth.tif"
     layer_name: "Niger_Flash_flood_depth"
-    max_zoom: 11
+    max_zoom: 12
 
   niger_flash_flood_hazard:
-    base_path: "../data/raw/Clean Energy/Niger/"
+    base_path: "../data/raw/Clean_energy/Niger/"
     input_file: "FlashFlood_Hazard_fullAOI_classified.tif"
     style_file: "FlashFlood_Hazard_fullAOI_classified.qml"
-    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_Flash_flood_hazard.tif"
+    vector_file: "../data/raw/Clean_energy/Niger/Extent_city.geojson"
+    output_file: "../data/processed/Clean_energy/Niger/Rasters/Niger_Flash_flood_hazard.tif"
     layer_name: "Niger_Flash_flood_hazard"
-    max_zoom: 11
+    max_zoom: 12
 
   # Cote d'Ivoire - Urban
   civ_abidjan_slum_detector:
@@ -276,13 +286,13 @@ layers:
     layer_name: "Cameroon_settlement"
     max_zoom: 11
 
-  cameroon_electrification:
+  cameroon_electrification2:
     base_path: "../data/raw/Clean_energy/Cameroon_Nightlight/"
     input_file: "year_of_electrification_clipped.tif"
     style_file: "year_of_electrification.qml"
-    output_file: "../data/processed/Clean_energy/Cameroon/Rasters/Cameroon_electrification.tif"
-    layer_name: "Cameroon_electrification"
-    max_zoom: 11
+    output_file: "../data/processed/Clean_energy/Cameroon/Rasters/Cameroon_electrification2.tif"
+    layer_name: "Cameroon_electrification2"
+    max_zoom: 15
 
   # Belize - Agriculture
   belize_precipitation:
