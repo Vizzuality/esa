@@ -387,6 +387,28 @@ layers:
     min_zoom: 3
     max_zoom: 9
 
+  # Niger - Clean Energy
+  niger_transmission_grid_flood_hazard:
+    input_file: "../data/raw/Clean_energy/Niger/vector_data/Niger_TransmissionGrid_100_FloodHazard.shp"
+    output_file: "../data/processed/Clean_energy/Niger/Vectors/TransmissionGrid_FloodHazard.mbtiles"
+    layer_name: "Niger_TransmissionGrid_FloodHazard"
+    min_zoom: 5
+    max_zoom: 13
+
+  niger_reseau_bt:
+    input_file: "../data/raw/Clean_energy/Niger/vector_data/Reseau_BT.shp"
+    output_file: "../data/processed/Clean_energy/Niger/Vectors/Reseau_BT.mbtiles"
+    layer_name: "Niger_Reseau_BT"
+    min_zoom: 5
+    max_zoom: 13
+
+  niger_reseau_mt:
+    input_file: "../data/raw/Clean_energy/Niger/vector_data/Reseau_MT.shp"
+    output_file: "../data/processed/Clean_energy/Niger/Vectors/Reseau_MT.mbtiles"
+    layer_name: "Niger_Reseau_MT"
+    min_zoom: 5
+    max_zoom: 13
+
   # Nigeria - FCS
   nigeria_districts:
     input_file: "../data/raw/FCS/Nigeria/Vectors/AOI/Districts_merged.geojson"
