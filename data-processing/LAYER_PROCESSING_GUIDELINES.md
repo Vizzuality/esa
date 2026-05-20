@@ -14,10 +14,10 @@ This document explains how to add and process new geospatial layers in the ESA-G
 6. [Uploading to Mapbox](#uploading-to-mapbox) — raster & vector
 7. [Animated Layers](#animated-layers) — `03_animated_layers.ipynb`
 8. [Uploading Animated Tiles to S3](#uploading-animated-tiles-to-s3)
-9. [Charts Data](#charts-data) — `04_charts_data.ipynb`
-10. [Step 1 Standard Layers](#step-1-standard-layers) — `05_layers_step1.ipynb`
-11. [Preprocessing Utilities](#preprocessing-utilities)
-12. [Common Gotchas](#common-gotchas)
+9. [Step 1 Standard Layers](#step-1-standard-layers) — `04_layers_step1.ipynb`
+10. [Preprocessing Utilities](#preprocessing-utilities)
+11. [Common Gotchas](#common-gotchas)
+12. [Charts and Widgets](#charts-and-widgets)
 
 ---
 
@@ -115,11 +115,13 @@ layers:
 | `output_file` | Yes | Output path for the processed GeoTIFF |
 | `layer_name` | Yes | Display name and Mapbox tileset name |
 | `max_zoom` | No | Maximum zoom level. Auto-detected from pixel resolution if omitted |
-| `vector_file` | No | Shapefile to clip the raster to (e.g. country boundary) |
+| `vector_file` | No | Vector file (`.shp`, `.geojson`) to clip the raster to (e.g. country boundary) |
 
 ### Processing
 
-In `01_raster_layers.ipynb`, use the working cell at the bottom of the notebook: set `layer_keys`, run, then revert before committing. If the layer requires preprocessing (clipping, resampling, CRS assignment, etc.), add those cells above the working cell, run them, then move them into the **Preprocessing records** section with a markdown header explaining what was done.
+In `01_raster_layers.ipynb`, use the working cell at the bottom of the notebook: set `layer_keys`, run, then revert before committing.
+
+**Clipping** is handled automatically via the `vector_file` config field — no preprocessing cells needed. If the layer requires other preprocessing (merging tiles, resampling, CRS assignment, band extraction, etc.), add those cells above the working cell, run them, then move them into the **Preprocessing records** section with a markdown header explaining what was done.
 
 ```python
 from data_processing.process_layers import process_raster_layers
@@ -196,18 +198,6 @@ process_vector_layers(
 ```
 
 **Output:** `{output_file}.mbtiles`
-
-### Preprocessing: JSON to GeoJSON
-
-```python
-import geopandas as gpd
-
-gdf = gpd.read_file("input.json")
-gdf = gdf.set_crs("EPSG:4326")
-gdf.to_file("output.geojson", driver="GeoJSON")
-```
-
----
 
 ## Uploading to Mapbox
 
@@ -309,9 +299,7 @@ process_animated_layers(
 
 Preprocessing is sometimes required (masking nodata, clipping to boundary, reprojecting, etc.) and is documented as cells directly before the processor call in the **Preprocessing records** section of the notebook. See the [Preprocessing Utilities](#preprocessing-utilities) section for available helpers.
 
----
-
-## Uploading Animated Tiles to S3
+### Uploading Animated Tiles to S3
 
 Animated tiles are uploaded directly to S3, not Mapbox. The frontend fetches them from there.
 
@@ -326,47 +314,9 @@ aws s3 cp ../data/processed/Region/Country/APNGs/LayerName/ \
 
 ---
 
-## Charts Data
-
-**Notebook:** `04_charts_data.ipynb`
-
-Converts raw tabular files (CSV or Excel) into the JSON format that Strapi expects for charts in story steps.
-
-| Function | Use when |
-|----------|----------|
-| `csv_to_json` | Simple flat CSV table |
-| `excel_to_json` | Excel spreadsheet |
-| `csv_to_json_multiline` | Multiple series in one file (e.g. year + month + value columns) |
-
-```python
-from data_processing.utils import csv_to_json, excel_to_json, csv_to_json_multiline
-
-csv_to_json(
-    input_file="../data/raw/Region/Country/data.csv",
-    output_file="../data/processed/Region/Country/Charts/data.json",
-    skiprows=4,  # skip header rows if needed
-    sep=";",     # column separator (default is comma)
-)
-
-excel_to_json(
-    input_file="../data/raw/Region/Country/data.xlsx",
-    output_file="../data/processed/Region/Country/Charts/data.json",
-)
-
-csv_to_json_multiline(
-    input_file="../data/raw/Region/Country/timeseries.csv",
-    output_file="../data/processed/Region/Country/Charts/timeseries.json",
-    col_names=["year", "month", "value"],
-)
-```
-
-The resulting JSON is then linked to the story step manually in Strapi.
-
----
-
 ## Step 1 Standard Layers
 
-**Notebook:** `05_layers_step1.ipynb`
+**Notebook:** `04_layers_step1.ipynb`
 
 Every country story opens with a standard overview map built from global public datasets. This notebook downloads and processes those layers per country.
 
@@ -443,3 +393,42 @@ All from `data_processing.utils`.
 **Animated layer filenames** — All files in the input folder must follow the same naming convention matching `date_format`, otherwise frames will be skipped or sorted incorrectly.
 
 **Mapbox tileset name** — `layer_name` must be 32 characters or fewer, alphanumeric with underscores and hyphens only.
+
+---
+
+## Charts and Widgets
+
+Story steps can include data widgets (charts, tables, etc.). The source data typically comes as CSV or Excel files and needs to be converted to JSON, then pasted into the widget field in Strapi.
+
+The JSON structure varies by chart type. Two common patterns:
+
+**Time series / line charts** — `x`/`y` pairs:
+```json
+{
+  "datasets": [
+    {
+      "data": [
+        {"x": "01/02/22", "y": 8},
+        {"x": "03/02/22", "y": 4}
+      ]
+    }
+  ]
+}
+```
+
+**Bar / categorical charts** — separate `labels` and `data` arrays:
+```json
+{
+  "labels": ["Housing", "Transport", "Energy"],
+  "datasets": [
+    {
+      "data": [57.6, 36.7, 20.5],
+      "backgroundColor": ["#701422", "#701422", "#9DB3BB"]
+    }
+  ]
+}
+```
+
+Other formats may be needed depending on the widget. Check existing widgets in Strapi for reference.
+
+`data_processing.utils` includes helper functions (`csv_to_json`, `excel_to_json`, `csv_to_json_multiline`) for simple conversions, but each chart tends to have unique requirements so the transformation is often done case by case.
