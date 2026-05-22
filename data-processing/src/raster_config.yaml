@@ -721,3 +721,44 @@ layers:
     output_file: "../data/processed/FCS/Nigeria/Rasters/Enugu_YearlyChanges_clipped.tif"
     layer_name: "Nigeria_Enugu_YearlyChanges"
     max_zoom: 15
+
+  # Bhutan - Health
+  bhutan_dem:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 2"
+    input_file: "GDA-Public-Health_DEM_Bhutan_2025.tif"
+    style_file: "DEM.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_DEM.tif"
+    layer_name: "Bhutan_DEM"
+    max_zoom: 11
+
+  bhutan_population_raster:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 3"
+    input_file: "BhutanPop2025_10m_Raster.tif"
+    style_file: "Population_raster_10m res.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_PopulationRaster.tif"
+    layer_name: "Bhutan_PopulationRaster"
+    max_zoom: 11
+
+  bhutan_landuse:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 3"
+    input_file: "GDA-Public-Health_Landuse_Bhutan_2025.tif"
+    style_file: "Landuse.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_Landuse.tif"
+    layer_name: "Bhutan_Landuse"
+    max_zoom: 11
+
+  bhutan_pop_access_all_hf:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 4"
+    input_file: "GDA-Public-Health_PopAccessClasses_All_HF_Bhutan_2025.tif"
+    style_file: "Pop_Accessibility_Classes.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_PopAccess_AllHF.tif"
+    layer_name: "Bhutan_PopAccess_AllHF"
+    max_zoom: 13
+
+  bhutan_pop_access_hospitals:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 4"
+    input_file: "GDA-Public-Health_PopAccessClasses_Hospitals_Bhutan_2025.tif"
+    style_file: "Pop_Accessibility_Classes.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_PopAccess_Hospitals.tif"
+    layer_name: "Bhutan_PopAccess_Hospitals"
+    max_zoom: 13
