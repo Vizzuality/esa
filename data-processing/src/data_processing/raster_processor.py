@@ -201,6 +201,8 @@ class RasterProcessor:
         convert to COG, and optionally to MBTiles and upload to Mapbox.
         """
         try:
+            self.output_file.parent.mkdir(parents=True, exist_ok=True)
+
             if self.vector_file:
                 console.print("✂️ Clipping raster with vector...", style="bold white")
                 self.clip_raster()

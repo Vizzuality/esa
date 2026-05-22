@@ -417,3 +417,39 @@ layers:
     min_zoom: 3
     max_zoom: 9
 
+  # Bhutan - Health
+  bhutan_population_density:
+    input_file: "../data/raw/Health/Bhutan/Visuals/Step 1/GDA-Public-Health_PopulationDensity_Bhutan_2025.gpkg"
+    output_file: "../data/processed/Health/Bhutan/Vectors/PopulationDensity.mbtiles"
+    layer_name: "Bhutan_PopulationDensity"
+    min_zoom: 3
+    max_zoom: 9
+
+  bhutan_road_network:
+    input_file: "../data/raw/Health/Bhutan/Visuals/Step 2/Road_network.gpkg"
+    output_file: "../data/processed/Health/Bhutan/Vectors/RoadNetwork.mbtiles"
+    layer_name: "Bhutan_RoadNetwork"
+    min_zoom: 3
+    max_zoom: 9
+
+  bhutan_health_facilities:
+    input_file: "../data/raw/Health/Bhutan/Visuals/Step 2/Health_Facilities.gpkg"
+    output_file: "../data/processed/Health/Bhutan/Vectors/HealthFacilities.mbtiles"
+    layer_name: "Bhutan_HealthFacilities"
+    min_zoom: 3
+    max_zoom: 9
+
+  bhutan_least_access_districts:
+    input_file: "../data/raw/Health/Bhutan/Visuals/Step 5/GDA-Public-Health_Least Acess_Districts.gpkg"
+    output_file: "../data/processed/Health/Bhutan/Vectors/LeastAccessDistricts.mbtiles"
+    layer_name: "Bhutan_LeastAccessDistricts"
+    min_zoom: 3
+    max_zoom: 9
+
+  bhutan_least_access_gewogs:
+    input_file: "../data/raw/Health/Bhutan/Visuals/Step 5/GDA-Public-Health_Least Acess_Gewogs.gpkg"
+    output_file: "../data/processed/Health/Bhutan/Vectors/LeastAccessGewogs.mbtiles"
+    layer_name: "Bhutan_LeastAccessGewogs"
+    min_zoom: 3
+    max_zoom: 9
+
