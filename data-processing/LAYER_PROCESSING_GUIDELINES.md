@@ -49,6 +49,20 @@ uv sync
 source .venv/bin/activate
 ```
 
+### Data directory
+
+Raw inputs and processed outputs live in `data-processing/data/`, which is gitignored. Create it manually on first clone:
+
+```
+data-processing/data/
+├── raw/          # Original files from data providers, organised by theme/country
+│   └── {Theme}/{Country}/...
+└── processed/    # Pipeline outputs (COG, MBTiles, APNGs), organised the same way
+    └── {Theme}/{Country}/{Rasters|Vectors|APNGs}/...
+```
+
+All config paths (`base_path`, `input_file`, `output_file`, `vector_file`) are relative to `data-processing/src/`, so they use `../data/raw/...` and `../data/processed/...`.
+
 ### Environment variables
 
 Copy `.env.example` to `.env` and fill in credentials:
