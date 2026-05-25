@@ -762,3 +762,20 @@ layers:
     output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_PopAccess_Hospitals.tif"
     layer_name: "Bhutan_PopAccess_Hospitals"
     max_zoom: 13
+
+  # India - Agriculture
+  india_worldcover:
+    base_path: "../data/raw/Agriculture/India/GDA-AGRI_UC1-India/ESA_WORLDCOVER/ESA_WorldCover_10m_2021_v200_N30E075_Map"
+    input_file: "ESA_WorldCover_10m_2021_v200_N30E075_Map_resampled.tif"
+    style_file: "../landcover.qml"
+    output_file: "../data/processed/Agriculture/India/Rasters/India_Worldcover.tif"
+    layer_name: "India_Worldcover"
+    max_zoom: 11
+
+  india_soc_change:
+    base_path: "../data/raw/Agriculture/India/GDA-AGRI_UC1-India/PREDICTIONS"
+    input_file: "SOC_prediction_Himachal-Pradesh-croplands_change-2018-2023.tif"
+    style_file: "SOC_change.qml"
+    output_file: "../data/processed/Agriculture/India/Rasters/India_SOC_Change.tif"
+    layer_name: "India_SOC_Change"
+    max_zoom: 14
