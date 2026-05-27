@@ -635,12 +635,20 @@ layers:
     layer_name: "FIRAT_land_productivity"
     max_zoom: 10
 
-  firat_land_cover_change:
+  firat_land_cover_change2:
     base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
-    input_file: "land_cover_change.tif"
+    input_file: "masked_GDACR_Land-Cover-Subindicator_Turkey_2008-2023_20241108100235_v2.tif"
     style_file: "SDG_3_classes.qml"
-    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_cover_change.tif"
-    layer_name: "FIRAT_land_cover_change"
+    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_cover_change2.tif"
+    layer_name: "FIRAT_land_cover_change2"
+    max_zoom: 10
+
+  firat_vegetation_productivity:
+    base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
+    input_file: "masked_GDACR_landsat_DMB_productivity-subindicator-GPGv2_Turkey_2008-2023_20241108100235_resampled.tif"
+    style_file: "SDG_3_classes.qml"
+    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/vegetation_productivity.tif"
+    layer_name: "FIRAT_vegetation_productivity"
     max_zoom: 10
 
   firat_soc:
