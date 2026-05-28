@@ -787,3 +787,61 @@ layers:
     output_file: "../data/processed/Agriculture/India/Rasters/India_SOC_Change.tif"
     layer_name: "India_SOC_Change"
     max_zoom: 14
+
+  # Ghana - Agriculture
+  ghana_crop_type:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/CropType"
+    input_file: "openEO_Tono IRRIGABLE AREA_2023_WRLDCOV_CROP_CLIP_postproc_DEFthr_clip.tif"
+    style_file: "Crop_Type_Style.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_CropType.tif"
+    layer_name: "Ghana_CropType"
+    max_zoom: 14
+
+  ghana_precipitation:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "Precipitation_Country_1981-2010.tif"
+    style_file: "Precipitation_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_Precipitation.tif"
+    layer_name: "Ghana_Precipitation"
+    max_zoom: 9
+
+  ghana_temperature:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "Temperature_Country_1981-2010.tif"
+    style_file: "Temperature_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_Temperature.tif"
+    layer_name: "Ghana_Temperature"
+    max_zoom: 9
+
+  ghana_wind_speed:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "WindSpeed_Country_1981-2010.tif"
+    style_file: "WindSpeed_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_WindSpeed.tif"
+    layer_name: "Ghana_WindSpeed"
+    max_zoom: 9
+
+  ghana_solar_radiation:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "SolarRadiation_Country_1981-2010.tif"
+    style_file: "SolarRadiation_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_SolarRadiation.tif"
+    layer_name: "Ghana_SolarRadiation"
+    max_zoom: 9
+
+  ghana_soil_moisture:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "SoilMoisture_Country_1981-2010.tif"
+    style_file: "SoilMoisture_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_SoilMoisture.tif"
+    layer_name: "Ghana_SoilMoisture"
+    max_zoom: 9
+
+  # Rwanda-Uganda - Agriculture
+  uganda_yield_estimation:
+    base_path: "../data/raw/Agriculture/Rwanda-Uganda/QGIS_layers/4_Yield-estimation"
+    input_file: "Uganda-kassnada-Mityana-districts/GDA-AGRI_UC8-Uganda_Kassanda-district_maize_Yield-Estimation_20230301-20230830_10m.tif"
+    style_file: "yield_style.qml"
+    output_file: "../data/processed/Agriculture/Rwanda-Uganda/Rasters/Uganda_YieldEstimation.tif"
+    layer_name: "Uganda_YieldEstimation"
+    max_zoom: 14

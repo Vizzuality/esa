@@ -476,3 +476,18 @@ layers:
         2: "#006724"
         3: "#f2d33a"
         4: "#e96a1f"
+
+   # Rwanda-Uganda - Agriculture
+  uganda_dry_matter_productivity:
+    input_folder: "../data/raw/Agriculture/Rwanda-Uganda/QGIS_layers/3_Dry-Matter-Productivity/Uganda-kassnada-Mityana-districts/"
+    output_folder: "../data/processed/Agriculture/Rwanda-Uganda/APNGs/DryMatterProductivity/"
+    min_z: 8
+    max_z: 12
+    vmin: 0
+    vmax: 40
+    date_format: "YYYYMMDD"
+    colormap:
+      type: binned
+      intervals: [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+      colors: ["#96714e", "#f4b982", "#d6e2b3", "#b5d178", "#4a8131", "#264f24", "#0f330d", "#041903", "#a258bf", "#622573"]
+

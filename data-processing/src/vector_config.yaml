@@ -453,3 +453,11 @@ layers:
     min_zoom: 3
     max_zoom: 9
 
+  # Rwanda-Uganda - Agriculture
+  rwanda_maize_crop_map:
+    input_file: "../data/raw/Agriculture/Rwanda-Uganda/QGIS_layers/2_Crop-mapping/Rwanda-AOI3/GDA-AGRI_UC8-Rwanda_AOI3_maize-map_20230301-20230831_total.shp"
+    output_file: "../data/processed/Agriculture/Rwanda-Uganda/Vectors/Rwanda_MaizeCropMap.mbtiles"
+    layer_name: "Rwanda_MaizeCropMap"
+    min_zoom: 6
+    max_zoom: 14
+
