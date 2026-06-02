@@ -358,6 +358,13 @@ layers:
     min_zoom: 8
     max_zoom: 12
 
+  sudan_livestock_zone_buffer:
+    input_file: "../data/raw/FCS/Sudan/to_vizz/livestock_zone_buffer.shp"
+    output_file: "../data/processed/FCS/Sudan/Vectors/Livestock_zone_buffer.mbtiles"
+    layer_name: "Sudan_Livestock_Zone_Buffer"
+    min_zoom: 8
+    max_zoom: 12
+
   # Afghanistan - CR
   afghanistan_provinces:
     input_file: "../data/raw/Climate_resilience/Afghanistan/Datasets/Afghanistan_Provinces/AFG_Provinces_4326.shp"
