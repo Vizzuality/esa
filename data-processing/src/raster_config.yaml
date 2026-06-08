@@ -845,3 +845,28 @@ layers:
     output_file: "../data/processed/Agriculture/Rwanda-Uganda/Rasters/Uganda_YieldEstimation.tif"
     layer_name: "Uganda_YieldEstimation"
     max_zoom: 14
+
+  # Bangladesh - CE (Climate)
+  bangladesh_flood_hazard:
+    base_path: "../data/raw/Clean_energy/Bangladesh_Climate/"
+    input_file: "Flood_hazard.tif"
+    style_file: "Flood_hazard.qml"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/FloodHazard.tif"
+    layer_name: "Bangladesh_FloodHazard"
+    max_zoom: 11
+
+  bangladesh_flood_hazard_clipped:
+    base_path: "../data/raw/Clean_energy/Bangladesh_Climate/"
+    input_file: "Flood_hazard_clipped.tif"
+    style_file: "Flood_hazard_clipped.qml"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/FloodHazardClipped.tif"
+    layer_name: "Bangladesh_FloodHazardClipped"
+    max_zoom: 11
+
+  bangladesh_landslide_hazard:
+    base_path: "../data/raw/Clean_energy/Bangladesh_Climate/"
+    input_file: "Landslide_hazard.tif"
+    style_file: "Landslide_hazard.qml"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/LandslideHazard.tif"
+    layer_name: "Bangladesh_LandslideHazard"
+    max_zoom: 11
