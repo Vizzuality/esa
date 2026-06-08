@@ -476,3 +476,11 @@ layers:
     min_zoom: 6
     max_zoom: 14
 
+  # Ghana - DR
+  ghana_shorelines_time_series:
+    input_file: "../data/raw/Disaster_resilience/Ghana/Shorelines_time_series_analysis/GDA-AID-DR_UC03_TS_V00_053054N0001734W-054717N0003955E_2015-2022.geojson"
+    output_file: "../data/processed/Disaster_resilience/Ghana/Vectors/ShorelinesTimeSeries.mbtiles"
+    layer_name: "Ghana_ShorelinesTimeSeries"
+    min_zoom: 6
+    max_zoom: 14
+

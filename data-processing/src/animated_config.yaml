@@ -486,3 +486,26 @@ layers:
       intervals: [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
       colors: ["#96714e", "#f4b982", "#d6e2b3", "#b5d178", "#4a8131", "#264f24", "#0f330d", "#041903", "#a258bf", "#622573"]
 
+  # Ghana - DR
+  ghana_littoral_land_use:
+    input_folder: "../data/raw/Disaster_resilience/Ghana/Littoral_land_use_map/animated/"
+    output_folder: "../data/processed/Disaster_resilience/Ghana/APNGs/LittoralLandUse/"
+    min_z: 7
+    max_z: 12
+    vmin: 0
+    vmax: 255
+    date_format: "YYYYMMDD"
+    colormap:
+      type: categorical
+      values:
+        1: "#a0a0a0"
+        2: "#c68a4e"
+        15: "#00970c"
+        20: "#d0ff24"
+        80: "#5eff91"
+        90: "#3bff00"
+        120: "#40e0d0"
+        125: "#99ffff"
+        150: "#3399ff"
+        200: "#000099"
+
