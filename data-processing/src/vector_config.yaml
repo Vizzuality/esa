@@ -468,3 +468,11 @@ layers:
     min_zoom: 6
     max_zoom: 14
 
+  # Bangladesh - CE (Climate)
+  bangladesh_energy_lines:
+    input_file: "../data/raw/Clean_energy/Bangladesh_Climate/EnergyLines_FloodExposure.shp"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Vectors/EnergyLinesFloodExposure.mbtiles"
+    layer_name: "Bangladesh_EnergyFloodExposure"
+    min_zoom: 6
+    max_zoom: 14
+
