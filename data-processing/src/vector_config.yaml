@@ -484,3 +484,47 @@ layers:
     min_zoom: 6
     max_zoom: 14
 
+  # Tanzania - Urban
+  tanzania_heat_event_simulation:
+    input_file: "../data/raw/Urban_sustainability/Tanzania/Dar_Es_Salaam_Heat_Event_Simulation_derivative.geojson"
+    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/HeatEventSimulation.mbtiles"
+    layer_name: "Tanzania_HeatEventSim"
+    min_zoom: 6
+    max_zoom: 14
+
+  tanzania_hourly_temperature:
+    input_file: "../data/raw/Urban_sustainability/Tanzania/Dar_Es_Salaam_Daily_Hourly.geojson"
+    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/HourlyTemperature.mbtiles"
+    layer_name: "Tanzania_HourlyTemp"
+    min_zoom: 6
+    max_zoom: 14
+
+  tanzania_suhii:
+    input_file: "../data/raw/Urban_sustainability/Tanzania/dar_es_salaam_suhii.geojson"
+    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/SUHII.mbtiles"
+    layer_name: "Tanzania_SUHII"
+    min_zoom: 6
+    max_zoom: 14
+
+  tanzania_lst:
+    input_file: "../data/raw/Urban_sustainability/Tanzania/dar_es_salaam_lst.geojson"
+    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/LST.mbtiles"
+    layer_name: "Tanzania_LST"
+    min_zoom: 6
+    max_zoom: 14
+
+  # CIV - Urban
+  civ_hvi:
+    input_file: "../data/raw/Urban_sustainability/CIV/Abidjan_HVI_derivative.geojson"
+    output_file: "../data/processed/Urban_sustainability/CIV/Vectors/HVI.mbtiles"
+    layer_name: "CIV_HVI"
+    min_zoom: 6
+    max_zoom: 14
+
+  civ_suhii:
+    input_file: "../data/raw/Urban_sustainability/CIV/abidjan_suhii.geojson"
+    output_file: "../data/processed/Urban_sustainability/CIV/Vectors/SUHII.mbtiles"
+    layer_name: "CIV_SUHII"
+    min_zoom: 6
+    max_zoom: 14
+
