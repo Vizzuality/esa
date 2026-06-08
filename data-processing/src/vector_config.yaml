@@ -528,3 +528,18 @@ layers:
     min_zoom: 6
     max_zoom: 14
 
+  # Nigeria - Health
+  nigeria_kano_kaduna_states:
+    input_file: "../data/raw/Health/Nigeria/Step 2/kano_kaduna_states.gpkg"
+    output_file: "../data/processed/Health/Nigeria/Vectors/KanoKadunaStates.mbtiles"
+    layer_name: "Kano_Kaduna_States"
+    min_zoom: 6
+    max_zoom: 14
+
+  nigeria_croptypemap_rice:
+    input_file: "../data/raw/Health/Nigeria/Step 3/croptypemap_rice_clipped.gpkg"
+    output_file: "../data/processed/Health/Nigeria/Vectors/CroptypeMapRice.mbtiles"
+    layer_name: "Nigeria_CroptypeMapRice"
+    min_zoom: 6
+    max_zoom: 14
+

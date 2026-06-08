@@ -509,3 +509,34 @@ layers:
         150: "#3399ff"
         200: "#000099"
 
+  # Yemen - Health
+  yemen_ggdi:
+    input_folder: "../data/raw/Health/Yemen/GGDI/renamed/"
+    output_folder: "../data/processed/Health/Yemen/APNGs/GGDI/"
+    min_z: 3
+    max_z: 8
+    vmin: 0
+    vmax: 255
+    date_format: "YYYY"
+    colormap:
+      type: categorical
+      values:
+        1: "#fbedde"
+        2: "#fa8d57"
+        3: "#e34932"
+        4: "#95160a"
+      transparent_values: [99]
+
+  yemen_groundwater_storage_anomalies:
+    input_folder: "../data/raw/Health/Yemen/Groundwater Storage Anomalies/renamed/"
+    output_folder: "../data/processed/Health/Yemen/APNGs/GroundwaterStorageAnomalies/"
+    min_z: 3
+    max_z: 8
+    vmin: -120
+    vmax: 120
+    date_format: "YYYY"
+    colormap:
+      type: linear
+      colors: ["#ca0020", "#f4a582", "#f7f7f7", "#0571b0", "#92c5de"]
+      reserve_zero_transparent: true
+

@@ -870,3 +870,21 @@ layers:
     output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/LandslideHazard.tif"
     layer_name: "Bangladesh_LandslideHazard"
     max_zoom: 11
+
+  # Yemen - Health
+  yemen_precipitation:
+    base_path: "../data/raw/Health/Yemen/Precipitaion"
+    input_file: "CHIRPS_multi_anual_mean_Yemen_prj.tif"
+    style_file: "precipitation.qml"
+    output_file: "../data/processed/Health/Yemen/Rasters/Precipitation.tif"
+    layer_name: "Yemen_Precipitation"
+    max_zoom: 11
+
+  # Nigeria - Health
+  nigeria_yield_estimation:
+    base_path: "../data/raw/Health/Nigeria/Step 4"
+    input_file: "yield_estimation_clipped.tif"
+    style_file: "yieldestimation.qml"
+    output_file: "../data/processed/Health/Nigeria/Rasters/YieldEstimation.tif"
+    layer_name: "Nigeria_YieldEstimation"
+    max_zoom: 14
