@@ -837,6 +837,30 @@ layers:
     layer_name: "Ghana_SoilMoisture"
     max_zoom: 9
 
+  ghana_peak_groundnut_rcp45:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana"
+    input_file: "Ghana_Peak_Groundnut_RCP45.tif"
+    style_file: "Ghana_Peak_styling.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_PeakGroundnutRCP45.tif"
+    layer_name: "Ghana_PeakGroundnutRCP45"
+    max_zoom: 9
+
+  ghana_peak_maize_rcp45:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana"
+    input_file: "Ghana_Peak_Maize_RCP45.tif"
+    style_file: "Ghana_Peak_styling.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_PeakMaizeRCP45.tif"
+    layer_name: "Ghana_PeakMaizeRCP45"
+    max_zoom: 9
+
+  ghana_peak_soybean_rcp45:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana"
+    input_file: "Ghana_Peak_Soybean_RCP45.tif"
+    style_file: "Ghana_Peak_styling.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_PeakSoybeanRCP45.tif"
+    layer_name: "Ghana_PeakSoybeanRCP45"
+    max_zoom: 9
+
   # Rwanda-Uganda - Agriculture
   uganda_yield_estimation:
     base_path: "../data/raw/Agriculture/Rwanda-Uganda/QGIS_layers/4_Yield-estimation"
