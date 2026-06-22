@@ -1,27 +1,31 @@
 """Process raster and vector layers based on YAML configuration."""
 
-
+import math
+import os
 import subprocess
 import sys
 from pathlib import Path
 from typing import Optional
 
+import numpy as np
+import rasterio
 import yaml
+from rasterio.warp import transform_bounds
 
-import os
-
-from .raster_processor import RasterProcessor
-from .vector_processor import VectorProcessor
 from helpers.cog_converter import COGConverter
 from helpers.mapbox_uploader import upload_to_mapbox
 from helpers.mbtiles_converter import MBTilesConverterFactory
 
+from .raster_processor import RasterProcessor
+from .vector_processor import VectorProcessor
+
 # ── Shared helpers ────────────────────────────────────────────────────────────
 
+
 def _read_layers(config_path: str) -> dict:
-    with open(config_path, 'r') as f:
+    with open(config_path, "r") as f:
         config = yaml.safe_load(f) or {}
-    return config.get('layers', {})
+    return config.get("layers", {})
 
 
 def _resolve_upload_flag(
@@ -34,16 +38,14 @@ def _resolve_upload_flag(
         return upload_override
     if upload_layer_keys_set is not None:
         return layer_id in upload_layer_keys_set
-    return layer_config.get('upload', False)
+    return layer_config.get("upload", False)
 
 
 # ── Pre-styled raster (no QML) ───────────────────────────────────────────────
 
+
 def _native_max_zoom(file: Path) -> int:
     """Return the native max zoom of a raster based on its resolution."""
-    import math
-    import rasterio
-    from rasterio.warp import transform_bounds
     with rasterio.open(file) as src:
         bounds = transform_bounds(src.crs, "EPSG:4326", *src.bounds)
         res_x = abs(src.transform.a)
@@ -72,9 +74,6 @@ def _normalize_to_uint8(input_file: Path, output_file: Path, percentile: float =
         output_file: Destination uint8 GeoTIFF.
         percentile: Low/high percentile used for clipping (default 2 / 98).
     """
-    import numpy as np
-    import rasterio
-
     with rasterio.open(input_file) as src:
         meta = src.meta.copy()
         data = src.read()
@@ -126,7 +125,6 @@ def process_prestyled_raster(
         percentile: Percentile used for float→uint8 contrast stretch (default 2/98).
         upload: Whether to upload the MBTiles to Mapbox.
     """
-    import rasterio
 
     input_file = Path(input_file)
     output_file = Path(output_file)
@@ -143,7 +141,7 @@ def process_prestyled_raster(
     cog_input = input_file
     if needs_normalization:
         normalized_path = output_file.parent / f"normalized_{output_file.name}"
-        print(f"⚖️  Normalizing float32 → uint8 (percentile clip {percentile}/{100-percentile})")
+        print(f"⚖️  Normalizing float32 → uint8 (percentile clip {percentile}/{100 - percentile})")
         _normalize_to_uint8(input_file, normalized_path, percentile=percentile)
         cog_input = normalized_path
 
@@ -173,6 +171,7 @@ def process_prestyled_raster(
 
 # ── Raster ────────────────────────────────────────────────────────────────────
 
+
 def _process_rasters(
     config_path: str,
     layer_keys: list = None,
@@ -189,20 +188,20 @@ def _process_rasters(
     processed_count = 0
     failed_count = 0
 
-    print(f'Found {len(layers)} raster layer(s) to process\n')
+    print(f"Found {len(layers)} raster layer(s) to process\n")
 
     for layer_id, layer_config in layers.items():
         try:
-            base_path = Path(layer_config['base_path'])
-            input_file = base_path / layer_config['input_file']
-            output_file = Path(layer_config['output_file'])
+            base_path = Path(layer_config["base_path"])
+            input_file = base_path / layer_config["input_file"]
+            output_file = Path(layer_config["output_file"])
 
             style_file = None
-            if layer_config.get('style_file'):
-                style_file = base_path / layer_config['style_file']
+            if layer_config.get("style_file"):
+                style_file = base_path / layer_config["style_file"]
 
             if not input_file.exists():
-                print(f'SKIP {layer_id}: Input file not found at {input_file}')
+                print(f"SKIP {layer_id}: Input file not found at {input_file}")
                 failed_count += 1
                 continue
 
@@ -211,27 +210,28 @@ def _process_rasters(
             )
 
             vector_file = None
-            if layer_config.get('vector_file'):
-                vector_file = Path(layer_config['vector_file'])
+            if layer_config.get("vector_file"):
+                vector_file = Path(layer_config["vector_file"])
 
             RasterProcessor(
                 input_file,
                 output_file=output_file,
                 qml_file=style_file,
-                layer_name=layer_config['layer_name'],
+                layer_name=layer_config["layer_name"],
                 vector_file=vector_file,
                 upload=upload_flag,
-                max_zoom=layer_config.get('max_zoom', 11),
+                max_zoom=layer_config.get("max_zoom", 11),
+                tile_format=layer_config.get("tile_format", "PNG"),
             ).process()
 
             print(f"✅ {layer_id}: {layer_config['layer_name']} (upload={upload_flag})")
             processed_count += 1
 
         except Exception as e:
-            print(f'❌ {layer_id}: {str(e)}')
+            print(f"❌ {layer_id}: {str(e)}")
             failed_count += 1
 
-    print(f'\n📊 Summary: {processed_count} processed, {failed_count} failed')
+    print(f"\n📊 Summary: {processed_count} processed, {failed_count} failed")
     return processed_count, failed_count
 
 
@@ -295,20 +295,20 @@ sys.exit(1 if failed > 0 else 0)
     fail = 0
 
     for key in keys_to_run:
-        print(f'\n=== Processing raster {key} in isolated process ===')
+        print(f"\n=== Processing raster {key} in isolated process ===")
 
         if upload_override is not None:
-            upload_arg = '1' if upload_override else '0'
+            upload_arg = "1" if upload_override else "0"
         elif upload_layer_keys_set is not None:
-            upload_arg = '1' if key in upload_layer_keys_set else '0'
+            upload_arg = "1" if key in upload_layer_keys_set else "0"
         else:
-            upload_arg = 'none'
+            upload_arg = "none"
 
         try:
             subprocess.run(
                 [
                     sys.executable,
-                    '-c',
+                    "-c",
                     runner,
                     config_path,
                     key,
@@ -319,14 +319,15 @@ sys.exit(1 if failed > 0 else 0)
             )
             ok += 1
         except subprocess.CalledProcessError:
-            print(f'❌ {key}: failed in isolated process')
+            print(f"❌ {key}: failed in isolated process")
             fail += 1
 
-    print(f'\n📊 Isolated summary: {ok} succeeded, {fail} failed')
+    print(f"\n📊 Isolated summary: {ok} succeeded, {fail} failed")
     return ok, fail
 
 
 # ── Vector ────────────────────────────────────────────────────────────────────
+
 
 def _process_vectors(
     config_path: str,
@@ -345,15 +346,15 @@ def _process_vectors(
     processed_count = 0
     failed_count = 0
 
-    print(f'📋 Found {len(layers)} vector layer(s) to process\n')
+    print(f"📋 Found {len(layers)} vector layer(s) to process\n")
 
     for layer_id, layer_config in layers.items():
         try:
-            input_file = Path(layer_config['input_file'])
-            output_file = Path(layer_config['output_file'])
+            input_file = Path(layer_config["input_file"])
+            output_file = Path(layer_config["output_file"])
 
             if not input_file.exists():
-                print(f'⚠️  SKIP {layer_id}: Input file not found at {input_file}')
+                print(f"⚠️  SKIP {layer_id}: Input file not found at {input_file}")
                 failed_count += 1
                 continue
 
@@ -362,19 +363,16 @@ def _process_vectors(
             )
 
             if dry_run:
-                print(
-                    f"✓ DRY RUN {layer_id}: {layer_config['layer_name']} "
-                    f"(upload={upload_flag})"
-                )
+                print(f"✓ DRY RUN {layer_id}: {layer_config['layer_name']} (upload={upload_flag})")
                 processed_count += 1
                 continue
 
             VectorProcessor(
                 input_file=input_file,
                 output_file=output_file,
-                layer_name=layer_config['layer_name'],
-                min_zoom=layer_config.get('min_zoom', 0),
-                max_zoom=layer_config.get('max_zoom', 14),
+                layer_name=layer_config["layer_name"],
+                min_zoom=layer_config.get("min_zoom", 0),
+                max_zoom=layer_config.get("max_zoom", 14),
                 upload=upload_flag,
             ).process()
 
@@ -382,10 +380,10 @@ def _process_vectors(
             processed_count += 1
 
         except Exception as e:
-            print(f'❌ {layer_id}: {str(e)}')
+            print(f"❌ {layer_id}: {str(e)}")
             failed_count += 1
 
-    print(f'\n📊 Summary: {processed_count} processed, {failed_count} failed')
+    print(f"\n📊 Summary: {processed_count} processed, {failed_count} failed")
     return processed_count, failed_count
 
 
@@ -415,4 +413,3 @@ def process_vector_layers(
         upload_override=upload_override,
         upload_layer_keys=upload_layer_keys,
     )
-

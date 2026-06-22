@@ -35,6 +35,7 @@ class RasterProcessor:
         create_mbtiles: bool = True,
         vector_file: Path = None,
         max_zoom: int = None,
+        tile_format: str = "PNG",
     ):
         """
         Initialize the RasterProcessor object.
@@ -48,6 +49,9 @@ class RasterProcessor:
             create_mbtiles (bool): Whether to create an MBTiles file.
             vector_file (Path): Optional path to a shapefile for clipping the raster.
             max_zoom (int): Maximum zoom level for COG conversion.
+            tile_format (str): Tile format for MBTiles ("PNG" or "JPEG").
+                               Use "JPEG" for continuous/interpolated rasters
+                               that exceed the Mapbox 500KB tile size limit.
         """
         self.input_file = input_file
         self.qml_file = qml_file
@@ -57,6 +61,7 @@ class RasterProcessor:
         self.create_mbtiles = create_mbtiles
         self.vector_file = vector_file
         self.max_zoom = max_zoom
+        self.tile_format = tile_format
         self.clipped_raster_path = None
 
     def clip_raster(self) -> Path:
@@ -219,7 +224,9 @@ class RasterProcessor:
             if self.create_mbtiles:
                 console.print("📦 Converting to MBTiles...", style="bold white")
                 mbtiles_path = geotiff_path.with_suffix(".mbtiles")
-                MBTilesConverterFactory.convert(geotiff_path, mbtiles_path)
+                MBTilesConverterFactory.convert(
+                    geotiff_path, mbtiles_path, tile_format=self.tile_format
+                )
                 console.print(
                     f"✅ Processing complete. Output saved to {mbtiles_path}", style="bold green"
                 )

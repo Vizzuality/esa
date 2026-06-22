@@ -540,3 +540,16 @@ layers:
       colors: ["#ca0020", "#f4a582", "#f7f7f7", "#0571b0", "#92c5de"]
       reserve_zero_transparent: true
 
+  # Afghanistan - CR
+  afghanistan_irrigation_channel:
+    input_folder: "../data/raw/Climate_resilience/Afghanistan/Datasets/irrigation_channel/renamed/"
+    output_folder: "../data/processed/Climate_resilience/Afghanistan/APNGs/IrrigationChannel/"
+    min_z: 10
+    max_z: 12
+    vmin: 0
+    vmax: 255
+    date_format: "YYYYMMDD"
+    colormap:
+      type: linear
+      colors: ["#000000", "#ffffff"]
+
