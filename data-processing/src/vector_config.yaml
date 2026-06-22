@@ -432,14 +432,14 @@ layers:
     min_zoom: 3
     max_zoom: 9
 
-  bhutan_road_network:
+  bhutan_road_network:  # preprocessing: extract layer from gpkg (notebook 02)
     input_file: "../data/raw/Health/Bhutan/Visuals/Step 2/Road_network.gpkg"
     output_file: "../data/processed/Health/Bhutan/Vectors/RoadNetwork.mbtiles"
     layer_name: "Bhutan_RoadNetwork"
     min_zoom: 3
     max_zoom: 9
 
-  bhutan_health_facilities:
+  bhutan_health_facilities:  # preprocessing: extract layer from gpkg (notebook 02)
     input_file: "../data/raw/Health/Bhutan/Visuals/Step 2/Health_Facilities.gpkg"
     output_file: "../data/processed/Health/Bhutan/Vectors/HealthFacilities.mbtiles"
     layer_name: "Bhutan_HealthFacilities"
@@ -529,17 +529,61 @@ layers:
     max_zoom: 14
 
   # Nigeria - Health
-  nigeria_kano_kaduna_states:
+  nigeria_kano_kaduna_states:  # preprocessing: merge Kano + Kaduna states (notebook 02)
     input_file: "../data/raw/Health/Nigeria/Step 2/kano_kaduna_states.gpkg"
     output_file: "../data/processed/Health/Nigeria/Vectors/KanoKadunaStates.mbtiles"
     layer_name: "Kano_Kaduna_States"
     min_zoom: 6
     max_zoom: 14
 
-  nigeria_croptypemap_rice:
+  nigeria_croptypemap_rice:  # preprocessing: clip with bbox (notebook 02)
     input_file: "../data/raw/Health/Nigeria/Step 3/croptypemap_rice_clipped.gpkg"
     output_file: "../data/processed/Health/Nigeria/Vectors/CroptypeMapRice.mbtiles"
     layer_name: "Nigeria_CroptypeMapRice"
+    min_zoom: 6
+    max_zoom: 14
+
+  # Madagascar - CE
+  madagascar_buildings:
+    input_file: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset/buildings_subsetClasses.json"
+    output_file: "../data/processed/Clean_energy/Madagascar/Vectors/Buildings.mbtiles"
+    layer_name: "Madagascar_Buildings"
+    min_zoom: 6
+    max_zoom: 14
+
+  madagascar_roads:
+    input_file: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset/roads_subset.geojson"
+    output_file: "../data/processed/Clean_energy/Madagascar/Vectors/Roads.mbtiles"
+    layer_name: "Madagascar_Roads"
+    min_zoom: 6
+    max_zoom: 14
+
+  madagascar_settlements:
+    input_file: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset/settlement_subset2.geojson"
+    output_file: "../data/processed/Clean_energy/Madagascar/Vectors/Settlements.mbtiles"
+    layer_name: "Madagascar_Settlements"
+    min_zoom: 6
+    max_zoom: 14
+
+  # Armenia - CE Solar
+  armenia_solar_building:
+    input_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/Syunik_cityLevel/Syunik_solar_Building.shp"
+    output_file: "../data/processed/Clean_energy/Armenia/Vectors/SolarBuilding.mbtiles"
+    layer_name: "Armenia_SolarBuilding"
+    min_zoom: 6
+    max_zoom: 14
+
+  armenia_edges:
+    input_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/Syunik_cityLevel/v3_edges.shp"
+    output_file: "../data/processed/Clean_energy/Armenia/Vectors/Edges.mbtiles"
+    layer_name: "Armenia_Edges"
+    min_zoom: 6
+    max_zoom: 14
+
+  armenia_solar_potential:
+    input_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/Syunik_cityLevel/v4_SolarPotential.shp"
+    output_file: "../data/processed/Clean_energy/Armenia/Vectors/SolarPotential.mbtiles"
+    layer_name: "Armenia_SolarPotential"
     min_zoom: 6
     max_zoom: 14
 

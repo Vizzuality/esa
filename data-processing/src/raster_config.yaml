@@ -364,7 +364,7 @@ layers:
     max_zoom: 11
 
   # Somalia - Water
-  somalia_worldcover:
+  somalia_worldcover:  # preprocessing: merge + resample + clip (notebook 01)
     base_path: "../data/raw/Water/Somalia/Rasters/"
     input_file: "Clipped/WorldCover_resampled.tif"
     style_file: "WorldCover.qml"
@@ -372,7 +372,7 @@ layers:
     layer_name: "WorldCover"
     max_zoom: 11
 
-  somalia_groundwater_storage:
+  somalia_groundwater_storage:  # preprocessing: clip to Somalia (notebook 01)
     base_path: "../data/raw/Water/Somalia/Rasters/Clipped/"
     input_file: "3_GDAWater_GroundwaterResourcesEstimation_MeanAnnualGroundwaterStorageBalance_Multi-annual_Somalia_2003-2024_10042025.tif"
     style_file: "Groundwater.qml"
@@ -381,7 +381,7 @@ layers:
     max_zoom: 11
 
   # West Africa - Water
-  west_africa_precipitation:
+  west_africa_precipitation:  # preprocessing: assign CRS (notebook 01)
     base_path: "../data/raw/Water/West Africa/Rasters/"
     input_file: "1_GDAWater_Precipitation_MeanAnnualPrecipitation_Multi-annual_WestAfrica_2003-2024_23052025_prj.tif"
     style_file: "precipitation.qml"
@@ -389,7 +389,7 @@ layers:
     layer_name: "MeanAnnualPrecipitation_WestAfrica"
     max_zoom: 5
 
-  west_africa_groundwater_availability:
+  west_africa_groundwater_availability:  # preprocessing: clip to West Africa (notebook 01)
     base_path: "../data/raw/Water/West Africa/Rasters/Clipped"
     input_file: "3a_GDAWATER_Groundwater_Availability_percentage_WestAfrica_2024_03.tif"
     style_file: "Groundwater_Availability_percentage.qml"
@@ -643,7 +643,7 @@ layers:
     layer_name: "FIRAT_land_cover_change2"
     max_zoom: 10
 
-  firat_vegetation_productivity:
+  firat_vegetation_productivity:  # preprocessing: resample scale_factor=7 (notebook 01)
     base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
     input_file: "masked_GDACR_landsat_DMB_productivity-subindicator-GPGv2_Turkey_2008-2023_20241108100235_resampled.tif"
     style_file: "SDG_3_classes.qml"
@@ -695,7 +695,7 @@ layers:
     max_zoom: 13
   
 # Mozambique - CR
-  mozambique_agb_prediction:
+  mozambique_agb_prediction:  # preprocessing: extract band1 + resample (notebook 01)
     base_path: "../data/raw/Climate_resilience/Mozambique/Rasters"
     input_file: "0007MZ_GIL_L4_AGB_band1_resampled.tiff"
     style_file: "band1.qml"
@@ -772,7 +772,7 @@ layers:
     max_zoom: 13
 
   # India - Agriculture
-  india_worldcover:
+  india_worldcover:  # preprocessing: resample scale_factor=10 (notebook 01)
     base_path: "../data/raw/Agriculture/India/GDA-AGRI_UC1-India/ESA_WORLDCOVER/ESA_WorldCover_10m_2021_v200_N30E075_Map"
     input_file: "ESA_WorldCover_10m_2021_v200_N30E075_Map_resampled.tif"
     style_file: "../landcover.qml"
@@ -883,8 +883,8 @@ layers:
     base_path: "../data/raw/Clean_energy/Bangladesh_Climate/"
     input_file: "Flood_hazard_clipped.tif"
     style_file: "Flood_hazard_clipped.qml"
-    output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/FloodHazardClipped.tif"
-    layer_name: "Bangladesh_FloodHazardClipped"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/FloodHazardClipped2.tif"
+    layer_name: "Bangladesh_FloodHazardClipped2"
     max_zoom: 11
 
   bangladesh_landslide_hazard:
@@ -896,7 +896,7 @@ layers:
     max_zoom: 11
 
   # Yemen - Health
-  yemen_precipitation:
+  yemen_precipitation:  # preprocessing: assign CRS (notebook 01)
     base_path: "../data/raw/Health/Yemen/Precipitaion"
     input_file: "CHIRPS_multi_anual_mean_Yemen_prj.tif"
     style_file: "precipitation.qml"
@@ -905,10 +905,70 @@ layers:
     max_zoom: 11
 
   # Nigeria - Health
-  nigeria_yield_estimation:
+  nigeria_yield_estimation:  # preprocessing: clip with bbox (notebook 01)
     base_path: "../data/raw/Health/Nigeria/Step 4"
     input_file: "yield_estimation_clipped.tif"
     style_file: "yieldestimation.qml"
     output_file: "../data/processed/Health/Nigeria/Rasters/YieldEstimation.tif"
     layer_name: "Nigeria_YieldEstimation"
     max_zoom: 14
+
+  # Madagascar - CE
+  madagascar_cropland_mask:
+    base_path: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset"
+    input_file: "Cropland_mask_LTF.tif"
+    style_file: "Cropland_mask_LTF.qml"
+    output_file: "../data/processed/Clean_energy/Madagascar/Rasters/CroplandMask.tif"
+    layer_name: "Madagascar_CroplandMask"
+    max_zoom: 11
+
+  madagascar_irrigation_class:
+    base_path: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset"
+    input_file: "OB_irrigation_class_LTF.tif"
+    style_file: "OB_irrigation_class_LTF.qml"
+    output_file: "../data/processed/Clean_energy/Madagascar/Rasters/IrrigationClass.tif"
+    layer_name: "Madagascar_IrrigationClass"
+    max_zoom: 11
+
+  # Armenia - CE
+  armenia_lulc:
+    base_path: "../data/raw/Clean_energy/Armenia_Wind"
+    input_file: "LULC.tif"
+    style_file: "LULC_symbology.qml"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/LULC.tif"
+    layer_name: "Armenia_LULC"
+    max_zoom: 11
+
+  armenia_wind_speed_140m:
+    base_path: "../data/raw/Clean_energy/Armenia_Wind/1_22_391_Armenien/geotiff_Dateien"
+    input_file: "ws_140m.tif"
+    style_file: "ws_140m.qml"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/WindSpeed140m.tif"
+    layer_name: "Armenia_WindSpeed140m"
+    max_zoom: 11
+
+  armenia_power_density_100m:
+    base_path: "../data/raw/Clean_energy/Armenia_Wind/1_22_391_Armenien/geotiff_Dateien"
+    input_file: "pd_100m.tif"
+    style_file: "pd_100m.qml"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/PowerDensity100m.tif"
+    layer_name: "Armenia_PowerDensity100m"
+    max_zoom: 11
+
+  armenia_cloud_probability:
+    base_path: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer"
+    input_file: "CloudProbability_Armenia_2022.tif"
+    style_file: "../Armenia_SymbologyLayers/CloudProbability_Armenia_2022.qml"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/CloudProbability.tif"
+    layer_name: "Armenia_CloudProbability"
+    max_zoom: 10
+    tile_format: JPEG
+
+  armenia_solar_radiation:
+    base_path: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer"
+    input_file: "SolarRadiation_Armenia_25m.tif"
+    style_file: "../Armenia_SymbologyLayers/SolarRadiation_Armenia_25m.qml"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/SolarRadiation.tif"
+    layer_name: "Armenia_SolarRadiation"
+    max_zoom: 10
+    tile_format: JPEG
