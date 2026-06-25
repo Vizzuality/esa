@@ -17,6 +17,8 @@ import { useIsMobile } from '@/hooks/screen-size';
 import RichText from '@/components/ui/rich-text';
 import ScrollExplanation from '@/components/ui/scroll-explanation';
 
+import Feedback from '@/containers/story/feedback';
+
 type Disclaimer = {
   id: number;
   title: string;
@@ -157,23 +159,23 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
             )} */}
 
             <motion.div
-              className="flex w-full max-w-5xl flex-1 justify-center space-y-16 sm:items-center"
+              className="flex w-full max-w-5xl flex-1 flex-col justify-center space-y-16 sm:items-center"
               initial={{ opacity: 0, x: '300%' }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5 }}
               style={{ opacity: scrollOpacity }}
             >
-              <div className="max-w-lg space-y-4 p-4 sm:p-10">
+              <div className="max-w-lg  space-y-4 p-4 sm:p-10">
                 <h3 className="text-enlight-yellow-500 text-2xl font-bold tracking-wider">
                   {title}
                 </h3>
                 <RichText className="conclusion-list text-white">{content}</RichText>
               </div>
+              <Feedback />
             </motion.div>
           </div>
         </div>
-
         <div className="fixed bottom-0">
           <motion.div style={{ opacity: showContinueScrolling }} className="z-10 mb-8">
             <ScrollExplanation>Continue scrolling to explore more stories</ScrollExplanation>
