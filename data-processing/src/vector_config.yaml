@@ -470,9 +470,16 @@ layers:
 
   # Bangladesh - CE (Climate)
   bangladesh_energy_lines:
-    input_file: "../data/raw/Clean_energy/Bangladesh_Climate/EnergyLines_FloodExposure.shp"
-    output_file: "../data/processed/Clean_energy/Bangladesh/Vectors/EnergyLinesFloodExposure.mbtiles"
-    layer_name: "Bangladesh_EnergyFloodExposure"
+    input_file: "../data/raw/Clean_energy/Bangladesh_Climate/Bangladesh_lines_LDS.shp"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Vectors/Bangladesh_lines_LDS.mbtiles"
+    layer_name: "Bangladesh_EnergyLines"
+    min_zoom: 6
+    max_zoom: 14
+
+  bangladesh_towers:
+    input_file: "../data/raw/Clean_energy/Bangladesh_Climate/Bangladesh_towers_LDS_clip.geojson"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Vectors/Bangladesh_towers_LDS.mbtiles"
+    layer_name: "Bangladesh_Towers"
     min_zoom: 6
     max_zoom: 14
 
