@@ -7,7 +7,11 @@ import { getStoriesParams } from '@/lib/stories';
 import { getGetCategoriesQueryOptions } from '@/types/generated/category';
 import { getGetStoriesQueryOptions } from '@/types/generated/story';
 import { CategoryListResponse } from '@/types/generated/strapi.schemas';
-import { getGetTopStoriesQueryOptions } from '@/types/generated/top-story';
+// NOTE: top-story prefetch is disabled for now — the globe side panel renders
+// regular stories (see containers/globe/top-stories). We no longer distinguish
+// between featured/top stories and stories. The top-story entity/API is kept
+// in place so this can be re-enabled later.
+// import { getGetTopStoriesQueryOptions } from '@/types/generated/top-story';
 
 import Globe from '@/containers/globe';
 
@@ -59,17 +63,19 @@ async function prefetchQueries(searchParams: HomePageProps['searchParams']) {
       queryFn: storiesQueryFn,
     });
 
-    const { queryKey: topStoriesQueryKey, queryFn: topStoriesQueryFn } =
-      getGetTopStoriesQueryOptions({
-        'pagination[limit]': 5,
-        populate: 'story,cover_image',
-        sort: 'index:asc',
-      });
-
-    await queryClient.prefetchQuery({
-      queryKey: topStoriesQueryKey,
-      queryFn: topStoriesQueryFn,
-    });
+    // Top stories prefetch disabled — see note on the import above. The panel
+    // now uses the regular stories prefetched above (no featured/top distinction).
+    // const { queryKey: topStoriesQueryKey, queryFn: topStoriesQueryFn } =
+    //   getGetTopStoriesQueryOptions({
+    //     'pagination[limit]': 5,
+    //     populate: 'story,cover_image',
+    //     sort: 'index:asc',
+    //   });
+    //
+    // await queryClient.prefetchQuery({
+    //   queryKey: topStoriesQueryKey,
+    //   queryFn: topStoriesQueryFn,
+    // });
 
     return dehydrate(queryClient);
   } catch (error) {
