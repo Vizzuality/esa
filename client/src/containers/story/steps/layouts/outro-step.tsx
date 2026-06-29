@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { useScroll, motion, useTransform, useMotionValueEvent, useInView } from 'framer-motion';
+import { useScroll, motion, useTransform, useMotionValueEvent } from 'framer-motion';
 import { useSetAtom } from 'jotai';
 
 import { cn } from '@/lib/classnames';
@@ -68,7 +68,6 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   }, [step, disclaimer]);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const endRef = useRef<HTMLDivElement>(null);
   const navigatedRef = useRef(false);
 
   const { scrollYProgress } = useScroll({
@@ -76,14 +75,6 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     offset: ['start end', 'end start'],
     smooth: 10000,
   });
-
-  // Sentinel at the very bottom of the outro: only enters view once the user has
-  // scrolled past the outro content, so we redirect at the true end of the story.
-  // The outro is the last step, so the page can't scroll past the sentinel — at max
-  // scroll it sits right at (or just below) the fold and would never intersect. The
-  // bottom margin grows the observer root downward so it registers in the final
-  // stretch of scroll, while still gating the redirect on `hasSeenOutro`.
-  const isEnd = useInView(endRef, { amount: 'some', margin: '0px 0px 200px 0px' });
 
   const [show, setShow] = useState(true);
   // True once the user has scrolled far enough to see the "Continue scrolling" hint;
@@ -96,14 +87,25 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     if (!showContent) setShow(false);
   }, [showContent]);
 
+  // The outro is the last step, so its bottom sits exactly at the document's max-scroll
+  // edge — a bottom sentinel + IntersectionObserver never fires reliably there in a
+  // production build. Detect the true end of scroll deterministically instead: at max
+  // scroll `scrollY + innerHeight === scrollHeight`. Gated by `hasSeenOutro` so we only
+  // leave for the globe once the "Continue scrolling" hint has been shown.
   useEffect(() => {
-    if (isEnd && hasSeenOutro && !navigatedRef.current) {
-      navigatedRef.current = true;
-      storyNavigation.isLeaving = true;
-      setLayers([]);
-      push('/globe', { scroll: false });
-    }
-  }, [isEnd, hasSeenOutro, setLayers, push]);
+    const onScroll = () => {
+      const atBottom =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+      if (atBottom && hasSeenOutro && !navigatedRef.current) {
+        navigatedRef.current = true;
+        storyNavigation.isLeaving = true;
+        setLayers([]);
+        push('/globe', { scroll: false });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [hasSeenOutro, setLayers, push]);
 
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
     if (!show && showContent && v > 0.2) {
@@ -268,7 +270,6 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
           </div>
         </div>
       </motion.div>
-      <div ref={endRef} className="pointer-events-none absolute bottom-0 h-px w-full" />
     </div>
   );
 };
