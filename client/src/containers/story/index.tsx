@@ -9,7 +9,7 @@ import { useSetAtom } from 'jotai';
 import { ScrollProvider } from '@/lib/scroll';
 
 import { layersAtom, tmpBboxAtom } from '@/store/map';
-import { useSyncStep } from '@/store/stories';
+import { storyNavigation, useSyncStep } from '@/store/stories';
 
 import { StoryStepMapLocation } from '@/types/story';
 
@@ -32,6 +32,12 @@ const Story = () => {
 
   const story = useMemo(() => storyData?.data?.attributes, [storyData]);
   const steps = useMemo(() => story?.steps || [], [story]);
+
+  // Re-enable scroll-driven step syncing when (re)entering a story; it is disabled
+  // by the outro while redirecting to the globe (see storyNavigation).
+  useEffect(() => {
+    storyNavigation.isLeaving = false;
+  }, []);
 
   const mapLocation = useMemo((): StoryStepMapLocation | undefined => {
     const firstStep = steps[0];
