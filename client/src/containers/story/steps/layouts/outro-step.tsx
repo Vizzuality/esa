@@ -79,7 +79,11 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
 
   // Sentinel at the very bottom of the outro: only enters view once the user has
   // scrolled past the outro content, so we redirect at the true end of the story.
-  const isEnd = useInView(endRef, { amount: 'some' });
+  // The outro is the last step, so the page can't scroll past the sentinel — at max
+  // scroll it sits right at (or just below) the fold and would never intersect. The
+  // bottom margin grows the observer root downward so it registers in the final
+  // stretch of scroll, while still gating the redirect on `hasSeenOutro`.
+  const isEnd = useInView(endRef, { amount: 'some', margin: '0px 0px 200px 0px' });
 
   const [show, setShow] = useState(true);
   // True once the user has scrolled far enough to see the "Continue scrolling" hint;
