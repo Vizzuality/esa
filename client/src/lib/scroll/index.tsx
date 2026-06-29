@@ -12,7 +12,7 @@ import {
 
 import { motionValue, MotionValue, useMotionValueEvent, useScroll } from 'framer-motion';
 
-import { useSyncStep } from '@/store/stories';
+import { storyNavigation, useSyncStep } from '@/store/stories';
 
 type ScrollItem = {
   key: string | number;
@@ -121,6 +121,10 @@ export const ScrollProvider = ({ children }: PropsWithChildren<any>) => {
   );
 
   useMotionValueEvent(scrollY, 'change', (v) => {
+    // While the outro is redirecting to the globe, the route transition resets the
+    // scroll position; ignore it so we don't recompute the step and bounce to step one.
+    if (storyNavigation.isLeaving) return;
+
     const current = scrollItemsHeights.reduce(
       (acc, i) => {
         const currentH = i.rect?.height ?? 0;

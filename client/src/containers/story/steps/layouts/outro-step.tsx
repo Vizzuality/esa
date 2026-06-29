@@ -5,10 +5,14 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { useScroll, motion, useTransform, useMotionValueEvent } from 'framer-motion';
+import { useScroll, motion, useTransform, useMotionValueEvent, useInView } from 'framer-motion';
+import { useSetAtom } from 'jotai';
 
 import { cn } from '@/lib/classnames';
 import { getImageSrc } from '@/lib/image-src';
+
+import { layersAtom } from '@/store/map';
+import { storyNavigation } from '@/store/stories';
 
 import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
@@ -40,6 +44,7 @@ type MediaStepLayoutProps = {
 
 const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps) => {
   const { push } = useRouter();
+  const setLayers = useSetAtom(layersAtom);
 
   const { content, title } = step as StepLayoutOutroStepComponent;
 
@@ -63,6 +68,8 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   }, [step, disclaimer]);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const endRef = useRef<HTMLDivElement>(null);
+  const navigatedRef = useRef(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -70,7 +77,14 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     smooth: 10000,
   });
 
+  // Sentinel at the very bottom of the outro: only enters view once the user has
+  // scrolled past the outro content, so we redirect at the true end of the story.
+  const isEnd = useInView(endRef, { amount: 'some' });
+
   const [show, setShow] = useState(true);
+  // True once the user has scrolled far enough to see the "Continue scrolling" hint;
+  // gates the redirect so we only leave for the globe after that hint is shown.
+  const [hasSeenOutro, setHasSeenOutro] = useState(false);
 
   const isMobile = useIsMobile();
 
@@ -78,15 +92,23 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     if (!showContent) setShow(false);
   }, [showContent]);
 
+  useEffect(() => {
+    if (isEnd && hasSeenOutro && !navigatedRef.current) {
+      navigatedRef.current = true;
+      storyNavigation.isLeaving = true;
+      setLayers([]);
+      push('/globe', { scroll: false });
+    }
+  }, [isEnd, hasSeenOutro, setLayers, push]);
+
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
     if (!show && showContent && v > 0.2) {
       if (!isMobile && v > 0.2) setShow(true);
       if (isMobile && v > 0.1) setShow(true);
     }
     if (show && v < 0.2) setShow(false);
-    if (v > 0.7) {
-      push('/globe');
-    }
+    // Matches the "Continue scrolling" hint threshold (showContinueScrolling, 0.3-0.5).
+    if (!hasSeenOutro && v > 0.5) setHasSeenOutro(true);
   });
 
   // const media = (step as any)?.media?.data?.attributes;
@@ -103,7 +125,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   const categoryDisclaimer = disclaimer as Disclaimer[];
 
   return (
-    <div ref={containerRef} className="absolute flex h-[300vh] items-end pt-[50vh] sm:items-start">
+    <div ref={containerRef} className="relative flex h-[300vh] items-end pt-[50vh] sm:items-start">
       <motion.div
         className={cn(
           'sticky bottom-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:top-0 sm:min-h-screen 2xl:px-12'
@@ -159,7 +181,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
             )} */}
 
             <motion.div
-              className="flex w-full max-w-5xl flex-1 flex-col justify-center space-y-16 sm:items-center"
+              className="flex w-full max-w-5xl flex-1 flex-col justify-center space-y-4 sm:items-center"
               initial={{ opacity: 0, x: '300%' }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
@@ -242,6 +264,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
           </div>
         </div>
       </motion.div>
+      <div ref={endRef} className="pointer-events-none absolute bottom-0 h-px w-full" />
     </div>
   );
 };
