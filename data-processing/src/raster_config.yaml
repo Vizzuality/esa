@@ -972,3 +972,55 @@ layers:
     layer_name: "Armenia_SolarRadiation"
     max_zoom: 10
     tile_format: JPEG
+
+  # DRC - Climate Resilience
+  drc_agb_2018:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
+    input_file: "AGB_2018_resampled.tif"
+    style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-AGB-2018.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/AGB_2018.tif"
+    layer_name: "DRC_AGB_2018"
+    max_zoom: 7
+
+  drc_agb_change_2010_2018:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
+    input_file: "GMV-GDA-CR-UseCaseA7-DRCongo-AGBChange-2010_2018.tif"
+    style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-AGBChange-2010_2018.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/AGBChange_2010_2018.tif"
+    layer_name: "DRC_AGBChange_2010_2018"
+    max_zoom: 7
+
+  drc_forest_mask_2010:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
+    input_file: "GMV-GDA-CR-UseCaseA7-DRCongo-ForestMask2010.tif"
+    style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-ForestMask2010.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/ForestMask2010.tif"
+    layer_name: "DRC_ForestMask2010"
+    max_zoom: 7
+
+  drc_forest_mask_2018:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
+    input_file: "GMV-GDA-CR-UseCaseA7-DRCongo-ForestMask2018.tif"
+    style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-ForestMask2018.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/ForestMask2018.tif"
+    layer_name: "DRC_ForestMask2018"
+    max_zoom: 7
+
+  # Peru - Climate Resilience
+  peru_deforestation_lossyear:
+    base_path: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/geospatial/step2_deforestation/"
+    input_file: "GDA_peru_iquitos_deforestation_lossyear.tif"
+    style_file: "../../styles/GDA_peru_iquitos_deforestation_lossyear.qml"
+    vector_file: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/ancillary/zoom_window_step2_deforestation.shp"
+    output_file: "../data/processed/Climate_resilience/Peru/Rasters/Peru_Deforestation_Lossyear.tif"
+    layer_name: "Peru_Deforestation_Lossyear"
+    max_zoom: 11
+
+  peru_lc_transitions:
+    base_path: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/geospatial/step3_transitions/"
+    input_file: "GDA_peru_yurimaguas_lc_transitions.tif"
+    style_file: "../../styles/GDA_peru_yurimaguas_lc_transitions.qml"
+    vector_file: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/ancillary/zoom_window_step3_transitions.shp"
+    output_file: "../data/processed/Climate_resilience/Peru/Rasters/Peru_LC_Transitions.tif"
+    layer_name: "Peru_LC_Transitions"
+    max_zoom: 13
