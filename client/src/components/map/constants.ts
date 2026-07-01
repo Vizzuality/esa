@@ -18,5 +18,5 @@ export const DEFAULT_PROPS: CustomMapProps = {
   id: 'default',
   initialViewState: DEFAULT_VIEW_STATE,
   minZoom: DEFAULT_MOBILE_ZOOM,
-  maxZoom: 14,
+  maxZoom: 17,
 };
