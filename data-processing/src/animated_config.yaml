@@ -553,3 +553,53 @@ layers:
       type: linear
       colors: ["#000000", "#ffffff"]
 
+  # Peru - Climate Resilience
+  peru_lc_palm:
+    input_folder: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/geospatial/step4_palm/"
+    output_folder: "../data/processed/Climate_resilience/Peru/APNGs/"
+    vector_file: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/ancillary/zoom_window_step4_palm.shp"
+    min_z: 10
+    max_z: 13
+    vmin: 0
+    vmax: 255
+    date_format: "YYYYMMDD"
+    colormap:
+      type: categorical
+      values:
+        0: [0, 0, 0, 0]
+        1: [0, 98, 24, 255]
+        2: [107, 158, 0, 255]
+        3: [170, 50, 214, 255]
+        4: [135, 77, 32, 255]
+        5: [218, 221, 46, 255]
+        6: [255, 176, 50, 255]
+        7: [200, 0, 0, 255]
+        8: [180, 180, 180, 255]
+        9: [31, 120, 180, 255]
+        10: [158, 215, 198, 255]
+
+  # DRC - Climate Resilience (LUH2 Projections SSP3-7.0)
+  drc_primf:
+    input_folder: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo/LUH2 Projections/primf/"
+    output_folder: "../data/processed/Climate_resilience/DRC/APNGs/Primf/"
+    min_z: 2
+    max_z: 6
+    vmin: 0
+    vmax: 0.95
+    date_format: "YYYY"
+    colormap:
+      type: linear
+      colors: ["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837"]
+
+  drc_range:
+    input_folder: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo/LUH2 Projections/range/"
+    output_folder: "../data/processed/Climate_resilience/DRC/APNGs/Range/"
+    min_z: 2
+    max_z: 6
+    vmin: 0
+    vmax: 1.0
+    date_format: "YYYY"
+    colormap:
+      type: linear
+      colors: ["#ffffd4", "#fed98e", "#fe9929", "#d95f0e", "#993404"]
+

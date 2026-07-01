@@ -594,3 +594,11 @@ layers:
     min_zoom: 6
     max_zoom: 14
 
+  # Peru - Climate Resilience
+  peru_aoi_peruvian_amazon:
+    input_file: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/geospatial/step1_aoi/AOI_peruvian_amazon.shp"
+    output_file: "../data/processed/Climate_resilience/Peru/Vectors/AOI_peruvian_amazon.mbtiles"
+    layer_name: "Peru_AOI_PeruvianAmazon"
+    min_zoom: 3
+    max_zoom: 9
+
