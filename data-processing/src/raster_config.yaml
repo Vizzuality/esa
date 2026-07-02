@@ -959,19 +959,19 @@ layers:
     base_path: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer"
     input_file: "CloudProbability_Armenia_2022.tif"
     style_file: "../Armenia_SymbologyLayers/CloudProbability_Armenia_2022.qml"
-    output_file: "../data/processed/Clean_energy/Armenia/Rasters/CloudProbability.tif"
-    layer_name: "Armenia_CloudProbability"
-    max_zoom: 10
-    tile_format: JPEG
+    vector_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer/armenia_boundary.geojson"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/CloudProb.tif"
+    layer_name: "Armenia_CloudProb"
+    max_zoom: 8
 
   armenia_solar_radiation:
     base_path: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer"
-    input_file: "SolarRadiation_Armenia_25m.tif"
+    input_file: "SolarRadiation_Armenia_25m_resampled.tif"
     style_file: "../Armenia_SymbologyLayers/SolarRadiation_Armenia_25m.qml"
+    vector_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer/armenia_boundary.geojson"
     output_file: "../data/processed/Clean_energy/Armenia/Rasters/SolarRadiation.tif"
     layer_name: "Armenia_SolarRadiation"
-    max_zoom: 10
-    tile_format: JPEG
+    max_zoom: 9
 
   # DRC - Climate Resilience
   drc_agb_2018:

@@ -90,7 +90,12 @@ class RasterProcessor:
 
                 original_nodata = src.nodata
                 if original_nodata is None:
-                    nodata_value = -9999.0 if src.dtypes[0] in ["float32", "float64"] else -9999
+                    if src.dtypes[0] in ["float32", "float64"]:
+                        nodata_value = -9999.0
+                    elif src.dtypes[0] == "uint8":
+                        nodata_value = 0
+                    else:
+                        nodata_value = -9999
                 else:
                     nodata_value = original_nodata
 

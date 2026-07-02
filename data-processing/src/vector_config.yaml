@@ -577,22 +577,22 @@ layers:
     input_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/Syunik_cityLevel/Syunik_solar_Building.shp"
     output_file: "../data/processed/Clean_energy/Armenia/Vectors/SolarBuilding.mbtiles"
     layer_name: "Armenia_SolarBuilding"
-    min_zoom: 6
-    max_zoom: 14
+    min_zoom: 10
+    max_zoom: 16
 
   armenia_edges:
     input_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/Syunik_cityLevel/v3_edges.shp"
     output_file: "../data/processed/Clean_energy/Armenia/Vectors/Edges.mbtiles"
     layer_name: "Armenia_Edges"
-    min_zoom: 6
-    max_zoom: 14
+    min_zoom: 10
+    max_zoom: 16
 
   armenia_solar_potential:
     input_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/Syunik_cityLevel/v4_SolarPotential.shp"
     output_file: "../data/processed/Clean_energy/Armenia/Vectors/SolarPotential.mbtiles"
     layer_name: "Armenia_SolarPotential"
-    min_zoom: 6
-    max_zoom: 14
+    min_zoom: 10
+    max_zoom: 16
 
   # Peru - Climate Resilience
   peru_aoi_peruvian_amazon:
