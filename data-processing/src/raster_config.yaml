@@ -1025,3 +1025,12 @@ layers:
     output_file: "../data/processed/Climate_resilience/Peru/Rasters/Peru_LC_Transitions.tif"
     layer_name: "Peru_LC_Transitions"
     max_zoom: 13
+
+  # Vietnam - FFF
+  vietnam_hanoi_landcover:
+    base_path: "../data/raw/FFF/Vietnam/Geodata/"
+    input_file: "hanoi_gv_3857_2_5_v1.tif"
+    style_file: "hanoi_landcover_v1.qml"
+    output_file: "../data/processed/FFF/Vietnam/Rasters/Vietnam_Hanoi_Landcover.tif"
+    layer_name: "Vietnam_Hanoi_Landcover"
+    max_zoom: 13
