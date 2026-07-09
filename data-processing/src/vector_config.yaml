@@ -468,6 +468,13 @@ layers:
     min_zoom: 6
     max_zoom: 14
 
+  rwanda_rice_marshland_map:
+    input_file: "../data/raw/Agriculture/Rwanda-Uganda/QGIS_layers/2_Crop-mapping/Rwanda-AOI3/GDA-AGRI_UC8-Rwanda_AOI3_rice-marshland-map_20220901-20230831.shp"
+    output_file: "../data/processed/Agriculture/Rwanda-Uganda/Vectors/Rwanda_RiceMarshlandMap.mbtiles"
+    layer_name: "Rwanda_RiceMarshlandMap"
+    min_zoom: 6
+    max_zoom: 14
+
   # Bangladesh - CE (Climate)
   bangladesh_energy_lines:
     input_file: "../data/raw/Clean_energy/Bangladesh_Climate/Bangladesh_lines_LDS.shp"
