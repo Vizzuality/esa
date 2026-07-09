@@ -192,7 +192,8 @@ class RasterProcessor:
 
             # Nodata → transparent
             if nodata is not None:
-                rgba[3][data == nodata] = 0
+                nodata_mask = np.isnan(data) if np.isnan(nodata) else (data == nodata)
+                rgba[3][nodata_mask] = 0
 
             meta.update({"driver": "GTiff", "dtype": "uint8", "count": 4, "nodata": None})
 

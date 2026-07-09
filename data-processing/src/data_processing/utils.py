@@ -9,6 +9,7 @@ import os
 import re
 import subprocess
 import tempfile
+import unicodedata
 from glob import glob
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -24,6 +25,13 @@ from rasterio.mask import mask
 from rasterio.merge import merge
 from rasterio.warp import Resampling, calculate_default_transform, reproject
 from rasterio.windows import Window
+
+
+def sanitize_name(name: str) -> str:
+    """Strip accents and replace non-alphanumeric chars for Mapbox-safe file/tileset names."""
+    name = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
+    name = re.sub(r"[^a-zA-Z0-9_-]", "_", name)
+    return re.sub(r"_+", "_", name).strip("_")
 
 
 def create_apngs(tile_dir: Path):
@@ -217,7 +225,6 @@ def clip_rasters_by_vector(input_folder: Path, vector_file: Path, output_folder:
         return input_folder
 
 
-
 def merge_tifs(folder_path, output_file, pattern="*.tif", nodata_value=0):
     """
     Merge all TIFs in a folder and save to a single file without loading everything into memory.
@@ -235,32 +242,36 @@ def merge_tifs(folder_path, output_file, pattern="*.tif", nodata_value=0):
     mosaic = mosaic.astype("uint8")
 
     out_meta = src_files[0].meta.copy()
-    out_meta.update({
-        "driver": "GTiff",
-        "height": mosaic.shape[1],
-        "width": mosaic.shape[2],
-        "transform": out_trans,
-        "nodata": nodata_value,
-        "dtype": "uint8",
-        "compress": "LZW",
-        "predictor": 2,
-        "tiled": True,
-        "blockxsize": 256,
-        "blockysize": 256,
-    })
+    out_meta.update(
+        {
+            "driver": "GTiff",
+            "height": mosaic.shape[1],
+            "width": mosaic.shape[2],
+            "transform": out_trans,
+            "nodata": nodata_value,
+            "dtype": "uint8",
+            "compress": "LZW",
+            "predictor": 2,
+            "tiled": True,
+            "blockxsize": 256,
+            "blockysize": 256,
+        }
+    )
 
     Path(output_file).parent.mkdir(parents=True, exist_ok=True)
     with rasterio.open(output_file, "w", **out_meta) as dest:
         # Write block by block to save memory
         for _, window in dest.block_windows(1):
             # Extract corresponding window from mosaic
-            data = mosaic[:, window.row_off:window.row_off+window.height,
-                          window.col_off:window.col_off+window.width]
+            data = mosaic[
+                :,
+                window.row_off : window.row_off + window.height,
+                window.col_off : window.col_off + window.width,
+            ]
             dest.write(data, window=window)
 
     [src.close() for src in src_files]
     return output_file
-
 
 
 def resample_raster(input_file, output_file, scale_factor=5, resampling_method=Resampling.nearest):
@@ -271,21 +282,22 @@ def resample_raster(input_file, output_file, scale_factor=5, resampling_method=R
         new_height = src.height // scale_factor
         new_width = src.width // scale_factor
         new_transform = src.transform * src.transform.scale(
-            (src.width / new_width),
-            (src.height / new_height)
+            (src.width / new_width), (src.height / new_height)
         )
 
         profile = src.profile.copy()
-        profile.update({
-            "height": new_height,
-            "width": new_width,
-            "transform": new_transform,
-            "compress": "LZW",
-            "predictor": 2,
-            "tiled": True,
-            "blockxsize": 256,
-            "blockysize": 256
-        })
+        profile.update(
+            {
+                "height": new_height,
+                "width": new_width,
+                "transform": new_transform,
+                "compress": "LZW",
+                "predictor": 2,
+                "tiled": True,
+                "blockxsize": 256,
+                "blockysize": 256,
+            }
+        )
 
         with rasterio.open(output_file, "w", **profile) as dst:
             # Process block by block
@@ -295,7 +307,7 @@ def resample_raster(input_file, output_file, scale_factor=5, resampling_method=R
                     col_off=window.col_off * scale_factor,
                     row_off=window.row_off * scale_factor,
                     width=window.width * scale_factor,
-                    height=window.height * scale_factor
+                    height=window.height * scale_factor,
                 )
 
                 src_data = src.read(window=src_window)
@@ -308,7 +320,7 @@ def resample_raster(input_file, output_file, scale_factor=5, resampling_method=R
                     src_crs=src.crs,
                     dst_transform=dst.window_transform(window),
                     dst_crs=dst.crs,
-                    resampling=resampling_method
+                    resampling=resampling_method,
                 )
                 dst.write(dest_data, window=window)
     return output_file
@@ -348,7 +360,8 @@ def clip_raster_to_country_and_create_cog(
 
     # Create output filename based on the raster name and country
     raster_basename = raster_file.stem
-    cog_file = output_dir / f"{raster_basename}_{country_name.replace(' ', '_')}.tif"
+    country_slug = sanitize_name(country_name)
+    cog_file = output_dir / f"{raster_basename}_{country_slug}.tif"
 
     # Read country boundary
     print(f"Reading country boundary for {country_name}...")
@@ -429,7 +442,8 @@ def hex_to_rgba(hex_color):
         tuple: RGBA tuple with values 0-255 and alpha=255
     """
     h = hex_color.lstrip("#")
-    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4)) + (255,)
+    return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4)) + (255,)
+
 
 def csv_to_json(input_file, output_file, skiprows=0, sep=None, round_digits=2):
     """
@@ -470,8 +484,10 @@ def csv_to_json(input_file, output_file, skiprows=0, sep=None, round_digits=2):
         "datasets": [
             {
                 "data": [
-                    {"x": round(float(row["x"]), round_digits),
-                     "y": round(float(row["y"]), round_digits)}
+                    {
+                        "x": round(float(row["x"]), round_digits),
+                        "y": round(float(row["y"]), round_digits),
+                    }
                     for _, row in df.iterrows()
                 ]
             }
@@ -484,6 +500,7 @@ def csv_to_json(input_file, output_file, skiprows=0, sep=None, round_digits=2):
 
     print(f"Saved JSON to {output_file}")
     return result
+
 
 def excel_to_json(input_file, output_file, skiprows=0, round_digits=2, date_format="%Y-%m-%d"):
     """
@@ -546,8 +563,10 @@ def excel_to_json(input_file, output_file, skiprows=0, round_digits=2, date_form
     print(f"Saved JSON to {output_file}")
     return result
 
-def csv_to_json_multiline(input_file, output_file, col_year=0, col_x=1, col_y=2,
-                          col_names=None, sep=None, round_digits=2):
+
+def csv_to_json_multiline(
+    input_file, output_file, col_year=0, col_x=1, col_y=2, col_names=None, sep=None, round_digits=2
+):
     """
     Convert a CSV into JSON for a multi-line chart.
 
@@ -590,10 +609,7 @@ def csv_to_json_multiline(input_file, output_file, col_year=0, col_x=1, col_y=2,
             {"x": float(row[x_col]), "y": round(float(row[y_col]), round_digits)}
             for _, row in group.iterrows()
         ]
-        datasets.append({
-            "label": str(year),
-            "data": data
-        })
+        datasets.append({"label": str(year), "data": data})
 
     result = {"datasets": datasets}
 
@@ -603,6 +619,7 @@ def csv_to_json_multiline(input_file, output_file, col_year=0, col_x=1, col_y=2,
 
     print(f"Saved JSON to {output_file}")
     return result
+
 
 def reproject_raster(input_path, output_path, target_crs, resampling_method=Resampling.nearest):
     """Reproject a single raster to a new coordinate reference system."""
@@ -615,15 +632,10 @@ def reproject_raster(input_path, output_path, target_crs, resampling_method=Resa
 
         # Copy source metadata and update for target CRS
         kwargs = src.meta.copy()
-        kwargs.update({
-            'crs': target_crs,
-            'transform': transform,
-            'width': width,
-            'height': height
-        })
+        kwargs.update({"crs": target_crs, "transform": transform, "width": width, "height": height})
 
         # Create output raster and reproject
-        with rasterio.open(output_path, 'w', **kwargs) as dst:
+        with rasterio.open(output_path, "w", **kwargs) as dst:
             for i in range(1, src.count + 1):
                 reproject(
                     source=rasterio.band(src, i),
@@ -632,7 +644,7 @@ def reproject_raster(input_path, output_path, target_crs, resampling_method=Resa
                     src_crs=src.crs,
                     dst_transform=transform,
                     dst_crs=target_crs,
-                    resampling=resampling_method
+                    resampling=resampling_method,
                 )
 
 
@@ -689,14 +701,14 @@ def rename_files_date_prefix_to_suffix(directory_path: str) -> int:
     for file_path in directory.iterdir():
         if file_path.is_file():
             filename = file_path.name
-            match = re.match(r'^(\d+)_(.+)$', filename)
+            match = re.match(r"^(\d+)_(.+)$", filename)
 
             if match:
                 numbers, rest = match.groups()
 
                 # Move numbers to end
-                if '.' in rest:
-                    name, ext = rest.rsplit('.', 1)
+                if "." in rest:
+                    name, ext = rest.rsplit(".", 1)
                     new_filename = f"{name}_{numbers}.{ext}"
                 else:
                     new_filename = f"{rest}_{numbers}"

@@ -935,8 +935,9 @@ layers:
     base_path: "../data/raw/Clean_energy/Armenia_Wind"
     input_file: "LULC.tif"
     style_file: "LULC_symbology.qml"
-    output_file: "../data/processed/Clean_energy/Armenia/Rasters/LULC.tif"
-    layer_name: "Armenia_LULC"
+    vector_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer/armenia_boundary.geojson"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/LULC2.tif"
+    layer_name: "Armenia_LULC2"
     max_zoom: 11
 
   armenia_wind_speed_140m:
