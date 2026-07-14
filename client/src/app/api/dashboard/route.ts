@@ -4,8 +4,8 @@ import type { DashboardProps } from '@/hooks/dashboard';
 
 export const runtime = 'nodejs';
 
-// ISR: serve from the data cache and revalidate in the background every 15 min.
-export const revalidate = 900;
+// ISR: serve from the data cache and revalidate in the background every hour.
+export const revalidate = 3600;
 
 // Placeholder values served when the upstream master-data function is
 // unavailable, so the dashboard panel always renders numbers instead of going
@@ -48,7 +48,7 @@ export async function GET() {
       // Serve from the data cache and revalidate in the background; on
       // revalidation failure Next.js keeps serving the stale payload, so
       // transient upstream outages don't surface as 502s.
-      next: { revalidate: 900 },
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
