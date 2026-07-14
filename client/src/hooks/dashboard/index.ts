@@ -7,7 +7,6 @@ export type DashboardProps = {
   caseStudiesInProgress: number;
   caseStudiesCompleted: number;
   totalIFIs: number;
-  allCountries: string[];
 };
 
 type DashboardQueryKey = ['dashboard-data'];
