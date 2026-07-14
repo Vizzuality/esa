@@ -918,17 +918,17 @@ layers:
     base_path: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset"
     input_file: "Cropland_mask_LTF.tif"
     style_file: "Cropland_mask_LTF.qml"
-    output_file: "../data/processed/Clean_energy/Madagascar/Rasters/CroplandMask.tif"
-    layer_name: "Madagascar_CroplandMask"
+    output_file: "../data/processed/Clean_energy/Madagascar/Rasters/CroplandMask2.tif"
+    layer_name: "Madagascar_CroplandMask2"
     max_zoom: 11
 
   madagascar_irrigation_class:
     base_path: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset"
     input_file: "OB_irrigation_class_LTF.tif"
     style_file: "OB_irrigation_class_LTF.qml"
-    output_file: "../data/processed/Clean_energy/Madagascar/Rasters/IrrigationClass.tif"
-    layer_name: "Madagascar_IrrigationClass"
-    max_zoom: 11
+    output_file: "../data/processed/Clean_energy/Madagascar/Rasters/IrrigationClass2.tif"
+    layer_name: "Madagascar_IrrigationClass2"
+    max_zoom: 14
 
   # Armenia - CE
   armenia_lulc:
