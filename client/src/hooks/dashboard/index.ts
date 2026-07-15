@@ -18,7 +18,7 @@ export function useDashboard<TSelected = DashboardProps>(
   >
 ): UseQueryResult<TSelected, Error> {
   const fetchDashboard = async (): Promise<DashboardProps> => {
-    const basePath = (env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/+$/, '');
+    const basePath = (env.NEXT_PUBLIC_BASE_PATH || '/impact-sphere').replace(/\/+$/, '');
     const res = await fetch(`${basePath}/api/dashboard`);
 
     if (!res.ok) {
