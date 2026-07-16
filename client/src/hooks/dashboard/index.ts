@@ -9,6 +9,13 @@ export type DashboardProps = {
   totalIFIs: number;
 };
 
+export const DASHBOARD_FALLBACK: DashboardProps = {
+  supportedCountries: 92,
+  caseStudiesInProgress: 23,
+  caseStudiesCompleted: 115,
+  totalIFIs: 133,
+};
+
 type DashboardQueryKey = ['dashboard-data'];
 
 export function useDashboard<TSelected = DashboardProps>(
@@ -18,7 +25,7 @@ export function useDashboard<TSelected = DashboardProps>(
   >
 ): UseQueryResult<TSelected, Error> {
   const fetchDashboard = async (): Promise<DashboardProps> => {
-    const basePath = (env.NEXT_PUBLIC_BASE_PATH || '/impact-sphere').replace(/\/+$/, '');
+    const basePath = (env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/+$/, '');
     const res = await fetch(`${basePath}/api/dashboard`);
 
     if (!res.ok) {

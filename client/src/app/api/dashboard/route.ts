@@ -1,17 +1,8 @@
 import { NextResponse } from 'next/server';
 
-import type { DashboardProps } from '@/hooks/dashboard';
+import { DASHBOARD_FALLBACK } from '@/hooks/dashboard';
 
 export const runtime = 'nodejs';
-
-// Hardcoded values served when the upstream master-data call fails, so the
-// dashboard panel always renders numbers instead of going blank.
-const FALLBACK_DASHBOARD: DashboardProps = {
-  supportedCountries: 92,
-  caseStudiesInProgress: 23,
-  caseStudiesCompleted: 115,
-  totalIFIs: 133,
-};
 
 export async function GET() {
   const baseUrl = process.env.GDA_MASTER_DATA_FUNCTION_BASE_URL;
@@ -45,9 +36,9 @@ export async function GET() {
     }
 
     console.error('Dashboard upstream returned', res.status);
-    return NextResponse.json(FALLBACK_DASHBOARD);
+    return NextResponse.json(DASHBOARD_FALLBACK);
   } catch (error: unknown) {
     console.error('Error fetching dashboard data:', error);
-    return NextResponse.json(FALLBACK_DASHBOARD);
+    return NextResponse.json(DASHBOARD_FALLBACK);
   }
 }
