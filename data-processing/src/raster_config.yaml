@@ -1034,3 +1034,28 @@ layers:
     output_file: "../data/processed/FFF/Vietnam/Rasters/Vietnam_Hanoi_Landcover.tif"
     layer_name: "Vietnam_Hanoi_Landcover"
     max_zoom: 13
+
+  # Dar es Salaam, Abidjan, Novi Sad - Urban Sustainability
+  dar_lulc:  # preprocessing: resample scale_factor=2 (notebook 01)
+    base_path: "../data/raw/Urban_sustainability/3stories/Dar es Salaam - Heat Event simulation - Slide 3"
+    input_file: "Land Use _ Land Cover Dar es Salaam_resampled.tif"
+    style_file: "Land Use _ Land Cover Dar es Salaam.qml"
+    output_file: "../data/processed/Urban_sustainability/Dar/Rasters/Dar_LULC.tif"
+    layer_name: "Dar_LULC"
+    max_zoom: 14
+
+  abidjan_lulc:
+    base_path: "../data/raw/Urban_sustainability/3stories/Abijan - HVI - Slide 4"
+    input_file: "Land Use _ Land Cover Abijan.tif"
+    style_file: "Land Use _ Land Cover Abijan.qml"
+    output_file: "../data/processed/Urban_sustainability/Abidjan/Rasters/Abidjan_LULC.tif"
+    layer_name: "Abidjan_LULC"
+    max_zoom: 14
+
+  novisad_lulc:
+    base_path: "../data/raw/Urban_sustainability/3stories/Novi Sad - greening scenario -Slide 5"
+    input_file: "Land Use _ Land Cover Novi Sad.tif"
+    style_file: "Land Use _ Land Cover Novi Sad.qml"
+    output_file: "../data/processed/Urban_sustainability/NoviSad/Rasters/NoviSad_LULC.tif"
+    layer_name: "NoviSad_LULC"
+    max_zoom: 14
