@@ -501,28 +501,28 @@ layers:
   # Tanzania - Urban
   tanzania_heat_event_simulation:
     input_file: "../data/raw/Urban_sustainability/Tanzania/Dar_Es_Salaam_Heat_Event_Simulation_derivative.geojson"
-    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/HeatEventSimulation.mbtiles"
+    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/Tanzania_HeatEventSim.mbtiles"
     layer_name: "Tanzania_HeatEventSim"
     min_zoom: 6
     max_zoom: 14
 
   tanzania_hourly_temperature:
     input_file: "../data/raw/Urban_sustainability/Tanzania/Dar_Es_Salaam_Daily_Hourly.geojson"
-    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/HourlyTemperature.mbtiles"
+    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/Tanzania_HourlyTemp.mbtiles"
     layer_name: "Tanzania_HourlyTemp"
     min_zoom: 6
     max_zoom: 14
 
   tanzania_suhii:
     input_file: "../data/raw/Urban_sustainability/Tanzania/dar_es_salaam_suhii.geojson"
-    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/SUHII.mbtiles"
+    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/Tanzania_SUHII.mbtiles"
     layer_name: "Tanzania_SUHII"
     min_zoom: 6
     max_zoom: 14
 
   tanzania_lst:
     input_file: "../data/raw/Urban_sustainability/Tanzania/dar_es_salaam_lst.geojson"
-    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/LST.mbtiles"
+    output_file: "../data/processed/Urban_sustainability/Tanzania/Vectors/Tanzania_LST.mbtiles"
     layer_name: "Tanzania_LST"
     min_zoom: 6
     max_zoom: 14
@@ -530,14 +530,14 @@ layers:
   # CIV - Urban
   civ_hvi:
     input_file: "../data/raw/Urban_sustainability/CIV/Abidjan_HVI_derivative.geojson"
-    output_file: "../data/processed/Urban_sustainability/CIV/Vectors/HVI.mbtiles"
+    output_file: "../data/processed/Urban_sustainability/CIV/Vectors/CIV_HVI.mbtiles"
     layer_name: "CIV_HVI"
     min_zoom: 6
     max_zoom: 14
 
   civ_suhii:
     input_file: "../data/raw/Urban_sustainability/CIV/abidjan_suhii.geojson"
-    output_file: "../data/processed/Urban_sustainability/CIV/Vectors/SUHII.mbtiles"
+    output_file: "../data/processed/Urban_sustainability/CIV/Vectors/CIV_SUHII.mbtiles"
     layer_name: "CIV_SUHII"
     min_zoom: 6
     max_zoom: 14
@@ -608,4 +608,72 @@ layers:
     layer_name: "Peru_AOI_PeruvianAmazon"
     min_zoom: 3
     max_zoom: 9
+
+  # Urban Sustainability - 3 Stories
+
+  # Dar es Salaam
+  dar_suhii:
+    input_file: "../data/raw/Urban_sustainability/3stories/Dar es Salaam - Heat Event simulation - Slide 3/Surface Urban Heat Island Intensity (SUHII) Dar es Salaam.geojson"
+    output_file: "../data/processed/Urban_sustainability/Dar/Vectors/Dar_SUHII.mbtiles"
+    layer_name: "Dar_SUHII"
+    min_zoom: 6
+    max_zoom: 14
+
+  dar_lst:
+    input_file: "../data/raw/Urban_sustainability/3stories/Dar es Salaam - Heat Event simulation - Slide 3/Land Surface Temperature (LST) Dar es Salaam.geojson"
+    output_file: "../data/processed/Urban_sustainability/Dar/Vectors/Dar_LST.mbtiles"
+    layer_name: "Dar_LST"
+    min_zoom: 6
+    max_zoom: 14
+
+  dar_heat_event_sim:
+    input_file: "../data/raw/Urban_sustainability/3stories/Dar es Salaam - Heat Event simulation - Slide 3/Heat Event Simulation.geojson"
+    output_file: "../data/processed/Urban_sustainability/Dar/Vectors/Dar_HeatEventSim.mbtiles"
+    layer_name: "Dar_HeatEventSim"
+    min_zoom: 6
+    max_zoom: 14
+
+  # Abidjan
+  abidjan_suhii:
+    input_file: "../data/raw/Urban_sustainability/3stories/Abijan - HVI - Slide 4/Surface Urban Heat Island Intensity (SUHII) Abijan.geojson"
+    output_file: "../data/processed/Urban_sustainability/Abidjan/Vectors/Abidjan_SUHII.mbtiles"
+    layer_name: "Abidjan_SUHII"
+    min_zoom: 6
+    max_zoom: 14
+
+  abidjan_lst:
+    input_file: "../data/raw/Urban_sustainability/3stories/Abijan - HVI - Slide 4/Land Surface Temperature (LST) Abijan.geojson"
+    output_file: "../data/processed/Urban_sustainability/Abidjan/Vectors/Abidjan_LST.mbtiles"
+    layer_name: "Abidjan_LST"
+    min_zoom: 6
+    max_zoom: 14
+
+  abidjan_hvi:
+    input_file: "../data/raw/Urban_sustainability/3stories/Abijan - HVI - Slide 4/Heat Vulnerability Index (HVI) map.geojson"
+    output_file: "../data/processed/Urban_sustainability/Abidjan/Vectors/Abidjan_HVI.mbtiles"
+    layer_name: "Abidjan_HVI"
+    min_zoom: 6
+    max_zoom: 14
+
+  # Novi Sad
+  novisad_suhii:
+    input_file: "../data/raw/Urban_sustainability/3stories/Novi Sad - greening scenario -Slide 5/Surface Urban Heat Island Intensity (SUHII) Novi Sad.geojson"
+    output_file: "../data/processed/Urban_sustainability/NoviSad/Vectors/NoviSad_SUHII.mbtiles"
+    layer_name: "NoviSad_SUHII"
+    min_zoom: 6
+    max_zoom: 14
+
+  novisad_lst:
+    input_file: "../data/raw/Urban_sustainability/3stories/Novi Sad - greening scenario -Slide 5/Land Surface Temperature (LST) Novi Sad.geojson"
+    output_file: "../data/processed/Urban_sustainability/NoviSad/Vectors/NoviSad_LST.mbtiles"
+    layer_name: "NoviSad_LST"
+    min_zoom: 6
+    max_zoom: 14
+
+  novisad_greening_sim:
+    input_file: "../data/raw/Urban_sustainability/3stories/Novi Sad - greening scenario -Slide 5/Greening Simulation.geojson"
+    output_file: "../data/processed/Urban_sustainability/NoviSad/Vectors/NoviSad_GreeningSim.mbtiles"
+    layer_name: "NoviSad_GreeningSim"
+    min_zoom: 6
+    max_zoom: 14
 
