@@ -677,3 +677,52 @@ layers:
     min_zoom: 6
     max_zoom: 14
 
+# Health - Pakistan Dengue
+  pakistan_dengue_population:
+    input_file: "../data/raw/Health/Pakistan/Dengue/01_GDA-Health-ADB-Pakistan_Census_TotalPopul.gpkg"
+    output_file: "../data/processed/Health/Pakistan/Vectors/punjab_population.mbtiles"
+    layer_name: "Pakistan_DenguePopulation"
+    min_zoom: 3
+    max_zoom: 8
+
+  pakistan_dengue_sindhCorrelations:
+    input_file: "../data/raw/Health/Pakistan/Dengue/02_sindhCorrelations.gpkg"
+    output_file: "../data/processed/Health/Pakistan/Vectors/sindh_correlations.mbtiles"
+    layer_name: "Pakistan_Dengue_sindhCorrelations"
+    min_zoom: 3
+    max_zoom: 8
+  
+  pakistan_dengue_punjabCorrelations:
+    input_file: "../data/raw/Health/Pakistan/Dengue/03_punjabCorrelations.gpkg"
+    output_file: "../data/processed/Health/Pakistan/Vectors/punjab_correlations.mbtiles"
+    layer_name: "Pakistan_Dengue_punjabCorrelations"
+    min_zoom: 3
+    max_zoom: 8
+
+  pakistan_dengue_punjabResults2023:
+    input_file: "../data/raw/Health/Pakistan/Dengue/04_Punjab_Spatial_Results_2023.gpkg"
+    output_file: "../data/processed/Health/Pakistan/Vectors/punjab_results_2023.mbtiles"
+    layer_name: "Pakistan_Dengue_punjab_results2023"
+    min_zoom: 3
+    max_zoom: 8
+
+  pakistan_dengue_punjabResults2024:
+    input_file: "../data/raw/Health/Pakistan/Dengue/05_Punjab_Spatial_Results_2024.gpkg"
+    output_file: "../data/processed/Health/Pakistan/Vectors/punjab_results_2024.mbtiles"
+    layer_name: "Pakistan_Dengue_punjab_results2024"
+    min_zoom: 3
+    max_zoom: 8
+  
+  pakistan_dengue_sindhResults2023:
+    input_file: "../data/raw/Health/Pakistan/Dengue/06_Sindh_Spatial_Results_2023.gpkg"
+    output_file: "../data/processed/Health/Pakistan/Vectors/sindh_results_2023.mbtiles"
+    layer_name: "Pakistan_Dengue_sindh_results2023"
+    min_zoom: 3
+    max_zoom: 8
+
+  pakistan_dengue_sindhResults2024:
+    input_file: "../data/raw/Health/Pakistan/Dengue/07_Sindh_Spatial_Results_2024.gpkg"
+    output_file: "../data/processed/Health/Pakistan/Vectors/sindh_results_2024.mbtiles"
+    layer_name: "Pakistan_Dengue_sindh_results2024"
+    min_zoom: 3
+    max_zoom: 8

@@ -603,3 +603,43 @@ layers:
       type: linear
       colors: ["#ffffd4", "#fed98e", "#fe9929", "#d95f0e", "#993404"]
 
+  # Pakistan - Health (Heat Risk)
+  pakistan_tmax:
+    input_folder: "../data/raw/Health/Pakistan/Heat Risk/Layers/gda_health_h02_pakistan_climate_2024/renamed/"
+    output_folder: "../data/processed/Health/Pakistan/APNGs/TMAX/"
+    min_z: 2
+    max_z: 6
+    vmin: 0
+    vmax: 50
+    date_format: "YYYYMMDD"
+    colormap:
+      type: sld_gradient
+      breakpoints: [0, 12.5, 25, 37.5, 50]
+      colors: ["#2c7bb6", "#abd9e9", "#ffffbf", "#fdae61", "#d7191c"]
+
+  pakistan_utci:
+    input_folder: "../data/raw/Health/Pakistan/Heat Risk/Layers/02_gda_health_h02_pakistan_utci_2024/"
+    output_folder: "../data/processed/Health/Pakistan/APNGs/UTCI/"
+    min_z: 2
+    max_z: 6
+    vmin: -500
+    vmax: 500
+    date_format: "YYYYMMDD"
+    colormap:
+      type: sld_gradient
+      breakpoints: [-500, -400, -270, -130, 0, 90, 260, 320, 380, 500]
+      colors: ["#000080", "#0000c0", "#0000ff", "#0060ff", "#00c0ff", "#00c000", "#ff6600", "#ff3300", "#cc0000", "#800000"]
+
+  pakistan_heat_risk:
+    input_folder: "../data/raw/Health/Pakistan/Heat Risk/Layers/03_gda_health_h02_pakistan_heatriskmap_2024/renamed/"
+    output_folder: "../data/processed/Health/Pakistan/APNGs/HeatRisk/"
+    min_z: 2
+    max_z: 6
+    vmin: -1000
+    vmax: 1000
+    date_format: "YYYYMMDD"
+    colormap:
+      type: sld_gradient
+      breakpoints: [-1000, -500, -100, -50, -10, -5, -1, 1, 5, 10, 50, 100, 500, 1000]
+      colors: ["#000046", "#000096", "#003cdc", "#0082ff", "#00c8ff", "#78e6b4", "#00aa00", "#00c800", "#c8e600", "#fff000", "#ffb400", "#ff6400", "#ff3200", "#c80000"]
+
