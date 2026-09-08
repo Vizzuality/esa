@@ -1076,3 +1076,61 @@ layers:
     output_file: "../data/processed/FFF/DominicanRepublic/Rasters/DR_Landslide_Hazard.tif"
     layer_name: "DR_Landslide_Hazard"
     max_zoom: 11
+  
+  # Madagascar Coastal Blue Carbon Assessment - FFF
+  mdg_mangrove_detection_1996:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "Mangrove_MDG_Madagascar_EOMAP_19940101_19961231_30m.tif"
+    style_file: "Mangrove_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Mangrove_Detect_1996.tif"
+    layer_name: "MDG_Mangrove_Detect_1996"
+    max_zoom: 10
+  
+  mdg_mangrove_detection_2010:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "Mangrove_MDG_Madagascar_EOMAP_20090101_20111231_30m.tif"
+    style_file: "Mangrove_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Mangrove_Detect_2010.tif"
+    layer_name: "MDG_Mangrove_Detect_2010"
+    max_zoom: 10
+
+  mdg_mangrove_detection_2020:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "MDG_Mangrove_Detect_2020_resampled.tif"
+    style_file: "Mangrove_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Mangrove_Detect_2020.tif"
+    layer_name: "MDG_Mangrove_Detect_2020"
+    max_zoom: 10
+  
+  mdg_aboveground_carbon_2020:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "MDG_Aboveground_Carbon_2020_resampled.tif"
+    style_file: "AGC_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Aboveground_Carbon_2020.tif"
+    layer_name: "MDG_Aboveground_Carbon_2020"
+    max_zoom: 10
+  
+  mdg_belowground_carbon_2020:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "MDG_Belowground_Carbon_2020_resampled.tif"
+    style_file: "BGC_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Belowground_Carbon_2020.tif"
+    layer_name: "MDG_Belowground_Carbon_2020"
+    max_zoom: 10
+
+  mdg_total_carbon_2020:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "MDG_Total_Carbon_2020_resampled.tif"
+    style_file: "TOC_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Total_Carbon_2020.tif"
+    layer_name: "MDG_Total_Carbon_2020"
+    max_zoom: 10
+
+  # Madagascar (Comoros) - FFF
+  mdg_comoros_rate_change_2014_2023:
+    base_path: "../data/raw/FFF/Madagascar/Comoros/"
+    input_file: "HSI_rate_of_change_mackerel_2014_2023.tif"
+    style_file: "HSI_trend_Mackerel_Scad.qml"
+    output_file: "../data/processed/FFF/Madagascar/Comoros/Rasters/MDG_Comoros_Change_2014_2023.tif"
+    layer_name: "MDG_Comoros_Change_2014_2023"
+    max_zoom: 12
