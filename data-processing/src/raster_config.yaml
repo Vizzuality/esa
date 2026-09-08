@@ -1059,3 +1059,20 @@ layers:
     output_file: "../data/processed/Urban_sustainability/NoviSad/Rasters/NoviSad_LULC.tif"
     layer_name: "NoviSad_LULC"
     max_zoom: 14
+  
+  # Dominican Republic - FFF
+  dominicanrepublic_flood_hazard:
+    base_path: "../data/raw/FFF/DominicanRepublic/"
+    input_file: "flood_hazard_S1_mosaic.tif"
+    style_file: "flood_hazard_S1_mosaic.qml"
+    output_file: "../data/processed/FFF/DominicanRepublic/Rasters/DominicanRepublic_Flood_Hazard.tif"
+    layer_name: "DominicanRepublic_Flood_Hazard"
+    max_zoom: 11
+  
+  dominicanrepublic_landslide_hazard:
+    base_path: "../data/raw/FFF/DominicanRepublic/"
+    input_file: "DR_Landslide_Hazard_resampled.tif"
+    style_file: "landslide_hazard_style.qml"
+    output_file: "../data/processed/FFF/DominicanRepublic/Rasters/DR_Landslide_Hazard.tif"
+    layer_name: "DR_Landslide_Hazard"
+    max_zoom: 11
