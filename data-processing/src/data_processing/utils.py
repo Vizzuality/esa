@@ -722,3 +722,20 @@ def rename_files_date_prefix_to_suffix(directory_path: str) -> int:
 
     print(f"{renamed_count} files renamed")
     return renamed_count
+
+
+def rename_yyyymm_files(directory_path: str, day_suffix: str = "01") -> int:
+    """Rename '<YYYYMM>.tif' -> '_<YYYYMM><day_suffix>.tif'."""
+    directory = Path(directory_path)
+    pattern = re.compile(r"^(\d{6})(\.tif+)$", re.IGNORECASE)
+    count = 0
+    for file_path in directory.iterdir():
+        match = pattern.match(file_path.name)
+        if match:
+            yyyymm, ext = match.groups()
+            new_name = f"_{yyyymm}{day_suffix}{ext}"
+            file_path.rename(file_path.parent / new_name)
+            print(f"{file_path.name} -> {new_name}")
+            count += 1
+    print(f"{count} files renamed")
+    return count
