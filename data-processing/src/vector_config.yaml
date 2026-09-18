@@ -742,3 +742,18 @@ layers:
     layer_name: "MDG_Comoros_EEZ"
     min_zoom: 5
     max_zoom: 10
+
+  # Iraq - Health
+  iraq_building_damage_h3:
+    input_file: "../data/raw/Health/Iraq/Data/EO Layer/GDA-PublicHealth_EstimatedBuildingDamageSeverity_h3-res8_Mosul_Iraq_2015-2025.geojson"
+    output_file: "../data/processed/Health/Iraq/Vectors/Iraq_BuildingDamage_H3.mbtiles"
+    layer_name: "Iraq_BuildingDamage_H3"
+    min_zoom: 6
+    max_zoom: 14
+
+  iraq_hospital_digitisation:
+    input_file: "../data/raw/Health/Iraq/Data/EO Layer/GDA_health_Mosul_manual_digitisation.geojson"
+    output_file: "../data/processed/Health/Iraq/Vectors/Iraq_Hospital_Digitisation.mbtiles"
+    layer_name: "Iraq_Hospital_Digitisation"
+    min_zoom: 6
+    max_zoom: 14
