@@ -643,3 +643,29 @@ layers:
       breakpoints: [-1000, -500, -100, -50, -10, -5, -1, 1, 5, 10, 50, 100, 500, 1000]
       colors: ["#000046", "#000096", "#003cdc", "#0082ff", "#00c8ff", "#78e6b4", "#00aa00", "#00c800", "#c8e600", "#fff000", "#ffb400", "#ff6400", "#ff3200", "#c80000"]
 
+  # Madagascar (Comoros) - FFF
+  mdg_hsi_mackerel_scad:
+    input_folder: "../data/raw/FFF/Madagascar/Comoros/hsi_mackerel_scad_monthly_data/"
+    output_folder: "../data/processed/FFF/Madagascar/Comoros/APNGs/HSI_Mackerel_Scad/"
+    min_z: 6
+    max_z: 8
+    vmin: 0.3
+    vmax: 0.910502
+    date_format: "YYYYMMDD" # Before YYYYMM
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.3, 0.368897, 0.4079459, 0.45578, 0.5634347, 0.6212657, 0.6911486, 0.7935457, 0.8478987, 0.910502]
+      colors: ["#a13c3c", "#a15757", "#a1ad9f", "#a2b4ba", "#7492ba", "#496da1", "#325587", "#26446e", "#16335e", "#182a4f"]
+
+  mdg_hsi_silky_shark:
+    input_folder: "../data/raw/FFF/Madagascar/Comoros/hsi_silky_shark_monthly_data/"
+    output_folder: "../data/processed/FFF/Madagascar/Comoros/APNGs/HSI_Silky_Shark/"
+    min_z: 6
+    max_z: 8
+    vmin: 0.402081
+    vmax: 0.8829108
+    date_format: "YYYYMMDD" # Before YYYYMM
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.402081, 0.4263441, 0.487099, 0.5247729, 0.6095615, 0.655109, 0.7101487, 0.7907963, 0.8336046, 0.8829108]
+      colors: ["#a13c3c", "#a15757", "#a1ad9f", "#a2b4ba", "#7492ba", "#496da1", "#325587", "#26446e", "#16335e", "#182a4f"]

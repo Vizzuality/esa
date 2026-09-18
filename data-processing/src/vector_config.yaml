@@ -738,7 +738,7 @@ layers:
   # Madagascar (Comoros) - FFF
   mdg_comoran_EEZ:
     input_file: "../data/raw/FFF/Madagascar/Comoros/Comoran_EEZ.gpkg"
-    output_file: "../data/processed/FFF/Madagascar/Vectors/mdg_comoran_eez.mbtiles"
+    output_file: "../data/processed/FFF/Madagascar/Comoros/Vectors/mdg_comoran_eez.mbtiles"
     layer_name: "MDG_Comoros_EEZ"
     min_zoom: 5
     max_zoom: 10
