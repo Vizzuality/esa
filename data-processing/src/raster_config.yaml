@@ -1134,3 +1134,12 @@ layers:
     output_file: "../data/processed/FFF/Madagascar/Comoros/Rasters/MDG_Comoros_Change_2014_2023.tif"
     layer_name: "MDG_Comoros_Change_2014_2023"
     max_zoom: 12
+
+  # Iraq - Health
+  iraq_building_damage_severity:
+    base_path: "../data/raw/Health/Iraq/Data/EO Layer"
+    input_file: "GDA-PublicHealth_EstimatedBuildingDamageSeverity_Mosul_Iraq_2015-2025.tif"
+    style_file: "GDA-PublicHealth_EstimatedBuildingDamageSeverity_Mosul_Iraq_2015-2025.qml"
+    output_file: "../data/processed/Health/Iraq/Rasters/Iraq_BuildingDamageSeverity.tif"
+    layer_name: "Iraq_BuildingDamageSeverity"
+    max_zoom: 13
