@@ -1034,6 +1034,15 @@ layers:
     output_file: "../data/processed/FFF/Vietnam/Rasters/Vietnam_Hanoi_Landcover.tif"
     layer_name: "Vietnam_Hanoi_Landcover"
     max_zoom: 13
+  
+  vietnam_hanoi_landcover_clipped:
+    base_path: "../data/raw/FFF/Vietnam/Geodata/"
+    input_file: "hanoi_gv_3857_2_5_v1.tif"
+    style_file: "hanoi_landcover_v1.qml"
+    vector_file: "../data/raw/FFF/Vietnam/Geodata/hanoi.shp"
+    output_file: "../data/processed/FFF/Vietnam/Rasters/Vietnam_Hanoi_Landcover_Clipped.tif"
+    layer_name: "Vietnam_Hanoi_Landcover_Clipped"
+    max_zoom: 15
 
   # Dar es Salaam, Abidjan, Novi Sad - Urban Sustainability
   dar_lulc:  # preprocessing: resample scale_factor=2 (notebook 01)
