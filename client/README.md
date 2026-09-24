@@ -59,4 +59,29 @@ These secrets are required for CI/CD workflows:
 > - All secrets for **staging** and **production** are configured in **GitHub → Settings → Secrets and variables → Actions**.
 > - Local development values belong in a `.env.local` file (never committed).
 > - `NEXT_PUBLIC_` variables are exposed to the frontend and should not contain sensitive credentials.
-> - `/api/dashboard` proxies the master-data Azure Function server-side, so the **server container needs outbound HTTPS** to that host. When the upstream call fails the route still returns 200 with placeholder figures and explains why in headers: `x-dashboard-source: fallback`, `x-dashboard-reason` (`upstream-status` | `timeout` | `network` | `invalid-json`) and `x-dashboard-detail` (upstream HTTP status or Node error code). Check with `curl -sI <deployment>/api/dashboard`; a healthy deployment answers `x-dashboard-source: upstream`.
+> - `/api/dashboard` proxies the master-data Azure Function server-side, so the **server container needs outbound HTTPS** to that host. When the upstream call fails the route still returns 200 with placeholder figures and explains why in response headers (see below).
+
+### 🩺 Diagnosing `/api/dashboard`
+
+The route never fails loudly: if the upstream Azure Function cannot be reached it returns `200` with hardcoded placeholder figures (`92 / 23 / 115 / 133`) so the globe still renders. The cause is exposed in response headers, so a deployment can be diagnosed without server logs:
+
+```bash
+curl -sD - -o /dev/null <deployment>/api/dashboard | grep -iE '^(HTTP|x-dashboard|cache-control|cf-cache-status)'
+```
+
+A healthy deployment answers `x-dashboard-source: upstream`. Otherwise you get `x-dashboard-source: fallback`, `Cache-Control: no-store` and:
+
+| `x-dashboard-reason` | `x-dashboard-detail`                    | Meaning / fix                                                                                                                                          |
+| -------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `upstream-status`    | `401`                                   | `GDA_MASTER_DATA_FUNCTION_KEY` is wrong or was rotated. Regenerate / copy the function key from the Azure Function App.                               |
+| `upstream-status`    | `404`                                   | `GDA_MASTER_DATA_FUNCTION_BASE_URL` is wrong (must be the Function App origin with **no trailing path**; the route appends `/ExcelWebAPI`).             |
+| `upstream-status`    | `403`                                   | Azure Function App access restrictions (IP allowlist) reject the server's egress IP.                                                                   |
+| `network`            | `ENOTFOUND`                             | Hostname in `GDA_MASTER_DATA_FUNCTION_BASE_URL` does not resolve: typo, or the container has no DNS for that host.                                     |
+| `network`            | `ECONNREFUSED` / `UND_ERR_CONNECT_TIMEOUT` / `ETIMEDOUT` | Outbound HTTPS to `*.azurewebsites.net` is blocked or black-holed by firewall / egress policy. Note: Node `fetch` (undici) **ignores `HTTPS_PROXY`**; a corporate proxy needs an explicit `EnvHttpProxyAgent` (not configured today). |
+| `network`            | `DEPTH_ZERO_SELF_SIGNED_CERT` / `SELF_SIGNED_CERT_IN_CHAIN` / `UNABLE_TO_VERIFY_LEAF_SIGNATURE` / other `CERT_*` | TLS interception on the egress path. Provide the interception CA via `NODE_EXTRA_CA_CERTS` in the container.                                          |
+| `timeout`            | `TimeoutError`                          | Upstream accepted the connection but did not answer within 30 s (Azure cold start or hung function). Check the Function App health / invocation logs. |
+| `invalid-json`       | —                                       | Upstream answered `200` with a non-JSON body (usually a captive portal or proxy error page). Same root cause family as the `network` rows.             |
+
+If a CDN sits in front (ESA prod is behind Cloudflare), also read `cf-cache-status`: fallback responses are `no-store`, so a `HIT` there means an old build is cached and needs purging.
+
+Every row except `403` was reproduced against a standalone build (same layout as `Dockerfile.prod`) by forcing that failure class. The headers never contain the upstream URL, host or key.
