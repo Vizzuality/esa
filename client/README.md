@@ -43,6 +43,8 @@ These secrets are required for CI/CD workflows:
 | `NEXT_PUBLIC_API_URL`                        | API endpoint for the CMS (Strapi). Varies by environment.                                                | `http://localhost:1337/api` (local) / `https://impact-sphere-gda.esa.int/cms/impact-sphere/cms/api` (prod)                |
 | `NEXT_PUBLIC_BASE_PATH`                      | Base path for assets and routes in staging/production (if deployed under a subdirectory).                | `/impact-sphere/`                                                                                                         |
 | `NEXT_PUBLIC_PREVIEW_SECRET`                 | Secret token that authorizes preview access to unpublished content from the CMS.                         |
+| `GDA_MASTER_DATA_FUNCTION_BASE_URL`          | Base URL of the Azure Function hosting the master-data `ExcelWebAPI` (no trailing path). Server-only; required at runtime, `/api/dashboard` returns 500 without it. |
+| `GDA_MASTER_DATA_FUNCTION_KEY`               | Azure Functions `x-functions-key` for the master-data function. Server-only secret; never expose to the browser.                                                    |
 | `NEXT_PUBLIC_MAPBOX_API_TOKEN`               | Mapbox access token used for maps rendering.                                                             | Provided by project account (Vizzuality).                                                                                 |
 | `NEXT_PUBLIC_MAPBOX_USERNAME`                | Mapbox account username used to access and manage project map styles.                                    |
 | `NEXT_PUBLIC_MAPBOX_STYLE_ID`                | Identifier of the Mapbox style applied to the main map visualization.                                    |
@@ -57,3 +59,4 @@ These secrets are required for CI/CD workflows:
 > - All secrets for **staging** and **production** are configured in **GitHub → Settings → Secrets and variables → Actions**.
 > - Local development values belong in a `.env.local` file (never committed).
 > - `NEXT_PUBLIC_` variables are exposed to the frontend and should not contain sensitive credentials.
+> - `/api/dashboard` proxies the master-data Azure Function server-side, so the **server container needs outbound HTTPS** to that host. When the upstream call fails the route still returns 200 with placeholder figures and explains why in headers: `x-dashboard-source: fallback`, `x-dashboard-reason` (`upstream-status` | `timeout` | `network` | `invalid-json`) and `x-dashboard-detail` (upstream HTTP status or Node error code). Check with `curl -sI <deployment>/api/dashboard`; a healthy deployment answers `x-dashboard-source: upstream`.
