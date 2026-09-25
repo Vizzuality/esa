@@ -1,6 +1,8 @@
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/+$/, '');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  basePath,
   output: 'standalone',
   transpilePackages: ['@esa/types'],
 
@@ -47,7 +49,7 @@ const nextConfig = {
 
   env: {
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: 'false',
-    NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH || '',
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 
   typescript: { ignoreBuildErrors: true },

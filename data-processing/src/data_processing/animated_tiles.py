@@ -2,10 +2,8 @@
 Module for creating animated tiles
 """
 
-import glob
 import io
 import os
-import re
 import shutil
 import warnings
 from concurrent.futures import ThreadPoolExecutor
@@ -286,6 +284,9 @@ class RasterioEngine(TileEngine):
                     with open_raster_in_4326(self.tif_file_path) as src:
                         # Get the bounding box
                         bbox = list(src.bounds)
+                        # Normalize inverted lat bounds (positive y-res rasters)
+                        if bbox[1] > bbox[3]:
+                            bbox[1], bbox[3] = bbox[3], bbox[1]
                         # Get the count of bands
                         self.num_bands = src.count
 

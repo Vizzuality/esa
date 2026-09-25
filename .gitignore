@@ -102,3 +102,6 @@ target/
 .tox
 
 .ruff_cache
+
+# Claude Code local config (skills, hooks, settings)
+.claude/

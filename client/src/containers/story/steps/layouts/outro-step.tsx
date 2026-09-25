@@ -6,9 +6,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { useScroll, motion, useTransform, useMotionValueEvent } from 'framer-motion';
+import { useSetAtom } from 'jotai';
 
 import { cn } from '@/lib/classnames';
 import { getImageSrc } from '@/lib/image-src';
+
+import { layersAtom } from '@/store/map';
+import { storyNavigation } from '@/store/stories';
 
 import { StepLayoutOutroStepComponent } from '@/types/generated/strapi.schemas';
 
@@ -16,6 +20,8 @@ import { useIsMobile } from '@/hooks/screen-size';
 
 import RichText from '@/components/ui/rich-text';
 import ScrollExplanation from '@/components/ui/scroll-explanation';
+
+import Feedback from '@/containers/story/feedback';
 
 type Disclaimer = {
   id: number;
@@ -38,6 +44,7 @@ type MediaStepLayoutProps = {
 
 const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps) => {
   const { push } = useRouter();
+  const setLayers = useSetAtom(layersAtom);
 
   const { content, title } = step as StepLayoutOutroStepComponent;
 
@@ -61,6 +68,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   }, [step, disclaimer]);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const navigatedRef = useRef(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -69,6 +77,9 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   });
 
   const [show, setShow] = useState(true);
+  // True once the user has scrolled far enough to see the "Continue scrolling" hint;
+  // gates the redirect so we only leave for the globe after that hint is shown.
+  const [hasSeenOutro, setHasSeenOutro] = useState(false);
 
   const isMobile = useIsMobile();
 
@@ -76,15 +87,34 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
     if (!showContent) setShow(false);
   }, [showContent]);
 
+  // The outro is the last step, so its bottom sits exactly at the document's max-scroll
+  // edge — a bottom sentinel + IntersectionObserver never fires reliably there in a
+  // production build. Detect the true end of scroll deterministically instead: at max
+  // scroll `scrollY + innerHeight === scrollHeight`. Gated by `hasSeenOutro` so we only
+  // leave for the globe once the "Continue scrolling" hint has been shown.
+  useEffect(() => {
+    const onScroll = () => {
+      const atBottom =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+      if (atBottom && hasSeenOutro && !navigatedRef.current) {
+        navigatedRef.current = true;
+        storyNavigation.isLeaving = true;
+        setLayers([]);
+        push('/globe', { scroll: false });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [hasSeenOutro, setLayers, push]);
+
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
     if (!show && showContent && v > 0.2) {
       if (!isMobile && v > 0.2) setShow(true);
       if (isMobile && v > 0.1) setShow(true);
     }
     if (show && v < 0.2) setShow(false);
-    if (v > 0.7) {
-      push('/globe');
-    }
+    // Matches the "Continue scrolling" hint threshold (showContinueScrolling, 0.3-0.5).
+    if (!hasSeenOutro && v > 0.5) setHasSeenOutro(true);
   });
 
   // const media = (step as any)?.media?.data?.attributes;
@@ -101,7 +131,7 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
   const categoryDisclaimer = disclaimer as Disclaimer[];
 
   return (
-    <div ref={containerRef} className="absolute flex h-[300vh] items-end pt-[50vh] sm:items-start">
+    <div ref={containerRef} className="relative flex h-[300vh] items-end pt-[50vh] sm:items-start">
       <motion.div
         className={cn(
           'sticky bottom-0 flex h-screen min-h-fit w-screen flex-col items-center justify-center opacity-0 sm:top-0 sm:min-h-screen 2xl:px-12'
@@ -157,23 +187,23 @@ const OutroStepLayout = ({ step, showContent, disclaimer }: MediaStepLayoutProps
             )} */}
 
             <motion.div
-              className="flex w-full max-w-5xl flex-1 justify-center space-y-16 sm:items-center"
+              className="flex w-full max-w-5xl flex-1 flex-col justify-center space-y-4 sm:items-center"
               initial={{ opacity: 0, x: '300%' }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5 }}
               style={{ opacity: scrollOpacity }}
             >
-              <div className="max-w-lg space-y-4 p-4 sm:p-10">
+              <div className="max-w-lg  space-y-4 p-4 sm:p-10">
                 <h3 className="text-enlight-yellow-500 text-2xl font-bold tracking-wider">
                   {title}
                 </h3>
                 <RichText className="conclusion-list text-white">{content}</RichText>
               </div>
+              <Feedback />
             </motion.div>
           </div>
         </div>
-
         <div className="fixed bottom-0">
           <motion.div style={{ opacity: showContinueScrolling }} className="z-10 mb-8">
             <ScrollExplanation>Continue scrolling to explore more stories</ScrollExplanation>

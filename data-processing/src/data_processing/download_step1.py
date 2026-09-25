@@ -17,6 +17,7 @@ from tqdm.auto import tqdm
 # Helper functions
 # -----------------------
 
+
 def _compute_intersecting_tiles(country_geom, country_name=None):
     """
     Compute 10x10 degree tiles that intersect a country's geometry.
@@ -43,6 +44,7 @@ def _compute_intersecting_tiles(country_geom, country_name=None):
         print(f"Tiles intersecting {country_name}: {tiles_to_download}")
     return tiles_to_download
 
+
 def _download_tile(base_url, filename_template, lon_label, lat_label, tiles_folder):
     """
     Download a single tile using a filename template.
@@ -64,6 +66,7 @@ def _download_tile(base_url, filename_template, lon_label, lat_label, tiles_fold
         f.write(r.content)
     return out_path
 
+
 def _create_mosaic(tiles_files, output_mosaic):
     """
     Merge raster files into a mosaic.
@@ -76,18 +79,16 @@ def _create_mosaic(tiles_files, output_mosaic):
     mosaic, out_trans = merge(src_files, nodata=0)
 
     out_meta = src_files[0].meta.copy()
-    out_meta.update({
-        "height": mosaic.shape[1],
-        "width": mosaic.shape[2],
-        "transform": out_trans,
-        "nodata": 0
-    })
+    out_meta.update(
+        {"height": mosaic.shape[1], "width": mosaic.shape[2], "transform": out_trans, "nodata": 0}
+    )
 
     with rasterio.open(output_mosaic, "w", **out_meta) as dest:
         dest.write(mosaic)
 
     for src in src_files:
         src.close()
+
 
 def _download_worldcover_tiles(tiles, base_url, version, year, tiles_folder, overwrite=False):
     """Download WorldCover tiles and return list of downloaded files."""
@@ -111,6 +112,7 @@ def _download_worldcover_tiles(tiles, base_url, version, year, tiles_folder, ove
         downloaded_files.append(out_path)
     return downloaded_files
 
+
 def _resample_tile(tile_path: Path, scale_factor: float) -> Path:
     """Resample a raster tile to a coarser resolution (categorical data)."""
     dst_path = tile_path.parent / f"resampled_{tile_path.name}"
@@ -120,37 +122,35 @@ def _resample_tile(tile_path: Path, scale_factor: float) -> Path:
 
         data = src.read(
             out_shape=(src.count, new_height, new_width),
-            resampling=Resampling.mode  # categorical data
+            resampling=Resampling.mode,  # categorical data
         )
 
         transform = src.transform * src.transform.scale(
-            src.width / new_width,
-            src.height / new_height
+            src.width / new_width, src.height / new_height
         )
 
         out_meta = src.meta.copy()
-        out_meta.update({
-            "height": new_height,
-            "width": new_width,
-            "transform": transform,
-            "compress": "LZW"
-        })
+        out_meta.update(
+            {"height": new_height, "width": new_width, "transform": transform, "compress": "LZW"}
+        )
 
         with rasterio.open(dst_path, "w", **out_meta) as dst:
             dst.write(data)
 
     return dst_path
 
+
 # -----------------------
 # Global Surface Water
 # -----------------------
+
 
 def download_gsw_for_country(
     country_name: str,
     dataset: str = "occurrence",
     gadm_file: str = "../data/raw/gadm_410-adm_0/gadm_410-adm_0.shp",
     tiles_folder: str = "../data/processed/GSW/Tiles",
-    output_dir: str = "../data/processed/GSW/Mosaics"
+    output_dir: str = "../data/processed/GSW/Mosaics",
 ) -> Path:
     """
     Download Global Surface Water tiles for a country, merge them, clip to country boundary,
@@ -162,8 +162,11 @@ def download_gsw_for_country(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    output_mosaic = output_dir / f"{dataset}_{country_name.replace(' ','_')}_mosaic.tif"
-    output_clipped = output_dir / f"{dataset}_{country_name.replace(' ','_')}_clipped.tif"
+    from data_processing.utils import sanitize_name
+
+    country_slug = sanitize_name(country_name)
+    output_mosaic = output_dir / f"{dataset}_{country_slug}_mosaic.tif"
+    output_clipped = output_dir / f"{dataset}_{country_slug}_clipped.tif"
 
     if output_clipped.exists():
         print(f"Clipped raster already exists: {output_clipped}, skipping download.")
@@ -198,12 +201,14 @@ def download_gsw_for_country(
     with rasterio.open(output_mosaic) as src:
         out_image, out_transform = mask(src, [country_geom], crop=True, nodata=0)
         out_meta = src.meta.copy()
-        out_meta.update({
-            "height": out_image.shape[1],
-            "width": out_image.shape[2],
-            "transform": out_transform,
-            "nodata": 0
-        })
+        out_meta.update(
+            {
+                "height": out_image.shape[1],
+                "width": out_image.shape[2],
+                "transform": out_transform,
+                "nodata": 0,
+            }
+        )
 
     with rasterio.open(output_clipped, "w", **out_meta) as dest:
         dest.write(out_image)
@@ -216,9 +221,11 @@ def download_gsw_for_country(
     print(f"Clipped raster saved to {output_clipped}")
     return output_clipped
 
+
 # -----------------------
 # ESA WorldCover
 # -----------------------
+
 
 def download_worldcover_for_country(
     country_name: str,
@@ -226,7 +233,7 @@ def download_worldcover_for_country(
     year: int = 2021,
     base_dir: str = "../data/processed/WorldCover",
     overwrite: bool = False,
-    target_resolution: int = None  # automatic if None
+    target_resolution: int = None,  # automatic if None
 ) -> Path:
     """
     Download ESA WorldCover tiles for a country, merge them, optionally downsize,
@@ -241,8 +248,11 @@ def download_worldcover_for_country(
     tiles_folder.mkdir(parents=True, exist_ok=True)
     mosaic_folder.mkdir(parents=True, exist_ok=True)
 
-    mosaic_file = mosaic_folder / f"WorldCover_{year}_{country_name.replace(' ','_')}_Mosaic.tif"
-    clipped_file = mosaic_folder / f"WorldCover_{year}_{country_name.replace(' ','_')}_Clipped.tif"
+    from data_processing.utils import sanitize_name
+
+    country_slug = sanitize_name(country_name)
+    mosaic_file = mosaic_folder / f"WorldCover_{year}_{country_slug}_Mosaic.tif"
+    clipped_file = mosaic_folder / f"WorldCover_{year}_{country_slug}_Clipped.tif"
 
     if clipped_file.exists() and not overwrite:
         print(f"Clipped raster already exists: {clipped_file}")
@@ -284,13 +294,15 @@ def download_worldcover_for_country(
     print("Merging tiles into mosaic...")
     mosaic, out_trans = merge([rasterio.open(p) for p in downloaded_files])
     out_meta = rasterio.open(downloaded_files[0]).meta.copy()
-    out_meta.update({
-        "driver": "GTiff",
-        "height": mosaic.shape[1],
-        "width": mosaic.shape[2],
-        "transform": out_trans,
-        "compress": "LZW"
-    })
+    out_meta.update(
+        {
+            "driver": "GTiff",
+            "height": mosaic.shape[1],
+            "width": mosaic.shape[2],
+            "transform": out_trans,
+            "compress": "LZW",
+        }
+    )
     with rasterio.open(mosaic_file, "w", **out_meta) as dst:
         dst.write(mosaic)
 
@@ -299,13 +311,15 @@ def download_worldcover_for_country(
     with rasterio.open(mosaic_file) as src:
         out_image, out_transform = mask(src, [country_geom], crop=True, nodata=0)
         out_meta = src.meta.copy()
-        out_meta.update({
-            "height": out_image.shape[1],
-            "width": out_image.shape[2],
-            "transform": out_transform,
-            "nodata": 0,
-            "compress": "LZW"
-        })
+        out_meta.update(
+            {
+                "height": out_image.shape[1],
+                "width": out_image.shape[2],
+                "transform": out_transform,
+                "nodata": 0,
+                "compress": "LZW",
+            }
+        )
     with rasterio.open(clipped_file, "w", **out_meta) as dst:
         dst.write(out_image)
 

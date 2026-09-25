@@ -459,20 +459,213 @@ layers:
       transparent_values: [0]
 
   # Sudan - FCS
-  sudan_croptypes:
-    input_folder: "../data/raw/FCS/Sudan/Crop type maps/"
-    output_folder: "../data/processed/FCS/Sudan/APNGs/"
+  sudan_crop_extent:
+    input_folder: "../data/raw/FCS/Sudan/to_vizz/"
+    output_folder: "../data/processed/FCS/Sudan/APNGs/CropExtent/"
     min_z: 7
     max_z: 10
     vmin: 0
-    vmax: 255
+    vmax: 1
     date_format: "YYYY"
-    upload: false
+    colormap:
+      type: single
+      color: [255, 170, 0, 170]
+      transparent_values: [0]
+
+   # Rwanda-Uganda - Agriculture
+  uganda_dry_matter_productivity:
+    input_folder: "../data/raw/Agriculture/Rwanda-Uganda/QGIS_layers/3_Dry-Matter-Productivity/Uganda-kassnada-Mityana-districts/"
+    output_folder: "../data/processed/Agriculture/Rwanda-Uganda/APNGs/DryMatterProductivity/"
+    min_z: 8
+    max_z: 12
+    vmin: 0
+    vmax: 40
+    date_format: "YYYYMMDD"
+    colormap:
+      type: binned
+      intervals: [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+      colors: ["#96714e", "#f4b982", "#d6e2b3", "#b5d178", "#4a8131", "#264f24", "#0f330d", "#041903", "#a258bf", "#622573"]
+
+  # Ghana - DR
+  ghana_littoral_land_use:
+    input_folder: "../data/raw/Disaster_resilience/Ghana/Littoral_land_use_map/animated/"
+    output_folder: "../data/processed/Disaster_resilience/Ghana/APNGs/LittoralLandUse/"
+    min_z: 7
+    max_z: 12
+    vmin: 0
+    vmax: 255
+    date_format: "YYYYMMDD"
     colormap:
       type: categorical
       values:
-        0: "#ff00ff"
-        1: "#2e41a0"
-        2: "#006724"
-        3: "#f2d33a"
-        4: "#e96a1f"
+        1: "#a0a0a0"
+        2: "#c68a4e"
+        15: "#00970c"
+        20: "#d0ff24"
+        80: "#5eff91"
+        90: "#3bff00"
+        120: "#40e0d0"
+        125: "#99ffff"
+        150: "#3399ff"
+        200: "#000099"
+
+  # Yemen - Health
+  yemen_ggdi:
+    input_folder: "../data/raw/Health/Yemen/GGDI/renamed/"
+    output_folder: "../data/processed/Health/Yemen/APNGs/GGDI/"
+    min_z: 3
+    max_z: 8
+    vmin: 0
+    vmax: 255
+    date_format: "YYYY"
+    colormap:
+      type: categorical
+      values:
+        1: "#fbedde"
+        2: "#fa8d57"
+        3: "#e34932"
+        4: "#95160a"
+      transparent_values: [99]
+
+  yemen_groundwater_storage_anomalies:
+    input_folder: "../data/raw/Health/Yemen/Groundwater Storage Anomalies/renamed/"
+    output_folder: "../data/processed/Health/Yemen/APNGs/GroundwaterStorageAnomalies/"
+    min_z: 3
+    max_z: 8
+    vmin: -120
+    vmax: 120
+    date_format: "YYYY"
+    colormap:
+      type: linear
+      colors: ["#ca0020", "#f4a582", "#f7f7f7", "#0571b0", "#92c5de"]
+      reserve_zero_transparent: true
+
+  # Afghanistan - CR
+  afghanistan_irrigation_channel:
+    input_folder: "../data/raw/Climate_resilience/Afghanistan/Datasets/irrigation_channel/renamed/"
+    output_folder: "../data/processed/Climate_resilience/Afghanistan/APNGs/IrrigationChannel/"
+    min_z: 10
+    max_z: 12
+    vmin: 0
+    vmax: 255
+    date_format: "YYYYMMDD"
+    colormap:
+      type: linear
+      colors: ["#000000", "#ffffff"]
+
+  # Peru - Climate Resilience
+  peru_lc_palm:
+    input_folder: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/geospatial/step4_palm/"
+    output_folder: "../data/processed/Climate_resilience/Peru/APNGs/"
+    vector_file: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/ancillary/zoom_window_step4_palm.shp"
+    min_z: 10
+    max_z: 13
+    vmin: 0
+    vmax: 255
+    date_format: "YYYYMMDD"
+    colormap:
+      type: categorical
+      values:
+        0: [0, 0, 0, 0]
+        1: [0, 98, 24, 255]
+        2: [107, 158, 0, 255]
+        3: [170, 50, 214, 255]
+        4: [135, 77, 32, 255]
+        5: [218, 221, 46, 255]
+        6: [255, 176, 50, 255]
+        7: [200, 0, 0, 255]
+        8: [180, 180, 180, 255]
+        9: [31, 120, 180, 255]
+        10: [158, 215, 198, 255]
+
+  # DRC - Climate Resilience (LUH2 Projections SSP3-7.0)
+  drc_primf:
+    input_folder: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo/LUH2 Projections/primf/"
+    output_folder: "../data/processed/Climate_resilience/DRC/APNGs/Primf/"
+    min_z: 2
+    max_z: 6
+    vmin: 0
+    vmax: 0.95
+    date_format: "YYYY"
+    colormap:
+      type: linear
+      colors: ["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837"]
+
+  drc_range:
+    input_folder: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo/LUH2 Projections/range/"
+    output_folder: "../data/processed/Climate_resilience/DRC/APNGs/Range/"
+    min_z: 2
+    max_z: 6
+    vmin: 0
+    vmax: 1.0
+    date_format: "YYYY"
+    colormap:
+      type: linear
+      colors: ["#ffffd4", "#fed98e", "#fe9929", "#d95f0e", "#993404"]
+
+  # Pakistan - Health (Heat Risk)
+  pakistan_tmax:
+    input_folder: "../data/raw/Health/Pakistan/Heat Risk/Layers/gda_health_h02_pakistan_climate_2024/renamed/"
+    output_folder: "../data/processed/Health/Pakistan/APNGs/TMAX/"
+    min_z: 2
+    max_z: 6
+    vmin: 0
+    vmax: 50
+    date_format: "YYYYMMDD"
+    colormap:
+      type: sld_gradient
+      breakpoints: [0, 12.5, 25, 37.5, 50]
+      colors: ["#2c7bb6", "#abd9e9", "#ffffbf", "#fdae61", "#d7191c"]
+
+  pakistan_utci:
+    input_folder: "../data/raw/Health/Pakistan/Heat Risk/Layers/02_gda_health_h02_pakistan_utci_2024/"
+    output_folder: "../data/processed/Health/Pakistan/APNGs/UTCI/"
+    min_z: 2
+    max_z: 6
+    vmin: -500
+    vmax: 500
+    date_format: "YYYYMMDD"
+    colormap:
+      type: sld_gradient
+      breakpoints: [-500, -400, -270, -130, 0, 90, 260, 320, 380, 500]
+      colors: ["#000080", "#0000c0", "#0000ff", "#0060ff", "#00c0ff", "#00c000", "#ff6600", "#ff3300", "#cc0000", "#800000"]
+
+  pakistan_heat_risk:
+    input_folder: "../data/raw/Health/Pakistan/Heat Risk/Layers/03_gda_health_h02_pakistan_heatriskmap_2024/renamed/"
+    output_folder: "../data/processed/Health/Pakistan/APNGs/HeatRisk/"
+    min_z: 2
+    max_z: 6
+    vmin: -1000
+    vmax: 1000
+    date_format: "YYYYMMDD"
+    colormap:
+      type: sld_gradient
+      breakpoints: [-1000, -500, -100, -50, -10, -5, -1, 1, 5, 10, 50, 100, 500, 1000]
+      colors: ["#000046", "#000096", "#003cdc", "#0082ff", "#00c8ff", "#78e6b4", "#00aa00", "#00c800", "#c8e600", "#fff000", "#ffb400", "#ff6400", "#ff3200", "#c80000"]
+
+  # Madagascar (Comoros) - FFF
+  mdg_hsi_mackerel_scad:
+    input_folder: "../data/raw/FFF/Madagascar/Comoros/hsi_mackerel_scad_monthly_data/"
+    output_folder: "../data/processed/FFF/Madagascar/Comoros/APNGs/HSI_Mackerel_Scad/"
+    min_z: 6
+    max_z: 8
+    vmin: 0.3
+    vmax: 0.910502
+    date_format: "YYYYMMDD" # Before YYYYMM
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.3, 0.368897, 0.4079459, 0.45578, 0.5634347, 0.6212657, 0.6911486, 0.7935457, 0.8478987, 0.910502]
+      colors: ["#a13c3c", "#a15757", "#a1ad9f", "#a2b4ba", "#7492ba", "#496da1", "#325587", "#26446e", "#16335e", "#182a4f"]
+
+  mdg_hsi_silky_shark:
+    input_folder: "../data/raw/FFF/Madagascar/Comoros/hsi_silky_shark_monthly_data/"
+    output_folder: "../data/processed/FFF/Madagascar/Comoros/APNGs/HSI_Silky_Shark/"
+    min_z: 6
+    max_z: 8
+    vmin: 0.402081
+    vmax: 0.8829108
+    date_format: "YYYYMMDD" # Before YYYYMM
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.402081, 0.4263441, 0.487099, 0.5247729, 0.6095615, 0.655109, 0.7101487, 0.7907963, 0.8336046, 0.8829108]
+      colors: ["#a13c3c", "#a15757", "#a1ad9f", "#a2b4ba", "#7492ba", "#496da1", "#325587", "#26446e", "#16335e", "#182a4f"]

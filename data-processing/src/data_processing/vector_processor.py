@@ -52,6 +52,7 @@ class VectorProcessor:
         Process the vector data: convert to MBTiles and upload to Mapbox.
         """
         try:
+            self.output_file.parent.mkdir(parents=True, exist_ok=True)
             console.print("📦 Converting to MBTiles...", style="bold white")
             MBTilesConverterFactory.convert(
                 self.input_file,

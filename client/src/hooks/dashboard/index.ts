@@ -7,7 +7,13 @@ export type DashboardProps = {
   caseStudiesInProgress: number;
   caseStudiesCompleted: number;
   totalIFIs: number;
-  allCountries: string[];
+};
+
+export const DASHBOARD_FALLBACK: DashboardProps = {
+  supportedCountries: 92,
+  caseStudiesInProgress: 23,
+  caseStudiesCompleted: 115,
+  totalIFIs: 133,
 };
 
 type DashboardQueryKey = ['dashboard-data'];
@@ -22,11 +28,18 @@ export function useDashboard<TSelected = DashboardProps>(
     const basePath = (env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/+$/, '');
     const res = await fetch(`${basePath}/api/dashboard`);
 
+    // The route can 404 outright when the basePath/proxy is misconfigured, so
+    // the server-side fallback never runs. Serve the shared hardcoded values
+    // here too, so the dashboard renders numbers instead of going blank.
     if (!res.ok) {
-      throw new Error(`Dashboard API error: ${res.status}`);
+      return DASHBOARD_FALLBACK;
     }
 
-    return res.json();
+    try {
+      return await res.json();
+    } catch {
+      return DASHBOARD_FALLBACK;
+    }
   };
 
   return useQuery<DashboardProps, Error, TSelected, DashboardQueryKey>({

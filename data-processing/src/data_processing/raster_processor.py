@@ -35,6 +35,7 @@ class RasterProcessor:
         create_mbtiles: bool = True,
         vector_file: Path = None,
         max_zoom: int = None,
+        tile_format: str = "PNG",
     ):
         """
         Initialize the RasterProcessor object.
@@ -48,6 +49,9 @@ class RasterProcessor:
             create_mbtiles (bool): Whether to create an MBTiles file.
             vector_file (Path): Optional path to a shapefile for clipping the raster.
             max_zoom (int): Maximum zoom level for COG conversion.
+            tile_format (str): Tile format for MBTiles ("PNG" or "JPEG").
+                               Use "JPEG" for continuous/interpolated rasters
+                               that exceed the Mapbox 500KB tile size limit.
         """
         self.input_file = input_file
         self.qml_file = qml_file
@@ -57,6 +61,7 @@ class RasterProcessor:
         self.create_mbtiles = create_mbtiles
         self.vector_file = vector_file
         self.max_zoom = max_zoom
+        self.tile_format = tile_format
         self.clipped_raster_path = None
 
     def clip_raster(self) -> Path:
@@ -85,7 +90,12 @@ class RasterProcessor:
 
                 original_nodata = src.nodata
                 if original_nodata is None:
-                    nodata_value = -9999.0 if src.dtypes[0] in ["float32", "float64"] else -9999
+                    if src.dtypes[0] in ["float32", "float64"]:
+                        nodata_value = -9999.0
+                    elif src.dtypes[0] == "uint8":
+                        nodata_value = 0
+                    else:
+                        nodata_value = -9999
                 else:
                     nodata_value = original_nodata
 
@@ -182,7 +192,8 @@ class RasterProcessor:
 
             # Nodata → transparent
             if nodata is not None:
-                rgba[3][data == nodata] = 0
+                nodata_mask = np.isnan(data) if np.isnan(nodata) else (data == nodata)
+                rgba[3][nodata_mask] = 0
 
             meta.update({"driver": "GTiff", "dtype": "uint8", "count": 4, "nodata": None})
 
@@ -201,6 +212,8 @@ class RasterProcessor:
         convert to COG, and optionally to MBTiles and upload to Mapbox.
         """
         try:
+            self.output_file.parent.mkdir(parents=True, exist_ok=True)
+
             if self.vector_file:
                 console.print("✂️ Clipping raster with vector...", style="bold white")
                 self.clip_raster()
@@ -217,7 +230,9 @@ class RasterProcessor:
             if self.create_mbtiles:
                 console.print("📦 Converting to MBTiles...", style="bold white")
                 mbtiles_path = geotiff_path.with_suffix(".mbtiles")
-                MBTilesConverterFactory.convert(geotiff_path, mbtiles_path)
+                MBTilesConverterFactory.convert(
+                    geotiff_path, mbtiles_path, tile_format=self.tile_format
+                )
                 console.print(
                     f"✅ Processing complete. Output saved to {mbtiles_path}", style="bold green"
                 )

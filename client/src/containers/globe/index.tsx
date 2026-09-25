@@ -158,7 +158,7 @@ export default function Home() {
           </div>
           <div className="hidden h-full w-[280px] flex-col sm:flex 2xl:w-80">
             <div className="flex h-full max-h-fit flex-col justify-between">
-              <Card title="Find more stories" className="relative h-full">
+              <Card title="Find more stories" className="relative h-full" scrollIndicator>
                 <TopStories />
               </Card>
             </div>

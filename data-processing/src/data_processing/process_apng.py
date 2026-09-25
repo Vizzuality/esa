@@ -242,6 +242,10 @@ def process_animated_layers(
         layer = layers[layer_id]
         cm = _build_colormap(layer)
 
+        vector_file = None
+        if layer.get("vector_file"):
+            vector_file = Path(_resolve_path(config_dir, layer["vector_file"]))
+
         animated_tiles = AnimatedTiles(
             data=_resolve_path(config_dir, layer["input_folder"]),
             output_folder=_resolve_path(config_dir, layer["output_folder"]),
@@ -251,6 +255,7 @@ def process_animated_layers(
             vmin=float(layer["vmin"]),
             vmax=float(layer["vmax"]),
             engine=layer.get("engine", "rasterio"),
+            vector_file=vector_file,
             date_format=layer.get("date_format"),
         )
 

@@ -175,28 +175,38 @@ layers:
 
   # Niger - CE
   niger_solar_irradiation:
-    base_path: "../data/raw/Clean Energy/Niger/"
+    base_path: "../data/raw/Clean_energy/Niger/"
     input_file: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
     style_file: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.qml"
-    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
+    output_file: "../data/processed/Clean_energy/Niger/Rasters/Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02.tif"
     layer_name: "Niger_GCS_Buffer25km_250m_Solar_kWhm2_v02"
     max_zoom: 11
 
+  niger_solar_irradiation_capital:
+      base_path: "../data/raw/Clean_energy/Niger/"
+      input_file: "Niger_SolarRadiation_Mosaic_CapitalRegion.tif"
+      style_file: "Niger_SolarRadiation_Mosaic_CapitalRegion.qml"
+      output_file: "../data/processed/Clean_energy/Niger/Rasters/Niger_SolarRadiation_Mosaic_CapitalRegion.tif"
+      layer_name: "Niger_SolarRadiation_Mosaic_CapitalRegion"
+      max_zoom: 11  
+
   niger_flash_flood_depth:
-    base_path: "../data/raw/Clean Energy/Niger/"
+    base_path: "../data/raw/Clean_energy/Niger/"
     input_file: "Depth_fullAOI.tif"
     style_file: "Depth_fullAOI.qml"
-    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_Flash_flood_depth.tif"
+    vector_file: "../data/raw/Clean_energy/Niger/Extent_city.geojson"
+    output_file: "../data/processed/Clean_energy/Niger/Rasters/Niger_Flash_flood_depth.tif"
     layer_name: "Niger_Flash_flood_depth"
-    max_zoom: 11
+    max_zoom: 12
 
   niger_flash_flood_hazard:
-    base_path: "../data/raw/Clean Energy/Niger/"
+    base_path: "../data/raw/Clean_energy/Niger/"
     input_file: "FlashFlood_Hazard_fullAOI_classified.tif"
     style_file: "FlashFlood_Hazard_fullAOI_classified.qml"
-    output_file: "../data/processed/Clean Energy/Niger/Rasters/Niger_Flash_flood_hazard.tif"
+    vector_file: "../data/raw/Clean_energy/Niger/Extent_city.geojson"
+    output_file: "../data/processed/Clean_energy/Niger/Rasters/Niger_Flash_flood_hazard.tif"
     layer_name: "Niger_Flash_flood_hazard"
-    max_zoom: 11
+    max_zoom: 12
 
   # Cote d'Ivoire - Urban
   civ_abidjan_slum_detector:
@@ -276,13 +286,13 @@ layers:
     layer_name: "Cameroon_settlement"
     max_zoom: 11
 
-  cameroon_electrification:
+  cameroon_electrification2:
     base_path: "../data/raw/Clean_energy/Cameroon_Nightlight/"
     input_file: "year_of_electrification_clipped.tif"
     style_file: "year_of_electrification.qml"
-    output_file: "../data/processed/Clean_energy/Cameroon/Rasters/Cameroon_electrification.tif"
-    layer_name: "Cameroon_electrification"
-    max_zoom: 11
+    output_file: "../data/processed/Clean_energy/Cameroon/Rasters/Cameroon_electrification2.tif"
+    layer_name: "Cameroon_electrification2"
+    max_zoom: 15
 
   # Belize - Agriculture
   belize_precipitation:
@@ -354,7 +364,7 @@ layers:
     max_zoom: 11
 
   # Somalia - Water
-  somalia_worldcover:
+  somalia_worldcover:  # preprocessing: merge + resample + clip (notebook 01)
     base_path: "../data/raw/Water/Somalia/Rasters/"
     input_file: "Clipped/WorldCover_resampled.tif"
     style_file: "WorldCover.qml"
@@ -362,7 +372,7 @@ layers:
     layer_name: "WorldCover"
     max_zoom: 11
 
-  somalia_groundwater_storage:
+  somalia_groundwater_storage:  # preprocessing: clip to Somalia (notebook 01)
     base_path: "../data/raw/Water/Somalia/Rasters/Clipped/"
     input_file: "3_GDAWater_GroundwaterResourcesEstimation_MeanAnnualGroundwaterStorageBalance_Multi-annual_Somalia_2003-2024_10042025.tif"
     style_file: "Groundwater.qml"
@@ -371,7 +381,7 @@ layers:
     max_zoom: 11
 
   # West Africa - Water
-  west_africa_precipitation:
+  west_africa_precipitation:  # preprocessing: assign CRS (notebook 01)
     base_path: "../data/raw/Water/West Africa/Rasters/"
     input_file: "1_GDAWater_Precipitation_MeanAnnualPrecipitation_Multi-annual_WestAfrica_2003-2024_23052025_prj.tif"
     style_file: "precipitation.qml"
@@ -379,7 +389,7 @@ layers:
     layer_name: "MeanAnnualPrecipitation_WestAfrica"
     max_zoom: 5
 
-  west_africa_groundwater_availability:
+  west_africa_groundwater_availability:  # preprocessing: clip to West Africa (notebook 01)
     base_path: "../data/raw/Water/West Africa/Rasters/Clipped"
     input_file: "3a_GDAWATER_Groundwater_Availability_percentage_WestAfrica_2024_03.tif"
     style_file: "Groundwater_Availability_percentage.qml"
@@ -625,12 +635,20 @@ layers:
     layer_name: "FIRAT_land_productivity"
     max_zoom: 10
 
-  firat_land_cover_change:
+  firat_land_cover_change2:
     base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
-    input_file: "land_cover_change.tif"
+    input_file: "masked_GDACR_Land-Cover-Subindicator_Turkey_2008-2023_20241108100235_v2.tif"
     style_file: "SDG_3_classes.qml"
-    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_cover_change.tif"
-    layer_name: "FIRAT_land_cover_change"
+    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/land_cover_change2.tif"
+    layer_name: "FIRAT_land_cover_change2"
+    max_zoom: 10
+
+  firat_vegetation_productivity:  # preprocessing: resample scale_factor=7 (notebook 01)
+    base_path: "../data/raw/Climate_resilience/Turkey/FIRAT/SDG_1531_Indicator"
+    input_file: "masked_GDACR_landsat_DMB_productivity-subindicator-GPGv2_Turkey_2008-2023_20241108100235_resampled.tif"
+    style_file: "SDG_3_classes.qml"
+    output_file: "../data/processed/Climate_resilience/Turkey/Rasters/vegetation_productivity.tif"
+    layer_name: "FIRAT_vegetation_productivity"
     max_zoom: 10
 
   firat_soc:
@@ -677,7 +695,7 @@ layers:
     max_zoom: 13
   
 # Mozambique - CR
-  mozambique_agb_prediction:
+  mozambique_agb_prediction:  # preprocessing: extract band1 + resample (notebook 01)
     base_path: "../data/raw/Climate_resilience/Mozambique/Rasters"
     input_file: "0007MZ_GIL_L4_AGB_band1_resampled.tiff"
     style_file: "band1.qml"
@@ -711,3 +729,426 @@ layers:
     output_file: "../data/processed/FCS/Nigeria/Rasters/Enugu_YearlyChanges_clipped.tif"
     layer_name: "Nigeria_Enugu_YearlyChanges"
     max_zoom: 15
+
+  # Bhutan - Health
+  bhutan_dem:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 2"
+    input_file: "GDA-Public-Health_DEM_Bhutan_2025.tif"
+    style_file: "DEM.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_DEM.tif"
+    layer_name: "Bhutan_DEM"
+    max_zoom: 11
+
+  bhutan_population_raster:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 3"
+    input_file: "BhutanPop2025_10m_Raster.tif"
+    style_file: "Population_raster_10m res.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_PopulationRaster.tif"
+    layer_name: "Bhutan_PopulationRaster"
+    max_zoom: 11
+
+  bhutan_landuse:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 3"
+    input_file: "GDA-Public-Health_Landuse_Bhutan_2025.tif"
+    style_file: "Landuse.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_Landuse.tif"
+    layer_name: "Bhutan_Landuse"
+    max_zoom: 11
+
+  bhutan_pop_access_all_hf:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 4"
+    input_file: "GDA-Public-Health_PopAccessClasses_All_HF_Bhutan_2025.tif"
+    style_file: "Pop_Accessibility_Classes.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_PopAccess_AllHF.tif"
+    layer_name: "Bhutan_PopAccess_AllHF"
+    max_zoom: 13
+
+  bhutan_pop_access_hospitals:
+    base_path: "../data/raw/Health/Bhutan/Visuals/Step 4"
+    input_file: "GDA-Public-Health_PopAccessClasses_Hospitals_Bhutan_2025.tif"
+    style_file: "Pop_Accessibility_Classes.qml"
+    output_file: "../data/processed/Health/Bhutan/Rasters/Bhutan_PopAccess_Hospitals.tif"
+    layer_name: "Bhutan_PopAccess_Hospitals"
+    max_zoom: 13
+
+  # India - Agriculture
+  india_worldcover:  # preprocessing: resample scale_factor=10 (notebook 01)
+    base_path: "../data/raw/Agriculture/India/GDA-AGRI_UC1-India/ESA_WORLDCOVER/ESA_WorldCover_10m_2021_v200_N30E075_Map"
+    input_file: "ESA_WorldCover_10m_2021_v200_N30E075_Map_resampled.tif"
+    style_file: "../landcover.qml"
+    output_file: "../data/processed/Agriculture/India/Rasters/India_Worldcover.tif"
+    layer_name: "India_Worldcover"
+    max_zoom: 11
+
+  india_soc_change:
+    base_path: "../data/raw/Agriculture/India/GDA-AGRI_UC1-India/PREDICTIONS"
+    input_file: "SOC_prediction_Himachal-Pradesh-croplands_change-2018-2023.tif"
+    style_file: "SOC_change.qml"
+    output_file: "../data/processed/Agriculture/India/Rasters/India_SOC_Change.tif"
+    layer_name: "India_SOC_Change"
+    max_zoom: 14
+
+  # Ghana - Agriculture
+  ghana_crop_type:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/CropType"
+    input_file: "openEO_Tono IRRIGABLE AREA_2023_WRLDCOV_CROP_CLIP_postproc_DEFthr_clip.tif"
+    style_file: "Crop_Type_Style.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_CropType.tif"
+    layer_name: "Ghana_CropType"
+    max_zoom: 14
+
+  ghana_precipitation:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "Precipitation_Country_1981-2010.tif"
+    style_file: "Precipitation_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_Precipitation.tif"
+    layer_name: "Ghana_Precipitation"
+    max_zoom: 9
+
+  ghana_temperature:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "Temperature_Country_1981-2010.tif"
+    style_file: "Temperature_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_Temperature.tif"
+    layer_name: "Ghana_Temperature"
+    max_zoom: 9
+
+  ghana_wind_speed:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "WindSpeed_Country_1981-2010.tif"
+    style_file: "WindSpeed_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_WindSpeed.tif"
+    layer_name: "Ghana_WindSpeed"
+    max_zoom: 9
+
+  ghana_solar_radiation:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "SolarRadiation_Country_1981-2010.tif"
+    style_file: "SolarRadiation_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_SolarRadiation.tif"
+    layer_name: "Ghana_SolarRadiation"
+    max_zoom: 9
+
+  ghana_soil_moisture:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana/Country_Met"
+    input_file: "SoilMoisture_Country_1981-2010.tif"
+    style_file: "SoilMoisture_Country_1981-2010.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_SoilMoisture.tif"
+    layer_name: "Ghana_SoilMoisture"
+    max_zoom: 9
+
+  ghana_peak_groundnut_rcp45:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana"
+    input_file: "Ghana_Peak_Groundnut_RCP45.tif"
+    style_file: "Ghana_Peak_styling.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_PeakGroundnutRCP45.tif"
+    layer_name: "Ghana_PeakGroundnutRCP45"
+    max_zoom: 9
+
+  ghana_peak_maize_rcp45:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana"
+    input_file: "Ghana_Peak_Maize_RCP45.tif"
+    style_file: "Ghana_Peak_styling.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_PeakMaizeRCP45.tif"
+    layer_name: "Ghana_PeakMaizeRCP45"
+    max_zoom: 9
+
+  ghana_peak_soybean_rcp45:
+    base_path: "../data/raw/Agriculture/Ghana/Ghana"
+    input_file: "Ghana_Peak_Soybean_RCP45.tif"
+    style_file: "Ghana_Peak_styling.qml"
+    output_file: "../data/processed/Agriculture/Ghana/Rasters/Ghana_PeakSoybeanRCP45.tif"
+    layer_name: "Ghana_PeakSoybeanRCP45"
+    max_zoom: 9
+
+  # Rwanda-Uganda - Agriculture
+  uganda_yield_estimation:
+    base_path: "../data/raw/Agriculture/Rwanda-Uganda/QGIS_layers/4_Yield-estimation"
+    input_file: "Uganda-kassnada-Mityana-districts/GDA-AGRI_UC8-Uganda_Kassanda-district_maize_Yield-Estimation_20230301-20230830_10m.tif"
+    style_file: "yield_style.qml"
+    output_file: "../data/processed/Agriculture/Rwanda-Uganda/Rasters/Uganda_YieldEstimation.tif"
+    layer_name: "Uganda_YieldEstimation"
+    max_zoom: 14
+
+  # Bangladesh - CE (Climate)
+  bangladesh_flood_hazard:
+    base_path: "../data/raw/Clean_energy/Bangladesh_Climate/"
+    input_file: "Flood_hazard.tif"
+    style_file: "Flood_hazard.qml"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/FloodHazard.tif"
+    layer_name: "Bangladesh_FloodHazard"
+    max_zoom: 11
+
+  bangladesh_landslide_hazard_clipped:
+    base_path: "../data/raw/Clean_energy/Bangladesh_Climate/"
+    input_file: "Landslide_Clipped.tif"
+    style_file: "Landslide_hazard_clipped.qml"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/Landslide_Clipped.tif"
+    layer_name: "Bangladesh_LandslideClipped"
+    max_zoom: 11
+
+  bangladesh_landslide_hazard:
+    base_path: "../data/raw/Clean_energy/Bangladesh_Climate/"
+    input_file: "Landslide_hazard.tif"
+    style_file: "Landslide_hazard.qml"
+    output_file: "../data/processed/Clean_energy/Bangladesh/Rasters/LandslideHazard.tif"
+    layer_name: "Bangladesh_LandslideHazard"
+    max_zoom: 11
+
+  # Yemen - Health
+  yemen_precipitation:  # preprocessing: assign CRS (notebook 01)
+    base_path: "../data/raw/Health/Yemen/Precipitaion"
+    input_file: "CHIRPS_multi_anual_mean_Yemen_prj.tif"
+    style_file: "precipitation.qml"
+    output_file: "../data/processed/Health/Yemen/Rasters/Precipitation.tif"
+    layer_name: "Yemen_Precipitation"
+    max_zoom: 11
+
+  # Nigeria - Health
+  nigeria_yield_estimation:  # preprocessing: clip with bbox (notebook 01)
+    base_path: "../data/raw/Health/Nigeria/Step 4"
+    input_file: "yield_estimation_clipped.tif"
+    style_file: "yieldestimation.qml"
+    output_file: "../data/processed/Health/Nigeria/Rasters/YieldEstimation.tif"
+    layer_name: "Nigeria_YieldEstimation"
+    max_zoom: 14
+
+  # Madagascar - CE
+  madagascar_cropland_mask:
+    base_path: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset"
+    input_file: "Cropland_mask_LTF.tif"
+    style_file: "Cropland_mask_LTF.qml"
+    output_file: "../data/processed/Clean_energy/Madagascar/Rasters/CroplandMask2.tif"
+    layer_name: "Madagascar_CroplandMask2"
+    max_zoom: 11
+
+  madagascar_irrigation_class:
+    base_path: "../data/raw/Clean_energy/Madagascar_demand/selectedSubset"
+    input_file: "OB_irrigation_class_LTF.tif"
+    style_file: "OB_irrigation_class_LTF.qml"
+    output_file: "../data/processed/Clean_energy/Madagascar/Rasters/IrrigationClass2.tif"
+    layer_name: "Madagascar_IrrigationClass2"
+    max_zoom: 14
+
+  # Armenia - CE
+  armenia_lulc:
+    base_path: "../data/raw/Clean_energy/Armenia_Wind"
+    input_file: "LULC.tif"
+    style_file: "LULC_symbology.qml"
+    vector_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer/armenia_boundary.geojson"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/LULC2.tif"
+    layer_name: "Armenia_LULC2"
+    max_zoom: 11
+
+  armenia_wind_speed_140m:
+    base_path: "../data/raw/Clean_energy/Armenia_Wind/1_22_391_Armenien/geotiff_Dateien"
+    input_file: "ws_140m.tif"
+    style_file: "ws_140m.qml"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/WindSpeed140m.tif"
+    layer_name: "Armenia_WindSpeed140m"
+    max_zoom: 11
+
+  armenia_power_density_100m:
+    base_path: "../data/raw/Clean_energy/Armenia_Wind/1_22_391_Armenien/geotiff_Dateien"
+    input_file: "pd_100m.tif"
+    style_file: "pd_100m.qml"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/PowerDensity100m.tif"
+    layer_name: "Armenia_PowerDensity100m"
+    max_zoom: 11
+
+  armenia_cloud_probability:
+    base_path: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer"
+    input_file: "CloudProbability_Armenia_2022.tif"
+    style_file: "../Armenia_SymbologyLayers/CloudProbability_Armenia_2022.qml"
+    vector_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer/armenia_boundary.geojson"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/CloudProb.tif"
+    layer_name: "Armenia_CloudProb"
+    max_zoom: 8
+
+  armenia_solar_radiation:
+    base_path: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer"
+    input_file: "SolarRadiation_Armenia_25m_resampled.tif"
+    style_file: "../Armenia_SymbologyLayers/SolarRadiation_Armenia_25m.qml"
+    vector_file: "../data/raw/Clean_energy/Armenia_Solar/storyArmeniaSolar/natLayer/armenia_boundary.geojson"
+    output_file: "../data/processed/Clean_energy/Armenia/Rasters/SolarRadiation.tif"
+    layer_name: "Armenia_SolarRadiation"
+    max_zoom: 9
+
+  # DRC - Climate Resilience
+  drc_agb_2018:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
+    input_file: "AGB_2018_resampled.tif"
+    style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-AGB-2018.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/AGB_2018.tif"
+    layer_name: "DRC_AGB_2018"
+    max_zoom: 7
+
+  drc_agb_change_2010_2018:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
+    input_file: "GMV-GDA-CR-UseCaseA7-DRCongo-AGBChange-2010_2018.tif"
+    style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-AGBChange-2010_2018.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/AGBChange_2010_2018.tif"
+    layer_name: "DRC_AGBChange_2010_2018"
+    max_zoom: 7
+
+  drc_forest_mask_2010:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
+    input_file: "GMV-GDA-CR-UseCaseA7-DRCongo-ForestMask2010.tif"
+    style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-ForestMask2010.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/ForestMask2010.tif"
+    layer_name: "DRC_ForestMask2010"
+    max_zoom: 7
+
+  drc_forest_mask_2018:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
+    input_file: "GMV-GDA-CR-UseCaseA7-DRCongo-ForestMask2018.tif"
+    style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-ForestMask2018.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/ForestMask2018.tif"
+    layer_name: "DRC_ForestMask2018"
+    max_zoom: 7
+
+  # Peru - Climate Resilience
+  peru_deforestation_lossyear:
+    base_path: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/geospatial/step2_deforestation/"
+    input_file: "GDA_peru_iquitos_deforestation_lossyear.tif"
+    style_file: "../../styles/GDA_peru_iquitos_deforestation_lossyear.qml"
+    vector_file: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/ancillary/zoom_window_step2_deforestation.shp"
+    output_file: "../data/processed/Climate_resilience/Peru/Rasters/Peru_Deforestation_Lossyear.tif"
+    layer_name: "Peru_Deforestation_Lossyear"
+    max_zoom: 11
+
+  peru_lc_transitions:
+    base_path: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/geospatial/step3_transitions/"
+    input_file: "GDA_peru_yurimaguas_lc_transitions.tif"
+    style_file: "../../styles/GDA_peru_yurimaguas_lc_transitions.qml"
+    vector_file: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/ancillary/zoom_window_step3_transitions.shp"
+    output_file: "../data/processed/Climate_resilience/Peru/Rasters/Peru_LC_Transitions.tif"
+    layer_name: "Peru_LC_Transitions"
+    max_zoom: 13
+
+  # Vietnam - FFF
+  vietnam_hanoi_landcover:
+    base_path: "../data/raw/FFF/Vietnam/Geodata/"
+    input_file: "hanoi_gv_3857_2_5_v1.tif"
+    style_file: "hanoi_landcover_v1.qml"
+    output_file: "../data/processed/FFF/Vietnam/Rasters/Vietnam_Hanoi_Landcover.tif"
+    layer_name: "Vietnam_Hanoi_Landcover"
+    max_zoom: 13
+  
+  vietnam_hanoi_landcover_clipped:
+    base_path: "../data/raw/FFF/Vietnam/Geodata/"
+    input_file: "hanoi_gv_3857_2_5_v1.tif"
+    style_file: "hanoi_landcover_v1.qml"
+    vector_file: "../data/raw/FFF/Vietnam/Geodata/hanoi.shp"
+    output_file: "../data/processed/FFF/Vietnam/Rasters/Vietnam_Hanoi_Landcover_Clipped.tif"
+    layer_name: "Vietnam_Hanoi_Landcover_Clipped"
+    max_zoom: 15
+
+  # Dar es Salaam, Abidjan, Novi Sad - Urban Sustainability
+  dar_lulc:  # preprocessing: resample scale_factor=2 (notebook 01)
+    base_path: "../data/raw/Urban_sustainability/3stories/Dar es Salaam - Heat Event simulation - Slide 3"
+    input_file: "Land Use _ Land Cover Dar es Salaam_resampled.tif"
+    style_file: "Land Use _ Land Cover Dar es Salaam.qml"
+    output_file: "../data/processed/Urban_sustainability/Dar/Rasters/Dar_LULC.tif"
+    layer_name: "Dar_LULC"
+    max_zoom: 14
+
+  abidjan_lulc:
+    base_path: "../data/raw/Urban_sustainability/3stories/Abijan - HVI - Slide 4"
+    input_file: "Land Use _ Land Cover Abijan.tif"
+    style_file: "Land Use _ Land Cover Abijan.qml"
+    output_file: "../data/processed/Urban_sustainability/Abidjan/Rasters/Abidjan_LULC.tif"
+    layer_name: "Abidjan_LULC"
+    max_zoom: 14
+
+  novisad_lulc:
+    base_path: "../data/raw/Urban_sustainability/3stories/Novi Sad - greening scenario -Slide 5"
+    input_file: "Land Use _ Land Cover Novi Sad.tif"
+    style_file: "Land Use _ Land Cover Novi Sad.qml"
+    output_file: "../data/processed/Urban_sustainability/NoviSad/Rasters/NoviSad_LULC.tif"
+    layer_name: "NoviSad_LULC"
+    max_zoom: 14
+  
+  # Dominican Republic - FFF
+  dominicanrepublic_flood_hazard:
+    base_path: "../data/raw/FFF/DominicanRepublic/"
+    input_file: "flood_hazard_S1_mosaic.tif"
+    style_file: "flood_hazard_S1_mosaic.qml"
+    output_file: "../data/processed/FFF/DominicanRepublic/Rasters/DominicanRepublic_Flood_Hazard.tif"
+    layer_name: "DominicanRepublic_Flood_Hazard"
+    max_zoom: 11
+  
+  dominicanrepublic_landslide_hazard:
+    base_path: "../data/raw/FFF/DominicanRepublic/"
+    input_file: "DR_Landslide_Hazard_resampled.tif"
+    style_file: "landslide_hazard_style.qml"
+    output_file: "../data/processed/FFF/DominicanRepublic/Rasters/DR_Landslide_Hazard.tif"
+    layer_name: "DR_Landslide_Hazard"
+    max_zoom: 11
+  
+  # Madagascar Coastal Blue Carbon Assessment - FFF
+  mdg_mangrove_detection_1996:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "Mangrove_MDG_Madagascar_EOMAP_19940101_19961231_30m.tif"
+    style_file: "Mangrove_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Mangrove_Detect_1996.tif"
+    layer_name: "MDG_Mangrove_Detect_1996"
+    max_zoom: 10
+  
+  mdg_mangrove_detection_2010:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "Mangrove_MDG_Madagascar_EOMAP_20090101_20111231_30m.tif"
+    style_file: "Mangrove_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Mangrove_Detect_2010.tif"
+    layer_name: "MDG_Mangrove_Detect_2010"
+    max_zoom: 10
+
+  mdg_mangrove_detection_2020:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "MDG_Mangrove_Detect_2020_resampled.tif"
+    style_file: "Mangrove_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Mangrove_Detect_2020.tif"
+    layer_name: "MDG_Mangrove_Detect_2020"
+    max_zoom: 10
+  
+  mdg_aboveground_carbon_2020:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "MDG_Aboveground_Carbon_2020_resampled.tif"
+    style_file: "AGC_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Aboveground_Carbon_2020.tif"
+    layer_name: "MDG_Aboveground_Carbon_2020"
+    max_zoom: 10
+  
+  mdg_belowground_carbon_2020:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "MDG_Belowground_Carbon_2020_resampled.tif"
+    style_file: "BGC_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Belowground_Carbon_2020.tif"
+    layer_name: "MDG_Belowground_Carbon_2020"
+    max_zoom: 10
+
+  mdg_total_carbon_2020:
+    base_path: "../data/raw/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/"
+    input_file: "MDG_Total_Carbon_2020_resampled.tif"
+    style_file: "TOC_style.qml"
+    output_file: "../data/processed/FFF/Madagascar/Coastal_Blue_Carbon_Assessment/Rasters/MDG_Total_Carbon_2020.tif"
+    layer_name: "MDG_Total_Carbon_2020"
+    max_zoom: 10
+
+  # Madagascar (Comoros) - FFF
+  mdg_comoros_rate_change_2014_2023:
+    base_path: "../data/raw/FFF/Madagascar/Comoros/"
+    input_file: "HSI_rate_of_change_mackerel_2014_2023.tif"
+    style_file: "HSI_trend_Mackerel_Scad.qml"
+    output_file: "../data/processed/FFF/Madagascar/Comoros/Rasters/MDG_Comoros_Change_2014_2023.tif"
+    layer_name: "MDG_Comoros_Change_2014_2023"
+    max_zoom: 12
+
+  # Iraq - Health
+  iraq_building_damage_severity:
+    base_path: "../data/raw/Health/Iraq/Data/EO Layer"
+    input_file: "GDA-PublicHealth_EstimatedBuildingDamageSeverity_Mosul_Iraq_2015-2025.tif"
+    style_file: "GDA-PublicHealth_EstimatedBuildingDamageSeverity_Mosul_Iraq_2015-2025.qml"
+    output_file: "../data/processed/Health/Iraq/Rasters/Iraq_BuildingDamageSeverity.tif"
+    layer_name: "Iraq_BuildingDamageSeverity"
+    max_zoom: 13

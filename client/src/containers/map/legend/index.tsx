@@ -97,7 +97,13 @@ const MapLegends = ({ className = '' }) => {
   );
 
   const LEGENDS = useMemo(() => {
-    return layersData?.data?.reduce<LegendProps[]>((acc, curr) => {
+    // Strapi's $in filter ignores the order of `layers`, so reorder the response
+    // to match the order the layers come from Strapi (the `layers` atom).
+    const orderedData = layers
+      .map((id) => layersData?.data?.find((layer) => layer.id === id))
+      .filter((layer): layer is NonNullable<typeof layer> => !!layer);
+
+    return orderedData.reduce<LegendProps[]>((acc, curr) => {
       const layerId = curr.id;
       const legends = curr?.attributes?.legend_config;
 
@@ -122,7 +128,7 @@ const MapLegends = ({ className = '' }) => {
 
       return [...acc, ...layerLegends];
     }, []);
-  }, [layersData?.data, layersSettings]);
+  }, [layers, layersData?.data, layersSettings]);
 
   return (
     <Legend

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import axios from 'axios';
+import { DASHBOARD_FALLBACK } from '@/hooks/dashboard';
 
 export const runtime = 'nodejs';
 
@@ -25,20 +25,20 @@ export async function GET() {
   }
 
   try {
-    const res = await axios.get(`${baseUrl}/ExcelWebAPI`, {
-      headers: {
-        'x-functions-key': key,
-      },
-      timeout: 10_000,
+    const res = await fetch(`${baseUrl}/ExcelWebAPI`, {
+      headers: { 'x-functions-key': key },
+      // Azure Function cold starts can exceed 10s; stay under the 60s proxy limit.
+      signal: AbortSignal.timeout(30_000),
     });
-    return NextResponse.json(res.data);
+
+    if (res.ok) {
+      return NextResponse.json(await res.json());
+    }
+
+    console.error('Dashboard upstream returned', res.status);
+    return NextResponse.json(DASHBOARD_FALLBACK);
   } catch (error: unknown) {
     console.error('Error fetching dashboard data:', error);
-    const upstreamStatus =
-      axios.isAxiosError(error) && error.response ? error.response.status : 502;
-    return NextResponse.json(
-      { error: 'Failed to fetch dashboard data', status: upstreamStatus },
-      { status: upstreamStatus }
-    );
+    return NextResponse.json(DASHBOARD_FALLBACK);
   }
 }

@@ -22,7 +22,13 @@ def upload_to_mapbox(source: Path, display_name: str, username: str, token: str)
     Upload the mbtiles file to Mapbox.
     """
 
-    tileset_name = source.stem
+    # Mapbox tileset IDs only allow [a-zA-Z0-9_-]; strip accents and replace invalid chars
+    import re
+    import unicodedata
+
+    tileset_name = unicodedata.normalize("NFKD", source.stem).encode("ascii", "ignore").decode()
+    tileset_name = re.sub(r"[^a-zA-Z0-9_-]", "_", tileset_name)
+    tileset_name = re.sub(r"_+", "_", tileset_name).strip("_")
     mapbox_credentials = get_s3_credentials(username, token)
 
     upload_status = upload_to_s3_boto3(source, mapbox_credentials)
