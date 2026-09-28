@@ -757,3 +757,18 @@ layers:
     layer_name: "Iraq_Hospital_Digitisation"
     min_zoom: 6
     max_zoom: 14
+  
+  # Kyrgyzstan - FFF
+  krg_kara_darya_basin:
+    input_file: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/aoi/Kara Darya Basin.shp"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Vectors/KRG_KaraDaryaBasin.mbtiles"
+    layer_name: "KRG_KaraDaryaBasin"
+    min_zoom: 5
+    max_zoom: 11
+
+  krg_field_visit_places:
+    input_file: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/aoi/GDA_FFF_KG_Field_Visit_Places.shp"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Vectors/KRG_FieldVisitPlaces.mbtiles"
+    layer_name: "KRG_FieldVisitPlaces"
+    min_zoom: 5
+    max_zoom: 11
