@@ -1152,3 +1152,100 @@ layers:
     output_file: "../data/processed/Health/Iraq/Rasters/Iraq_BuildingDamageSeverity.tif"
     layer_name: "Iraq_BuildingDamageSeverity"
     max_zoom: 13
+
+  # Kyrgyzstan - FFF
+  krg_esa_worldcover:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/auxiliar"
+    input_file: "esa_worldcover_AOI_cog_resampled.tif"
+    style_file: "../../styles/auxiliar/ESA_WorldCover_classes.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_ESA_WorldCover.tif"
+    layer_name: "KRG_ESA_WorldCover"
+    max_zoom: 10
+  
+  krg_base_period_2000_2015:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service1"
+    input_file: "GDA-FFF_SDG-15-3-1_base-period_2000-2015_20260409_resampled.tif"
+    style_file: "../../styles/Service1/SDG3_Base-and-Reporting-Periods.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_BasePeriod.tif"
+    layer_name: "KRG_BasePeriod"
+    max_zoom: 10
+  
+  krg_reporting_period_2015_2023:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service1"
+    input_file: "GDA-FFD_SDG-15-3-1_reporting-period_2015-2023_20260409_resampled.tif"
+    style_file: "../../styles/Service1/SDG3_Base-and-Reporting-Periods.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_ReportingPeriod.tif"
+    layer_name: "KRG_ReportingPeriod"
+    max_zoom: 10
+  
+  krg_period_assessment_2000_2023:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service1"
+    input_file: "GDA-FFF_SDG-15-3-1_transitions_2000-2023_20260409_resampled.tif"
+    style_file: "../../styles/Service1/SDG7_Period-Assessment_2000-2023.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_PeriodAssessment.tif"
+    layer_name: "KRG_PeriodAssessment"
+    max_zoom: 10
+
+  krg_r_factor:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service2"
+    input_file: "GDA-FFF_R-factor_RamEI60.tif"
+    style_file: "../../styles/Service2/GDA-FFF_R-factor_RamEI60.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_R_Factor.tif"
+    layer_name: "KRG_R_Factor"
+    max_zoom: 11
+  
+  krg_ls_factor:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service2"
+    input_file: "GDA-FFF_LS-factor_Desmet&Govers.tif"
+    style_file: "../../styles/Service2/GDA-FFF_LS-factor_Desmet-Govers.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_LS_Factor.tif"
+    layer_name: "KRG_LS_Factor"
+    max_zoom: 11
+  
+  krg_k_factor:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service2"
+    input_file: "GDA-FFF_K-factor_KDg.tif"
+    style_file: "../../styles/Service2/GDA-FFF_K-factor_KDg.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_K_Factor.tif"
+    layer_name: "KRG_K_Factor"
+    max_zoom: 11
+  
+  krg_c_factor:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service2"
+    input_file: "GDA-FFF_C-factor_Landum_resampled.tif"
+    style_file: "../../styles/Service2/GDA-FFF_C-factor_Landum.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_C_Factor.tif"
+    layer_name: "KRG_C_Factor"
+    max_zoom: 10
+
+  krg_a_factor_classified:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service2"
+    input_file: "GDA-FFF_RUSLE_A_Soil-Loss-Risk-Classification_resampled.tif"
+    style_file: "../../styles/Service2/GDA-FFF_RUSLE_A_Soil-Loss-Risk-Classification.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_A_Factor_Classified.tif"
+    layer_name: "KRG_A_Factor_Classified"
+    max_zoom: 10
+
+  krg_sentinel2_vegetation_trend:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/Service3"
+    input_file: "GDA-FFF_Sentinel-2_Vegetation_Trend_resampled.tif"
+    style_file: "../../styles/Service3/GDA-FFF_Sentinel-2_Vegetation_Trend.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_Sentinel2_Veg_Trend.tif"
+    layer_name: "KRG_Sentinel2_Veg_Trend"
+    max_zoom: 11
+
+  krg_sdg_rusle:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/auxiliar"
+    input_file: "sdg_rusle_combo_grouped3x6_cog_resampled.tif"
+    style_file: "../../styles/auxiliar/sdg_rusle_combo_grouped3x6_cog.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_sdg_rusle.tif"
+    layer_name: "KRG_sdg_rusle"
+    max_zoom: 10
+
+  krg_local_dem:
+    base_path: "../data/raw/FFF/Kyrgyzstan/Impact-Sphere/data/auxiliar"
+    input_file: "local_dem_AOI_cog_resampled.tif"
+    style_file: "../../styles/auxiliar/DEM_400_4000_hypsometric.qml"
+    output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_Local_DEM.tif"
+    layer_name: "KRG_Local_DEM"
+    max_zoom: 10
