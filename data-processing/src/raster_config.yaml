@@ -987,9 +987,9 @@ layers:
     base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
     input_file: "GMV-GDA-CR-UseCaseA7-DRCongo-AGBChange-2010_2018.tif"
     style_file: "GMV-GDA-CR-UseCaseA7-DRCongo-AGBChange-2010_2018.qml"
-    output_file: "../data/processed/Climate_resilience/DRC/Rasters/AGBChange_2010_2018.tif"
-    layer_name: "DRC_AGBChange_2010_2018"
-    max_zoom: 7
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/AGBChange2_2010_2018.tif"
+    layer_name: "DRC_AGBChange2_2010_2018"
+    max_zoom: 9
 
   drc_forest_mask_2010:
     base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo"
@@ -1007,6 +1007,23 @@ layers:
     layer_name: "DRC_ForestMask2018"
     max_zoom: 7
 
+  # DRC - Climate Resilience (LUH2 Change Projections 2015-2050)
+  drc_primf_change_2050:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo/LUH2 Projections"
+    input_file: "primf_change_2015_2050.tif"
+    style_file: "change_projection_RdYlGn.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/DRC_Primf_Change_2050.tif"
+    layer_name: "DRC_Primf_Change_2050"
+    max_zoom: 9
+
+  drc_range_change_2050:
+    base_path: "../data/raw/Climate_resilience/DRC/GDA-CR_RDCongo/LUH2 Projections"
+    input_file: "range_change_2015_2050.tif"
+    style_file: "change_projection_RdYlGn.qml"
+    output_file: "../data/processed/Climate_resilience/DRC/Rasters/DRC_Range_Change_2050.tif"
+    layer_name: "DRC_Range_Change_2050"
+    max_zoom: 9
+
   # Peru - Climate Resilience
   peru_deforestation_lossyear:
     base_path: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/geospatial/step2_deforestation/"
@@ -1022,9 +1039,9 @@ layers:
     input_file: "GDA_peru_yurimaguas_lc_transitions.tif"
     style_file: "../../styles/GDA_peru_yurimaguas_lc_transitions.qml"
     vector_file: "../data/raw/Climate_resilience/Peru/GDA_Peru_story/data/ancillary/zoom_window_step3_transitions.shp"
-    output_file: "../data/processed/Climate_resilience/Peru/Rasters/Peru_LC_Transitions.tif"
-    layer_name: "Peru_LC_Transitions"
-    max_zoom: 13
+    output_file: "../data/processed/Climate_resilience/Peru/Rasters/Peru_LC_Transitions2.tif"
+    layer_name: "Peru_LC_Transitions2"
+    max_zoom: 14
 
   # Vietnam - FFF
   vietnam_hanoi_landcover:
@@ -1249,3 +1266,5 @@ layers:
     output_file: "../data/processed/FFF/Kyrgyzstan/Rasters/KRG_Local_DEM.tif"
     layer_name: "KRG_Local_DEM"
     max_zoom: 10
+
+  
