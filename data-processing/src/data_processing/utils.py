@@ -24,7 +24,6 @@ from apng import APNG
 from rasterio.mask import mask
 from rasterio.merge import merge
 from rasterio.warp import Resampling, calculate_default_transform, reproject
-from rasterio.windows import Window
 
 
 def sanitize_name(name: str) -> str:
@@ -276,13 +275,18 @@ def merge_tifs(folder_path, output_file, pattern="*.tif", nodata_value=0):
 
 def resample_raster(input_file, output_file, scale_factor=5, resampling_method=Resampling.nearest):
     """
-    Resample a raster to lower resolution in a memory-efficient way using blocks/windows.
+    Resample a raster to lower resolution using a single-pass read.
     """
     with rasterio.open(input_file) as src:
         new_height = src.height // scale_factor
         new_width = src.width // scale_factor
         new_transform = src.transform * src.transform.scale(
             (src.width / new_width), (src.height / new_height)
+        )
+
+        data = src.read(
+            out_shape=(src.count, new_height, new_width),
+            resampling=resampling_method,
         )
 
         profile = src.profile.copy()
@@ -300,29 +304,7 @@ def resample_raster(input_file, output_file, scale_factor=5, resampling_method=R
         )
 
         with rasterio.open(output_file, "w", **profile) as dst:
-            # Process block by block
-            for _, window in dst.block_windows(1):
-                # Compute corresponding source window
-                src_window = Window(
-                    col_off=window.col_off * scale_factor,
-                    row_off=window.row_off * scale_factor,
-                    width=window.width * scale_factor,
-                    height=window.height * scale_factor,
-                )
-
-                src_data = src.read(window=src_window)
-                dest_data = np.zeros((src.count, window.height, window.width), dtype=src.dtypes[0])
-
-                reproject(
-                    source=src_data,
-                    destination=dest_data,
-                    src_transform=src.window_transform(src_window),
-                    src_crs=src.crs,
-                    dst_transform=dst.window_transform(window),
-                    dst_crs=dst.crs,
-                    resampling=resampling_method,
-                )
-                dst.write(dest_data, window=window)
+            dst.write(data)
     return output_file
 
 
