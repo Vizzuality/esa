@@ -16,7 +16,12 @@ import { ChartJSOrUndefined, ChartProps } from 'react-chartjs-2/dist/types';
 
 import { WidgetWidgetComponent } from '@/types/generated/strapi.schemas';
 
-import { bubbleDefaultOptions, getChartDefaultData, getChartDefaultOptions } from './utils';
+import {
+  applyRangeDatasetOptions,
+  bubbleDefaultOptions,
+  getChartDefaultData,
+  getChartDefaultOptions,
+} from './utils';
 
 type ChartJsProps = {
   widget: WidgetWidgetComponent;
@@ -59,14 +64,18 @@ const ChartJs = ({ widget, ...props }: ChartJsProps) => {
     props.isLast
   );
 
-  const OPTIONS = {
-    ...optionsWithDefaults,
-    datasets: {
-      ...(chartType === 'bubble'
-        ? { bubble: { ...bubbleDefaultOptions, ...optionsWithDefaults?.datasets?.bubble } }
-        : {}),
+  // Paired "range" datasets (e.g. uncertainty upper/lower bound) show as one tooltip/legend entry.
+  const OPTIONS = applyRangeDatasetOptions(
+    {
+      ...optionsWithDefaults,
+      datasets: {
+        ...(chartType === 'bubble'
+          ? { bubble: { ...bubbleDefaultOptions, ...optionsWithDefaults?.datasets?.bubble } }
+          : {}),
+      },
     },
-  };
+    data
+  );
 
   return (
     <div className="w-full">

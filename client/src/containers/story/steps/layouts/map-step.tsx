@@ -115,7 +115,7 @@ const MapStepLayout = ({ step, showContent, storySummary }: MapStepLayoutProps) 
             </MapContent>
           )}
 
-          {/* TO - DO - legend and title must to be independent */}
+          {/* TO - DO - legend and title must be independent */}
           {!!widget?.id && (
             <MapContent showContent={showContent} title={widget.title}>
               <div className="mt-2 space-y-2">
