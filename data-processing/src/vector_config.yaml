@@ -772,3 +772,11 @@ layers:
     layer_name: "KRG_FieldVisitPlaces"
     min_zoom: 5
     max_zoom: 11
+
+  # Nepal - Disaster Resilience
+  nepal_slope_instability_map:
+    input_file: "../data/raw/DR/Nepal/Data/GDA-AID-DR_UC09adbNEP_psi-mean-abs-velocity.gpkg"
+    output_file: "../data/processed/DR/Nepal/Vectors/Nepal_Instability.mbtiles"
+    layer_name: "Nepal_Instability"
+    min_zoom: 8
+    max_zoom: 15 
