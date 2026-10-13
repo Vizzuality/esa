@@ -1267,4 +1267,44 @@ layers:
     layer_name: "KRG_Local_DEM2"
     max_zoom: 10
 
+  # NGDI (Horn of Africa) - FFF
+
+  ngdi_calibrated_ndvi300:
+    base_path: "../data/raw/FFF/NGDI/Data"
+    input_file: "c_gls_NDVI300_202608210000_GLOBE_OLCI_V3.0.1_cropped.tif"
+    style_file: "c_gls_NDVI300_202608210000_GLOBE_OLCI_V3.0.1_cropped.qml"
+    output_file: "../data/processed/FFF/NGDI/Rasters/NGDI_Calibrated_NDVI300.tif"
+    layer_name: "NGDI_Calibrated_NDVI300"
+    max_zoom: 11
+
+  ngdi_z-score:
+    base_path: "../data/raw/FFF/NGDI/Data"
+    input_file: "zscore_c_gls_NDVI300_202608210000_GLOBE_OLCI_V3.0.1_cropped.tif"
+    style_file: "zscore_c_gls_NDVI300_202608210000_GLOBE_OLCI_V3.0.1_cropped.qml"
+    output_file: "../data/processed/FFF/NGDI/Rasters/NGDI_Z-Score.tif"
+    layer_name: "NGDI_Z-Score"
+    max_zoom: 11
+
+  ngdi_drought_severity:
+    base_path: "../data/raw/FFF/NGDI/Data"
+    input_file: "droughtindex_c_gls_NDVI300_202608210000_GLOBE_OLCI_V3.0.1_cropped.tif"
+    style_file: "droughtindex_c_gls_NDVI300_202608210000_GLOBE_OLCI_V3.0.1_cropped.qml"
+    output_file: "../data/processed/FFF/NGDI/Rasters/NGDI_Drought_Severity.tif"
+    layer_name: "NGDI_Drought_Severity"
+    max_zoom: 11
   
+  ngdi_pop_exposure:
+    base_path: "../data/raw/FFF/NGDI/Data"
+    input_file: "landscan_2023_cropped.tif"
+    style_file: "landscan_2023_cropped.qml"
+    output_file: "../data/processed/FFF/NGDI/Rasters/NGDI_Pop_Exposure.tif"
+    layer_name: "NGDI_Pop_Exposure"
+    max_zoom: 11
+  
+  ngdi_landcover:
+    base_path: "../data/raw/FFF/NGDI/Data"
+    input_file: "ESA_WorldCover_cropped_resampled.tif"
+    style_file: "ESA_WorldCover_cropped.qml"
+    output_file: "../data/processed/FFF/NGDI/Rasters/NGDI_Landcover.tif"
+    layer_name: "NGDI_Landcover"
+    max_zoom: 11
