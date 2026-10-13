@@ -1166,9 +1166,9 @@ layers:
     base_path: "../data/raw/Health/Iraq/Data/EO Layer"
     input_file: "GDA-PublicHealth_EstimatedBuildingDamageSeverity_Mosul_Iraq_2015-2025.tif"
     style_file: "GDA-PublicHealth_EstimatedBuildingDamageSeverity_Mosul_Iraq_2015-2025.qml"
-    output_file: "../data/processed/Health/Iraq/Rasters/Iraq_BuildingDamageSeverity.tif"
-    layer_name: "Iraq_BuildingDamageSeverity"
-    max_zoom: 13
+    output_file: "../data/processed/Health/Iraq/Rasters/Iraq_BuildingDamageSeverity3.tif"
+    layer_name: "Iraq_BuildingDamageSeverity3"
+    max_zoom: 16
 
   # Kyrgyzstan - FFF
   krg_esa_worldcover:
