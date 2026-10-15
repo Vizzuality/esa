@@ -26,7 +26,8 @@ def upload_to_mapbox(source: Path, display_name: str, username: str, token: str)
     import re
     import unicodedata
 
-    tileset_name = unicodedata.normalize("NFKD", source.stem).encode("ascii", "ignore").decode()
+    raw_name = display_name or source.stem
+    tileset_name = unicodedata.normalize("NFKD", raw_name).encode("ascii", "ignore").decode()
     tileset_name = re.sub(r"[^a-zA-Z0-9_-]", "_", tileset_name)
     tileset_name = re.sub(r"_+", "_", tileset_name).strip("_")
     mapbox_credentials = get_s3_credentials(username, token)
