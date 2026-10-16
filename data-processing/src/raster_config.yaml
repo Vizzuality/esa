@@ -1308,3 +1308,13 @@ layers:
     output_file: "../data/processed/FFF/NGDI/Rasters/NGDI_Landcover.tif"
     layer_name: "NGDI_Landcover"
     max_zoom: 11
+  
+  # Red Sea - FFF
+
+  redsea_seagrass_carbon_EGY:
+    base_path: "../data/raw/FFF/RedSea/Data/Step_5"
+    input_file: "SeagrassCarbon_EGY_Egypt_EOMAP_20230101_20231231_10m.tif"
+    style_file: "SeagrassCarbon.qml"
+    output_file: "../data/processed/FFF/RedSea/Rasters/RedSea_Seagrass_Carbon_EGY.tif"
+    layer_name: "RedSea_Seagrass_Carbon_EGY"
+    max_zoom: 14
