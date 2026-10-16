@@ -644,3 +644,30 @@ layers:
       type: sld_gradient
       breakpoints: [0.402081, 0.4263441, 0.487099, 0.5247729, 0.6095615, 0.655109, 0.7101487, 0.7907963, 0.8336046, 0.8829108]
       colors: ["#a13c3c", "#a15757", "#a1ad9f", "#a2b4ba", "#7492ba", "#496da1", "#325587", "#26446e", "#16335e", "#182a4f"]
+    
+  # Red Sea - FFF
+  redsea_SOC_DJI_18_23:
+    input_folder: "../data/raw/FFF/RedSea/Data/Step_3/SOC_DJI_2018-2023"
+    output_folder: "../data/processed/FFF/RedSea/APNGs/SOC_DJI_2018-2023/"
+    min_z: 6
+    max_z: 15
+    vmin: 100
+    vmax: 250
+    date_format: "YYYYMMDD"
+    colormap:
+      type: sld_gradient
+      breakpoints: [100, 119.5, 139, 158.5, 178, 197.5, 217, 235, 250]
+      colors: ["#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b"]
+  
+  redsea_AGB_DJI_18_23:
+    input_folder: "../data/raw/FFF/RedSea/Data/Step_3/AGB_DJI_2018-2023"
+    output_folder: "../data/processed/FFF/RedSea/APNGs/AGB_DJI_2018-2023/"
+    min_z: 6
+    max_z: 15
+    vmin: 0.08
+    vmax: 7.14
+    date_format: "YYYYMMDD"
+    colormap:
+      type: sld_gradient
+      breakpoints: [0.08, 0.99, 1.92, 2.83, 3.75, 4.67, 5.59, 6.43, 7.14]
+      colors: ["#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b"]

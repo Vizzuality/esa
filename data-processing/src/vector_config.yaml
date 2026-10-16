@@ -780,3 +780,26 @@ layers:
     layer_name: "Nepal_Instability"
     min_zoom: 8
     max_zoom: 15 
+
+  # Red Sea - FFF
+  
+  redsea_seafloor_23_EGY:
+    input_file: "../data/raw/FFF/RedSea/Data/Step_4/SFC_EGY_Egypt_EOMAP_20230101_20231231_10m.shp"
+    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Seafloor_23_EGY.mbtiles"
+    layer_name: "RedSea_Seafloor_23_EGY"
+    min_zoom: 5
+    max_zoom: 12
+
+  redsea_mangrove_2018:
+    input_file: "../data/raw/FFF/RedSea/Data/Step_2/mangrove_extent_2018.gpkg"
+    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Mangrove_2018.mbtiles"
+    layer_name: "RedSea_Mangrove_2018"
+    min_zoom: 3
+    max_zoom: 10
+
+  redsea_mangrove_2023:
+    input_file: "../data/raw/FFF/RedSea/Data/Step_2/mangrove_extent_2023.gpkg"
+    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Mangrove_2023.mbtiles"
+    layer_name: "RedSea_Mangrove_2023"
+    min_zoom: 3
+    max_zoom: 10
