@@ -782,48 +782,7 @@ layers:
     max_zoom: 15 
 
   # Red Sea - FFF
-  redsea_mangrove_18_EGY:
-    input_file: "../data/raw/FFF/RedSea/Data/Step_2/Mangrove_EGY_Egypt_EOMAP_20180101_20181231_10m.shp"
-    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Mangrove_18_EGY.mbtiles"
-    layer_name: "RedSea_Mangrove_18_EGY"
-    min_zoom: 3
-    max_zoom: 10
-
-  redsea_mangrove_18_YEM:
-    input_file: "../data/raw/FFF/RedSea/Data/Step_2/Mangrove_YEM_Yemen_EOMAP_20180101_20181231_10m.shp"
-    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Mangrove_18_YEM.mbtiles"
-    layer_name: "RedSea_Mangrove_18_YEM"
-    min_zoom: 3
-    max_zoom: 10
-
-  redsea_mangrove_18_DJI:
-    input_file: "../data/raw/FFF/RedSea/Data/Step_2/Mangrove_DJI_Djibouti_EOMAP_20180101_20181231_10m.shp"
-    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Mangrove_18_DJI.mbtiles"
-    layer_name: "RedSea_Mangrove_18_DJI"
-    min_zoom: 3
-    max_zoom: 10
-
-  redsea_mangrove_23_EGY:
-    input_file: "../data/raw/FFF/RedSea/Data/Step_2/Mangrove_EGY_Egypt_EOMAP_20230101_20231231_10m.shp"
-    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Mangrove_23_EGY.mbtiles"
-    layer_name: "RedSea_Mangrove_23_EGY"
-    min_zoom: 3
-    max_zoom: 10
-
-  redsea_mangrove_23_YEM:
-    input_file: "../data/raw/FFF/RedSea/Data/Step_2/Mangrove_YEM_Yemen_EOMAP_20230101_20231231_10m.shp"
-    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Mangrove_23_YEM.mbtiles"
-    layer_name: "RedSea_Mangrove_23_YEM"
-    min_zoom: 3
-    max_zoom: 10
-
-  redsea_mangrove_23_DJI:
-    input_file: "../data/raw/FFF/RedSea/Data/Step_2/Mangrove_DJI_Djibouti_EOMAP_20230101_20231231_10m.shp"
-    output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Mangrove_23_DJI.mbtiles"
-    layer_name: "RedSea_Mangrove_23_DJI"
-    min_zoom: 3
-    max_zoom: 10
-
+  
   redsea_seafloor_23_EGY:
     input_file: "../data/raw/FFF/RedSea/Data/Step_4/SFC_EGY_Egypt_EOMAP_20230101_20231231_10m.shp"
     output_file: "../data/processed/FFF/RedSea/Vectors/RedSea_Seafloor_23_EGY.mbtiles"
