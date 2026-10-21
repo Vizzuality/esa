@@ -94,11 +94,11 @@ def get_files_with_years(input_folder, date_format="DDMMYYYY"):
         if match_6:
             date_str = match_6.group(1)
 
-            if date_format == "YYYYMMDD":
+            if date_format in ["YYYYMMDD", "YYYYMM"]: 
                 # YYYYMM format - assume first day of month
                 normalized_date = int(date_str + "01")
-            else:  # DDMMYYYY
-                # MMYYYY format - convert to YYYYMM01
+            else:  # DDMMYYYY or MMYYYY (Month first format)
+                # Extract MM and YYYY, reorder to YYYYMM01 for sorting
                 mm = date_str[:2]
                 yyyy = date_str[2:]
                 normalized_date = int(yyyy + mm + "01")
