@@ -803,3 +803,12 @@ layers:
     layer_name: "RedSea_Mangrove_2023"
     min_zoom: 3
     max_zoom: 10
+  
+  # Bangladesh - Forest Management
+
+  bgd_rest_sites_2026:
+    input_file: "../data/raw/FM/Bangladesh/02_ADB_BFD_MangroveEntentAndChange/03_BGD_Potential_MangroveRestorationSites2026/GDA_Forest_Longlist_MangroveRest_PrimSecondPotentSites_AllSubDistricts_1_0.gpkg"
+    output_file: "../data/processed/FM/Bangladesh/Vectors/BGD_Rest_Sites_2026.mbtiles"
+    layer_name: "BGD_Rest_Sites_2026"
+    min_zoom: 6
+    max_zoom: 14

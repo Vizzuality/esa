@@ -1318,3 +1318,29 @@ layers:
     output_file: "../data/processed/FFF/RedSea/Rasters/RedSea_Seagrass_Carbon_EGY.tif"
     layer_name: "RedSea_Seagrass_Carbon_EGY"
     max_zoom: 14
+
+  # Bangladesh - Forest Management
+
+  bgd_mangrove_extent_2024:
+    base_path: "../data/raw/FM/Bangladesh/02_ADB_BFD_MangroveEntentAndChange/01_BGD_MangroveExtent2024"
+    input_file: "GDA_Forest_BGD_Mangrove_SEN2_10m_2024_2024_3857_2_0.tif"
+    style_file: "Mangroves_2024_BGD_v2_legend.qml"
+    output_file: "../data/processed/FM/Bangladesh/Rasters/BGD_Mngr_Extent_2024.tif"
+    layer_name: "BGD_Mngr_Extent_2024"
+    max_zoom: 13
+
+  bgd_mangrove_change_2024:
+    base_path: "../data/raw/FM/Bangladesh/02_ADB_BFD_MangroveEntentAndChange/02_BGD_MangroveChange2020-2024"
+    input_file: "GDA_Forest_BGD_MangroveChange_SEN2_10m_2020_2024_3857_1_0.tif"
+    style_file: "Mangrove_2020_2024_Change_BGD_legend.qml"
+    output_file: "../data/processed/FM/Bangladesh/Rasters/BGD_Mngr_Change_2024.tif"
+    layer_name: "BGD_Mngr_Change_2024"
+    max_zoom: 13
+
+  bgd_intertidal_areas_25-26:
+    base_path: "../data/raw/FM/Bangladesh/01_ADB_BFD_MangroveRestorationPotential/02_IntertidalAreasData"
+    input_file: "BGD_IN-4.TIF"
+    style_file: "BGD_intertidalAreasEOT20model_Annual2025-2026.qml"
+    output_file: "../data/processed/FM/Bangladesh/Rasters/BGD_Int_Areas_25-26.tif"
+    layer_name: "BGD_Intl_Areas_25-26"
+    max_zoom: 10
