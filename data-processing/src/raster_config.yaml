@@ -1344,3 +1344,21 @@ layers:
     output_file: "../data/processed/FM/Bangladesh/Rasters/BGD_Int_Areas_25-26.tif"
     layer_name: "BGD_Intl_Areas_25-26"
     max_zoom: 10
+
+  # Bosnia - FFF
+
+  bih_chlorophyll_a:
+    base_path: "../data/raw/FFF/Bosnia/Slide_3 - Water"
+    input_file: "Chlorophyll_a_trend_per_month.tif"
+    style_file: "modrac_chl_trend.qml"
+    output_file: "../data/processed/FFF/Bosnia/Rasters/BIH_Chlorophyll_a.tif"
+    layer_name: "BIH_Chlorophyll_a"
+    max_zoom: 15
+
+  bih_clay_mineral:
+    base_path: "../data/raw/FFF/Bosnia/Slide_4"
+    input_file: "ClayMineralRatio_trend_per_month_STL.tif"
+    style_file: "hak_cmr_trend.qml"
+    output_file: "../data/processed/FFF/Bosnia/Rasters/BIH_Clay_Mineral.tif"
+    layer_name: "BIH_Clay_Mineral"
+    max_zoom: 16

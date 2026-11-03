@@ -224,6 +224,7 @@ class RasterioEngine(TileEngine):
             with Reader(tif_file_path) as dst:
                 # Get the tile data and mask
                 img = dst.tile(tile.x, tile.y, tile.z, indexes=indexes, tilesize=self.TILE_SIZE)
+                img.array.mask = img.array.mask | np.isnan(img.array.data) # Ensure NaN values are masked
                 # Convert the data to an image
                 if num_bands == 1:
                     # Rescale the data linearly from vmin-vmax to 0-255
@@ -350,6 +351,7 @@ class XArrayEngine(TileEngine):
             with XarrayReader(da) as dst:
                 # Get the tile data and mask
                 img = dst.tile(tile.x, tile.y, tile.z, tilesize=self.TILE_SIZE)
+                img.array.mask = img.array.mask | np.isnan(img.array.data) # Ensure NaN values are masked
                 # Convert the data to an image
                 # Rescale the data linearly from 0-10000 to 0-255
                 img.rescale(in_range=((self.vmin, self.vmax),), out_range=((0, 255),))
