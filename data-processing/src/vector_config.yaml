@@ -812,3 +812,26 @@ layers:
     layer_name: "BGD_Rest_Sites_2026"
     min_zoom: 6
     max_zoom: 14
+
+  # Bosnia - FFF
+
+  bih_modrac_points:
+    input_file: "../data/raw/FFF/Bosnia/Slide_3 - Water/modrac_control_points.geojson"
+    output_file: "../data/processed/FFF/Bosnia/Vectors/BIH_Modrac_Points.mbtiles"
+    layer_name: "BIH_Modrac_Points"
+    min_zoom: 10
+    max_zoom: 16
+
+  bih_HAK_power_plant:
+    input_file: "../data/raw/FFF/Bosnia/Slide_4/control_points_HAK.geojson"
+    output_file: "../data/processed/FFF/Bosnia/Vectors/BIH_HAK_PowerPlant.mbtiles"
+    layer_name: "BIH_HAK_PowerPlant"
+    min_zoom: 10
+    max_zoom: 16
+  
+  bih_AOI_HAK_powerr_plant:
+    input_file: "../data/raw/FFF/Bosnia/Slide_4/AOI_PowerPlant_HAK.geojson"
+    output_file: "../data/processed/FFF/Bosnia/Vectors/BIH_AOI_HAK_PowerPlant.mbtiles"
+    layer_name: "BIH_AOI_HAK_PowerPlant"
+    min_zoom: 10
+    max_zoom: 16
