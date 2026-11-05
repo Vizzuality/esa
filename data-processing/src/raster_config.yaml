@@ -685,14 +685,14 @@ layers:
     layer_name: "Sudan_Livestock"
     max_zoom: 10
 
-  # Tajikistan - FCS
-  tajikistan_hfc:
+  # Afghanistan (Kabul) - FCS
+  afghanistan_hfc:
     base_path: "../data/raw/FCS/Tajikistan/Telespazio DropZone-56bBTqjHRbPu3xgJ"
-    input_file: "TJK_HFC_2017-2022_clipped.tif"
+    input_file: "AFG_HFC_2017-2022_clipped.tif"
     style_file: "HFC_2017-2022.qml"
-    output_file: "../data/processed/FCS/Tajikistan/Rasters/Tajikistan_HFC_2017-2022_clipped.tif"
-    layer_name: "Tajikistan_HFC_clipped"
-    max_zoom: 13
+    output_file: "../data/processed/FCS/Tajikistan/Rasters/Afghanistan_HFC_2017-2022_clipped.tif"
+    layer_name: "Afghanistan_HFC_clipped2"
+    max_zoom: 15
   
 # Mozambique - CR
   mozambique_agb_prediction:  # preprocessing: extract band1 + resample (notebook 01)
@@ -710,7 +710,7 @@ layers:
     style_file: "april_summed10_heatmap_filtered.qml"
     output_file: "../data/processed/FCS/Cameroon/Cameroon_Heatmap.tif"
     layer_name: "Cameroon_Heatmap"
-    max_zoom: 15
+    max_zoom: 16
 
 # Nigeria - FCS
   nigeria_settlement_extent:
