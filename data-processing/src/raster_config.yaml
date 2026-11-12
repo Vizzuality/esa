@@ -1362,3 +1362,21 @@ layers:
     output_file: "../data/processed/FFF/Bosnia/Rasters/BIH_Clay_Mineral.tif"
     layer_name: "BIH_Clay_Mineral"
     max_zoom: 16
+  
+  # Dhaka River (Bangladesh) - FFF
+
+  bgd_dtm_30m:
+    base_path: "../data/raw/FFF/Bangladesh/Layers_for_Impact_Sphere/Topography_Service1"
+    input_file: "DTM_30m_resampled.tif"
+    style_file: "DTM_30m_Style.qml"
+    output_file: "../data/processed/FFF/Bangladesh/Dhaka_River/Rasters/BGD_DTM_30m.tif"
+    layer_name: "BGD_DTM_30m"
+    max_zoom: 12
+  
+  bgd_landuse_30m:
+    base_path: "../data/raw/FFF/Bangladesh/Layers_for_Impact_Sphere/LandCover_LandUser_Service2"
+    input_file: "ESRI_IO_LULC_2017_10m_resampled.tif"
+    style_file: "LU_Style.qml"
+    output_file: "../data/processed/FFF/Bangladesh/Dhaka_River/Rasters/BGD_land_use_30m.tif"
+    layer_name: "BGD_land_use_30m"
+    max_zoom: 12

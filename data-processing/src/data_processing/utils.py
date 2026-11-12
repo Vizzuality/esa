@@ -67,12 +67,14 @@ def get_files_with_years(input_folder, date_format="DDMMYYYY"):
         input_folder (str): Path to the folder containing files
         date_format (str): Expected date format. Options: "DDMMYYYY" or "YYYYMMDD"
     """
+    # Separator accepted before and inside the date pattern: _ o -
+    sep = "[_-]"
     files = os.listdir(input_folder)
     files_with_dates = []
 
     for f in files:
         # Pattern 1: 8 digits - highest priority
-        match_8 = re.search(r"_(\d{8})", f)
+        match_8 = re.search(rf"{sep}(\d{{8}})", f)
         if match_8:
             date_str = match_8.group(1)
 
@@ -90,7 +92,7 @@ def get_files_with_years(input_folder, date_format="DDMMYYYY"):
             continue
 
         # Pattern 2: 6 digits - medium priority
-        match_6 = re.search(r"_(\d{6})", f)
+        match_6 = re.search(rf"{sep}(\d{{6}})", f)
         if match_6:
             date_str = match_6.group(1)
 
@@ -107,7 +109,7 @@ def get_files_with_years(input_folder, date_format="DDMMYYYY"):
             continue
 
         # Pattern 3: 4 digits - lowest priority
-        match_4 = re.search(r"_(\d{4})", f)
+        match_4 = re.search(rf"{sep}(\d{{4}})", f)
         if match_4:
             date_str = match_4.group(1)
             # YYYY format - assume January 1st (same for both formats)
@@ -115,6 +117,20 @@ def get_files_with_years(input_folder, date_format="DDMMYYYY"):
             files_with_dates.append((f, normalized_date))
             continue
 
+        # Pattern 4: YYYY-MM[-DD], also at the beginning of the name (e.g. 2014-12_water.tif)
+        # Validates month (01-12) and day (01-31), and disallows additional attached digits,
+        # so it does not capture names like 2014_Style.qml
+        match_ym = re.search(
+            rf"(?:^|{sep})(\d{{4}}){sep}(0[1-9]|1[0-2])(?:{sep}(0[1-9]|[12]\d|3[01]))?(?!\d)",
+            f,
+        )
+        if match_ym:
+            yyyy, mm, dd = match_ym.groups()
+            # If no day is provided, assume the 1st, just like in the 6-digit pattern
+            normalized_date = int(yyyy + mm + (dd or "01"))
+            files_with_dates.append((f, normalized_date))
+            continue
+            
     sorted_files = sorted(files_with_dates, key=lambda x: x[1])
     return sorted_files
 
