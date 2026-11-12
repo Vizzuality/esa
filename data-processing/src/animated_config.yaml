@@ -685,4 +685,17 @@ layers:
       type: sld_gradient
       breakpoints: [6.47, 10.52, 14.56, 18.60, 22.64, 26.68, 30.72]
       colors: ["#2b83ba", "#80bfab", "#c7e8ad", "#ffffbf", "#fec980", "#f07c4a", "#d7191c"]
-    
+  
+  # Dhaka River (Bangladesh) - FFF
+  bgd_annual_water_cover:
+    input_folder: "../data/raw/FFF/Bangladesh/Layers_for_Impact_Sphere/RiverMorphology_Service3/WaterCover/"
+    output_folder: "../data/processed/FFF/Bangladesh/Dhaka_River/APNGs/Annual_Water_Cover/"
+    min_z: 6
+    max_z: 15
+    vmin: 0
+    vmax: 1
+    date_format: "YYYY"
+    colormap:
+      type: single
+      color: [220, 16, 255, 255]   # Pink color #dc10ff
+      transparent_values: [0]

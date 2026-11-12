@@ -835,3 +835,12 @@ layers:
     layer_name: "BIH_AOI_HAK_PowerPlant"
     min_zoom: 10
     max_zoom: 16
+  
+    # Dhaka River (Bangladesh) - FFF
+
+  bgd_river_names:
+    input_file: "../data/raw/FFF/Bangladesh/Layers_for_Impact_Sphere/RiverMorphology_Service3/RiverNames.shp"
+    output_file: "../data/processed/FFF/Bangladesh/Dhaka_River/Vectors/BGD_Rivers_Name.mbtiles"
+    layer_name: "BGD_Rivers_Name"
+    min_zoom: 6
+    max_zoom: 14
