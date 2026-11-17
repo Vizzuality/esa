@@ -7,6 +7,8 @@ import { LucideIcon } from 'lucide-react';
 import { Layer } from '@/types/generated/strapi.schemas';
 import { LegendType } from '@/types/map';
 
+import type { TimelineDateType } from './item-types/timeline/utils';
+
 type Sortable = {
   enabled: boolean;
   handle?: boolean;
@@ -120,11 +122,16 @@ export interface LegendTypeTimelineProps extends Legend {
   id: number;
   layerId: number;
   interval?: number;
+  /** ISO date */
   start: string;
+  /** ISO date */
   end: string;
-  dateType?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second';
+  /** Step unit between start and end. `dekad` = 10-day periods starting on the 1st, 11th and 21st */
+  dateType?: TimelineDateType;
+  /** date-fns format for generated labels */
   format?: string;
   animationInterval?: number;
+  /** Custom labels; only used when there is exactly one per step */
   labels?: string[];
 }
 
