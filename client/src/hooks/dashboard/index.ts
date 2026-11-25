@@ -10,9 +10,9 @@ export type DashboardProps = {
 };
 
 export const DASHBOARD_FALLBACK: DashboardProps = {
-  supportedCountries: 95,
-  caseStudiesInProgress: 17,
-  caseStudiesCompleted: 124,
+  supportedCountries: 94,
+  caseStudiesInProgress: 11,
+  caseStudiesCompleted: 130,
   totalIFIs: 137,
 };
 
