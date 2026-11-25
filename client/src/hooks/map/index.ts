@@ -8,6 +8,29 @@ type UseMapImageOptions = {
   sdf?: boolean;
 };
 
+type UseMapSvgImageOptions = {
+  name: string;
+  svg: string;
+  pixelRatio?: number;
+};
+
+// `map.loadImage` can't decode SVG in every browser, so rasterize it through an <img>.
+export function useMapSvgImage({ name, svg, pixelRatio = 2 }: UseMapSvgImageOptions) {
+  const { default: map } = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+    const image = new Image();
+    // Draw at `pixelRatio` size so the icon stays sharp on high-DPI screens.
+    image.width = Number(svg.match(/width="([\d.]+)"/)?.[1] ?? 0) * pixelRatio;
+    image.height = Number(svg.match(/height="([\d.]+)"/)?.[1] ?? 0) * pixelRatio;
+    image.onload = () => {
+      if (!map.hasImage(name)) map.addImage(name, image, { pixelRatio });
+    };
+    image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  }, [map, name, svg, pixelRatio]);
+}
+
 export function useMapImage({ url, name, sdf = false }: UseMapImageOptions) {
   const { default: map } = useMap();
 

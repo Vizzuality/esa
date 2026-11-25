@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 
 import { useMap } from 'react-map-gl';
 
-import Image from 'next/image';
-
 import { useAtomValue, useSetAtom } from 'jotai';
 import { X } from 'lucide-react';
 import mapboxgl from 'mapbox-gl';
@@ -23,6 +21,7 @@ import { DEFAULT_MOBILE_ZOOM, DEFAULT_VIEW_STATE } from '@/components/map/consta
 import { Button } from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import GradientLine from '@/components/ui/gradient-line';
+import StoryMarkerIcon from '@/components/ui/story-marker-icon';
 
 import Header from '../header';
 
@@ -168,27 +167,11 @@ export default function Home() {
           <div className="flex-0 mb-2 text-sm lg:absolute">
             <div className="flex items-center">
               Impact stories
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-lg.png`}
-                width={28}
-                height={28}
-                alt="Story marker"
-                priority
-                className="h-7 w-7 object-cover"
-              />
+              <StoryMarkerIcon />
             </div>
-            <div className="-mt-2 flex items-center gap-1">
-              Case Studies
-              <div className="pt-0.5">
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/eoids-marker.png`}
-                  width={24}
-                  height={24}
-                  priority
-                  alt="Story marker"
-                  className="h-6 w-6 object-cover"
-                />
-              </div>
+            <div className="-mt-2 flex items-center">
+              Enhanced Stories
+              <StoryMarkerIcon type="enhanced" />
             </div>
           </div>
           <div className="flex-1">
@@ -224,27 +207,11 @@ export default function Home() {
             <div className="flex items-center gap-4 pl-1 pt-1 text-sm">
               <div className="flex items-center">
                 Impact stories
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-lg.png`}
-                  width={28}
-                  height={28}
-                  alt="Story marker"
-                  priority
-                  className="h-7 w-7 object-cover"
-                />
+                <StoryMarkerIcon />
               </div>
-              <div className="flex items-center gap-1">
-                Case Studies
-                <div className="pt-0.5">
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/eoids-marker.png`}
-                    width={24}
-                    height={24}
-                    priority
-                    alt="Story marker"
-                    className="h-6 w-6 object-cover"
-                  />
-                </div>
+              <div className="flex items-center">
+                Enhanced Stories
+                <StoryMarkerIcon type="enhanced" />
               </div>
             </div>
           </div>

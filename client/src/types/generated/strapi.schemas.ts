@@ -514,6 +514,7 @@ export type TopStoryUpdatedBy = {
 
 export type TopStoryStoryDataAttributes = {
   active?: boolean;
+  enhanced?: boolean;
   category?: TopStoryStoryDataAttributesCategory;
   createdAt?: string;
   createdBy?: TopStoryStoryDataAttributesCreatedBy;
@@ -2276,6 +2277,7 @@ export const StoryStatus = {
 
 export interface Story {
   active?: boolean;
+  enhanced?: boolean;
   category?: StoryCategory;
   createdAt?: string;
   createdBy?: StoryCreatedBy;
@@ -2349,6 +2351,7 @@ export type StoryCategoryDataAttributes = {
 
 export type StoryCategoryDataAttributesStoriesDataItemAttributes = {
   active?: boolean;
+  enhanced?: boolean;
   category?: StoryCategoryDataAttributesStoriesDataItemAttributesCategory;
   createdAt?: string;
   createdBy?: StoryCategoryDataAttributesStoriesDataItemAttributesCreatedBy;
@@ -3479,6 +3482,7 @@ export type StoryRequestDataCategory = number | string;
 
 export type StoryRequestData = {
   active?: boolean;
+  enhanced?: boolean;
   category?: StoryRequestDataCategory;
   ifis?: StoryRequestDataIfisItem[];
   impacted_people?: string;
@@ -5269,6 +5273,7 @@ export type CategoryStoriesDataItemAttributesTags = {
 
 export type CategoryStoriesDataItemAttributes = {
   active?: boolean;
+  enhanced?: boolean;
   category?: CategoryStoriesDataItemAttributesCategory;
   createdAt?: string;
   createdBy?: CategoryStoriesDataItemAttributesCreatedBy;

@@ -48,6 +48,10 @@
       "type": "boolean",
       "default": true
     },
+    "enhanced": {
+      "type": "boolean",
+      "default": false
+    },
     "marker": {
       "type": "customField",
       "options": {

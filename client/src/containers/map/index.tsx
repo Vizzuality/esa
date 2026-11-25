@@ -29,7 +29,6 @@ import Map from '@/components/map';
 import { DEFAULT_PROPS } from '@/components/map/constants';
 import { CustomMapProps } from '@/components/map/types';
 
-import EOIDsMarkers from './markers/eoids-markers';
 import SelectedStoriesMarker from './markers/selected-stories-marker';
 import StoryMapMarkers from './markers/story-map-markers';
 
@@ -98,26 +97,13 @@ export default function MapContainer() {
       if (!isGlobePage) return;
       if (e.features?.length) {
         const storyMarkersFeatures = e.features
-          .filter((f) => f.source === 'eoids-markers')
-          .map((f) => ({
-            ...f,
-            geometry: f.geometry as GeoJSON.Point,
-          }));
-        const storyMarkersEOIDsFeatures = e.features
           .filter((f) => f.source === 'story-markers')
           .map((f) => ({
             ...f,
             geometry: f.geometry as GeoJSON.Point,
           }));
 
-        if (storyMarkersFeatures.length || storyMarkersEOIDsFeatures.length) {
-          setMarkers([
-            ...storyMarkersFeatures,
-            ...storyMarkersEOIDsFeatures,
-          ] as GeoJSON.Feature<GeoJSON.Point>[]);
-        } else {
-          setMarkers([]);
-        }
+        setMarkers(storyMarkersFeatures as GeoJSON.Feature<GeoJSON.Point>[]);
       }
 
       if (e.features?.length === 0) {
@@ -187,7 +173,6 @@ export default function MapContainer() {
         )}
       >
         <LayerManager />
-        <EOIDsMarkers />
         <GlobeMarkers />
         {(step === 1 || !step) && (
           <StoryMapMarkers markers={storyData?.data?.attributes?.steps?.[0]?.map?.markers} />

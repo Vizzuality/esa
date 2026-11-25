@@ -8,8 +8,16 @@ import { usePathname } from 'next/navigation';
 
 import { StoryStepMap } from '@/types/story';
 
-import { useMapImage } from '@/hooks/map';
+import { useMapSvgImage } from '@/hooks/map';
 import useStories from '@/hooks/stories/useStories';
+
+import { STORY_MARKER_COLORS, STORY_MARKER_IMAGES, storyMarkerSvg } from '@/constants/story-marker';
+
+const StoryMarkerImage = ({ name }: { name: string }) => {
+  const { type, variant } = STORY_MARKER_IMAGES[name];
+  useMapSvgImage({ name, svg: storyMarkerSvg(type, variant) });
+  return null;
+};
 
 const GlobeMarkers = () => {
   const { data: stories } = useStories();
@@ -32,22 +40,13 @@ const GlobeMarkers = () => {
               location: attributes?.location,
               title: attributes?.title,
               active: attributes?.active,
+              enhanced: !!attributes?.enhanced,
             },
           };
         }) || [],
     }),
     [stories?.data]
   ) as GeoJSON.FeatureCollection<GeoJSON.Point>;
-
-  useMapImage({
-    name: 'story-marker',
-    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-sm.png`,
-  });
-
-  useMapImage({
-    name: 'story-marker-lg',
-    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/map/story-marker-lg.png`,
-  });
 
   const pathname = usePathname();
   const visibility = useMemo(
@@ -84,69 +83,74 @@ const GlobeMarkers = () => {
   }, []);
 
   return pathname.includes('stories') ? null : (
-    <Source id="story-markers" type="geojson" data={FeatureCollection}>
-      <Layer
-        id="story-markers-cluster"
-        type="circle"
-        filter={['has', 'point_count']}
-        paint={{
-          'circle-color': '#FFE094',
-          'circle-radius': 12,
-        }}
-        layout={{
-          visibility,
-        }}
-      />
+    <>
+      {Object.keys(STORY_MARKER_IMAGES).map((name) => (
+        <StoryMarkerImage key={name} name={name} />
+      ))}
+      <Source id="story-markers" type="geojson" data={FeatureCollection}>
+        <Layer
+          id="story-markers-cluster"
+          type="circle"
+          filter={['has', 'point_count']}
+          paint={{
+            'circle-color': STORY_MARKER_COLORS.default,
+            'circle-radius': 12,
+          }}
+          layout={{
+            visibility,
+          }}
+        />
 
-      <Layer
-        id="story-markers-cluster-count"
-        type="symbol"
-        filter={['has', 'point_count']}
-        layout={{
-          'text-field': ['get', 'point_count_abbreviated'],
-          'text-size': 12,
-          'text-ignore-placement': true,
-          'text-allow-overlap': true,
-          visibility,
-        }}
-        paint={{
-          'text-color': '#003247',
-        }}
-      />
+        <Layer
+          id="story-markers-cluster-count"
+          type="symbol"
+          filter={['has', 'point_count']}
+          layout={{
+            'text-field': ['get', 'point_count_abbreviated'],
+            'text-size': 12,
+            'text-ignore-placement': true,
+            'text-allow-overlap': true,
+            visibility,
+          }}
+          paint={{
+            'text-color': '#003247',
+          }}
+        />
 
-      <Layer
-        id="story-markers-unclustered-lg"
-        type="symbol"
-        filter={['!', ['has', 'point_count']]}
-        paint={{
-          'icon-color': '#FFE094',
-        }}
-        layout={{
-          'icon-image': 'story-marker-lg',
-          'icon-ignore-placement': true,
-          'icon-allow-overlap': true,
-          'icon-size': size,
-          visibility,
-        }}
-      />
-      <Layer
-        id="story-markers-unclustered"
-        type="symbol"
-        filter={['!', ['has', 'point_count']]}
-        paint={{
-          'icon-color': '#FFE094',
-          'icon-opacity': 1 - opacity,
-        }}
-        layout={{
-          'icon-image': 'story-marker',
-          'icon-ignore-placement': true,
-          'icon-allow-overlap': true,
-          'icon-size': 1,
-          'icon-offset': [0.75, 1.75],
-          visibility,
-        }}
-      />
-    </Source>
+        <Layer
+          id="story-markers-unclustered-lg"
+          type="symbol"
+          filter={['!', ['has', 'point_count']]}
+          layout={{
+            'icon-image': [
+              'case',
+              ['get', 'enhanced'],
+              'story-marker-enhanced-lg',
+              'story-marker-lg',
+            ],
+            'icon-ignore-placement': true,
+            'icon-allow-overlap': true,
+            'icon-size': size,
+            visibility,
+          }}
+        />
+        <Layer
+          id="story-markers-unclustered"
+          type="symbol"
+          filter={['!', ['has', 'point_count']]}
+          paint={{
+            'icon-opacity': 1 - opacity,
+          }}
+          layout={{
+            'icon-image': ['case', ['get', 'enhanced'], 'story-marker-enhanced', 'story-marker'],
+            'icon-ignore-placement': true,
+            'icon-allow-overlap': true,
+            'icon-size': 1,
+            visibility,
+          }}
+        />
+      </Source>
+    </>
   );
 };
 
