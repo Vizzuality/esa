@@ -25,26 +25,32 @@ const VARIANTS: Record<
 const diamond = (cx: number, cy: number, r: number) =>
   `M${cx} ${cy - r}L${cx + r} ${cy}L${cx} ${cy + r}L${cx - r} ${cy}Z`;
 
-export const storyMarkerSvg = (type: StoryMarkerType, variant: StoryMarkerVariant = 'lg') => {
-  const color = STORY_MARKER_COLORS[type];
+export const SHADOW_BLUR = 5;
+export const BORDER_WIDTH = 1.5;
+
+// Shared geometry: rendered as JSX by `StoryMarkerIcon` and as a string by `storyMarkerSvg`.
+export const getStoryMarkerShape = (type: StoryMarkerType, variant: StoryMarkerVariant = 'lg') => {
   const { width, height, outer, inner } = VARIANTS[variant];
   const cx = width / 2;
   const cy = height / 2;
-  const filterId = `story-marker-shadow-${type}-${variant}`;
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><defs><filter id="${filterId}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter></defs><path d="${diamond(
-    cx,
-    cy,
-    outer + 2
-  )}" fill="#000" fill-opacity="0.45" filter="url(#${filterId})"/><path d="${diamond(
-    cx,
-    cy,
-    outer
-  )}" fill="${BORDER_COLOR}" stroke="${color}" stroke-width="1.5"/><path d="${diamond(
-    cx,
-    cy,
-    inner
-  )}" fill="${color}"/></svg>`;
+  return {
+    width,
+    height,
+    color: STORY_MARKER_COLORS[type],
+    borderColor: BORDER_COLOR,
+    shadowPath: diamond(cx, cy, outer + 2),
+    outerPath: diamond(cx, cy, outer),
+    innerPath: diamond(cx, cy, inner),
+  };
+};
+
+// Mapbox needs an image, so the map markers use this string version.
+export const storyMarkerSvg = (type: StoryMarkerType, variant: StoryMarkerVariant = 'lg') => {
+  const { width, height, color, borderColor, shadowPath, outerPath, innerPath } =
+    getStoryMarkerShape(type, variant);
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><defs><filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${SHADOW_BLUR}"/></filter></defs><path d="${shadowPath}" fill="#000" fill-opacity="0.45" filter="url(#shadow)"/><path d="${outerPath}" fill="${borderColor}" stroke="${color}" stroke-width="${BORDER_WIDTH}"/><path d="${innerPath}" fill="${color}"/></svg>`;
 };
 
 // Mapbox image names → marker definition
