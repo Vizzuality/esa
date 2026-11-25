@@ -57,3 +57,5 @@ These secrets are required for CI/CD workflows:
 > - All secrets for **staging** and **production** are configured in **GitHub → Settings → Secrets and variables → Actions**.
 > - Local development values belong in a `.env.local` file (never committed).
 > - `NEXT_PUBLIC_` variables are exposed to the frontend and should not contain sensitive credentials.
+
+<!-- railway deployment check -->
