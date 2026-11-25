@@ -82,3 +82,20 @@ docker-compose up --build
 Open the app in http://localhost:3000 for the client and http://localhost:1337 for the CMS.
 
 NOTE: Docker is recommended for development, but not for production (yet).
+
+## Preview environments
+
+Every pull request gets its own Railway environment with the `app`, `cms` and `Postgres` services. The preview database starts empty, so the `cms` pre-deploy command runs [`cms/scripts/seed-preview.sh`](cms/scripts/seed-preview.sh), which pulls content from the production CMS with `strapi transfer` the first time the preview deploys.
+
+It reads two variables on the `cms` service, which preview environments copy from production when they are created:
+
+- `SEED_SOURCE_URL`: `/admin` URL of the CMS to pull from.
+- `SEED_SOURCE_TOKEN`: a transfer token with _Pull_ access, created in that CMS under _Settings → Transfer Tokens_. Don't seal it: Railway doesn't copy sealed variables into PR environments.
+
+Limitations:
+
+- Only content and configuration are copied. Media records keep pointing to the production bucket, but the files themselves aren't copied.
+- Admin users aren't transferred; create one in the preview's `/admin`.
+- `strapi transfer` requires identical schemas, so a pull request that changes a content type starts with an empty CMS.
+
+See [ADR 0002](docs/adr/0002-seed-preview-environments-with-strapi-transfer.md) for the reasoning.
