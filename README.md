@@ -63,16 +63,6 @@ The admin page should open in your browser, if not go to http://localhost:1337/a
 
 4 - Create a new user so you can access the admin panel.
 
-#### Seeding data
-
-To seed the database with some data, run:
-
-```bash
-yarn cms seed
-```
-
-All the data and configuration should be imported.
-
 ## Types for API
 
 To generate the types for the API, run:
